@@ -35,6 +35,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 FmodManager="*res://addons/fmod/FmodManager.gd"
+AudioManager="*res://autoload/audio_manager.gd"
+GameManager="*res://autoload/game_manager.gd"
 
 [dotnet]
 
