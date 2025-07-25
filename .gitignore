@@ -1,0 +1,8 @@
+# Godot 4+ specific ignores
+godot_project/.godot/
+godot_project/android/
+
+# FMOD
+raw_assets/fmod_project_gmtk2025/.user
+raw_assets/fmod_project_gmtk2025/.cache
+raw_assets/fmod_project_gmtk2025/.unsaved
