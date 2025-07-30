@@ -29,6 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="GodotProject"
+run/main_scene="uid://7pcc87aupxml"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -38,6 +39,15 @@ FmodManager="*res://addons/fmod/FmodManager.gd"
 AudioManager="*res://autoload/audio_manager.gd"
 GameManager="*res://autoload/game_manager.gd"
 
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=576
+window/size/window_width_override=2048
+window/size/window_height_override=1152
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
 [dotnet]
 
 project/assembly_name="GodotProject"
@@ -45,3 +55,8 @@ project/assembly_name="GodotProject"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/fmod/plugin.cfg")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
