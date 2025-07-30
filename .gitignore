@@ -6,3 +6,6 @@ godot_project/android/
 raw_assets/fmod_project_gmtk2025/.user
 raw_assets/fmod_project_gmtk2025/.cache
 raw_assets/fmod_project_gmtk2025/.unsaved
+
+# Mac
+.DS_Store
