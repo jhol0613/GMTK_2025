@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3nxiipcuklcd"]
+
+[ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://levels/level_base.gd" id="1_vmt1o"]
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://levels/tilemap_level_base.tscn" id="2_da5si"]
+[ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://player_character/player_character.tscn" id="3_ep22m"]
+[ext_resource type="PackedScene" uid="uid://b3f80jetyys4y" path="res://levels/sequencer_level_base_placeholder.tscn" id="4_da5si"]
+
+[node name="LevelBase" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_vmt1o")
+
+[node name="TilemapLevel" parent="." instance=ExtResource("2_da5si")]
+position = Vector2(117, 266)
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("3_ep22m")]
+
+[node name="SequencerLevelPlaceholder" parent="." instance=ExtResource("4_da5si")]
+
+[connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_sequencer_level_placeholder_player_action_received"]
+
+[editable path="TilemapLevel"]

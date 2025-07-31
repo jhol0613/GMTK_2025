@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="GodotProject"
-run/main_scene="uid://7pcc87aupxml"
+run/main_scene="uid://ryi6symlc4ea"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -38,6 +38,7 @@ config/icon="res://icon.svg"
 FmodManager="*res://addons/fmod/FmodManager.gd"
 AudioManager="*res://autoload/audio_manager.gd"
 GameManager="*res://autoload/game_manager.gd"
+Enums="*res://autoload/enums.gd"
 
 [display]
 
