@@ -2,16 +2,7 @@ extends Node2D
 
 @export var bounds : Vector2i
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-	
-func get_traversible_neighbors(position: Vector2i) -> Array[Vector2i]:
+func get_traversible_neighbors(_position: Vector2i) -> Array[Vector2i]:
 	var neighbors = $Obstacles.get_used_cells()
 	var neighbors_to_return : Array[Vector2i]
 	

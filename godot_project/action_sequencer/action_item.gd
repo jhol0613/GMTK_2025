@@ -13,7 +13,7 @@ const bumped_z_index := 1
 signal drag_start(instance: ActionItem)
 signal drag_stop(instance: ActionItem)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if _dragging:
 		self.global_position = get_global_mouse_position() + _offset
 

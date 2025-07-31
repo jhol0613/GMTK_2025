@@ -14,12 +14,6 @@ func _ready() -> void:
 	
 	tile_size = Vector2i($TilemapLevel.get_horizontal_tile_spacing(), $TilemapLevel.get_vertical_tile_spacing())
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
 	# Update player grid position, world position, and trigger action so player can deal with animation
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
