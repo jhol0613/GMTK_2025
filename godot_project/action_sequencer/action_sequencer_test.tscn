@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cc3tvs1k0txis"]
+
+[ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_7ol8b"]
+[ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/test_action_item.tscn" id="2_aful1"]
+[ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/test_action_slot.tscn" id="3_k2iec"]
+[ext_resource type="Script" uid="uid://c5nv8dno55d8q" path="res://action_sequencer/test_sequence_runner.gd" id="4_8ilwh"]
+[ext_resource type="Script" uid="uid://jvybmgwhf8e5" path="res://action_sequencer/test_playback_control.gd" id="5_t8ho8"]
+
+[node name="ActionSequencerTest" type="Node2D" node_paths=PackedStringArray("items_container", "slots_container")]
+script = ExtResource("1_7ol8b")
+move_up_scene = ExtResource("2_aful1")
+move_right_scene = ExtResource("2_aful1")
+move_down_scene = ExtResource("2_aful1")
+move_left_scene = ExtResource("2_aful1")
+action_slot_scene = ExtResource("3_k2iec")
+items_container = NodePath("SequencingLayout/ActionItems")
+slots_container = NodePath("SequencingLayout/ActionSlots")
+available_slots = 4
+available_actions = Array[int]([1, 2])
+action_quantities = Array[int]([2, 3])
+
+[node name="SequencingLayout" type="HBoxContainer" parent="."]
+offset_right = 1026.0
+offset_bottom = 576.0
+
+[node name="ActionSlots" type="VBoxContainer" parent="SequencingLayout"]
+layout_mode = 2
+
+[node name="ActionItems" type="VBoxContainer" parent="SequencingLayout"]
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TestSequenceRunner" type="Node" parent="."]
+script = ExtResource("4_8ilwh")
+
+[node name="TestPlaybackControl" type="Node" parent="."]
+script = ExtResource("5_t8ho8")
+
+[connection signal="perform_action" from="." to="TestSequenceRunner" method="_on_perform_action"]
+[connection signal="timeout" from="Timer" to="." method="_on_advance"]
+[connection signal="playback_play" from="TestPlaybackControl" to="." method="play"]
