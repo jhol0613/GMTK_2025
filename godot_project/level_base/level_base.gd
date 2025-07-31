@@ -21,12 +21,6 @@ func _ready() -> void:
 	_player_character.horizontal_action_distance = tile_size.x
 	_player_character.vertical_action_distance = tile_size.y
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
 	# Update player grid position, world position, and trigger action so player can deal with animation
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)

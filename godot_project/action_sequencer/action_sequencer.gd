@@ -1,5 +1,8 @@
 extends Node
 
+# TODO: remove this reference as soon as FMOD callback is connected
+@onready var _timer: Timer = $Timer
+
 #region Exports
 @export_category("UI Scenes")
 
@@ -20,7 +23,7 @@ extends Node
 @export_category("Actions")
 
 @export_range(0, 32) var available_slots: int = 0
-@export var available_actions: Array[Action] = []
+@export var available_actions: Array[Enums.PlayerAction] = []
 @export var action_quantities: Array[int] = []
 
 
@@ -34,48 +37,26 @@ enum SequencingState {
 	FINISHED,
 }
 
-enum Action {
-	MOVE_UP,
-	MOVE_RIGHT,
-	MOVE_DOWN,
-	MOVE_LEFT,
-	# TODO: add more actions to the sequencer
-}
-
-# container class to store an instance to the slot and its corresponding data
-class ActionItemData:
-	var node: ActionItem
-	var quantity: int
-	var action: Action
-	
-	func _init(_node: ActionItem, _quantity: int, _action: Action) -> void:
-		self.node = _node
-		self.quantity = _quantity
-		self.action = _action
-
 #endregion
 
 #region Internal state
 
 var current_state := SequencingState.SEQUENCING
 var current_action := 0
-var action_list := []
 
-var initialized_slots: Array[ActionSlot] = []
-var initialized_items: Array[ActionItemData] = []
-
-# null if no item is selected
-var dragged_item: ActionItem = null
+# ActionSlot
+var initialized_slots := []
+# ActionItemData
+var initialized_items := []
 
 #endregion
 
 #region Signals
-signal move_up
-signal move_right
-signal move_down
-signal move_left
-# TODO: add signals for each new action
+
+signal perform_action(type: Enums.PlayerAction)
+
 #endregion
+
 
 func _ready() -> void:
 	# instantiate slots and items, add them to their respective containers and
@@ -84,18 +65,24 @@ func _ready() -> void:
 		initialized_slots.append(action_slot_scene.instantiate())
 		slots_container.add_child(initialized_slots.back())
 	for i in range(available_actions.size()):
-		var action_scene: PackedScene
+		var item_scene: PackedScene
 		match available_actions[i]:
-			Action.MOVE_UP:
-				action_scene = move_up_scene
-			Action.MOVE_RIGHT:
-				action_scene = move_right_scene
-			Action.MOVE_DOWN:
-				action_scene = move_down_scene
-			Action.MOVE_LEFT:
-				action_scene = move_left_scene
-		initialized_items.append(action_scene.instantiate())
+			Enums.PlayerAction.UP:
+				item_scene = move_up_scene
+			Enums.PlayerAction.RIGHT:
+				item_scene = move_right_scene
+			Enums.PlayerAction.DOWN:
+				item_scene = move_down_scene
+			Enums.PlayerAction.LEFT:
+				item_scene = move_left_scene
+			_:
+				push_error("This action is not yet implemented!")
+		initialized_items.append(item_scene.instantiate())
+		initialized_items.back().action = available_actions[i]
+		initialized_items.back().quantity = action_quantities[i]
+
 		items_container.add_child(initialized_items.back())
+
 
 func play():
 	if current_state != SequencingState.SEQUENCING:
@@ -103,30 +90,35 @@ func play():
 		return
 	# TODO: add a callback to enable the UI
 	current_state = SequencingState.RUNNING
+	current_action = 0
+	_timer.start()
+
+	for slot in initialized_slots:
+		print("Actions in slots: ", slot.action)
+
 
 # make one step in the simulation
 func advance():
 	if current_state != SequencingState.RUNNING:
 		return
 
-	if action_list.size() <= current_action or current_action < 0:
+	if initialized_slots.size() < current_action or current_action < 0:
 		push_error("Sequencer has broken state!")
+		print(initialized_slots.size(), " ", current_action)
 		return
 
-	if action_list.size() - 1 == current_action:
+	if initialized_slots.size() == current_action:
 		current_state = SequencingState.FINISHED
+		_timer.stop()
 		return
-
-	match action_list[current_action]:
-		Action.MOVE_UP:
-			move_up.emit()
-		Action.MOVE_RIGHT:
-			move_right.emit()
-		Action.MOVE_DOWN:
-			move_down.emit()
-		Action.MOVE_LEFT:
-			move_left.emit()
-		_:
-			push_error("Sequencer encountered unknown action!")
-
+	perform_action.emit(initialized_slots[current_action].action)
 	current_action += 1
+
+
+#region Signal connections
+
+func _on_advance() -> void:
+	advance() # TODO: connect this function to the FMOD callback
+
+
+#endregion

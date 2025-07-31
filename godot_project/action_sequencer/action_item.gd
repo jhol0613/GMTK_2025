@@ -1,27 +1,23 @@
-extends Area2D
+extends Control
 
 class_name ActionItem
 
-var _dragging := false
 
-# in ActionSequencer, we determine which action is taken by comparing the instances
-signal drag_start(instance: ActionItem)
-signal drag_stop(instance: ActionItem)
+var action: Enums.PlayerAction
+var quantity: int
 
-func _physics_process(delta):
-	if _dragging:
-		self.global_position = get_global_mouse_position()
+@export var preview_scene: PackedScene
 
-func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and event.button_index == 1:
-		if _dragging != event.pressed:
-			if event.pressed:
-				drag_start.emit(self)
-			else:
-				drag_stop.emit(self)
-		_dragging = event.pressed
-		
-func _input(event):
-	if event is InputEventMouseButton and event.button_index == 1 and _dragging:
-		_dragging = false
-		
+func decrease_quantity():
+	quantity -= 1
+	# TODO: update quantity UI here
+
+
+func _get_drag_data(_at_position: Vector2) -> Variant:
+	set_drag_preview(preview_scene.instantiate())
+	return {
+		"type": "item",
+		"action": action,
+		"quantity": quantity,
+		"reference": self
+	}

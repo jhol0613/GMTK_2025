@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2yuwdalgstuj"]
+
+[ext_resource type="Script" uid="uid://cds2tru0s15j4" path="res://action_sequencer/action_slot.gd" id="1_ruuat"]
+[ext_resource type="PackedScene" uid="uid://c42yl06x7ifhn" path="res://action_sequencer/action_items/test_preview_item.tscn" id="2_o7gfy"]
+[ext_resource type="Texture2D" uid="uid://j6ix55338cu" path="res://ui/item_slot_placeholder.png" id="2_ruuat"]
+
+[node name="TestActionSlot" type="CenterContainer"]
+mouse_filter = 0
+script = ExtResource("1_ruuat")
+preview_scene = ExtResource("2_o7gfy")
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_ruuat")

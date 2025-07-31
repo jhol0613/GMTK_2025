@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c42yl06x7ifhn"]
+
+[ext_resource type="Texture2D" uid="uid://5p2io5ssroqh" path="res://icon.svg" id="3_vosyq"]
+
+[node name="TestActionItem" type="CenterContainer"]
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("3_vosyq")

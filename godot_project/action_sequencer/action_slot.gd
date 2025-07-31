@@ -1,14 +1,14 @@
-extends Area2D
+extends Control
 
 class_name ActionSlot
 
-var _hovered := false
+var action: Enums.PlayerAction = Enums.PlayerAction.NONE
 
-func is_hovered() -> bool:
-	return _hovered
 
-func _mouse_enter() -> void:
-	_hovered = true
+func _can_drop_data(_position, data):
+	return action == Enums.PlayerAction.NONE and data["type"] == "item" and data["quantity"] > 0
 
-func _mouse_exit() -> void:
-	_hovered = false
+
+func _drop_data(_position, data):
+	action = data["action"]
+	data["reference"].decrease_quantity()
