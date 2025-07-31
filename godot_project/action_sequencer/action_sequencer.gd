@@ -80,7 +80,7 @@ func _ready() -> void:
 		initialized_items.append(item_scene.instantiate())
 		initialized_items.back().action = available_actions[i]
 		initialized_items.back().quantity = action_quantities[i]
-		
+
 		items_container.add_child(initialized_items.back())
 
 
@@ -90,7 +90,11 @@ func play():
 		return
 	# TODO: add a callback to enable the UI
 	current_state = SequencingState.RUNNING
+	current_action = 0
 	_timer.start()
+
+	for slot in initialized_slots:
+		print("Actions in slots: ", slot.action if slot.has_action else "empty")
 
 
 # make one step in the simulation
@@ -98,8 +102,9 @@ func advance():
 	if current_state != SequencingState.RUNNING:
 		return
 
-	if initialized_slots.size() > current_action or current_action < 0:
+	if initialized_slots.size() < current_action or current_action < 0:
 		push_error("Sequencer has broken state!")
+		print(initialized_slots.size(), " ", current_action)
 		return
 
 	if initialized_slots.size() == current_action:

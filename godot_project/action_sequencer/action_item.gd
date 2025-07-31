@@ -10,8 +10,14 @@ var quantity: int
 
 func decrease_quantity():
 	quantity -= 1
+	# TODO: update quantity UI here
 
 
-func _get_drag_data(at_position: Vector2) -> Variant:
+func _get_drag_data(_at_position: Vector2) -> Variant:
 	set_drag_preview(preview_scene.instantiate())
-	return {"action": action, "quantity": quantity, "reference": self}
+	return {
+		"type": "item",
+		"action": action,
+		"quantity": quantity,
+		"reference": self
+	}
