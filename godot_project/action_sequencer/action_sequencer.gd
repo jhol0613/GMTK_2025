@@ -61,8 +61,10 @@ var current_state := SequencingState.SEQUENCING
 var current_action := 0
 var action_list := []
 
-var initialized_slots: Array[ActionSlot] = []
-var initialized_items: Array[ActionItemData] = []
+# ActionSlot
+var initialized_slots: Array = []
+# ActionItemData
+var initialized_items: Array = []
 
 # null if no item is selected
 var dragged_item: ActionItem = null

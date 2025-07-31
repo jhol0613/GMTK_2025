@@ -1,32 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://cc3tvs1k0txis"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_7ol8b"]
-[ext_resource type="Texture2D" uid="uid://5p2io5ssroqh" path="res://icon.svg" id="2_aful1"]
+[ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/test_action_item.tscn" id="2_aful1"]
+[ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/test_action_slot.tscn" id="3_k2iec"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ilwh"]
-size = Vector2(150, 144)
-
-[node name="ActionSequencerTest" type="Node2D"]
+[node name="ActionSequencerTest" type="Node2D" node_paths=PackedStringArray("items_container", "slots_container")]
 script = ExtResource("1_7ol8b")
+move_up_scene = ExtResource("2_aful1")
+move_right_scene = ExtResource("2_aful1")
+move_down_scene = ExtResource("2_aful1")
+move_left_scene = ExtResource("2_aful1")
+action_slot_scene = ExtResource("3_k2iec")
+items_container = NodePath("SequencingLayout/ActionItems")
+slots_container = NodePath("SequencingLayout/ActionSlots")
+available_slots = 4
+available_actions = Array[int]([0, 1])
+action_quantities = Array[int]([2, 3])
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 1150.0
-offset_bottom = 649.0
-alignment = 2
+[node name="SequencingLayout" type="HBoxContainer" parent="."]
+offset_right = 1026.0
+offset_bottom = 576.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ActionSlots" type="VBoxContainer" parent="SequencingLayout"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="ActionItems" type="VBoxContainer" parent="SequencingLayout"]
 layout_mode = 2
-texture = ExtResource("2_aful1")
-
-[node name="Area2D" type="Area2D" parent="VBoxContainer/HBoxContainer/TextureRect"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VBoxContainer/HBoxContainer/TextureRect/Area2D"]
-position = Vector2(65, 62)
-shape = SubResource("RectangleShape2D_8ilwh")
-
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_aful1")
