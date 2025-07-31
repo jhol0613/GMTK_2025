@@ -94,7 +94,7 @@ func play():
 	_timer.start()
 
 	for slot in initialized_slots:
-		print("Actions in slots: ", slot.action if slot.has_action else "empty")
+		print("Actions in slots: ", slot.action)
 
 
 # make one step in the simulation
@@ -111,8 +111,7 @@ func advance():
 		current_state = SequencingState.FINISHED
 		_timer.stop()
 		return
-	if initialized_slots[current_action].has_action:
-		perform_action.emit(initialized_slots[current_action].action)
+	perform_action.emit(initialized_slots[current_action].action)
 	current_action += 1
 
 
