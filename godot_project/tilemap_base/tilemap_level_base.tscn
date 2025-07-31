@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=4 uid="uid://bo06pc8na5fpa"]
 
-[ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://levels/tilemap_level_base.gd" id="1_3qeya"]
-[ext_resource type="TileSet" uid="uid://unty4aymmpbx" path="res://environment/test_tilemap.tres" id="2_l3o5p"]
+[ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://tilemap_base/tilemap_level_base.gd" id="1_3qeya"]
+[ext_resource type="TileSet" uid="uid://unty4aymmpbx" path="res://tilemap_base/test_tilemap.tres" id="2_l3o5p"]
 
 [node name="TilemapLevelBase" type="Node2D"]
 y_sort_enabled = true

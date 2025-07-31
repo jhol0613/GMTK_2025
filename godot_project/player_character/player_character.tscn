@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=5 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://bp1yw4w34vxpe" path="res://player_character/test character.png" id="1_qlps6"]
@@ -17,68 +17,10 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvxdu"]
 height = 54.0
 
-[sub_resource type="Animation" id="Animation_1ty04"]
-resource_name = "move"
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.00754569, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.0666667, 0.724449, 0.934274, -0.25, 0, 0.266667, 0, 0.00754569, -0.133333, 0.410908, 0.1, 0.28851, -0.00119703, -0.133333, 0.38468, 0.166667, -0.0743131, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.3, 0.7, 0.933333, 1)
-}
-
-[sub_resource type="Animation" id="Animation_5l2xy"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_bvxdu"]
-_data = {
-&"RESET": SubResource("Animation_5l2xy"),
-&"move": SubResource("Animation_1ty04")
-}
-
 [node name="PlayerCharacter" type="Node2D"]
-y_sort_enabled = true
 script = ExtResource("1_1ty04")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
 position = Vector2(1, -27)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
 
@@ -88,8 +30,3 @@ position = Vector2(0, -9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -16)
 shape = SubResource("CapsuleShape2D_bvxdu")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_bvxdu")
-}

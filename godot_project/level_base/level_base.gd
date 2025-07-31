@@ -4,15 +4,19 @@ extends Node2D
 # instance, and any agents that will be performing actions. Received signals from the sequencer 
 # and directs movement and actions of agents on the tilemap
 
+@onready var _player_character : PlayerCharacter = $PlayerCharacter
+@onready var _tilemap_level : TilemapLevel = $TilemapLevel
+
 var player_position: Vector2i
 var tile_size: Vector2i
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#print(_player_character.global_position)
 	#Get player grid position based on their local coordinate
-	player_position = $TilemapLevel/Floor.local_to_map($TilemapLevel/Floor.to_local($PlayerCharacter.global_position))
-	
-	tile_size = Vector2i($TilemapLevel.get_horizontal_tile_spacing(), $TilemapLevel.get_vertical_tile_spacing())
+	player_position = _tilemap_level.global_to_map(_player_character.global_position)
+	#Get tilemap grid size so you can move agents by appropriate number of pixels for moves
+	tile_size = Vector2i(_tilemap_level.get_horizontal_tile_spacing(), _tilemap_level.get_vertical_tile_spacing())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,7 +27,8 @@ func _process(delta: float) -> void:
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
 	# Update player grid position, world position, and trigger action so player can deal with animation
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
-	player_position += move_direction
-	$PlayerCharacter.global_position += Vector2(tile_size * move_direction)
-	$PlayerCharacter.execute_action(action)
+	if _tilemap_level.get_traversible_neighbors(player_position).has(player_position + move_direction):
+		player_position += move_direction
+		_player_character.global_position += Vector2(tile_size * move_direction)
+		_player_character.execute_action(action)
 	#print(player_position)

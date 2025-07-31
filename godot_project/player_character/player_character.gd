@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name PlayerCharacter
+
 ## The curve the player should follow moving from one tile to another
 @export var directy_movement_curve: Curve
 ## The y value the player should add to their movement as they move to another tile (to add a "jumping" component instead of just linear motion)
