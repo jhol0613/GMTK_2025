@@ -11,5 +11,8 @@ texture_region_size = Vector2i(32, 32)
 2:3/0 = 0
 
 [resource]
-tile_size = Vector2i(16, 20)
+tile_size = Vector2i(32, 20)
+navigation_layer_0/layers = 1
+custom_data_layer_0/name = "Traversible"
+custom_data_layer_0/type = 1
 sources/1 = SubResource("TileSetAtlasSource_yu812")
