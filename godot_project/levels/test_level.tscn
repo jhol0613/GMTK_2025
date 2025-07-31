@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=4 uid="uid://ryi6symlc4ea"]
+[gd_scene load_steps=2 format=3 uid="uid://ryi6symlc4ea"]
 
 [ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://level_base/level_base.tscn" id="1_46lwt"]
 
@@ -6,8 +6,5 @@
 
 [node name="PlayerCharacter" parent="." index="0"]
 position = Vector2(133, 350)
-
-[node name="Obstacles" parent="TilemapLevel" index="1"]
-tile_map_data = PackedByteArray("AAAAAAYAAQABAAMAAAAIAAYAAQABAAMAAAAIAAUAAQABAAMAAAAHAAUAAQABAAMAAAAHAAYAAQABAAMAAAAGAAYAAQABAAMAAAAGAAUAAQABAAMAAAAKAAMAAQABAAMAAAALAAMAAQABAAMAAAALAAQAAQABAAMAAAALAAUAAQABAAMAAAAKAAUAAQABAAMAAAAKAAQAAQABAAMAAAA=")
 
 [editable path="TilemapLevel"]
