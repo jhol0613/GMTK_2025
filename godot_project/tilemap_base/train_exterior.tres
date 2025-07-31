@@ -1,0 +1,44 @@
+[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://c3ksn0lys57ue"]
+
+[ext_resource type="Texture2D" uid="uid://cuqjtegey05u4" path="res://tilemap_base/outsidetiles.png" id="1_d41th"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_lvh7y"]
+tile_data = PackedInt32Array(0, 0, 6, 65536, 0, 7, 131072, 0, 8, 196608, 0, 9, 262144, 0, 19, 327680, 0, 20, 393216, 0, 21)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_8bxqq"]
+tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 1, 196608, 0, 2, 262144, 0, 3)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tbsj5"]
+texture = ExtResource("1_d41th")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+0:10/0 = 0
+0:11/0 = 0
+0:12/0 = 0
+0:13/0 = 0
+0:14/0 = 0
+0:15/0 = 0
+0:16/0 = 0
+0:17/0 = 0
+0:18/0 = 0
+0:19/0 = 0
+0:20/0 = 0
+0:21/0 = 0
+0:22/0 = 0
+0:23/0 = 0
+0:24/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_tbsj5")
+pattern_0 = SubResource("TileMapPattern_lvh7y")
+pattern_1 = SubResource("TileMapPattern_8bxqq")

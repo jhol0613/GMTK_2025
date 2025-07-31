@@ -1,0 +1,74 @@
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://caeopn1ofm4ck"]
+
+[ext_resource type="Texture2D" uid="uid://cuqjtegey05u4" path="res://tilemap_base/outsidetiles.png" id="1_0enqh"]
+[ext_resource type="Texture2D" uid="uid://cptqcjamm8e15" path="res://tilemap_base/walltiles.png" id="2_fdl0w"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_x5m2a"]
+tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 16, 131072, 1, 8, 1, 1, 3, 65537, 1, 17, 131073, 1, 9, 2, 1, 4, 65538, 1, 18, 131074, 1, 10)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_usvtv"]
+tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 5, 131072, 1, 8, 1, 1, 3, 65537, 1, 6, 131073, 1, 9, 2, 1, 4, 65538, 1, 7, 131074, 1, 10)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_8jvm2"]
+tile_data = PackedInt32Array(0, 1, 12, 65536, 1, 14, 131072, 1, 13)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_thhve"]
+texture = ExtResource("1_0enqh")
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:5/0/texture_origin = Vector2i(4, 0)
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+0:10/0 = 0
+0:11/0 = 0
+0:12/0 = 0
+0:13/0 = 0
+0:14/0 = 0
+0:15/0 = 0
+0:16/0 = 0
+0:17/0 = 0
+0:18/0 = 0
+0:19/0 = 0
+0:20/0 = 0
+0:21/0 = 0
+0:22/0 = 0
+0:23/0 = 0
+0:24/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fual3"]
+texture = ExtResource("2_fdl0w")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+0:10/0 = 0
+0:11/0 = 0
+0:12/0 = 0
+0:13/0 = 0
+0:14/0 = 0
+0:15/0 = 0
+0:16/0 = 0
+0:17/0 = 0
+0:18/0 = 0
+0:19/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_thhve")
+sources/1 = SubResource("TileSetAtlasSource_fual3")
+pattern_0 = SubResource("TileMapPattern_x5m2a")
+pattern_1 = SubResource("TileMapPattern_usvtv")
+pattern_2 = SubResource("TileMapPattern_8jvm2")
