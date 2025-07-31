@@ -14,7 +14,7 @@ action_slot_scene = ExtResource("3_k2iec")
 items_container = NodePath("SequencingLayout/ActionItems")
 slots_container = NodePath("SequencingLayout/ActionSlots")
 available_slots = 4
-available_actions = Array[int]([0, 1])
+available_actions = Array[int]([1, 2])
 action_quantities = Array[int]([2, 3])
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
@@ -26,3 +26,7 @@ layout_mode = 2
 
 [node name="ActionItems" type="VBoxContainer" parent="SequencingLayout"]
 layout_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_advance"]

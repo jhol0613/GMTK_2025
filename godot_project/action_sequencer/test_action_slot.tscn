@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://j6ix55338cu" path="res://ui/item_slot_placeholder.png" id="2_ruuat"]
 
 [node name="TestActionSlot" type="CenterContainer"]
+mouse_filter = 0
 script = ExtResource("1_ruuat")
 
 [node name="Sprite2D" type="TextureRect" parent="."]

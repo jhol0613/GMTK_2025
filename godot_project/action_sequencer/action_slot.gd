@@ -2,13 +2,15 @@ extends Control
 
 class_name ActionSlot
 
-var _hovered := false
+var has_action := false
+var action: Enums.PlayerAction
 
-func is_hovered() -> bool:
-	return _hovered
 
-func _mouse_enter() -> void:
-	_hovered = true
+func _can_drop_data(position, data):
+	return not has_action and data["quantity"] > 0
 
-func _mouse_exit() -> void:
-	_hovered = false
+
+func _drop_data(position, data):
+	action = data["action"]
+	data["reference"].decrease_quantity()
+	has_action = true
