@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3f80jetyys4y"]
+
+[ext_resource type="Script" uid="uid://o0n1m36jq50c" path="res://levels/sequencer_level_base_placeholder.gd" id="1_lsw2d"]
+
+[node name="SequencerLevelBasePlaceholder" type="Node2D"]
+script = ExtResource("1_lsw2d")

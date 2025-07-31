@@ -21,3 +21,9 @@ func get_traversible_neighbors(position: Vector2i) -> Array[Vector2i]:
 		
 	return neighbors_to_return
 	
+func get_vertical_tile_spacing():
+	return $Floor.tile_set.tile_size.y
+	
+func get_horizontal_tile_spacing():
+	return $Floor.tile_set.tile_size.x
+	

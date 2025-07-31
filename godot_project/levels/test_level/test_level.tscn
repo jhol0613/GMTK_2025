@@ -1,7 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://c88g34b8gepkc"]
+[gd_scene load_steps=2 format=4 uid="uid://ryi6symlc4ea"]
 
-[ext_resource type="PackedScene" uid="uid://7pcc87aupxml" path="res://levels/test_level/tilemap_test_level.tscn" id="1_isn0r"]
+[ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://levels/level_base.tscn" id="1_isn0r"]
 
-[node name="test_level" type="Node2D"]
+[node name="LevelBase" instance=ExtResource("1_isn0r")]
 
-[node name="Node2D" parent="." instance=ExtResource("1_isn0r")]
+[node name="Obstacles" parent="TilemapLevel" index="1"]
+tile_map_data = PackedByteArray("AAAAAAYAAQABAAMAAAAIAAYAAQABAAMAAAAIAAUAAQABAAMAAAAHAAUAAQABAAMAAAAHAAYAAQABAAMAAAAGAAYAAQABAAMAAAAGAAUAAQABAAMAAAAKAAMAAQABAAMAAAALAAMAAQABAAMAAAALAAQAAQABAAMAAAALAAUAAQABAAMAAAAKAAUAAQABAAMAAAAKAAQAAQABAAMAAAA=")
+
+[node name="PlayerCharacter" parent="." index="1"]
+position = Vector2(133, 350)
+
+[editable path="TilemapLevel"]
