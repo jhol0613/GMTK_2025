@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2yuwdalgstuj"]
+
+[ext_resource type="Script" uid="uid://cds2tru0s15j4" path="res://action_sequencer/action_slot.gd" id="1_5idlh"]
+[ext_resource type="Texture2D" uid="uid://ce6vi0awahwpw" path="res://action_sequencer/small_test_slot.png" id="2_7wert"]
+
+[node name="ActionSlot" type="CenterContainer"]
+mouse_filter = 0
+script = ExtResource("1_5idlh")
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_7wert")
