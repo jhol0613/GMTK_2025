@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=9 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
-[ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/test_action_item.tscn" id="2_7huxh"]
-[ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/test_action_slot.tscn" id="3_h8boe"]
+[ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_item.tscn" id="2_7huxh"]
+[ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slot.tscn" id="3_h8boe"]
 [ext_resource type="Script" uid="uid://c5nv8dno55d8q" path="res://action_sequencer/test_sequence_runner.gd" id="4_4n1ua"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/start_pushed.png" id="4_7huxh"]
+[ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/start_unpushed.png" id="4_201rw"]
 [ext_resource type="Script" uid="uid://jvybmgwhf8e5" path="res://action_sequencer/test_playback_control.gd" id="5_201rw"]
+[ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/start_mouse_hover.png" id="6_rc3vt"]
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
@@ -18,25 +20,35 @@ move_right_scene = ExtResource("2_7huxh")
 move_down_scene = ExtResource("2_7huxh")
 move_left_scene = ExtResource("2_7huxh")
 action_slot_scene = ExtResource("3_h8boe")
-items_container = NodePath("SequencingLayout/ActionItems")
-slots_container = NodePath("SequencingLayout/ActionSlots")
+items_container = NodePath("ActionItems")
+slots_container = NodePath("ActionSlots")
 available_slots = 4
 available_actions = Array[int]([1, 2])
 action_quantities = Array[int]([2, 3])
 
+[node name="ActionSlots" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 187.0
+offset_top = -304.0
+offset_right = 187.0
+offset_bottom = -252.0
+grow_vertical = 0
+alignment = 1
+
+[node name="ActionItems" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 568.0
+offset_top = 24.0
+offset_right = 568.0
+offset_bottom = 76.0
+
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ActionSlots" type="HBoxContainer" parent="SequencingLayout"]
-layout_mode = 2
-
-[node name="ActionItems" type="VBoxContainer" parent="SequencingLayout"]
-layout_mode = 2
+offset_right = 48.0
+offset_bottom = 52.0
 
 [node name="PlayButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -45,13 +57,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -552.0
-offset_top = -349.0
-offset_right = -296.0
-offset_bottom = -93.0
+offset_left = -544.0
+offset_top = -340.0
+offset_right = -413.0
+offset_bottom = -212.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("4_7huxh")
+texture_normal = ExtResource("4_201rw")
+texture_pressed = ExtResource("4_7huxh")
+texture_hover = ExtResource("6_rc3vt")
 
 [node name="Timer" type="Timer" parent="."]
 
