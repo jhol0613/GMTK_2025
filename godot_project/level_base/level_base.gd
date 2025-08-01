@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var _player_character : PlayerCharacter = $PlayerCharacter
 @onready var _tilemap_level : TilemapLevel = $TilemapLevel
+@onready var _action_sequencer : ActionSequencer = $ActionSequencer
 
 var player_position: Vector2i
 var tile_size: Vector2i
@@ -20,6 +21,9 @@ func _ready() -> void:
 	
 	_player_character.horizontal_action_distance = tile_size.x
 	_player_character.vertical_action_distance = tile_size.y
+	
+	
+	
 
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
 	# Update player grid position, world position, and trigger action so player can deal with animation
@@ -29,3 +33,8 @@ func _on_sequencer_level_placeholder_player_action_received(action: Enums.Player
 		#_player_character.global_position += Vector2(tile_size * move_direction)
 		_player_character.execute_action(action)
 	#print(player_position)
+
+
+func _on_action_sequencer_perform_action(type: int) -> void:
+	print(type)
+	pass # Replace with function body.

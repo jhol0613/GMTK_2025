@@ -1,4 +1,6 @@
-extends Node
+extends Control
+
+class_name ActionSequencer
 
 # TODO: remove this reference as soon as FMOD callback is connected
 @onready var _timer: Timer = $Timer
@@ -120,5 +122,8 @@ func advance():
 func _on_advance() -> void:
 	advance() # TODO: connect this function to the FMOD callback
 
+
+func _on_play_button_pressed() -> void:
+	play()
 
 #endregion

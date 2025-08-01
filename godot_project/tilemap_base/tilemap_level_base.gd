@@ -6,7 +6,7 @@ class_name TilemapLevel
 
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
-@onready var _wall_layer : TileMapLayer = $Wall
+@onready var _wall_layer : TileMapLayer = $BackWall
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

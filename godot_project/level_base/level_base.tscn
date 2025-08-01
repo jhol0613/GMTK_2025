@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=8 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="2_da5si"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://player_character/player_character.tscn" id="3_ep22m"]
 [ext_resource type="PackedScene" uid="uid://b3f80jetyys4y" path="res://levels/sequencer_level_base_placeholder.tscn" id="4_da5si"]
+[ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="5_dtys8"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.792541)
@@ -22,30 +23,33 @@ script = ExtResource("1_vmt1o")
 [node name="PlayerCharacter" parent="." instance=ExtResource("3_ep22m")]
 
 [node name="TilemapLevel" parent="." instance=ExtResource("2_da5si")]
-position = Vector2(117, 266)
+position = Vector2(87, 132)
 
-[node name="PointLight2D" type="PointLight2D" parent="TilemapLevel/BackWall" index="0"]
+[node name="PointLight2D5" type="PointLight2D" parent="TilemapLevel/BackWall" index="0"]
 position = Vector2(112, -79.63)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.5
 
-[node name="PointLight2D2" type="PointLight2D" parent="TilemapLevel/BackWall" index="1"]
+[node name="PointLight2D6" type="PointLight2D" parent="TilemapLevel/BackWall" index="1"]
 position = Vector2(240, -78.63)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.5
 
-[node name="PointLight2D3" type="PointLight2D" parent="TilemapLevel/BackWall" index="2"]
+[node name="PointLight2D7" type="PointLight2D" parent="TilemapLevel/BackWall" index="2"]
 position = Vector2(-3, 39.37)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.3
 
-[node name="PointLight2D4" type="PointLight2D" parent="TilemapLevel/BackWall" index="3"]
+[node name="PointLight2D8" type="PointLight2D" parent="TilemapLevel/BackWall" index="3"]
 position = Vector2(356, 48.37)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.3
 
 [node name="SequencerLevelPlaceholder" parent="." instance=ExtResource("4_da5si")]
 
+[node name="ActionSequencer" parent="." instance=ExtResource("5_dtys8")]
+
 [connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_sequencer_level_placeholder_player_action_received"]
+[connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]
 
 [editable path="TilemapLevel"]
