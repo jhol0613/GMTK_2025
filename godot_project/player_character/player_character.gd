@@ -14,8 +14,8 @@ class_name PlayerCharacter
 ## Distance (in pixels) from one tile to the one to the one left or right of it
 @export var horizontal_action_distance: int
 ## Amount of time for movement animation
-@export var move_duration := .4
-@export var frame_rate := 10.0
+@export var move_duration := .6
+@export var frame_rate := 12.0
 
 @export_category("Animation")
 @onready var _move_left_emitter = $Sounds/MoveSideways
