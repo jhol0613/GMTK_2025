@@ -42,13 +42,11 @@ Enums="*res://autoload/enums.gd"
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=576
+window/size/viewport_width=614
+window/size/viewport_height=346
 window/size/window_width_override=2048
 window/size/window_height_override=1152
 window/stretch/mode="viewport"
-window/stretch/scale=1.6
-window/stretch/scale_mode="integer"
 
 [dotnet]
 

@@ -5,6 +5,6 @@
 [node name="LevelBase" instance=ExtResource("1_46lwt")]
 
 [node name="PlayerCharacter" parent="." index="0"]
-position = Vector2(133, 350)
+position = Vector2(102, 176)
 
 [editable path="TilemapLevel"]
