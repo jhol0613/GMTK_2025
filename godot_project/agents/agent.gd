@@ -22,6 +22,9 @@ class_name Agent
 @export var shadow: Sprite2D
 @export var sprite: AnimatedSprite2D
 
+@export_subgroup("Sound")
+@export var beat_delays: Dictionary[Enums.PlayerAction, float]
+
 #endregion
 
 @onready var _sprite_default_y = sprite.position.y
@@ -47,8 +50,11 @@ func execute_action(action : Enums.PlayerAction) -> void:
 			new_position += Vector2.RIGHT * tile_size.x
 	action_executed.emit(action)
 
+	# beat delay timer
+	await get_tree().create_timer(_get_delay_seconds(action)).timeout
+
 	var animation_name = _get_animation_name(action)
-	if animation_name != null:
+	if animation_name != "":
 		sprite.play(animation_name)
 
 	_initiate_move(new_position)
@@ -66,4 +72,8 @@ func _move_callback(alpha: float, start_position: Vector2, target_position: Vect
 
 
 func _get_animation_name(action: Enums.PlayerAction) -> String:
-	return animations.get(action, null)
+	return animations.get(action, "")
+
+
+func _get_delay_seconds(action: Enums.PlayerAction) -> float:
+	return beat_delays.get(action, 0.0) * AudioManager.beat_time_seconds
