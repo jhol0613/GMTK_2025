@@ -11,13 +11,14 @@ signal music_bar
 signal music_beat(beat: int)
 
 # Parameter values for music modes
-var _thinking_mode = .5
-var _running_mode = 1.0
-var _title_mode = 0.0
+@onready var _mode_dictionary = {
+	Enums.MusicMode.MENU: 0.0,
+	Enums.MusicMode.THINKING: 0.5,
+	Enums.MusicMode.RUNNING: 1.0
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	music_event.set_parameter("ThinkingMode", _running_mode)
 	pass # Replace with function body.
 
 
@@ -34,3 +35,6 @@ func _on_music_event_timeline_beat(params: Dictionary) -> void:
 		music_bar.emit()
 	music_beat.emit(_beat)
 	pass # Replace with function body.
+	
+func set_music_mode(mode: Enums.MusicMode):
+	music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))

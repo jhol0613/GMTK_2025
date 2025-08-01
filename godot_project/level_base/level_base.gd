@@ -9,23 +9,32 @@ extends Node2D
 ## Where on the tilemap the conductor should spawn
 @export var conductor_spawn_position: Vector2i
 
-@onready var _player_character : PlayerCharacter = $OnTheTrain/PlayerCharacter
-@onready var _tilemap_level : TilemapLevel = $OnTheTrain/TilemapLevel
+@export_subgroup("Animation")
+@export var train_move_right_on_play_distance := 56.0
+@export var train_move_right_on_play_time := 1.8
+
+@onready var _player_character : PlayerCharacter = $TrainCenter/OnTheTrain/PlayerCharacter
+@onready var _tilemap_level : TilemapLevel = $TrainCenter/OnTheTrain/TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
-@onready var _on_the_train : = $OnTheTrain
-@onready var _animation_player := $OnTheTrain/AnimationPlayer
+@onready var _on_the_train : = $TrainCenter/OnTheTrain
+# needs to exist since you can't animate x and y values for on the train separately, don't want train rock
+# animation to resest train horizontal position
+@onready var _train_center: = $TrainCenter
+@onready var _animation_player := $AnimationPlayer
 
 @onready var _initial_train_posit = _on_the_train.position
+@onready var _initial_player_posit = _player_character.global_position
 
 var tile_size: Vector2i
 var _conductor: Conductor
 
 
 func _ready() -> void:
-	_player_character.grid_position = _tilemap_level.global_to_map(_player_character.global_position)
+	_player_character.grid_position = _tilemap_level.global_to_map(_initial_player_posit)
 	_player_character.tile_size = _tilemap_level.get_tile_size()
 	
 	AudioManager.music_bar.connect(_on_music_bar)
+	_action_sequencer.play_action_delay = train_move_right_on_play_time
 
 
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
@@ -65,3 +74,16 @@ func _on_music_bar():
 	print("on the bar")
 	_animation_player.play("train_rock")
 	
+
+func _on_action_sequencer_play_started() -> void:
+	var tween = create_tween()
+	var target_pos := Vector2(train_move_right_on_play_distance, 0)
+	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+
+
+func _on_action_sequencer_replay_pressed() -> void:
+	var tween = create_tween()
+	var target_pos := Vector2(0, 0)
+	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)

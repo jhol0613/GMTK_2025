@@ -12,6 +12,12 @@ enum PlayerAction {
 	BONK
 }
 
+enum MusicMode {
+	MENU,
+	THINKING,
+	RUNNING
+}
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP:

@@ -97,3 +97,4 @@ theme_override_constants/separation = 7
 [connection signal="perform_action" from="." to="TestSequenceRunner" method="_on_perform_action"]
 [connection signal="playback_play" from="TestPlaybackControl" to="." method="play"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ReplayButton" to="." method="_on_replay_button_pressed"]

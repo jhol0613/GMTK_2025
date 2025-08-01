@@ -24,10 +24,19 @@ class_name ActionSequencer
 
 @export var total_slots := 8
 
+@export_category("Sequencer")
+## The amount of time to wait to start sequencing actions after play button pushed
+@export var play_action_delay := 0.0
+
 
 #endregion
 
 #region Type declarations
+
+@onready var _action_items = $ActionItems
+
+signal play_started
+signal replay_pressed
 
 enum SequencingState {
 	SEQUENCING,
@@ -59,6 +68,7 @@ signal perform_action(type: Enums.PlayerAction)
 func _ready() -> void:
 	# Connect to beat signal
 	AudioManager.music_bar.connect(_on_advance)
+	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
 	
 	# instantiate slots and items, add them to their respective containers and
 	# reference arrays
@@ -79,6 +89,7 @@ func _ready() -> void:
 
 		items_container.add_child(initialized_items.back())
 		initialized_items.back().set_action(available_actions[i]) # set the action icon once added to the tree
+	
 
 
 func play():
@@ -86,11 +97,14 @@ func play():
 		push_warning("Sequencer is not running, skipping advance()")
 		return
 	# TODO: add a callback to enable the UI
+	AudioManager.set_music_mode(Enums.MusicMode.RUNNING)
+	_action_items.visible = false
+	play_started.emit()
+	
+	# Wait for specified delay (for external animations) to start sequencing actions
+	await get_tree().create_timer(play_action_delay).timeout
 	current_state = SequencingState.RUNNING
 	current_action = 0
-
-	for slot in initialized_slots:
-		print("Actions in slots: ", slot.action)
 
 
 # make one step in the simulation
@@ -114,15 +128,30 @@ func advance():
 	perform_action.emit(initialized_slots[current_action].action)
 	current_action += 1
 
+func _reset_actions():
+	for i in range(available_actions.size()):
+		initialized_items[i].quantity = action_quantities[i]
+	
+	for i in range(available_slots):
+		initialized_slots[i].clear_slot()
+		
 
 #region Signal connections
 
 func _on_advance() -> void:
 	if current_state == SequencingState.RUNNING:
-		advance() # TODO: connect this function to the FMOD callback
+		advance()
 
 
 func _on_play_button_pressed() -> void:
 	play()
+
+
+func _on_replay_button_pressed() -> void:
+	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
+	_action_items.visible = true
+	_reset_actions()
+	replay_pressed.emit()
+	current_state = SequencingState.SEQUENCING
 
 #endregion

@@ -29,5 +29,9 @@ func _drop_data(_position, data):
 	texture_rect.texture = data["texture"]
 	data["reference"].decrease_quantity()
 	
+func clear_slot():
+	texture_rect.texture = null
+	action = Enums.PlayerAction.NONE
+	
 func set_light_on(on: bool):
 	$Backlight.visible = on
