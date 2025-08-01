@@ -5,6 +5,7 @@
 [node name="AudioManager" type="FmodBankLoader"]
 bank_paths = ["res://fmod_banks/Desktop/Master.strings.bank", "res://fmod_banks/Desktop/Master.bank", "res://fmod_banks/Desktop/BackgroundMusic.bank", "res://fmod_banks/Desktop/Character Move.bank", "res://fmod_banks/Desktop/Conductor.bank", "res://fmod_banks/Desktop/Player Exits.bank"]
 script = ExtResource("1_u6vuv")
+bpm = 170.0
 
 [node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/BackgroundMusic"
