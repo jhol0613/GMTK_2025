@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmm7fgv3iwjwv"]
+
+[ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://conductor/conductor.gd" id="1_eb2fl"]
+
+[node name="Conductor" type="Node2D"]
+script = ExtResource("1_eb2fl")
