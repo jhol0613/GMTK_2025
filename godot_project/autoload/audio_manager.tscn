@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c8m33vvls5etu" path="res://autoload/audio_manager.gd" id="1_u6vuv"]
 
 [node name="AudioManager" type="FmodBankLoader"]
-bank_paths = ["res://fmod_banks/Desktop/Master.strings.bank", "res://fmod_banks/Desktop/Master.bank", "res://fmod_banks/Desktop/BackgroundMusic.bank", "res://fmod_banks/Desktop/Character Move.bank", "res://fmod_banks/Desktop/Conductor.bank", "res://fmod_banks/Desktop/Player Exits.bank"]
+bank_paths = ["res://fmod_banks/Desktop/Master.strings.bank", "res://fmod_banks/Desktop/Master.bank", "res://fmod_banks/Desktop/Main.bank"]
 script = ExtResource("1_u6vuv")
 bpm = 170.0
 
