@@ -8,7 +8,8 @@ enum PlayerAction {
 	RIGHT,
 	JUMP,
 	DUCK,
-	HIDE
+	HIDE,
+	BONK
 }
 
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
