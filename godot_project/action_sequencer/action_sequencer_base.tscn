@@ -1,24 +1,21 @@
 [gd_scene load_steps=9 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
-[ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_item.tscn" id="2_7huxh"]
+[ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_7huxh"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slot.tscn" id="3_h8boe"]
 [ext_resource type="Script" uid="uid://c5nv8dno55d8q" path="res://action_sequencer/test_sequence_runner.gd" id="4_4n1ua"]
-[ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/start_pushed.png" id="4_7huxh"]
-[ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/start_unpushed.png" id="4_201rw"]
+[ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/play_button/start_pushed.png" id="4_7huxh"]
+[ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/play_button/start_unpushed.png" id="4_201rw"]
 [ext_resource type="Script" uid="uid://jvybmgwhf8e5" path="res://action_sequencer/test_playback_control.gd" id="5_201rw"]
-[ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/start_mouse_hover.png" id="6_rc3vt"]
+[ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/play_button/start_mouse_hover.png" id="6_rc3vt"]
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1024.0
-offset_bottom = 576.0
+offset_right = 616.0
+offset_bottom = 346.0
 script = ExtResource("1_ury52")
-move_up_scene = ExtResource("2_7huxh")
-move_right_scene = ExtResource("2_7huxh")
-move_down_scene = ExtResource("2_7huxh")
-move_left_scene = ExtResource("2_7huxh")
+action_item_scene = ExtResource("2_7huxh")
 action_slot_scene = ExtResource("3_h8boe")
 items_container = NodePath("ActionItems")
 slots_container = NodePath("ActionSlots")
@@ -31,19 +28,19 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 187.0
-offset_top = -304.0
-offset_right = 187.0
-offset_bottom = -252.0
+offset_left = 215.0
+offset_top = -71.0
+offset_right = 215.0
+offset_bottom = -19.0
 grow_vertical = 0
 alignment = 1
 
 [node name="ActionItems" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 568.0
-offset_top = 24.0
-offset_right = 568.0
-offset_bottom = 76.0
+offset_left = 543.0
+offset_top = 108.0
+offset_right = 543.0
+offset_bottom = 160.0
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -57,10 +54,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -544.0
-offset_top = -340.0
-offset_right = -413.0
-offset_bottom = -212.0
+offset_left = -147.0
+offset_top = -116.0
+offset_right = -16.0
+offset_bottom = 12.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("4_201rw")

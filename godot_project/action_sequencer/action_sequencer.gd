@@ -9,10 +9,12 @@ class_name ActionSequencer
 @export_category("UI Scenes")
 
 @export_subgroup("Action items")
-@export var move_up_scene: PackedScene
-@export var move_right_scene: PackedScene
-@export var move_down_scene: PackedScene
-@export var move_left_scene: PackedScene
+@export var action_item_scene : PackedScene
+#
+#@export var move_up_scene: PackedScene
+#@export var move_right_scene: PackedScene
+#@export var move_down_scene: PackedScene
+#@export var move_left_scene: PackedScene
 
 @export_subgroup("Slots")
 @export var action_slot_scene: PackedScene
@@ -61,29 +63,22 @@ signal perform_action(type: Enums.PlayerAction)
 
 
 func _ready() -> void:
+	# Connect to beat signal
+	AudioManager.music_bar.connect(_on_advance)
+	
 	# instantiate slots and items, add them to their respective containers and
 	# reference arrays
 	for i in range(available_slots):
 		initialized_slots.append(action_slot_scene.instantiate())
 		slots_container.add_child(initialized_slots.back())
 	for i in range(available_actions.size()):
-		var item_scene: PackedScene
-		match available_actions[i]:
-			Enums.PlayerAction.UP:
-				item_scene = move_up_scene
-			Enums.PlayerAction.RIGHT:
-				item_scene = move_right_scene
-			Enums.PlayerAction.DOWN:
-				item_scene = move_down_scene
-			Enums.PlayerAction.LEFT:
-				item_scene = move_left_scene
-			_:
-				push_error("This action is not yet implemented!")
-		initialized_items.append(item_scene.instantiate())
+
+		initialized_items.append(action_item_scene.instantiate())
 		initialized_items.back().action = available_actions[i]
 		initialized_items.back().quantity = action_quantities[i]
 
 		items_container.add_child(initialized_items.back())
+		initialized_items.back().set_action(available_actions[i]) # set the action icon once added to the tree
 
 
 func play():
@@ -120,6 +115,7 @@ func advance():
 #region Signal connections
 
 func _on_advance() -> void:
+	print("hallo")
 	advance() # TODO: connect this function to the FMOD callback
 
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bdjcj7pwehwv4"]
+
+[ext_resource type="Script" uid="uid://c8m33vvls5etu" path="res://autoload/audio_manager.gd" id="1_u6vuv"]
+
+[node name="AudioManager" type="FmodBankLoader"]
+bank_paths = ["res://fmod_banks/Desktop/Master.strings.bank", "res://fmod_banks/Desktop/Master.bank", "res://fmod_banks/Desktop/BackgroundMusic.bank", "res://fmod_banks/Desktop/Character Move.bank", "res://fmod_banks/Desktop/Conductor.bank", "res://fmod_banks/Desktop/Player Exits.bank"]
+script = ExtResource("1_u6vuv")
+
+[node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/BackgroundMusic"
+event_guid = "{0fd181b1-a31a-45e3-9591-15374848d73d}"
+autoplay = true
+fmod_parameters/ThinkingMode/id = -866468361928855257
+fmod_parameters/ThinkingMode = 0.0
+fmod_parameters/ThinkingMode/variant_type = 3
+
+[node name="Listener" type="FmodListener2D" parent="."]
+
+[connection signal="timeline_beat" from="MusicEvent" to="." method="_on_music_event_timeline_beat"]

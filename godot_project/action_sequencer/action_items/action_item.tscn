@@ -1,0 +1,33 @@
+[gd_scene load_steps=11 format=3 uid="uid://ltdnwoljvgwp"]
+
+[ext_resource type="Script" uid="uid://0ug1hsts2o1l" path="res://action_sequencer/action_items/action_item.gd" id="1_4oqtm"]
+[ext_resource type="PackedScene" uid="uid://c42yl06x7ifhn" path="res://action_sequencer/action_items/preview_item.tscn" id="2_ar57j"]
+[ext_resource type="Texture2D" uid="uid://fx4njx2da7pt" path="res://action_sequencer/action_items/Move_up.png" id="3_7erkm"]
+[ext_resource type="Texture2D" uid="uid://bbqr123j8tdpc" path="res://action_sequencer/action_items/Move_Down.png" id="4_y4jrt"]
+[ext_resource type="Texture2D" uid="uid://dy4odlpoa5wqr" path="res://action_sequencer/action_items/Move_Left.png" id="5_k5l37"]
+[ext_resource type="Texture2D" uid="uid://dlg1qbsky6kec" path="res://action_sequencer/action_items/Duck.png" id="6_6fshn"]
+[ext_resource type="Texture2D" uid="uid://btldhiqu02jpj" path="res://action_sequencer/action_items/Move_Right.png" id="6_k5l37"]
+[ext_resource type="Texture2D" uid="uid://bqmnwiqi44a8p" path="res://action_sequencer/action_items/Jump.png" id="7_6fshn"]
+[ext_resource type="Texture2D" uid="uid://qlfe1aq3vlhk" path="res://action_sequencer/action_items/Hide.png" id="7_j0qn6"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_almjv"]
+load_path = "res://.godot/imported/hide_action_small.png-3485e82ba8a0318a0e955cbe0216c54d.ctex"
+
+[node name="ActionItem" type="PanelContainer"]
+offset_right = 65.0
+offset_bottom = 65.0
+script = ExtResource("1_4oqtm")
+preview_scene = ExtResource("2_ar57j")
+icon_dictionary = Dictionary[int, CompressedTexture2D]({
+1: ExtResource("3_7erkm"),
+2: ExtResource("4_y4jrt"),
+3: ExtResource("5_k5l37"),
+4: ExtResource("6_k5l37"),
+5: ExtResource("7_6fshn"),
+6: ExtResource("6_6fshn"),
+7: ExtResource("7_j0qn6")
+})
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_almjv")

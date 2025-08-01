@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd5t58goffwnn"
-path="res://.godot/imported/player_shadow.png-5e4ed05baa2bfe0ce28a69068660f555.ctex"
+uid="uid://dy4odlpoa5wqr"
+path="res://.godot/imported/Move_Left.png-14b394d5db3da86a839283c10b0c3c0d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player_character/player_shadow.png"
-dest_files=["res://.godot/imported/player_shadow.png-5e4ed05baa2bfe0ce28a69068660f555.ctex"]
+source_file="res://action_sequencer/action_items/Move_Left.png"
+dest_files=["res://.godot/imported/Move_Left.png-14b394d5db3da86a839283c10b0c3c0d.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://spj8uub1psk3"
-path="res://.godot/imported/start_mouse_hover.png-9137ae5884bd830e5c3fdd0045df88bd.ctex"
+uid="uid://btldhiqu02jpj"
+path="res://.godot/imported/Move_Right.png-42ae257aba971e12041f0a9935c0deb3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/start_mouse_hover.png"
-dest_files=["res://.godot/imported/start_mouse_hover.png-9137ae5884bd830e5c3fdd0045df88bd.ctex"]
+source_file="res://action_sequencer/action_items/Move_Right.png"
+dest_files=["res://.godot/imported/Move_Right.png-42ae257aba971e12041f0a9935c0deb3.ctex"]
 
 [params]
 
