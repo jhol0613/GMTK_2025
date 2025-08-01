@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=7 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://conductor/conductor.gd" id="1_eb2fl"]
+[ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://player_character/direct_move_curve.tres" id="2_m234f"]
+[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://player_character/y_move_curve.tres" id="3_ps1s8"]
+[ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="4_lda0w"]
+[ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
 
-[node name="Conductor" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m234f"]
+height = 54.0
+
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("shadow", "sprite")]
 script = ExtResource("1_eb2fl")
+direct_movement_curve = ExtResource("2_m234f")
+y_movement_curve = ExtResource("3_ps1s8")
+shadow = NodePath("Shadow")
+sprite = NodePath("Shadow/AnimatedSprite2D")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+texture = ExtResource("4_lda0w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shadow"]
+position = Vector2(1, -27)
+sprite_frames = ExtResource("4_ps1s8")
+animation = &"walk_left"
+
+[node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
+position = Vector2(-1, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_m234f")

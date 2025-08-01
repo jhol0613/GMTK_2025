@@ -1,1 +1,4 @@
-extends Node2D
+extends Agent
+
+
+class_name Conductor

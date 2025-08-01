@@ -11,8 +11,7 @@ class_name TilemapLevel
 var path_grid: AStarGrid2D
 
 func _ready() -> void:
-	path_grid = AStarGrid2D.new()
-	path_grid.region = Rect2i()
+	_initialize_path_finding()
 
 
 func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
@@ -34,14 +33,29 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 
 	return neighbors_to_return
 
-func get_vertical_tile_spacing():
-	return _floor_layer.tile_set.tile_size.y
+func get_tile_size() -> Vector2i:
+	return _floor_layer.tile_set.tile_size
 
-func get_horizontal_tile_spacing():
-	return _floor_layer.tile_set.tile_size.x
-	
+
 ## Take global coordinates and convert to map coordinates
 func global_to_map(coordinates : Vector2):
 	return _floor_layer.local_to_map(_floor_layer.to_local(coordinates))
+
+# cycles through each tile in the tile layer, adding it to the path finding node
+func _initialize_path_finding():
+	path_grid = AStarGrid2D.new()
+	path_grid.region = _floor_layer.get_used_rect() \
+		.merge(_obstacle_layer.get_used_rect())
+	path_grid.cell_size = _floor_layer.tile_set.tile_size
+	path_grid.offset = path_grid.cell_size * 0.5
+	path_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	path_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
+	path_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	path_grid.update()
 	
+	for tile in _obstacle_layer.get_used_cells():
+		path_grid.set_point_solid(tile)
+	path_grid.update()
 	
+	# debug
+	print("Tile map data: ", path_grid)

@@ -23,3 +23,16 @@ func player_action_to_vector(action: PlayerAction) -> Vector2i:
 			return Vector2i.RIGHT
 		_:
 			return Vector2i.ZERO
+
+func vector_to_player_action(vector: Vector2i) -> PlayerAction:
+	match vector:
+		Vector2i.UP:
+			return PlayerAction.UP
+		Vector2i.DOWN:
+			return PlayerAction.DOWN
+		Vector2i.LEFT:
+			return PlayerAction.LEFT
+		Vector2i.RIGHT:
+			return PlayerAction.RIGHT
+		_:
+			return PlayerAction.NONE

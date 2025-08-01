@@ -1,44 +1,56 @@
 extends Node2D
 
 # Baseline for all levels. A Level will include a tilemap level, a sequencer, a player character
-# instance, and any agents that will be performing actions. Received signals from the sequencer 
+# instance, and any agents that will be performing actions. Received signals from the sequencer
 # and directs movement and actions of agents on the tilemap
+
+@export_subgroup("Conductor", "conductor")
+@export var conductor_scene: PackedScene
+## Where on the tilemap the conductor should spawn
+@export var conductor_spawn_position: Vector2i
 
 @onready var _player_character : PlayerCharacter = $PlayerCharacter
 @onready var _tilemap_level : TilemapLevel = $TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
 
-var player_position: Vector2i
 var tile_size: Vector2i
+var _conductor: Conductor
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	#print(_player_character.global_position)
-	#Get player grid position based on their local coordinate
-	player_position = _tilemap_level.global_to_map(_player_character.global_position)
-	#Get tilemap grid size so you can move agents by appropriate number of pixels for moves
-	tile_size = Vector2i(_tilemap_level.get_horizontal_tile_spacing(), _tilemap_level.get_vertical_tile_spacing())
-	
-	_player_character.horizontal_action_distance = tile_size.x
-	_player_character.vertical_action_distance = tile_size.y
-	
-	
-	
+	_player_character.grid_position = _tilemap_level.global_to_map(_player_character.global_position)
+	_player_character.tile_size = _tilemap_level.get_tile_size()
+
 
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
-	# Update player grid position, world position, and trigger action so player can deal with animation
-	var move_direction : Vector2i = Enums.player_action_to_vector(action)
-	if _tilemap_level.get_traversible_neighbors(player_position).has(player_position + move_direction):
-		player_position += move_direction
-		#_player_character.global_position += Vector2(tile_size * move_direction)
-		_player_character.execute_action(action)
-	#print(player_position)
+	_update_player(action)
+	_update_conductor()
 
 
 func _on_action_sequencer_perform_action(action: Enums.PlayerAction) -> void:
+	_update_player(action)
+	_update_conductor()
+
+
+func _update_player(action: Enums.PlayerAction) -> void:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
-	if _tilemap_level.get_traversible_neighbors(player_position).has(player_position + move_direction):
-		player_position += move_direction
-		#_player_character.global_position += Vector2(tile_size * move_direction)
+	if _tilemap_level.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
+		_player_character.grid_position += move_direction
 		_player_character.execute_action(action)
-	pass # Replace with function body.
+
+
+func _update_conductor() -> void:
+	if _conductor == null:
+		return
+	var conductor_path = _tilemap_level.path_grid \
+		.get_id_path(_conductor.grid_position, _player_character.grid_position, true)
+	_conductor.execute_action(
+		Enums.vector_to_player_action(_conductor.grid_position - conductor_path[1])
+	)
+
+
+func _spawn_conductor() -> void:
+	_conductor = conductor_scene.instantiate()
+	_conductor.grid_position = conductor_spawn_position
+	_conductor.tile_size = _tilemap_level.get_tile_size()
+	add_child(_conductor)
