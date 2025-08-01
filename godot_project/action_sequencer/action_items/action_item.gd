@@ -31,5 +31,6 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 		"type": "item",
 		"action": action,
 		"quantity": quantity,
-		"reference": self
+		"reference": self,
+		"texture": texture_rect.texture
 	}

@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://qlfe1aq3vlhk" path="res://action_sequencer/action_items/Hide.png" id="7_j0qn6"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_almjv"]
-load_path = "res://.godot/imported/hide_action_small.png-3485e82ba8a0318a0e955cbe0216c54d.ctex"
 
 [node name="ActionItem" type="PanelContainer"]
 offset_right = 65.0

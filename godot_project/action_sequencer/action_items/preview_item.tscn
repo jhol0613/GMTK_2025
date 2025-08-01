@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cng6fxu5g0t2i" path="res://action_sequencer/action_items/preview_item.gd" id="1_2b4gw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_almjv"]
-load_path = "res://.godot/imported/hide_action_small.png-3485e82ba8a0318a0e955cbe0216c54d.ctex"
 
 [node name="PreviewItem" type="CenterContainer"]
 offset_left = -208.0

@@ -2,19 +2,11 @@ extends Control
 
 class_name ActionSequencer
 
-# TODO: remove this reference as soon as FMOD callback is connected
-@onready var _timer: Timer = $Timer
-
 #region Exports
 @export_category("UI Scenes")
 
 @export_subgroup("Action items")
 @export var action_item_scene : PackedScene
-#
-#@export var move_up_scene: PackedScene
-#@export var move_right_scene: PackedScene
-#@export var move_down_scene: PackedScene
-#@export var move_left_scene: PackedScene
 
 @export_subgroup("Slots")
 @export var action_slot_scene: PackedScene
@@ -88,7 +80,6 @@ func play():
 	# TODO: add a callback to enable the UI
 	current_state = SequencingState.RUNNING
 	current_action = 0
-	_timer.start()
 
 	for slot in initialized_slots:
 		print("Actions in slots: ", slot.action)
@@ -105,9 +96,10 @@ func advance():
 		return
 
 	if initialized_slots.size() == current_action:
-		current_state = SequencingState.FINISHED
-		_timer.stop()
-		return
+		current_action = 0
+		
+	initialized_slots[current_action].set_light_on(true)
+	initialized_slots[current_action-1].set_light_on(false)
 	perform_action.emit(initialized_slots[current_action].action)
 	current_action += 1
 
@@ -115,8 +107,8 @@ func advance():
 #region Signal connections
 
 func _on_advance() -> void:
-	print("hallo")
-	advance() # TODO: connect this function to the FMOD callback
+	if current_state == SequencingState.RUNNING:
+		advance() # TODO: connect this function to the FMOD callback
 
 
 func _on_play_button_pressed() -> void:

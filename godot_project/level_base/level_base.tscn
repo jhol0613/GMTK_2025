@@ -23,7 +23,7 @@ script = ExtResource("1_vmt1o")
 [node name="PlayerCharacter" parent="." instance=ExtResource("3_ep22m")]
 
 [node name="TilemapLevel" parent="." instance=ExtResource("2_da5si")]
-position = Vector2(87, 132)
+position = Vector2(80, 114)
 
 [node name="PointLight2D5" type="PointLight2D" parent="TilemapLevel/BackWall" index="0"]
 position = Vector2(112, -79.63)

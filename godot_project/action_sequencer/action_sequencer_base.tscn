@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=10 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_7huxh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/play_button/start_unpushed.png" id="4_201rw"]
 [ext_resource type="Script" uid="uid://jvybmgwhf8e5" path="res://action_sequencer/test_playback_control.gd" id="5_201rw"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/play_button/start_mouse_hover.png" id="6_rc3vt"]
+[ext_resource type="Texture2D" uid="uid://cosoi57f34c6i" path="res://action_sequencer/sequencer.png" id="9_201rw"]
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
@@ -23,18 +24,6 @@ available_slots = 4
 available_actions = Array[int]([1, 2])
 action_quantities = Array[int]([2, 3])
 
-[node name="ActionSlots" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 215.0
-offset_top = -71.0
-offset_right = 215.0
-offset_bottom = -19.0
-grow_vertical = 0
-alignment = 1
-
 [node name="ActionItems" type="VBoxContainer" parent="."]
 layout_mode = 2
 offset_left = 543.0
@@ -47,6 +36,21 @@ layout_mode = 1
 offset_right = 48.0
 offset_bottom = 52.0
 
+[node name="TestSequenceRunner" type="Node" parent="."]
+script = ExtResource("4_4n1ua")
+
+[node name="TestPlaybackControl" type="Node" parent="."]
+script = ExtResource("5_201rw")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 246.0
+offset_right = 385.0
+offset_bottom = 364.0
+texture = ExtResource("9_201rw")
+stretch_mode = 4
+
 [node name="PlayButton" type="TextureButton" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -54,25 +58,30 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -147.0
-offset_top = -116.0
-offset_right = -16.0
-offset_bottom = 12.0
+offset_left = -113.0
+offset_top = -47.0
+offset_right = -44.0
+offset_bottom = -15.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("4_201rw")
 texture_pressed = ExtResource("4_7huxh")
 texture_hover = ExtResource("6_rc3vt")
+ignore_texture_size = true
+stretch_mode = 4
 
-[node name="Timer" type="Timer" parent="."]
-
-[node name="TestSequenceRunner" type="Node" parent="."]
-script = ExtResource("4_4n1ua")
-
-[node name="TestPlaybackControl" type="Node" parent="."]
-script = ExtResource("5_201rw")
+[node name="ActionSlots" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 78.0
+offset_top = -64.0
+offset_right = 78.0
+offset_bottom = -12.0
+grow_vertical = 0
+theme_override_constants/separation = 4
 
 [connection signal="perform_action" from="." to="TestSequenceRunner" method="_on_perform_action"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_advance"]
 [connection signal="playback_play" from="TestPlaybackControl" to="." method="play"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]

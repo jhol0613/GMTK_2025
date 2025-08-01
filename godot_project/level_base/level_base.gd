@@ -35,6 +35,10 @@ func _on_sequencer_level_placeholder_player_action_received(action: Enums.Player
 	#print(player_position)
 
 
-func _on_action_sequencer_perform_action(type: int) -> void:
-	print(type)
+func _on_action_sequencer_perform_action(action: Enums.PlayerAction) -> void:
+	var move_direction : Vector2i = Enums.player_action_to_vector(action)
+	if _tilemap_level.get_traversible_neighbors(player_position).has(player_position + move_direction):
+		player_position += move_direction
+		#_player_character.global_position += Vector2(tile_size * move_direction)
+		_player_character.execute_action(action)
 	pass # Replace with function body.
