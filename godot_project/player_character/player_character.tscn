@@ -187,10 +187,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvxdu"]
 height = 54.0
 
-[node name="PlayerCharacter" type="Node2D"]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "shadow", "sprite")]
 script = ExtResource("1_1ty04")
-direct_movement_curve = ExtResource("2_bvxdu")
-y_movement_curve = ExtResource("3_3f5wo")
 beat_delays = Dictionary[int, float]({
 1: 3.0,
 2: 3.0,
@@ -200,6 +198,21 @@ beat_delays = Dictionary[int, float]({
 6: 0.0,
 7: 0.0
 })
+move_left_emitter = NodePath("Sounds/MoveSideways")
+move_right_emitter = NodePath("Sounds/MoveSideways")
+move_up_emitter = NodePath("Sounds/MoveUp")
+move_down_emitter = NodePath("Sounds/MoveDown")
+jump_emitter = NodePath("Sounds/Jump")
+direct_movement_curve = ExtResource("2_bvxdu")
+y_movement_curve = ExtResource("3_3f5wo")
+animations = Dictionary[int, String]({
+1: "walk_up",
+2: "walk_down",
+3: "walk_left",
+4: "walk_right"
+})
+shadow = NodePath("Shadow")
+sprite = NodePath("Shadow/PlayerSprite")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("2_5l2xy")
@@ -207,7 +220,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -27)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"walk_left"
+animation = &"standing"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]
 position = Vector2(-1, 18)
@@ -219,21 +232,17 @@ shape = SubResource("CapsuleShape2D_bvxdu")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="MoveSideways" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Move_Right&Left"
 event_guid = "{11c7fa32-199e-4985-a700-58b612362f1c}"
 position = Vector2(1, -27)
 
 [node name="MoveUp" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Move_Up"
 event_guid = "{bb213f57-18b5-4395-8feb-73c0639ce055}"
 position = Vector2(1, -27)
 
 [node name="MoveDown" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Move_Down"
 event_guid = "{4fe98c68-2848-43c8-81ea-8949237876ce}"
 position = Vector2(1, -27)
 
 [node name="Jump" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Jump"
 event_guid = "{4949b836-3e08-4db3-9672-cd0d579c0433}"
 position = Vector2(1, -27)
