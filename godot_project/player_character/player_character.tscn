@@ -232,17 +232,21 @@ shape = SubResource("CapsuleShape2D_bvxdu")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="MoveSideways" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Move_Right&Left"
 event_guid = "{11c7fa32-199e-4985-a700-58b612362f1c}"
 position = Vector2(1, -27)
 
 [node name="MoveUp" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Move_Up"
 event_guid = "{bb213f57-18b5-4395-8feb-73c0639ce055}"
 position = Vector2(1, -27)
 
 [node name="MoveDown" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Move_Down"
 event_guid = "{4fe98c68-2848-43c8-81ea-8949237876ce}"
 position = Vector2(1, -27)
 
 [node name="Jump" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Jump"
 event_guid = "{4949b836-3e08-4db3-9672-cd0d579c0433}"
 position = Vector2(1, -27)

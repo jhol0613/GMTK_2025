@@ -9,9 +9,13 @@ extends Node2D
 ## Where on the tilemap the conductor should spawn
 @export var conductor_spawn_position: Vector2i
 
-@onready var _player_character : PlayerCharacter = $PlayerCharacter
-@onready var _tilemap_level : TilemapLevel = $TilemapLevel
+@onready var _player_character : PlayerCharacter = $OnTheTrain/PlayerCharacter
+@onready var _tilemap_level : TilemapLevel = $OnTheTrain/TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
+@onready var _on_the_train : = $OnTheTrain
+@onready var _animation_player := $OnTheTrain/AnimationPlayer
+
+@onready var _initial_train_posit = _on_the_train.position
 
 var tile_size: Vector2i
 var _conductor: Conductor
@@ -20,6 +24,8 @@ var _conductor: Conductor
 func _ready() -> void:
 	_player_character.grid_position = _tilemap_level.global_to_map(_player_character.global_position)
 	_player_character.tile_size = _tilemap_level.get_tile_size()
+	
+	AudioManager.music_bar.connect(_on_music_bar)
 
 
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
@@ -54,3 +60,8 @@ func _spawn_conductor() -> void:
 	_conductor.grid_position = conductor_spawn_position
 	_conductor.tile_size = _tilemap_level.get_tile_size()
 	add_child(_conductor)
+	
+func _on_music_bar():
+	print("on the bar")
+	_animation_player.play("train_rock")
+	

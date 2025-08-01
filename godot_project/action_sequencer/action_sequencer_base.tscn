@@ -7,8 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/play_button/start_pushed.png" id="4_7huxh"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/play_button/start_unpushed.png" id="4_201rw"]
 [ext_resource type="Script" uid="uid://jvybmgwhf8e5" path="res://action_sequencer/test_playback_control.gd" id="5_201rw"]
+[ext_resource type="Texture2D" uid="uid://h73hlii8jbws" path="res://action_sequencer/new_sequencer.png" id="6_201rw"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/play_button/start_mouse_hover.png" id="6_rc3vt"]
-[ext_resource type="Texture2D" uid="uid://cosoi57f34c6i" path="res://action_sequencer/sequencer.png" id="9_201rw"]
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
@@ -44,11 +44,12 @@ script = ExtResource("5_201rw")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 67.0
-offset_top = 246.0
-offset_right = 385.0
-offset_bottom = 364.0
-texture = ExtResource("9_201rw")
+offset_left = 49.0
+offset_top = 226.0
+offset_right = 434.0
+offset_bottom = 342.0
+texture = ExtResource("6_201rw")
+expand_mode = 1
 stretch_mode = 4
 
 [node name="PlayButton" type="TextureButton" parent="."]

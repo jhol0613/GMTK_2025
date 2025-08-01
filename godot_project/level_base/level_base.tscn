@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=11 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="2_da5si"]
@@ -16,40 +16,85 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
+[sub_resource type="Animation" id="Animation_dtys8"]
+resource_name = "train_rock"
+length = 1.412
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OnTheTrain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.706, 0.833333, 1.26667, 1.36667),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, 0), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n2acl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OnTheTrain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2acl"]
+_data = {
+&"RESET": SubResource("Animation_n2acl"),
+&"train_rock": SubResource("Animation_dtys8")
+}
+
 [node name="LevelBase" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_vmt1o")
-
-[node name="PlayerCharacter" parent="." instance=ExtResource("3_ep22m")]
-
-[node name="TilemapLevel" parent="." instance=ExtResource("2_da5si")]
-position = Vector2(80, 114)
-
-[node name="PointLight2D5" type="PointLight2D" parent="TilemapLevel/BackWall" index="0"]
-position = Vector2(112, -79.63)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.5
-
-[node name="PointLight2D6" type="PointLight2D" parent="TilemapLevel/BackWall" index="1"]
-position = Vector2(240, -78.63)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.5
-
-[node name="PointLight2D7" type="PointLight2D" parent="TilemapLevel/BackWall" index="2"]
-position = Vector2(-3, 39.37)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.3
-
-[node name="PointLight2D8" type="PointLight2D" parent="TilemapLevel/BackWall" index="3"]
-position = Vector2(356, 48.37)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.3
 
 [node name="SequencerLevelPlaceholder" parent="." instance=ExtResource("4_da5si")]
 
 [node name="ActionSequencer" parent="." instance=ExtResource("5_dtys8")]
 
+[node name="OnTheTrain" type="Node2D" parent="."]
+
+[node name="PlayerCharacter" parent="OnTheTrain" instance=ExtResource("3_ep22m")]
+
+[node name="TilemapLevel" parent="OnTheTrain" instance=ExtResource("2_da5si")]
+position = Vector2(71, 95)
+
+[node name="PointLight2D5" type="PointLight2D" parent="OnTheTrain/TilemapLevel/BackWall" index="0"]
+position = Vector2(112, -79.63)
+texture = SubResource("GradientTexture2D_dtys8")
+texture_scale = 1.5
+
+[node name="PointLight2D6" type="PointLight2D" parent="OnTheTrain/TilemapLevel/BackWall" index="1"]
+position = Vector2(240, -78.63)
+texture = SubResource("GradientTexture2D_dtys8")
+texture_scale = 1.5
+
+[node name="PointLight2D7" type="PointLight2D" parent="OnTheTrain/TilemapLevel/BackWall" index="2"]
+position = Vector2(-3, 39.37)
+texture = SubResource("GradientTexture2D_dtys8")
+texture_scale = 1.3
+
+[node name="PointLight2D8" type="PointLight2D" parent="OnTheTrain/TilemapLevel/BackWall" index="3"]
+position = Vector2(356, 48.37)
+texture = SubResource("GradientTexture2D_dtys8")
+texture_scale = 1.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OnTheTrain"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_n2acl")
+}
+
 [connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_sequencer_level_placeholder_player_action_received"]
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]
 
-[editable path="TilemapLevel"]
+[editable path="OnTheTrain/TilemapLevel"]

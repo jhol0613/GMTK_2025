@@ -22,6 +22,8 @@ class_name ActionSequencer
 @export var available_actions: Array[Enums.PlayerAction] = []
 @export var action_quantities: Array[int] = []
 
+@export var total_slots := 8
+
 
 #endregion
 
@@ -63,6 +65,12 @@ func _ready() -> void:
 	for i in range(available_slots):
 		initialized_slots.append(action_slot_scene.instantiate())
 		slots_container.add_child(initialized_slots.back())
+	for i in range(total_slots - available_slots):
+		var new_slot = action_slot_scene.instantiate()
+		initialized_slots.append(new_slot)
+		slots_container.add_child(initialized_slots.back())
+		new_slot.set_active(false)
+		
 	for i in range(available_actions.size()):
 
 		initialized_items.append(action_item_scene.instantiate())
@@ -95,11 +103,14 @@ func advance():
 		print(initialized_slots.size(), " ", current_action)
 		return
 
-	if initialized_slots.size() == current_action:
+	if available_slots == current_action:
 		current_action = 0
 		
 	initialized_slots[current_action].set_light_on(true)
-	initialized_slots[current_action-1].set_light_on(false)
+	if current_action > 0:
+		initialized_slots[current_action-1].set_light_on(false)
+	else:
+		initialized_slots[available_slots-1].set_light_on(false)
 	perform_action.emit(initialized_slots[current_action].action)
 	current_action += 1
 
