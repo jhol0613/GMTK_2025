@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2yuwdalgstuj"]
+
+[ext_resource type="Script" uid="uid://cds2tru0s15j4" path="res://action_sequencer/action_slots/action_slot.gd" id="1_5idlh"]
+[ext_resource type="Texture2D" uid="uid://c68c60ps82r03" path="res://action_sequencer/action_slots/action_slot_inactive.png" id="2_5idlh"]
+[ext_resource type="Texture2D" uid="uid://ye6pwcp6sgej" path="res://action_sequencer/action_slots/action_slot_disabled.png" id="3_5lq3q"]
+[ext_resource type="Texture2D" uid="uid://bvovbxr6f7vd2" path="res://action_sequencer/action_slots/square_light.tres" id="3_7wert"]
+[ext_resource type="Texture2D" uid="uid://ro6knoefluak" path="res://action_sequencer/action_slots/Move_up.png" id="4_kmjhv"]
+[ext_resource type="Texture2D" uid="uid://yd0hnuygysx1" path="res://action_sequencer/action_slots/Move_Down.png" id="5_5msto"]
+[ext_resource type="Texture2D" uid="uid://dwftvnq84alo8" path="res://action_sequencer/action_slots/Move_Left.png" id="6_hidq3"]
+[ext_resource type="Texture2D" uid="uid://ud0y87hpu6s3" path="res://action_sequencer/action_slots/Move_Right.png" id="7_xtiu8"]
+[ext_resource type="Texture2D" uid="uid://dg7s4hknhtvo8" path="res://action_sequencer/action_slots/Jump.png" id="8_bi66e"]
+[ext_resource type="Texture2D" uid="uid://7i3ye02vrbp2" path="res://action_sequencer/action_slots/Duck.png" id="9_8fu2t"]
+
+[node name="ActionSlot" type="CenterContainer"]
+mouse_filter = 0
+script = ExtResource("1_5idlh")
+active_texture = ExtResource("2_5idlh")
+inactive_texture = ExtResource("3_5lq3q")
+action_textures = Dictionary[int, CompressedTexture2D]({
+1: ExtResource("4_kmjhv"),
+2: ExtResource("5_5msto"),
+3: ExtResource("6_hidq3"),
+4: ExtResource("7_xtiu8"),
+5: ExtResource("8_bi66e"),
+6: ExtResource("9_8fu2t")
+})
+sequencer_light_color = Color(0, 0.788235, 0.211765, 1)
+space_available_light_color = Color(0, 0.611765, 0.823529, 1)
+metadata/_edit_horizontal_guides_ = [-59.0]
+
+[node name="Sprite2D" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_5idlh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="Backlight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(16, 25)
+energy = 1.32
+texture = ExtResource("3_7wert")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

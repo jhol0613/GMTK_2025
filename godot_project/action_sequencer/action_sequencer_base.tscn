@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=16 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_7huxh"]
-[ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slot.tscn" id="3_h8boe"]
+[ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_h8boe"]
 [ext_resource type="Script" uid="uid://c5nv8dno55d8q" path="res://action_sequencer/test_sequence_runner.gd" id="4_4n1ua"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/play_button/start_pushed.png" id="4_7huxh"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/play_button/start_unpushed.png" id="4_201rw"]
@@ -10,8 +10,20 @@
 [ext_resource type="Texture2D" uid="uid://h73hlii8jbws" path="res://action_sequencer/new_sequencer.png" id="6_201rw"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/play_button/start_mouse_hover.png" id="6_rc3vt"]
 [ext_resource type="Texture2D" uid="uid://c21fyghohuwvu" path="res://action_sequencer/replay_button/unpushed.png" id="10_4fjcr"]
+[ext_resource type="Texture2D" uid="uid://hgkcu6my2edw" path="res://action_sequencer/play_button/start_disabled.png" id="10_e7btv"]
 [ext_resource type="Texture2D" uid="uid://588sh1rfj8xg" path="res://action_sequencer/replay_button/pushed.png" id="11_e7btv"]
 [ext_resource type="Texture2D" uid="uid://b86m10fqu8guc" path="res://action_sequencer/replay_button/hover.png" id="12_8w216"]
+
+[sub_resource type="Gradient" id="Gradient_e7btv"]
+offsets = PackedFloat32Array(0.0582751, 0.764569)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8w216"]
+gradient = SubResource("Gradient_e7btv")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
@@ -22,17 +34,20 @@ script = ExtResource("1_ury52")
 action_item_scene = ExtResource("2_7huxh")
 action_slot_scene = ExtResource("3_h8boe")
 items_container = NodePath("ActionItems")
-slots_container = NodePath("ActionSlots")
-available_slots = 4
+slots_container = NodePath("TextureRect/ActionSlots")
+available_slots = 2
 available_actions = Array[int]([1, 2, 3, 4])
 action_quantities = Array[int]([8, 8, 8, 8])
 
-[node name="ActionItems" type="VBoxContainer" parent="."]
+[node name="ActionItems" type="GridContainer" parent="."]
 layout_mode = 2
-offset_left = 504.0
-offset_top = 6.0
-offset_right = 504.0
-offset_bottom = 58.0
+offset_left = 43.0
+offset_top = 256.0
+offset_right = 43.0
+offset_bottom = 308.0
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -47,54 +62,67 @@ script = ExtResource("5_201rw")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 108.0
-offset_top = 229.0
-offset_right = 497.0
-offset_bottom = 345.0
+offset_left = 196.0
+offset_top = 236.0
+offset_right = 585.0
+offset_bottom = 352.0
 texture = ExtResource("6_201rw")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="PlayButton" type="TextureButton" parent="."]
+[node name="ActionSlots" type="HBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -76.0
+offset_right = 37.0
+offset_bottom = -24.0
+grow_vertical = 0
+theme_override_constants/separation = 7
+
+[node name="PlayButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -413.0
+offset_left = -298.0
 offset_top = -110.0
-offset_right = -344.0
+offset_right = -229.0
 offset_bottom = -76.0
 grow_horizontal = 0
 grow_vertical = 0
 texture_normal = ExtResource("4_201rw")
 texture_pressed = ExtResource("4_7huxh")
 texture_hover = ExtResource("6_rc3vt")
+texture_disabled = ExtResource("10_e7btv")
 
-[node name="ReplayButton" type="TextureButton" parent="."]
+[node name="PlayLight1" type="PointLight2D" parent="TextureRect/PlayButton"]
+visible = false
+position = Vector2(30, 18)
+color = Color(0.481911, 0.932407, 0.536252, 1)
+texture = SubResource("GradientTexture2D_8w216")
+
+[node name="PlayLight2" type="PointLight2D" parent="TextureRect/PlayButton"]
+visible = false
+position = Vector2(10, 6)
+color = Color(0.482353, 0.933333, 0.537255, 1)
+texture = SubResource("GradientTexture2D_8w216")
+
+[node name="ReplayButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 267.0
-offset_top = 236.0
-offset_right = 326.0
-offset_bottom = 276.0
+offset_left = 158.0
+offset_top = 6.0
+offset_right = 217.0
+offset_bottom = 46.0
 texture_normal = ExtResource("10_4fjcr")
 texture_pressed = ExtResource("11_e7btv")
 texture_hover = ExtResource("12_8w216")
 
-[node name="ActionSlots" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 145.0
-offset_top = -78.0
-offset_right = 145.0
-offset_bottom = -26.0
-grow_vertical = 0
-theme_override_constants/separation = 7
-
 [connection signal="perform_action" from="." to="TestSequenceRunner" method="_on_perform_action"]
 [connection signal="playback_play" from="TestPlaybackControl" to="." method="play"]
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="ReplayButton" to="." method="_on_replay_button_pressed"]
+[connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="TextureRect/ReplayButton" to="." method="_on_replay_button_pressed"]

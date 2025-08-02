@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c68c60ps82r03"
-path="res://.godot/imported/action_slot_inactive.png-b33d5d275ca54b3df356a2752caa0b87.ctex"
+uid="uid://yd0hnuygysx1"
+path="res://.godot/imported/Move_Down.png-05a688a8a007f0cf046ddb468cf33ed4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/action_slot_inactive.png"
-dest_files=["res://.godot/imported/action_slot_inactive.png-b33d5d275ca54b3df356a2752caa0b87.ctex"]
+source_file="res://action_sequencer/action_slots/Move_Down.png"
+dest_files=["res://.godot/imported/Move_Down.png-05a688a8a007f0cf046ddb468cf33ed4.ctex"]
 
 [params]
 
