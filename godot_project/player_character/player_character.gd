@@ -3,9 +3,6 @@ extends Agent
 class_name PlayerCharacter
 
 
-@export_subgroup("Sound")
-
-
 @export_subgroup("Sound emitters")
 @export var move_left_emitter: FmodEventEmitter2D
 @export var move_right_emitter: FmodEventEmitter2D
@@ -13,7 +10,12 @@ class_name PlayerCharacter
 @export var move_down_emitter: FmodEventEmitter2D
 @export var jump_emitter: FmodEventEmitter2D
 
+@export_subgroup("Nodes")
+## Collision object to disable after the event happens
+@export var collision: CollisionObject2D
+
 func _ready() -> void:
+	super._ready()
 	action_executed.connect(_on_action_executed)
 
 
@@ -33,3 +35,7 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 	if emitter == null: # in case the action is not a movement action
 		return
 	emitter.play()
+
+
+func disable_collisions() -> void:
+	collision.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE

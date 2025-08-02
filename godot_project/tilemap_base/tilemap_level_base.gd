@@ -45,6 +45,9 @@ func get_tile_size() -> Vector2i:
 func global_to_map(coordinates : Vector2):
 	return _floor_layer.local_to_map(_floor_layer.to_local(coordinates))
 
+func map_to_local(grid_position: Vector2i):
+	return _floor_layer.map_to_local(grid_position)
+
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
 	path_grid = AStarGrid2D.new()

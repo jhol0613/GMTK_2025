@@ -9,13 +9,17 @@ extends Node2D
 ## Where on the tilemap the conductor should spawn
 @export var conductor_spawn_position: Vector2i
 
+@export_subgroup("Player", "player")
+@export var player_scene: PackedScene
+## Where on the tilemap the player should spawn
+@export var player_spawn_position: Vector2i
+
 @export_subgroup("Animation")
 @export var train_move_right_on_play_distance := 56.0
 @export var train_move_right_on_play_time := 1.8
 @export var next_car_offset := 490
 @export var train_car_advance_play_time := 2.5
 
-@onready var _player_character : PlayerCharacter = $TrainCenter/OnTheTrain/PlayerCharacter
 @onready var _tilemap_level : TilemapLevel = $TrainCenter/OnTheTrain/TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
@@ -25,23 +29,22 @@ extends Node2D
 @onready var _animation_player := $AnimationPlayer
 
 @onready var _initial_train_posit = _tilemap_level.position
-@onready var _initial_player_posit = _player_character.global_position
 
-var tile_size: Vector2i
 var _conductor: Conductor
+var _player_character: PlayerCharacter
 
 var _next_tile_level: TilemapLevel
 var _level_number := 0
+var _level_target: Area2D
 
 func _ready() -> void:
-	_player_character.grid_position = _tilemap_level.global_to_map(_initial_player_posit)
-	_player_character.tile_size = _tilemap_level.get_tile_size()
-
+	_player_character = _spawn_agent(player_scene, player_spawn_position)
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
 
 	_tilemap_level.connect("target_reached", _on_level_complete)
 	load_next_tile_level()
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
@@ -54,8 +57,6 @@ func load_next_tile_level():
 
 func advance_level():
 	_level_number += 1
-	# load following tilemap level
-	load_next_tile_level()
 
 	# Tween to control animation of one train car to the next
 	var advance_distance = ProjectSettings.get_setting("display/window/size/viewport_width")
@@ -78,10 +79,17 @@ func advance_level():
 	_action_sequencer.global_position = sequencer_posit
 	_action_sequencer.connect("play_started", _on_action_sequencer_play_started)
 	_action_sequencer.connect("replay_pressed", _on_action_sequencer_replay_pressed)
+	_action_sequencer.connect("perform_action", _on_action_performed)
+	# load following tilemap level
+	load_next_tile_level()
 
 # Called when level has been fully advanced
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
+	# TODO: play exit animation for the player
+	_player_character.disable_collisions()
+	_player_character.queue_free()
+	_player_character = _spawn_agent(player_scene, player_spawn_position)
 
 
 func _on_action_performed(action: Enums.PlayerAction) -> void:
@@ -92,7 +100,6 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 func _update_player(action: Enums.PlayerAction) -> void:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _tilemap_level.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
-		_player_character.grid_position += move_direction
 		_player_character.execute_action(action)
 
 
@@ -106,11 +113,21 @@ func _update_conductor() -> void:
 	)
 
 
-func _spawn_conductor() -> void:
-	_conductor = conductor_scene.instantiate()
-	_conductor.grid_position = conductor_spawn_position
-	_conductor.tile_size = _tilemap_level.get_tile_size()
-	add_child(_conductor)
+func _spawn_player():
+	_player_character = _spawn_agent(player_scene, player_spawn_position)
+	_player_character
+
+
+# instantiates the agent, adds it to the level, places it into the correct spot
+func _spawn_agent(scene: PackedScene, grid_position: Vector2i) -> Agent:
+	var agent = scene.instantiate()
+	agent.grid_position = grid_position
+	agent.grid_origin = grid_position
+	agent.local_origin = _tilemap_level.map_to_local(Vector2i.ZERO)
+	agent.tile_size = _tilemap_level.get_tile_size()
+	_tilemap_level.add_child(agent)
+	return agent
+
 
 func _on_music_bar():
 	_animation_player.play("train_rock")
