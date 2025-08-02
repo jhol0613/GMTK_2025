@@ -142,6 +142,8 @@ func _on_action_sequencer_replay_pressed() -> void:
 
 func _on_car_position_moved_back():
 	_action_sequencer.set_action_icons_hidden(false)
+	# TODO: maybe put a reset animation here
+	_player_character.reset()
 
 func _on_level_complete() -> void:
 	advance_level()
