@@ -20,6 +20,8 @@ fill_to = Vector2(0, 0)
 [node name="TilemapLevelBase" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_3qeya")
+next_level_path = "res://levels/level0_tilemap.tscn"
+associated_sequencer_level = "res://tilemap_level_base.tscn"
 
 [node name="Windows" type="TileMapLayer" parent="."]
 position = Vector2(0, -5.37)

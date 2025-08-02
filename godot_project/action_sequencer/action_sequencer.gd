@@ -136,6 +136,9 @@ func _reset_actions():
 		initialized_slots[i].clear_slot()
 		
 
+func set_action_icons_hidden(should_hide: bool):
+	_action_items.visible = !should_hide
+
 #region Signal connections
 
 func _on_advance() -> void:

@@ -2,6 +2,8 @@ extends Node2D
 
 class_name TilemapLevel
 
+@export var next_level_path: String
+@export var associated_sequencer_level: String
 @export var bounds : Vector2i
 
 @onready var _floor_layer : TileMapLayer = $Floor
