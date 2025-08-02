@@ -36,13 +36,13 @@ var _level_number := 0
 func _ready() -> void:
 	_player_character.grid_position = _tilemap_level.global_to_map(_initial_player_posit)
 	_player_character.tile_size = _tilemap_level.get_tile_size()
-	
+
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
-	
+
 	_tilemap_level.connect("target_reached", _on_level_complete)
 	load_next_tile_level()
-	
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
 		advance_level()
@@ -51,12 +51,12 @@ func load_next_tile_level():
 	_next_tile_level = load(_tilemap_level.next_level_path).instantiate()
 	_on_the_train.add_child(_next_tile_level)
 	_next_tile_level.position = _initial_train_posit + (_level_number+1) * Vector2(next_car_offset, 0.0)
-	
+
 func advance_level():
 	_level_number += 1
 	# load following tilemap level
 	load_next_tile_level()
-	
+
 	# Tween to control animation of one train car to the next
 	var advance_distance = ProjectSettings.get_setting("display/window/size/viewport_width")
 	var tween = create_tween()
@@ -64,11 +64,11 @@ func advance_level():
 	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_level_advanced)
-		
+
 	# Update tilemap reference to new level and connect to signals
 	_tilemap_level = _next_tile_level
 	_tilemap_level.connect("target_reached", _on_level_complete)
-	
+
 	# Load the new appropriate sequencer level
 	var sequencer_posit = _action_sequencer.global_position
 	_action_sequencer.queue_free()
@@ -82,14 +82,9 @@ func advance_level():
 # Called when level has been fully advanced
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
-	
-
-func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
-	_update_player(action)
-	_update_conductor()
 
 
-func _on_action_sequencer_perform_action(action: Enums.PlayerAction) -> void:
+func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
 
@@ -116,10 +111,10 @@ func _spawn_conductor() -> void:
 	_conductor.grid_position = conductor_spawn_position
 	_conductor.tile_size = _tilemap_level.get_tile_size()
 	add_child(_conductor)
-	
+
 func _on_music_bar():
 	_animation_player.play("train_rock")
-	
+
 
 func _on_action_sequencer_play_started() -> void:
 	var tween = create_tween()
@@ -134,9 +129,9 @@ func _on_action_sequencer_replay_pressed() -> void:
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_car_position_moved_back)
-	
+
 func _on_car_position_moved_back():
 	_action_sequencer.set_action_icons_hidden(false)
-		
+
 func _on_level_complete() -> void:
 	advance_level()
