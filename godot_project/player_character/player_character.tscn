@@ -1,22 +1,61 @@
-[gd_scene load_steps=32 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=44 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="2_5l2xy"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://player_character/direct_move_curve.tres" id="2_bvxdu"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://player_character/y_move_curve.tres" id="3_3f5wo"]
+[ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://player_character/sprites/ActionBonk.png" id="5_2bapq"]
 [ext_resource type="Texture2D" uid="uid://b1yloh6w3ao8m" path="res://player_character/sprites/player360.png" id="6_aodji"]
+[ext_resource type="Texture2D" uid="uid://dm6rcc2g6isnk" path="res://player_character/sprites/ActionJump.png" id="6_xgp35"]
 [ext_resource type="Texture2D" uid="uid://by4ds17usv1yq" path="res://player_character/sprites/PWalkB.png" id="7_dx1gn"]
 [ext_resource type="Texture2D" uid="uid://b86ry21nd6xfc" path="res://player_character/sprites/PWalkF.png" id="8_2bapq"]
+[ext_resource type="Texture2D" uid="uid://kkdq1q3rjbaj" path="res://player_character/sprites/ActionDuck.png" id="8_s6mum"]
 [ext_resource type="Texture2D" uid="uid://bwusmhmca44mr" path="res://player_character/sprites/PWalkL.png" id="9_xgp35"]
 [ext_resource type="Texture2D" uid="uid://d1f4ri5am1141" path="res://player_character/sprites/PWalkR.png" id="10_s6mum"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5yn4y"]
-atlas = ExtResource("6_aodji")
-region = Rect2(0, 126, 27, 63)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fy7jl"]
+atlas = ExtResource("5_2bapq")
+region = Rect2(0, 56, 42, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wmbr8"]
+atlas = ExtResource("5_2bapq")
+region = Rect2(0, 224, 42, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mt8m0"]
+atlas = ExtResource("6_xgp35")
+region = Rect2(0, 50, 41, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wkvkj"]
 atlas = ExtResource("6_aodji")
 region = Rect2(0, 63, 27, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6kvw"]
+atlas = ExtResource("8_s6mum")
+region = Rect2(0, 0, 41, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvbcp"]
+atlas = ExtResource("8_s6mum")
+region = Rect2(0, 46, 41, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1bv2"]
+atlas = ExtResource("8_s6mum")
+region = Rect2(0, 92, 41, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc5pn"]
+atlas = ExtResource("8_s6mum")
+region = Rect2(0, 138, 41, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw1uj"]
+atlas = ExtResource("6_xgp35")
+region = Rect2(0, 0, 41, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jsv2"]
+atlas = ExtResource("6_xgp35")
+region = Rect2(0, 100, 41, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yn4y"]
+atlas = ExtResource("6_aodji")
+region = Rect2(0, 126, 27, 63)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2mfni"]
 atlas = ExtResource("6_aodji")
@@ -92,6 +131,54 @@ region = Rect2(0, 128, 27, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5l2xy"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fy7jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wmbr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt8m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkvkj")
+}],
+"loop": true,
+"name": &"bonk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6kvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvbcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1bv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc5pn")
+}],
+"loop": true,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mw1uj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mt8m0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jsv2")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5yn4y")
@@ -201,17 +288,22 @@ animations = Dictionary[int, String]({
 1: "walk_up",
 2: "walk_down",
 3: "walk_left",
-4: "walk_right"
+4: "walk_right",
+8: "bonk_left"
 })
 sprite = NodePath("Shadow/PlayerSprite")
 beat_delays = Dictionary[int, float]({
-1: 3.0,
-2: 3.0,
-3: 3.0,
-4: 3.0,
+1: 1.5,
+2: 1.5,
+3: 1.5,
+4: 1.5,
 5: 0.0,
 6: 0.0,
-7: 0.0
+7: 0.0,
+8: 1.5,
+9: 1.5,
+10: 1.5,
+11: 1.5
 })
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -220,7 +312,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -27)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"standing"
+animation = &"bonk_left"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]
 position = Vector2(-1, 18)
@@ -251,3 +343,7 @@ position = Vector2(1, -27)
 event_name = "event:/Jump"
 event_guid = "{4949b836-3e08-4db3-9672-cd0d579c0433}"
 position = Vector2(1, -27)
+
+[node name="Bonk" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Bonk"
+event_guid = "{dee1c723-9a3b-423d-b98c-393f89f28734}"

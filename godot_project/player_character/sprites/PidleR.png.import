@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cb58xpr7hprei"
-path="res://.godot/imported/floortiles.png-7a7261cc7ebe3ca3609838561105df06.ctex"
+uid="uid://dbyla8txd5j7u"
+path="res://.godot/imported/PidleR.png-0ac1b1051270b2496456cb7ebbb587b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilemap_base/floortiles.png"
-dest_files=["res://.godot/imported/floortiles.png-7a7261cc7ebe3ca3609838561105df06.ctex"]
+source_file="res://player_character/sprites/PidleR.png"
+dest_files=["res://.godot/imported/PidleR.png-0ac1b1051270b2496456cb7ebbb587b0.ctex"]
 
 [params]
 

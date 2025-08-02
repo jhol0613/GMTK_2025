@@ -9,7 +9,10 @@ enum PlayerAction {
 	JUMP,
 	DUCK,
 	HIDE,
-	BONK
+	LEFT_BONK,
+	RIGHT_BONK,
+	UP_BONK,
+	DOWN_BONK
 }
 
 enum MusicMode {

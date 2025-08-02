@@ -17,6 +17,8 @@ class_name Agent
 @export var frame_rate := 10.0
 ## Animation names from the animated sprite for actions
 @export var animations: Dictionary[Enums.PlayerAction, String]
+## If a follow-on animation is defined for a given action, that animation will play after an action animation is finished
+@export var follow_on_animations: Dictionary[Enums.PlayerAction, String]
 
 @export_subgroup("Nodes")
 @export var sprite: AnimatedSprite2D
@@ -37,6 +39,8 @@ var grid_origin := Vector2i.ZERO
 var local_origin := Vector2.ZERO
 # grid total size
 var grid_size := Vector2i.ZERO
+
+var follow_on_animation: String
 
 
 signal action_executed(action: Enums.PlayerAction)
@@ -65,10 +69,15 @@ func execute_action(action : Enums.PlayerAction) -> void:
 	var animation_name = _get_animation_name(action)
 	if animation_name != "":
 		sprite.play(animation_name)
-
+	sprite.animation_finished.connect(_on_animation_finished)
+	if follow_on_animations.get(action) != null:
+		follow_on_animation = follow_on_animations.get(action)
 	_initiate_move(_grid_to_local(grid_position))
 
-
+func _on_animation_finished():
+	sprite.play(follow_on_animation)
+	sprite.animation_finished.disconnect(_on_animation_finished)
+	
 func reset() -> void:
 	grid_position = grid_origin
 	position = _grid_to_local(grid_position)

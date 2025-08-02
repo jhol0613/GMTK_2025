@@ -9,6 +9,10 @@ class_name PlayerCharacter
 @export var move_up_emitter: FmodEventEmitter2D
 @export var move_down_emitter: FmodEventEmitter2D
 @export var jump_emitter: FmodEventEmitter2D
+@export var bonk_emitter: FmodEventEmitter2D
+
+@export_subgroup("Animation")
+@export var jump_curve := Curve2D
 
 @export_subgroup("Nodes")
 ## Collision object to disable after the event happens
@@ -32,6 +36,8 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 			emitter = move_down_emitter
 		Enums.PlayerAction.JUMP:
 			emitter = jump_emitter
+		Enums.PlayerAction.LEFT_BONK, Enums.PlayerAction.RIGHT_BONK, Enums.PlayerAction.UP_BONK, Enums.PlayerAction.DOWN_BONK:
+			emitter = bonk_emitter
 	if emitter == null: # in case the action is not a movement action
 		return
 	emitter.play()

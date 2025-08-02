@@ -99,6 +99,16 @@ func _update_player(action: Enums.PlayerAction) -> void:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _tilemap_level.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
 		_player_character.execute_action(action)
+	else: #directional bonks
+		match action:
+			Enums.PlayerAction.LEFT:
+				_player_character.execute_action(Enums.PlayerAction.LEFT_BONK)
+			Enums.PlayerAction.RIGHT:
+				_player_character.execute_action(Enums.PlayerAction.RIGHT_BONK)
+			Enums.PlayerAction.UP:
+				_player_character.execute_action(Enums.PlayerAction.UP_BONK)
+			Enums.PlayerAction.DOWN:
+				_player_character.execute_action(Enums.PlayerAction.DOWN_BONK)
 
 
 func _update_conductor() -> void:
