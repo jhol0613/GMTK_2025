@@ -10,6 +10,8 @@ class_name Agent
 ## The y value the agent should add to their movement as they move to another tile (to add a "jumping" component instead of just linear motion)
 @export var y_movement_curve: Curve
 @export var y_movement_magnitude := 16.0
+@export var bonk_curve: Curve
+@export var jump_curve: Curve
 
 @export_subgroup("Frames")
 ## Amount of time for movement animation
@@ -69,12 +71,18 @@ func execute_action(action : Enums.PlayerAction) -> void:
 	var animation_name = _get_animation_name(action)
 	if animation_name != "":
 		sprite.play(animation_name)
-	sprite.animation_finished.connect(_on_animation_finished)
+	
 	if follow_on_animations.get(action) != null:
 		follow_on_animation = follow_on_animations.get(action)
-	_initiate_move(_grid_to_local(grid_position))
+		sprite.animation_finished.connect(_on_animation_finished)
+		
+	if _is_action_bonk(action):
+		_initiate_bonk(_grid_to_local(grid_position))
+	else:
+		_initiate_move(_grid_to_local(grid_position))
 
 func _on_animation_finished():
+	print("on animation finished called")
 	sprite.play(follow_on_animation)
 	sprite.animation_finished.disconnect(_on_animation_finished)
 	
@@ -86,6 +94,10 @@ func reset() -> void:
 func _initiate_move(new_target : Vector2):
 	var tween = create_tween()
 	tween.tween_method(_move_callback.bind(position, new_target), 0.0, 1.0, move_duration)
+	
+func _initiate_bonk(attempted_target: Vector2):
+	var tween = create_tween()
+	tween.tween_method(_bonk_callback.bind(position, attempted_target), 0.0, 1.0, move_duration)
 
 
 func _grid_to_local(grid_coordinates: Vector2i) -> Vector2:
@@ -97,6 +109,8 @@ func _move_callback(alpha: float, start_position: Vector2, target_position: Vect
 	position = direct_movement_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
 
+func _bonk_callback(alpha: float, start_position: Vector2, target_position: Vector2):
+	pass
 
 func _get_animation_name(action: Enums.PlayerAction) -> String:
 	return animations.get(action, "")
@@ -104,3 +118,9 @@ func _get_animation_name(action: Enums.PlayerAction) -> String:
 
 func _get_delay_seconds(action: Enums.PlayerAction) -> float:
 	return beat_delays.get(action, 0.0) * AudioManager.beat_time_seconds
+	
+func _is_action_bonk(action: Enums.PlayerAction):
+	return (action == Enums.PlayerAction.LEFT_BONK) or \
+		(action == Enums.PlayerAction.RIGHT_BONK) or \
+		(action == Enums.PlayerAction.UP_BONK) or \
+		(action == Enums.PlayerAction.DOWN_BONK)

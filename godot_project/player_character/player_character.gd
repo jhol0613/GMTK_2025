@@ -11,8 +11,6 @@ class_name PlayerCharacter
 @export var jump_emitter: FmodEventEmitter2D
 @export var bonk_emitter: FmodEventEmitter2D
 
-@export_subgroup("Animation")
-@export var jump_curve := Curve2D
 
 @export_subgroup("Nodes")
 ## Collision object to disable after the event happens

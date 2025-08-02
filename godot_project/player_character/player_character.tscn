@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bwusmhmca44mr" path="res://player_character/sprites/PWalkL.png" id="9_xgp35"]
 [ext_resource type="Texture2D" uid="uid://d1f4ri5am1141" path="res://player_character/sprites/PWalkR.png" id="10_s6mum"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvy4y"]
+atlas = ExtResource("9_xgp35")
+region = Rect2(0, 64, 33, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fy7jl"]
 atlas = ExtResource("5_2bapq")
 region = Rect2(0, 56, 42, 56)
@@ -85,10 +89,6 @@ region = Rect2(0, 0, 27, 64)
 atlas = ExtResource("8_2bapq")
 region = Rect2(0, 128, 27, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nvy4y"]
-atlas = ExtResource("9_xgp35")
-region = Rect2(0, 64, 33, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_weqcv"]
 atlas = ExtResource("9_xgp35")
 region = Rect2(0, 0, 33, 64)
@@ -133,9 +133,12 @@ region = Rect2(0, 128, 27, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fy7jl")
+"texture": SubResource("AtlasTexture_nvy4y")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fy7jl")
+}, {
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_wmbr8")
 }, {
 "duration": 1.0,
@@ -144,9 +147,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wkvkj")
 }],
-"loop": true,
+"loop": false,
 "name": &"bonk_left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -161,7 +164,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wc5pn")
 }],
-"loop": true,
+"loop": false,
 "name": &"duck",
 "speed": 5.0
 }, {
@@ -175,7 +178,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3jsv2")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -198,7 +201,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_im6gk")
 }],
-"loop": true,
+"loop": false,
 "name": &"standing",
 "speed": 10.0
 }, {
@@ -274,16 +277,18 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvxdu"]
 height = 54.0
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "collision", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "bonk_emitter", "collision", "sprite")]
 script = ExtResource("1_1ty04")
 move_left_emitter = NodePath("Sounds/MoveSideways")
 move_right_emitter = NodePath("Sounds/MoveSideways")
 move_up_emitter = NodePath("Sounds/MoveUp")
 move_down_emitter = NodePath("Sounds/MoveDown")
 jump_emitter = NodePath("Sounds/Jump")
+bonk_emitter = NodePath("Sounds/Bonk")
 collision = NodePath("Shadow/PlayerSprite/Area2D")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_3f5wo")
+frame_rate = 7.5
 animations = Dictionary[int, String]({
 1: "walk_up",
 2: "walk_down",
@@ -300,10 +305,10 @@ beat_delays = Dictionary[int, float]({
 5: 0.0,
 6: 0.0,
 7: 0.0,
-8: 1.5,
-9: 1.5,
-10: 1.5,
-11: 1.5
+8: 1.25,
+9: 1.25,
+10: 1.25,
+11: 1.25
 })
 
 [node name="Shadow" type="Sprite2D" parent="."]
