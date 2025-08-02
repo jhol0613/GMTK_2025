@@ -12,6 +12,8 @@ extends Node2D
 @export_subgroup("Animation")
 @export var train_move_right_on_play_distance := 56.0
 @export var train_move_right_on_play_time := 1.8
+@export var next_car_offset := 543
+@export var train_car_advance_play_time := 2.5
 
 @onready var _player_character : PlayerCharacter = $TrainCenter/OnTheTrain/PlayerCharacter
 @onready var _tilemap_level : TilemapLevel = $TrainCenter/OnTheTrain/TilemapLevel
@@ -22,12 +24,14 @@ extends Node2D
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
 
-@onready var _initial_train_posit = _on_the_train.position
+@onready var _initial_train_posit = _tilemap_level.position
 @onready var _initial_player_posit = _player_character.global_position
 
 var tile_size: Vector2i
 var _conductor: Conductor
 
+var _next_tile_level: TilemapLevel
+var _level_number := 1
 
 func _ready() -> void:
 	_player_character.grid_position = _tilemap_level.global_to_map(_initial_player_posit)
@@ -35,7 +39,43 @@ func _ready() -> void:
 	
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
+	
+	#TODO: Remove, this is to test level loading
+	load_next_tile_level()
+	advance_level()
 
+func load_next_tile_level():
+	_next_tile_level = load(_tilemap_level.next_level_path).instantiate()
+	_on_the_train.add_child(_next_tile_level)
+	_next_tile_level.position = _initial_train_posit + _level_number * Vector2(next_car_offset, 0.0)
+	_level_number += 1
+	
+func advance_level():
+	# load following tilemap level
+	load_next_tile_level()
+	
+	# Tween to control animation of one train car to the next
+	var advance_distance = ProjectSettings.get_setting("display/window/size/viewport_width")
+	var tween = create_tween()
+	var target_pos = _train_center.position + Vector2(-next_car_offset, 0)
+	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(_on_level_advanced)
+		
+	# Update tilemap reference to new level
+	_tilemap_level = _next_tile_level
+	
+	# Load the new appropriate sequencer level
+	var sequencer_posit = _action_sequencer.global_position
+	_action_sequencer.queue_free()
+	_action_sequencer = load(_tilemap_level.associated_sequencer_level).instantiate()
+	add_child(_action_sequencer)
+	_action_sequencer.set_action_icons_hidden(true)
+	_action_sequencer.global_position = sequencer_posit
+
+func _on_level_advanced():
+	_action_sequencer.set_action_icons_hidden(false)
+	
 
 func _on_sequencer_level_placeholder_player_action_received(action: Enums.PlayerAction) -> void:
 	_update_player(action)

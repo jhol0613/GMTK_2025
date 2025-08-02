@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=4 uid="uid://cw5pycp8um55m"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_54pxd"]
+
+[node name="TilemapLevelBase" instance=ExtResource("1_54pxd")]
+associated_sequencer_level = "res://levels/level0_sequencer.tscn"
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAACAAMAAQABAAMAAAAEAAQAAQABAAMAAAAGAAMAAQABAAMAAAAEAAUAAQABAAMAAAAIAAQAAQABAAMAAAAIAAUAAQABAAMAAAAEAAEAAQABAAMAAAAEAAAAAQABAAMAAAAIAAEAAQABAAMAAAAIAAAAAQABAAMAAAA=")
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+tile_map_data = PackedByteArray("AAD///3/AAAAAAYAAAD///7/AAAAAAcAAAD/////AAAAAAgAAAD//wAAAAAAAAkAAAD//wEAAAAAABIAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD+//3/AAAAAAAAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAA=")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+tile_map_data = PackedByteArray("AAAMAP3/AAAAAAYAAAAMAP7/AAAAAAcAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAkAAAAMAAEAAAAAABIAAAAMAAIAAAAAABQAAAAMAAMAAAAAABUAAAANAP3/AAAAAAAAABANAP7/AAAAAAEAABANAP//AAAAAAEAABANAAAAAAAAAAIAABANAAEAAAAAAAMAABA=")

@@ -4,7 +4,4 @@
 
 [node name="LevelBase" instance=ExtResource("1_46lwt")]
 
-[node name="PlayerCharacter" parent="OnTheTrain/TrainCenter" index="1"]
-position = Vector2(86, 139)
-
-[editable path="OnTheTrain/TrainCenter/TilemapLevel"]
+[editable path="TrainCenter/OnTheTrain/TilemapLevel"]

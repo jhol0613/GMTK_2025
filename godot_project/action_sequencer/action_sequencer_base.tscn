@@ -29,9 +29,9 @@ action_quantities = Array[int]([8, 8, 8, 8])
 
 [node name="ActionItems" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_left = 573.0
+offset_left = 504.0
 offset_top = 6.0
-offset_right = 573.0
+offset_right = 504.0
 offset_bottom = 58.0
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
