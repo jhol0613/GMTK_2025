@@ -1,12 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=15 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_7huxh"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_h8boe"]
-[ext_resource type="Script" uid="uid://c5nv8dno55d8q" path="res://action_sequencer/test_sequence_runner.gd" id="4_4n1ua"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/play_button/start_pushed.png" id="4_7huxh"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/play_button/start_unpushed.png" id="4_201rw"]
-[ext_resource type="Script" uid="uid://jvybmgwhf8e5" path="res://action_sequencer/test_playback_control.gd" id="5_201rw"]
 [ext_resource type="Texture2D" uid="uid://h73hlii8jbws" path="res://action_sequencer/new_sequencer.png" id="6_201rw"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/play_button/start_mouse_hover.png" id="6_rc3vt"]
 [ext_resource type="Texture2D" uid="uid://c21fyghohuwvu" path="res://action_sequencer/replay_button/unpushed.png" id="10_4fjcr"]
@@ -53,12 +51,6 @@ columns = 3
 layout_mode = 1
 offset_right = 48.0
 offset_bottom = 52.0
-
-[node name="TestSequenceRunner" type="Node" parent="."]
-script = ExtResource("4_4n1ua")
-
-[node name="TestPlaybackControl" type="Node" parent="."]
-script = ExtResource("5_201rw")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
@@ -122,7 +114,5 @@ texture_normal = ExtResource("10_4fjcr")
 texture_pressed = ExtResource("11_e7btv")
 texture_hover = ExtResource("12_8w216")
 
-[connection signal="perform_action" from="." to="TestSequenceRunner" method="_on_perform_action"]
-[connection signal="playback_play" from="TestPlaybackControl" to="." method="play"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TextureRect/ReplayButton" to="." method="_on_replay_button_pressed"]

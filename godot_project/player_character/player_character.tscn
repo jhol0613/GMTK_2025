@@ -187,13 +187,14 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bvxdu"]
 height = 54.0
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "shadow", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "collision", "sprite")]
 script = ExtResource("1_1ty04")
 move_left_emitter = NodePath("Sounds/MoveSideways")
 move_right_emitter = NodePath("Sounds/MoveSideways")
 move_up_emitter = NodePath("Sounds/MoveUp")
 move_down_emitter = NodePath("Sounds/MoveDown")
 jump_emitter = NodePath("Sounds/Jump")
+collision = NodePath("Shadow/PlayerSprite/Area2D")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_3f5wo")
 animations = Dictionary[int, String]({
@@ -202,7 +203,6 @@ animations = Dictionary[int, String]({
 3: "walk_left",
 4: "walk_right"
 })
-shadow = NodePath("Shadow")
 sprite = NodePath("Shadow/PlayerSprite")
 beat_delays = Dictionary[int, float]({
 1: 3.0,

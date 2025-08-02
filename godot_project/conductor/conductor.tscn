@@ -9,11 +9,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m234f"]
 height = 54.0
 
-[node name="Conductor" type="Node2D" node_paths=PackedStringArray("shadow", "sprite")]
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_eb2fl")
 direct_movement_curve = ExtResource("2_m234f")
 y_movement_curve = ExtResource("3_ps1s8")
-shadow = NodePath("Shadow")
 sprite = NodePath("Shadow/AnimatedSprite2D")
 
 [node name="Shadow" type="Sprite2D" parent="."]

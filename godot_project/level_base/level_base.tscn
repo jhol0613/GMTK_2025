@@ -58,6 +58,8 @@ fill_to = Vector2(0, 0)
 [node name="LevelBase" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_vmt1o")
+player_scene = ExtResource("3_ep22m")
+player_spawn_position = Vector2i(0, 2)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(294, -9)
@@ -101,9 +103,6 @@ texture_scale = 1.3
 position = Vector2(356, 48.37)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.3
-
-[node name="PlayerCharacter" parent="TrainCenter/OnTheTrain" instance=ExtResource("3_ep22m")]
-position = Vector2(153, 139)
 
 [connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_sequencer_level_placeholder_player_action_received"]
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]

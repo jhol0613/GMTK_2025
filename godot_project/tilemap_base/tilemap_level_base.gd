@@ -8,7 +8,6 @@ class_name TilemapLevel
 
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
-@onready var _wall_layer : TileMapLayer = $BackWall
 
 signal target_reached
 
@@ -45,6 +44,9 @@ func get_tile_size() -> Vector2i:
 func global_to_map(coordinates : Vector2):
 	return _floor_layer.local_to_map(_floor_layer.to_local(coordinates))
 
+func map_to_local(grid_position: Vector2i):
+	return _floor_layer.map_to_local(grid_position)
+
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
 	path_grid = AStarGrid2D.new()
@@ -65,5 +67,5 @@ func _initialize_path_finding():
 	print("Tile map data: ", path_grid)
 
 
-func _on_target_area_entered(area: Area2D) -> void:
+func _on_target_area_entered(_area: Area2D) -> void:
 	target_reached.emit()
