@@ -33,6 +33,9 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 
 		if cell_exists and cell_traversible:
 			neighbors_to_return.append(neighbor)
+	
+	# Your own position is traversible, too! For actions that keep you in the same square
+	neighbors_to_return.append(grid_position)
 
 	return neighbors_to_return
 

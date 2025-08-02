@@ -34,8 +34,8 @@ action_slot_scene = ExtResource("3_h8boe")
 items_container = NodePath("ActionItems")
 slots_container = NodePath("TextureRect/ActionSlots")
 available_slots = 2
-available_actions = Array[int]([1, 2, 3, 4])
-action_quantities = Array[int]([8, 8, 8, 8])
+available_actions = Array[int]([1, 2, 3, 4, 5])
+action_quantities = Array[int]([99999, 99999, 99999, 99999, 99999])
 
 [node name="ActionItems" type="GridContainer" parent="."]
 layout_mode = 2

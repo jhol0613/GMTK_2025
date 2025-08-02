@@ -16,7 +16,6 @@ class_name Agent
 @export_subgroup("Frames")
 ## Amount of time for movement animation
 @export var move_duration := .3
-@export var frame_rate := 10.0
 ## Animation names from the animated sprite for actions
 @export var animations: Dictionary[Enums.PlayerAction, String]
 ## If a follow-on animation is defined for a given action, that animation will play after an action animation is finished
@@ -26,6 +25,7 @@ class_name Agent
 @export var sprite: AnimatedSprite2D
 
 @export_subgroup("Sound")
+## How long to wait after sequencer signal to start an animation
 @export var beat_delays: Dictionary[Enums.PlayerAction, float]
 
 #endregion
@@ -49,8 +49,6 @@ signal action_executed(action: Enums.PlayerAction)
 
 func _ready():
 	position = _grid_to_local(grid_origin)
-	for anim_name in sprite.sprite_frames.get_animation_names():
-		sprite.sprite_frames.set_animation_speed(anim_name, frame_rate)
 
 func execute_action(action : Enums.PlayerAction) -> void:
 	match action:
@@ -77,7 +75,9 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		sprite.animation_finished.connect(_on_animation_finished)
 		
 	if _is_action_bonk(action):
-		_initiate_bonk(_grid_to_local(grid_position))
+		# Bonk target is where the player tried to go
+		var bonk_target = _grid_to_local(_get_bonk_target(action))
+		_initiate_bonk(bonk_target)
 	else:
 		_initiate_move(_grid_to_local(grid_position))
 
@@ -109,8 +109,27 @@ func _move_callback(alpha: float, start_position: Vector2, target_position: Vect
 	position = direct_movement_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
 
-func _bonk_callback(alpha: float, start_position: Vector2, target_position: Vector2):
-	pass
+func _bonk_callback(alpha: float, start_position: Vector2, attempted_position: Vector2):
+	var position_difference = attempted_position - start_position
+	position = bonk_curve.sample(alpha) * position_difference + start_position
+	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
+	
+func _get_bonk_target(action: Enums.PlayerAction) -> Vector2i:
+	var attempted_position: Vector2i
+	match action:
+		Enums.PlayerAction.UP_BONK:
+			attempted_position = grid_position + Vector2i.UP
+		Enums.PlayerAction.DOWN_BONK:
+			attempted_position = grid_position + Vector2i.DOWN
+		Enums.PlayerAction.LEFT_BONK:
+			attempted_position = grid_position + Vector2i.LEFT
+		Enums.PlayerAction.RIGHT_BONK:
+			attempted_position = grid_position + Vector2i.RIGHT
+		_:
+			attempted_position = grid_position + Vector2i.ZERO
+			
+	return attempted_position
+		
 
 func _get_animation_name(action: Enums.PlayerAction) -> String:
 	return animations.get(action, "")
