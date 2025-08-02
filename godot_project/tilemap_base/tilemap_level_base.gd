@@ -8,7 +8,6 @@ class_name TilemapLevel
 
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
-@onready var _wall_layer : TileMapLayer = $BackWall
 
 signal target_reached
 
@@ -68,5 +67,5 @@ func _initialize_path_finding():
 	print("Tile map data: ", path_grid)
 
 
-func _on_target_area_entered(area: Area2D) -> void:
+func _on_target_area_entered(_area: Area2D) -> void:
 	target_reached.emit()

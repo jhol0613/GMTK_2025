@@ -79,8 +79,8 @@ func _initiate_move(new_target : Vector2):
 	tween.tween_method(_move_callback.bind(position, new_target), 0.0, 1.0, move_duration)
 
 
-func _grid_to_local(grid_position: Vector2i) -> Vector2:
-	return local_origin + Vector2(grid_position * tile_size)
+func _grid_to_local(grid_coordinates: Vector2i) -> Vector2:
+	return local_origin + Vector2(grid_coordinates * tile_size)
 
 
 func _move_callback(alpha: float, start_position: Vector2, target_position: Vector2):

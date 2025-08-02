@@ -24,7 +24,7 @@ extends Node2D
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
 # needs to exist since you can't animate x and y values for on the train separately, don't want train rock
-# animation to resest train horizontal position
+# animation to reset train horizontal position
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
 
@@ -35,7 +35,6 @@ var _player_character: PlayerCharacter
 
 var _next_tile_level: TilemapLevel
 var _level_number := 0
-var _level_target: Area2D
 
 func _ready() -> void:
 	_player_character = _spawn_agent(player_scene, player_spawn_position)
@@ -52,14 +51,13 @@ func _input(event: InputEvent) -> void:
 
 func load_next_tile_level():
 	_next_tile_level = load(_tilemap_level.next_level_path).instantiate()
-	_on_the_train.add_child(_next_tile_level)
+	_on_the_train.call_deferred("add_child", _next_tile_level)
 	_next_tile_level.position = _initial_train_posit + (_level_number+1) * Vector2(next_car_offset, 0.0)
 
 func advance_level():
 	_level_number += 1
 
 	# Tween to control animation of one train car to the next
-	var advance_distance = ProjectSettings.get_setting("display/window/size/viewport_width")
 	var tween = create_tween()
 	var target_pos = _train_center.position + Vector2(-next_car_offset - train_move_right_on_play_distance, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
@@ -111,11 +109,6 @@ func _update_conductor() -> void:
 	_conductor.execute_action(
 		Enums.vector_to_player_action(_conductor.grid_position - conductor_path[1])
 	)
-
-
-func _spawn_player():
-	_player_character = _spawn_agent(player_scene, player_spawn_position)
-	_player_character
 
 
 # instantiates the agent, adds it to the level, places it into the correct spot
