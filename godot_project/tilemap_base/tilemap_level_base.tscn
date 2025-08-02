@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=10 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://tilemap_base/tilemap_level_base.gd" id="1_3qeya"]
 [ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemap_base/train_walls.tres" id="2_8f44r"]
@@ -16,6 +16,9 @@ gradient = SubResource("Gradient_yheth")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh3f"]
+size = Vector2(20, 27)
 
 [node name="TilemapLevelBase" type="Node2D"]
 y_sort_enabled = true
@@ -89,3 +92,12 @@ tile_set = ExtResource("5_cct4y")
 position = Vector2(4.27, 0)
 tile_map_data = PackedByteArray("AAAVAPr/AAAAAAgAAAAVAPv/AAABAAgAAAAVAPz/AAABAAgAAAAVAP3/AAABAAgAAAAVAP7/AAABAAgAAAAVAP//AAABAAgAAAAVAAAAAAABAAgAAAAVAAEAAAAAAAkAAAAVAAIAAAABAAoAAAAVAAMAAAABAAoAAAAVAAQAAAABAAoAAAAVAAUAAAABAAoAAAAVAAYAAAAAAAoAAAAVAAcAAAAAAAsAAAA=")
 tile_set = ExtResource("5_bsh3f")
+
+[node name="Target" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+position = Vector2(336, 53)
+shape = SubResource("RectangleShape2D_bsh3f")
+
+[connection signal="area_entered" from="Target" to="." method="_on_target_area_entered"]

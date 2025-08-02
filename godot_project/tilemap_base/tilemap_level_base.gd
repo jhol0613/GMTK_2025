@@ -10,6 +10,8 @@ class_name TilemapLevel
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 @onready var _wall_layer : TileMapLayer = $BackWall
 
+signal target_reached
+
 var path_grid: AStarGrid2D
 
 func _ready() -> void:
@@ -61,3 +63,7 @@ func _initialize_path_finding():
 	
 	# debug
 	print("Tile map data: ", path_grid)
+
+
+func _on_target_area_entered(area: Area2D) -> void:
+	target_reached.emit()

@@ -34,6 +34,9 @@ class_name ActionSequencer
 #region Type declarations
 
 @onready var _action_items = $ActionItems
+@onready var _play_button = $TextureRect/PlayButton
+@onready var _play_light1 = $TextureRect/PlayButton/PlayLight1
+@onready var _play_light2 = $TextureRect/PlayButton/PlayLight2
 
 signal play_started
 signal replay_pressed
@@ -56,6 +59,8 @@ var initialized_slots := []
 # ActionItemData
 var initialized_items := []
 
+var active_action_item : ActionItem
+
 #endregion
 
 #region Signals
@@ -75,6 +80,7 @@ func _ready() -> void:
 	for i in range(available_slots):
 		initialized_slots.append(action_slot_scene.instantiate())
 		slots_container.add_child(initialized_slots.back())
+		initialized_slots.back().connect("action_slot_clicked", _on_action_slot_clicked)
 	for i in range(total_slots - available_slots):
 		var new_slot = action_slot_scene.instantiate()
 		initialized_slots.append(new_slot)
@@ -89,6 +95,7 @@ func _ready() -> void:
 
 		items_container.add_child(initialized_items.back())
 		initialized_items.back().set_action(available_actions[i]) # set the action icon once added to the tree
+		initialized_items.back().connect("action_item_clicked", _on_action_item_clicked)
 	
 
 
@@ -120,11 +127,11 @@ func advance():
 	if available_slots == current_action:
 		current_action = 0
 		
-	initialized_slots[current_action].set_light_on(true)
+	initialized_slots[current_action].set_sequencer_light_on(true)
 	if current_action > 0:
-		initialized_slots[current_action-1].set_light_on(false)
+		initialized_slots[current_action-1].set_sequencer_light_on(false)
 	else:
-		initialized_slots[available_slots-1].set_light_on(false)
+		initialized_slots[available_slots-1].set_sequencer_light_on(false)
 	perform_action.emit(initialized_slots[current_action].action)
 	current_action += 1
 
@@ -147,14 +154,32 @@ func _on_advance() -> void:
 
 
 func _on_play_button_pressed() -> void:
+	_play_button.disabled = true
+	_play_light1.visible = true
+	_play_light2.visible = true
 	play()
 
 
 func _on_replay_button_pressed() -> void:
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
-	_action_items.visible = true
 	_reset_actions()
+	_play_button.disabled = false
+	_play_light1.visible = false
+	_play_light2.visible = false
 	replay_pressed.emit()
 	current_state = SequencingState.SEQUENCING
+	
+func _on_action_item_clicked(new_action_item: ActionItem):
+	active_action_item = new_action_item
+	for item in initialized_items:
+		if item != active_action_item:
+			item.deselect()
+			
+	for i in range(available_slots):
+		initialized_slots[i].ui_interaction_enabled = true
+		
+func _on_action_slot_clicked(clicked_slot : ActionSlot):
+	if active_action_item != null:
+		clicked_slot.set_action(active_action_item.action)
 
 #endregion

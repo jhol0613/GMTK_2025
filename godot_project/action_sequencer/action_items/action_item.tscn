@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ltdnwoljvgwp"]
+[gd_scene load_steps=12 format=3 uid="uid://ltdnwoljvgwp"]
 
 [ext_resource type="Script" uid="uid://0ug1hsts2o1l" path="res://action_sequencer/action_items/action_item.gd" id="1_4oqtm"]
 [ext_resource type="PackedScene" uid="uid://c42yl06x7ifhn" path="res://action_sequencer/action_items/preview_item.tscn" id="2_ar57j"]
@@ -9,10 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://btldhiqu02jpj" path="res://action_sequencer/action_items/Move_Right.png" id="6_k5l37"]
 [ext_resource type="Texture2D" uid="uid://bqmnwiqi44a8p" path="res://action_sequencer/action_items/Jump.png" id="7_6fshn"]
 [ext_resource type="Texture2D" uid="uid://qlfe1aq3vlhk" path="res://action_sequencer/action_items/Hide.png" id="7_j0qn6"]
+[ext_resource type="Texture2D" uid="uid://cr282lrn7fubk" path="res://action_sequencer/action_items/SelectedBorder.png" id="10_6fshn"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_almjv"]
 
-[node name="ActionItem" type="PanelContainer"]
+[node name="ActionItem" type="CenterContainer"]
 offset_right = 65.0
 offset_bottom = 65.0
 script = ExtResource("1_4oqtm")
@@ -27,6 +28,16 @@ icon_dictionary = Dictionary[int, CompressedTexture2D]({
 7: ExtResource("7_j0qn6")
 })
 
+[node name="Border" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("10_6fshn")
+stretch_mode = 2
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
 texture = SubResource("CompressedTexture2D_almjv")
+stretch_mode = 2
+
+[connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]
