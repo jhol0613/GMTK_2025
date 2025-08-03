@@ -26,7 +26,7 @@ extends Node2D
 @export var first_level: PackedScene
 @export var initial_train_position: Vector2
 
-@onready var _tilemap_level : TilemapLevel = $TrainCenter/OnTheTrain/TilemapLevel
+@onready var _tilemap_level : TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
 # needs to exist since you can't animate x and y values for on the train separately, don't want train rock
@@ -47,7 +47,7 @@ var _current_beat := 0
 func _ready() -> void:
 	_tilemap_level = first_level.instantiate()
 	_on_the_train.add_child(_tilemap_level)
-	
+
 	_tilemap_level.position = initial_train_position
 	
 	_spawn_player()
@@ -63,7 +63,7 @@ func _input(event: InputEvent) -> void:
 		advance_level()
 
 func load_next_tile_level():
-	_next_tile_level = load(_tilemap_level.next_level_path).instantiate()
+	_next_tile_level = _tilemap_level.next_level.instantiate()
 	_on_the_train.call_deferred("add_child", _next_tile_level)
 	_next_tile_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
 
@@ -87,7 +87,7 @@ func advance_level():
 	# Load the new appropriate sequencer level
 	var sequencer_posit = _action_sequencer.global_position
 	_action_sequencer.queue_free()
-	_action_sequencer = load(_tilemap_level.associated_sequencer_level).instantiate()
+	_action_sequencer = _tilemap_level.sequencer_scene.instantiate()
 	add_child(_action_sequencer)
 	_action_sequencer.set_action_icons_hidden(true)
 	_action_sequencer.global_position = sequencer_posit

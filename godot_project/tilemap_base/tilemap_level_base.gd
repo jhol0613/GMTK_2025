@@ -2,8 +2,8 @@ extends Node2D
 
 class_name TilemapLevel
 
-@export var next_level_path: String
-@export var associated_sequencer_level: String
+@export var next_level: PackedScene
+@export var sequencer_scene: PackedScene
 @export var bounds : Vector2i
 
 @export_subgroup("Conductor", "conductor")

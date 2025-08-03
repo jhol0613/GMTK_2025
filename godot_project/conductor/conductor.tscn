@@ -10,6 +10,7 @@
 size = Vector2(20, 10)
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("sprite")]
+z_index = 2
 script = ExtResource("1_eb2fl")
 direct_movement_curve = ExtResource("2_m234f")
 y_movement_curve = ExtResource("3_lda0w")

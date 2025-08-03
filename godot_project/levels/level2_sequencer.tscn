@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ba28mg8ic5o6j"]
+
+[ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="1_nkv5h"]
+
+[node name="ActionSequencerBase2" instance=ExtResource("1_nkv5h")]
+available_slots = 6
+available_actions = Array[int]([1, 2, 3, 4, 7])
+action_quantities = Array[int]([8, 8, 8, 8, 8])
