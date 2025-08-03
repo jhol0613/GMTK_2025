@@ -1,17 +1,34 @@
-[gd_scene load_steps=3 format=4 uid="uid://fmqdremv0bxx"]
+[gd_scene load_steps=4 format=4 uid="uid://fmqdremv0bxx"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_ta0fo"]
 [ext_resource type="PackedScene" uid="uid://df6cfmo4y4ulv" path="res://levels/level4_sequencer.tscn" id="3_450ge"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://tilemap_base/laser.tscn" id="3_csjwu"]
 
 [node name="TilemapLevelBase5" instance=ExtResource("1_ta0fo")]
 sequencer_scene = ExtResource("3_450ge")
 conductor_enabled = false
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAAGAAMAAQACAAMAAAAGAAQAAQACAAMAAAACAAAAAQACAAMAAAACAAEAAQACAAMAAAACAAIAAQACAAMAAAACAAMAAQACAAMAAAACAAQAAQACAAMAAAACAAUAAQACAAMAAAABAAAAAQACAAMAAAABAAEAAQACAAMAAAABAAIAAQACAAMAAAABAAMAAQACAAMAAAABAAQAAQACAAMAAAABAAUAAQACAAMAAAAFAAAAAQACAAMAAAAFAAEAAQACAAMAAAAFAAIAAQACAAMAAAAFAAMAAQACAAMAAAAFAAQAAQACAAMAAAAFAAUAAQACAAMAAAAGAAAAAQACAAMAAAAGAAEAAQACAAMAAAAGAAIAAQACAAMAAAAGAAUAAQACAAMAAAAJAAAAAQACAAMAAAAJAAEAAQACAAMAAAAJAAIAAQACAAMAAAAJAAMAAQACAAMAAAAJAAQAAQACAAMAAAAJAAUAAQACAAMAAAA=")
+tile_map_data = PackedByteArray()
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
 tile_map_data = PackedByteArray("AAD///3/AAAAAAYAAAD///7/AAAAAAcAAAD/////AAAAAAgAAAD//wAAAAAAAAkAAAD//wEAAAAAABAAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD+//3/AAAAAAAAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
 tile_map_data = PackedByteArray("AAAMAP3/AAAAAAYAAAAMAP7/AAAAAAcAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAkAAAAMAAEAAAAAAA8AAAAMAAIAAAAAABQAAAAMAAMAAAAAABUAAAANAP3/AAAAAAAAABANAP7/AAAAAAEAABANAP//AAAAAAEAABANAAAAAAAAAAIAABANAAEAAAAAAAMAABALAAQAAAAAABgAAAAKAAQAAAAAABcAAAAJAAQAAAAAABcAAAAIAAQAAAAAABcAAAAHAAQAAAAAABYAAAA=")
+
+[node name="Laser" parent="." index="8" instance=ExtResource("3_csjwu")]
+position = Vector2(48, 2)
+beam_length = 6
+
+[node name="Laser2" parent="." index="9" instance=ExtResource("3_csjwu")]
+position = Vector2(176, 2)
+beam_length = 6
+
+[node name="Laser3" parent="." index="10" instance=ExtResource("3_csjwu")]
+position = Vector2(208, 2)
+beam_length = 6
+
+[node name="Laser4" parent="." index="11" instance=ExtResource("3_csjwu")]
+position = Vector2(303, 2)
+beam_length = 6
