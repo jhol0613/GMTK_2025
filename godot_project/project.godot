@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="GodotProject"
-run/main_scene="uid://ryi6symlc4ea"
+run/main_scene="uid://dual0bcixw854"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://dual0bcixw854"]
+
+[ext_resource type="Script" uid="uid://dtkjbr420kbm1" path="res://ui/title_scene.gd" id="1_ofviv"]
+[ext_resource type="Texture2D" uid="uid://dxdqnh1nbxhln" path="res://ui/menuart.png" id="1_rnay7"]
+[ext_resource type="Texture2D" uid="uid://cep80sbedbwos" path="res://ui/play.png" id="2_ux3pq"]
+[ext_resource type="Texture2D" uid="uid://bkkxjyovgnt30" path="res://ui/playselect.png" id="3_yewqo"]
+[ext_resource type="Texture2D" uid="uid://bkk2sd8k2pv01" path="res://ui/options.png" id="4_0ddpl"]
+[ext_resource type="Texture2D" uid="uid://ievbjg1rx2ml" path="res://ui/optionsselect.png" id="5_ofviv"]
+
+[node name="TitleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ofviv")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -11.0
+offset_right = 682.0
+offset_bottom = 478.0
+texture = ExtResource("1_rnay7")
+stretch_mode = 4
+
+[node name="Play" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 231.0
+offset_right = 254.0
+offset_bottom = 280.0
+texture_normal = ExtResource("2_ux3pq")
+texture_hover = ExtResource("3_yewqo")
+stretch_mode = 4
+
+[node name="Options" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 268.0
+offset_right = 315.0
+offset_bottom = 321.0
+texture_normal = ExtResource("4_0ddpl")
+texture_hover = ExtResource("5_ofviv")
+stretch_mode = 4
+
+[node name="ClickStartEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Play_Click"
+event_guid = "{68bd9ad5-a3b8-4ad9-b4dd-0883ff4dabe4}"
+
+[node name="HoverEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/PlaceBlock"
+event_guid = "{aa867ae1-5c59-4cf4-b092-7b782f5115cf}"
+
+[connection signal="mouse_entered" from="Play" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="Options" to="." method="_on_options_mouse_entered"]

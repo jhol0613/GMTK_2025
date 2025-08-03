@@ -23,6 +23,8 @@ extends Node2D
 
 @export_category("Levels")
 @export var level_list: Array[PackedScene]
+@export var first_level: PackedScene
+@export var initial_train_position: Vector2
 
 @onready var _tilemap_level : TilemapLevel = $TrainCenter/OnTheTrain/TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
@@ -33,7 +35,7 @@ extends Node2D
 @onready var _animation_player := $AnimationPlayer
 @onready var _camera := $ShakeCamera
 
-@onready var _initial_train_posit = _tilemap_level.position
+
 
 var _conductor: Conductor
 var _player_character: PlayerCharacter
@@ -43,6 +45,11 @@ var _level_number := 0
 var _current_beat := 0
 
 func _ready() -> void:
+	_tilemap_level = first_level.instantiate()
+	_on_the_train.add_child(_tilemap_level)
+	
+	_tilemap_level.position = initial_train_position
+	
 	_player_character = _spawn_agent(player_scene, player_spawn_position)
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
@@ -58,7 +65,7 @@ func _input(event: InputEvent) -> void:
 func load_next_tile_level():
 	_next_tile_level = load(_tilemap_level.next_level_path).instantiate()
 	_on_the_train.call_deferred("add_child", _next_tile_level)
-	_next_tile_level.position = _initial_train_posit + (_level_number+1) * Vector2(next_car_offset, 0.0)
+	_next_tile_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
 
 func advance_level():
 	_level_number += 1
