@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="1_5tc8t"]
 
-[node name="ActionSequencerBase2" instance=ExtResource("1_5tc8t")]
+[node name="ActionSequencerBase4" instance=ExtResource("1_5tc8t")]
 available_slots = 4
-available_actions = Array[int]([4, 3, 1, 2, 5])
+available_actions = Array[int]([4, 3, 1, 2, 0])
 tutorial_mode = false

@@ -35,7 +35,7 @@ action_slot_scene = ExtResource("3_h8boe")
 items_container = NodePath("TextureRect/ActionItems")
 slots_container = NodePath("TextureRect/ActionSlots")
 available_slots = 2
-available_actions = Array[int]([4, 4, 0, 0, 0])
+available_actions = Array[int]([4, 3, 1, 2, 0])
 action_quantities = Array[int]([99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999])
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
