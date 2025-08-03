@@ -434,12 +434,13 @@ beat_delays = Dictionary[int, float]({
 })
 
 [node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
 texture = ExtResource("2_5l2xy")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
-position = Vector2(1, -27)
+position = Vector2(1, -30)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"jump"
+animation = &"standing"
 autoplay = "idle_down"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]

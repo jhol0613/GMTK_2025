@@ -70,16 +70,18 @@ texture_region_size = Vector2i(32, 32)
 3:1/0/texture_origin = Vector2i(-16, 2)
 2:3/size_in_atlas = Vector2i(2, 1)
 2:3/0 = 0
-2:3/0/texture_origin = Vector2i(15, 6)
+2:3/0/texture_origin = Vector2i(-16, -13)
 2:2/size_in_atlas = Vector2i(2, 1)
 2:2/0 = 0
-2:2/0/texture_origin = Vector2i(15, -2)
+2:2/0/texture_origin = Vector2i(-16, -1)
 0:2/size_in_atlas = Vector2i(2, 1)
 0:2/0 = 0
-0:2/0/texture_origin = Vector2i(-21, -7)
+0:2/0/texture_origin = Vector2i(-21, -16)
+0:2/0/y_sort_origin = 16
+0:2/0/custom_data_0 = true
 0:3/size_in_atlas = Vector2i(2, 1)
 0:3/0 = 0
-0:3/0/texture_origin = Vector2i(-21, -19)
+0:3/0/texture_origin = Vector2i(-21, -28)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s8jpv"]
 texture = ExtResource("4_6xxht")
