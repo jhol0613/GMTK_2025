@@ -15,11 +15,17 @@ class_name TilemapLevel
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 
+# array of all lasers in the level
+var lasers := []
+
 signal target_reached
 
 var path_grid: AStarGrid2D
 
 func _ready() -> void:
+	for child in get_children():
+		if child is Laser:
+			lasers.append(child)
 	_initialize_path_finding()
 
 

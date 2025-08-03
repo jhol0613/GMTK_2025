@@ -67,5 +67,3 @@ event_guid = "{faeb031a-7e1a-44ca-9a55-ae009a74b309}"
 [node name="Voice" type="FmodEventEmitter2D" parent="Sound"]
 event_name = "event:/Conductor Speak"
 event_guid = "{85959d5f-8e92-4859-bdd0-d6a884147397}"
-
-[connection signal="area_entered" from="Shadow/AnimatedSprite2D/Area2D" to="." method="_on_player_entered"]

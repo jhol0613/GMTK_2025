@@ -18,6 +18,8 @@ class_name PlayerCharacter
 ## Collision object to disable after the event happens
 @export var collision: CollisionObject2D
 
+signal failure
+
 func _ready() -> void:
 	super._ready()
 	action_executed.connect(_on_action_executed)
@@ -52,3 +54,9 @@ func notify_failure():
 
 func disable_collisions() -> void:
 	collision.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE
+
+
+func _on_collision(area: Area2D) -> void:
+	if area.collision_layer & Enums.CollisionLayer.ENEMIES:
+		notify_failure()
+		failure.emit()
