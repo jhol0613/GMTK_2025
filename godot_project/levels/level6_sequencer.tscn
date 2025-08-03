@@ -2,6 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="1_belcc"]
 
-[node name="ActionSequencerBase2" instance=ExtResource("1_belcc")]
-available_slots = 8
+[node name="ActionSequencerBase4" instance=ExtResource("1_belcc")]
+available_slots = 5
 available_actions = Array[int]([4, 3, 1, 2, 5])

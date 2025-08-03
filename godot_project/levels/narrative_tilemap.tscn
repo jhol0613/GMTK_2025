@@ -26,7 +26,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="TilemapLevelBase" instance=ExtResource("1_fde8v")]
+[node name="TilemapLevelBase2" instance=ExtResource("1_fde8v")]
 next_level = ExtResource("2_l2ivd")
 
 [node name="Obstacles" parent="." index="2"]

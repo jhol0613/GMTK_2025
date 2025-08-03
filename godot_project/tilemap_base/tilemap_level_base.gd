@@ -75,7 +75,8 @@ func _initialize_path_finding():
 	path_grid.update()
 
 	for tile in _obstacle_layer.get_used_cells():
-		path_grid.set_point_solid(tile)
+		if _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
+			path_grid.set_point_solid(tile)
 	path_grid.update()
 
 
