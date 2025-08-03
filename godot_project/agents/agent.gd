@@ -47,6 +47,7 @@ var local_origin := Vector2.ZERO
 var grid_size := Vector2i.ZERO
 
 var follow_on_animation: String
+var should_interrupt_queued_animation: bool
 
 signal action_executed(action: Enums.PlayerAction)
 
@@ -79,6 +80,11 @@ func execute_action(action : Enums.PlayerAction) -> void:
 
 
 func _on_beat(action: Enums.PlayerAction) -> void:
+	
+	if should_interrupt_queued_animation:
+		should_interrupt_queued_animation = false
+		return
+		
 	var animation_name = _get_animation_name(action)
 	if animation_name != "":
 		sprite.play(animation_name)
@@ -96,6 +102,8 @@ func _on_beat(action: Enums.PlayerAction) -> void:
 	elif action != Enums.PlayerAction.NONE:
 		_initiate_move(_grid_to_local(grid_position))
 
+func interrupt_queued_animation():
+	should_interrupt_queued_animation = true
 
 func _on_animation_finished():
 	sprite.play(follow_on_animation)

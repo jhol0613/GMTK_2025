@@ -60,6 +60,7 @@ func notify_success():
 
 func notify_failure():
 	failure_emitter.play()
+	interrupt_queued_animation()
 	sprite.play("failure")
 
 func disable_collisions() -> void:
