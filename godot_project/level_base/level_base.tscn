@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
 [ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://environment/snowflake.png" id="2_neno8"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://conductor/conductor.tscn" id="2_q5boi"]
-[ext_resource type="PackedScene" path="res://levels/narrative_tilemap.tscn" id="3_b73ho"]
+[ext_resource type="PackedScene" uid="uid://cftakqgrlqb80" path="res://levels/narrative_tilemap.tscn" id="3_b73ho"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://player_character/player_character.tscn" id="3_ep22m"]
 [ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://environment/snow_material.tres" id="3_uv04d"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="5_dtys8"]

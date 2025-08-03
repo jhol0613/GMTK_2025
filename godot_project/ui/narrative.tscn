@@ -244,5 +244,19 @@ wait_time = 7.5
 one_shot = true
 autostart = true
 
+[node name="SkipHintTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="SkipHint" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 466.0
+offset_top = 419.0
+offset_right = 591.0
+offset_bottom = 442.0
+text = "Press K to skip..."
+
 [connection signal="animation_finished" from="passenger_and_player" to="." method="_on_passenger_and_player_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="SkipHintTimer" to="." method="_on_skip_hint_timer_timeout"]
