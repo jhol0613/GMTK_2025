@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brh8bknuo7lsx"]
+[gd_scene load_steps=12 format=3 uid="uid://brh8bknuo7lsx"]
 
 [ext_resource type="Texture2D" uid="uid://xjgskf0kp1kg" path="res://tilemap_base/tilesheets/laser_turret.png" id="1_1pj2b"]
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://tilemap_base/laser.gd" id="1_cep7i"]
@@ -50,19 +50,32 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm5od"]
 size = Vector2(16, 10)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e1xtw"]
-texture = ExtResource("3_e1xtw")
-margins = Vector2i(0, 14)
-texture_region_size = Vector2i(15, 20)
-0:6/0 = 0
-0:5/0 = 0
-0:4/0 = 0
-0:3/0 = 0
-0:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_2u3lt"]
-tile_size = Vector2i(31, 20)
-sources/0 = SubResource("TileSetAtlasSource_e1xtw")
+[sub_resource type="Animation" id="Animation_2u3lt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Beam:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_e1xtw"]
 resource_name = "laser_fire"
@@ -93,33 +106,6 @@ tracks/1/keys = {
 "values": [false, true, true, false]
 }
 
-[sub_resource type="Animation" id="Animation_2u3lt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Collision/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Beam:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aar76"]
 _data = {
 &"RESET": SubResource("Animation_2u3lt"),
@@ -140,13 +126,6 @@ collision_layer = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("RectangleShape2D_nm5od")
 disabled = true
-
-[node name="BeamTiles" type="TileMapLayer" parent="."]
-visible = false
-position = Vector2(16, 10)
-tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0)
-enabled = false
-tile_set = SubResource("TileSet_2u3lt")
 
 [node name="Beam" type="Sprite2D" parent="."]
 visible = false
