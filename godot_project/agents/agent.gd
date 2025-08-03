@@ -22,6 +22,7 @@ class_name Agent
 @export var animations: Dictionary[Enums.PlayerAction, String]
 ## If a follow-on animation is defined for a given action, that animation will play after an action animation is finished
 @export var follow_on_animations: Dictionary[Enums.PlayerAction, String]
+@export var default_animation: String
 
 @export_subgroup("Nodes")
 @export var sprite: AnimatedSprite2D
@@ -98,6 +99,8 @@ func _on_animation_finished():
 	sprite.animation_finished.disconnect(_on_animation_finished)
 
 func reset() -> void:
+	if default_animation != "":
+		sprite.play(default_animation)
 	grid_position = grid_origin
 	position = _grid_to_local(grid_position)
 

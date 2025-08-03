@@ -19,6 +19,7 @@ extends Node2D
 @export var train_car_advance_play_time := 2.5
 ## How long to wait before scrolling to the next level (e.g. to allow time for animation)
 @export var level_success_delay := 2.0
+@export var level_failure_delay := 2.0
 
 @export_category("Levels")
 @export var level_list: Array[PackedScene]
@@ -62,8 +63,8 @@ func load_next_tile_level():
 func advance_level():
 	_level_number += 1
 
-	#TODO: Delay level advance. Not sure why this causes player collision detection to stay on
-	#await get_tree().create_timer(level_success_delay).timeout
+	_action_sequencer.stop_sequencer()
+	await get_tree().create_timer(level_success_delay).timeout
 
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
@@ -197,5 +198,9 @@ func _on_level_complete() -> void:
 
 
 func _on_level_fail() -> void:
-	# TODO: level fail screen
+	_player_character.notify_failure()
+	_action_sequencer.stop_sequencer()
+	_conductor.visible = false
+	await get_tree().create_timer(level_failure_delay).timeout
+	_action_sequencer.push_replay_button()
 	pass
