@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=53 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -20,6 +20,10 @@
 [sub_resource type="Curve" id="Curve_2bapq"]
 _data = [Vector2(0, 0), 0.0, 1.86627, 0, 0, Vector2(0.195506, 0.532075), 2.72153, -2.1701, 1, 0, Vector2(0.51573, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
+
+[sub_resource type="Curve" id="Curve_wkvkj"]
+_data = [Vector2(0, 0), 0.0, 6.3068, 0, 0, Vector2(0.338202, 1), 0.0, 0.0, 0, 0, Vector2(0.598876, 1), 0.0, 0.0, 0, 0, Vector2(0.877528, 0), -7.46179, 0.0, 0, 0, Vector2(0.937079, 0.115395), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_txkxt"]
 atlas = ExtResource("8_2bapq")
@@ -101,13 +105,13 @@ region = Rect2(0, 0, 27, 63)
 atlas = ExtResource("16_im6gk")
 region = Rect2(0, 63, 27, 63)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mw1uj"]
-atlas = ExtResource("6_xgp35")
-region = Rect2(0, 0, 41, 50)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_3jsv2"]
 atlas = ExtResource("6_xgp35")
 region = Rect2(0, 100, 41, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mw1uj"]
+atlas = ExtResource("6_xgp35")
+region = Rect2(0, 0, 41, 50)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5yn4y"]
 atlas = ExtResource("6_aodji")
@@ -293,14 +297,14 @@ animations = [{
 "speed": 5.67
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mw1uj")
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_3jsv2")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_mt8m0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3jsv2")
+"texture": SubResource("AtlasTexture_mw1uj")
 }],
 "loop": false,
 "name": &"jump",
@@ -389,6 +393,8 @@ collision = NodePath("Shadow/PlayerSprite/Area2D")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_3f5wo")
 bonk_curve = SubResource("Curve_2bapq")
+jump_curve = SubResource("Curve_wkvkj")
+jump_magnitude = 36.0
 animations = Dictionary[int, String]({
 1: "walk_up",
 2: "walk_down",

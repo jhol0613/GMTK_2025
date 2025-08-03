@@ -12,6 +12,8 @@ class_name Agent
 @export var y_movement_magnitude := 16.0
 @export var bonk_curve: Curve
 @export var jump_curve: Curve
+@export var jump_magnitude := 24.0
+@export var jump_duration := .53
 
 @export_subgroup("Frames")
 ## Amount of time for movement animation
@@ -78,7 +80,9 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		# Bonk target is where the player tried to go
 		var bonk_target = _grid_to_local(_get_bonk_target(action))
 		_initiate_bonk(bonk_target)
-	else:
+	elif action == Enums.PlayerAction.JUMP:
+		_initiate_jump()
+	elif action != Enums.PlayerAction.NONE:
 		_initiate_move(_grid_to_local(grid_position))
 
 func _on_animation_finished():
@@ -99,6 +103,9 @@ func _initiate_bonk(attempted_target: Vector2):
 	var tween = create_tween()
 	tween.tween_method(_bonk_callback.bind(position, attempted_target), 0.0, 1.0, move_duration)
 
+func _initiate_jump():
+	var tween = create_tween()
+	tween.tween_method(_jump_callback.bind(), 0.0, 1.0, jump_duration)
 
 func _grid_to_local(grid_coordinates: Vector2i) -> Vector2:
 	return local_origin + Vector2(grid_coordinates * tile_size)
@@ -113,6 +120,9 @@ func _bonk_callback(alpha: float, start_position: Vector2, attempted_position: V
 	var position_difference = attempted_position - start_position
 	position = bonk_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
+	
+func _jump_callback(alpha: float):
+	sprite.position.y = -jump_curve.sample(alpha) * jump_magnitude + _sprite_default_y
 	
 func _get_bonk_target(action: Enums.PlayerAction) -> Vector2i:
 	var attempted_position: Vector2i
