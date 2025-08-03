@@ -4,7 +4,7 @@ enum PlayerAction {
 	NONE,
 	UP,
 	DOWN,
-	LEFT, 
+	LEFT,
 	RIGHT,
 	JUMP,
 	DUCK,
