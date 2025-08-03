@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=22 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="2_da5si"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cex205ebtfbhn" path="res://environment/Cloudfar.png" id="13_dy25v"]
 [ext_resource type="Texture2D" uid="uid://f6iq7ujhjxih" path="res://environment/Stars.png" id="14_q7mdp"]
 [ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://environment/Sky.png" id="15_u1tcv"]
+[ext_resource type="Script" uid="uid://rvmpbi1h4oil" path="res://level_base/shake_camera.gd" id="16_b73ho"]
 
 [sub_resource type="Animation" id="Animation_n2acl"]
 length = 0.001
@@ -194,6 +195,10 @@ light_mask = 2
 z_index = -10
 position = Vector2(300, 214)
 texture = ExtResource("15_u1tcv")
+
+[node name="ShakeCamera" type="Camera2D" parent="."]
+position = Vector2(300, 226)
+script = ExtResource("16_b73ho")
 
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]
 [connection signal="play_started" from="ActionSequencer" to="." method="_on_action_sequencer_play_started"]
