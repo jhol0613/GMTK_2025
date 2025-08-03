@@ -32,9 +32,9 @@ stretch_mode = 4
 [node name="Play" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 156.0
-offset_top = 231.0
+offset_top = 225.0
 offset_right = 254.0
-offset_bottom = 280.0
+offset_bottom = 274.0
 texture_normal = ExtResource("2_ux3pq")
 texture_hover = ExtResource("3_yewqo")
 stretch_mode = 4
@@ -56,6 +56,17 @@ event_guid = "{68bd9ad5-a3b8-4ad9-b4dd-0883ff4dabe4}"
 [node name="HoverEmitter" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/PlaceBlock"
 event_guid = "{aa867ae1-5c59-4cf4-b092-7b782f5115cf}"
+
+[node name="TransitionColor" type="ColorRect" parent="."]
+z_index = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
 
 [connection signal="mouse_entered" from="Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
