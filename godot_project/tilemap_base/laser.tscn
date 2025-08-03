@@ -114,6 +114,7 @@ _data = {
 
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_cep7i")
+animation_delay = 1.5
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nm5od")
@@ -136,3 +137,7 @@ texture = ExtResource("3_e1xtw")
 libraries = {
 &"": SubResource("AnimationLibrary_aar76")
 }
+
+[node name="SoundEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Laser"
+event_guid = "{e149887e-3227-407d-92a2-99745b543c3f}"
