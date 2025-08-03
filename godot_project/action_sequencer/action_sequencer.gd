@@ -194,8 +194,9 @@ func _on_action_slot_clicked(clicked_slot : ActionSlot):
 	if active_action_item != null:
 		clicked_slot.set_action(active_action_item.action)
 		
-func _on_one_slot_stopped_flashing():
+func _on_one_slot_stopped_flashing(stopped_slot: ActionSlot):
 	for i in range(available_slots):
 		initialized_slots[i].stop_flashing()
+	tutorial_mode = false
 
 #endregion

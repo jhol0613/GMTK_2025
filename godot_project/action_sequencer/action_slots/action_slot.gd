@@ -27,7 +27,7 @@ var is_active := true
 var ui_interaction_enabled := false
 
 signal action_slot_clicked(ActionSlot)
-signal stopped_flashing()
+signal stopped_flashing(ActionSlot)
 
 func set_active(active: bool):
 	is_active = active
@@ -72,6 +72,7 @@ func flash():
 func stop_flashing():
 	set_space_available_light_on(false)
 	flashing = false
+	flash_timer.stop()
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -82,16 +83,20 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered() -> void:
 	if ui_interaction_enabled:
-		set_space_available_light_on(true)
 		if flashing:
-			flashing = false
-			stopped_flashing.emit()
-
+			stop_flashing()
+			stopped_flashing.emit(self)
+		set_space_available_light_on(true)
 
 func _on_mouse_exited() -> void:
 	set_space_available_light_on(false)
 
 
 func _on_flash_timer_timeout() -> void:
-	if flashing:
-		flash_timer.start(flash_time)
+	if not flashing:
+		return
+	if $Backlight.visible:
+		set_space_available_light_on(false)
+	else:
+		set_space_available_light_on(true)
+	flash_timer.start(flash_time)
