@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=4 uid="uid://fmqdremv0bxx"]
+[gd_scene load_steps=4 format=4 uid="uid://dc482s4dad561"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_ta0fo"]
+[ext_resource type="PackedScene" uid="uid://xrlscsnf8pkl" path="res://levels/level5_tilemap.tscn" id="2_fd64a"]
+[ext_resource type="PackedScene" uid="uid://df6cfmo4y4ulv" path="res://levels/level4_sequencer.tscn" id="3_450ge"]
 
-[node name="TilemapLevelBase" instance=ExtResource("1_ta0fo")]
-next_level_path = "res://levels/level12_tilemap.tscn"
+[node name="TilemapLevelBase3" instance=ExtResource("1_ta0fo")]
+next_level = ExtResource("2_fd64a")
+sequencer_scene = ExtResource("3_450ge")
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAGAAMAAQACAAMAAAAGAAQAAQACAAMAAAACAAAAAQACAAMAAAACAAEAAQACAAMAAAACAAIAAQACAAMAAAACAAMAAQACAAMAAAACAAQAAQACAAMAAAACAAUAAQACAAMAAAABAAAAAQACAAMAAAABAAEAAQACAAMAAAABAAIAAQACAAMAAAABAAMAAQACAAMAAAABAAQAAQACAAMAAAABAAUAAQACAAMAAAAFAAAAAQACAAMAAAAFAAEAAQACAAMAAAAFAAIAAQACAAMAAAAFAAMAAQACAAMAAAAFAAQAAQACAAMAAAAFAAUAAQACAAMAAAAGAAAAAQACAAMAAAAGAAEAAQACAAMAAAAGAAIAAQACAAMAAAAGAAUAAQACAAMAAAAJAAAAAQACAAMAAAAJAAEAAQACAAMAAAAJAAIAAQACAAMAAAAJAAMAAQACAAMAAAAJAAQAAQACAAMAAAAJAAUAAQACAAMAAAA=")
