@@ -35,8 +35,8 @@ action_slot_scene = ExtResource("3_h8boe")
 items_container = NodePath("TextureRect/ActionItems")
 slots_container = NodePath("TextureRect/ActionSlots")
 available_slots = 2
-available_actions = Array[int]([1, 2, 3, 4, 5])
-action_quantities = Array[int]([99999, 99999, 99999, 99999, 99999])
+available_actions = Array[int]([4, 4, 0, 0, 0])
+action_quantities = Array[int]([99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999])
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -45,9 +45,9 @@ offset_bottom = 52.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 53.0
-offset_top = 238.0
-offset_right = 553.0
+offset_left = 37.0
+offset_top = 236.0
+offset_right = 570.0
 offset_bottom = 354.0
 texture = ExtResource("4_ba78j")
 expand_mode = 1
@@ -58,10 +58,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 148.0
-offset_top = -76.0
-offset_right = 148.0
-offset_bottom = -24.0
+offset_left = 182.0
+offset_top = -78.0
+offset_right = 182.0
+offset_bottom = -26.0
 grow_vertical = 0
 theme_override_constants/separation = 7
 
@@ -95,31 +95,47 @@ position = Vector2(10, 6)
 color = Color(0.482353, 0.933333, 0.537255, 1)
 texture = SubResource("GradientTexture2D_8w216")
 
+[node name="PlayButtonHover" type="FmodEventEmitter2D" parent="TextureRect/PlayButton"]
+event_name = "event:/Play&Restart_Hover"
+event_guid = "{683c26f8-14b5-456b-9935-627bedc49368}"
+
+[node name="PlayButtonPress" type="FmodEventEmitter2D" parent="TextureRect/PlayButton"]
+event_name = "event:/Play_Click"
+event_guid = "{68bd9ad5-a3b8-4ad9-b4dd-0883ff4dabe4}"
+
 [node name="ReplayButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 271.0
-offset_top = 6.0
-offset_right = 330.0
-offset_bottom = 46.0
+offset_left = 301.0
+offset_top = 8.0
+offset_right = 360.0
+offset_bottom = 48.0
 texture_normal = ExtResource("10_4fjcr")
 texture_pressed = ExtResource("11_e7btv")
 texture_hover = ExtResource("12_8w216")
 
+[node name="ReplayButtonPress" type="FmodEventEmitter2D" parent="TextureRect/ReplayButton"]
+event_name = "event:/Restart_Click"
+event_guid = "{fe86c1b7-5d7d-4771-86bc-d2eadab64a1b}"
+
 [node name="ActionItems" type="GridContainer" parent="TextureRect"]
 z_index = 11
-layout_mode = 2
-offset_left = 11.0
-offset_top = 14.0
-offset_right = 11.0
-offset_bottom = 66.0
-theme_override_constants/h_separation = 3
-theme_override_constants/v_separation = 3
-columns = 3
+layout_mode = 1
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 20.0
+offset_bottom = 69.0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 0
+columns = 4
 
 [node name="TutorialArrow" type="Sprite2D" parent="TextureRect/ActionItems"]
+visible = false
 z_index = 4
-position = Vector2(96, 45)
+position = Vector2(111, 31)
+scale = Vector2(1.57, 1.57)
 texture = ExtResource("12_4fjcr")
 
+[connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="TextureRect/ReplayButton" to="." method="_on_replay_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/ReplayButton" to="." method="_on_replay_button_pressed"]

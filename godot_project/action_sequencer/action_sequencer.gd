@@ -38,6 +38,10 @@ class_name ActionSequencer
 @onready var _play_button = $TextureRect/PlayButton
 @onready var _play_light1 = $TextureRect/PlayButton/PlayLight1
 @onready var _play_light2 = $TextureRect/PlayButton/PlayLight2
+@onready var _tutorial_arrow = $TextureRect/ActionItems/TutorialArrow
+@onready var play_button_hover_emitter = $TextureRect/PlayButton/PlayButtonHover
+@onready var play_button_press_emitter = $TextureRect/PlayButton/PlayButtonPress
+@onready var replay_button_press_emitter = $TextureRect/ReplayButton/ReplayButtonPress
 
 signal play_started
 signal replay_pressed
@@ -167,10 +171,12 @@ func _on_advance() -> void:
 
 
 func _on_play_button_pressed() -> void:
-	_play_button.disabled = true
-	_play_light1.visible = true
-	_play_light2.visible = true
-	play()
+	if not tutorial_mode:
+		_play_button.disabled = true
+		_play_light1.visible = true
+		_play_light2.visible = true
+		play_button_press_emitter.play()
+		play()
 
 
 func _on_replay_button_pressed() -> void:
@@ -181,8 +187,11 @@ func _on_replay_button_pressed() -> void:
 	_play_light2.visible = false
 	replay_pressed.emit()
 	current_state = SequencingState.SEQUENCING
+	replay_button_press_emitter.play()
 
 func _on_action_item_clicked(new_action_item: ActionItem):
+	if tutorial_mode:
+		_tutorial_arrow.visible = true
 	active_action_item = new_action_item
 	for item in initialized_items:
 		if item != active_action_item:
@@ -190,6 +199,7 @@ func _on_action_item_clicked(new_action_item: ActionItem):
 
 	for i in range(available_slots):
 		initialized_slots[i].ui_interaction_enabled = true
+		initialized_slots[i].preview_action = active_action_item.action
 		if tutorial_mode:
 			initialized_slots[i].flash()
 
@@ -201,9 +211,16 @@ func _on_one_slot_stopped_flashing(_stopped_slot: ActionSlot):
 	for i in range(available_slots):
 		initialized_slots[i].stop_flashing()
 	tutorial_mode = false
+	_tutorial_arrow.visible = false
 
 func _on_one_action_item_stopped_flashing(_stopped_slot: ActionItem):
 	for item in initialized_items:
 		item.stop_flashing()
-
+	
+func _on_play_button_mouse_entered() -> void:
+	play_button_hover_emitter.play()
+	
+func _on_replay_button_mouse_entered() -> void:
+	play_button_hover_emitter.play()
+	
 #endregion

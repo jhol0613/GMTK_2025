@@ -6,12 +6,15 @@ class_name ActionItem
 @onready var border = $Border
 @onready var light = $PointLight2D
 @onready var flash_timer = $Timer
+@onready var selected_emitter = $Selected
+
 
 @export var preview_scene : PackedScene
 @export var icon_dictionary: Dictionary[Enums.PlayerAction, CompressedTexture2D]
 
 @export var flash_time := .3
 @export var max_flashes := 6
+
 
 var flash_count = 0
 var flashing = false
@@ -38,9 +41,10 @@ func decrease_quantity():
 	# TODO: update quantity UI here
 
 func flash():
-	flashing = true
-	flash_count = 0
-	flash_timer.start(flash_time)
+	if action != Enums.PlayerAction.NONE:
+		flashing = true
+		flash_count = 0
+		flash_timer.start(flash_time)
 	
 func stop_flashing():
 	flash_timer.stop()
@@ -70,7 +74,7 @@ func _on_texture_rect_mouse_exited() -> void:
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index != MOUSE_BUTTON_LEFT:
+		if event.button_index != MOUSE_BUTTON_LEFT or action == Enums.PlayerAction.NONE:
 			return
 		
 		if flashing:
@@ -79,6 +83,7 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			
 		# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
 		if not selected:
+			selected_emitter.play()
 			border.modulate.a = 1
 			light.visible = true
 			texture_rect.position.y += 1

@@ -15,6 +15,8 @@ class_name ActionSlot
 @onready var texture_rect = $TextureRect
 @onready var background_sprite = $Sprite2D
 @onready var flash_timer = $Timer
+@onready var place_block_emitter = $PlaceBlock
+
 
 var action: Enums.PlayerAction = Enums.PlayerAction.NONE
 
@@ -25,6 +27,9 @@ var is_active := true
 
 # Controls whether a hovering mouse is registered
 var ui_interaction_enabled := false
+
+# What action to preview if hovered
+var preview_action:= Enums.PlayerAction.NONE
 
 signal action_slot_clicked(ActionSlot)
 signal stopped_flashing(ActionSlot)
@@ -63,6 +68,8 @@ func set_action(new_action: Enums.PlayerAction):
 	action = new_action
 	texture_rect.texture = action_textures.get(action)
 	set_space_available_light_on(false)
+	place_block_emitter.play()
+	
 
 func flash():
 	flashing = true
@@ -86,9 +93,13 @@ func _on_mouse_entered() -> void:
 			stop_flashing()
 			stopped_flashing.emit(self)
 		set_space_available_light_on(true)
+		texture_rect.texture = action_textures.get(preview_action)
 
 func _on_mouse_exited() -> void:
 	set_space_available_light_on(false)
+	if action == Enums.PlayerAction.NONE:
+		print("action none")
+		texture_rect.texture = null
 
 
 func _on_flash_timer_timeout() -> void:

@@ -198,8 +198,8 @@ func _on_level_complete() -> void:
 
 
 func _on_level_fail() -> void:
-	_player_character.notify_failure()
 	_action_sequencer.stop_sequencer()
+	_player_character.notify_failure()
 	_conductor.visible = false
 	await get_tree().create_timer(level_failure_delay).timeout
 	_action_sequencer.push_replay_button()

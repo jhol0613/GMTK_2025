@@ -44,6 +44,10 @@ texture = ExtResource("3_7wert")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="PlaceBlock" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/PlaceBlock"
+event_guid = "{aa867ae1-5c59-4cf4-b092-7b782f5115cf}"
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
