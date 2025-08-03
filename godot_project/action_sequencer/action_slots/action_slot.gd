@@ -65,7 +65,6 @@ func set_action(new_action: Enums.PlayerAction):
 	set_space_available_light_on(false)
 
 func flash():
-	print("flash")
 	flashing = true
 	flash_timer.start(flash_time)
 		

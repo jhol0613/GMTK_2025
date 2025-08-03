@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=15 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_7huxh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c21fyghohuwvu" path="res://action_sequencer/replay_button/unpushed.png" id="10_4fjcr"]
 [ext_resource type="Texture2D" uid="uid://hgkcu6my2edw" path="res://action_sequencer/play_button/start_disabled.png" id="10_e7btv"]
 [ext_resource type="Texture2D" uid="uid://588sh1rfj8xg" path="res://action_sequencer/replay_button/pushed.png" id="11_e7btv"]
+[ext_resource type="Texture2D" uid="uid://iqat4cj40yyy" path="res://ui/big_arrow.png" id="12_4fjcr"]
 [ext_resource type="Texture2D" uid="uid://b86m10fqu8guc" path="res://action_sequencer/replay_button/hover.png" id="12_8w216"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
@@ -114,6 +115,11 @@ offset_bottom = 66.0
 theme_override_constants/h_separation = 3
 theme_override_constants/v_separation = 3
 columns = 3
+
+[node name="TutorialArrow" type="Sprite2D" parent="TextureRect/ActionItems"]
+z_index = 4
+position = Vector2(96, 45)
+texture = ExtResource("12_4fjcr")
 
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TextureRect/ReplayButton" to="." method="_on_replay_button_pressed"]

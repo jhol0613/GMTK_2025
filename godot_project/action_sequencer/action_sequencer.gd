@@ -99,6 +99,9 @@ func _ready() -> void:
 		items_container.add_child(initialized_items.back())
 		initialized_items.back().set_action(available_actions[i]) # set the action icon once added to the tree
 		initialized_items.back().connect("action_item_clicked", _on_action_item_clicked)
+		if tutorial_mode:
+			initialized_items[i].flash()
+			initialized_items.back().connect("stopped_flashing", _on_one_action_item_stopped_flashing)
 	
 
 
@@ -198,5 +201,9 @@ func _on_one_slot_stopped_flashing(stopped_slot: ActionSlot):
 	for i in range(available_slots):
 		initialized_slots[i].stop_flashing()
 	tutorial_mode = false
+	
+func _on_one_action_item_stopped_flashing(stopped_slot: ActionItem):
+	for item in initialized_items:
+		item.stop_flashing()
 
 #endregion
