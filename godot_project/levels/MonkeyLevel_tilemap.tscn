@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=4 uid="uid://bis4mmgrdtses"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_apvbp"]
+[ext_resource type="Texture2D" uid="uid://bqas277c1yr20" path="res://environment/Typing Monkey.png" id="2_5gdua"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cfvx"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(0, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgi8s"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(80, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyvgx"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(160, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yb6lc"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(240, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sx48k"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(320, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo375"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(400, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_br6eb"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(480, 0, 80, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djer8"]
+atlas = ExtResource("2_5gdua")
+region = Rect2(560, 0, 80, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x30fp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cfvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgi8s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyvgx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yb6lc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sx48k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yo375")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_br6eb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djer8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TilemapLevelBase" instance=ExtResource("1_apvbp")]
+
+[node name="Floor" parent="." index="1"]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAACAAAAAAAAAAIAAAADAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAHAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAABAAEAAAAAAAIAAAACAAEAAAAAAAIAAAADAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAFAAEAAAAAAAIAAAAGAAEAAAAAAAIAAAAHAAEAAAAAAAIAAAAIAAEAAAAAAAIAAAAJAAEAAAAAAAIAAAAKAAAAAAAAAAIAAAAKAAEAAAAAAAIAAAAAAAQAAAAAAAIAAAABAAQAAAAAAAIAAAACAAQAAAAAAAIAAAADAAQAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAAAAAIAAAAIAAQAAAAAAAIAAAAJAAQAAAAAAAIAAAAKAAQAAAAAAAIAAAAAAAUAAAAAAAIAAAABAAUAAAAAAAIAAAACAAUAAAAAAAIAAAADAAUAAAAAAAIAAAAEAAUAAAAAAAIAAAAFAAUAAAAAAAIAAAAGAAUAAAAAAAIAAAAHAAUAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAMAAAAAAAMAAAAKAAIAAAAAAAMAAAAKAAMAAAAAAAMAAAABAAIAAAAAAAEAAAACAAIAAAAAAAEAAAADAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAEAAAAHAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAEAAAAJAAMAAAAAAAEAAAAIAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAEAAMAAAAAAAEAAAADAAMAAAAAAAEAAAACAAMAAAAAAAEAAAABAAMAAAAAAAEAAAAGAAIAAAAAAAEAAAA=")
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray()
+
+[node name="Node2D" type="Node2D" parent="." index="8"]
+position = Vector2(147.582, -3.54602)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" index="0"]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_x30fp")
+frame_progress = 0.897914
