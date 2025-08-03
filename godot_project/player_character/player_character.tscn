@@ -469,7 +469,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "bonk_emitter", "success_emitter", "failure_emitter", "collision", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "bonk_emitter", "success_emitter", "failure_emitter", "collision", "jump_collision_timer", "sprite")]
 script = ExtResource("1_1ty04")
 move_left_emitter = NodePath("Sounds/MoveSideways")
 move_right_emitter = NodePath("Sounds/MoveSideways")
@@ -480,6 +480,7 @@ bonk_emitter = NodePath("Sounds/Bonk")
 success_emitter = NodePath("Sounds/Success")
 failure_emitter = NodePath("Sounds/Failure")
 collision = NodePath("Shadow/PlayerSprite/Area2D")
+jump_collision_timer = NodePath("JumpCollisionDisable")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_wkvkj")
 bonk_curve = SubResource("Curve_2bapq")
@@ -576,4 +577,8 @@ event_guid = "{ed164642-30dc-45c4-8681-1ebc9b63cc8f}"
 event_name = "event:/Conductor Speak"
 event_guid = "{85959d5f-8e92-4859-bdd0-d6a884147397}"
 
+[node name="JumpCollisionDisable" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="Shadow/PlayerSprite/Area2D" to="." method="_on_collision"]
+[connection signal="timeout" from="JumpCollisionDisable" to="." method="on_jump_collision_disabled_expire"]

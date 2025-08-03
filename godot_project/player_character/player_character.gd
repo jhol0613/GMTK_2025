@@ -17,12 +17,19 @@ class_name PlayerCharacter
 @export_subgroup("Nodes")
 ## Collision object to disable after the event happens
 @export var collision: CollisionObject2D
+@export var jump_collision_timer: Timer
+
+@onready var original_collision_mask = collision.collision_mask
+@onready var original_collision_layer = collision.collision_layer
 
 signal failure
 
 func _ready() -> void:
 	super._ready()
 	action_executed.connect(_on_action_executed)
+	
+	var original_collision_mask = collision.collision_mask
+	var original_collision_layer = collision.collision_layer
 
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
@@ -37,6 +44,9 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		Enums.PlayerAction.DOWN:
 			emitter = move_down_emitter
 		Enums.PlayerAction.JUMP:
+			jump_collision_timer.start()
+			collision.collision_layer = 0
+			collision.collision_mask = 0
 			emitter = jump_emitter
 		Enums.PlayerAction.LEFT_BONK, Enums.PlayerAction.RIGHT_BONK, Enums.PlayerAction.UP_BONK, Enums.PlayerAction.DOWN_BONK:
 			emitter = bonk_emitter
@@ -60,3 +70,7 @@ func _on_collision(area: Area2D) -> void:
 	if area.collision_layer & Enums.CollisionLayer.ENEMIES:
 		notify_failure()
 		failure.emit()
+
+func on_jump_collision_disabled_expire() -> void:
+	collision.collision_layer = original_collision_layer
+	collision.collision_mask = original_collision_mask
