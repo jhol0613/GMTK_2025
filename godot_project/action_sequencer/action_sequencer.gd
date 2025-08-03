@@ -28,12 +28,13 @@ class_name ActionSequencer
 ## The amount of time to wait to start sequencing actions after play button pushed
 @export var play_action_delay := 0.0
 
+@export var tutorial_mode := true
 
 #endregion
 
 #region Type declarations
 
-@onready var _action_items = $ActionItems
+@onready var _action_items = $TextureRect/ActionItems
 @onready var _play_button = $TextureRect/PlayButton
 @onready var _play_light1 = $TextureRect/PlayButton/PlayLight1
 @onready var _play_light2 = $TextureRect/PlayButton/PlayLight2
@@ -81,6 +82,8 @@ func _ready() -> void:
 		initialized_slots.append(action_slot_scene.instantiate())
 		slots_container.add_child(initialized_slots.back())
 		initialized_slots.back().connect("action_slot_clicked", _on_action_slot_clicked)
+		if tutorial_mode:
+			initialized_slots.back().connect("stopped_flashing", _on_one_slot_stopped_flashing)
 	for i in range(total_slots - available_slots):
 		var new_slot = action_slot_scene.instantiate()
 		initialized_slots.append(new_slot)
@@ -184,9 +187,15 @@ func _on_action_item_clicked(new_action_item: ActionItem):
 			
 	for i in range(available_slots):
 		initialized_slots[i].ui_interaction_enabled = true
+		if tutorial_mode:
+			initialized_slots[i].flash()
 		
 func _on_action_slot_clicked(clicked_slot : ActionSlot):
 	if active_action_item != null:
 		clicked_slot.set_action(active_action_item.action)
+		
+func _on_one_slot_stopped_flashing():
+	for i in range(available_slots):
+		initialized_slots[i].stop_flashing()
 
 #endregion

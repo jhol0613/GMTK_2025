@@ -4,9 +4,12 @@ class_name ActionItem
 
 @onready var texture_rect = $TextureRect
 @onready var border = $Border
+@onready var light = $PointLight2D
 
 @export var preview_scene : PackedScene
 @export var icon_dictionary: Dictionary[Enums.PlayerAction, CompressedTexture2D]
+
+@export var icon_size := Vector2(32.0, 32.0)
 
 var action: Enums.PlayerAction
 var quantity: int
@@ -16,11 +19,13 @@ signal action_item_clicked(clicked_action_item: ActionItem)
 
 func _ready() -> void:
 	border.modulate.a = 0
-	pass
+	
 	
 func set_action(new_action: Enums.PlayerAction):
 	action = new_action
 	texture_rect.texture = icon_dictionary.get(action)
+	#texture_rect.size = icon_size
+	
 
 func decrease_quantity():
 	quantity -= 1
@@ -55,10 +60,13 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
 			if not selected:
 				border.modulate.a = 1
+				light.visible = true
 				texture_rect.position.y += 1
 				selected = true
 				action_item_clicked.emit(self)
 		
 func deselect():
 	border.modulate.a = 0
+	light.visible = false
 	selected = false
+	
