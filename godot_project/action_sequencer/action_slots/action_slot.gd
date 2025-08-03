@@ -100,6 +100,8 @@ func _on_mouse_exited() -> void:
 	if action == Enums.PlayerAction.NONE:
 		print("action none")
 		texture_rect.texture = null
+	else:
+		texture_rect.texture = action_textures.get(action)
 
 
 func _on_flash_timer_timeout() -> void:
