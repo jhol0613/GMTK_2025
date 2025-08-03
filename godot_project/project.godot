@@ -42,8 +42,8 @@ AudioManager="*res://autoload/audio_manager.tscn"
 
 [display]
 
-window/size/viewport_width=614
-window/size/viewport_height=346
+window/size/viewport_width=600
+window/size/viewport_height=450
 window/size/window_width_override=2048
 window/size/window_height_override=1152
 window/stretch/mode="viewport"

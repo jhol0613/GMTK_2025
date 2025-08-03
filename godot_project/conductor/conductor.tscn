@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://player_character/direct_move_curve.tres" id="2_m234f"]
-[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://player_character/y_move_curve.tres" id="3_ps1s8"]
+[ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://conductor/conductor_y_curve.tres" id="3_lda0w"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="4_lda0w"]
 [ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
 
@@ -12,23 +12,58 @@ size = Vector2(20, 10)
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_eb2fl")
 direct_movement_curve = ExtResource("2_m234f")
-y_movement_curve = ExtResource("3_ps1s8")
+y_movement_curve = ExtResource("3_lda0w")
+y_movement_magnitude = 5.0
+jump_duration = 0.7
+move_duration = 0.5
+animations = Dictionary[int, String]({
+1: "jump",
+2: "jump",
+3: "jump",
+4: "jump"
+})
+follow_on_animations = Dictionary[int, String]({
+1: "idle",
+2: "idle",
+3: "idle",
+4: "idle"
+})
 sprite = NodePath("Shadow/AnimatedSprite2D")
+beat_delays = Dictionary[int, float]({
+1: 0.0,
+2: 0.0,
+3: 0.0,
+4: 0.0
+})
 
 [node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
 texture = ExtResource("4_lda0w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shadow"]
-position = Vector2(1, -27)
+position = Vector2(2.575, -31.57)
 sprite_frames = ExtResource("4_ps1s8")
-animation = &"walk_left"
+animation = &"idle_left"
+autoplay = "idle_right"
 
 [node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
-position = Vector2(-1, 18)
+position = Vector2(-2.42, 21.47)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_lda0w")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="JumpSound" type="FmodEventEmitter2D" parent="Sound"]
+event_name = "event:/EnemyFootstep"
+event_guid = "{e3318077-c1c7-4090-abaf-e9923448721e}"
+
+[node name="EnteredSound" type="FmodEventEmitter2D" parent="Sound"]
+event_guid = "{00000000-0002-0000-0300-000026000000}"
+
+[node name="Voice" type="FmodEventEmitter2D" parent="Sound"]
+event_guid = "{00000000-0002-0000-0300-000026000000}"
 
 [connection signal="area_entered" from="Shadow/AnimatedSprite2D/Area2D" to="." method="_on_player_entered"]

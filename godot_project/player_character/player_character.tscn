@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="2_5l2xy"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://player_character/direct_move_curve.tres" id="2_bvxdu"]
-[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://player_character/y_move_curve.tres" id="3_3f5wo"]
+[ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://conductor/conductor_y_curve.tres" id="3_wkvkj"]
 [ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://player_character/sprites/ActionBonk.png" id="5_2bapq"]
 [ext_resource type="Texture2D" uid="uid://b1yloh6w3ao8m" path="res://player_character/sprites/player360.png" id="6_aodji"]
 [ext_resource type="Texture2D" uid="uid://dm6rcc2g6isnk" path="res://player_character/sprites/ActionJump.png" id="6_xgp35"]
@@ -391,7 +391,7 @@ jump_emitter = NodePath("Sounds/Jump")
 bonk_emitter = NodePath("Sounds/Bonk")
 collision = NodePath("Shadow/PlayerSprite/Area2D")
 direct_movement_curve = ExtResource("2_bvxdu")
-y_movement_curve = ExtResource("3_3f5wo")
+y_movement_curve = ExtResource("3_wkvkj")
 bonk_curve = SubResource("Curve_2bapq")
 jump_curve = SubResource("Curve_wkvkj")
 jump_magnitude = 36.0
@@ -438,9 +438,9 @@ position = Vector2(0, -6)
 texture = ExtResource("2_5l2xy")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
-position = Vector2(1, -30)
+position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"standing"
+animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]

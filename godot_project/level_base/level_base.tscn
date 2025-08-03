@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=12 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="2_da5si"]
 [ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://environment/snowflake.png" id="2_neno8"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://player_character/player_character.tscn" id="3_ep22m"]
 [ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://environment/snow_material.tres" id="3_uv04d"]
-[ext_resource type="PackedScene" uid="uid://b3f80jetyys4y" path="res://levels/sequencer_level_base_placeholder.tscn" id="4_da5si"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="5_dtys8"]
 
 [sub_resource type="Animation" id="Animation_n2acl"]
@@ -68,9 +67,11 @@ texture = ExtResource("2_neno8")
 lifetime = 10.01
 process_material = ExtResource("3_uv04d")
 
-[node name="SequencerLevelPlaceholder" parent="." instance=ExtResource("4_da5si")]
-
 [node name="ActionSequencer" parent="." instance=ExtResource("5_dtys8")]
+offset_left = 4.0
+offset_top = 103.0
+offset_right = 620.0
+offset_bottom = 449.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -82,7 +83,7 @@ libraries = {
 [node name="OnTheTrain" type="Node2D" parent="TrainCenter"]
 
 [node name="TilemapLevel" parent="TrainCenter/OnTheTrain" instance=ExtResource("2_da5si")]
-position = Vector2(135, 95)
+position = Vector2(132, 188)
 
 [node name="PointLight2D5" type="PointLight2D" parent="TrainCenter/OnTheTrain/TilemapLevel/BackWall" index="0"]
 position = Vector2(112, -79.63)
@@ -104,7 +105,6 @@ position = Vector2(356, 48.37)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.3
 
-[connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_sequencer_level_placeholder_player_action_received"]
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]
 [connection signal="play_started" from="ActionSequencer" to="." method="_on_action_sequencer_play_started"]
 [connection signal="replay_pressed" from="ActionSequencer" to="." method="_on_action_sequencer_replay_pressed"]
