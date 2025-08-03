@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_8r6hs"]
 
 [node name="TilemapLevelBase" instance=ExtResource("1_8r6hs")]
+next_level_path = "res://levels/level7_tilemap.tscn"
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAGAAQAAwAAAAAAAAACAAIAAwABAAAAAAAEAAIAAwABAAAAAAAKAAIAAwABAAAAAAAAAAUAAwABAAAAAAAFAAUAAwABAAAAAAAAAAEAAwAAAAAAAAABAAEAAwAAAAAAAAAFAAEAAwAAAAAAAAAHAAEAAwAAAAAAAAAIAAEAAwAAAAAAAAABAAQAAwAAAAAAAAACAAQAAwAAAAAAAAADAAQAAwAAAAAAAAAIAAQAAwAAAAAAAAAJAAQAAwAAAAAAAAA=")

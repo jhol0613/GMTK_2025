@@ -1,9 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://brrki0dhak6pa"]
+[gd_scene load_steps=2 format=3 uid="uid://brrki0dhak6pa"]
 
 [ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://level_base/level_base.tscn" id="1_h6fn6"]
-[ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://conductor/conductor.tscn" id="2_4lkc1"]
 
 [node name="LevelBase2" instance=ExtResource("1_h6fn6")]
-conductor_scene = ExtResource("2_4lkc1")
 
 [editable path="TrainCenter/OnTheTrain/TilemapLevel"]
