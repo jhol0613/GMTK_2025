@@ -22,6 +22,7 @@ fill_to = Vector2(0, 0)
 size = Vector2(20, 27)
 
 [node name="TilemapLevelBase" type="Node2D"]
+z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_3qeya")
 next_level_path = "res://levels/level0_tilemap.tscn"

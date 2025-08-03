@@ -1,5 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://cftakqgrlqb80"]
+[gd_scene load_steps=6 format=4 uid="uid://cftakqgrlqb80"]
 
-[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_swusm"]
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_fde8v"]
+[ext_resource type="Texture2D" uid="uid://dlw0gucuj5jld" path="res://decorations/Passengerbored.png" id="2_3bixj"]
 
-[node name="TilemapLevelBase" instance=ExtResource("1_swusm")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2ivd"]
+atlas = ExtResource("2_3bixj")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u137y"]
+atlas = ExtResource("2_3bixj")
+region = Rect2(0, 64, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3bixj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2ivd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u137y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TilemapLevelBase" instance=ExtResource("1_fde8v")]
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAACAAEAAAABAAIAAAACAP//AAABAAAAAAACAAAAAAABAAEAAAACAAIAAAABAAMAAAADAP//AAABAAAAABADAAAAAAABAAEAABADAAEAAAABAAIAABADAAIAAAABAAMAABAFAP//AAACAAAAAAAFAAAAAAACAAEAAAAFAAEAAAACAAIAAAAFAAIAAAACAAMAAAAGAP//AAABAAAAABAGAAAAAAABAAEAABAGAAEAAAABAAIAABAGAAIAAAABAAMAABAJAP//AAABAAAAABAJAAAAAAABAAEAABAJAAEAAAABAAIAABAJAAIAAAABAAMAABAIAP//AAABAAAAAAAIAAAAAAABAAEAAAAIAAEAAAABAAIAAAAIAAIAAAABAAMAAAA=")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="AdditionalSprites" index="1"]
+z_index = 1
+position = Vector2(78, -7)
+sprite_frames = SubResource("SpriteFrames_3bixj")
