@@ -1,9 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=21 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
-[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="2_da5si"]
 [ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://environment/snowflake.png" id="2_neno8"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://conductor/conductor.tscn" id="2_q5boi"]
+[ext_resource type="PackedScene" path="res://levels/narrative_tilemap.tscn" id="3_b73ho"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://player_character/player_character.tscn" id="3_ep22m"]
 [ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://environment/snow_material.tres" id="3_uv04d"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="5_dtys8"]
@@ -55,22 +55,14 @@ _data = {
 &"train_rock": SubResource("Animation_dtys8")
 }
 
-[sub_resource type="Gradient" id="Gradient_yheth"]
-offsets = PackedFloat32Array(0, 0.792541)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dtys8"]
-gradient = SubResource("Gradient_yheth")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0, 0)
-
 [node name="LevelBase" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_vmt1o")
 conductor_scene = ExtResource("2_q5boi")
 player_scene = ExtResource("3_ep22m")
 player_spawn_position = Vector2i(0, 2)
+first_level = ExtResource("3_b73ho")
+initial_train_position = Vector2(132, 188)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(621, -11)
@@ -93,29 +85,6 @@ libraries = {
 [node name="TrainCenter" type="Node2D" parent="."]
 
 [node name="OnTheTrain" type="Node2D" parent="TrainCenter"]
-
-[node name="TilemapLevel" parent="TrainCenter/OnTheTrain" instance=ExtResource("2_da5si")]
-position = Vector2(132, 188)
-
-[node name="PointLight2D5" type="PointLight2D" parent="TrainCenter/OnTheTrain/TilemapLevel/BackWall" index="0"]
-position = Vector2(112, -79.63)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.5
-
-[node name="PointLight2D6" type="PointLight2D" parent="TrainCenter/OnTheTrain/TilemapLevel/BackWall" index="1"]
-position = Vector2(240, -78.63)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.5
-
-[node name="PointLight2D7" type="PointLight2D" parent="TrainCenter/OnTheTrain/TilemapLevel/BackWall" index="2"]
-position = Vector2(-3, 39.37)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.3
-
-[node name="PointLight2D8" type="PointLight2D" parent="TrainCenter/OnTheTrain/TilemapLevel/BackWall" index="3"]
-position = Vector2(356, 48.37)
-texture = SubResource("GradientTexture2D_dtys8")
-texture_scale = 1.3
 
 [node name="Tracks" type="Parallax2D" parent="."]
 repeat_size = Vector2(572.17, 0)
@@ -205,5 +174,3 @@ script = ExtResource("16_b73ho")
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]
 [connection signal="play_started" from="ActionSequencer" to="." method="_on_action_sequencer_play_started"]
 [connection signal="replay_pressed" from="ActionSequencer" to="." method="_on_action_sequencer_replay_pressed"]
-
-[editable path="TrainCenter/OnTheTrain/TilemapLevel"]

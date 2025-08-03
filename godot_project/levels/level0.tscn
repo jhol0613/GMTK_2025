@@ -3,5 +3,3 @@
 [ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://level_base/level_base.tscn" id="1_h6fn6"]
 
 [node name="LevelBase2" instance=ExtResource("1_h6fn6")]
-
-[editable path="TrainCenter/OnTheTrain/TilemapLevel"]
