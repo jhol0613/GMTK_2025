@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://xrlscsnf8pkl"]
+[gd_scene load_steps=4 format=4 uid="uid://cumg6at0gcjrh"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_83e0r"]
-[ext_resource type="PackedScene" uid="uid://b51apmmjbo54j" path="res://levels/level6_tilemap.tscn" id="2_exuag"]
+[ext_resource type="PackedScene" uid="uid://caw4xud5ef66p" path="res://levels/level6_tilemap.tscn" id="2_exuag"]
 [ext_resource type="PackedScene" uid="uid://d3je0oll33l1w" path="res://levels/level5_sequencer.tscn" id="3_lm237"]
 
-[node name="TilemapLevelBase3" instance=ExtResource("1_83e0r")]
+[node name="TilemapLevelBase5" instance=ExtResource("1_83e0r")]
 next_level = ExtResource("2_exuag")
 sequencer_scene = ExtResource("3_lm237")
 
