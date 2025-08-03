@@ -161,7 +161,7 @@ func _reset_level() -> void:
 		return
 	_conductor.queue_free()
 	_conductor = null
-	
+
 	_current_beat = 0
 
 

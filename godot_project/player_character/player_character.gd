@@ -45,7 +45,7 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 func notify_success():
 	sprite.play("success")
 	success_emitter.play()
-	
+
 func notify_failure():
 	failure_emitter.play()
 	sprite.play("failure")

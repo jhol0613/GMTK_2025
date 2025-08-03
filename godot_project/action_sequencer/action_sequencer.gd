@@ -75,7 +75,7 @@ func _ready() -> void:
 	# Connect to beat signal
 	AudioManager.music_bar.connect(_on_advance)
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
-	
+
 	# instantiate slots and items, add them to their respective containers and
 	# reference arrays
 	for i in range(available_slots):
@@ -89,7 +89,7 @@ func _ready() -> void:
 		initialized_slots.append(new_slot)
 		slots_container.add_child(initialized_slots.back())
 		new_slot.set_active(false)
-		
+
 	for i in range(available_actions.size()):
 
 		initialized_items.append(action_item_scene.instantiate())
@@ -102,7 +102,7 @@ func _ready() -> void:
 		if tutorial_mode:
 			initialized_items[i].flash()
 			initialized_items.back().connect("stopped_flashing", _on_one_action_item_stopped_flashing)
-	
+
 
 
 func play():
@@ -113,7 +113,7 @@ func play():
 	AudioManager.set_music_mode(Enums.MusicMode.RUNNING)
 	_action_items.visible = false
 	play_started.emit()
-	
+
 	# Wait for specified delay (for external animations) to start sequencing actions
 	await get_tree().create_timer(play_action_delay).timeout
 	current_state = SequencingState.RUNNING
@@ -132,7 +132,7 @@ func advance():
 
 	if available_slots == current_action:
 		current_action = 0
-		
+
 	initialized_slots[current_action].set_sequencer_light_on(true)
 	if current_action > 0:
 		initialized_slots[current_action-1].set_sequencer_light_on(false)
@@ -144,14 +144,14 @@ func advance():
 func _reset_actions():
 	for i in range(available_actions.size()):
 		initialized_items[i].quantity = action_quantities[i]
-	
+
 	for i in range(available_slots):
 		initialized_slots[i].clear_slot()
-		
+
 
 func set_action_icons_hidden(should_hide: bool):
 	_action_items.visible = !should_hide
-	
+
 func stop_sequencer():
 	current_state = SequencingState.FINISHED
 
@@ -181,28 +181,28 @@ func _on_replay_button_pressed() -> void:
 	_play_light2.visible = false
 	replay_pressed.emit()
 	current_state = SequencingState.SEQUENCING
-	
+
 func _on_action_item_clicked(new_action_item: ActionItem):
 	active_action_item = new_action_item
 	for item in initialized_items:
 		if item != active_action_item:
 			item.deselect()
-			
+
 	for i in range(available_slots):
 		initialized_slots[i].ui_interaction_enabled = true
 		if tutorial_mode:
 			initialized_slots[i].flash()
-		
+
 func _on_action_slot_clicked(clicked_slot : ActionSlot):
 	if active_action_item != null:
 		clicked_slot.set_action(active_action_item.action)
-		
-func _on_one_slot_stopped_flashing(stopped_slot: ActionSlot):
+
+func _on_one_slot_stopped_flashing(_stopped_slot: ActionSlot):
 	for i in range(available_slots):
 		initialized_slots[i].stop_flashing()
 	tutorial_mode = false
-	
-func _on_one_action_item_stopped_flashing(stopped_slot: ActionItem):
+
+func _on_one_action_item_stopped_flashing(_stopped_slot: ActionItem):
 	for item in initialized_items:
 		item.stop_flashing()
 
