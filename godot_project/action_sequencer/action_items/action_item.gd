@@ -13,6 +13,7 @@ class_name ActionItem
 @export var flash_time := .3
 @export var max_flashes := 6
 
+
 var flash_count = 0
 var flashing = false
 
@@ -38,9 +39,10 @@ func decrease_quantity():
 	# TODO: update quantity UI here
 
 func flash():
-	flashing = true
-	flash_count = 0
-	flash_timer.start(flash_time)
+	if action != Enums.PlayerAction.NONE:
+		flashing = true
+		flash_count = 0
+		flash_timer.start(flash_time)
 	
 func stop_flashing():
 	flash_timer.stop()
@@ -70,7 +72,7 @@ func _on_texture_rect_mouse_exited() -> void:
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index != MOUSE_BUTTON_LEFT:
+		if event.button_index != MOUSE_BUTTON_LEFT or action == Enums.PlayerAction.NONE:
 			return
 		
 		if flashing:
