@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ryi6symlc4ea"]
+[gd_scene load_steps=5 format=3 uid="uid://ryi6symlc4ea"]
 
 [ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://level_base/level_base.tscn" id="1_46lwt"]
+[ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://conductor/conductor.tscn" id="2_x25rp"]
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="3_w7r7j"]
+[ext_resource type="PackedScene" uid="uid://cw5pycp8um55m" path="res://levels/level0_tilemap.tscn" id="4_o6mel"]
 
 [node name="LevelBase" instance=ExtResource("1_46lwt")]
+conductor_scene = ExtResource("2_x25rp")
+level_list = Array[PackedScene]([ExtResource("3_w7r7j"), ExtResource("4_o6mel")])
 
 [connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_action_performed"]
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_performed"]

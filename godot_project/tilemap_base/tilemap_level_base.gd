@@ -6,6 +6,12 @@ class_name TilemapLevel
 @export var associated_sequencer_level: String
 @export var bounds : Vector2i
 
+@export_subgroup("Conductor", "conductor")
+@export var conductor_spawn_beat := 2
+## Where in the car grid the conductor should appear
+@export var conductor_spawn_position := Vector2i(0, 2)
+@export var conductor_enabled := true
+
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 
@@ -31,7 +37,7 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 		if tile_data:
 			cell_traversible = tile_data.get_custom_data("Traversible")
 
-		if cell_exists and cell_traversible:
+		if cell_traversible:
 			neighbors_to_return.append(neighbor)
 	
 	# Your own position is traversible, too! For actions that keep you in the same square
@@ -61,13 +67,10 @@ func _initialize_path_finding():
 	path_grid.default_estimate_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
 	path_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	path_grid.update()
-	
+
 	for tile in _obstacle_layer.get_used_cells():
 		path_grid.set_point_solid(tile)
 	path_grid.update()
-	
-	# debug
-	print("Tile map data: ", path_grid)
 
 
 func _on_target_area_entered(_area: Area2D) -> void:

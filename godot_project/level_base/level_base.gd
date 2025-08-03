@@ -6,8 +6,6 @@ extends Node2D
 
 @export_subgroup("Conductor", "conductor")
 @export var conductor_scene: PackedScene
-## Where on the tilemap the conductor should spawn
-@export var conductor_spawn_position: Vector2i
 
 @export_subgroup("Player", "player")
 @export var player_scene: PackedScene
@@ -19,6 +17,9 @@ extends Node2D
 @export var train_move_right_on_play_time := 1.8
 @export var next_car_offset := 490
 @export var train_car_advance_play_time := 2.5
+
+@export_category("Levels")
+@export var level_list: Array[PackedScene]
 
 @onready var _tilemap_level : TilemapLevel = $TrainCenter/OnTheTrain/TilemapLevel
 @onready var _action_sequencer : ActionSequencer = $ActionSequencer
@@ -35,6 +36,7 @@ var _player_character: PlayerCharacter
 
 var _next_tile_level: TilemapLevel
 var _level_number := 0
+var _current_beat := 0
 
 func _ready() -> void:
 	_player_character = _spawn_agent(player_scene, player_spawn_position)
@@ -81,6 +83,7 @@ func advance_level():
 	# load following tilemap level
 	load_next_tile_level()
 
+
 # Called when level has been fully advanced
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
@@ -88,11 +91,13 @@ func _on_level_advanced():
 	_player_character.disable_collisions()
 	_player_character.queue_free()
 	_player_character = _spawn_agent(player_scene, player_spawn_position)
+	_reset_level()
 
 
 func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
+	_current_beat += 1
 
 
 func _update_player(action: Enums.PlayerAction) -> void:
@@ -112,12 +117,18 @@ func _update_player(action: Enums.PlayerAction) -> void:
 
 
 func _update_conductor() -> void:
-	if _conductor == null:
+	if _conductor == null \
+		and _current_beat < _tilemap_level.conductor_spawn_beat \
+		or not _tilemap_level.conductor_enabled:
 		return
+	if _conductor == null:
+		_spawn_conductor()
 	var conductor_path = _tilemap_level.path_grid \
 		.get_id_path(_conductor.grid_position, _player_character.grid_position, true)
+	if conductor_path.size() < 2:
+		return
 	_conductor.execute_action(
-		Enums.vector_to_player_action(_conductor.grid_position - conductor_path[1])
+		Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)
 	)
 
 
@@ -130,6 +141,21 @@ func _spawn_agent(scene: PackedScene, grid_position: Vector2i) -> Agent:
 	agent.tile_size = _tilemap_level.get_tile_size()
 	_tilemap_level.add_child(agent)
 	return agent
+
+
+func _spawn_conductor() -> void:
+	if _conductor != null:
+		_conductor.queue_free()
+	_conductor = _spawn_agent(conductor_scene, _tilemap_level.conductor_spawn_position)
+	_conductor.player_caught.connect(_on_level_fail)
+
+func _reset_level() -> void:
+	if _conductor == null:
+		return
+	_conductor.queue_free()
+	_conductor = null
+	
+	_current_beat = 0
 
 
 func _on_music_bar():
@@ -149,11 +175,19 @@ func _on_action_sequencer_replay_pressed() -> void:
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_car_position_moved_back)
+	_reset_level()
+
 
 func _on_car_position_moved_back():
 	_action_sequencer.set_action_icons_hidden(false)
 	# TODO: maybe put a reset animation here
 	_player_character.reset()
 
+
 func _on_level_complete() -> void:
 	advance_level()
+
+
+func _on_level_fail() -> void:
+	# TODO: level fail screen
+	pass

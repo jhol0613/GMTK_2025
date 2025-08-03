@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="4_lda0w"]
 [ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m234f"]
-height = 54.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
+size = Vector2(20, 10)
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_eb2fl")
@@ -25,7 +25,10 @@ animation = &"walk_left"
 
 [node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(-1, 18)
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
-position = Vector2(0, -16)
-shape = SubResource("CapsuleShape2D_m234f")
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_lda0w")
+
+[connection signal="area_entered" from="Shadow/AnimatedSprite2D/Area2D" to="." method="_on_player_entered"]

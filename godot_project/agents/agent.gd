@@ -33,6 +33,7 @@ class_name Agent
 #endregion
 
 @onready var _sprite_default_y = sprite.position.y
+@onready var _timer = Timer.new()
 # agent's position inside of the grid
 var grid_position := Vector2i(0, 0)
 # grid's tile size for calculating the local position
@@ -46,10 +47,12 @@ var grid_size := Vector2i.ZERO
 
 var follow_on_animation: String
 
-
 signal action_executed(action: Enums.PlayerAction)
 
 func _ready():
+	_timer.one_shot = true
+	add_child(_timer)
+	_timer.timeout.connect(_on_beat)
 	position = _grid_to_local(grid_origin)
 
 func execute_action(action : Enums.PlayerAction) -> void:
@@ -64,18 +67,22 @@ func execute_action(action : Enums.PlayerAction) -> void:
 			grid_position += Vector2i.RIGHT
 	action_executed.emit(action)
 
-	# beat delay timer
-	# TODO: replace this with a scene timer
-	await get_tree().create_timer(_get_delay_seconds(action)).timeout
+	# stupid timer can't rebind the function
+	_timer.timeout.disconnect(_on_beat)
+	_timer.stop()
+	_timer.timeout.connect(_on_beat.bind(action))
+	_timer.start(_get_delay_seconds(action))
 
+
+func _on_beat(action: Enums.PlayerAction) -> void:
 	var animation_name = _get_animation_name(action)
 	if animation_name != "":
 		sprite.play(animation_name)
-	
+
 	if follow_on_animations.get(action) != null:
 		follow_on_animation = follow_on_animations.get(action)
 		sprite.animation_finished.connect(_on_animation_finished)
-		
+
 	if _is_action_bonk(action):
 		# Bonk target is where the player tried to go
 		var bonk_target = _grid_to_local(_get_bonk_target(action))
@@ -85,11 +92,12 @@ func execute_action(action : Enums.PlayerAction) -> void:
 	elif action != Enums.PlayerAction.NONE:
 		_initiate_move(_grid_to_local(grid_position))
 
+
 func _on_animation_finished():
 	print("on animation finished called")
 	sprite.play(follow_on_animation)
 	sprite.animation_finished.disconnect(_on_animation_finished)
-	
+
 func reset() -> void:
 	grid_position = grid_origin
 	position = _grid_to_local(grid_position)
@@ -98,7 +106,7 @@ func reset() -> void:
 func _initiate_move(new_target : Vector2):
 	var tween = create_tween()
 	tween.tween_method(_move_callback.bind(position, new_target), 0.0, 1.0, move_duration)
-	
+
 func _initiate_bonk(attempted_target: Vector2):
 	var tween = create_tween()
 	tween.tween_method(_bonk_callback.bind(position, attempted_target), 0.0, 1.0, move_duration)
@@ -147,7 +155,7 @@ func _get_animation_name(action: Enums.PlayerAction) -> String:
 
 func _get_delay_seconds(action: Enums.PlayerAction) -> float:
 	return beat_delays.get(action, 0.0) * AudioManager.beat_time_seconds
-	
+
 func _is_action_bonk(action: Enums.PlayerAction):
 	return (action == Enums.PlayerAction.LEFT_BONK) or \
 		(action == Enums.PlayerAction.RIGHT_BONK) or \
