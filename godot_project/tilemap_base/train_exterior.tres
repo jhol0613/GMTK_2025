@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://c3ksn0lys57ue"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://c3ksn0lys57ue"]
 
 [ext_resource type="Texture2D" uid="uid://cuqjtegey05u4" path="res://tilemap_base/tilesheets/outsidetiles.png" id="1_d41th"]
+[ext_resource type="Texture2D" uid="uid://d3yicosfk1pl" path="res://tilemap_base/tilesheets/Transitionfloor.png" id="2_lvh7y"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_lvh7y"]
 tile_data = PackedInt32Array(0, 0, 6, 65536, 0, 7, 131072, 0, 8, 196608, 0, 9, 262144, 0, 19, 327680, 0, 20, 393216, 0, 21)
@@ -37,8 +38,15 @@ texture_region_size = Vector2i(32, 32)
 0:23/0 = 0
 0:24/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bxqq"]
+texture = ExtResource("2_lvh7y")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_tbsj5")
+sources/1 = SubResource("TileSetAtlasSource_8bxqq")
 pattern_0 = SubResource("TileMapPattern_lvh7y")
 pattern_1 = SubResource("TileMapPattern_8bxqq")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=11 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://tilemap_base/tilemap_level_base.gd" id="1_3qeya"]
 [ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemap_base/train_walls.tres" id="2_8f44r"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://cyxpoxyaw6ve8" path="res://tilemap_base/obstacles.tres" id="4_bsh3f"]
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemap_base/train_mini_walls.tres" id="5_bsh3f"]
 [ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemap_base/train_exterior.tres" id="5_cct4y"]
+[ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://environment/car_connector.png" id="7_cct4y"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.716783)
@@ -115,8 +116,11 @@ collision_layer = 2
 position = Vector2(336, 53)
 shape = SubResource("RectangleShape2D_bsh3f")
 
-[node name="AdditionalSprites" type="Node" parent="."]
+[node name="AdditionalSprites" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="AdditionalSprites"]
+[node name="CarConnector" type="Sprite2D" parent="AdditionalSprites"]
+z_index = -1
+position = Vector2(421, 58)
+texture = ExtResource("7_cct4y")
 
 [connection signal="area_entered" from="Target" to="." method="_on_target_area_entered"]

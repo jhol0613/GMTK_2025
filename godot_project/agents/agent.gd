@@ -94,7 +94,6 @@ func _on_beat(action: Enums.PlayerAction) -> void:
 
 
 func _on_animation_finished():
-	print("on animation finished called")
 	sprite.play(follow_on_animation)
 	sprite.animation_finished.disconnect(_on_animation_finished)
 

@@ -13,10 +13,12 @@ extends Node2D
 @export var player_spawn_position: Vector2i
 
 @export_subgroup("Animation")
-@export var train_move_right_on_play_distance := 56.0
-@export var train_move_right_on_play_time := 1.8
+@export var train_move_right_on_play_distance := -22#56.0
+@export var train_move_right_on_play_time := 1.2
 @export var next_car_offset := 490
 @export var train_car_advance_play_time := 2.5
+## How long to wait before scrolling to the next level (e.g. to allow time for animation)
+@export var level_success_delay := 2.0
 
 @export_category("Levels")
 @export var level_list: Array[PackedScene]
@@ -28,6 +30,7 @@ extends Node2D
 # animation to reset train horizontal position
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
+@onready var _camera := $Camera2D
 
 @onready var _initial_train_posit = _tilemap_level.position
 
@@ -59,6 +62,9 @@ func load_next_tile_level():
 func advance_level():
 	_level_number += 1
 
+	#TODO: Delay level advance. Not sure why this causes player collision detection to stay on
+	#await get_tree().create_timer(level_success_delay).timeout
+
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
 	var target_pos = _train_center.position + Vector2(-next_car_offset - train_move_right_on_play_distance, 0)
@@ -88,7 +94,7 @@ func advance_level():
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
 	# TODO: play exit animation for the player
-	_player_character.disable_collisions()
+
 	_player_character.queue_free()
 	_player_character = _spawn_agent(player_scene, player_spawn_position)
 	_reset_level()
@@ -185,6 +191,8 @@ func _on_car_position_moved_back():
 
 
 func _on_level_complete() -> void:
+	_player_character.disable_collisions()
+	_player_character.notify_success()
 	advance_level()
 
 
