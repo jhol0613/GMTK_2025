@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_2adhr"]
 [ext_resource type="PackedScene" uid="uid://ba28mg8ic5o6j" path="res://levels/level2_sequencer.tscn" id="3_fhu6d"]
 
-[node name="TilemapLevelBase3" instance=ExtResource("1_2adhr")]
+[node name="TilemapLevelBase4" instance=ExtResource("1_2adhr")]
 sequencer_scene = ExtResource("3_fhu6d")
 conductor_enabled = false
 
