@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://brh8bknuo7lsx"]
+[gd_scene load_steps=12 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Texture2D" uid="uid://xjgskf0kp1kg" path="res://tilemap_base/tilesheets/laser_turret.png" id="1_1pj2b"]
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://tilemap_base/laser.gd" id="1_cep7i"]

@@ -102,6 +102,7 @@ func _on_level_advanced():
 func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
+	_update_lasers()
 	_current_beat += 1
 
 
@@ -135,6 +136,11 @@ func _update_conductor() -> void:
 	_conductor.execute_action(
 		Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)
 	)
+
+
+func _update_lasers() -> void:
+	for laser in _tilemap_level.lasers:
+		laser.fire(_current_beat)
 
 
 # instantiates the agent, adds it to the level, places it into the correct spot
@@ -204,7 +210,6 @@ func _on_level_complete() -> void:
 
 func _on_level_fail() -> void:
 	_action_sequencer.stop_sequencer()
-	_player_character.notify_failure()
 	_conductor.visible = false
 	await get_tree().create_timer(level_failure_delay).timeout
 	_action_sequencer.push_replay_button()

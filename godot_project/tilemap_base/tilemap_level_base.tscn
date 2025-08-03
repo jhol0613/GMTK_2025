@@ -7,7 +7,7 @@
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemap_base/train_mini_walls.tres" id="5_bsh3f"]
 [ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemap_base/train_exterior.tres" id="5_cct4y"]
 [ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://environment/car_connector.png" id="7_cct4y"]
-[ext_resource type="PackedScene" uid="uid://brh8bknuo7lsx" path="res://tilemap_base/laser.tscn" id="8_s4tib"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://tilemap_base/laser.tscn" id="8_s4tib"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.716783)
@@ -127,5 +127,6 @@ texture = ExtResource("7_cct4y")
 
 [node name="Laser" parent="." instance=ExtResource("8_s4tib")]
 position = Vector2(111, 3)
+activation_sequence = Array[bool]([false, true, true])
 
 [connection signal="area_entered" from="Target" to="." method="_on_target_area_entered"]
