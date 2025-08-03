@@ -24,8 +24,3 @@ func fire(beat: int) -> void:
 	if activation_sequence[beat % activation_sequence.size()]:
 		sprite.play("fire")
 		animation_player.play("laser_fire")
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action("DebugAction"):
-		fire(0)
