@@ -67,12 +67,15 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		Enums.PlayerAction.RIGHT:
 			grid_position += Vector2i.RIGHT
 	action_executed.emit(action)
-
-	# stupid timer can't rebind the function
-	_timer.timeout.disconnect(_on_beat)
-	_timer.stop()
-	_timer.timeout.connect(_on_beat.bind(action))
-	_timer.start(_get_delay_seconds(action))
+	
+	if _get_delay_seconds(action) == 0.0:
+		_on_beat(action)
+	else:	
+		# stupid timer can't rebind the function
+		_timer.timeout.disconnect(_on_beat)
+		_timer.stop()
+		_timer.timeout.connect(_on_beat.bind(action))
+		_timer.start(_get_delay_seconds(action))
 
 
 func _on_beat(action: Enums.PlayerAction) -> void:
@@ -130,10 +133,10 @@ func _bonk_callback(alpha: float, start_position: Vector2, attempted_position: V
 	var position_difference = attempted_position - start_position
 	position = bonk_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
-
+	
 func _jump_callback(alpha: float):
 	sprite.position.y = -jump_curve.sample(alpha) * jump_magnitude + _sprite_default_y
-
+	
 func _get_bonk_target(action: Enums.PlayerAction) -> Vector2i:
 	var attempted_position: Vector2i
 	match action:
@@ -147,9 +150,9 @@ func _get_bonk_target(action: Enums.PlayerAction) -> Vector2i:
 			attempted_position = grid_position + Vector2i.RIGHT
 		_:
 			attempted_position = grid_position + Vector2i.ZERO
-
+			
 	return attempted_position
-
+		
 
 func _get_animation_name(action: Enums.PlayerAction) -> String:
 	return animations.get(action, "")

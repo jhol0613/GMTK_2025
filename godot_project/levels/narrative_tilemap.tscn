@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://cftakqgrlqb80"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_swusm"]
+
+[node name="TilemapLevelBase" instance=ExtResource("1_swusm")]

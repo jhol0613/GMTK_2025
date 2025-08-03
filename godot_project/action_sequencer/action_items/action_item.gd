@@ -6,6 +6,8 @@ class_name ActionItem
 @onready var border = $Border
 @onready var light = $PointLight2D
 @onready var flash_timer = $Timer
+@onready var selected_emitter = $Selected
+
 
 @export var preview_scene : PackedScene
 @export var icon_dictionary: Dictionary[Enums.PlayerAction, CompressedTexture2D]
@@ -81,6 +83,7 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			
 		# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
 		if not selected:
+			selected_emitter.play()
 			border.modulate.a = 1
 			light.visible = true
 			texture_rect.position.y += 1
