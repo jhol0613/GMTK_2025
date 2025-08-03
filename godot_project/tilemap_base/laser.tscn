@@ -1,0 +1,159 @@
+[gd_scene load_steps=14 format=3 uid="uid://brh8bknuo7lsx"]
+
+[ext_resource type="Texture2D" uid="uid://xjgskf0kp1kg" path="res://tilemap_base/tilesheets/laser_turret.png" id="1_1pj2b"]
+[ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://tilemap_base/laser.gd" id="1_cep7i"]
+[ext_resource type="Texture2D" uid="uid://442f1tjyhcb1" path="res://tilemap_base/tilesheets/laser_beam.png" id="3_e1xtw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cep7i"]
+atlas = ExtResource("1_1pj2b")
+region = Rect2(62, 0, 31, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1xtw"]
+atlas = ExtResource("1_1pj2b")
+region = Rect2(93, 0, 31, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u3lt"]
+atlas = ExtResource("1_1pj2b")
+region = Rect2(0, 0, 31, 21)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nm5od"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cep7i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cep7i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1xtw")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_2u3lt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1xtw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cep7i")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm5od"]
+size = Vector2(16, 10)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e1xtw"]
+texture = ExtResource("3_e1xtw")
+margins = Vector2i(0, 14)
+texture_region_size = Vector2i(15, 20)
+0:6/0 = 0
+0:5/0 = 0
+0:4/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2u3lt"]
+tile_size = Vector2i(31, 20)
+sources/0 = SubResource("TileSetAtlasSource_e1xtw")
+
+[sub_resource type="Animation" id="Animation_e1xtw"]
+resource_name = "laser_fire"
+length = 0.60001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Beam:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_2u3lt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Beam:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aar76"]
+_data = {
+&"RESET": SubResource("Animation_2u3lt"),
+&"laser_fire": SubResource("Animation_e1xtw")
+}
+
+[node name="Laser" type="Node2D"]
+script = ExtResource("1_cep7i")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nm5od")
+animation = &"fire"
+autoplay = "default"
+
+[node name="Collision" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("RectangleShape2D_nm5od")
+disabled = true
+
+[node name="BeamTiles" type="TileMapLayer" parent="."]
+visible = false
+position = Vector2(16, 10)
+tile_map_data = PackedByteArray(0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0)
+enabled = false
+tile_set = SubResource("TileSet_2u3lt")
+
+[node name="Beam" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 61)
+texture = ExtResource("3_e1xtw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_aar76")
+}
