@@ -6,3 +6,4 @@
 available_slots = 4
 available_actions = Array[int]([1, 2, 3, 4, 7])
 action_quantities = Array[int]([8, 8, 8, 8, 8])
+tutorial_mode = false
