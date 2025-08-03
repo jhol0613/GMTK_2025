@@ -145,6 +145,13 @@ func _reset_actions():
 
 func set_action_icons_hidden(should_hide: bool):
 	_action_items.visible = !should_hide
+	
+func stop_sequencer():
+	current_state = SequencingState.FINISHED
+
+## Does the same thing as hitting the replay button
+func push_replay_button():
+	_on_replay_button_pressed()
 
 #region Signal connections
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=65 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://kkdq1q3rjbaj" path="res://player_character/sprites/ActionDuck.png" id="8_s6mum"]
 [ext_resource type="Texture2D" uid="uid://bwusmhmca44mr" path="res://player_character/sprites/PWalkL.png" id="9_xgp35"]
 [ext_resource type="Texture2D" uid="uid://d1f4ri5am1141" path="res://player_character/sprites/PWalkR.png" id="10_s6mum"]
+[ext_resource type="Texture2D" uid="uid://c45o0ob8uo200" path="res://player_character/sprites/ConductorGameover.png" id="13_im6gk"]
 [ext_resource type="Texture2D" uid="uid://0kwq3605whpw" path="res://player_character/sprites/PidleF.png" id="13_xgp35"]
 [ext_resource type="Texture2D" uid="uid://dj8qvxmx4b3o5" path="res://player_character/sprites/PidleL.png" id="14_wkvkj"]
 [ext_resource type="Texture2D" uid="uid://dbyla8txd5j7u" path="res://player_character/sprites/PidleR.png" id="15_5yn4y"]
@@ -73,6 +74,22 @@ region = Rect2(0, 92, 41, 46)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wc5pn"]
 atlas = ExtResource("8_s6mum")
 region = Rect2(0, 138, 41, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aw7cp"]
+atlas = ExtResource("13_im6gk")
+region = Rect2(0, 0, 72, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abjfc"]
+atlas = ExtResource("13_im6gk")
+region = Rect2(0, 70, 72, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cplg4"]
+atlas = ExtResource("13_im6gk")
+region = Rect2(0, 140, 72, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4ltr"]
+atlas = ExtResource("13_im6gk")
+region = Rect2(0, 210, 72, 70)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s6mum"]
 atlas = ExtResource("13_xgp35")
@@ -279,6 +296,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_aw7cp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abjfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cplg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4ltr")
+}],
+"loop": true,
+"name": &"failure",
+"speed": 5.67
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_s6mum")
 }, {
 "duration": 1.0,
@@ -435,7 +469,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "bonk_emitter", "success_emitter", "collision", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "bonk_emitter", "success_emitter", "failure_emitter", "collision", "sprite")]
 script = ExtResource("1_1ty04")
 move_left_emitter = NodePath("Sounds/MoveSideways")
 move_right_emitter = NodePath("Sounds/MoveSideways")
@@ -444,6 +478,7 @@ move_down_emitter = NodePath("Sounds/MoveDown")
 jump_emitter = NodePath("Sounds/Jump")
 bonk_emitter = NodePath("Sounds/Bonk")
 success_emitter = NodePath("Sounds/Success")
+failure_emitter = NodePath("Sounds/Failure")
 collision = NodePath("Shadow/PlayerSprite/Area2D")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_wkvkj")
@@ -473,6 +508,7 @@ follow_on_animations = Dictionary[int, String]({
 10: "idle_down",
 11: "idle_down"
 })
+default_animation = "idle_down"
 sprite = NodePath("Shadow/PlayerSprite")
 beat_delays = Dictionary[int, float]({
 1: 1.5,
@@ -495,7 +531,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"success"
+animation = &"failure"
 autoplay = "idle_down"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]
@@ -535,3 +571,7 @@ event_guid = "{dee1c723-9a3b-423d-b98c-393f89f28734}"
 [node name="Success" type="FmodEventEmitter2D" parent="Sounds"]
 event_name = "event:/Player Exits"
 event_guid = "{ed164642-30dc-45c4-8681-1ebc9b63cc8f}"
+
+[node name="Failure" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Conductor Speak"
+event_guid = "{85959d5f-8e92-4859-bdd0-d6a884147397}"

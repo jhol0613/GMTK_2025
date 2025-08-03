@@ -11,6 +11,7 @@ class_name PlayerCharacter
 @export var jump_emitter: FmodEventEmitter2D
 @export var bonk_emitter: FmodEventEmitter2D
 @export var success_emitter: FmodEventEmitter2D
+@export var failure_emitter: FmodEventEmitter2D
 
 
 @export_subgroup("Nodes")
@@ -44,7 +45,10 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 func notify_success():
 	sprite.play("success")
 	success_emitter.play()
-	print("level complete")
+	
+func notify_failure():
+	failure_emitter.play()
+	sprite.play("failure")
 
 func disable_collisions() -> void:
 	collision.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE
