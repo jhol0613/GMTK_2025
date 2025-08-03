@@ -1,7 +1,10 @@
-[gd_scene load_steps=12 format=4 uid="uid://bis4mmgrdtses"]
+[gd_scene load_steps=28 format=4 uid="uid://bis4mmgrdtses"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_apvbp"]
 [ext_resource type="Texture2D" uid="uid://bqas277c1yr20" path="res://environment/Typing Monkey.png" id="2_5gdua"]
+[ext_resource type="Texture2D" uid="uid://dcxmub4vesxf1" path="res://decorations/Cheese.png" id="3_8cfvx"]
+[ext_resource type="Texture2D" uid="uid://dwt1i2perxwss" path="res://decorations/EatingMouse.png" id="4_vgi8s"]
+[ext_resource type="Texture2D" uid="uid://do2qch2t3moop" path="res://decorations/RunningMouse.png" id="5_vgi8s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8cfvx"]
 atlas = ExtResource("2_5gdua")
@@ -67,10 +70,103 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_x30fp"]
+atlas = ExtResource("4_vgi8s")
+region = Rect2(0, 0, 20, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dmpr"]
+atlas = ExtResource("4_vgi8s")
+region = Rect2(20, 0, 20, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6nos"]
+atlas = ExtResource("4_vgi8s")
+region = Rect2(40, 0, 20, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhfki"]
+atlas = ExtResource("4_vgi8s")
+region = Rect2(60, 0, 20, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gol8p"]
+atlas = ExtResource("4_vgi8s")
+region = Rect2(80, 0, 20, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qq12g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x30fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dmpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6nos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhfki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gol8p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qq12g"]
+atlas = ExtResource("5_vgi8s")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nii4"]
+atlas = ExtResource("5_vgi8s")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51he1"]
+atlas = ExtResource("5_vgi8s")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1ffe"]
+atlas = ExtResource("5_vgi8s")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hgut"]
+atlas = ExtResource("5_vgi8s")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs13t"]
+atlas = ExtResource("5_vgi8s")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rno4m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qq12g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nii4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51he1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1ffe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hgut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vs13t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="TilemapLevelBase" instance=ExtResource("1_apvbp")]
 
 [node name="Floor" parent="." index="1"]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAACAAAAAAAAAAIAAAADAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAHAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAABAAEAAAAAAAIAAAACAAEAAAAAAAIAAAADAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAFAAEAAAAAAAIAAAAGAAEAAAAAAAIAAAAHAAEAAAAAAAIAAAAIAAEAAAAAAAIAAAAJAAEAAAAAAAIAAAAKAAAAAAAAAAIAAAAKAAEAAAAAAAIAAAAAAAQAAAAAAAIAAAABAAQAAAAAAAIAAAACAAQAAAAAAAIAAAADAAQAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAAAAAIAAAAIAAQAAAAAAAIAAAAJAAQAAAAAAAIAAAAKAAQAAAAAAAIAAAAAAAUAAAAAAAIAAAABAAUAAAAAAAIAAAACAAUAAAAAAAIAAAADAAUAAAAAAAIAAAAEAAUAAAAAAAIAAAAFAAUAAAAAAAIAAAAGAAUAAAAAAAIAAAAHAAUAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAMAAAAAAAMAAAAKAAIAAAAAAAMAAAAKAAMAAAAAAAMAAAABAAIAAAAAAAEAAAACAAIAAAAAAAEAAAADAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAEAAAAHAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAEAAAAJAAMAAAAAAAEAAAAIAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAEAAMAAAAAAAEAAAADAAMAAAAAAAEAAAACAAMAAAAAAAEAAAABAAMAAAAAAAEAAAAGAAIAAAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAACAAAAAAAAAAIAAAADAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAHAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAABAAEAAAAAAAIAAAACAAEAAAAAAAIAAAADAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAFAAEAAAAAAAIAAAAGAAEAAAAAAAIAAAAHAAEAAAAAAAIAAAAIAAEAAAAAAAIAAAAJAAEAAAAAAAIAAAAKAAAAAAAAAAIAAAAKAAEAAAAAAAIAAAAAAAQAAAAAAAIAAAABAAQAAAAAAAIAAAACAAQAAAAAAAIAAAADAAQAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAAAAAIAAAAJAAQAAAAAAAIAAAAKAAQAAAAAAAIAAAAAAAUAAAAAAAIAAAABAAUAAAAAAAIAAAACAAUAAAAAAAIAAAADAAUAAAAAAAIAAAAEAAUAAAAAAAIAAAAFAAUAAAAAAAIAAAAGAAUAAAAAAAIAAAAHAAUAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAMAAAAAAAMAAAAKAAIAAAAAAAMAAAAKAAMAAAAAAAMAAAABAAIAAAAAAAEAAAACAAIAAAAAAAEAAAADAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAEAAAAHAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAEAAAAJAAMAAAAAAAEAAAAIAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAEAAMAAAAAAAEAAAADAAMAAAAAAAEAAAACAAMAAAAAAAEAAAABAAMAAAAAAAEAAAAGAAIAAAAAAAEAAAAIAAQAAAAAAAIAAAA=")
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray()
@@ -81,4 +177,18 @@ position = Vector2(147.582, -3.54602)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" index="0"]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_x30fp")
-frame_progress = 0.897914
+frame_progress = 0.95684
+
+[node name="Cheese" type="Sprite2D" parent="." index="9"]
+position = Vector2(310, 66)
+texture = ExtResource("3_8cfvx")
+
+[node name="EatingMouse" type="AnimatedSprite2D" parent="." index="10"]
+position = Vector2(298, 67)
+sprite_frames = SubResource("SpriteFrames_qq12g")
+frame_progress = 0.528208
+
+[node name="Running Mouse" type="AnimatedSprite2D" parent="." index="11"]
+position = Vector2(240, 67)
+sprite_frames = SubResource("SpriteFrames_rno4m")
+frame_progress = 0.583142
