@@ -43,6 +43,7 @@ tile_map_data = PackedByteArray("AAAGAAMAAgACAAIAAAAGAAQAAgACAAMAAAA=")
 tile_set = ExtResource("4_bsh3f")
 
 [node name="BackWall" type="TileMapLayer" parent="."]
+z_index = -2
 position = Vector2(0, -5.37)
 tile_map_data = PackedByteArray("AAAHAP7/AQAAAA4AAAAHAP//AQAAAA0AAAAHAP3/AQAAAAwAAAAIAP3/AQAAAAAAAAAIAP7/AQAAABAAAAAIAP//AQAAAAgAAAAJAP3/AQAAAAMAAAAJAP7/AQAAABEAAAAJAP//AQAAAAkAAAAKAP3/AQAAAAQAAAAKAP7/AQAAABIAAAAKAP//AQAAAAoAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAUAAAAEAP//AQAAAAgAAAAFAP3/AQAAAAMAAAAFAP7/AQAAAAYAAAAFAP//AQAAAAkAAAAGAP3/AQAAAAQAAAAGAP7/AQAAAAcAAAAGAP//AQAAAAoAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAUAAAAAAP//AQAAAAgAAAABAP3/AQAAAAMAAAABAP7/AQAAAAYAAAABAP//AQAAAAkAAAACAP3/AQAAAAQAAAACAP7/AQAAAAcAAAACAP//AQAAAAoAAAADAP3/AQAAAAwAAAADAP7/AQAAAA4AAAADAP//AQAAAA0AAAA=")
 tile_set = ExtResource("2_8f44r")
@@ -94,6 +95,7 @@ tile_set = ExtResource("5_bsh3f")
 
 [node name="RightExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
+z_index = 1
 position = Vector2(9.315, -5)
 tile_map_data = PackedByteArray("AAALAAUAAAAAAAAAAAALAAQAAAAAAAAAAAALAAMAAAAAAAAAAAALAAIAAAAAAAAAAAALAAEAAAAAAAAAAAALAAAAAAAAAAAAAAALAP//AAAAAAAAAAALAP7/AAAAAAAAAAA=")
 tile_set = ExtResource("2_wstta")
@@ -106,6 +108,7 @@ tile_set = ExtResource("5_cct4y")
 
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
+z_index = 1
 position = Vector2(4.27, 0)
 tile_map_data = PackedByteArray("AAAVAPr/AAAAAAgAAAAVAPv/AAABAAgAAAAVAPz/AAABAAgAAAAVAP3/AAABAAgAAAAVAP7/AAABAAgAAAAVAP//AAABAAgAAAAVAAAAAAABAAgAAAAVAAEAAAAAAAkAAAAVAAIAAAABAAoAAAAVAAMAAAABAAoAAAAVAAQAAAABAAoAAAAVAAUAAAABAAoAAAAVAAYAAAAAAAoAAAAVAAcAAAAAAAsAAAA=")
 tile_set = ExtResource("5_bsh3f")
@@ -120,7 +123,6 @@ shape = SubResource("RectangleShape2D_bsh3f")
 [node name="AdditionalSprites" type="Node2D" parent="."]
 
 [node name="CarConnector" type="Sprite2D" parent="AdditionalSprites"]
-z_index = -1
 position = Vector2(421, 58)
 texture = ExtResource("7_cct4y")
 
