@@ -31,7 +31,7 @@ extends Node2D
 # animation to reset train horizontal position
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
-@onready var _camera := $Camera2D
+@onready var _camera := $ShakeCamera
 
 @onready var _initial_train_posit = _tilemap_level.position
 

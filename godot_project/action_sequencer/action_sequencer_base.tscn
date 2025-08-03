@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=15 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_ury52"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_7huxh"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_h8boe"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/play_button/start_pushed.png" id="4_7huxh"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/play_button/start_unpushed.png" id="4_201rw"]
-[ext_resource type="Texture2D" uid="uid://h73hlii8jbws" path="res://action_sequencer/new_sequencer.png" id="6_201rw"]
+[ext_resource type="Texture2D" uid="uid://cosoi57f34c6i" path="res://action_sequencer/sequencer.png" id="4_ba78j"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/play_button/start_mouse_hover.png" id="6_rc3vt"]
 [ext_resource type="Texture2D" uid="uid://c21fyghohuwvu" path="res://action_sequencer/replay_button/unpushed.png" id="10_4fjcr"]
 [ext_resource type="Texture2D" uid="uid://hgkcu6my2edw" path="res://action_sequencer/play_button/start_disabled.png" id="10_e7btv"]
 [ext_resource type="Texture2D" uid="uid://588sh1rfj8xg" path="res://action_sequencer/replay_button/pushed.png" id="11_e7btv"]
+[ext_resource type="Texture2D" uid="uid://iqat4cj40yyy" path="res://ui/big_arrow.png" id="12_4fjcr"]
 [ext_resource type="Texture2D" uid="uid://b86m10fqu8guc" path="res://action_sequencer/replay_button/hover.png" id="12_8w216"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
@@ -31,21 +32,11 @@ offset_bottom = 346.0
 script = ExtResource("1_ury52")
 action_item_scene = ExtResource("2_7huxh")
 action_slot_scene = ExtResource("3_h8boe")
-items_container = NodePath("ActionItems")
+items_container = NodePath("TextureRect/ActionItems")
 slots_container = NodePath("TextureRect/ActionSlots")
 available_slots = 2
 available_actions = Array[int]([1, 2, 3, 4, 5])
 action_quantities = Array[int]([99999, 99999, 99999, 99999, 99999])
-
-[node name="ActionItems" type="GridContainer" parent="."]
-layout_mode = 2
-offset_left = 43.0
-offset_top = 256.0
-offset_right = 43.0
-offset_bottom = 308.0
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 3
 
 [node name="SequencingLayout" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -54,11 +45,11 @@ offset_bottom = 52.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 196.0
-offset_top = 236.0
-offset_right = 585.0
-offset_bottom = 352.0
-texture = ExtResource("6_201rw")
+offset_left = 53.0
+offset_top = 238.0
+offset_right = 553.0
+offset_bottom = 354.0
+texture = ExtResource("4_ba78j")
 expand_mode = 1
 stretch_mode = 4
 
@@ -67,9 +58,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 37.0
+offset_left = 148.0
 offset_top = -76.0
-offset_right = 37.0
+offset_right = 148.0
 offset_bottom = -24.0
 grow_vertical = 0
 theme_override_constants/separation = 7
@@ -106,13 +97,29 @@ texture = SubResource("GradientTexture2D_8w216")
 
 [node name="ReplayButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 158.0
+offset_left = 271.0
 offset_top = 6.0
-offset_right = 217.0
+offset_right = 330.0
 offset_bottom = 46.0
 texture_normal = ExtResource("10_4fjcr")
 texture_pressed = ExtResource("11_e7btv")
 texture_hover = ExtResource("12_8w216")
+
+[node name="ActionItems" type="GridContainer" parent="TextureRect"]
+z_index = 11
+layout_mode = 2
+offset_left = 11.0
+offset_top = 14.0
+offset_right = 11.0
+offset_bottom = 66.0
+theme_override_constants/h_separation = 3
+theme_override_constants/v_separation = 3
+columns = 3
+
+[node name="TutorialArrow" type="Sprite2D" parent="TextureRect/ActionItems"]
+z_index = 4
+position = Vector2(96, 45)
+texture = ExtResource("12_4fjcr")
 
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TextureRect/ReplayButton" to="." method="_on_replay_button_pressed"]
