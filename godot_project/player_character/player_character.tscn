@@ -575,3 +575,5 @@ event_guid = "{ed164642-30dc-45c4-8681-1ebc9b63cc8f}"
 [node name="Failure" type="FmodEventEmitter2D" parent="Sounds"]
 event_name = "event:/Conductor Speak"
 event_guid = "{85959d5f-8e92-4859-bdd0-d6a884147397}"
+
+[connection signal="area_entered" from="Shadow/PlayerSprite/Area2D" to="." method="_on_collision"]

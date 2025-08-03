@@ -3,7 +3,6 @@ extends Agent
 
 class_name Conductor
 
-signal player_caught
 
 @onready var jump_emitter = $Sound/JumpSound
 @onready var entered_emitter = $Sound/EnteredSound
@@ -32,6 +31,3 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 	if emitter == null: # in case the action is not a movement action
 		return
 	emitter.play()
-
-func _on_player_entered(_area: Area2D) -> void:
-	player_caught.emit()

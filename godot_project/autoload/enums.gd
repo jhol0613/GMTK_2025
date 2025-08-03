@@ -21,6 +21,12 @@ enum MusicMode {
 	RUNNING
 }
 
+enum CollisionLayer {
+	PLAYER = 1,
+	TRIGGERS = 2,
+	ENEMIES = 4,
+}
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP:

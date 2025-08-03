@@ -43,7 +43,7 @@ var _level_number := 0
 var _current_beat := 0
 
 func _ready() -> void:
-	_player_character = _spawn_agent(player_scene, player_spawn_position)
+	_spawn_player()
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
 
@@ -94,10 +94,8 @@ func advance_level():
 # Called when level has been fully advanced
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
-	# TODO: play exit animation for the player
 
-	_player_character.queue_free()
-	_player_character = _spawn_agent(player_scene, player_spawn_position)
+	_spawn_player()
 	_reset_level()
 
 
@@ -150,11 +148,18 @@ func _spawn_agent(scene: PackedScene, grid_position: Vector2i) -> Agent:
 	return agent
 
 
+func _spawn_player() -> void:
+	if _player_character != null:
+		_player_character.queue_free()
+	_player_character = _spawn_agent(player_scene, player_spawn_position)
+	_player_character.failure.connect(_on_level_fail)
+
+
 func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_agent(conductor_scene, _tilemap_level.conductor_spawn_position)
-	_conductor.player_caught.connect(_on_level_fail)
+
 
 func _reset_level() -> void:
 	if _conductor == null:
@@ -203,4 +208,3 @@ func _on_level_fail() -> void:
 	_conductor.visible = false
 	await get_tree().create_timer(level_failure_delay).timeout
 	_action_sequencer.push_replay_button()
-	pass
