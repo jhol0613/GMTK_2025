@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=12 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://tilemap_base/tilemap_level_base.gd" id="1_3qeya"]
 [ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemap_base/train_walls.tres" id="2_8f44r"]
+[ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="2_s4tib"]
 [ext_resource type="TileSet" uid="uid://cd8pqkqbg8nrr" path="res://tilemap_base/train_floor.tres" id="2_wstta"]
 [ext_resource type="TileSet" uid="uid://cyxpoxyaw6ve8" path="res://tilemap_base/obstacles.tres" id="4_bsh3f"]
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemap_base/train_mini_walls.tres" id="5_bsh3f"]
@@ -25,6 +26,7 @@ size = Vector2(20, 27)
 z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_3qeya")
+sequencer_scene = ExtResource("2_s4tib")
 
 [node name="Windows" type="TileMapLayer" parent="."]
 position = Vector2(0, -5.37)

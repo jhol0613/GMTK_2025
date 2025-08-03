@@ -2,7 +2,6 @@ extends Node2D
 
 class_name TilemapLevel
 
-@export var next_level: PackedScene
 @export var sequencer_scene: PackedScene
 @export var bounds : Vector2i
 

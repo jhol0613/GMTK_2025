@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://dco8dneiqmglo"]
+[gd_scene load_steps=3 format=4 uid="uid://dco8dneiqmglo"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_2pi55"]
-[ext_resource type="PackedScene" uid="uid://byfkjgjhywmam" path="res://levels/level2_tilemap.tscn" id="2_csjo1"]
 [ext_resource type="PackedScene" uid="uid://ibw7ks3hhoj7" path="res://levels/level1_sequencer.tscn" id="3_is71u"]
 
 [node name="TilemapLevelBase2" instance=ExtResource("1_2pi55")]
-next_level = ExtResource("2_csjo1")
 sequencer_scene = ExtResource("3_is71u")
 
 [node name="Obstacles" parent="." index="2"]

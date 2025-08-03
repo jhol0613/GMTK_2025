@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://d0ufdtnalnjf0"]
+[gd_scene load_steps=6 format=4 uid="uid://d0ufdtnalnjf0"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="1_fde8v"]
 [ext_resource type="Texture2D" uid="uid://dlw0gucuj5jld" path="res://decorations/Passengerbored.png" id="2_3bixj"]
-[ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://levels/level1_tilemap.tscn" id="2_l2ivd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l2ivd"]
 atlas = ExtResource("2_3bixj")
@@ -27,7 +26,6 @@ animations = [{
 }]
 
 [node name="TilemapLevelBase2" instance=ExtResource("1_fde8v")]
-next_level = ExtResource("2_l2ivd")
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAACAAEAAAABAAIAAAACAP//AAABAAAAAAACAAAAAAABAAEAAAADAP//AAABAAAAABADAAAAAAABAAEAABADAAEAAAABAAIAABAFAP//AAACAAAAAAAFAAAAAAACAAEAAAAFAAEAAAACAAIAAAAGAP//AAABAAAAABAGAAAAAAABAAEAABAGAAEAAAABAAIAABAJAP//AAABAAAAABAJAAAAAAABAAEAABAJAAEAAAABAAIAABAIAP//AAABAAAAAAAIAAAAAAABAAEAAAAIAAEAAAABAAIAAAAIAAIAAAABAAMAAAAJAAIAAAABAAMAABAGAAIAAAABAAMAABAFAAIAAAACAAMAAAACAAIAAAABAAMAAAADAAIAAAABAAMAABA=")

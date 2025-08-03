@@ -23,7 +23,6 @@ extends Node2D
 
 @export_category("Levels")
 @export var level_list: Array[PackedScene]
-@export var first_level: PackedScene
 @export var initial_train_position: Vector2
 
 @onready var _tilemap_level : TilemapLevel
@@ -36,7 +35,6 @@ extends Node2D
 @onready var _camera := $ShakeCamera
 
 
-
 var _conductor: Conductor
 var _player_character: PlayerCharacter
 
@@ -45,7 +43,7 @@ var _level_number := 0
 var _current_beat := 0
 
 func _ready() -> void:
-	_tilemap_level = first_level.instantiate()
+	_tilemap_level = level_list[0].instantiate()
 	_on_the_train.add_child(_tilemap_level)
 
 	_tilemap_level.position = initial_train_position
@@ -63,7 +61,7 @@ func _input(event: InputEvent) -> void:
 		advance_level()
 
 func load_next_tile_level():
-	_next_tile_level = _tilemap_level.next_level.instantiate()
+	_next_tile_level = level_list[(_level_number + 1) % level_list.size()].instantiate()
 	_on_the_train.call_deferred("add_child", _next_tile_level)
 	_next_tile_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
 
