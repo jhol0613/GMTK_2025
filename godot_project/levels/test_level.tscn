@@ -9,7 +9,6 @@
 conductor_scene = ExtResource("2_x25rp")
 level_list = Array[PackedScene]([ExtResource("3_w7r7j"), ExtResource("4_o6mel")])
 
-[connection signal="player_action_received" from="SequencerLevelPlaceholder" to="." method="_on_action_performed"]
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_performed"]
 
 [editable path="TrainCenter/OnTheTrain/TilemapLevel"]

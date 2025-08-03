@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=21 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_base/level_base.gd" id="1_vmt1o"]
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://tilemap_base/tilemap_level_base.tscn" id="2_da5si"]
@@ -6,6 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://player_character/player_character.tscn" id="3_ep22m"]
 [ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://environment/snow_material.tres" id="3_uv04d"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="5_dtys8"]
+[ext_resource type="Texture2D" uid="uid://csd70wwn77q11" path="res://environment/Tracks.png" id="7_neno8"]
+[ext_resource type="Texture2D" uid="uid://dip8yg5mg0v8t" path="res://environment/Snowfloor.png" id="8_uv04d"]
+[ext_resource type="Texture2D" uid="uid://bsqe55ncksgbo" path="res://environment/Treesclose.png" id="9_tb1rm"]
+[ext_resource type="Texture2D" uid="uid://dl4gj5ppttyse" path="res://environment/Treesfar.png" id="10_yek5b"]
+[ext_resource type="Texture2D" uid="uid://djejxgkwpk8ea" path="res://environment/Mountains.png" id="11_c6x0s"]
+[ext_resource type="Texture2D" uid="uid://bydlsgvji1lns" path="res://environment/Cloudsclose.png" id="12_2jfk7"]
+[ext_resource type="Texture2D" uid="uid://cex205ebtfbhn" path="res://environment/Cloudfar.png" id="13_dy25v"]
+[ext_resource type="Texture2D" uid="uid://f6iq7ujhjxih" path="res://environment/Stars.png" id="14_q7mdp"]
+[ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://environment/Sky.png" id="15_u1tcv"]
 
 [sub_resource type="Animation" id="Animation_n2acl"]
 length = 0.001
@@ -61,17 +70,17 @@ player_scene = ExtResource("3_ep22m")
 player_spawn_position = Vector2i(0, 2)
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(294, -9)
-amount = 800
+position = Vector2(621, -11)
+amount = 1500
 texture = ExtResource("2_neno8")
-lifetime = 10.01
+lifetime = 4.35
 process_material = ExtResource("3_uv04d")
 
 [node name="ActionSequencer" parent="." instance=ExtResource("5_dtys8")]
 offset_left = 4.0
-offset_top = 103.0
+offset_top = 107.0
 offset_right = 620.0
-offset_bottom = 449.0
+offset_bottom = 453.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -104,6 +113,87 @@ texture_scale = 1.3
 position = Vector2(356, 48.37)
 texture = SubResource("GradientTexture2D_dtys8")
 texture_scale = 1.3
+
+[node name="Tracks" type="Parallax2D" parent="."]
+repeat_size = Vector2(572.17, 0)
+autoscroll = Vector2(-250, 0)
+
+[node name="Tracks" type="Sprite2D" parent="Tracks"]
+light_mask = 2
+z_index = -2
+position = Vector2(300, 202)
+texture = ExtResource("7_neno8")
+
+[node name="Ground" type="Sprite2D" parent="Tracks"]
+light_mask = 2
+z_index = -3
+position = Vector2(298, 230)
+texture = ExtResource("8_uv04d")
+
+[node name="TreesClose" type="Parallax2D" parent="."]
+repeat_size = Vector2(605.99, 0)
+autoscroll = Vector2(-80, 0)
+
+[node name="TreesClose" type="Sprite2D" parent="TreesClose"]
+light_mask = 2
+z_index = -4
+position = Vector2(299, 209)
+texture = ExtResource("9_tb1rm")
+
+[node name="TreesFar" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, 9)
+repeat_size = Vector2(607.98, 0)
+autoscroll = Vector2(-50, 0)
+
+[node name="TreesFar" type="Sprite2D" parent="TreesFar"]
+light_mask = 2
+z_index = -5
+position = Vector2(301, 191)
+texture = ExtResource("10_yek5b")
+
+[node name="Mountains" type="Parallax2D" parent="."]
+scroll_offset = Vector2(0, 18)
+repeat_size = Vector2(606.32, 0)
+autoscroll = Vector2(-8, 0)
+
+[node name="Mountains" type="Sprite2D" parent="Mountains"]
+light_mask = 2
+z_index = -6
+position = Vector2(302, 179)
+texture = ExtResource("11_c6x0s")
+
+[node name="CloudsClose" type="Parallax2D" parent="."]
+repeat_size = Vector2(739.965, 0)
+autoscroll = Vector2(-17, 0)
+
+[node name="CloudsClose" type="Sprite2D" parent="CloudsClose"]
+light_mask = 2
+position = Vector2(201, 158)
+texture = ExtResource("12_2jfk7")
+
+[node name="CloudsFar" type="Parallax2D" parent="."]
+repeat_size = Vector2(638.47, 0)
+autoscroll = Vector2(-4, 0)
+
+[node name="CloudsFar" type="Sprite2D" parent="CloudsFar"]
+light_mask = 2
+z_index = -8
+position = Vector2(280, 172)
+texture = ExtResource("13_dy25v")
+
+[node name="Sky" type="Parallax2D" parent="."]
+
+[node name="Stars" type="Sprite2D" parent="Sky"]
+light_mask = 2
+z_index = -9
+position = Vector2(301, 221)
+texture = ExtResource("14_q7mdp")
+
+[node name="Sunset" type="Sprite2D" parent="Sky"]
+light_mask = 2
+z_index = -10
+position = Vector2(300, 214)
+texture = ExtResource("15_u1tcv")
 
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_sequencer_perform_action"]
 [connection signal="play_started" from="ActionSequencer" to="." method="_on_action_sequencer_play_started"]

@@ -4,8 +4,10 @@
 particle_flag_disable_z = true
 emission_shape_offset = Vector3(0, 40, 0)
 emission_shape = 3
-emission_box_extents = Vector3(307, 100, 1)
-gravity = Vector3(0, 40, 0)
-turbulence_enabled = true
-turbulence_noise_strength = 2.17
-turbulence_noise_scale = 6.606
+emission_box_extents = Vector3(20, 400, 1)
+direction = Vector3(-1, 0.4, 0)
+spread = 15.205
+initial_velocity_min = 139.64
+initial_velocity_max = 243.02
+gravity = Vector3(0, 0, 0)
+turbulence_influence_min = 0.027

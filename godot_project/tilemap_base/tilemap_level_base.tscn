@@ -8,7 +8,7 @@
 [ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemap_base/train_exterior.tres" id="5_cct4y"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
-offsets = PackedFloat32Array(0, 0.792541)
+offsets = PackedFloat32Array(0, 0.716783)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bsh3f"]
@@ -47,49 +47,63 @@ tile_set = ExtResource("2_8f44r")
 
 [node name="PointLight2D" type="PointLight2D" parent="BackWall"]
 position = Vector2(112, -79.63)
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="PointLight2D2" type="PointLight2D" parent="BackWall"]
 position = Vector2(240, -79.63)
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="PointLight2D3" type="PointLight2D" parent="BackWall"]
 position = Vector2(-2, 42.37)
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="PointLight2D4" type="PointLight2D" parent="BackWall"]
 position = Vector2(356, 42.37)
+shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
+[node name="Windows" type="TileMapLayer" parent="BackWall"]
+tile_map_data = PackedByteArray("AAAAAP3/AQAAAAEAAAACAP3/AQAAAAIAAAAEAP3/AQAAAAEAAAAIAP3/AQAAAAEAAAAGAP3/AQAAAAIAAAAKAP3/AQAAAAIAAAA=")
+tile_set = ExtResource("2_8f44r")
+
 [node name="LeftExteriorFloor" type="TileMapLayer" parent="."]
+light_mask = 2
 position = Vector2(-8.345, -5)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("2_wstta")
 
 [node name="LeftExterior" type="TileMapLayer" parent="LeftExteriorFloor"]
-tile_map_data = PackedByteArray("AAD///3/AAAAAAYAAAD///7/AAAAAAcAAAD/////AAAAAAgAAAD//wAAAAAAAAkAAAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD+//3/AAAAAAAAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAA=")
+light_mask = 2
+tile_map_data = PackedByteArray("AAD///3/AAAAAAYAAAD///7/AAAAAAcAAAD/////AAAAAAgAAAD//wAAAAAAAAkAAAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD+//3/AAAAAAAAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAA=")
 tile_set = ExtResource("5_cct4y")
 
 [node name="LeftWall" type="TileMapLayer" parent="LeftExteriorFloor"]
+light_mask = 2
 position = Vector2(13, 0)
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wYAAAAAAAoAAAD//wUAAAAAAAoAAAD//wQAAAAAAAoAAAD//wMAAAAAAAoAAAD//wIAAAAAAAoAAAD//wEAAAAAAAkAAAD//wAAAAABAAgAAAD/////AAABAAgAAAD///7/AAABAAgAAAD///3/AAABAAgAAAD///z/AAABAAgAAAD///v/AAABAAgAAAD///r/AAAAAAgAAAA=")
 tile_set = ExtResource("5_bsh3f")
 
 [node name="RightExteriorFloor" type="TileMapLayer" parent="."]
+light_mask = 2
 position = Vector2(9.315, -5)
 tile_map_data = PackedByteArray("AAALAAUAAAAAAAAAAAALAAQAAAAAAAAAAAALAAMAAAAAAAAAAAALAAIAAAAAAAAAAAALAAEAAAAAAAAAAAALAAAAAAAAAAAAAAALAP//AAAAAAAAAAALAP7/AAAAAAAAAAA=")
 tile_set = ExtResource("2_wstta")
 
 [node name="RightExterior" type="TileMapLayer" parent="RightExteriorFloor"]
+light_mask = 2
 position = Vector2(-31.94, 0)
-tile_map_data = PackedByteArray("AAAMAP3/AAAAAAYAAAAMAP7/AAAAAAcAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAkAAAAMAAEAAAAAABMAAAAMAAIAAAAAABQAAAAMAAMAAAAAABUAAAANAP3/AAAAAAAAABANAP7/AAAAAAEAABANAP//AAAAAAEAABANAAAAAAAAAAIAABANAAEAAAAAAAMAABA=")
+tile_map_data = PackedByteArray("AAAMAP3/AAAAAAYAAAAMAP7/AAAAAAcAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAkAAAAMAAEAAAAAABMAAAAMAAIAAAAAABQAAAAMAAMAAAAAABUAAAANAP3/AAAAAAAAABANAP7/AAAAAAEAABANAP//AAAAAAEAABANAAAAAAAAAAIAABANAAEAAAAAAAMAABALAAQAAAAAABgAAAAKAAQAAAAAABcAAAAJAAQAAAAAABcAAAAIAAQAAAAAABcAAAAHAAQAAAAAABYAAAA=")
 tile_set = ExtResource("5_cct4y")
 
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
+light_mask = 2
 position = Vector2(4.27, 0)
 tile_map_data = PackedByteArray("AAAVAPr/AAAAAAgAAAAVAPv/AAABAAgAAAAVAPz/AAABAAgAAAAVAP3/AAABAAgAAAAVAP7/AAABAAgAAAAVAP//AAABAAgAAAAVAAAAAAABAAgAAAAVAAEAAAAAAAkAAAAVAAIAAAABAAoAAAAVAAMAAAABAAoAAAAVAAQAAAABAAoAAAAVAAUAAAABAAoAAAAVAAYAAAAAAAoAAAAVAAcAAAAAAAsAAAA=")
 tile_set = ExtResource("5_bsh3f")
@@ -100,5 +114,9 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 position = Vector2(336, 53)
 shape = SubResource("RectangleShape2D_bsh3f")
+
+[node name="AdditionalSprites" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="AdditionalSprites"]
 
 [connection signal="area_entered" from="Target" to="." method="_on_target_area_entered"]
