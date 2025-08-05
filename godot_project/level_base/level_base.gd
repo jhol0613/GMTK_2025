@@ -173,9 +173,8 @@ func _spawn_conductor() -> void:
 
 
 func _reset_level() -> void:
-	if _conductor == null:
-		return
-	_conductor.queue_free()
+	if _conductor != null:
+		_conductor.queue_free()
 	_conductor = null
 
 	_current_beat = 0
