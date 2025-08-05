@@ -21,16 +21,13 @@ tile_map_data = PackedByteArray("AAD///3/AAAAAAYAAAD///7/AAAAAAcAAAD/////AAAAAAg
 tile_map_data = PackedByteArray("AAAMAP3/AAAAAAYAAAAMAP7/AAAAAAcAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAkAAAAMAAEAAAAAABAAAAAMAAIAAAAAABQAAAAMAAMAAAAAABUAAAANAP3/AAAAAAAAABANAP7/AAAAAAEAABANAP//AAAAAAEAABANAAAAAAAAAAIAABANAAEAAAAAAAMAABALAAQAAAAAABgAAAAKAAQAAAAAABcAAAAJAAQAAAAAABcAAAAIAAQAAAAAABcAAAAHAAQAAAAAABYAAAA=")
 
 [node name="Laser" parent="." index="8" instance=ExtResource("3_nvnpq")]
-z_index = 1
 position = Vector2(111, 2)
 beam_length = 6
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("3_nvnpq")]
-z_index = 1
 position = Vector2(208, 2)
 beam_length = 6
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("3_nvnpq")]
-z_index = 1
 position = Vector2(304, 2)
 beam_length = 6
