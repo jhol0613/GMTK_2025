@@ -27,9 +27,6 @@ signal failure
 func _ready() -> void:
 	super._ready()
 	action_executed.connect(_on_action_executed)
-	
-	var original_collision_mask = collision.collision_mask
-	var original_collision_layer = collision.collision_layer
 
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:

@@ -98,7 +98,6 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	set_space_available_light_on(false)
 	if action == Enums.PlayerAction.NONE:
-		print("action none")
 		texture_rect.texture = null
 	else:
 		texture_rect.texture = action_textures.get(action)

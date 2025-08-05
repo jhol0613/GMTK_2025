@@ -32,7 +32,6 @@ extends Node2D
 # animation to reset train horizontal position
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
-@onready var _camera := $ShakeCamera
 
 
 var _conductor: Conductor
