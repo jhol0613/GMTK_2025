@@ -29,22 +29,23 @@ offset_bottom = 478.0
 texture = ExtResource("1_rnay7")
 stretch_mode = 4
 
-[node name="Play" type="TextureButton" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 156.0
+offset_left = 172.0
 offset_top = 225.0
-offset_right = 254.0
-offset_bottom = 274.0
+offset_right = 355.0
+offset_bottom = 357.0
+
+[node name="Play" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 texture_normal = ExtResource("2_ux3pq")
 texture_hover = ExtResource("3_yewqo")
 stretch_mode = 4
 
-[node name="Options" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 148.0
-offset_top = 268.0
-offset_right = 315.0
-offset_bottom = 321.0
+[node name="Options" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 texture_normal = ExtResource("4_0ddpl")
 texture_hover = ExtResource("5_ofviv")
 stretch_mode = 4
@@ -68,6 +69,6 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[connection signal="mouse_entered" from="Play" to="." method="_on_play_mouse_entered"]
-[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
-[connection signal="mouse_entered" from="Options" to="." method="_on_options_mouse_entered"]
+[connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
