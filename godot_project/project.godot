@@ -28,10 +28,12 @@ DSP/dsp_buffer_count=4
 
 [application]
 
-config/name="GodotProject"
+config/name="RhythmRail"
 run/main_scene="uid://dual0bcixw854"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://ui/splashscreen.png"
+config/icon="uid://eenhxk641vat"
 
 [autoload]
 
