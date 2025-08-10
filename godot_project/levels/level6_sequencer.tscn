@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpslkqst3o127"]
-
-[ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer_base.tscn" id="1_belcc"]
-
-[node name="ActionSequencerBase6" instance=ExtResource("1_belcc")]
-available_slots = 5
-tutorial_mode = false

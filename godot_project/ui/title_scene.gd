@@ -8,7 +8,7 @@ func _on_play_pressed() -> void:
 	tween.tween_callback(load_first_level)
 
 func load_first_level():
-	get_tree().change_scene_to_file("res://ui/narrative.tscn")
+	get_tree().change_scene_to_file("res://cutscenes/intro_narrative.tscn")
 
 
 func _on_play_mouse_entered() -> void:
