@@ -1,0 +1,173 @@
+[gd_scene load_steps=22 format=3 uid="uid://dual0bcixw854"]
+
+[ext_resource type="Script" uid="uid://dtkjbr420kbm1" path="res://menus/title_screen/title_scene.gd" id="1_ofviv"]
+[ext_resource type="Texture2D" uid="uid://cuc5c16cqv58r" path="res://menus/title_screen/Menu_Stars.png" id="2_3h5pg"]
+[ext_resource type="Texture2D" uid="uid://c6mly8pwfudoj" path="res://menus/title_screen/Menu_Sky.png" id="2_t0baq"]
+[ext_resource type="Texture2D" uid="uid://cep80sbedbwos" path="res://menus/title_screen/play.png" id="2_ux3pq"]
+[ext_resource type="Texture2D" uid="uid://bi1j88xmw3mtp" path="res://menus/title_screen/Menu_Foreground.png" id="3_5mg7y"]
+[ext_resource type="Texture2D" uid="uid://bkkxjyovgnt30" path="res://menus/title_screen/playselect.png" id="3_yewqo"]
+[ext_resource type="Texture2D" uid="uid://bkk2sd8k2pv01" path="res://menus/title_screen/options.png" id="4_0ddpl"]
+[ext_resource type="Texture2D" uid="uid://b11x7oa6qkn5j" path="res://menus/title_screen/playpressed.png" id="5_5mg7y"]
+[ext_resource type="Texture2D" uid="uid://ievbjg1rx2ml" path="res://menus/title_screen/optionsselect.png" id="5_ofviv"]
+[ext_resource type="Texture2D" uid="uid://bojivainvlqrd" path="res://menus/title_screen/optionspressed.png" id="8_bgyt0"]
+[ext_resource type="Texture2D" uid="uid://cqwvwbxw1kcpk" path="res://menus/title_screen/TitleText1.png" id="11_ehrfh"]
+[ext_resource type="Texture2D" uid="uid://bgeovtkbbvbbd" path="res://menus/title_screen/TitleText2.png" id="12_kjgsu"]
+[ext_resource type="Texture2D" uid="uid://b508ued4vhh0g" path="res://menus/title_screen/tracks.png" id="13_q7rrh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e8u02"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ehrfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_kjgsu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.67
+}]
+
+[sub_resource type="Gradient" id="Gradient_t0baq"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.321895, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_txf55"]
+gradient = SubResource("Gradient_t0baq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3h5pg"]
+particle_flag_disable_z = true
+direction = Vector3(1, -0.4, 0)
+spread = 5.689
+initial_velocity_min = 12.94
+initial_velocity_max = 60.0
+gravity = Vector3(0, -10, 0)
+scale_min = 2.0
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_txf55")
+turbulence_enabled = true
+turbulence_noise_strength = 0.33
+turbulence_noise_scale = 1.017
+turbulence_influence_min = 0.055
+turbulence_influence_max = 0.055
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82f6l"]
+atlas = ExtResource("13_q7rrh")
+region = Rect2(92, 0, 46, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6hpg"]
+atlas = ExtResource("13_q7rrh")
+region = Rect2(46, 0, 46, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mo1b"]
+atlas = ExtResource("13_q7rrh")
+region = Rect2(0, 0, 46, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ehrfh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_82f6l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6hpg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mo1b")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TitleScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ofviv")
+
+[node name="SkyRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 599.0
+offset_bottom = 453.0
+texture = ExtResource("2_t0baq")
+
+[node name="Stars" type="Parallax2D" parent="."]
+repeat_size = Vector2(600, 0)
+autoscroll = Vector2(-2, 0)
+
+[node name="StarsRect" type="TextureRect" parent="Stars"]
+offset_right = 600.0
+offset_bottom = 497.0
+texture = ExtResource("2_3h5pg")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TitleScreenRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = -37.0
+offset_right = 602.0
+offset_bottom = 451.0
+texture = ExtResource("3_5mg7y")
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 191.0
+offset_right = 254.0
+offset_bottom = 284.0
+theme_override_constants/separation = -11
+
+[node name="Play" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("2_ux3pq")
+texture_pressed = ExtResource("5_5mg7y")
+texture_hover = ExtResource("3_yewqo")
+stretch_mode = 4
+
+[node name="Options" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_0ddpl")
+texture_pressed = ExtResource("8_bgyt0")
+texture_hover = ExtResource("5_ofviv")
+stretch_mode = 4
+
+[node name="ClickStartEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Play_Click"
+event_guid = "{68bd9ad5-a3b8-4ad9-b4dd-0883ff4dabe4}"
+
+[node name="HoverEmitter" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/PlaceBlock"
+event_guid = "{aa867ae1-5c59-4cf4-b092-7b782f5115cf}"
+
+[node name="Title" type="AnimatedSprite2D" parent="."]
+position = Vector2(281, 200)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_e8u02")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Title"]
+position = Vector2(-51.5, -21.5)
+scale = Vector2(0.5, 0.5)
+amount = 12
+lifetime = 2.73
+process_material = SubResource("ParticleProcessMaterial_3h5pg")
+
+[node name="TrackSprite" type="AnimatedSprite2D" parent="Title"]
+position = Vector2(-41, -7)
+sprite_frames = SubResource("SpriteFrames_ehrfh")
+frame = 2
+frame_progress = 1.0
+
+[connection signal="button_down" from="VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="button_down" from="VBoxContainer/Options" to="." method="_on_options_button_down"]
+[connection signal="mouse_entered" from="VBoxContainer/Options" to="." method="_on_options_mouse_entered"]

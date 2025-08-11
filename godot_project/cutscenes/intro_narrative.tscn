@@ -53,7 +53,7 @@ animations = [{
 "duration": 6.0,
 "texture": SubResource("AtlasTexture_e3oh2")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_jdnyo")
 }, {
 "duration": 1.0,
@@ -74,7 +74,7 @@ animations = [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_fd4dx")
 }, {
-"duration": 4.0,
+"duration": 5.0,
 "texture": SubResource("AtlasTexture_jdnyo")
 }, {
 "duration": 20.0,
@@ -158,10 +158,22 @@ animations = [{
 "texture": SubResource("AtlasTexture_eeae7")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_eeae7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eab8e")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_eab8e")
 }, {
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_qyiea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhol3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hn4aa")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hhol3")
@@ -181,7 +193,7 @@ animations = [{
 "duration": 5.0,
 "texture": SubResource("AtlasTexture_r4og7")
 }, {
-"duration": 8.0,
+"duration": 7.0,
 "texture": SubResource("AtlasTexture_hhol3")
 }, {
 "duration": 4.0,
@@ -212,35 +224,36 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_eeae7")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1000
+custom_minimum_size = Vector2(38.945, 0)
+layout_mode = 0
+offset_right = 601.0
+offset_bottom = 452.0
+color = Color(0.0987284, 0.0987284, 0.0987284, 1)
+
 [node name="conductor" type="AnimatedSprite2D" parent="."]
-position = Vector2(279, 276)
+position = Vector2(272.5, 244)
 sprite_frames = SubResource("SpriteFrames_sj5x1")
-autoplay = "default"
 
 [node name="passenger_and_player" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(320, 232)
+position = Vector2(313.5, 200)
 sprite_frames = SubResource("SpriteFrames_hq7jj")
-autoplay = "default"
-
-[node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
 
 [node name="bench" type="AnimatedSprite2D" parent="."]
 z_index = -2
-position = Vector2(325, 250)
+position = Vector2(318.5, 218)
 sprite_frames = SubResource("SpriteFrames_eab8e")
-autoplay = "default"
 
-[node name="bench" type="AnimatedSprite2D" parent="bench"]
+[node name="bench_back" type="AnimatedSprite2D" parent="bench"]
 z_index = -2
 position = Vector2(31, 0)
 sprite_frames = SubResource("SpriteFrames_eab8e")
-autoplay = "default"
 flip_h = true
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 7.5
+[node name="BenchTimer" type="Timer" parent="."]
+wait_time = 10.0
 one_shot = true
 autostart = true
 
@@ -257,6 +270,12 @@ offset_right = 591.0
 offset_bottom = 442.0
 text = "Press K to skip..."
 
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+autostart = true
+
 [connection signal="animation_finished" from="passenger_and_player" to="." method="_on_passenger_and_player_animation_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BenchTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="SkipHintTimer" to="." method="_on_skip_hint_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

@@ -1,5 +1,8 @@
 extends Control
 
+@onready var _conductor = $conductor
+@onready var passenger_and_player = $passenger_and_player
+@onready var _bench = $bench
 
 func _ready() -> void:
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
@@ -7,15 +10,15 @@ func _ready() -> void:
 
 func _on_timer_timeout() -> void:
 	$bench.visible = false
-	$bench/bench.visible = false
+	$bench/bench_back.visible = false
 
 
 func _on_passenger_and_player_animation_finished() -> void:
-	get_tree().change_scene_to_file("res://level_manager/level_manager.tscn")
+	GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
-		get_tree().change_scene_to_file("res://level_manager/level_manager.tscn")
+		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER)
 
 
 func _on_skip_hint_timer_timeout() -> void:
@@ -24,3 +27,9 @@ func _on_skip_hint_timer_timeout() -> void:
 		$SkipHintTimer.stop()
 	else:
 		$SkipHint.visible = true
+
+
+func _on_start_timer_timeout() -> void:
+	_conductor.play("default")
+	passenger_and_player.play("default")
+	pass # Replace with function body.

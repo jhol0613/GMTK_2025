@@ -37,10 +37,10 @@ config/icon="uid://eenhxk641vat"
 
 [autoload]
 
-FmodManager="*res://addons/fmod/FmodManager.gd"
-GameManager="*res://autoload/game_manager.gd"
 Enums="*res://autoload/enums.gd"
+FmodManager="*res://addons/fmod/FmodManager.gd"
 AudioManager="*res://autoload/audio_manager.tscn"
+GameManager="*res://autoload/game_manager.tscn"
 
 [display]
 

@@ -27,6 +27,12 @@ enum CollisionLayer {
 	ENEMIES = 4,
 }
 
+enum Scenes {
+	TITLE,
+	INTRO_CUTSCENE,
+	LEVEL_MANAGER
+}
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP:
