@@ -78,39 +78,41 @@ tile_set = ExtResource("3_fo6gb")
 
 [node name="LeftExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
-position = Vector2(-8.345, -5)
+z_index = -3
+position = Vector2(-8.345, 0)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("4_p76ks")
 
 [node name="LeftExterior" type="TileMapLayer" parent="LeftExteriorFloor"]
 light_mask = 2
-tile_map_data = PackedByteArray("AAD///3/AAAAAAYAAAD///7/AAAAAAcAAAD/////AAAAAAgAAAD//wAAAAAAAAkAAAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD+//3/AAAAAAAAAAD+//7/AAAAAAEAAAD+////AAAAAAEAAAD+/wAAAAAAAAIAAAD+/wEAAAAAAAMAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAA=")
+position = Vector2(0, -9)
+tile_map_data = PackedByteArray("AAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
 tile_set = ExtResource("6_cjwl0")
 
 [node name="LeftWall" type="TileMapLayer" parent="LeftExteriorFloor"]
 light_mask = 2
-position = Vector2(13, 0)
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wYAAAAAAAoAAAD//wUAAAAAAAoAAAD//wQAAAAAAAoAAAD//wMAAAAAAAoAAAD//wIAAAAAAAoAAAD//wEAAAAAAAkAAAD//wAAAAABAAgAAAD/////AAABAAgAAAD///7/AAABAAgAAAD///3/AAABAAgAAAD///z/AAABAAgAAAD///v/AAABAAgAAAD///r/AAAAAAgAAAA=")
+position = Vector2(32, -5)
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wAAAAABAAgAAAD/////AAABAAgAAAD///7/AAABAAgAAAD//wIAAAABAAoAAAD+////AgAAAAQAAAD+//7/AgAAAAIAAAD+//3/AgAAAAAAAAD///3/AAAAAAgAAAD+/wAAAgAAAAYAAAD9/wEAAAAAAAYAAAD9/wAAAAAAAAQAAAD9////AAAAAAIAAAD9//7/AAAAAAIAAAD9//3/AAAAAAAAAAA=")
 tile_set = ExtResource("7_x6ye1")
 
 [node name="RightExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
-z_index = 1
-position = Vector2(9.315, -5)
-tile_map_data = PackedByteArray("AAALAAUAAAAAAAAAAAALAAQAAAAAAAAAAAALAAMAAAAAAAAAAAALAAIAAAAAAAAAAAALAAEAAAAAAAAAAAALAAAAAAAAAAAAAAALAP//AAAAAAAAAAALAP7/AAAAAAAAAAA=")
+z_index = -3
+position = Vector2(360.655, 0)
+scale = Vector2(-1, 1)
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("4_p76ks")
 
 [node name="RightExterior" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
-position = Vector2(-31.94, 0)
-tile_map_data = PackedByteArray("AAAMAP3/AAAAAAYAAAAMAP7/AAAAAAcAAAAMAP//AAAAAAgAAAAMAAAAAAAAAAkAAAAMAAEAAAAAABMAAAAMAAIAAAAAABQAAAAMAAMAAAAAABUAAAANAP3/AAAAAAAAABANAP7/AAAAAAEAABANAP//AAAAAAEAABANAAAAAAAAAAIAABANAAEAAAAAAAMAABALAAQAAAAAABgAAAAKAAQAAAAAABcAAAAJAAQAAAAAABcAAAAIAAQAAAAAABcAAAAHAAQAAAAAABYAAAA=")
+position = Vector2(0, -9)
+tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAABMAABA=")
 tile_set = ExtResource("6_cjwl0")
 
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
-z_index = 1
-position = Vector2(4.27, 0)
-tile_map_data = PackedByteArray("AAAVAPr/AAAAAAgAAAAVAPv/AAABAAgAAAAVAPz/AAABAAgAAAAVAP3/AAABAAgAAAAVAP7/AAABAAgAAAAVAP//AAABAAgAAAAVAAAAAAABAAgAAAAVAAEAAAAAAAkAAAAVAAIAAAABAAoAAAAVAAMAAAABAAoAAAAVAAQAAAABAAoAAAAVAAUAAAABAAoAAAAVAAYAAAAAAAoAAAAVAAcAAAAAAAsAAAA=")
+position = Vector2(32, -5)
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wAAAAABAAgAAAD/////AAABAAgAAAD///7/AAABAAgAAAD//wIAAAABAAoAAAD+////AgAAAAQAAAD+//7/AgAAAAIAAAD+//3/AgAAAAAAAAD///3/AAAAAAgAAAD+/wAAAgAAAAYAAAD9//3/AAAAAAAAAAD9//7/AAAAAAIAAAD9////AAAAAAIAAAD9/wAAAAAAAAQAAAD9/wEAAAAAAAYAAAA=")
 tile_set = ExtResource("7_x6ye1")
 
 [node name="Target" type="Area2D" parent="."]
@@ -123,6 +125,7 @@ shape = SubResource("RectangleShape2D_bsh3f")
 [node name="AdditionalSprites" type="Node2D" parent="."]
 
 [node name="CarConnector" type="Sprite2D" parent="AdditionalSprites"]
+z_index = -4
 position = Vector2(421, 58)
 texture = ExtResource("8_4d8y1")
 

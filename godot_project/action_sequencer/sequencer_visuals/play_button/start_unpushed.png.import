@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h73hlii8jbws"
-path="res://.godot/imported/new_sequencer.png-9a789ebe4a2481587fb3b6dfae033927.ctex"
+uid="uid://fwn88sifx0xe"
+path="res://.godot/imported/start_unpushed.png-8bae13b28faaa8b36f68bd574487baf8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/new_sequencer.png"
-dest_files=["res://.godot/imported/new_sequencer.png-9a789ebe4a2481587fb3b6dfae033927.ctex"]
+source_file="res://action_sequencer/sequencer_visuals/play_button/start_unpushed.png"
+dest_files=["res://.godot/imported/start_unpushed.png-8bae13b28faaa8b36f68bd574487baf8.ctex"]
 
 [params]
 
