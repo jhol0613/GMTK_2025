@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_1tigw"]
 [ext_resource type="Texture2D" uid="uid://cp0veu1y50nvb" path="res://action_sequencer/sequencer_visuals/sequencer_v4.png" id="4_t1wqv"]
-[ext_resource type="Texture2D" path="res://action_sequencer/play_button/start_unpushed.png" id="5_4oryb"]
-[ext_resource type="Texture2D" path="res://action_sequencer/play_button/start_pushed.png" id="6_tq4nj"]
-[ext_resource type="Texture2D" path="res://action_sequencer/play_button/start_mouse_hover.png" id="7_qhuj8"]
-[ext_resource type="Texture2D" path="res://action_sequencer/play_button/start_disabled.png" id="8_5cmkx"]
-[ext_resource type="Texture2D" path="res://action_sequencer/replay_button/unpushed.png" id="9_62g22"]
-[ext_resource type="Texture2D" path="res://action_sequencer/replay_button/pushed.png" id="10_cdoyw"]
-[ext_resource type="Texture2D" path="res://action_sequencer/replay_button/hover.png" id="11_krlbp"]
+[ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/sequencer_visuals/play_button/start_unpushed.png" id="5_t1wqv"]
+[ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/sequencer_visuals/play_button/start_pushed.png" id="6_tq4nj"]
+[ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/sequencer_visuals/play_button/start_mouse_hover.png" id="7_qhuj8"]
+[ext_resource type="Texture2D" uid="uid://hgkcu6my2edw" path="res://action_sequencer/sequencer_visuals/play_button/start_disabled.png" id="8_5cmkx"]
+[ext_resource type="Texture2D" uid="uid://c21fyghohuwvu" path="res://action_sequencer/sequencer_visuals/replay_button/unpushed.png" id="9_62g22"]
+[ext_resource type="Texture2D" uid="uid://588sh1rfj8xg" path="res://action_sequencer/sequencer_visuals/replay_button/pushed.png" id="10_cdoyw"]
+[ext_resource type="Texture2D" uid="uid://b86m10fqu8guc" path="res://action_sequencer/sequencer_visuals/replay_button/hover.png" id="11_krlbp"]
 [ext_resource type="Texture2D" uid="uid://iqat4cj40yyy" path="res://ui/big_arrow.png" id="12_ja8dg"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
@@ -43,8 +43,9 @@ offset_bottom = 52.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
+offset_left = -2.0
 offset_top = 230.0
-offset_right = 600.0
+offset_right = 598.0
 offset_bottom = 356.0
 texture = ExtResource("4_t1wqv")
 stretch_mode = 2
@@ -75,7 +76,7 @@ offset_right = -231.0
 offset_bottom = -77.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("5_4oryb")
+texture_normal = ExtResource("5_t1wqv")
 texture_pressed = ExtResource("6_tq4nj")
 texture_hover = ExtResource("7_qhuj8")
 texture_disabled = ExtResource("8_5cmkx")
