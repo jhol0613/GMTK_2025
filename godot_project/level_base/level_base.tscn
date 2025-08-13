@@ -39,7 +39,6 @@ tile_set = ExtResource("4_p76ks")
 [node name="Obstacles" type="TileMapLayer" parent="."]
 y_sort_enabled = true
 position = Vector2(0, -13)
-tile_map_data = PackedByteArray("AAAGAAMAAgACAAIAAAAGAAQAAgACAAMAAAA=")
 tile_set = ExtResource("5_10qrp")
 
 [node name="BackWall" type="TileMapLayer" parent="."]
@@ -112,7 +111,7 @@ tile_set = ExtResource("6_cjwl0")
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
 position = Vector2(32, -5)
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wAAAAABAAgAAAD/////AAABAAgAAAD///7/AAABAAgAAAD//wIAAAABAAoAAAD+////AgAAAAQAAAD+//7/AgAAAAIAAAD+//3/AgAAAAAAAAD///3/AAAAAAgAAAD+/wAAAgAAAAYAAAA=")
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAD+/wAAAwAAAAMAAAD+////AwAAAAIAAAD+//7/AwAAAAEAAAD+//3/AwAAAAAAAAA=")
 tile_set = ExtResource("7_x6ye1")
 
 [node name="Target" type="Area2D" parent="."]

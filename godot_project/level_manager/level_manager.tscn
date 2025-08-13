@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://agents/player_character/player_character.tscn" id="3_oyr8j"]
-[ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://levels/level1.tscn" id="4_nhk1l"]
+[ext_resource type="PackedScene" uid="uid://cvqna86lykqsr" path="res://levels/laser_test.tscn" id="4_2hi70"]
 [ext_resource type="PackedScene" uid="uid://byfkjgjhywmam" path="res://levels/level2.tscn" id="5_1fdvy"]
 [ext_resource type="PackedScene" uid="uid://csooychkhq3rn" path="res://levels/level3.tscn" id="6_i57lx"]
 [ext_resource type="PackedScene" uid="uid://bis4mmgrdtses" path="res://levels/MonkeyLevel.tscn" id="7_2hi70"]
@@ -64,7 +64,7 @@ script = ExtResource("1_04quo")
 player_scene = ExtResource("3_oyr8j")
 conductor_scene = ExtResource("2_xxlmw")
 initial_train_position = Vector2(132, 190)
-level_list = Array[PackedScene]([ExtResource("4_nhk1l"), ExtResource("5_1fdvy"), ExtResource("6_i57lx"), ExtResource("7_2hi70")])
+level_list = Array[PackedScene]([ExtResource("4_2hi70"), ExtResource("5_1fdvy"), ExtResource("6_i57lx"), ExtResource("7_2hi70")])
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(621, -11)

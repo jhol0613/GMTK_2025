@@ -14,7 +14,7 @@ class_name Laser
 @export var beam_tile_size := Vector2i(16, 20)
 ## Beat sequence: for each item in the array, on that beat the laser will fire/not fire
 @export var activation_sequence: Array[bool] = [false, true]
-@export var animation_delay := 2.0
+@export var animation_delay := 0.1
 
 func _ready() -> void:
 	collision.shape.size = Vector2i(beam_tile_size.x, beam_tile_size.y * beam_length + 1)
