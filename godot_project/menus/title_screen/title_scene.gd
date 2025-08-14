@@ -19,8 +19,8 @@ func _ready():
 
 func _on_play_pressed() -> void:
 	GameManager.load_scene(Enums.Scenes.INTRO_CUTSCENE)
-	
-	
+
+
 func _on_music_beat(beat: int):
 	_track_sprite.frame = (_track_sprite.frame + 1) % _num_track_frames
 	_beat = beat

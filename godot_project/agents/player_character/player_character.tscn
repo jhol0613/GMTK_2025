@@ -546,35 +546,28 @@ shape = SubResource("RectangleShape2D_lda0w")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="MoveSideways" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Move_Right&Left"
 event_guid = "{58f2ff27-c93a-4ac7-a79d-5f99c877b787}"
 position = Vector2(1, -27)
 
 [node name="MoveUp" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Move_Up"
 event_guid = "{331ded67-6d48-4da7-a3fd-ae3bbc917335}"
 position = Vector2(1, -27)
 
 [node name="MoveDown" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Move_Down"
 event_guid = "{b1ddc327-83af-45c5-9e56-c362653fdc63}"
 position = Vector2(1, -27)
 
 [node name="Jump" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Jump"
 event_guid = "{4f5922a9-697d-453f-b5bb-a2e37826fd66}"
 position = Vector2(1, -27)
 
 [node name="Bonk" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Bonk"
 event_guid = "{34706cdc-2344-427d-a089-465c4135ebaa}"
 
 [node name="Success" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Player Exits"
 event_guid = "{6f08cbf7-1e72-4d0c-bbad-e7070c4ea5bd}"
 
 [node name="Failure" type="FmodEventEmitter2D" parent="Sounds"]
-event_name = "event:/Conductor Speak"
 event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
 
 [node name="JumpCollisionDisable" type="Timer" parent="."]

@@ -6,7 +6,7 @@ func set_fmod_event(event: FmodEventDescription) -> bool: # returns false if the
     for child in %ParameterDisplaysContainer.get_children():
         %ParameterDisplaysContainer.remove_child(child)
         child.queue_free()
-    
+
     var event_parameters: Array = event.get_parameters()
     if event_parameters:
         show()

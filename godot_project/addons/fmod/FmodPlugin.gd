@@ -21,11 +21,11 @@ func _init():
 	fmod_button = Button.new()
 	fmod_button.icon = load("res://addons/fmod/icons/fmod_icon.svg")
 	fmod_button.text = "Fmod Explorer"
-	
+
 	fmod_button.pressed.connect(_on_project_explorer_button_clicked)
-	
+
 	add_control_to_container(EditorPlugin.CONTAINER_TOOLBAR, fmod_button)
-	
+
 	bank_explorer = fmod_bank_explorer_window.instantiate()
 	bank_explorer.theme = get_editor_interface().get_base_control().get_theme()
 	bank_explorer.visible = false
@@ -70,7 +70,7 @@ func _enter_tree():
 func _exit_tree():
 	remove_inspector_plugin(emitter_inspector_plugin)
 	remove_inspector_plugin(bank_loader_inspector_plugin)
-	
+
 	remove_control_from_container(EditorPlugin.CONTAINER_TOOLBAR, fmod_button)
 	fmod_button.queue_free()
 	remove_export_plugin(export_plugin)

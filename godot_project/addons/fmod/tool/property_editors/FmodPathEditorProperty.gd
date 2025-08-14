@@ -12,9 +12,9 @@ func initialize(open_project_explorer_callable: Callable, path_prop: String, gui
     guid_property = guid_prop
     path_property = path_prop
     var guid_and_path_ui: FmodGuidAndPathPropertyEditorUi = %FmodGuidAndPathPropertyEditorUi
-    
+
     default_line_edit_modulate = guid_and_path_ui.get_node("%GuidLineEdit").modulate
-    
+
     var open_project_explorer_event = func open_project_explorer_event():
         open_project_explorer_callable.call(self._set_path_and_guid)
     guid_and_path_ui.set_callables(open_project_explorer_event, _set_path, _set_guid)

@@ -20,12 +20,12 @@ func _ready():
     var minimum_value = parameter.get_minimum()
     var maximum_value = parameter.get_maximum()
     var default_value = parameter.get_default_value()
-    
+
     var copy_icon : Texture = EditorInterface.get_editor_theme().get_icon("ActionCopy", "EditorIcons")
     %NameCopyButton.icon = copy_icon
     %IdCopyButton.icon = copy_icon
-    
-    
+
+
     %NameLabel.text = parameter.get_name()
     %IdLabel.text = str(parameter.get_id())
     if parameter.is_labeled():
@@ -45,11 +45,11 @@ func _ready():
     %NameCopyButton.pressed.connect(_on_copy_name_button)
     %IdCopyButton.pressed.connect(_on_copy_id_button)
     %BackToDefaultButton.pressed.connect(_on_default_value_button)
-    
+
     %ValueSlider.min_value = minimum_value
     %ValueSlider.max_value = maximum_value
     %ValueSlider.value = default_value
-    
+
     _on_slider_value_changed(%ValueSlider.value)
     %ValueSlider.value_changed.connect(_on_slider_value_changed)
 

@@ -115,15 +115,15 @@ func advance():
 		_initialized_slots[_available_slots-1].set_sequencer_light_on(false)
 	perform_action.emit(_initialized_slots[current_action].action)
 	current_action += 1
-	
+
 # should be called when a new level wants to update sequencer parameters
 func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction], new_action_quantities := default_action_quantities):
-	
-	# Update state variables 
+
+	# Update state variables
 	_available_slots = new_available_slots
 	_available_actions = new_available_actions
 	_action_quantities = new_action_quantities
-	
+
 	# clear out slots and items
 	_initialized_slots.clear()
 	for slot in slots_container.get_children():
@@ -131,7 +131,7 @@ func update_sequencer_data(new_available_slots: int, new_available_actions: Arra
 	_initialized_items.clear()
 	for item in items_container.get_children():
 		item.queue_free()
-		
+
 	# instantiate slots and add them to their respective containers and reference arrays
 	for i in range(_available_slots):
 		_initialized_slots.append(action_slot_scene.instantiate())
@@ -145,7 +145,7 @@ func update_sequencer_data(new_available_slots: int, new_available_actions: Arra
 		_initialized_slots.append(new_slot)
 		slots_container.add_child(_initialized_slots.back())
 		new_slot.set_active(false)
-		
+
 	# instantiate items and add them to their respective containers and reference arrays
 	for i in range(_available_actions.size()):
 		_initialized_items.append(action_item_scene.instantiate())
@@ -184,14 +184,14 @@ func stop_sequencer():
 ## Does the same thing as hitting the replay button
 func push_replay_button():
 	_on_replay_button_pressed()
-	
+
 # Clears out all slots and resets action quanitities
 func _clear_action_slots():
 	for i in range(_available_actions.size()):
 		_initialized_items[i].quantity = _action_quantities[i]
 	for i in range(_available_slots):
 		_initialized_slots[i].clear_slot()
-		
+
 func _turn_off_sequence_light():
 	for slot in _initialized_slots:
 		slot.set_sequencer_light_on(false)
@@ -244,11 +244,11 @@ func _on_one_slot_stopped_flashing(_stopped_slot: ActionSlot):
 func _on_one_action_item_stopped_flashing(_stopped_slot: ActionItem):
 	for item in _initialized_items:
 		item.stop_flashing()
-	
+
 func _on_play_button_mouse_entered() -> void:
 	play_button_hover_emitter.play()
-	
+
 func _on_replay_button_mouse_entered() -> void:
 	play_button_hover_emitter.play()
-	
+
 #endregion

@@ -28,13 +28,13 @@ signal stopped_flashing(ActionItem)
 
 func _ready() -> void:
 	border.modulate.a = 0
-	
-	
+
+
 func set_action(new_action: Enums.PlayerAction):
 	action = new_action
 	texture_rect.texture = icon_dictionary.get(action)
 	#texture_rect.size = icon_size
-	
+
 
 func decrease_quantity():
 	quantity -= 1
@@ -45,7 +45,7 @@ func flash():
 		flashing = true
 		flash_count = 0
 		flash_timer.start(flash_time)
-	
+
 func stop_flashing():
 	flash_timer.stop()
 	set_light_on(false)
@@ -76,11 +76,11 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index != MOUSE_BUTTON_LEFT or action == Enums.PlayerAction.NONE:
 			return
-		
+
 		if flashing:
 			stopped_flashing.emit(self)
 			stop_flashing()
-			
+
 		# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
 		if not selected:
 			selected_emitter.play()
@@ -90,13 +90,13 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 			selected = true
 			action_item_clicked.emit(self)
 
-		
-		
+
+
 func deselect():
 	border.modulate.a = 0
 	light.visible = false
 	selected = false
-	
+
 func set_light_on(on: bool):
 	if on:
 		border.modulate.a = 1

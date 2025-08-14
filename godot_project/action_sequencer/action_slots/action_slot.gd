@@ -49,32 +49,32 @@ func _can_drop_data(_position, data):
 func _drop_data(_position, data):
 	set_action(data["action"])
 	data["reference"].decrease_quantity()
-	
+
 func clear_slot():
 	texture_rect.texture = null
 	action = Enums.PlayerAction.NONE
-	
+
 func set_sequencer_light_on(on: bool):
 	if on:
 		$Backlight.color = sequencer_light_color
 	$Backlight.visible = on
-	
+
 func set_space_available_light_on(on: bool):
 	if on:
 		$Backlight.color = space_available_light_color
 	$Backlight.visible = on
-	
+
 func set_action(new_action: Enums.PlayerAction):
 	action = new_action
 	texture_rect.texture = action_textures.get(action)
 	set_space_available_light_on(false)
 	place_block_emitter.play()
-	
+
 
 func flash():
 	flashing = true
 	flash_timer.start(flash_time)
-		
+
 func stop_flashing():
 	set_space_available_light_on(false)
 	flashing = false

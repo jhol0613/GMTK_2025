@@ -184,6 +184,7 @@ position = Vector2(300, 214)
 texture = ExtResource("18_o52lx")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(600, 450)
 offset_right = 40.0
 offset_bottom = 40.0

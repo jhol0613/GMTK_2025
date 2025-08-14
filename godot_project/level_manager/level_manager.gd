@@ -52,12 +52,12 @@ func _ready() -> void:
 	_on_the_train.add_child(_level_scene)
 
 	_level_scene.position = initial_train_position
-	
+
 	_spawn_player()
-	
+
 	# Currently just uses default action quantities
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions)
-	
+
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
 
