@@ -143,4 +143,4 @@ libraries = {
 
 [node name="SoundEmitter" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/Laser"
-event_guid = "{e149887e-3227-407d-92a2-99745b543c3f}"
+event_guid = "{9a53cd25-e27b-4025-a7f1-ec3a4cb0cf2b}"

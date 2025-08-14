@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{5fc3905b-c0dd-4f30-bc25-afe6fe5ad0b8}">
+		<property name="name">
+			<value>ThinkingMode</value>
+		</property>
+		<relationship name="folder">
+			<destination>{24d93029-5501-46c5-88c8-a6ddec4015bb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{c2823393-90cc-4ece-8a36-ff571f0130a0}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{c2823393-90cc-4ece-8a36-ff571f0130a0}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -9,9 +9,9 @@ bpm = 170.0
 
 [node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/BackgroundMusic"
-event_guid = "{0fd181b1-a31a-45e3-9591-15374848d73d}"
+event_guid = "{fb5c7b3a-5579-445e-b53a-759b365b69e7}"
 autoplay = true
-fmod_parameters/ThinkingMode/id = -866468361928855257
+fmod_parameters/ThinkingMode/id = 5318922715226752698
 fmod_parameters/ThinkingMode = 0.0
 fmod_parameters/ThinkingMode/variant_type = 3
 

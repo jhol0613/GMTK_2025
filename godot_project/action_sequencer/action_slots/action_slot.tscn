@@ -46,7 +46,7 @@ one_shot = true
 
 [node name="PlaceBlock" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/PlaceBlock"
-event_guid = "{aa867ae1-5c59-4cf4-b092-7b782f5115cf}"
+event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
