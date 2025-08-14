@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=13 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Texture2D" uid="uid://xjgskf0kp1kg" path="res://agents/lasers/laser_turret.png" id="1_1pj2b"]
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
@@ -8,13 +8,17 @@
 atlas = ExtResource("1_1pj2b")
 region = Rect2(62, 0, 31, 21)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e1xtw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2glp"]
 atlas = ExtResource("1_1pj2b")
-region = Rect2(93, 0, 31, 21)
+region = Rect2(62, 0, 31, 19)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2u3lt"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1chx"]
 atlas = ExtResource("1_1pj2b")
-region = Rect2(0, 0, 31, 21)
+region = Rect2(93, 0, 31, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67eld"]
+atlas = ExtResource("1_1pj2b")
+region = Rect2(31, 0, 31, 19)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nm5od"]
 animations = [{
@@ -28,19 +32,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cep7i")
+"texture": SubResource("AtlasTexture_a2glp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e1xtw")
+"texture": SubResource("AtlasTexture_s1chx")
 }, {
 "duration": 6.0,
-"texture": SubResource("AtlasTexture_2u3lt")
+"texture": SubResource("AtlasTexture_67eld")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e1xtw")
+"texture": SubResource("AtlasTexture_s1chx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cep7i")
+"texture": SubResource("AtlasTexture_a2glp")
 }],
 "loop": false,
 "name": &"fire",
@@ -114,7 +118,6 @@ _data = {
 
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_cep7i")
-animation_delay = 1.5
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nm5od")

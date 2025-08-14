@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hgkcu6my2edw"
-path="res://.godot/imported/start_disabled.png-3347bc176cd580c345c103ae9d0fb33b.ctex"
+uid="uid://m3nkjfvekm2c"
+path="res://.godot/imported/start_flash.png-bf8787e21db8820f1e786824c419cbb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/play_button/start_disabled.png"
-dest_files=["res://.godot/imported/start_disabled.png-3347bc176cd580c345c103ae9d0fb33b.ctex"]
+source_file="res://action_sequencer/sequencer_visuals/play_button/start_flash.png"
+dest_files=["res://.godot/imported/start_flash.png-bf8787e21db8820f1e786824c419cbb8.ctex"]
 
 [params]
 

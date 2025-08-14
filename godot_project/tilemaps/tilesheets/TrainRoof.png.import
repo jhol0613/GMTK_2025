@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cosoi57f34c6i"
-path="res://.godot/imported/sequencer.png-ef7ba1a33a7160c9b97d2128795f14d8.ctex"
+uid="uid://d1whotyl6kka2"
+path="res://.godot/imported/TrainRoof.png-440f3ad77c4d2d374c6e31b93323b007.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer.png"
-dest_files=["res://.godot/imported/sequencer.png-ef7ba1a33a7160c9b97d2128795f14d8.ctex"]
+source_file="res://tilemaps/tilesheets/TrainRoof.png"
+dest_files=["res://.godot/imported/TrainRoof.png-440f3ad77c4d2d374c6e31b93323b007.ctex"]
 
 [params]
 

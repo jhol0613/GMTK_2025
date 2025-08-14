@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://67odlaafm7s0"
-path="res://.godot/imported/normal.png-86fbede037cb5e66df520d3b904be1b4.ctex"
+path="res://.godot/imported/normal.png-1f3f0ca11fb4b02b31669f7f624d7da2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/replay_button/normal.png"
-dest_files=["res://.godot/imported/normal.png-86fbede037cb5e66df520d3b904be1b4.ctex"]
+source_file="res://action_sequencer/sequencer_visuals/replay_button/normal.png"
+dest_files=["res://.godot/imported/normal.png-1f3f0ca11fb4b02b31669f7f624d7da2.ctex"]
 
 [params]
 
