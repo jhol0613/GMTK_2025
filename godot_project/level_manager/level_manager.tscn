@@ -183,6 +183,12 @@ z_index = -10
 position = Vector2(300, 214)
 texture = ExtResource("18_o52lx")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(600, 450)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
 [connection signal="perform_action" from="ActionSequencer" to="." method="_on_action_performed"]
 [connection signal="play_started" from="ActionSequencer" to="." method="_on_action_sequencer_play_started"]
 [connection signal="replay_pressed" from="ActionSequencer" to="." method="_on_action_sequencer_replay_pressed"]
