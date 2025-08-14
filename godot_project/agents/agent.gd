@@ -30,6 +30,8 @@ class_name Agent
 @export_subgroup("Sound")
 ## How long to wait after sequencer signal to start an animation
 @export var beat_delays: Dictionary[Enums.PlayerAction, float]
+## Sound emitter for each action
+@export var sound_emitters: Dictionary[Enums.PlayerAction, FmodEventEmitter2D]
 
 #endregion
 
@@ -68,6 +70,10 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		Enums.PlayerAction.RIGHT:
 			grid_position += Vector2i.RIGHT
 	action_executed.emit(action)
+
+	var emitter = sound_emitters.get(action, null)
+	if emitter:
+		emitter.play()
 
 	if _get_delay_seconds(action) == 0.0:
 		_on_beat(action)

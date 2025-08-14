@@ -469,14 +469,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("move_left_emitter", "move_right_emitter", "move_up_emitter", "move_down_emitter", "jump_emitter", "bonk_emitter", "success_emitter", "failure_emitter", "collision", "jump_collision_timer", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "collision", "jump_collision_timer", "sprite", "sound_emitters")]
 script = ExtResource("1_1ty04")
-move_left_emitter = NodePath("Sounds/MoveSideways")
-move_right_emitter = NodePath("Sounds/MoveSideways")
-move_up_emitter = NodePath("Sounds/MoveUp")
-move_down_emitter = NodePath("Sounds/MoveDown")
-jump_emitter = NodePath("Sounds/Jump")
-bonk_emitter = NodePath("Sounds/Bonk")
 success_emitter = NodePath("Sounds/Success")
 failure_emitter = NodePath("Sounds/Failure")
 collision = NodePath("Shadow/PlayerSprite/Area2D")
@@ -524,6 +518,17 @@ beat_delays = Dictionary[int, float]({
 10: 1.5,
 11: 1.5
 })
+sound_emitters = {
+1: NodePath("Sounds/MoveUp"),
+2: NodePath("Sounds/MoveDown"),
+3: NodePath("Sounds/MoveSideways"),
+4: NodePath("Sounds/MoveSideways"),
+5: NodePath("Sounds/Jump"),
+8: NodePath("Sounds/Bonk"),
+9: NodePath("Sounds/Bonk"),
+10: NodePath("Sounds/Bonk"),
+11: NodePath("Sounds/Bonk")
+}
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
