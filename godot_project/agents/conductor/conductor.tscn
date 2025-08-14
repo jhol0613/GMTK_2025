@@ -58,13 +58,13 @@ shape = SubResource("RectangleShape2D_lda0w")
 [node name="Sound" type="Node" parent="."]
 
 [node name="JumpSound" type="FmodEventEmitter2D" parent="Sound"]
-event_name = "event:/EnemyFootstep"
-event_guid = "{e3318077-c1c7-4090-abaf-e9923448721e}"
+event_name = "event:/Jump"
+event_guid = "{4f5922a9-697d-453f-b5bb-a2e37826fd66}"
 
 [node name="EnteredSound" type="FmodEventEmitter2D" parent="Sound"]
 event_name = "event:/Door Opens (Conductor Enters)"
-event_guid = "{faeb031a-7e1a-44ca-9a55-ae009a74b309}"
+event_guid = "{eba7682c-5954-49ed-a01d-f8fbbd6d8628}"
 
 [node name="Voice" type="FmodEventEmitter2D" parent="Sound"]
 event_name = "event:/Conductor Speak"
-event_guid = "{85959d5f-8e92-4859-bdd0-d6a884147397}"
+event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"

@@ -50,7 +50,7 @@ texture = ExtResource("11_j0qn6")
 
 [node name="Selected" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/PickBlock"
-event_guid = "{e409fca6-9dde-4b63-a9a7-9cf5098c02e8}"
+event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
 [connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
 [connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
