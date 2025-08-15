@@ -38,6 +38,11 @@ class_name ActionSequencer
 @onready var play_button_press_emitter = $TextureRect/PlayButton/PlayButtonPress
 @onready var replay_button_press_emitter = $TextureRect/ReplayButton/ReplayButtonPress
 
+@onready var music_slider: VSlider = $TextureRect/MusicSlider
+@onready var sfx_slider:   VSlider = $TextureRect/SfxSlider
+const P_MUSIC := "Music_Vol"
+const P_SFX   := "SFX_Vol"
+
 signal play_started
 signal replay_pressed
 
@@ -78,6 +83,12 @@ func _ready() -> void:
 	# Connect to beat signal
 	AudioManager.music_bar.connect(_on_advance)
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
+	
+	music_slider.value = FmodServer.get_global_parameter_by_name(P_MUSIC)
+	sfx_slider.value   = FmodServer.get_global_parameter_by_name(P_SFX)
+
+	music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
+	sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
 
 
 func play():
@@ -250,5 +261,12 @@ func _on_play_button_mouse_entered() -> void:
 	
 func _on_replay_button_mouse_entered() -> void:
 	play_button_hover_emitter.play()
+
+func _on_music_slider_changed(value):
+	FmodServer.set_global_parameter_by_name(P_MUSIC, value)
+
+func _on_sfx_slider_changed(value):
+	FmodServer.set_global_parameter_by_name(P_SFX, value)
+
 	
 #endregion
