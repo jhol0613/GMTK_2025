@@ -32,7 +32,7 @@ extends Node2D
 
 
 @onready var _level_scene : RhythmRailLevel
-@onready var _action_sequencer : ActionSequencer = $ActionSequencer
+@onready var _action_sequencer : ActionSequencer = $CanvasLayer/ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
 # needs to exist since you can't animate x and y values for on the train separately, don't want train rock
 # animation to reset train horizontal position
@@ -63,6 +63,8 @@ func _ready() -> void:
 
 	_level_scene.connect("target_reached", _on_level_complete)
 	load_next_level()
+	
+	print($CanvasLayer/Shader.material.get_shader_parameter("brightness"))
 
 
 func _input(event: InputEvent) -> void:

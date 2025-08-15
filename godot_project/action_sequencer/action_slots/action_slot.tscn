@@ -39,6 +39,8 @@ layout_mode = 2
 visible = false
 position = Vector2(16, 25)
 energy = 1.32
+range_layer_min = -10
+range_layer_max = 10
 texture = ExtResource("3_7wert")
 
 [node name="Timer" type="Timer" parent="."]

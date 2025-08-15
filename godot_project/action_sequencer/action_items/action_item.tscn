@@ -44,6 +44,8 @@ texture = SubResource("CompressedTexture2D_almjv")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
 position = Vector2(16, 16)
+range_layer_min = -10
+range_layer_max = 10
 texture = ExtResource("11_j0qn6")
 
 [node name="Timer" type="Timer" parent="."]
