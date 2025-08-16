@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=12 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_fo6gb"]
 [ext_resource type="TileSet" uid="uid://cd8pqkqbg8nrr" path="res://tilemaps/train_floor.tres" id="4_p76ks"]
 [ext_resource type="TileSet" uid="uid://cyxpoxyaw6ve8" path="res://tilemaps/obstacles.tres" id="5_10qrp"]
 [ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="6_cjwl0"]
+[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="7_uv04d"]
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="7_x6ye1"]
 [ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://level_manager/background/car_connector.png" id="8_4d8y1"]
 
@@ -77,7 +78,6 @@ tile_set = ExtResource("3_fo6gb")
 
 [node name="LeftExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
-z_index = -3
 position = Vector2(-9.345, 0)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("4_p76ks")
@@ -91,8 +91,14 @@ tile_set = ExtResource("6_cjwl0")
 [node name="LeftWall" type="TileMapLayer" parent="LeftExteriorFloor"]
 light_mask = 2
 position = Vector2(32, -5)
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAD+////AwAAAAIAAAD+//7/AwAAAAEAAAD+//3/AwAAAAAAAAD+/wAAAwAAAAMAAAA=")
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAA=")
 tile_set = ExtResource("7_x6ye1")
+
+[node name="LeftRoof" type="TileMapLayer" parent="LeftExteriorFloor"]
+light_mask = 2
+position = Vector2(32, -8)
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD+////AwAAAAIAAAD+//7/AwAAAAEAAAD+//3/AwAAAAAAAAD+/wAAAwAAAAMAAAD///3/BAABAAAAAAAAAP3/BAABAAAAAAABAP3/BAABAAAAAAACAP3/BAABAAAAAAADAP3/BAABAAAAAAAEAP3/BAABAAAAAAA=")
+tile_set = ExtResource("7_uv04d")
 
 [node name="RightExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
@@ -111,8 +117,17 @@ tile_set = ExtResource("6_cjwl0")
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
 position = Vector2(32, -5)
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAD+/wAAAwAAAAMAAAD+////AwAAAAIAAAD+//7/AwAAAAEAAAD+//3/AwAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAA=")
 tile_set = ExtResource("7_x6ye1")
+
+[node name="RightRoof" type="TileMapLayer" parent="RightExteriorFloor"]
+light_mask = 2
+z_index = 2
+position = Vector2(6, -8)
+rotation = 3.14159
+scale = Vector2(1, -1)
+tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAAAAP3/AwAAAAAAABAAAP7/AwAAAAEAABAAAP//AwAAAAIAABAAAAAAAwAAAAMAABD///3/BAAAAAAAABD+//3/BAAAAAAAABD9//3/BAAAAAAAABD8//3/BAAAAAAAABD7//3/BAAAAAAAAAD6//3/BAAAAAAAAAA=")
+tile_set = ExtResource("7_uv04d")
 
 [node name="Target" type="Area2D" parent="."]
 collision_layer = 2
