@@ -165,16 +165,14 @@ animations = [{
 
 [node name="TilemapLevelBase" instance=ExtResource("1_apvbp")]
 
-[node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray()
-
 [node name="Node2D" type="Node2D" parent="." index="8"]
 position = Vector2(147.582, -3.54602)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" index="0"]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_x30fp")
-frame_progress = 0.95684
+autoplay = "default"
+frame_progress = 0.426656
 
 [node name="Cheese" type="Sprite2D" parent="." index="9"]
 position = Vector2(310, 66)
@@ -183,9 +181,11 @@ texture = ExtResource("3_8cfvx")
 [node name="EatingMouse" type="AnimatedSprite2D" parent="." index="10"]
 position = Vector2(298, 67)
 sprite_frames = SubResource("SpriteFrames_qq12g")
-frame_progress = 0.528208
+autoplay = "default"
+frame_progress = 0.229244
 
 [node name="Running Mouse" type="AnimatedSprite2D" parent="." index="11"]
 position = Vector2(240, 67)
 sprite_frames = SubResource("SpriteFrames_rno4m")
-frame_progress = 0.583142
+autoplay = "default"
+frame_progress = 0.719064

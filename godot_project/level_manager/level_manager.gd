@@ -29,7 +29,7 @@ extends Node2D
 @export_range(0, 1, .01) var brightness: float
 @export_range(0, 1, .01) var contrast: float
 @export_range(0, 1, .01) var saturation: float
-@export var filter_animation_time := 1.0
+@export var filter_animation_time := 1.5
 
 @export_category("Levels")
 ## All train cars in order
@@ -58,10 +58,6 @@ func _ready() -> void:
 	_on_the_train.add_child(_level_scene)
 
 	_level_scene.position = initial_train_position
-	
-	# Turn on thinking mode visual fx
-	_shader.material.set_shader_parameter("vignette", 1.0)
-	_shader.material.set_shader_parameter("bcs", Vector3(brightness, contrast, saturation))
 
 	_spawn_player()
 
@@ -73,6 +69,9 @@ func _ready() -> void:
 
 	_level_scene.connect("target_reached", _on_level_complete)
 	load_next_level()
+	
+	# Turn on thinking mode visual fx
+	_fade_to_thinking_shader()
 
 
 func _input(event: InputEvent) -> void:
@@ -201,11 +200,7 @@ func _on_action_sequencer_play_started() -> void:
 	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	
-	var tween2 = create_tween().set_parallel(true)
-	tween2.tween_property(_shader.material, "shader_parameter/bcs", Vector3(1,1,1), filter_animation_time)
-	tween2.tween_property(_shader.material, "shader_parameter/vignette", 0.0, filter_animation_time)
-	#_shader.material.set_shader_parameter("bcs", Vector3(1.0, 1.0, 1.0))
+	_fade_to_running_shader()
  
 
 
@@ -215,12 +210,7 @@ func _on_action_sequencer_replay_pressed() -> void:
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_car_position_moved_back)
-	
-	var tween2 = create_tween().set_parallel(true)
-	tween2.tween_property(_shader.material, "shader_parameter/bcs", 
-		Vector3(brightness, contrast, saturation), filter_animation_time)
-	tween2.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
-	
+	_fade_to_thinking_shader()
 	_reset_level()
 
 
@@ -242,3 +232,17 @@ func _on_level_fail() -> void:
 		_conductor.visible = false
 	await get_tree().create_timer(level_failure_delay).timeout
 	_action_sequencer.push_replay_button()
+
+func _fade_to_running_shader():
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(_shader.material, "shader_parameter/bcs", Vector3(1,1,1), filter_animation_time)
+	tween.tween_property(_shader.material, "shader_parameter/vignette", 0.0, filter_animation_time)
+	tween.tween_property(_shader.material, "shader_parameter/wipe", -1.0, filter_animation_time)
+		
+
+func _fade_to_thinking_shader():
+	var tween = create_tween().set_parallel(true)
+	tween.tween_property(_shader.material, "shader_parameter/bcs", 
+		Vector3(brightness, contrast, saturation), filter_animation_time)
+	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
+	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)

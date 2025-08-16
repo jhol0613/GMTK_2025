@@ -15,6 +15,13 @@ enum PlayerAction {
 	DOWN_BONK
 }
 
+enum Direction {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}
+
 enum MusicMode {
 	MENU,
 	THINKING,

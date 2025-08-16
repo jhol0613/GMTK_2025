@@ -27,6 +27,7 @@
 shader = ExtResource("21_grapr")
 shader_parameter/bcs = Vector3(1, 1, 1)
 shader_parameter/vignette = 0.0
+shader_parameter/wipe = 0.0
 shader_parameter/vignette_texture = ExtResource("9_aoawx")
 
 [sub_resource type="Animation" id="Animation_n2acl"]

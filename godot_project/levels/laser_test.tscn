@@ -9,4 +9,6 @@ available_slots = 8
 available_actions = Array[int]([4, 5])
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_y0bm1")]
-position = Vector2(112, 4)
+position = Vector2(144, 61)
+direction = 3
+beam_length = 60
