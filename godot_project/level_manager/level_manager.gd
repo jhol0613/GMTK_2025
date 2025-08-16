@@ -25,6 +25,11 @@ extends Node2D
 @export var level_success_delay := 2.0
 ## How long to wait to reset the level after a failure
 @export var level_failure_delay := 2.0
+@export_subgroup("Thinking Mode Filter")
+@export_range(0, 1, .01) var brightness: float
+@export_range(0, 1, .01) var contrast: float
+@export_range(0, 1, .01) var saturation: float
+@export var filter_animation_time := 1.0
 
 @export_category("Levels")
 ## All train cars in order
@@ -32,12 +37,13 @@ extends Node2D
 
 
 @onready var _level_scene : RhythmRailLevel
-@onready var _action_sequencer : ActionSequencer = $CanvasLayer/ActionSequencer
+@onready var _action_sequencer : ActionSequencer = $SequencerLayer/ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
 # needs to exist since you can't animate x and y values for on the train separately, don't want train rock
 # animation to reset train horizontal position
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
+@onready var _shader := $ShaderLayer/Shader
 
 
 var _conductor: Conductor
@@ -52,6 +58,10 @@ func _ready() -> void:
 	_on_the_train.add_child(_level_scene)
 
 	_level_scene.position = initial_train_position
+	
+	# Turn on thinking mode visual fx
+	_shader.material.set_shader_parameter("vignette", 1.0)
+	_shader.material.set_shader_parameter("bcs", Vector3(brightness, contrast, saturation))
 
 	_spawn_player()
 
@@ -63,8 +73,6 @@ func _ready() -> void:
 
 	_level_scene.connect("target_reached", _on_level_complete)
 	load_next_level()
-	
-	print($CanvasLayer/Shader.material.get_shader_parameter("brightness"))
 
 
 func _input(event: InputEvent) -> void:
@@ -193,6 +201,12 @@ func _on_action_sequencer_play_started() -> void:
 	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
+	var tween2 = create_tween().set_parallel(true)
+	tween2.tween_property(_shader.material, "shader_parameter/bcs", Vector3(1,1,1), filter_animation_time)
+	tween2.tween_property(_shader.material, "shader_parameter/vignette", 0.0, filter_animation_time)
+	#_shader.material.set_shader_parameter("bcs", Vector3(1.0, 1.0, 1.0))
+ 
 
 
 func _on_action_sequencer_replay_pressed() -> void:
@@ -201,6 +215,12 @@ func _on_action_sequencer_replay_pressed() -> void:
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_car_position_moved_back)
+	
+	var tween2 = create_tween().set_parallel(true)
+	tween2.tween_property(_shader.material, "shader_parameter/bcs", 
+		Vector3(brightness, contrast, saturation), filter_animation_time)
+	tween2.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
+	
 	_reset_level()
 
 
