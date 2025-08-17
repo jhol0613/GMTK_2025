@@ -40,6 +40,9 @@ class_name ActionSequencer
 
 @onready var music_slider: VSlider = $TextureRect/MusicSlider
 @onready var sfx_slider:   VSlider = $TextureRect/SfxSlider
+
+@onready var speed_btn: TextureButton = $TextureRect/SpeedControl
+
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
 
@@ -89,6 +92,8 @@ func _ready() -> void:
 
 	music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
 	sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
+	
+	_speed_control_ready()
 
 
 func play():
@@ -267,6 +272,18 @@ func _on_music_slider_changed(value):
 
 func _on_sfx_slider_changed(value):
 	FmodServer.set_global_parameter_by_name(P_SFX, value)
+	
+func _speed_control_ready() -> void:
+	speed_btn.toggle_mode = true
+	speed_btn.button_pressed = false
+	AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
+	speed_btn.toggled.connect(_on_speed_toggled)
+	
+func _on_speed_toggled(pressed: bool) -> void:
+	if pressed:
+		AudioManager.time_multiplier = Enums.TimeMultiplier.DOUBLE
+	else:
+		AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
 
 
 #endregion
