@@ -29,7 +29,6 @@ func _on_music_event_timeline_beat(_params: Dictionary) -> void:
 		_beat = 1
 		music_bar.emit()
 		music_beat.emit(_beat)
-	pass # Replace with function body.
 
 func set_music_mode(mode: Enums.MusicMode):
 	music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))
