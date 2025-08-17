@@ -22,6 +22,13 @@ enum Direction {
 	RIGHT
 }
 
+enum TimeMultiplier {
+	HALF = 8,
+	SINGLE = 4,
+	DOUBLE = 2,
+	QUADRUPLE = 1
+}
+
 enum MusicMode {
 	MENU,
 	THINKING,

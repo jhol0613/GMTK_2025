@@ -12,6 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://bfvugq7fmqx7m" path="res://agents/lasers/beam_line.png" id="7_dshi8"]
 [ext_resource type="Texture2D" uid="uid://c4t5pl6fmwa3k" path="res://agents/lasers/laser_up.png" id="7_knkgi"]
 
+[sub_resource type="Resource" id="Resource_gmiso"]
+script = ExtResource("2_g7y3a")
+animation_name = "fire_up"
+start_position_offset = Vector2(0, -9)
+vector_direction = Vector2(0, -1)
+end_image = ExtResource("6_chnl6")
+metadata/_custom_type_script = "uid://duifkavk2c1j8"
+
 [sub_resource type="Resource" id="Resource_knkgi"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_down"
@@ -34,14 +42,6 @@ animation_name = "fire_right"
 start_position_offset = Vector2(9, -2)
 vector_direction = Vector2(1, 0)
 end_image = ExtResource("5_tquva")
-metadata/_custom_type_script = "uid://duifkavk2c1j8"
-
-[sub_resource type="Resource" id="Resource_gmiso"]
-script = ExtResource("2_g7y3a")
-animation_name = "fire_up"
-start_position_offset = Vector2(0, -9)
-vector_direction = Vector2(0, -1)
-end_image = ExtResource("6_chnl6")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dshi8"]
@@ -304,12 +304,15 @@ event_guid = "{9a53cd25-e27b-4025-a7f1-ec3a4cb0cf2b}"
 
 [node name="BeamLine" type="Line2D" parent="."]
 visible = false
-points = PackedVector2Array(0, 0, 0, -20)
+position = Vector2(0, 5)
+points = PackedVector2Array(0, 0, 0, 100)
 width = 4.0
 texture = ExtResource("7_dshi8")
 texture_mode = 2
 
 [node name="BeamEnd" type="Sprite2D" parent="BeamLine"]
+position = Vector2(0, 100)
+texture = ExtResource("3_to654")
 
 [node name="Collision" type="Area2D" parent="BeamLine"]
 collision_layer = 4

@@ -6,6 +6,7 @@
 bank_paths = ["res://fmod_banks/Desktop/Master.strings.bank", "res://fmod_banks/Desktop/Master.bank", "res://fmod_banks/Desktop/Main.bank"]
 script = ExtResource("1_u6vuv")
 bpm = 170.0
+time_multiplier = 2
 
 [node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/BackgroundMusic"

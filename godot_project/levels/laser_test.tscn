@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_y0bm1"]
 
 [node name="LevelBase" instance=ExtResource("1_og7ub")]
-conductor_enabled = false
 available_slots = 8
 available_actions = Array[int]([4, 5])
 
