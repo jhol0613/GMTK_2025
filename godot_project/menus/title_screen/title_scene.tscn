@@ -120,8 +120,8 @@ stretch_mode = 4
 layout_mode = 0
 offset_left = 88.0
 offset_top = 191.0
-offset_right = 254.0
-offset_bottom = 284.0
+offset_right = 258.0
+offset_bottom = 292.0
 theme_override_constants/separation = -11
 
 [node name="Play" type="TextureButton" parent="VBoxContainer"]
@@ -133,6 +133,14 @@ texture_hover = ExtResource("3_yewqo")
 stretch_mode = 4
 
 [node name="Options" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_0ddpl")
+texture_pressed = ExtResource("8_bgyt0")
+texture_hover = ExtResource("5_ofviv")
+stretch_mode = 4
+
+[node name="Quit" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 texture_normal = ExtResource("4_0ddpl")
@@ -171,3 +179,6 @@ frame_progress = 1.0
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="button_down" from="VBoxContainer/Options" to="." method="_on_options_button_down"]
 [connection signal="mouse_entered" from="VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="button_down" from="VBoxContainer/Quit" to="." method="_on_options_button_down"]
+[connection signal="mouse_entered" from="VBoxContainer/Quit" to="." method="_on_options_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

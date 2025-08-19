@@ -12,7 +12,9 @@ extends Control
 
 @onready var _num_track_frames = _track_sprite.sprite_frames.get_frame_count("default")
 
+
 var _beat := 0
+
 
 func _ready():
 	AudioManager.connect("music_beat", _on_music_beat)
@@ -43,3 +45,7 @@ func _on_play_button_down() -> void:
 
 func _on_options_button_down() -> void:
 	_click_start_emitter.play()
+	
+	
+func _on_quit_pressed() -> void:
+	get_tree().quit()
