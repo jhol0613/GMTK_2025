@@ -38,19 +38,31 @@ class_name ActionSequencer
 @onready var play_button_press_emitter = $TextureRect/PlayButton/PlayButtonPress
 @onready var replay_button_press_emitter = $TextureRect/ReplayButton/ReplayButtonPress
 
-@onready var music_slider: VSlider = $TextureRect/MusicSlider
+@onready var _music_slider: VSlider = $TextureRect/MusicSlider
 @onready var music_slider_click_emitter = $TextureRect/MusicSlider/MusicSliderClick
 @onready var music_slider_release_emitter = $TextureRect/MusicSlider/MusicSliderRelease
 
-@onready var sfx_slider:   VSlider = $TextureRect/SfxSlider
+@onready var _sfx_slider:   VSlider = $TextureRect/SfxSlider
 @onready var sfx_slider_click_emitter = $TextureRect/SfxSlider/SfxSliderClick
 @onready var sfx_slider_release_emitter = $TextureRect/SfxSlider/SfxSliderRelease
 
-@onready var speed_btn: TextureButton = $TextureRect/SpeedControl
+@onready var _speed_btn: TextureButton = $TextureRect/SpeedControl
 @onready var speed_btn_emitter = $TextureRect/SpeedControl/Switch
+
+@onready var _redo_btn = $TextureRect/RedoButton
+@onready var redo_btn_hover_emitter = $TextureRect/RedoButton/RedoButtonHover
+@onready var redo_btn_press_emitter = $TextureRect/RedoButton/RedoButtonPress
+
+@onready var _eraser_btn= $TextureRect/EraserButton
+@onready var eraser_btn_hover_emitter = $TextureRect/EraserButton/EraserButtonHover
+@onready var eraser_btn_press_emitter = $TextureRect/EraserButton/EraserButtonPress
+var _eraser_mode := false
 
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
+
+const ERASER_CURSOR := preload("res://action_sequencer/sequencer_visuals/eraser_button/EraserMouse.png")
+const ERASER_HOTSPOT := Vector2(6, 14)
 
 enum SequencingState {
 	SEQUENCING,
@@ -93,13 +105,15 @@ func _ready() -> void:
 	AudioManager.music_bar.connect(_on_advance)
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
 	
-	music_slider.value = FmodServer.get_global_parameter_by_name(P_MUSIC)
-	sfx_slider.value   = FmodServer.get_global_parameter_by_name(P_SFX)
+	_music_slider.value = FmodServer.get_global_parameter_by_name(P_MUSIC)
+	_sfx_slider.value   = FmodServer.get_global_parameter_by_name(P_SFX)
 
-	music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
-	sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
+	_music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
+	_sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
 	
 	_speed_control_ready()
+	
+	_setup_eraser_button()
 
 
 func play():
@@ -306,10 +320,10 @@ func _on_sfx_slider_changed(value):
 	FmodServer.set_global_parameter_by_name(P_SFX, value)
 	
 func _speed_control_ready() -> void:
-	speed_btn.toggle_mode = true
-	speed_btn.button_pressed = false
+	_speed_btn.toggle_mode = true
+	_speed_btn.button_pressed = false
 	AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
-	speed_btn.toggled.connect(_on_speed_toggled)
+	_speed_btn.toggled.connect(_on_speed_toggled)
 	
 func _on_speed_toggled(pressed: bool) -> void:
 	speed_btn_emitter.play()
@@ -317,5 +331,31 @@ func _on_speed_toggled(pressed: bool) -> void:
 		AudioManager.time_multiplier = Enums.TimeMultiplier.DOUBLE
 	else:
 		AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
+
+func _on_redo_button_mouse_entered() -> void:
+	redo_btn_hover_emitter.play()
+	
+func _on_redo_button_pressed() -> void:
+	redo_btn_press_emitter.play()
+	_clear_action_slots()
+
+func _setup_eraser_button() -> void:
+	_eraser_btn.toggle_mode = true
+	_eraser_btn.button_pressed = false
+	if _eraser_btn.toggled.is_connected(_on_eraser_toggled):
+		_eraser_btn.toggled.disconnect(_on_eraser_toggled)
+	_eraser_btn.toggled.connect(_on_eraser_toggled)
+	
+func _on_eraser_button_mouse_entered() -> void:
+	eraser_btn_hover_emitter.play()
+	
+func _on_eraser_toggled(pressed: bool) -> void:
+	_eraser_mode = pressed
+	if pressed:
+		Input.set_custom_mouse_cursor(ERASER_CURSOR, Input.CURSOR_ARROW, ERASER_HOTSPOT)
+	else:
+		Input.set_custom_mouse_cursor(null)
+	for i in range(_available_slots):
+		_initialized_slots[i].set_eraser_mode(pressed)
 
 #endregion

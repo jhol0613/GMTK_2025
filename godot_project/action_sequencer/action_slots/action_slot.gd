@@ -35,6 +35,8 @@ var ui_interaction_enabled := false
 # What action to preview if hovered
 var preview_action:= Enums.PlayerAction.NONE
 
+var eraser_mode: bool = false
+
 @onready var flashing_light_on := false: set = _update_flashing_light
 @onready var hover_light_on := false: set = _update_hover_light
 @onready var sequence_light_on := false: set = _update_sequence_light
@@ -110,6 +112,12 @@ func stop_flashing():
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		if eraser_mode:
+			if action != Enums.PlayerAction.NONE:
+				clear_slot()            
+				accept_event()    
+				return
+				
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if is_active and ui_interaction_enabled and action != preview_action:
 				action_slot_clicked.emit(self)
@@ -135,3 +143,6 @@ func _on_flash_timer_timeout() -> void:
 		return
 	flashing_light_on = !flashing_light_on
 	flash_timer.start(flash_time)
+
+func set_eraser_mode(on: bool) -> void:
+	eraser_mode = on
