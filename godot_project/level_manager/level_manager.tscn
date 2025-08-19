@@ -213,5 +213,6 @@ offset_right = 620.0
 offset_bottom = 453.0
 
 [connection signal="perform_action" from="SequencerLayer/ActionSequencer" to="." method="_on_action_performed"]
+[connection signal="perform_thinking_action" from="SequencerLayer/ActionSequencer" to="." method="_on_thinking_action_performed"]
 [connection signal="play_started" from="SequencerLayer/ActionSequencer" to="." method="_on_action_sequencer_play_started"]
 [connection signal="replay_pressed" from="SequencerLayer/ActionSequencer" to="." method="_on_action_sequencer_replay_pressed"]

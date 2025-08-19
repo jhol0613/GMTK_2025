@@ -22,10 +22,15 @@ enum Direction {
 	RIGHT
 }
 
+## Single is 4, double is 2, quad is 1, half is 8
 enum TimeMultiplier {
+	## 8
 	HALF = 8,
+	## 4
 	SINGLE = 4,
+	## 2
 	DOUBLE = 2,
+	## 1
 	QUADRUPLE = 1
 }
 

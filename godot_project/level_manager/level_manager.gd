@@ -110,14 +110,20 @@ func advance_level():
 # Called when level has been fully advanced
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
-
 	_spawn_player()
 	_reset_level()
 
-
+# Called when sequencer emits an action in play mode
 func _on_action_performed(action: Enums.PlayerAction) -> void:
+	print("play action")
 	_update_player(action)
 	_update_conductor()
+	_update_lasers()
+	_current_beat += 1
+
+# Called when sequencer emits an action in thinking mode
+func _on_thinking_action_performed():
+	print("thinking action")
 	_update_lasers()
 	_current_beat += 1
 
@@ -187,7 +193,6 @@ func _reset_level() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
-
 	_current_beat = 0
 
 
@@ -196,6 +201,7 @@ func _on_music_bar():
 
 
 func _on_action_sequencer_play_started() -> void:
+	_current_beat = 0
 	var tween = create_tween()
 	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \

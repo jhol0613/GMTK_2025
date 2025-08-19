@@ -24,7 +24,8 @@ action_textures = Dictionary[int, CompressedTexture2D]({
 5: ExtResource("8_bi66e"),
 6: ExtResource("9_8fu2t")
 })
-sequencer_light_color = Color(0, 0.788235, 0.211765, 1)
+playing_light_color = Color(0, 0.984314, 0, 0.87451)
+thinking_light_color = Color(1, 1, 0.54902, 0.223529)
 space_available_light_color = Color(0, 0.611765, 0.823529, 1)
 metadata/_edit_horizontal_guides_ = [-59.0]
 

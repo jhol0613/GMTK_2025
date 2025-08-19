@@ -46,9 +46,6 @@ class_name ActionSequencer
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
 
-signal play_started
-signal replay_pressed
-
 enum SequencingState {
 	SEQUENCING,
 	RUNNING,
@@ -67,9 +64,9 @@ var current_state := SequencingState.SEQUENCING
 var current_action := 0
 
 # ActionSlot
-var _initialized_slots := []
+var _initialized_slots := [ActionSlot]
 # ActionItemData
-var _initialized_items := []
+var _initialized_items := [ActionItem]
 
 var _active_action_item : ActionItem
 
@@ -78,6 +75,9 @@ var _active_action_item : ActionItem
 #region Signals
 
 signal perform_action(type: Enums.PlayerAction)
+signal perform_thinking_action
+signal play_started
+signal replay_pressed
 
 #endregion
 
@@ -100,21 +100,25 @@ func play():
 	if current_state != SequencingState.SEQUENCING:
 		push_warning("Sequencer is not running, skipping advance()")
 		return
-	# TODO: add a callback to enable the UI
+
 	AudioManager.set_music_mode(Enums.MusicMode.RUNNING)
 	_action_items.visible = false
 	play_started.emit()
 
 	# Wait for specified delay (for external animations) to start sequencing actions
 	await get_tree().create_timer(play_action_delay).timeout
+	
+	current_action = 0	
+	_turn_off_sequencer_lights()
+	for i in range(_available_slots):
+		_initialized_slots[i].set_to_playing_mode_color()
+		_initialized_slots[i].ui_interaction_enabled = false
 	current_state = SequencingState.RUNNING
-	current_action = 0
+
 
 
 # make one step in the simulation
 func advance():
-	if current_state != SequencingState.RUNNING:
-		return
 
 	if _initialized_slots.size() < current_action or current_action < 0:
 		push_error("Sequencer has broken state!")
@@ -123,13 +127,20 @@ func advance():
 
 	if _available_slots == current_action:
 		current_action = 0
-
-	_initialized_slots[current_action].set_sequencer_light_on(true)
+		
+	# Update lights while sequencing
+	_initialized_slots[current_action].sequence_light_on = true
 	if current_action > 0:
-		_initialized_slots[current_action-1].set_sequencer_light_on(false)
+		_initialized_slots[current_action-1].sequence_light_on = false#   set_light_status(Enums.LightStatus.OFF, true, should_set_default_only)
 	else:
-		_initialized_slots[_available_slots-1].set_sequencer_light_on(false)
-	perform_action.emit(_initialized_slots[current_action].action)
+		_initialized_slots[_available_slots-1].sequence_light_on = false#  set_light_status(Enums.LightStatus.OFF, true, should_set_default_only)	
+		
+	# Sequencer stays running in thinking mode, but emits different type of signal for level manager to interpret
+	if current_state == SequencingState.RUNNING:
+		perform_action.emit(_initialized_slots[current_action].action)
+	elif current_state == SequencingState.SEQUENCING:
+		perform_thinking_action.emit()	
+	
 	current_action += 1
 
 # should be called when a new level wants to update sequencer parameters
@@ -186,10 +197,12 @@ func update_sequencer_data(new_available_slots: int, new_available_actions: Arra
 func _enter_thinking_mode():
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
 	current_state = SequencingState.SEQUENCING
-	_turn_off_sequence_light()
+	_turn_off_sequencer_lights()
 	_play_button.disabled = false
 	_play_light1.visible = false
 	_play_light2.visible = false
+	for i in range(_available_slots):
+		_initialized_slots[i].ui_interaction_enabled = true
 
 func set_action_icons_hidden(should_hide: bool):
 	_action_items.visible = !should_hide
@@ -208,14 +221,14 @@ func _clear_action_slots():
 	for i in range(_available_slots):
 		_initialized_slots[i].clear_slot()
 
-func _turn_off_sequence_light():
-	for slot in _initialized_slots:
-		slot.set_sequencer_light_on(false)
+func _turn_off_sequencer_lights():
+	for i in range(_available_slots):
+		_initialized_slots[i].sequence_light_on = false
 
 #region Signal connections
 
 func _on_advance() -> void:
-	if current_state == SequencingState.RUNNING:
+	if current_state != SequencingState.FINISHED:
 		advance()
 
 
@@ -245,13 +258,14 @@ func _on_action_item_clicked(new_action_item: ActionItem):
 		_initialized_slots[i].ui_interaction_enabled = true
 		_initialized_slots[i].preview_action = _active_action_item.action
 		if tutorial_mode:
-			_initialized_slots[i].flash()
+			_initialized_slots[i].start_flashing()
 
 func _on_action_slot_clicked(clicked_slot : ActionSlot):
 	if _active_action_item != null:
 		clicked_slot.set_action(_active_action_item.action)
 
 func _on_one_slot_stopped_flashing(_stopped_slot: ActionSlot):
+	print("on stopped flashing")
 	for i in range(_available_slots):
 		_initialized_slots[i].stop_flashing()
 	tutorial_mode = false
@@ -284,6 +298,5 @@ func _on_speed_toggled(pressed: bool) -> void:
 		AudioManager.time_multiplier = Enums.TimeMultiplier.DOUBLE
 	else:
 		AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
-
 
 #endregion
