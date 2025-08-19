@@ -39,7 +39,12 @@ class_name ActionSequencer
 @onready var replay_button_press_emitter = $TextureRect/ReplayButton/ReplayButtonPress
 
 @onready var music_slider: VSlider = $TextureRect/MusicSlider
+@onready var music_slider_click_emitter = $TextureRect/MusicSlider/MusicSliderClick
+@onready var music_slider_release_emitter = $TextureRect/MusicSlider/MusicSliderRelease
+
 @onready var sfx_slider:   VSlider = $TextureRect/SfxSlider
+@onready var sfx_slider_click_emitter = $TextureRect/SfxSlider/SfxSliderClick
+@onready var sfx_slider_release_emitter = $TextureRect/SfxSlider/SfxSliderRelease
 
 @onready var speed_btn: TextureButton = $TextureRect/SpeedControl
 @onready var speed_btn_emitter = $TextureRect/SpeedControl/Switch
@@ -284,6 +289,18 @@ func _on_replay_button_mouse_entered() -> void:
 
 func _on_music_slider_changed(value):
 	FmodServer.set_global_parameter_by_name(P_MUSIC, value)
+	
+func _on_music_slider_drag_started() -> void:
+	music_slider_click_emitter.play()
+
+func _on_music_slider_drag_ended(value_changed: bool) -> void:
+	music_slider_release_emitter.play()
+	
+func _on_sfx_slider_drag_started() -> void:
+	sfx_slider_click_emitter.play()
+
+func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
+	sfx_slider_release_emitter.play()
 
 func _on_sfx_slider_changed(value):
 	FmodServer.set_global_parameter_by_name(P_SFX, value)
