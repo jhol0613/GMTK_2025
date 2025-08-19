@@ -42,6 +42,7 @@ class_name ActionSequencer
 @onready var sfx_slider:   VSlider = $TextureRect/SfxSlider
 
 @onready var speed_btn: TextureButton = $TextureRect/SpeedControl
+@onready var speed_btn_emitter = $TextureRect/SpeedControl/Switch
 
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
@@ -294,6 +295,7 @@ func _speed_control_ready() -> void:
 	speed_btn.toggled.connect(_on_speed_toggled)
 	
 func _on_speed_toggled(pressed: bool) -> void:
+	speed_btn_emitter.play()
 	if pressed:
 		AudioManager.time_multiplier = Enums.TimeMultiplier.DOUBLE
 	else:

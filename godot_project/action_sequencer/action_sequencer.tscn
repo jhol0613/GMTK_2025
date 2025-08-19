@@ -176,6 +176,10 @@ toggle_mode = true
 texture_normal = ExtResource("14_gqgsu")
 texture_pressed = ExtResource("15_4oryb")
 
+[node name="Switch" type="FmodEventEmitter2D" parent="TextureRect/SpeedControl"]
+event_name = "event:/Switch"
+event_guid = "{4be42de0-2f0a-4ff1-ad9d-e2e8cf053fce}"
+
 [connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="mouse_entered" from="TextureRect/ReplayButton" to="." method="_on_replay_button_mouse_entered"]

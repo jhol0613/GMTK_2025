@@ -7,6 +7,7 @@ class_name ActionItem
 @onready var light = $PointLight2D
 @onready var flash_timer = $Timer
 @onready var selected_emitter = $Selected
+@onready var hover_emitter = $Hover
 
 
 @export var preview_scene : PackedScene
@@ -64,6 +65,7 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 
 
 func _on_texture_rect_mouse_entered() -> void:
+	hover_emitter.play()
 	if not selected:
 		texture_rect.position.y += -1
 

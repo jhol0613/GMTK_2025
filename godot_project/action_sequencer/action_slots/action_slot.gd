@@ -22,6 +22,7 @@ class_name ActionSlot
 @onready var flash_timer = $Timer
 @onready var place_block_emitter = $PlaceBlock
 @onready var backlight = $Backlight
+@onready var hover_emitter = $Hover
 
 var action: Enums.PlayerAction = Enums.PlayerAction.NONE
 
@@ -114,6 +115,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				action_slot_clicked.emit(self)
 
 func _on_mouse_entered() -> void:
+	hover_emitter.play()
 	if ui_interaction_enabled and action != preview_action:
 		hover_light_on = true
 		texture_rect.texture = action_textures.get(preview_action)

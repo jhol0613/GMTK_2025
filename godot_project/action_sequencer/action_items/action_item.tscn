@@ -54,6 +54,10 @@ texture = ExtResource("11_j0qn6")
 event_name = "event:/PickBlock"
 event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
+[node name="Hover" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/IconHover"
+event_guid = "{0973ae57-e5f7-40b8-ae4e-e2ab450692bb}"
+
 [connection signal="gui_input" from="TextureRect" to="." method="_on_texture_rect_gui_input"]
 [connection signal="mouse_entered" from="TextureRect" to="." method="_on_texture_rect_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect" to="." method="_on_texture_rect_mouse_exited"]

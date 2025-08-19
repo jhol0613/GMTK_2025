@@ -51,6 +51,10 @@ one_shot = true
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
+[node name="Hover" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/SlotHover"
+event_guid = "{4617f2bf-e26f-4d78-b661-2634eb2ca28c}"
+
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
