@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dual0bcixw854"]
+[gd_scene load_steps=24 format=3 uid="uid://dual0bcixw854"]
 
 [ext_resource type="Script" uid="uid://dtkjbr420kbm1" path="res://menus/title_screen/title_scene.gd" id="1_ofviv"]
 [ext_resource type="Texture2D" uid="uid://cuc5c16cqv58r" path="res://menus/title_screen/Menu_Stars.png" id="2_3h5pg"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://ievbjg1rx2ml" path="res://menus/title_screen/optionsselect.png" id="5_ofviv"]
 [ext_resource type="Texture2D" uid="uid://bojivainvlqrd" path="res://menus/title_screen/optionspressed.png" id="8_bgyt0"]
 [ext_resource type="Texture2D" uid="uid://cqwvwbxw1kcpk" path="res://menus/title_screen/TitleText1.png" id="11_ehrfh"]
+[ext_resource type="Texture2D" uid="uid://clvfo3gwt5a2o" path="res://menus/title_screen/Quit.png" id="11_l6hpg"]
+[ext_resource type="Texture2D" uid="uid://dtw0tsnohj5k7" path="res://menus/title_screen/Quitselect.png" id="12_7mo1b"]
 [ext_resource type="Texture2D" uid="uid://bgeovtkbbvbbd" path="res://menus/title_screen/TitleText2.png" id="12_kjgsu"]
 [ext_resource type="Texture2D" uid="uid://b508ued4vhh0g" path="res://menus/title_screen/tracks.png" id="13_q7rrh"]
 
@@ -143,9 +145,9 @@ stretch_mode = 4
 [node name="Quit" type="TextureButton" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-texture_normal = ExtResource("4_0ddpl")
-texture_pressed = ExtResource("8_bgyt0")
-texture_hover = ExtResource("5_ofviv")
+texture_normal = ExtResource("11_l6hpg")
+texture_pressed = ExtResource("12_7mo1b")
+texture_hover = ExtResource("12_7mo1b")
 stretch_mode = 4
 
 [node name="ClickStartEmitter" type="FmodEventEmitter2D" parent="."]
