@@ -204,6 +204,7 @@ func _enter_thinking_mode():
 	_play_light2.visible = false
 	for i in range(_available_slots):
 		_initialized_slots[i].ui_interaction_enabled = true
+		_initialized_slots[i].set_to_thinking_mode_color()
 
 func set_action_icons_hidden(should_hide: bool):
 	_action_items.visible = !should_hide
@@ -250,23 +251,32 @@ func _on_replay_button_pressed() -> void:
 func _on_action_item_clicked(new_action_item: ActionItem):
 	if tutorial_mode:
 		_tutorial_arrow.visible = true
-	_active_action_item = new_action_item
+	if _active_action_item == new_action_item:
+		_active_action_item = null
+	else:
+		_active_action_item = new_action_item
 	for item in _initialized_items:
 		if item != _active_action_item:
 			item.deselect()
 
 	for i in range(_available_slots):
 		_initialized_slots[i].ui_interaction_enabled = true
-		_initialized_slots[i].preview_action = _active_action_item.action
+		if _active_action_item == null:
+			_initialized_slots[i].preview_action = Enums.PlayerAction.NONE
+		else:
+			_initialized_slots[i].preview_action = _active_action_item.action
+			
 		if tutorial_mode:
 			_initialized_slots[i].start_flashing()
 
 func _on_action_slot_clicked(clicked_slot : ActionSlot):
 	if _active_action_item != null:
 		clicked_slot.set_action(_active_action_item.action)
+	else:
+		print("active action item is null")
+		clicked_slot.set_action(Enums.PlayerAction.NONE)
 
 func _on_one_slot_stopped_flashing(_stopped_slot: ActionSlot):
-	print("on stopped flashing")
 	for i in range(_available_slots):
 		_initialized_slots[i].stop_flashing()
 	tutorial_mode = false

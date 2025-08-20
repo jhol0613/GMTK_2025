@@ -23,6 +23,7 @@ var flashing = false
 var action: Enums.PlayerAction
 var quantity: int
 var selected := false
+var _hovered := false
 
 signal action_item_clicked(clicked_action_item: ActionItem)
 signal stopped_flashing(ActionItem)
@@ -65,13 +66,15 @@ func _get_drag_data(_at_position: Vector2) -> Variant:
 
 
 func _on_texture_rect_mouse_entered() -> void:
-	hover_emitter.play()
-	if not selected:
+	if not _hovered and not selected:
+		hover_emitter.play()
 		texture_rect.position.y += -1
+		_hovered = true
 
 func _on_texture_rect_mouse_exited() -> void:
-	if not selected:
+	if _hovered:
 		texture_rect.position.y += 1
+	_hovered = false
 
 
 func _on_texture_rect_gui_input(event: InputEvent) -> void:
@@ -82,16 +85,29 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 		if flashing:
 			stopped_flashing.emit(self)
 			stop_flashing()
-
 		# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
-		if not selected:
-			selected_emitter.play()
-			border.modulate.a = 1
-			light.visible = true
+		
+		selected = not selected
+		selected_emitter.play()
+		border.modulate.a = float(selected)
+		light.visible = float(selected)
+		if _hovered:
 			texture_rect.position.y += 1
-			selected = true
-			action_item_clicked.emit(self)
-
+			_hovered = false
+		action_item_clicked.emit(self)
+		
+		
+		#if not selected:
+			#selected_emitter.play()
+			#border.modulate.a = 1
+			#light.visible = true
+			#texture_rect.position.y += 1
+			#selected = true
+			#action_item_clicked.emit(self)
+		#else:
+			#selected_emitter.play()
+			#border.modulate.a = 0
+			#light.visible = false
 
 
 func deselect():

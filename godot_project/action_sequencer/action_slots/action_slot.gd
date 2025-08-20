@@ -80,6 +80,8 @@ func _update_flashing_light(new_state):
 	_update_light()
 	
 func _update_hover_light(new_state):
+	if !hover_light_on and new_state:
+		hover_emitter.play()
 	hover_light_on = new_state
 	_update_light()
 	
@@ -89,7 +91,6 @@ func _update_sequence_light(new_state):
 
 # Ensures that lights take on color/visibility in the proper priority order
 func _update_light():
-	print("updating light")
 	# Priority is flashing light, hover light, sequence light
 	if flashing_light_on:
 		backlight.color = space_available_light_color
@@ -115,7 +116,6 @@ func _on_gui_input(event: InputEvent) -> void:
 				action_slot_clicked.emit(self)
 
 func _on_mouse_entered() -> void:
-	hover_emitter.play()
 	if ui_interaction_enabled and action != preview_action:
 		hover_light_on = true
 		texture_rect.texture = action_textures.get(preview_action)

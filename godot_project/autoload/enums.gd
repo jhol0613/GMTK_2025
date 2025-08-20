@@ -22,7 +22,7 @@ enum Direction {
 	RIGHT
 }
 
-## Single is 4, double is 2, quad is 1, half is 8
+## FMOD event runs in quad time. TimeMultiplier is "FMOD bars per sequencer step"
 enum TimeMultiplier {
 	## 8
 	HALF = 8,

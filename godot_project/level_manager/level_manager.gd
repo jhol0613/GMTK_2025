@@ -53,6 +53,9 @@ var _next_level: RhythmRailLevel
 var _level_number := 0
 var _current_beat := 0
 
+# Prevents registering replay button while success animation is playing
+var _replay_enabled := true 
+
 func _ready() -> void:
 	_level_scene = level_list[0].instantiate()
 	_on_the_train.add_child(_level_scene)
@@ -70,8 +73,8 @@ func _ready() -> void:
 	_level_scene.connect("target_reached", _on_level_complete)
 	load_next_level()
 	
-	# Turn on thinking mode visual fx
-	_fade_to_thinking_shader()
+	# Turn on thinking mode
+	_reset_level()
 
 
 func _input(event: InputEvent) -> void:
@@ -115,7 +118,6 @@ func _on_level_advanced():
 
 # Called when sequencer emits an action in play mode
 func _on_action_performed(action: Enums.PlayerAction) -> void:
-	print("play action")
 	_update_player(action)
 	_update_conductor()
 	_update_lasers()
@@ -123,7 +125,6 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 
 # Called when sequencer emits an action in thinking mode
 func _on_thinking_action_performed():
-	print("thinking action")
 	_update_lasers()
 	_current_beat += 1
 
@@ -194,6 +195,9 @@ func _reset_level() -> void:
 		_conductor.queue_free()
 	_conductor = null
 	_current_beat = 0
+	
+	_fade_to_thinking_shader()
+	_replay_enabled = true
 
 
 func _on_music_bar():
@@ -211,12 +215,13 @@ func _on_action_sequencer_play_started() -> void:
 
 
 func _on_action_sequencer_replay_pressed() -> void:
+	if not _replay_enabled:
+		return
 	var tween = create_tween()
 	var target_pos := Vector2(-_level_number * next_car_offset, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_car_position_moved_back)
-	_fade_to_thinking_shader()
 	_reset_level()
 
 
@@ -230,7 +235,8 @@ func _on_level_complete() -> void:
 	_player_character.disable_collisions()
 	_player_character.notify_success()
 	advance_level()
-
+	_replay_enabled = false
+	
 
 func _on_level_fail() -> void:
 	_action_sequencer.stop_sequencer()
