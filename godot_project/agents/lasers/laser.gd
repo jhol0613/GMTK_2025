@@ -3,6 +3,7 @@ extends Agent
 
 class_name Laser
 
+@onready var _sprite := $Sprite
 @onready var collision_shape := $BeamLine/Collision/CollisionShape2D
 @onready var animation_player = $AnimationPlayer
 @onready var sound = $SoundEmitter
@@ -33,13 +34,13 @@ func _construct():
 	if !is_inside_tree(): return
 
 	# Laser visuals
-	sprite.set_animation(direction_data.get(direction).animation_name)
+	_sprite.set_animation(direction_data.get(direction).animation_name)
 	beam_line.position = direction_data.get(direction).start_position_offset
 	beam_line.points[1] = beam_length * direction_data.get(direction).vector_direction
 	beam_line.visible = false
 	beam_end.texture = direction_data.get(direction).end_image
 	beam_end.position = beam_line.points[1]
-	sprite.frame = 0
+	_sprite.frame = 0
 	beam_line.visible = true
 
 
@@ -59,5 +60,5 @@ func _fire(beat: int):
 	if activation_sequence[beat % activation_sequence.size()]:
 		await get_tree().create_timer(animation_delay).timeout
 		sound.play()
-		sprite.play(direction_data.get(direction).animation_name)
+		_sprite.play(direction_data.get(direction).animation_name)
 		animation_player.play("laser_fire")
