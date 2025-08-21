@@ -113,11 +113,11 @@ func stop_flashing():
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if eraser_mode:
-			if action != Enums.PlayerAction.NONE:
-				clear_slot()            
-				accept_event()    
-				return
+		#if eraser_mode:
+			#if action != Enums.PlayerAction.NONE:
+				#clear_slot()            
+				#accept_event()    
+				#return
 				
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if is_active and ui_interaction_enabled and action != preview_action:

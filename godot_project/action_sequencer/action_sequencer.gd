@@ -270,23 +270,17 @@ func _on_replay_button_pressed() -> void:
 func _on_action_item_clicked(new_action_item: ActionItem):
 	if tutorial_mode:
 		_tutorial_arrow.visible = true
+		
 	if _active_action_item == new_action_item:
-		_active_action_item = null
+		_enter_erase_mode()
 	else:
+		_exit_erase_mode()
 		_active_action_item = new_action_item
-	for item in _initialized_items:
-		if item != _active_action_item:
-			item.deselect()
+		for item in _initialized_items:
+			if item != _active_action_item:
+				item.deselect()
 
-	for i in range(_available_slots):
-		_initialized_slots[i].ui_interaction_enabled = true
-		if _active_action_item == null:
-			_initialized_slots[i].preview_action = Enums.PlayerAction.NONE
-		else:
-			_initialized_slots[i].preview_action = _active_action_item.action
-			
-		if tutorial_mode:
-			_initialized_slots[i].start_flashing()
+	_update_slot_action_previews()
 
 func _on_action_slot_clicked(clicked_slot : ActionSlot):
 	if _active_action_item != null:
@@ -358,14 +352,39 @@ func _setup_eraser_button() -> void:
 	
 func _on_eraser_button_mouse_entered() -> void:
 	eraser_btn_hover_emitter.play()
-	
+
 func _on_eraser_toggled(pressed: bool) -> void:
 	_eraser_mode = pressed
 	if pressed:
-		Input.set_custom_mouse_cursor(ERASER_CURSOR, Input.CURSOR_ARROW, ERASER_HOTSPOT)
+		_enter_erase_mode()
+		_update_slot_action_previews()
 	else:
-		Input.set_custom_mouse_cursor(null)
+		_exit_erase_mode()
+
+## Deselect all action items, set current action to NONE, and set eraser cursor
+func _enter_erase_mode():
+	Input.set_custom_mouse_cursor(ERASER_CURSOR, Input.CURSOR_ARROW, ERASER_HOTSPOT)
+	_eraser_btn.button_pressed = true
+	_active_action_item = null
+	for item in _initialized_items:
+		item.deselect()
+
+func _exit_erase_mode():
+	Input.set_custom_mouse_cursor(null)
+	_setup_eraser_button()
+
+## Iterate through action slots and make sure preview is set to current action (or NONE if in erase mode)
+func _update_slot_action_previews():
 	for i in range(_available_slots):
-		_initialized_slots[i].set_eraser_mode(pressed)
+		_initialized_slots[i].ui_interaction_enabled = true
+		if _active_action_item == null:
+			_initialized_slots[i].preview_action = Enums.PlayerAction.NONE
+		else:
+			_initialized_slots[i].preview_action = _active_action_item.action
+			
+		if tutorial_mode:
+			_initialized_slots[i].start_flashing()
+
+
 
 #endregion
