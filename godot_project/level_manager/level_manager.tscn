@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://f6iq7ujhjxih" path="res://level_manager/background/Stars.png" id="17_okyf0"]
 [ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://level_manager/background/Sky.png" id="18_o52lx"]
 [ext_resource type="Script" uid="uid://rvmpbi1h4oil" path="res://level_manager/shake_camera.gd" id="19_xwfi3"]
-[ext_resource type="Shader" uid="uid://ddfo0lf2lp4ro" path="res://level_manager/level_manager.gdshader" id="21_grapr"]
+[ext_resource type="Shader" uid="uid://dnq5xe80tuaun" path="res://level_manager/level_manager.gdshader" id="21_grapr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aoawx"]
 shader = ExtResource("21_grapr")

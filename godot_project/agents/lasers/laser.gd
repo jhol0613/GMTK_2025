@@ -1,9 +1,8 @@
 @tool
-extends Node2D
+extends Agent
 
 class_name Laser
 
-@onready var sprite = $Sprite
 @onready var collision_shape := $BeamLine/Collision/CollisionShape2D
 @onready var animation_player = $AnimationPlayer
 @onready var sound = $SoundEmitter
@@ -26,13 +25,14 @@ class_name Laser
 func _ready() -> void:
 	_construct()
 	beam_line.visible = false
+	tick.connect(_fire)
 
 # Called when certain exports are changed so they can be visualized in the editor
 func _construct():
-	#Setters might be called before initialization
+	# Setters might be called before initialization
 	if !is_inside_tree(): return
-	
-	#Laser visuals
+
+	# Laser visuals
 	sprite.set_animation(direction_data.get(direction).animation_name)
 	beam_line.position = direction_data.get(direction).start_position_offset
 	beam_line.points[1] = beam_length * direction_data.get(direction).vector_direction
@@ -41,24 +41,23 @@ func _construct():
 	beam_end.position = beam_line.points[1]
 	sprite.frame = 0
 	beam_line.visible = true
-	
-	
-	#Laser collision
+
+
+	# Laser collision
 	collision_shape.disabled = true
 	collision_shape.shape.b = beam_line.points[1]
 
 func set_beam_length(new_length: int):
 	beam_length = new_length
 	_construct()
-	
+
 func set_direction(new_direction: Enums.Direction):
 	direction = new_direction
 	_construct()
 
-func fire(beat: int) -> void:
+func _fire(beat: int):
 	if activation_sequence[beat % activation_sequence.size()]:
 		await get_tree().create_timer(animation_delay).timeout
 		sound.play()
 		sprite.play(direction_data.get(direction).animation_name)
 		animation_player.play("laser_fire")
-	

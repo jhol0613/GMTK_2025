@@ -120,12 +120,12 @@ func _on_level_advanced():
 func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
-	_update_lasers()
+	_update_agents()
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
 func _on_thinking_action_performed():
-	_update_lasers()
+	_update_agents()
 	_current_beat += 1
 
 
@@ -133,7 +133,7 @@ func _update_player(action: Enums.PlayerAction) -> void:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _level_scene.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
 		_player_character.execute_action(action)
-	else: #directional bonks
+	else:
 		match action:
 			Enums.PlayerAction.LEFT:
 				_player_character.execute_action(Enums.PlayerAction.LEFT_BONK)
@@ -161,9 +161,9 @@ func _update_conductor() -> void:
 	)
 
 
-func _update_lasers() -> void:
-	for laser in _level_scene.lasers:
-		laser.fire(_current_beat)
+func _update_agents() -> void:
+	for agent in _level_scene.static_agents:
+		agent.tick.emit(_current_beat)
 
 
 # instantiates the agent, adds it to the level, places it into the correct spot

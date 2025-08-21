@@ -23,8 +23,8 @@ class_name RhythmRailLevel
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 
-# array of all lasers in the level
-var lasers := []
+# array of all agents in the level that aren't player and conductor
+var static_agents := []
 
 signal target_reached
 
@@ -32,8 +32,8 @@ var path_grid: AStarGrid2D
 
 func _ready() -> void:
 	for child in get_children():
-		if child is Laser:
-			lasers.append(child)
+		if child is Agent:
+			static_agents.append(child)
 	_initialize_path_finding()
 
 

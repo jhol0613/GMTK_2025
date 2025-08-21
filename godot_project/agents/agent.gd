@@ -52,6 +52,7 @@ var follow_on_animation: String
 var should_interrupt_queued_animation: bool
 
 signal action_executed(action: Enums.PlayerAction)
+signal tick(beat: int)
 
 func _ready():
 	_timer.one_shot = true
