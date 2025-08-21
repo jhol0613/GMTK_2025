@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw10a68fok6ou"
-path="res://.godot/imported/SingleTime.png-05dac331b0f26d2dcf0235e73a51c783.ctex"
+uid="uid://c1eyqmrv0nb5a"
+path="res://.godot/imported/EraserMouse.png-57f579929b4f09b80569d20385391e13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_visuals/SpeedControl/SingleTime.png"
-dest_files=["res://.godot/imported/SingleTime.png-05dac331b0f26d2dcf0235e73a51c783.ctex"]
+source_file="res://action_sequencer/sequencer_visuals/eraser_button/EraserMouse.png"
+dest_files=["res://.godot/imported/EraserMouse.png-57f579929b4f09b80569d20385391e13.ctex"]
 
 [params]
 

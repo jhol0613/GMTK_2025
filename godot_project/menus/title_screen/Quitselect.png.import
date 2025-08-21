@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyslse4pkfdyx"
-path="res://.godot/imported/DoubleTime.png-3c2d9cdc503fb5cad8623a6eb163cb87.ctex"
+uid="uid://dtw0tsnohj5k7"
+path="res://.godot/imported/Quitselect.png-65f8517181ffcc82deccceaa08a58c51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_visuals/SpeedControl/DoubleTime.png"
-dest_files=["res://.godot/imported/DoubleTime.png-3c2d9cdc503fb5cad8623a6eb163cb87.ctex"]
+source_file="res://menus/title_screen/Quitselect.png"
+dest_files=["res://.godot/imported/Quitselect.png-65f8517181ffcc82deccceaa08a58c51.ctex"]
 
 [params]
 
