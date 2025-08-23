@@ -32,13 +32,13 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 			collision.collision_mask = 0
 
 func notify_success():
-	sprite.play("success")
+	play_animation("success")
 	success_emitter.play()
 
 func notify_failure():
 	failure_emitter.play()
 	interrupt_queued_animation()
-	sprite.play("failure")
+	play_animation("failure")
 
 func disable_collisions() -> void:
 	collision.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE

@@ -13,11 +13,11 @@ func play_with_signals(name: StringName = &"", custom_speed: float = 1.0, from_e
 	play(name, custom_speed, from_end)
 	if !sprite_frames.has_animation(name):
 		return
-		
-	var signals = _get_signals(name)
-	for sig in signals:
-		var timer = get_tree().create_timer(_get_time_at_frame(name, sig.frame))
-		timer.timeout.connect(_on_timeout.bind(sig.signal_id))
+
+	var signal_frames = _get_signals(name)
+	for frame_number in signal_frames:
+		var timer = get_tree().create_timer(_get_time_at_frame(name, frame_number))
+		timer.timeout.connect(_on_timeout.bind(signal_frames.get(frame_number)))
 
 func _on_timeout(signal_id: String):
 	animation_signal.emit(signal_id)
@@ -33,8 +33,9 @@ func _get_signals(animation_name: String) -> Dictionary[int, String]:
 func _get_time_at_frame(animation_name: String, frame_number: int):
 	var frame_time := 0.0
 	var single_frame_duration = 1.0 / sprite_frames.get_animation_speed(animation_name)
-	for i in range(sprite_frames.get_frame_count(animation_name)):
-		frame_time += sprite_frames.get_frame_duration(animation_name, frame_number) * single_frame_duration
+	for i in range(frame_number):
+		frame_time += sprite_frames.get_frame_duration(animation_name, i) * single_frame_duration
+		print(frame_time)
 		
 	return frame_time
 		

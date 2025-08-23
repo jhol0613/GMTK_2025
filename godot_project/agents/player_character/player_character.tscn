@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=77 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -19,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://dbyla8txd5j7u" path="res://agents/player_character/sprites/PidleR.png" id="15_5yn4y"]
 [ext_resource type="Texture2D" uid="uid://je5jv4uoiyvl" path="res://agents/player_character/sprites/PidleB.png" id="16_im6gk"]
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 
 [sub_resource type="Curve" id="Curve_2bapq"]
 _data = [Vector2(0, 0), 0.0, 1.86627, 0, 0, Vector2(0.195506, 0.532075), 2.72153, -2.1701, 1, 0, Vector2(0.51573, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -76,29 +78,33 @@ region = Rect2(0, 92, 41, 46)
 atlas = ExtResource("8_s6mum")
 region = Rect2(0, 138, 41, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqgq8"]
-atlas = ExtResource("13_dqgq8")
-region = Rect2(0, 0, 53, 75)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2b0p1"]
-atlas = ExtResource("13_dqgq8")
-region = Rect2(0, 75, 53, 75)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvvi5"]
 atlas = ExtResource("13_dqgq8")
-region = Rect2(0, 150, 53, 75)
+region = Rect2(0, 0, 54, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_efbsa"]
 atlas = ExtResource("13_dqgq8")
-region = Rect2(0, 225, 53, 75)
+region = Rect2(0, 75, 54, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vkpdm"]
 atlas = ExtResource("13_dqgq8")
-region = Rect2(0, 300, 53, 75)
+region = Rect2(0, 150, 54, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrlin"]
 atlas = ExtResource("13_dqgq8")
-region = Rect2(0, 375, 53, 75)
+region = Rect2(0, 225, 54, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gli1f"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 300, 54, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y67j"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 375, 54, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qasg8"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 450, 54, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aw7cp"]
 atlas = ExtResource("13_im6gk")
@@ -321,26 +327,29 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dqgq8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2b0p1")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_gvvi5")
 }, {
-"duration": 2.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_efbsa")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vkpdm")
 }, {
-"duration": 3.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xrlin")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_gli1f")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_0y67j")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_qasg8")
 }],
 "loop": false,
 "name": &"enter",
-"speed": 5.67
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -514,6 +523,20 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Resource" id="Resource_efbsa"]
+script = ExtResource("21_gvvi5")
+signal_id = "door_slammed"
+animation = "enter"
+frame = 5
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_gvvi5"]
+script = ExtResource("21_gvvi5")
+signal_id = "door_slammed"
+animation = "success"
+frame = 7
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
@@ -585,8 +608,11 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"enter"
+animation = &"success"
 autoplay = "idle_down"
+script = ExtResource("20_2b0p1")
+signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]
 position = Vector2(-1, 18)

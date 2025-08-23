@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=38 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bwoierraggsp3" path="res://agents/lasers/beam_up_end.png" id="6_chnl6"]
 [ext_resource type="Texture2D" uid="uid://bfvugq7fmqx7m" path="res://agents/lasers/beam_line.png" id="7_dshi8"]
 [ext_resource type="Texture2D" uid="uid://c4t5pl6fmwa3k" path="res://agents/lasers/laser_up.png" id="7_knkgi"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="11_gmiso"]
 
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
@@ -293,6 +294,8 @@ sprite = NodePath("Sprite")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nm5od")
 animation = &"fire_down"
+script = ExtResource("11_gmiso")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

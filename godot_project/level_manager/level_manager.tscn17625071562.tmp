@@ -1,0 +1,218 @@
+[gd_scene load_steps=27 format=3 uid="uid://b3nxiipcuklcd"]
+
+[ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_manager/level_manager.gd" id="1_04quo"]
+[ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
+[ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://agents/player_character/player_character.tscn" id="3_oyr8j"]
+[ext_resource type="PackedScene" uid="uid://cvqna86lykqsr" path="res://levels/laser_test.tscn" id="4_2hi70"]
+[ext_resource type="PackedScene" uid="uid://byfkjgjhywmam" path="res://levels/level2.tscn" id="5_1fdvy"]
+[ext_resource type="PackedScene" uid="uid://csooychkhq3rn" path="res://levels/level3.tscn" id="6_i57lx"]
+[ext_resource type="PackedScene" uid="uid://bis4mmgrdtses" path="res://levels/MonkeyLevel.tscn" id="7_2hi70"]
+[ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://level_manager/background/snowflake.png" id="7_yunoc"]
+[ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://level_manager/background/snow_material.tres" id="8_dqmx2"]
+[ext_resource type="Texture2D" uid="uid://c6r7se21vvsjk" path="res://level_manager/Vignette.png" id="9_aoawx"]
+[ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer.tscn" id="9_hv4d1"]
+[ext_resource type="Texture2D" uid="uid://csd70wwn77q11" path="res://level_manager/background/Tracks.png" id="10_r8183"]
+[ext_resource type="Texture2D" uid="uid://dip8yg5mg0v8t" path="res://level_manager/background/Snowfloor.png" id="11_y8q0i"]
+[ext_resource type="Texture2D" uid="uid://bsqe55ncksgbo" path="res://level_manager/background/Treesclose.png" id="12_bjkct"]
+[ext_resource type="Texture2D" uid="uid://dl4gj5ppttyse" path="res://level_manager/background/Treesfar.png" id="13_32fjc"]
+[ext_resource type="Texture2D" uid="uid://djejxgkwpk8ea" path="res://level_manager/background/Mountains.png" id="14_t7li4"]
+[ext_resource type="Texture2D" uid="uid://bydlsgvji1lns" path="res://level_manager/background/Cloudsclose.png" id="15_cd10y"]
+[ext_resource type="Texture2D" uid="uid://cex205ebtfbhn" path="res://level_manager/background/Cloudfar.png" id="16_sxf1l"]
+[ext_resource type="Texture2D" uid="uid://f6iq7ujhjxih" path="res://level_manager/background/Stars.png" id="17_okyf0"]
+[ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://level_manager/background/Sky.png" id="18_o52lx"]
+[ext_resource type="Script" uid="uid://rvmpbi1h4oil" path="res://level_manager/shake_camera.gd" id="19_xwfi3"]
+[ext_resource type="Shader" uid="uid://ddfo0lf2lp4ro" path="res://level_manager/level_manager.gdshader" id="21_grapr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aoawx"]
+shader = ExtResource("21_grapr")
+shader_parameter/bcs = Vector3(1, 1, 1)
+shader_parameter/vignette = 0.0
+shader_parameter/wipe = 0.0
+shader_parameter/vignette_texture = ExtResource("9_aoawx")
+
+[sub_resource type="Animation" id="Animation_n2acl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrainCenter/OnTheTrain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dtys8"]
+resource_name = "train_rock"
+length = 1.412
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TrainCenter/OnTheTrain:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.706, 0.833333, 1.26667, 1.36667),
+"transitions": PackedFloat32Array(1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05, 1e-05),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, 0), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0), Vector2(0, 0), Vector2(0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2acl"]
+_data = {
+&"RESET": SubResource("Animation_n2acl"),
+&"train_rock": SubResource("Animation_dtys8")
+}
+
+[node name="LevelManager" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_04quo")
+player_scene = ExtResource("3_oyr8j")
+conductor_scene = ExtResource("2_xxlmw")
+initial_train_position = Vector2(132, 190)
+brightness = 1.0
+contrast = 1.0
+saturation = 0.5
+level_list = Array[PackedScene]([ExtResource("4_2hi70"), ExtResource("5_1fdvy"), ExtResource("6_i57lx"), ExtResource("7_2hi70")])
+
+[node name="ShaderLayer" type="CanvasLayer" parent="."]
+
+[node name="Shader" type="ColorRect" parent="ShaderLayer"]
+z_index = 2096
+z_as_relative = false
+material = SubResource("ShaderMaterial_aoawx")
+custom_minimum_size = Vector2(600, 450)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(621, -11)
+amount = 1500
+texture = ExtResource("7_yunoc")
+lifetime = 4.35
+process_material = ExtResource("8_dqmx2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n2acl")
+}
+
+[node name="TrainCenter" type="Node2D" parent="."]
+
+[node name="OnTheTrain" type="Node2D" parent="TrainCenter"]
+
+[node name="ShakeCamera" type="Camera2D" parent="."]
+position = Vector2(300, 226)
+script = ExtResource("19_xwfi3")
+
+[node name="Scenery" type="Node2D" parent="."]
+z_index = -8
+
+[node name="Tracks" type="Parallax2D" parent="Scenery"]
+z_index = -3
+repeat_size = Vector2(572.17, 0)
+autoscroll = Vector2(-250, 0)
+
+[node name="Tracks" type="Sprite2D" parent="Scenery/Tracks"]
+light_mask = 2
+z_index = -2
+position = Vector2(300, 202)
+texture = ExtResource("10_r8183")
+
+[node name="Ground" type="Sprite2D" parent="Scenery/Tracks"]
+light_mask = 2
+z_index = -3
+position = Vector2(298, 230)
+texture = ExtResource("11_y8q0i")
+
+[node name="TreesClose" type="Parallax2D" parent="Scenery"]
+z_index = -3
+repeat_size = Vector2(605.99, 0)
+autoscroll = Vector2(-80, 0)
+
+[node name="TreesClose" type="Sprite2D" parent="Scenery/TreesClose"]
+light_mask = 2
+z_index = -4
+position = Vector2(299, 209)
+texture = ExtResource("12_bjkct")
+
+[node name="TreesFar" type="Parallax2D" parent="Scenery"]
+z_index = -3
+scroll_offset = Vector2(0, 9)
+repeat_size = Vector2(607.98, 0)
+autoscroll = Vector2(-50, 0)
+
+[node name="TreesFar" type="Sprite2D" parent="Scenery/TreesFar"]
+light_mask = 2
+z_index = -5
+position = Vector2(301, 191)
+texture = ExtResource("13_32fjc")
+
+[node name="Mountains" type="Parallax2D" parent="Scenery"]
+z_index = -3
+scroll_offset = Vector2(0, 18)
+repeat_size = Vector2(606.32, 0)
+autoscroll = Vector2(-8, 0)
+
+[node name="Mountains" type="Sprite2D" parent="Scenery/Mountains"]
+light_mask = 2
+z_index = -6
+position = Vector2(302, 179)
+texture = ExtResource("14_t7li4")
+
+[node name="CloudsClose" type="Parallax2D" parent="Scenery"]
+z_index = -3
+repeat_size = Vector2(739.965, 0)
+autoscroll = Vector2(-17, 0)
+
+[node name="CloudsClose" type="Sprite2D" parent="Scenery/CloudsClose"]
+light_mask = 2
+position = Vector2(201, 158)
+texture = ExtResource("15_cd10y")
+
+[node name="CloudsFar" type="Parallax2D" parent="Scenery"]
+z_index = -3
+repeat_size = Vector2(638.47, 0)
+autoscroll = Vector2(-4, 0)
+
+[node name="CloudsFar" type="Sprite2D" parent="Scenery/CloudsFar"]
+light_mask = 2
+z_index = -8
+position = Vector2(280, 172)
+texture = ExtResource("16_sxf1l")
+
+[node name="Sky" type="Parallax2D" parent="Scenery"]
+z_index = -3
+
+[node name="Stars" type="Sprite2D" parent="Scenery/Sky"]
+light_mask = 2
+z_index = -9
+position = Vector2(301, 221)
+texture = ExtResource("17_okyf0")
+
+[node name="Sunset" type="Sprite2D" parent="Scenery/Sky"]
+light_mask = 2
+z_index = -10
+position = Vector2(300, 214)
+texture = ExtResource("18_o52lx")
+
+[node name="SequencerLayer" type="CanvasLayer" parent="."]
+
+[node name="ActionSequencer" parent="SequencerLayer" instance=ExtResource("9_hv4d1")]
+z_index = 520
+offset_left = 4.0
+offset_top = 107.0
+offset_right = 620.0
+offset_bottom = 453.0
+
+[connection signal="perform_action" from="SequencerLayer/ActionSequencer" to="." method="_on_action_performed"]
+[connection signal="perform_thinking_action" from="SequencerLayer/ActionSequencer" to="." method="_on_thinking_action_performed"]
+[connection signal="play_started" from="SequencerLayer/ActionSequencer" to="." method="_on_action_sequencer_play_started"]
+[connection signal="replay_pressed" from="SequencerLayer/ActionSequencer" to="." method="_on_action_sequencer_replay_pressed"]

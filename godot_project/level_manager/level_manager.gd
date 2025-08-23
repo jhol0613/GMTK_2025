@@ -44,6 +44,7 @@ extends Node2D
 @onready var _train_center: = $TrainCenter
 @onready var _animation_player := $AnimationPlayer
 @onready var _shader := $ShaderLayer/Shader
+@onready var _shake_camera := $ShakeCamera
 
 
 var _conductor: Conductor
@@ -107,6 +108,10 @@ func advance_level():
 
 	# Update sequencer with new level data
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions)
+	
+	# Connect to animation signals from static agents
+	for agent in _level_scene.static_agents:
+		agent.animation_signal.connect(_on_animation_signal_received)
 
 	# load following level
 	load_next_level()
@@ -162,11 +167,9 @@ func _update_conductor() -> void:
 		Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)
 	)
 
-
 func _update_agents() -> void:
 	for agent in _level_scene.static_agents:
 		agent.tick.emit(_current_beat)
-
 
 # instantiates the agent, adds it to the level, places it into the correct spot
 func _spawn_agent(scene: PackedScene, grid_position: Vector2i) -> Agent:
@@ -176,8 +179,8 @@ func _spawn_agent(scene: PackedScene, grid_position: Vector2i) -> Agent:
 	agent.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
 	agent.tile_size = _level_scene.get_tile_size()
 	_level_scene.add_child(agent)
+	agent.animation_signal.connect(_on_animation_signal_received)
 	return agent
-
 
 func _spawn_player() -> void:
 	if _player_character != null:
@@ -185,12 +188,15 @@ func _spawn_player() -> void:
 	_player_character = _spawn_agent(player_scene, _level_scene.player_spawn_position)
 	_player_character.failure.connect(_on_level_fail)
 
-
 func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_agent(conductor_scene, _level_scene.conductor_spawn_position)
 
+func _on_animation_signal_received(signal_id: String):
+	match signal_id:
+		"door_slammed":
+			_shake_camera.apply_shake()
 
 func _reset_level() -> void:
 	if _conductor != null:

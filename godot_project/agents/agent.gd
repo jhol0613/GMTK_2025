@@ -25,7 +25,7 @@ class_name Agent
 @export var default_animation: String
 
 @export_subgroup("Nodes")
-@export var sprite: AnimatedSprite2D
+@export var sprite: AnimatedSprite2DSignals
 
 @export_subgroup("Sound")
 ## How long to wait after sequencer signal to start an animation
@@ -52,6 +52,8 @@ var follow_on_animation: String
 var should_interrupt_queued_animation: bool
 
 signal action_executed(action: Enums.PlayerAction)
+##Pass on signals from agents animation sprite
+signal animation_signal(id: String)
 signal tick(beat: int)
 
 func _ready():
@@ -59,6 +61,7 @@ func _ready():
 	add_child(_timer)
 	_timer.timeout.connect(_on_beat)
 	position = _grid_to_local(grid_origin)
+	sprite.connect("animation_signal", _on_animation_signal)
 
 func execute_action(action : Enums.PlayerAction) -> void:
 	match action:
@@ -87,8 +90,8 @@ func execute_action(action : Enums.PlayerAction) -> void:
 
 func play_animation(animation_name: String, follow_on = null):
 	assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attemtping to call play agent animation that does not exisst")
-	sprite.play(animation_name)
-	if follow_on_animation != null:
+	sprite.play_with_signals(animation_name)
+	if follow_on != null:
 		follow_on_animation = follow_on
 		sprite.animation_finished.connect(_on_animation_finished)
 
@@ -115,12 +118,12 @@ func interrupt_queued_animation():
 	should_interrupt_queued_animation = true
 
 func _on_animation_finished():
-	sprite.play(follow_on_animation)
+	sprite.play_with_signals(follow_on_animation)
 	sprite.animation_finished.disconnect(_on_animation_finished)
 
 func reset() -> void:
 	if default_animation != "":
-		sprite.play(default_animation)
+		sprite.play_with_signals(default_animation)
 	grid_position = grid_origin
 	position = _grid_to_local(grid_position)
 
@@ -183,3 +186,6 @@ func _is_action_bonk(action: Enums.PlayerAction):
 		(action == Enums.PlayerAction.RIGHT_BONK) or \
 		(action == Enums.PlayerAction.UP_BONK) or \
 		(action == Enums.PlayerAction.DOWN_BONK)
+		
+func _on_animation_signal(signal_id):
+	animation_signal.emit(signal_id)

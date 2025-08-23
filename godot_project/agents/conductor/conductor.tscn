@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=8 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_m234f"]
 [ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://agents/conductor/conductor_y_curve.tres" id="3_lda0w"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="4_lda0w"]
 [ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://agents/player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
@@ -52,6 +53,8 @@ position = Vector2(2.575, -31.57)
 sprite_frames = ExtResource("4_ps1s8")
 animation = &"jump_right"
 autoplay = "idle_right"
+script = ExtResource("6_mq2pu")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(-2.42, 21.47)
