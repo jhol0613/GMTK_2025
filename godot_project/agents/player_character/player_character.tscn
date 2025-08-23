@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=72 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://kkdq1q3rjbaj" path="res://agents/player_character/sprites/ActionDuck.png" id="8_s6mum"]
 [ext_resource type="Texture2D" uid="uid://bwusmhmca44mr" path="res://agents/player_character/sprites/PWalkL.png" id="9_xgp35"]
 [ext_resource type="Texture2D" uid="uid://d1f4ri5am1141" path="res://agents/player_character/sprites/PWalkR.png" id="10_s6mum"]
+[ext_resource type="Texture2D" uid="uid://bxumb624ic81u" path="res://agents/player_character/sprites/PlayerEnter.png" id="13_dqgq8"]
 [ext_resource type="Texture2D" uid="uid://c45o0ob8uo200" path="res://agents/player_character/sprites/ConductorGameover.png" id="13_im6gk"]
 [ext_resource type="Texture2D" uid="uid://0kwq3605whpw" path="res://agents/player_character/sprites/PidleF.png" id="13_xgp35"]
 [ext_resource type="Texture2D" uid="uid://dj8qvxmx4b3o5" path="res://agents/player_character/sprites/PidleL.png" id="14_wkvkj"]
@@ -74,6 +75,30 @@ region = Rect2(0, 92, 41, 46)
 [sub_resource type="AtlasTexture" id="AtlasTexture_wc5pn"]
 atlas = ExtResource("8_s6mum")
 region = Rect2(0, 138, 41, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqgq8"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 0, 53, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2b0p1"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 75, 53, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvvi5"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 150, 53, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efbsa"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 225, 53, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkpdm"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 300, 53, 75)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrlin"]
+atlas = ExtResource("13_dqgq8")
+region = Rect2(0, 375, 53, 75)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aw7cp"]
 atlas = ExtResource("13_im6gk")
@@ -293,6 +318,29 @@ animations = [{
 "loop": false,
 "name": &"duck",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqgq8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2b0p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvvi5")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_efbsa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkpdm")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_xrlin")
+}],
+"loop": false,
+"name": &"enter",
+"speed": 5.67
 }, {
 "frames": [{
 "duration": 1.0,
@@ -537,7 +585,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"failure"
+animation = &"enter"
 autoplay = "idle_down"
 
 [node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]

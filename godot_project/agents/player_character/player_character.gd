@@ -21,6 +21,7 @@ signal failure
 func _ready() -> void:
 	super._ready()
 	action_executed.connect(_on_action_executed)
+	play_animation("enter", "idle_right")
 
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:

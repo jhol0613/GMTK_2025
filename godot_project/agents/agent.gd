@@ -85,6 +85,12 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		_timer.timeout.connect(_on_beat.bind(action))
 		_timer.start(_get_delay_seconds(action))
 
+func play_animation(animation_name: String, follow_on = null):
+	assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attemtping to call play agent animation that does not exisst")
+	sprite.play(animation_name)
+	if follow_on_animation != null:
+		follow_on_animation = follow_on
+		sprite.animation_finished.connect(_on_animation_finished)
 
 func _on_beat(action: Enums.PlayerAction) -> void:
 
@@ -94,11 +100,7 @@ func _on_beat(action: Enums.PlayerAction) -> void:
 
 	var animation_name = _get_animation_name(action)
 	if animation_name != "":
-		sprite.play(animation_name)
-
-	if follow_on_animations.get(action) != null:
-		follow_on_animation = follow_on_animations.get(action)
-		sprite.animation_finished.connect(_on_animation_finished)
+		play_animation(animation_name, follow_on_animations.get(action))
 
 	if _is_action_bonk(action):
 		# Bonk target is where the player tried to go
