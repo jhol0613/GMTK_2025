@@ -1,137 +1,60 @@
-[gd_scene load_steps=8 format=3 uid="uid://bm2axmjyuw8gr"]
+[gd_scene load_steps=29 format=3 uid="uid://bm2axmjyuw8gr"]
 
 [ext_resource type="Script" uid="uid://bc3elcigudtk7" path="res://menus/pause_menu/pause_menu.gd" id="1_qd56w"]
-[ext_resource type="Shader" uid="uid://3t6ae1cacb84" path="res://menus/pause_menu/pause_menu_shader.gdshader" id="2_4s7ec"]
-[ext_resource type="Texture2D" uid="uid://dgdw1436w52je" path="res://action_sequencer/sequencer_visuals/eraser_button/Eraser.png" id="3_l3nas"]
+[ext_resource type="Texture2D" uid="uid://bu64yaxj7fu0s" path="res://menus/pause_menu/pausemenu_visuals/pause.png" id="3_4s7ec"]
+[ext_resource type="Texture2D" uid="uid://betxuvh17xfgr" path="res://menus/pause_menu/pausemenu_visuals/yesno.png" id="4_4s7ec"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpjwo"]
-shader = ExtResource("2_4s7ec")
-shader_parameter/lod = 0.0
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4s7ec"]
 
-[sub_resource type="Animation" id="Animation_bt0gd"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate:r")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer:modulate:g")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PanelContainer:modulate:b")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PanelContainer:modulate:a")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0)
-}
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l3nas"]
 
-[sub_resource type="Animation" id="Animation_xotp6"]
-resource_name = "blur"
-length = 0.3
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 0.8, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PanelContainer:modulate:r")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PanelContainer:modulate:g")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PanelContainer:modulate:b")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PanelContainer:modulate:a")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.15, 0, 0.15, 0, 1, -0.15, 0, 0.15, 0),
-"times": PackedFloat32Array(0, 0.3)
-}
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpjwo"]
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_gjmkn"]
-_data = {
-&"RESET": SubResource("Animation_bt0gd"),
-&"blur": SubResource("Animation_xotp6")
-}
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xotp6"]
 
-[node name="pause_menu" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt0gd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjmkn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hc5v2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hjpdg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l4eqo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_orpgp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_racry"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3oo7h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2g2at"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tjaam"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_twrce"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1lf1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qtm86"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qjpom"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2rgmr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ankup"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qkiab"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2s5u5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d3bq3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sa38l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4ehs"]
+
+[node name="Root" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -141,46 +64,106 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qd56w")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_vpjwo")
+[node name="shade" type="ColorRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 599.0
-offset_bottom = 449.0
+offset_bottom = 451.0
+color = Color(0, 0, 0, 0.152941)
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 156.0
-offset_top = 111.0
-offset_right = -143.0
-offset_bottom = -141.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="pause_menu" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
+[node name="pause_menu_bg" type="TextureRect" parent="pause_menu"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 450.0
+texture = ExtResource("3_4s7ec")
 
-[node name="resume" type="TextureButton" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource("3_l3nas")
+[node name="resume_btn" type="Button" parent="pause_menu"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 161.0
+offset_right = 217.0
+offset_bottom = 180.0
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4s7ec")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l3nas")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vpjwo")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xotp6")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bt0gd")
 
-[node name="quit" type="TextureButton" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("3_l3nas")
+[node name="options_btn" type="Button" parent="pause_menu"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 180.0
+offset_right = 217.0
+offset_bottom = 199.0
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gjmkn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hc5v2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hjpdg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_l4eqo")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_orpgp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_gjmkn")
-}
+[node name="quit_btn" type="Button" parent="pause_menu"]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 199.0
+offset_right = 217.0
+offset_bottom = 216.0
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_racry")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3oo7h")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_2g2at")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tjaam")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_twrce")
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[node name="quit_confirm" type="Control" parent="pause_menu"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="confirm_menu_bg" type="TextureRect" parent="pause_menu/quit_confirm"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_4s7ec")
+
+[node name="quit_yes" type="Button" parent="pause_menu/quit_confirm"]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 232.0
+offset_right = 294.0
+offset_bottom = 257.0
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1lf1k")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qtm86")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qjpom")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2rgmr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ankup")
+
+[node name="quit_no" type="Button" parent="pause_menu/quit_confirm"]
+layout_mode = 0
+offset_left = 303.0
+offset_top = 232.0
+offset_right = 352.0
+offset_bottom = 257.0
+focus_mode = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qkiab")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2s5u5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_d3bq3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_sa38l")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_p4ehs")
+
+[connection signal="mouse_entered" from="pause_menu/resume_btn" to="." method="_on_resume_btn_mouse_entered"]
+[connection signal="pressed" from="pause_menu/resume_btn" to="." method="_on_resume_btn_pressed"]
+[connection signal="mouse_entered" from="pause_menu/options_btn" to="." method="_on_options_btn_mouse_entered"]
+[connection signal="pressed" from="pause_menu/options_btn" to="." method="_on_options_btn_pressed"]
+[connection signal="mouse_entered" from="pause_menu/quit_btn" to="." method="_on_quit_btn_mouse_entered"]
+[connection signal="pressed" from="pause_menu/quit_btn" to="." method="_on_quit_btn_pressed"]
+[connection signal="mouse_entered" from="pause_menu/quit_confirm/quit_yes" to="." method="_on_quit_yes_mouse_entered"]
+[connection signal="pressed" from="pause_menu/quit_confirm/quit_yes" to="." method="_on_quit_yes_pressed"]
+[connection signal="pressed" from="pause_menu/quit_confirm/quit_no" to="." method="_on_quit_no_pressed"]
