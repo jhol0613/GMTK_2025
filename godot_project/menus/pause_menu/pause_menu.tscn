@@ -54,7 +54,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p4ehs"]
 
-[node name="Root" type="Control"]
+[node name="PauseMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15

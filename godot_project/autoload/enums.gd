@@ -49,7 +49,8 @@ enum CollisionLayer {
 enum Scenes {
 	TITLE,
 	INTRO_CUTSCENE,
-	LEVEL_MANAGER
+	LEVEL_MANAGER,
+	PAUSE
 }
 
 func player_action_to_vector(action: PlayerAction) -> Vector2i:

@@ -75,6 +75,8 @@ func _ready() -> void:
 	
 	# Turn on thinking mode
 	_reset_level()
+	
+	GameManager.pause_enabled = true
 
 
 func _input(event: InputEvent) -> void:

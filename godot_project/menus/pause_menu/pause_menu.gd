@@ -18,30 +18,30 @@ const T_NO_HI        := preload("res://menus/pause_menu/pausemenu_visuals/no.png
 var _is_open := false
 
 func _ready() -> void:
-	visible = false
-	pause.visible = false
+	visible = true
+	pause.visible = true
 	confirm.visible = false
 	shade.visible = false
   
-	$pause_menu/resume_btn.mouse_entered.connect(_on_resume_btn_mouse_entered)
-	$pause_menu/options_btn.mouse_entered.connect(_on_options_btn_mouse_entered)
-	$pause_menu/quit_btn.mouse_entered.connect(_on_quit_btn_mouse_entered)
-
-	$pause_menu/resume_btn.mouse_exited.connect(_on_main_exit_hover_clear)
-	$pause_menu/options_btn.mouse_exited.connect(_on_main_exit_hover_clear)
-	$pause_menu/quit_btn.mouse_exited.connect(_on_main_exit_hover_clear)
-
-	$pause_menu/resume_btn.pressed.connect(_on_resume_btn_pressed)
-	$pause_menu/options_btn.pressed.connect(_on_options_btn_pressed)
-	$pause_menu/quit_btn.pressed.connect(_on_quit_btn_pressed)
+	#$pause_menu/resume_btn.mouse_entered.connect(_on_resume_btn_mouse_entered)
+	#$pause_menu/options_btn.mouse_entered.connect(_on_options_btn_mouse_entered)
+	#$pause_menu/quit_btn.mouse_entered.connect(_on_quit_btn_mouse_entered)
+#
+	#$pause_menu/resume_btn.mouse_exited.connect(_on_main_exit_hover_clear)
+	#$pause_menu/options_btn.mouse_exited.connect(_on_main_exit_hover_clear)
+	#$pause_menu/quit_btn.mouse_exited.connect(_on_main_exit_hover_clear)
+#
+	#$pause_menu/resume_btn.pressed.connect(_on_resume_btn_pressed)
+	#$pause_menu/options_btn.pressed.connect(_on_options_btn_pressed)
+	#$pause_menu/quit_btn.pressed.connect(_on_quit_btn_pressed)
 
 	$pause_menu/quit_confirm/quit_yes.mouse_entered.connect(func(): confirm_bg.texture = T_YES_HI)
 	$pause_menu/quit_confirm/quit_no.mouse_entered.connect(func(): confirm_bg.texture = T_NO_HI)
 	$pause_menu/quit_confirm/quit_yes.mouse_exited.connect(func(): confirm_bg.texture = T_YESNO)
 	$pause_menu/quit_confirm/quit_no.mouse_exited.connect(func(): confirm_bg.texture = T_YESNO)
 
-	$pause_menu/quit_confirm/quit_yes.pressed.connect(_on_quit_yes_pressed)
-	$pause_menu/quit_confirm/quit_no.pressed.connect(_on_quit_no_pressed)
+	#$pause_menu/quit_confirm/quit_yes.pressed.connect(_on_quit_yes_pressed)
+	#$pause_menu/quit_confirm/quit_no.pressed.connect(_on_quit_no_pressed)
 
 func toggle_pause() -> void:
 	_is_open = !_is_open
@@ -55,10 +55,10 @@ func toggle_pause() -> void:
 	else:
 		bg.texture = T_PAUSE
 		
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("escape"):
-		toggle_pause()
-		get_viewport().set_input_as_handled()
+#func _unhandled_input(event: InputEvent) -> void:
+	#if event.is_action_pressed("escape"):
+		#toggle_pause()
+		#get_viewport().set_input_as_handled()
 		
 func _on_resume_btn_mouse_entered() -> void:
 	if not confirm.visible:
@@ -79,7 +79,7 @@ func _on_main_exit_hover_clear() -> void:
 		bg.texture = T_PAUSE
 
 func _on_resume_btn_pressed() -> void:
-	toggle_pause()
+	GameManager.unpause_game()
 
 
 func _on_options_btn_pressed() -> void:

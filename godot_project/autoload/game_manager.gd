@@ -2,6 +2,8 @@ extends Node2D
 
 @export_subgroup("Scenes")
 @export var scene_dict: Dictionary[Enums.Scenes, PackedScene]
+## Scenes must explicitly set pause enabled to true
+@export var pause_enabled := false
 
 @export_subgroup("Animation")
 @export var default_fade_out_time := 1.0
@@ -9,6 +11,8 @@ extends Node2D
 
 @onready var _transition_out_time = default_fade_out_time
 @onready var _transition_in_time = default_fade_in_time
+
+@onready var _pause_layer: CanvasLayer
 
 func _ready():
 	pass
@@ -18,10 +22,24 @@ func load_scene(scene: Enums.Scenes, transition_in_time = default_fade_in_time,
 
 	_transition_out_time = transition_out_time
 	_transition_in_time = transition_in_time
+	
+	pause_enabled = false
+	_pause_layer.layer = 10
 
 	match transition_style:
 		"fade_out_in":
 			_fadeout(scene)
+
+func pause_game():
+	if pause_enabled:
+		get_tree().paused = true
+		_pause_layer = CanvasLayer.new()
+		get_tree().current_scene.add_child(_pause_layer)
+		_pause_layer.add_child(scene_dict.get(Enums.Scenes.PAUSE).instantiate())
+		
+func unpause_game():
+	get_tree().paused = false
+	_pause_layer.queue_free()
 
 func _fadeout(next_scene: Enums.Scenes):
 	var fadeout_rect = _build_fadeout_rect(0)
@@ -39,7 +57,6 @@ func _fadein():
 	tween.tween_callback(_remove_fadeout_rect.bind(fadeout_rect))
 
 func _load_scene(scene_to_load: Enums.Scenes):
-	print("attempting load")
 	get_tree().change_scene_to_packed(scene_dict.get(scene_to_load))
 	get_tree().connect("tree_changed", _fadein)
 
@@ -54,3 +71,10 @@ func _build_fadeout_rect(alpha: float) -> ColorRect:
 	fadeout_rect.modulate.a = alpha
 	fadeout_rect.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 	return fadeout_rect
+	
+func _input(event: InputEvent):
+	if Input.is_action_just_pressed("Pause"):
+		if get_tree().paused:
+			unpause_game()
+		else:
+			pause_game()

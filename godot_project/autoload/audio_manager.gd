@@ -19,8 +19,6 @@ signal music_beat(beat: int)
 
 var _beat = 0
 # Ensure time change only happens on a beat that makes sense in the new time
-@onready var _queued_time_multiplier := time_multiplier
-@onready var _time_multiplier := time_multiplier
 @onready var _bar := 0
 
 func _on_music_event_timeline_beat(_params: Dictionary) -> void:
