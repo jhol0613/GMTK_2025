@@ -158,12 +158,24 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_d3bq3")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_sa38l")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_p4ehs")
 
+[node name="pause_btn_hover" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/PauseHover"
+event_guid = "{ea28acac-8947-4b28-80c1-399dc6f9ac3f}"
+
+[node name="pause_btn_click" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/PasueClick"
+event_guid = "{1e6fda23-5bac-4100-a590-d50141d2c696}"
+
 [connection signal="mouse_entered" from="pause_menu/resume_btn" to="." method="_on_resume_btn_mouse_entered"]
 [connection signal="pressed" from="pause_menu/resume_btn" to="." method="_on_resume_btn_pressed"]
 [connection signal="mouse_entered" from="pause_menu/options_btn" to="." method="_on_options_btn_mouse_entered"]
 [connection signal="pressed" from="pause_menu/options_btn" to="." method="_on_options_btn_pressed"]
 [connection signal="mouse_entered" from="pause_menu/quit_btn" to="." method="_on_quit_btn_mouse_entered"]
 [connection signal="pressed" from="pause_menu/quit_btn" to="." method="_on_quit_btn_pressed"]
+[connection signal="focus_entered" from="pause_menu/quit_confirm/quit_yes" to="." method="_on_quit_yes_focus_entered"]
 [connection signal="mouse_entered" from="pause_menu/quit_confirm/quit_yes" to="." method="_on_quit_yes_mouse_entered"]
+[connection signal="mouse_exited" from="pause_menu/quit_confirm/quit_yes" to="." method="_on_quit_yes_mouse_exited"]
 [connection signal="pressed" from="pause_menu/quit_confirm/quit_yes" to="." method="_on_quit_yes_pressed"]
+[connection signal="focus_entered" from="pause_menu/quit_confirm/quit_no" to="." method="_on_quit_no_focus_entered"]
+[connection signal="focus_exited" from="pause_menu/quit_confirm/quit_no" to="." method="_on_quit_no_focus_exited"]
 [connection signal="pressed" from="pause_menu/quit_confirm/quit_no" to="." method="_on_quit_no_pressed"]

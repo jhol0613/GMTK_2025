@@ -5,6 +5,8 @@ extends Control
 @onready var confirm     : Control      = $pause_menu/quit_confirm
 @onready var confirm_bg  : TextureRect  = $pause_menu/quit_confirm/confirm_menu_bg
 @onready var shade       : ColorRect    = $shade
+@onready var pause_btn_hover_emitter = $pause_btn_hover
+@onready var pause_btn_click_emitter = $pause_btn_click
 
 const T_PAUSE        := preload("res://menus/pause_menu/pausemenu_visuals/pause.png")
 const T_RESUME_HI    := preload("res://menus/pause_menu/pausemenu_visuals/pauseresume.png")
@@ -35,8 +37,8 @@ func _ready() -> void:
 	#$pause_menu/options_btn.pressed.connect(_on_options_btn_pressed)
 	#$pause_menu/quit_btn.pressed.connect(_on_quit_btn_pressed)
 
-	$pause_menu/quit_confirm/quit_yes.mouse_entered.connect(func(): confirm_bg.texture = T_YES_HI)
-	$pause_menu/quit_confirm/quit_no.mouse_entered.connect(func(): confirm_bg.texture = T_NO_HI)
+	$pause_menu/quit_confirm/quit_yes.mouse_entered.connect(func(): pause_btn_hover_emitter.play(); confirm_bg.texture = T_YES_HI)
+	$pause_menu/quit_confirm/quit_no.mouse_entered.connect(func(): pause_btn_hover_emitter.play(); confirm_bg.texture = T_NO_HI)
 	$pause_menu/quit_confirm/quit_yes.mouse_exited.connect(func(): confirm_bg.texture = T_YESNO)
 	$pause_menu/quit_confirm/quit_no.mouse_exited.connect(func(): confirm_bg.texture = T_YESNO)
 
@@ -61,16 +63,19 @@ func toggle_pause() -> void:
 		#get_viewport().set_input_as_handled()
 		
 func _on_resume_btn_mouse_entered() -> void:
+	pause_btn_hover_emitter.play()
 	if not confirm.visible:
 		bg.texture = T_RESUME_HI
 
 
 func _on_options_btn_mouse_entered() -> void:
+	pause_btn_hover_emitter.play()
 	if not confirm.visible:
 		bg.texture = T_OPTIONS_HI
 
 
 func _on_quit_btn_mouse_entered() -> void:
+	pause_btn_hover_emitter.play()
 	if not confirm.visible:
 		bg.texture = T_EXIT_HI
 
@@ -79,23 +84,28 @@ func _on_main_exit_hover_clear() -> void:
 		bg.texture = T_PAUSE
 
 func _on_resume_btn_pressed() -> void:
+	pause_btn_click_emitter.play()
 	GameManager.unpause_game()
 
 
 func _on_options_btn_pressed() -> void:
+	pause_btn_click_emitter.play()
 	bg.texture = T_PAUSE
 	# Todo: add a options menu here
 
 
 func _on_quit_btn_pressed() -> void:
+	pause_btn_click_emitter.play()
 	confirm.visible = true
 	confirm_bg.texture = T_YESNO
 
 
 func _on_quit_yes_pressed() -> void:
+	pause_btn_click_emitter.play()
 	get_tree().quit()
 
 
 func _on_quit_no_pressed() -> void:
+	pause_btn_click_emitter.play()
 	confirm.visible = false
 	bg.texture = T_PAUSE
