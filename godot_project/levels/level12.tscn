@@ -1,10 +1,8 @@
 [gd_scene load_steps=3 format=4 uid="uid://c1px383kx30ih"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_base/level_base.tscn" id="1_2tplf"]
-[ext_resource type="PackedScene" uid="uid://degjmnurobaxb" path="res://levels/level12_sequencer.tscn" id="2_k0qq5"]
 
 [node name="TilemapLevelBase" instance=ExtResource("1_2tplf")]
-sequencer_scene = ExtResource("2_k0qq5")
 conductor_enabled = false
 
 [node name="Floor" parent="." index="1"]

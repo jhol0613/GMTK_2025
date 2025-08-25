@@ -12,3 +12,4 @@ available_actions = Array[int]([4, 5])
 position = Vector2(144, 61)
 direction = 3
 beam_length = 60
+activation_sequence = Array[bool]([false, false, false, false, true])

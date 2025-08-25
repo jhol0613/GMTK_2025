@@ -279,7 +279,7 @@ _data = {
 }
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_gmiso"]
-b = Vector2(0, 100)
+b = Vector2(60, 0)
 
 [node name="Laser" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_cep7i")
