@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=4 uid="uid://krk6lavhbs40"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_base/level_base.tscn" id="1_3l1p8"]
+
+[node name="LevelBase" instance=ExtResource("1_3l1p8")]
+conductor_spawn_beat = 8
+available_slots = 8
+available_actions = Array[int]([4, 3, 1, 2])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAAAAQAAwADAAAAAAADAAQAAwADAAAAABABAAIAAwADAAAAAAAHAAIAAwADAAAAAAAJAAIAAwADAAAAABACAAIAAwAAAAEAAAAIAAIAAwAAAAEAAAABAAQAAwAAAAEAAAACAAQAAwAAAAEAAAAGAAIAAAABAAAAAAAGAAMAAAABAAEAAAAGAAQAAAABAAIAAAAGAAUAAAABAAMAAAAIAAQAAgAAAAAAAAAIAAUAAgAAAAEAAAAJAAQAAgABAAAAAAAJAAUAAgABAAEAAAAFAAQAAwAAAAAAAAADAAIAAwAAAAEAAAAEAAIAAwADAAAAABA=")
