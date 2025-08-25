@@ -1,8 +1,8 @@
 extends Camera2D
 
-@export var default_strength := 12.0
+@export var default_strength := 6.0
 ##Higher numbers = faster fade
-@export var default_fade := 6.0
+@export var default_fade := 7.5
 
 @onready var _shake_strength := default_strength
 @onready var _shake_fade := default_fade
