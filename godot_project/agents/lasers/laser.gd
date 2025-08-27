@@ -45,8 +45,12 @@ func _construct():
 
 
 	# Laser collision
+	var new_shape = collision_shape.shape.duplicate()
+	new_shape.b = beam_line.points[1]
+	collision_shape.shape = new_shape
 	collision_shape.disabled = true
-	collision_shape.shape.b = beam_line.points[1]
+	
+	print(collision_shape.shape.b)
 
 func set_beam_length(new_length: int):
 	beam_length = new_length

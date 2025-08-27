@@ -39,7 +39,7 @@ tile_set = ExtResource("4_p76ks")
 
 [node name="Obstacles" type="TileMapLayer" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -13)
+position = Vector2(0, -7)
 tile_set = ExtResource("5_10qrp")
 
 [node name="BackWall" type="TileMapLayer" parent="."]

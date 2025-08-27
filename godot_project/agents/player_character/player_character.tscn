@@ -544,7 +544,7 @@ size = Vector2(20, 10)
 script = ExtResource("1_1ty04")
 success_emitter = NodePath("Sounds/Success")
 failure_emitter = NodePath("Sounds/Failure")
-collision = NodePath("Shadow/PlayerSprite/Area2D")
+collision = NodePath("Shadow/Area2D")
 jump_collision_timer = NodePath("JumpCollisionDisable")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_wkvkj")
@@ -614,11 +614,11 @@ script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="Area2D" type="Area2D" parent="Shadow/PlayerSprite"]
-position = Vector2(-1, 18)
+[node name="Area2D" type="Area2D" parent="Shadow"]
+position = Vector2(0, -11.3)
 collision_mask = 6
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/PlayerSprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/Area2D"]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_lda0w")
 
@@ -659,5 +659,5 @@ event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
 [node name="JumpCollisionDisable" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="area_entered" from="Shadow/PlayerSprite/Area2D" to="." method="_on_collision"]
+[connection signal="area_entered" from="Shadow/Area2D" to="." method="_on_collision"]
 [connection signal="timeout" from="JumpCollisionDisable" to="." method="on_jump_collision_disabled_expire"]
