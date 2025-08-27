@@ -82,6 +82,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
+		_advance_car_for_play(0.0)
 		advance_level()
 
 func load_next_level():
@@ -214,12 +215,14 @@ func _on_music_bar():
 
 func _on_action_sequencer_play_started() -> void:
 	_current_beat = 0
-	var tween = create_tween()
-	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
-	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
  
+func _advance_car_for_play(animation_time: float):
+	var tween = create_tween()
+	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
+	tween.tween_property(_train_center, "position", target_pos, animation_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 
 
 func _on_action_sequencer_replay_pressed() -> void:
