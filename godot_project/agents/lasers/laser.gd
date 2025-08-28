@@ -49,8 +49,6 @@ func _construct():
 	new_shape.b = beam_line.points[1]
 	collision_shape.shape = new_shape
 	collision_shape.disabled = true
-	
-	print(collision_shape.shape.b)
 
 func set_beam_length(new_length: int):
 	beam_length = new_length

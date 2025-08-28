@@ -1,0 +1,50 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://brb4bwq8xu0j"]
+
+[ext_resource type="Texture2D" uid="uid://dvx26k0y084ae" path="res://tilemaps/tilesheets/Passenger.png" id="5_ky82p"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mgk8y"]
+texture = ExtResource("5_ky82p")
+texture_region_size = Vector2i(32, 64)
+0:0/animation_columns = 2
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(4, 6)
+0:0/0/y_sort_origin = 24
+0:1/animation_columns = 2
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(4, 6)
+0:1/0/y_sort_origin = 20
+0:2/animation_columns = 2
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(4, 6)
+0:2/0/y_sort_origin = 24
+0:3/animation_columns = 2
+0:3/animation_frame_0/duration = 1.0
+0:3/animation_frame_1/duration = 1.0
+0:3/0 = 0
+0:3/0/texture_origin = Vector2i(-2, 6)
+0:3/0/y_sort_origin = 24
+0:4/animation_columns = 2
+0:4/animation_frame_0/duration = 1.0
+0:4/animation_frame_1/duration = 1.0
+0:4/0 = 0
+0:4/0/texture_origin = Vector2i(-4, 6)
+0:4/0/y_sort_origin = 24
+0:5/animation_columns = 2
+0:5/animation_frame_0/duration = 1.0
+0:5/animation_frame_1/duration = 1.0
+0:5/0 = 0
+0:5/0/texture_origin = Vector2i(-3, 6)
+0:5/0/y_sort_origin = 24
+
+[resource]
+tile_size = Vector2i(32, 19)
+navigation_layer_0/layers = 1
+custom_data_layer_0/name = "Traversible"
+custom_data_layer_0/type = 1
+sources/4 = SubResource("TileSetAtlasSource_mgk8y")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=29 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://agents/player_character/player_character.tscn" id="3_oyr8j"]
+[ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://levels/newLevels/level1-1.tscn" id="4_0dlna"]
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/newLevels/level1-14.tscn" id="4_g2xd3"]
 [ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://level_manager/background/snowflake.png" id="7_yunoc"]
 [ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://level_manager/background/snow_material.tres" id="8_dqmx2"]
@@ -77,7 +78,7 @@ initial_train_position = Vector2(132, 190)
 brightness = 1.0
 contrast = 1.0
 saturation = 0.5
-level_list = Array[PackedScene]([ExtResource("14_galoq"), ExtResource("11_yvnug"), ExtResource("12_eli24"), ExtResource("13_u7ynm"), ExtResource("14_galoq"), ExtResource("4_g2xd3")])
+level_list = Array[PackedScene]([ExtResource("4_0dlna"), ExtResource("11_yvnug"), ExtResource("12_eli24"), ExtResource("13_u7ynm"), ExtResource("14_galoq"), ExtResource("4_g2xd3")])
 
 [node name="ShaderLayer" type="CanvasLayer" parent="."]
 
