@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dntjpfyfjhb7w"
-path="res://.godot/imported/snowflake.png-652e10cd61b35d57fa91705495c83218.ctex"
+uid="uid://csd70wwn77q11"
+path="res://.godot/imported/Tracks.png-8c0076af838670996e3a0fb249c04f53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/snowflake.png"
-dest_files=["res://.godot/imported/snowflake.png-652e10cd61b35d57fa91705495c83218.ctex"]
+source_file="res://backgrounds/world1/Tracks.png"
+dest_files=["res://.godot/imported/Tracks.png-8c0076af838670996e3a0fb249c04f53.ctex"]
 
 [params]
 

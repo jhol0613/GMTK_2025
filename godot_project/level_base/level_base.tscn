@@ -8,7 +8,7 @@
 [ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="6_cjwl0"]
 [ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="7_uv04d"]
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="7_x6ye1"]
-[ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://level_manager/background/car_connector.png" id="8_4d8y1"]
+[ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://backgrounds/world1/car_connector.png" id="8_4d8y1"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.716783)

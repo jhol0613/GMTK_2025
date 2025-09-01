@@ -4,12 +4,10 @@ extends Camera2D
 ##Higher numbers = faster fade
 @export var default_fade := 7.5
 
-@onready var _shake_strength := default_strength
 @onready var _shake_fade := default_fade
 
 var rng = RandomNumberGenerator.new()
 var _current_shake_strength := 0.0
-var _shaking = true
 
 func _ready() -> void:
 	pass

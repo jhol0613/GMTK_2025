@@ -1,27 +1,22 @@
-[gd_scene load_steps=29 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=24 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://agents/player_character/player_character.tscn" id="3_oyr8j"]
-[ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://levels/newLevels/level1-1.tscn" id="4_0dlna"]
-[ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/newLevels/level1-14.tscn" id="4_g2xd3"]
-[ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://level_manager/background/snowflake.png" id="7_yunoc"]
-[ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://level_manager/background/snow_material.tres" id="8_dqmx2"]
+[ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://backgrounds/world1/snowflake.png" id="7_yunoc"]
+[ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://backgrounds/world1/snow_material.tres" id="8_dqmx2"]
 [ext_resource type="Texture2D" uid="uid://c6r7se21vvsjk" path="res://level_manager/Vignette.png" id="9_aoawx"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer.tscn" id="9_hv4d1"]
-[ext_resource type="Texture2D" uid="uid://csd70wwn77q11" path="res://level_manager/background/Tracks.png" id="10_r8183"]
-[ext_resource type="Texture2D" uid="uid://dip8yg5mg0v8t" path="res://level_manager/background/Snowfloor.png" id="11_y8q0i"]
-[ext_resource type="PackedScene" uid="uid://dqleuvyixoqjp" path="res://levels/newLevels/level1-10.tscn" id="11_yvnug"]
-[ext_resource type="Texture2D" uid="uid://bsqe55ncksgbo" path="res://level_manager/background/Treesclose.png" id="12_bjkct"]
-[ext_resource type="PackedScene" uid="uid://bksx64kgphvmo" path="res://levels/newLevels/level1-11.tscn" id="12_eli24"]
-[ext_resource type="Texture2D" uid="uid://dl4gj5ppttyse" path="res://level_manager/background/Treesfar.png" id="13_32fjc"]
-[ext_resource type="PackedScene" uid="uid://ej8hk3h8ibcr" path="res://levels/newLevels/level1-12.tscn" id="13_u7ynm"]
-[ext_resource type="PackedScene" uid="uid://cwr6q03gr1165" path="res://levels/newLevels/level1-13.tscn" id="14_galoq"]
-[ext_resource type="Texture2D" uid="uid://djejxgkwpk8ea" path="res://level_manager/background/Mountains.png" id="14_t7li4"]
-[ext_resource type="Texture2D" uid="uid://bydlsgvji1lns" path="res://level_manager/background/Cloudsclose.png" id="15_cd10y"]
-[ext_resource type="Texture2D" uid="uid://cex205ebtfbhn" path="res://level_manager/background/Cloudfar.png" id="16_sxf1l"]
-[ext_resource type="Texture2D" uid="uid://f6iq7ujhjxih" path="res://level_manager/background/Stars.png" id="17_okyf0"]
-[ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://level_manager/background/Sky.png" id="18_o52lx"]
+[ext_resource type="Resource" uid="uid://bhskeg8clmay6" path="res://level_manager/level_catalog.tres" id="10_4koax"]
+[ext_resource type="Texture2D" uid="uid://csd70wwn77q11" path="res://backgrounds/world1/Tracks.png" id="10_r8183"]
+[ext_resource type="Texture2D" uid="uid://dip8yg5mg0v8t" path="res://backgrounds/world1/Snowfloor.png" id="11_y8q0i"]
+[ext_resource type="Texture2D" uid="uid://bsqe55ncksgbo" path="res://backgrounds/world1/Treesclose.png" id="12_bjkct"]
+[ext_resource type="Texture2D" uid="uid://dl4gj5ppttyse" path="res://backgrounds/world1/Treesfar.png" id="13_32fjc"]
+[ext_resource type="Texture2D" uid="uid://djejxgkwpk8ea" path="res://backgrounds/world1/Mountains.png" id="14_t7li4"]
+[ext_resource type="Texture2D" uid="uid://bydlsgvji1lns" path="res://backgrounds/world1/Cloudsclose.png" id="15_cd10y"]
+[ext_resource type="Texture2D" uid="uid://cex205ebtfbhn" path="res://backgrounds/world1/Cloudfar.png" id="16_sxf1l"]
+[ext_resource type="Texture2D" uid="uid://f6iq7ujhjxih" path="res://backgrounds/world1/Stars.png" id="17_okyf0"]
+[ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://backgrounds/world1/Sky.png" id="18_o52lx"]
 [ext_resource type="Script" uid="uid://rvmpbi1h4oil" path="res://level_manager/shake_camera.gd" id="19_xwfi3"]
 [ext_resource type="Shader" uid="uid://ddfo0lf2lp4ro" path="res://level_manager/level_manager.gdshader" id="21_grapr"]
 
@@ -78,7 +73,7 @@ initial_train_position = Vector2(132, 190)
 brightness = 1.0
 contrast = 1.0
 saturation = 0.5
-level_list = Array[PackedScene]([ExtResource("4_0dlna"), ExtResource("11_yvnug"), ExtResource("12_eli24"), ExtResource("13_u7ynm"), ExtResource("14_galoq"), ExtResource("4_g2xd3")])
+level_catalog = ExtResource("10_4koax")
 
 [node name="ShaderLayer" type="CanvasLayer" parent="."]
 

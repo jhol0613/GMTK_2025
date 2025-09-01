@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=4 uid="uid://cwr6q03gr1165"]
 
-[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_base/level_base.tscn" id="1_sv4kh"]
-[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_dvyco"]
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_base/level_base.tscn" id="1_n8u0y"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_2k2ns"]
 
-[node name="LevelBase" instance=ExtResource("1_sv4kh")]
+[node name="LevelBase" instance=ExtResource("1_n8u0y")]
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 30
 available_slots = 8
@@ -12,11 +12,11 @@ available_actions = Array[int]([4, 3, 1, 2, 5])
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAAAAAAAgAAAAAAAAAAAAEAAgAAAAEAAAAEAAAAAAACAAAAAAAEAAEAAAACAAEAAAAEAAIAAAACAAIAAAAEAAMAAAACAAMAAAAIAAAAAAABAAAAAAAIAAEAAAABAAEAAAAIAAIAAAABAAIAAAAIAAMAAAABAAMAAAACAAAAAAAFAAAAAAACAAEAAAAFAAEAAAACAAIAAAAFAAIAAAACAAMAAAAFAAMAAAAGAAAAAAAFAAAAAAAGAAEAAAAFAAEAAAAGAAIAAAAFAAIAAAAGAAMAAAAFAAMAAAAJAAAAAAABAAAAABAJAAEAAAABAAEAABAJAAIAAAABAAIAABAJAAMAAAABAAMAABAFAAEAAgACAAAAAAAFAAIAAgACAAEAAAADAAQAAgAAAAAAAAADAAUAAgAAAAEAAAADAAMAAwAAAAAAAAAHAAMAAwAAAAAAAAAEAAUAAwABAAAAAAAFAAQAAgAAAAAAAAAFAAUAAgAAAAEAAAAGAAQAAgAAAAAAAAAGAAUAAgAAAAEAAAABAAUAAgADAAEAAAAHAAUAAgADAAEAAAAJAAUAAgADAAEAAAACAAUAAgAEAAEAAAAIAAUAAgAEAAEAAAAKAAUAAgAEAAEAAAA=")
 
-[node name="Laser" parent="." index="8" instance=ExtResource("2_dvyco")]
+[node name="Laser" parent="." index="8" instance=ExtResource("2_2k2ns")]
 position = Vector2(48, 3)
 beam_length = 75
 
-[node name="Laser2" parent="." index="9" instance=ExtResource("2_dvyco")]
+[node name="Laser2" parent="." index="9" instance=ExtResource("2_2k2ns")]
 position = Vector2(17, 79)
 direction = 3
 beam_length = 321

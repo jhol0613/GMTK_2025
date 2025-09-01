@@ -1,7 +1,7 @@
 [gd_scene load_steps=28 format=3 uid="uid://bis4mmgrdtses"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_base/level_base.tscn" id="1_apvbp"]
-[ext_resource type="Texture2D" uid="uid://bqas277c1yr20" path="res://level_manager/background/Typing Monkey.png" id="2_5gdua"]
+[ext_resource type="Texture2D" uid="uid://bqas277c1yr20" path="res://backgrounds/world1/Typing Monkey.png" id="2_5gdua"]
 [ext_resource type="Texture2D" uid="uid://dcxmub4vesxf1" path="res://decorations/Cheese.png" id="3_8cfvx"]
 [ext_resource type="Texture2D" uid="uid://dwt1i2perxwss" path="res://decorations/EatingMouse.png" id="4_vgi8s"]
 [ext_resource type="Texture2D" uid="uid://do2qch2t3moop" path="res://decorations/RunningMouse.png" id="5_vgi8s"]
@@ -164,6 +164,8 @@ animations = [{
 }]
 
 [node name="TilemapLevelBase" instance=ExtResource("1_apvbp")]
+available_slots = 1
+available_actions = Array[int]([4])
 
 [node name="Node2D" type="Node2D" parent="." index="8"]
 position = Vector2(147.582, -3.54602)

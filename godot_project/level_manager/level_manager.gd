@@ -33,7 +33,8 @@ extends Node2D
 
 @export_category("Levels")
 ## All train cars in order
-@export var level_list: Array[PackedScene]
+#@export var level_list: Array[PackedScene]
+@export var level_catalog: LevelCatalog
 
 
 @onready var _level_scene : RhythmRailLevel
@@ -58,7 +59,9 @@ var _current_beat := 0
 var _replay_enabled := true 
 
 func _ready() -> void:
-	_level_scene = level_list[0].instantiate()
+	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
+	
+	#_level_scene = level_list[0].instantiate()
 	_on_the_train.add_child(_level_scene)
 
 	_level_scene.position = initial_train_position
@@ -86,7 +89,14 @@ func _input(event: InputEvent) -> void:
 		advance_level()
 
 func load_next_level():
-	_next_level = level_list[(_level_number + 1) % level_list.size()].instantiate()
+	#_next_level = level_list[(_level_number + 1) % level_list.size()].instantiate()
+	var _next_level_packed = GameManager.level_catalog.get_next_level()
+	if _next_level_packed != null:
+		_next_level = _next_level_packed.instantiate()
+	else: # for now, loop to first level at game end
+		_next_level = GameManager.level_catalog.get_level(0,0).instantiate()
+	if GameManager.level_catalog.is_new_world():
+		print("New World level loaded")
 	_on_the_train.call_deferred("add_child", _next_level)
 	_next_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
 

@@ -113,8 +113,15 @@ DebugAction={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Triggers"
 2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Collectibles"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
+
+[rhythm_rail]
+
+DeveloperOptions/test_world=1
+DeveloperOptions/test_level=1
+DeveloperOptions/run_test_level_on_startup=true

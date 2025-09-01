@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csd70wwn77q11"
-path="res://.godot/imported/Tracks.png-7955aaa8d1de12bff089aa90600438a4.ctex"
+uid="uid://bqas277c1yr20"
+path="res://.godot/imported/Typing Monkey.png-3dda48e5920f2676f4fcca0be94afa63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/Tracks.png"
-dest_files=["res://.godot/imported/Tracks.png-7955aaa8d1de12bff089aa90600438a4.ctex"]
+source_file="res://backgrounds/world1/Typing Monkey.png"
+dest_files=["res://.godot/imported/Typing Monkey.png-3dda48e5920f2676f4fcca0be94afa63.ctex"]
 
 [params]
 

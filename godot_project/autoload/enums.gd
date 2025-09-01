@@ -53,6 +53,11 @@ enum Scenes {
 	PAUSE
 }
 
+enum TransitionStyle {
+	NONE,
+	FADEINOUT
+}
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP:

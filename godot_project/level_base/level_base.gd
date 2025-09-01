@@ -30,6 +30,13 @@ signal target_reached
 
 var path_grid: AStarGrid2D
 
+func _enter_tree() -> void:
+	if get_parent() == get_tree().root:
+		var index = GameManager.level_catalog.get_index(self)
+		GameManager.start_world = index.get("world")
+		GameManager.start_level = index.get("level")
+		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
+
 func _ready() -> void:
 	for child in get_children():
 		if child is Agent:

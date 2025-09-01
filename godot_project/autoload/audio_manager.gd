@@ -8,7 +8,6 @@ extends FmodBankLoader
 @onready var music_event = $MusicEvent
 
 signal music_bar
-signal music_beat(beat: int)
 
 # Parameter values for music modes
 @onready var _mode_dictionary = {
@@ -17,7 +16,6 @@ signal music_beat(beat: int)
 	Enums.MusicMode.RUNNING: 1.0
 }
 
-var _beat = 0
 # Ensure time change only happens on a beat that makes sense in the new time
 @onready var _bar := 0
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsqe55ncksgbo"
-path="res://.godot/imported/Treesclose.png-a72c1394c1170f17923ccb2aa660d727.ctex"
+uid="uid://dip8yg5mg0v8t"
+path="res://.godot/imported/Snowfloor.png-0a110d25b92bcb110466b22af0f295e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/Treesclose.png"
-dest_files=["res://.godot/imported/Treesclose.png-a72c1394c1170f17923ccb2aa660d727.ctex"]
+source_file="res://backgrounds/world1/Snowfloor.png"
+dest_files=["res://.godot/imported/Snowfloor.png-0a110d25b92bcb110466b22af0f295e4.ctex"]
 
 [params]
 

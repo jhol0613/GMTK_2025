@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqas277c1yr20"
-path="res://.godot/imported/Typing Monkey.png-5392e60a848daa10b1a82411a3fbd468.ctex"
+uid="uid://cex205ebtfbhn"
+path="res://.godot/imported/Cloudfar.png-c2b82fa56a17caf2e3a1e52460839f20.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/Typing Monkey.png"
-dest_files=["res://.godot/imported/Typing Monkey.png-5392e60a848daa10b1a82411a3fbd468.ctex"]
+source_file="res://backgrounds/world1/Cloudfar.png"
+dest_files=["res://.godot/imported/Cloudfar.png-c2b82fa56a17caf2e3a1e52460839f20.ctex"]
 
 [params]
 

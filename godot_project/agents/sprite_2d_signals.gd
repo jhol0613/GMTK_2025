@@ -9,8 +9,8 @@ class_name AnimatedSprite2DSignals
 
 signal animation_signal(signal_id: String)
 	
-func play_with_signals(name: StringName = &"", custom_speed: float = 1.0, from_end: bool = false):
-	play(name, custom_speed, from_end)
+func play_with_signals(animation_name: StringName = &"", custom_speed: float = 1.0, from_end: bool = false):
+	play(animation_name, custom_speed, from_end)
 	if !sprite_frames.has_animation(name):
 		return
 

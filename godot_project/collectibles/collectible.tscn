@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://dtwktrcf8naij"]
+
+[ext_resource type="Script" uid="uid://ce7pnxivjemsb" path="res://collectibles/collectible.gd" id="1_k5esu"]
+[ext_resource type="Texture2D" uid="uid://tnwnw8oanb0n" path="res://collectibles/placeholder.png" id="1_m0tds"]
+[ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_k5esu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjpvi"]
+atlas = ExtResource("1_m0tds")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aa1be"]
+atlas = ExtResource("1_m0tds")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_our3d"]
+atlas = ExtResource("1_m0tds")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u11dx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjpvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa1be")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_our3d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aa1be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjpvi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17veg"]
+
+[node name="Collectible" type="Node2D"]
+script = ExtResource("1_k5esu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_u11dx")
+frame_progress = 0.251532
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_k5esu")
+
+[node name="CollisionShape2D" type="Area2D" parent="Shadow"]
+position = Vector2(-1, -9)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/CollisionShape2D"]
+position = Vector2(1, 8)
+shape = SubResource("RectangleShape2D_17veg")
+
+[connection signal="area_entered" from="Shadow/CollisionShape2D" to="." method="_on_collision_shape_2d_area_entered"]

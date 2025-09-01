@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://biw3rlelfmcyf"
-path="res://.godot/imported/car_connector.png-3afb01661a445e1585cb277aa3279191.ctex"
+uid="uid://f6iq7ujhjxih"
+path="res://.godot/imported/Stars.png-6cb5dc3f480a2d07e0b49431784a6760.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/car_connector.png"
-dest_files=["res://.godot/imported/car_connector.png-3afb01661a445e1585cb277aa3279191.ctex"]
+source_file="res://backgrounds/world1/Stars.png"
+dest_files=["res://.godot/imported/Stars.png-6cb5dc3f480a2d07e0b49431784a6760.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dl4gj5ppttyse"
-path="res://.godot/imported/Treesfar.png-25f8a9a0b78f6b0d31d19fb94a9092be.ctex"
+uid="uid://bydlsgvji1lns"
+path="res://.godot/imported/Cloudsclose.png-f90c9ce3e33e50332920d666b62a8d4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/Treesfar.png"
-dest_files=["res://.godot/imported/Treesfar.png-25f8a9a0b78f6b0d31d19fb94a9092be.ctex"]
+source_file="res://backgrounds/world1/Cloudsclose.png"
+dest_files=["res://.godot/imported/Cloudsclose.png-f90c9ce3e33e50332920d666b62a8d4a.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bydlsgvji1lns"
-path="res://.godot/imported/Cloudsclose.png-5939a896c665ad75c04b96b4675345a1.ctex"
+uid="uid://b62e16ypu1bjs"
+path="res://.godot/imported/Sky.png-ed1406b74ee85ffa5a9d22f80dae96de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_manager/background/Cloudsclose.png"
-dest_files=["res://.godot/imported/Cloudsclose.png-5939a896c665ad75c04b96b4675345a1.ctex"]
+source_file="res://backgrounds/world1/Sky.png"
+dest_files=["res://.godot/imported/Sky.png-ed1406b74ee85ffa5a9d22f80dae96de.ctex"]
 
 [params]
 
