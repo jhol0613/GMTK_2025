@@ -38,6 +38,7 @@ extends Node2D
 
 
 @onready var _level_scene : RhythmRailLevel
+@onready var _world_scene : Node = GameManager.level_catalog.get_world_scene().instantiate()
 @onready var _action_sequencer : ActionSequencer = $SequencerLayer/ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
 # needs to exist since you can't animate x and y values for on the train separately, don't want train rock
@@ -63,6 +64,7 @@ func _ready() -> void:
 	
 	#_level_scene = level_list[0].instantiate()
 	_on_the_train.add_child(_level_scene)
+	add_child(_world_scene)
 
 	_level_scene.position = initial_train_position
 

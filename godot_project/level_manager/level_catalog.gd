@@ -51,4 +51,7 @@ func get_next_level() -> PackedScene:
 func is_new_world() -> bool:
 	return !_previous_world == _current_world
 	
+func get_world_scene() -> PackedScene:
+	return world_definitions[_current_world].world_scene
+	
 	
