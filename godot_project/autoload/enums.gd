@@ -58,6 +58,13 @@ enum TransitionStyle {
 	FADEINOUT
 }
 
+enum CollectibleType {
+	## Collectibles that only persist in the level where they're collected
+	IN_LEVEL,
+	## Collectibles that should be noted in the save-game file
+	SAVED
+}
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP:

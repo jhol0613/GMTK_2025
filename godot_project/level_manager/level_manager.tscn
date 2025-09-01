@@ -1,10 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=13 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://agents/player_character/player_character.tscn" id="3_oyr8j"]
-[ext_resource type="Texture2D" uid="uid://dntjpfyfjhb7w" path="res://backgrounds/world1/snowflake.png" id="7_yunoc"]
-[ext_resource type="Material" uid="uid://b1y2pfj1dlc3r" path="res://backgrounds/world1/snow_material.tres" id="8_dqmx2"]
 [ext_resource type="Texture2D" uid="uid://c6r7se21vvsjk" path="res://level_manager/Vignette.png" id="9_aoawx"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer.tscn" id="9_hv4d1"]
 [ext_resource type="Resource" uid="uid://bhskeg8clmay6" path="res://level_manager/level_catalog.tres" id="10_4koax"]
@@ -79,13 +77,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-position = Vector2(621, -11)
-amount = 1500
-texture = ExtResource("7_yunoc")
-lifetime = 4.35
-process_material = ExtResource("8_dqmx2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

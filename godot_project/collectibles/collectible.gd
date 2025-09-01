@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var CollectibleType := Enums.Collectibles.GENERIC
+@export var type := Enums.CollectibleType.SAVED
+@export var id := "None"
 
 @onready var collision_shape = $Shadow/CollisionShape2D
 
@@ -12,9 +13,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func collect(type: Enums.Collectibles):
-	GameManager.add_to_inventory(type)
+func collect():
+	if type == Enums.CollectibleType.SAVED:
+		GameManager.save_collectible(id)
 
 func _on_collision_shape_2d_area_entered(area: Area2D) -> void:
-	collect(CollectibleType)
-	pass # Replace with function body.
+	collect()

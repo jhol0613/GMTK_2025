@@ -5,6 +5,9 @@ extends Node2D
 ## Scenes must explicitly set pause enabled to true
 @export var pause_enabled := false
 
+@export_subgroup("Save Files")
+@export var save_file := "user://save_data.tres"
+
 @export_subgroup("Animation")
 @export var default_fade_out_time := 1.0
 @export var default_fade_in_time := 1.0
@@ -19,8 +22,18 @@ extends Node2D
 
 @onready var _pause_layer: CanvasLayer
 
+var _save_data: SaveData
+
 func _ready():
+	_load_save_data()
 	pass
+	
+func _load_save_data():
+	if FileAccess.file_exists(save_file):
+		_save_data = ResourceLoader.load(save_file).duplicate(true)
+	else:
+		_save_data = SaveData.new()
+		DirAccess.make_dir_absolute(save_file)
 
 func load_scene(scene: Enums.Scenes, transition_style = Enums.TransitionStyle.FADEINOUT, transition_in_time = default_fade_in_time,
 	transition_out_time = default_fade_out_time):
@@ -48,8 +61,12 @@ func unpause_game():
 	get_tree().paused = false
 	_pause_layer.queue_free()
 	
-func collect():
+func update_furthest_level_reached(world: int, level: int):
 	pass
+	
+func save_collectible(id: String):
+	_save_data.collectibles_acquired.append(id)
+	ResourceSaver.save(_save_data, save_file)
 	
 func _load_scene(scene_to_load: Enums.Scenes):
 	get_tree().call_deferred("change_scene_to_packed", scene_dict.get(scene_to_load))
