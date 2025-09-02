@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cd8pqkqbg8nrr"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://cd8pqkqbg8nrr"]
 
 [ext_resource type="Texture2D" uid="uid://cb58xpr7hprei" path="res://tilemaps/tilesheets/floortiles.png" id="1_suaeb"]
 [ext_resource type="Texture2D" uid="uid://d3yicosfk1pl" path="res://tilemaps/tilesheets/Transitionfloor.png" id="2_hnw0k"]
+[ext_resource type="Texture2D" uid="uid://dbivpyqcmdmss" path="res://tilemaps/tilesheets/Secondfloor.png" id="3_h7dfu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s4tib"]
 texture = ExtResource("1_suaeb")
@@ -21,9 +22,18 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h168v"]
+texture = ExtResource("3_h7dfu")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 19)
 custom_data_layer_0/name = "traversible"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_s4tib")
 sources/1 = SubResource("TileSetAtlasSource_boq8t")
+sources/2 = SubResource("TileSetAtlasSource_h168v")

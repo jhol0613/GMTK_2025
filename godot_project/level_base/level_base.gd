@@ -25,12 +25,16 @@ class_name RhythmRailLevel
 
 # array of all agents in the level that aren't player and conductor
 var static_agents := []
+# array of all collectibles in the level
+var collectibles := []
 
 signal target_reached
 
 var path_grid: AStarGrid2D
 
 func _enter_tree() -> void:
+	# If scene is started and isn't the child of the level manager, load itself properly via the level manager.
+	# this allows you to play a level with F6 if you have it open in the editor and it's in the level catalog
 	if get_parent() == get_tree().root:
 		var index = GameManager.level_catalog.get_index(self)
 		GameManager.start_world = index.get("world")
@@ -41,6 +45,8 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Agent:
 			static_agents.append(child)
+		if child is Collectible:
+			collectibles.append(child)
 	_initialize_path_finding()
 
 

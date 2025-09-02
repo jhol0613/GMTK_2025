@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b62e16ypu1bjs" path="res://backgrounds/world1/Sky.png" id="11_p2gav"]
 
 [node name="World1Background" type="Node2D"]
+z_index = -100
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(621, -11)

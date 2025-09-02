@@ -219,6 +219,9 @@ func _reset_level() -> void:
 	
 	_fade_to_thinking_shader()
 	_replay_enabled = true
+	
+	for collectible in _level_scene.collectibles:
+		collectible.reset()
 
 
 func _on_music_bar():
@@ -257,6 +260,8 @@ func _on_car_position_moved_back():
 func _on_level_complete() -> void:
 	_player_character.disable_collisions()
 	_player_character.notify_success()
+	for collectible in _level_scene.collectibles:
+		collectible.collect_if_queued()
 	advance_level()
 	_replay_enabled = false
 	

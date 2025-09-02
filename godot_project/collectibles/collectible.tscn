@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtwktrcf8naij"]
+[gd_scene load_steps=11 format=3 uid="uid://dtwktrcf8naij"]
 
 [ext_resource type="Script" uid="uid://ce7pnxivjemsb" path="res://collectibles/collectible.gd" id="1_k5esu"]
 [ext_resource type="Texture2D" uid="uid://tnwnw8oanb0n" path="res://collectibles/placeholder.png" id="1_m0tds"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_k5esu"]
+[ext_resource type="Curve" uid="uid://cmtntxx3ce38e" path="res://collectibles/collectible_curve.tres" id="2_pjpvi"]
+[ext_resource type="Curve" uid="uid://7ugs1ovuv74r" path="res://collectibles/collectible_scale_curve.tres" id="3_aa1be"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjpvi"]
 atlas = ExtResource("1_m0tds")
@@ -40,25 +42,28 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17veg"]
+size = Vector2(20, 14)
 
 [node name="Collectible" type="Node2D"]
 script = ExtResource("1_k5esu")
+collected_y_curve = ExtResource("2_pjpvi")
+collected_scale_curve = ExtResource("3_aa1be")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_u11dx")
-frame_progress = 0.251532
+autoplay = "default"
 
 [node name="Shadow" type="Sprite2D" parent="."]
-z_index = -1
 texture = ExtResource("2_k5esu")
 
-[node name="CollisionShape2D" type="Area2D" parent="Shadow"]
+[node name="CollisionArea" type="Area2D" parent="Shadow"]
 position = Vector2(-1, -9)
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/CollisionShape2D"]
-position = Vector2(1, 8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/CollisionArea"]
+position = Vector2(1, 9)
 shape = SubResource("RectangleShape2D_17veg")
 
-[connection signal="area_entered" from="Shadow/CollisionShape2D" to="." method="_on_collision_shape_2d_area_entered"]
+[connection signal="area_entered" from="Shadow/CollisionArea" to="." method="_on_collision_shape_2d_area_entered"]

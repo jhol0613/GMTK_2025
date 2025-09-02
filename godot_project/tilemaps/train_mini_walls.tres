@@ -1,7 +1,8 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dtbtqvpvt1qm3"]
+[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://dtbtqvpvt1qm3"]
 
 [ext_resource type="Texture2D" uid="uid://cuqjtegey05u4" path="res://tilemaps/tilesheets/outsidetiles.png" id="1_h613x"]
 [ext_resource type="Texture2D" uid="uid://d3yicosfk1pl" path="res://tilemaps/tilesheets/Transitionfloor.png" id="2_6a3jm"]
+[ext_resource type="Texture2D" uid="uid://dyg8rapld1r7u" path="res://tilemaps/tilesheets/Secondoutside.png" id="3_nrtq5"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_h613x"]
 tile_data = PackedInt32Array(0, 0, 8, 65536, 65536, 8, 131072, 65536, 8, 196608, 65536, 8, 262144, 65536, 8, 327680, 65536, 8, 393216, 65536, 8, 458752, 0, 9, 524288, 65536, 10, 589824, 65536, 10, 655360, 65536, 10, 720896, 65536, 10, 786432, 0, 10, 851968, 0, 11)
@@ -78,8 +79,62 @@ texture = ExtResource("2_6a3jm")
 2:1/0 = 0
 3:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_533wt"]
+texture = ExtResource("3_nrtq5")
+0:2/size_in_atlas = Vector2i(1, 2)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(11, 0)
+1:2/size_in_atlas = Vector2i(1, 2)
+1:2/0 = 0
+1:2/0/texture_origin = Vector2i(12, 0)
+1:0/size_in_atlas = Vector2i(1, 2)
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(12, 0)
+0:0/size_in_atlas = Vector2i(1, 2)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(11, 0)
+0:4/size_in_atlas = Vector2i(2, 2)
+0:4/0 = 0
+0:6/size_in_atlas = Vector2i(2, 2)
+0:6/0 = 0
+0:8/size_in_atlas = Vector2i(2, 2)
+0:8/0 = 0
+0:10/size_in_atlas = Vector2i(2, 2)
+0:10/0 = 0
+0:12/size_in_atlas = Vector2i(2, 2)
+0:12/0 = 0
+0:14/size_in_atlas = Vector2i(2, 2)
+0:14/0 = 0
+0:16/size_in_atlas = Vector2i(2, 2)
+0:16/0 = 0
+0:18/size_in_atlas = Vector2i(2, 2)
+0:18/0 = 0
+0:20/size_in_atlas = Vector2i(2, 2)
+0:20/0 = 0
+0:22/size_in_atlas = Vector2i(2, 2)
+0:22/0 = 0
+0:24/size_in_atlas = Vector2i(2, 2)
+0:24/0 = 0
+0:26/size_in_atlas = Vector2i(2, 2)
+0:26/0 = 0
+0:28/size_in_atlas = Vector2i(2, 2)
+0:28/0 = 0
+0:30/size_in_atlas = Vector2i(2, 2)
+0:30/0 = 0
+0:32/size_in_atlas = Vector2i(2, 2)
+0:32/0 = 0
+0:34/size_in_atlas = Vector2i(2, 2)
+0:34/0 = 0
+0:40/0 = 0
+1:40/0 = 0
+0:36/0 = 0
+1:36/0 = 0
+0:38/0 = 0
+1:38/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6a3jm")
 sources/1 = SubResource("TileSetAtlasSource_svw4q")
+sources/2 = SubResource("TileSetAtlasSource_533wt")
 pattern_0 = SubResource("TileMapPattern_h613x")

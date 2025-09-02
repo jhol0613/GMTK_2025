@@ -1,6 +1,7 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://brb4bwq8xu0j"]
+[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://brb4bwq8xu0j"]
 
 [ext_resource type="Texture2D" uid="uid://s04k1qwhev7y" path="res://tilemaps/tilesheets/tabledressing.png" id="1_by52y"]
+[ext_resource type="Texture2D" uid="uid://dpk7ra1o1kw7x" path="res://tilemaps/tilesheets/Headlamps.png" id="2_a23um"]
 [ext_resource type="Texture2D" uid="uid://dvx26k0y084ae" path="res://tilemaps/tilesheets/Passenger.png" id="5_ky82p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a23um"]
@@ -8,17 +9,26 @@ texture = ExtResource("1_by52y")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/texture_origin = Vector2i(0, 9)
-0:0/0/z_index = 1
+0:0/0/y_sort_origin = 8
 1:0/0 = 0
-1:0/0/z_index = 1
+1:0/0/y_sort_origin = 24
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 10)
-2:0/0/z_index = 1
+2:0/0/y_sort_origin = 20
 0:1/0 = 0
 0:1/0/texture_origin = Vector2i(0, 10)
-0:1/0/z_index = 1
+0:1/0/y_sort_origin = 20
 1:1/0 = 0
-1:1/0/z_index = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yhtlq"]
+texture = ExtResource("2_a23um")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 13)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 13)
+0:2/0 = 0
+0:2/0/texture_origin = Vector2i(0, 13)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mgk8y"]
 texture = ExtResource("5_ky82p")
@@ -67,3 +77,4 @@ custom_data_layer_0/name = "Traversible"
 custom_data_layer_0/type = 1
 sources/4 = SubResource("TileSetAtlasSource_mgk8y")
 sources/0 = SubResource("TileSetAtlasSource_a23um")
+sources/1 = SubResource("TileSetAtlasSource_yhtlq")

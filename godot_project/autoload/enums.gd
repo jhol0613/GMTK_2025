@@ -65,6 +65,11 @@ enum CollectibleType {
 	SAVED
 }
 
+enum SaveDataItem {
+	COLLECTIBLES_ACQUIRED,
+	FARTHEST_LEVEL_REACHED
+}
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP:
