@@ -23,9 +23,11 @@ class_name RhythmRailLevel
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 
-# array of all agents in the level that aren't player and conductor
-var static_agents := []
-# array of all collectibles in the level
+# agents in the level to call update function to
+var agents := []
+# movables in the level except the player and conductor
+var movables := []
+# collectibles in the level
 var collectibles := []
 
 signal target_reached
@@ -43,10 +45,15 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	for child in get_children():
-		if child is Agent:
-			static_agents.append(child)
-		if child is Collectible:
+		if child is Agent: # movables are probably fine being in here
+			agents.append(child)
+		if child is Movable:
+			movables.append(child)
+		if child is Collectible: # TODO: add collectibles into agent hierarchy
 			collectibles.append(child)
+	for agent in agents:
+		agent.local_origin = map_to_local(Vector2i.ZERO)
+		agent.tile_size = get_tile_size()
 	_initialize_path_finding()
 
 

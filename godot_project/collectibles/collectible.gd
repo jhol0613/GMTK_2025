@@ -1,4 +1,4 @@
-extends Node2D
+extends Agent
 
 class_name Collectible
 
@@ -19,13 +19,9 @@ class_name Collectible
 
 @onready var queued_for_collect = false
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _ready() -> void:
+	super._ready()
 
 ## Saves a collectible to the save file if it's been queued for collect
 func collect_if_queued():
@@ -39,6 +35,7 @@ func reset():
 	sprite.position = _sprite_initial_position
 	sprite.scale = Vector2(1,1)
 	sprite.play("default")
+	super.reset()
 
 func _on_collision_shape_2d_area_entered(area: Area2D) -> void:
 	collision_area.collision_layer = 0;
@@ -46,11 +43,11 @@ func _on_collision_shape_2d_area_entered(area: Area2D) -> void:
 	var tween = create_tween()
 	tween.tween_method(_triggered_callback.bind(), 0.0, 1.0, collected_duration)
 	tween.connect("finished", _on_triggered)
-	
+
 func _triggered_callback(alpha: float):
 	sprite.position.y = -collected_y_curve.sample(alpha) * collected_y_magnitude + _sprite_initial_position.y
 	sprite.scale.x = collected_scale_curve.sample(alpha)
 	sprite.scale.y = sprite.scale.x
-	
+
 func _on_triggered():
 	visible = false
