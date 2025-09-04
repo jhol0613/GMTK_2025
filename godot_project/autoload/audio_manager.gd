@@ -4,7 +4,7 @@ extends FmodBankLoader
 ##Should be a multiple of 2 to avoid strange results
 @export var time_multiplier := Enums.TimeMultiplier.SINGLE: set = _time_multiplier_changed
 		
-@onready var beat_time_seconds := 60.0/bpm
+@onready var beat_time_seconds := 60.0 * time_multiplier / (bpm * 4)
 @onready var music_event = $MusicEvent
 
 signal music_bar
