@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://je5jv4uoiyvl" path="res://agents/player_character/sprites/PidleB.png" id="16_im6gk"]
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
-[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 
 [sub_resource type="Curve" id="Curve_2bapq"]
 _data = [Vector2(0, 0), 0.0, 1.86627, 0, 0, Vector2(0.195506, 0.532075), 2.72153, -2.1701, 1, 0, Vector2(0.51573, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
