@@ -1,8 +1,7 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://brb4bwq8xu0j"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://brb4bwq8xu0j"]
 
 [ext_resource type="Texture2D" uid="uid://s04k1qwhev7y" path="res://tilemaps/tilesheets/tabledressing.png" id="1_by52y"]
 [ext_resource type="Texture2D" uid="uid://dpk7ra1o1kw7x" path="res://tilemaps/tilesheets/Headlamps.png" id="2_a23um"]
-[ext_resource type="Texture2D" uid="uid://bosqfrh6fa84m" path="res://tilemaps/tilesheets/Untitled 09-04-2025 09-38-31.png" id="3_yhtlq"]
 [ext_resource type="Texture2D" uid="uid://hyhx66bylt6p" path="res://tilemaps/tilesheets/cat spill.png" id="4_hf8jf"]
 [ext_resource type="Texture2D" uid="uid://dvx26k0y084ae" path="res://tilemaps/tilesheets/Passenger.png" id="5_ky82p"]
 
@@ -33,7 +32,6 @@ texture_region_size = Vector2i(32, 32)
 0:2/0/texture_origin = Vector2i(0, 13)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hf8jf"]
-texture = ExtResource("3_yhtlq")
 texture_region_size = Vector2i(32, 19)
 0:0/0 = 0
 0:1/0 = 0
