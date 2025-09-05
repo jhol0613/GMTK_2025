@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dql50aatpoank"]
+
+[ext_resource type="PackedScene" uid="uid://dun6ql3fg27u2" path="res://level_system/level_selection_menu/level_button.tscn" id="1_kt366"]
+[ext_resource type="Texture2D" uid="uid://b7e2n7an1k2kq" path="res://level_system/level_selection_menu/visual_assests/Map.png" id="1_m5yvn"]
+[ext_resource type="Texture2D" uid="uid://jeouautqnyeh" path="res://level_system/level_selection_menu/visual_assests/album cover/SmapleAlbumCover.png" id="3_8l6ke"]
+
+[node name="PrimaryLevelSelectionMenu" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 601.0
+offset_bottom = 449.0
+texture = ExtResource("1_m5yvn")
+
+[node name="World_1" parent="." instance=ExtResource("1_kt366")]
+offset_left = 91.0
+offset_top = 291.0
+offset_right = 148.0
+offset_bottom = 341.0
+texture_normal = ExtResource("3_8l6ke")
+level_path = "uid://d0bhe2nc2ba1q"

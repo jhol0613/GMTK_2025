@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=17 format=3 uid="uid://bhskeg8clmay6"]
+
+[ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
+[ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
+[ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://level_system/levels/level1-1.tscn" id="3_c7ff2"]
+[ext_resource type="PackedScene" uid="uid://bb0wlqq06138" path="res://backgrounds/world1/world1_background.tscn" id="3_oivuf"]
+[ext_resource type="PackedScene" uid="uid://qktyo80o850a" path="res://level_system/levels/level1-2.tscn" id="4_mxdnx"]
+[ext_resource type="PackedScene" uid="uid://dllxdbplfy1bs" path="res://level_system/levels/level1-3.tscn" id="5_lyfvt"]
+[ext_resource type="PackedScene" uid="uid://bthrchsoqpjv4" path="res://level_system/levels/level1-4.tscn" id="6_2v3yu"]
+[ext_resource type="PackedScene" uid="uid://c7sdi0ir14t8d" path="res://level_system/levels/level1-5.tscn" id="7_v7251"]
+[ext_resource type="PackedScene" uid="uid://krk6lavhbs40" path="res://level_system/levels/level1-8.tscn" id="8_ycrwo"]
+[ext_resource type="PackedScene" uid="uid://nongj15fn1k6" path="res://level_system/levels/level1-9.tscn" id="9_itwhn"]
+[ext_resource type="PackedScene" uid="uid://dqleuvyixoqjp" path="res://level_system/levels/level1-10.tscn" id="10_4rfef"]
+[ext_resource type="PackedScene" uid="uid://bksx64kgphvmo" path="res://level_system/levels/level1-11.tscn" id="11_aqjkl"]
+[ext_resource type="PackedScene" uid="uid://ej8hk3h8ibcr" path="res://level_system/levels/level1-12.tscn" id="12_5m3b8"]
+[ext_resource type="PackedScene" uid="uid://cwr6q03gr1165" path="res://level_system/levels/level1-13.tscn" id="13_jxvy8"]
+[ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://level_system/levels/level1-14.tscn" id="14_8ct51"]
+
+[sub_resource type="Resource" id="Resource_wmh5c"]
+script = ExtResource("2_lqinw")
+world_scene = ExtResource("3_oivuf")
+level_list = Array[PackedScene]([ExtResource("3_c7ff2"), ExtResource("4_mxdnx"), ExtResource("5_lyfvt"), ExtResource("6_2v3yu"), ExtResource("7_v7251"), ExtResource("8_ycrwo"), ExtResource("9_itwhn"), ExtResource("10_4rfef"), ExtResource("11_aqjkl"), ExtResource("12_5m3b8"), ExtResource("13_jxvy8"), ExtResource("14_8ct51")])
+metadata/_custom_type_script = "uid://dk64rba8fhrtt"
+
+[resource]
+script = ExtResource("1_vetjv")
+world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c")])
+metadata/_custom_type_script = "uid://4j1dtwn2r7t1"

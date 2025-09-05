@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvqna86lykqsr"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_og7ub"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_y0bm1"]
+
+[node name="LevelBase" instance=ExtResource("1_og7ub")]
+conductor_spawn_beat = 8
+available_slots = 8
+available_actions = Array[int]([4, 5])
+
+[node name="Laser" parent="." index="8" instance=ExtResource("2_y0bm1")]
+position = Vector2(144, 61)
+direction = 3
+beam_length = 60
+activation_sequence = Array[bool]([false, false, false, false, true])

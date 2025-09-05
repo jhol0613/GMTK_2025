@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dun6ql3fg27u2"]
+
+[ext_resource type="Texture2D" uid="uid://clvfo3gwt5a2o" path="res://menus/title_screen/Quit.png" id="1_ioryx"]
+[ext_resource type="Script" uid="uid://w3asfp0tbn4h" path="res://level_system/level_selection_menu/level_button.gd" id="1_p0j54"]
+
+[node name="LevelButton" type="TextureButton"]
+texture_normal = ExtResource("1_ioryx")
+script = ExtResource("1_p0j54")
+level_path = "uid://dql50aatpoank"
+
+[connection signal="mouse_entered" from="." to="." method="lvl_btn_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="lvl_btn_on_mouse_exited"]
+[connection signal="pressed" from="." to="." method="lvl_btn_on_pressed"]
