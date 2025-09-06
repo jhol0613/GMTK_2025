@@ -1,4 +1,4 @@
-extends Agent
+extends Movable
 
 
 class_name Conductor

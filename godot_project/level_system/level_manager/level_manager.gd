@@ -57,11 +57,11 @@ var _level_number := 0
 var _current_beat := 0
 
 # Prevents registering replay button while success animation is playing
-var _replay_enabled := true 
+var _replay_enabled := true
 
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
-	
+
 	#_level_scene = level_list[0].instantiate()
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)
@@ -78,10 +78,10 @@ func _ready() -> void:
 
 	_level_scene.connect("target_reached", _on_level_complete)
 	load_next_level()
-	
+
 	# Turn on thinking mode
 	_reset_level()
-	
+
 	GameManager.pause_enabled = true
 
 
@@ -121,10 +121,10 @@ func advance_level():
 
 	# Update sequencer with new level data
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions)
-	
-	# Connect to animation signals from static agents
-	for agent in _level_scene.static_agents:
-		agent.animation_signal.connect(_on_animation_signal_received)
+
+	# Connect to animation signals from agents
+	for movable in _level_scene.movables:
+		movable.animation_signal.connect(_on_animation_signal_received)
 
 	# load following level
 	load_next_level()
@@ -181,30 +181,30 @@ func _update_conductor() -> void:
 	)
 
 func _update_agents() -> void:
-	for agent in _level_scene.static_agents:
+	for agent in _level_scene.agents:
 		agent.tick.emit(_current_beat)
 
-# instantiates the agent, adds it to the level, places it into the correct spot
-func _spawn_agent(scene: PackedScene, grid_position: Vector2i) -> Agent:
-	var agent = scene.instantiate()
-	agent.grid_position = grid_position
-	agent.grid_origin = grid_position
-	agent.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
-	agent.tile_size = _level_scene.get_tile_size()
-	_level_scene.add_child(agent)
-	agent.animation_signal.connect(_on_animation_signal_received)
-	return agent
+# instantiates the movable, adds it to the level, places it into the correct spot
+func _spawn_movable(scene: PackedScene, grid_position: Vector2i) -> Movable:
+	var movable = scene.instantiate()
+	movable.grid_position = grid_position
+	movable.grid_origin = grid_position
+	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
+	movable.tile_size = _level_scene.get_tile_size()
+	_level_scene.add_child(movable)
+	movable.animation_signal.connect(_on_animation_signal_received)
+	return movable
 
 func _spawn_player() -> void:
 	if _player_character != null:
 		_player_character.queue_free()
-	_player_character = _spawn_agent(player_scene, _level_scene.player_spawn_position)
+	_player_character = _spawn_movable(player_scene, _level_scene.player_spawn_position)
 	_player_character.failure.connect(_on_level_fail)
 
 func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
-	_conductor = _spawn_agent(conductor_scene, _level_scene.conductor_spawn_position)
+	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
 
 func _on_animation_signal_received(signal_id: String):
 	match signal_id:
@@ -216,10 +216,10 @@ func _reset_level() -> void:
 		_conductor.queue_free()
 	_conductor = null
 	_current_beat = 0
-	
+
 	_fade_to_thinking_shader()
 	_replay_enabled = true
-	
+
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
 
@@ -232,7 +232,7 @@ func _on_action_sequencer_play_started() -> void:
 	_current_beat = 0
 	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
- 
+
 func _advance_car_for_play(animation_time: float):
 	var tween = create_tween()
 	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
@@ -264,7 +264,7 @@ func _on_level_complete() -> void:
 		collectible.collect_if_queued()
 	advance_level()
 	_replay_enabled = false
-	
+
 
 func _on_level_fail() -> void:
 	_action_sequencer.stop_sequencer()
@@ -278,11 +278,11 @@ func _fade_to_running_shader():
 	tween.tween_property(_shader.material, "shader_parameter/bcs", Vector3(1,1,1), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 0.0, filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/wipe", -1.0, filter_animation_time)
-		
+
 
 func _fade_to_thinking_shader():
 	var tween = create_tween().set_parallel(true)
-	tween.tween_property(_shader.material, "shader_parameter/bcs", 
+	tween.tween_property(_shader.material, "shader_parameter/bcs",
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
