@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=4 uid="uid://dllxdbplfy1bs"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_c2bmi"]
+
+[sub_resource type="Gradient" id="Gradient_yheth"]
+offsets = PackedFloat32Array(0, 0.716783)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bsh3f"]
+gradient = SubResource("Gradient_yheth")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="LevelBase" instance=ExtResource("1_c2bmi")]
+player_spawn_position = Vector2i(0, 3)
+conductor_spawn_beat = 12
+available_slots = 4
+available_actions = Array[int]([4, 3, 1, 2])
+
+[node name="Decorative" parent="." index="0"]
+z_index = 1
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAJAAEABAAAAAIAAAAIAAAAAwAAAAAAAAABAP//BAAAAAEAAAAAAP//AAABAAAAAAACAAAABQAAAAAAAAA=")
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAABAAIAAAADAAUAAAABAAMAAAADAAYAAAADAAIAAAADAAUAAAADAAMAAAADAAYAAAAFAAIAAAADAAUAAAAFAAMAAAADAAYAAAAHAAIAAAADAAUAAAAHAAMAAAADAAYAAAAJAAIAAAADAAUAAAAJAAMAAAADAAYAAAABAP7/AAADAAAAAAABAP//AAADAAEAAAABAAAAAAADAAIAAAADAP7/AAADAAAAAAADAP//AAADAAEAAAADAAAAAAADAAIAAAAFAP7/AAADAAAAAAAFAP//AAADAAEAAAAFAAAAAAADAAIAAAAHAP7/AAADAAAAAAAHAP//AAADAAEAAAAHAAAAAAADAAIAAAAJAP7/AAADAAAAAAAJAP//AAADAAEAAAAJAAAAAAADAAIAAAABAAEAAAADAAQAAAADAAEAAAADAAQAAAAFAAEAAAADAAQAAAAHAAEAAAADAAQAAAAJAAEAAAADAAQAAAAAAP//BwAAAAAAAAAAAAAABwAAAAEAAAAAAAEABwAAAAIAAAACAP//BwAAAAAAAAACAAAABwAAAAEAAAACAAEABwAAAAIAAAAEAP//BwAAAAAAAAAEAAAABwAAAAEAAAAEAAEABwAAAAIAAAAGAP//BwAAAAAAAAAGAAAABwAAAAEAAAAGAAEABwAAAAIAAAAIAP//BwAAAAAAAAAIAAAABwAAAAEAAAAIAAEABwAAAAIAAAA=")
+
+[node name="PointLight2D5" type="PointLight2D" parent="BackWall" index="4"]
+position = Vector2(80, 3.37)
+color = Color(1, 1, 0.486275, 1)
+energy = 0.94
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_bsh3f")
+texture_scale = 1.4

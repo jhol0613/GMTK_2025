@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://dik8jkij8pc6i" path="res://autoload/game_manager.gd" id="1_7xclw"]
 [ext_resource type="PackedScene" uid="uid://dual0bcixw854" path="res://menus/title_screen/title_scene.tscn" id="2_lb6xn"]
 [ext_resource type="PackedScene" uid="uid://dbp5a6kd8shvl" path="res://cutscenes/intro_narrative.tscn" id="3_rhcyu"]
-[ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://level_manager/level_manager.tscn" id="4_rhcyu"]
+[ext_resource type="PackedScene" uid="uid://b3nxiipcuklcd" path="res://level_system/level_manager/level_manager.tscn" id="4_rhcyu"]
 [ext_resource type="PackedScene" uid="uid://bm2axmjyuw8gr" path="res://menus/pause_menu/pause_menu.tscn" id="5_0rjyf"]
-[ext_resource type="Resource" uid="uid://bhskeg8clmay6" path="res://level_manager/level_catalog.tres" id="6_3r1iq"]
+[ext_resource type="Resource" uid="uid://bhskeg8clmay6" path="res://level_system/level_manager/level_catalog.tres" id="6_3r1iq"]
 
 [node name="GameManager" type="Node2D"]
 process_mode = 3

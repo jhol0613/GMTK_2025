@@ -91,8 +91,8 @@ func _on_resume_btn_pressed() -> void:
 func _on_options_btn_pressed() -> void:
 	pause_btn_click_emitter.play()
 	bg.texture = T_PAUSE
-	# Todo: add a options menu here
-
+	get_tree().change_scene_to_file("res://level_system/level_selection_menu/primary_level_selection_menu.tscn")
+	GameManager.unpause_game()
 
 func _on_quit_btn_pressed() -> void:
 	pause_btn_click_emitter.play()
