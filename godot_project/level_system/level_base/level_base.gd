@@ -19,6 +19,7 @@ class_name RhythmRailLevel
 @export var available_actions: Array[Enums.PlayerAction] = []
 ##The limit of each type of action available to the player
 @export var action_quantities: Array[int] = []
+@export var tutorial_mode := false
 
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles

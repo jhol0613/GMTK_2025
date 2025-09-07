@@ -5,17 +5,21 @@
 
 [node name="LevelBase" instance=ExtResource("1_1kcp2")]
 conductor_spawn_beat = 10
-available_slots = 8
-available_actions = Array[int]([4, 3, 1, 2])
+available_slots = 3
+available_actions = Array[int]([4, 5])
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_8kmdv")]
 position = Vector2(80, 4)
+activation_sequence = Array[bool]([false, false, true])
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_8kmdv")]
 position = Vector2(144, 4)
+activation_sequence = Array[bool]([false, false, true])
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_8kmdv")]
 position = Vector2(208, 4)
+activation_sequence = Array[bool]([false, false, true])
 
 [node name="Laser4" parent="." index="11" instance=ExtResource("2_8kmdv")]
 position = Vector2(272, 4)
+activation_sequence = Array[bool]([false, false, true])

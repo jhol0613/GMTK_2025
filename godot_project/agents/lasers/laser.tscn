@@ -281,7 +281,7 @@ _data = {
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_gmiso"]
 b = Vector2(0, 100)
 
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="Laser" type="Node2D"]
 script = ExtResource("1_cep7i")
 direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
 0: SubResource("Resource_gmiso"),
@@ -289,7 +289,7 @@ direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
 2: SubResource("Resource_yjehw"),
 3: SubResource("Resource_use4v")
 })
-sprite = NodePath("Sprite")
+metadata/_edit_vertical_guides_ = [-55.0]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nm5od")

@@ -120,7 +120,9 @@ func advance_level():
 	_level_scene.connect("target_reached", _on_level_complete)
 
 	# Update sequencer with new level data
-	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions)
+	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions, 
+		_level_scene.action_quantities)
+	_action_sequencer.tutorial_mode = _level_scene.tutorial_mode
 
 	# Connect to animation signals from agents
 	for movable in _level_scene.movables:
@@ -215,7 +217,7 @@ func _reset_level() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
-	_current_beat = 0
+	#_current_beat = 0
 
 	_fade_to_thinking_shader()
 	_replay_enabled = true

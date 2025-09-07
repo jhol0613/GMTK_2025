@@ -123,10 +123,11 @@ func play():
 
 	AudioManager.set_music_mode(Enums.MusicMode.RUNNING)
 	_action_items.visible = false
-	play_started.emit()
 
 	# Wait for specified delay (for external animations) to start sequencing actions
 	await get_tree().create_timer(play_action_delay).timeout
+	
+	play_started.emit()
 	
 	current_action = 0	
 	_turn_off_sequencer_lights()
@@ -164,7 +165,8 @@ func advance():
 	current_action += 1
 
 # should be called when a new level wants to update sequencer parameters
-func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction], new_action_quantities := default_action_quantities):
+func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction], 
+	new_action_quantities := default_action_quantities, new_tutorial_mode := false):
 
 	# Update state variables
 	_available_slots = new_available_slots
