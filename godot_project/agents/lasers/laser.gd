@@ -19,6 +19,8 @@ class_name Laser
 
 @export_subgroup("Laser Data")
 @export var animation_delay := 0.1
+## How long to wait after laser animation starts to draw beam and implement collision
+@export var collision_delay := 0.4
 @export var beam_width := 4
 @export var direction_data: Dictionary[Enums.Direction, LaserDirectionData]
 
@@ -62,6 +64,7 @@ func _fire(beat: int):
 	print(beat)
 	if activation_sequence[beat % activation_sequence.size()]:
 		await get_tree().create_timer(animation_delay).timeout
-		sound.play()
 		_sprite.play(direction_data.get(direction).animation_name)
+		sound.play()
+		await get_tree().create_timer(collision_delay * AudioManager.time_multiplier * .25).timeout
 		animation_player.play("laser_fire")

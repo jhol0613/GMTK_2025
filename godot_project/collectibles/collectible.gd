@@ -16,6 +16,7 @@ class_name Collectible
 @onready var sprite = $AnimatedSprite2D
 
 @onready var _sprite_initial_position = sprite.position
+#@onready var _actor_initial_position = global_position
 
 @onready var queued_for_collect = false
 
@@ -31,8 +32,10 @@ func collect_if_queued():
 func reset():
 	visible = true
 	collision_area.set_collision_layer_value(3, true)
+	print(global_position)
+	#global_position = _actor_initial_position
 	queued_for_collect = false
-	sprite.position = _sprite_initial_position
+	#sprite.position = _sprite_initial_position
 	sprite.scale = Vector2(1,1)
 	sprite.play("default")
 	super.reset()

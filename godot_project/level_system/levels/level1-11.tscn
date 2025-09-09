@@ -10,15 +10,23 @@ available_slots = 6
 available_actions = Array[int]([4, 3, 1, 2, 5])
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_0ds5w")]
-position = Vector2(305, 4)
+position = Vector2(304, 3)
+activation_sequence = Array[bool]([false, false, true])
+collision_delay = null
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_0ds5w")]
 position = Vector2(209, 98)
 direction = 0
+activation_sequence = Array[bool]([false, false, true])
+collision_delay = null
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_0ds5w")]
 position = Vector2(176, 98)
 direction = 0
+activation_sequence = Array[bool]([false, false, true])
+collision_delay = null
 
 [node name="Laser4" parent="." index="11" instance=ExtResource("2_0ds5w")]
 position = Vector2(48, 4)
+activation_sequence = Array[bool]([false, false, true])
+collision_delay = null
