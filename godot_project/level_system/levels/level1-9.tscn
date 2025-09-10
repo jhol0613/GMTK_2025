@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_1kcp2"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_8kmdv"]
 
-[node name="LevelBase" instance=ExtResource("1_1kcp2")]
+[node name="LevelBase2" instance=ExtResource("1_1kcp2")]
 conductor_spawn_beat = 10
 available_slots = 6
 available_actions = Array[int]([4, 5])
