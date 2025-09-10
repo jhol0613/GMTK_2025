@@ -29,7 +29,7 @@ DSP/dsp_buffer_count=4
 [application]
 
 config/name="RhythmRail"
-run/main_scene="uid://b3nxiipcuklcd"
+run/main_scene="uid://dual0bcixw854"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/image="res://ui/splashscreen.png"

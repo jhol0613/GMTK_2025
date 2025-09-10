@@ -24,7 +24,7 @@ metadata/_custom_type_script = "uid://duifkavk2c1j8"
 [sub_resource type="Resource" id="Resource_knkgi"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_down"
-start_position_offset = Vector2(0, 5)
+start_position_offset = Vector2(0, 2)
 vector_direction = Vector2(0, 1)
 end_image = ExtResource("3_to654")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
@@ -283,6 +283,7 @@ b = Vector2(0, 100)
 
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_cep7i")
+beam_width = 1
 direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
 0: SubResource("Resource_gmiso"),
 1: SubResource("Resource_knkgi"),
@@ -308,7 +309,7 @@ event_guid = "{9a53cd25-e27b-4025-a7f1-ec3a4cb0cf2b}"
 
 [node name="BeamLine" type="Line2D" parent="."]
 visible = false
-position = Vector2(0, 5)
+position = Vector2(0, 2)
 points = PackedVector2Array(0, 0, 0, 100)
 width = 4.0
 texture = ExtResource("7_dshi8")

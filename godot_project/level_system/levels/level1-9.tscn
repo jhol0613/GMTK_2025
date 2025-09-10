@@ -1,25 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://nongj15fn1k6"]
+[gd_scene load_steps=3 format=4 uid="uid://nongj15fn1k6"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_1kcp2"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_8kmdv"]
 
 [node name="LevelBase" instance=ExtResource("1_1kcp2")]
 conductor_spawn_beat = 10
-available_slots = 8
-available_actions = Array[int]([4, 3, 1, 2])
+available_slots = 6
+available_actions = Array[int]([4, 5])
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+tile_map_data = PackedByteArray("AAD//wEAAAAAAA0AAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAAA0AABA=")
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_8kmdv")]
-position = Vector2(80, 4)
-collision_delay = 0.3
+position = Vector2(48, 3)
+beam_length = 98
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_8kmdv")]
-position = Vector2(144, 4)
-collision_delay = 0.3
+position = Vector2(80, 3)
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_8kmdv")]
-position = Vector2(208, 4)
-collision_delay = 0.3
+position = Vector2(144, 98)
+direction = 0
+beam_length = 98
 
 [node name="Laser4" parent="." index="11" instance=ExtResource("2_8kmdv")]
-position = Vector2(272, 4)
-collision_delay = 0.3
+position = Vector2(176, 3)
+beam_length = 98
+
+[node name="Laser5" parent="." index="12" instance=ExtResource("2_8kmdv")]
+position = Vector2(240, 3)
+
+[node name="Laser6" parent="." index="13" instance=ExtResource("2_8kmdv")]
+position = Vector2(272, 3)

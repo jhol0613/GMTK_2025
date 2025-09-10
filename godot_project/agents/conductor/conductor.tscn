@@ -11,6 +11,7 @@
 size = Vector2(20, 10)
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("sprite", "sound_emitters")]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_eb2fl")
 direct_movement_curve = ExtResource("2_m234f")

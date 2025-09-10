@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=4 uid="uid://bo06pc8na5fpa"]
 
-[ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_base/level_base.gd" id="1_sfitc"]
+[ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
 [ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_fo6gb"]
 [ext_resource type="TileSet" uid="uid://cd8pqkqbg8nrr" path="res://tilemaps/train_floor.tres" id="4_p76ks"]
@@ -31,6 +31,7 @@ player_spawn_position = Vector2i(0, 2)
 action_quantities = Array[int]([9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999])
 
 [node name="Decorative" type="TileMapLayer" parent="."]
+z_index = 1
 position = Vector2(0, -5.37)
 tile_set = ExtResource("2_tb1rm")
 
@@ -39,6 +40,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAACAAAAAAAAAAI
 tile_set = ExtResource("4_p76ks")
 
 [node name="Obstacles" type="TileMapLayer" parent="."]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -7)
 tile_set = ExtResource("5_10qrp")

@@ -572,6 +572,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 size = Vector2(20, 10)
 
 [node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "collision", "jump_collision_timer", "sprite", "sound_emitters")]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_1ty04")
 success_emitter = NodePath("Sounds/Success")
