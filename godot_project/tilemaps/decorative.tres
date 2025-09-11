@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=13 format=3 uid="uid://brb4bwq8xu0j"]
+[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://brb4bwq8xu0j"]
 
 [ext_resource type="Texture2D" uid="uid://s04k1qwhev7y" path="res://tilemaps/tilesheets/tabledressing.png" id="1_by52y"]
 [ext_resource type="Texture2D" uid="uid://dpk7ra1o1kw7x" path="res://tilemaps/tilesheets/Headlamps.png" id="2_a23um"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://hyhx66bylt6p" path="res://tilemaps/tilesheets/cat spill.png" id="4_hf8jf"]
 [ext_resource type="Texture2D" uid="uid://dvx26k0y084ae" path="res://tilemaps/tilesheets/Passenger.png" id="5_ky82p"]
 [ext_resource type="Texture2D" uid="uid://dvsw3y5vlwrbe" path="res://tilemaps/tilesheets/Candle.png" id="6_jc7w6"]
+[ext_resource type="Texture2D" uid="uid://c1l34rpsd1y5" path="res://tilemaps/tilesheets/White Table.png" id="7_557bu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a23um"]
 texture = ExtResource("1_by52y")
@@ -64,7 +65,7 @@ texture_region_size = Vector2i(32, 64)
 0:2/animation_frame_1/duration = 1.0
 0:2/0 = 0
 0:2/0/texture_origin = Vector2i(4, 6)
-0:2/0/y_sort_origin = 20
+0:2/0/y_sort_origin = 13
 0:3/animation_columns = 2
 0:3/animation_frame_0/duration = 1.0
 0:3/animation_frame_1/duration = 1.0
@@ -88,6 +89,16 @@ texture_region_size = Vector2i(32, 64)
 texture = ExtResource("6_jc7w6")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 9)
+0:0/0/y_sort_origin = 2
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ky82p"]
+texture = ExtResource("7_557bu")
+texture_region_size = Vector2i(32, 19)
+0:1/size_in_atlas = Vector2i(1, 2)
+0:1/0 = 0
+0:1/0/texture_origin = Vector2i(0, 12)
+0:1/0/y_sort_origin = -24
 
 [resource]
 tile_size = Vector2i(32, 19)
@@ -100,3 +111,4 @@ sources/1 = SubResource("TileSetAtlasSource_yhtlq")
 sources/3 = SubResource("TileSetAtlasSource_jc7w6")
 sources/2 = SubResource("TileSetAtlasSource_557bu")
 sources/5 = SubResource("TileSetAtlasSource_vue7b")
+sources/6 = SubResource("TileSetAtlasSource_ky82p")

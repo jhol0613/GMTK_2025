@@ -2,6 +2,9 @@ extends Node2D
 
 class_name RhythmRailLevel
 
+@export_subgroup("LevelInfo")
+@export var display_name:= "Unnamed Level"
+
 @export_subgroup("Player", "player")
 ## Where on the tilemap the player should spawn
 @export var player_spawn_position: Vector2i
@@ -14,7 +17,7 @@ class_name RhythmRailLevel
 
 @export_subgroup("Sequencer Data")
 ##How many slots should be available in the sequencer
-@export_range(0, 8) var available_slots: int = 0
+@export_range(0, 8) var available_slots: int = 8
 ##The actions the player can select from on this level
 @export var available_actions: Array[Enums.PlayerAction] = []
 ##The limit of each type of action available to the player

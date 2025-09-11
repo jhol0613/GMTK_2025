@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bis4mmgrdtses"]
+[gd_scene load_steps=28 format=4 uid="uid://bis4mmgrdtses"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_apvbp"]
 [ext_resource type="Texture2D" uid="uid://bqas277c1yr20" path="res://backgrounds/world1/Typing Monkey.png" id="2_5gdua"]
@@ -164,30 +164,38 @@ animations = [{
 }]
 
 [node name="TilemapLevelBase" instance=ExtResource("1_apvbp")]
+display_name = "Shakespeare's Greatest Hits"
 available_slots = 1
 available_actions = Array[int]([4])
+
+[node name="Floor" parent="." index="1"]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAABAAEAAAAAAAIAAAACAAEAAAAAAAIAAAADAAEAAAAAAAAAAAAEAAEAAAAAAAAAAAAFAAEAAAAAAAEAAAAGAAEAAAAAAAEAAAAHAAEAAAAAAAEAAAAIAAEAAAAAAAEAAAAJAAEAAAAAAAAAAAAKAAAAAAAAAAIAAAAKAAEAAAAAAAIAAAAAAAQAAAAAAAIAAAABAAQAAAAAAAIAAAACAAQAAAAAAAIAAAADAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAEAAAAGAAQAAAAAAAEAAAAHAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAIAAAAAAAUAAAAAAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAAAAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAKAAUAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAMAAAAAAAMAAAAKAAIAAAAAAAMAAAAKAAMAAAAAAAMAAAABAAIAAAAAAAIAAAACAAIAAAAAAAIAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAFAAIAAAAAAAEAAAAGAAIAAAAAAAEAAAAHAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAIAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAEAAMAAAAAAAAAAAADAAMAAAAAAAAAAAACAAMAAAAAAAIAAAABAAMAAAAAAAIAAAA=")
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAIAAMAAQADAAMAAAAHAAMAAQADAAMAAAAGAAMAAQADAAMAAAAGAAIAAQADAAMAAAAHAAIAAQADAAMAAAAIAAIAAQADAAMAAAA=")
 
 [node name="Node2D" type="Node2D" parent="." index="8"]
 position = Vector2(147.582, -3.54602)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D" index="0"]
 z_index = 1
+position = Vector2(95.418, 37.546)
 sprite_frames = SubResource("SpriteFrames_x30fp")
 autoplay = "default"
 frame_progress = 0.426656
 
 [node name="Cheese" type="Sprite2D" parent="." index="9"]
-position = Vector2(310, 66)
+position = Vector2(311, 2)
 texture = ExtResource("3_8cfvx")
 
 [node name="EatingMouse" type="AnimatedSprite2D" parent="." index="10"]
-position = Vector2(298, 67)
+position = Vector2(299, 3)
 sprite_frames = SubResource("SpriteFrames_qq12g")
 autoplay = "default"
 frame_progress = 0.229244
 
 [node name="Running Mouse" type="AnimatedSprite2D" parent="." index="11"]
-position = Vector2(240, 67)
+position = Vector2(176, 98)
 sprite_frames = SubResource("SpriteFrames_rno4m")
 autoplay = "default"
 frame_progress = 0.719064

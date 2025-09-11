@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_42vqv"]
 
 [node name="LevelBase" instance=ExtResource("1_wavwe")]
+display_name = "1-14"
 conductor_spawn_beat = 12
-available_slots = 8
 available_actions = Array[int]([4, 3, 1, 2, 5])
 
 [node name="Obstacles" parent="." index="2"]
