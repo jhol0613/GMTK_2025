@@ -1,11 +1,12 @@
 extends TextureButton
 
-@export_file var level_path
+class_name WorldSelectButton
+
+@export var destination_scene: Enums.Scenes
 
 var original_size := scale
 var grow_size := Vector2(1.1, 1.1)
-	
-	
+
 func lvl_btn_on_mouse_entered() -> void:
 	grow_btn(grow_size, .1)
 
@@ -17,6 +18,4 @@ func grow_btn(end_size: Vector2, duration: float) -> void:
 	tween.tween_property(self, 'scale', end_size, duration)
 
 func lvl_btn_on_pressed() -> void:
-	if level_path == null:
-		return
-	get_tree().change_scene_to_file(level_path)
+	GameManager.load_scene(destination_scene, Enums.TransitionStyle.NONE)

@@ -17,7 +17,8 @@ var _beat := 0
 
 
 func _ready():
-	AudioManager.connect("music_beat", _on_music_beat)
+	pass
+#	AudioManager.connect("music_beat", _on_music_beat)
 
 func _on_play_pressed() -> void:
 	GameManager.load_scene(Enums.Scenes.INTRO_CUTSCENE)

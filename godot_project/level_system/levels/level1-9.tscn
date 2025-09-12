@@ -6,6 +6,8 @@
 [node name="LevelBase2" instance=ExtResource("1_1kcp2")]
 display_name = "1-9"
 conductor_spawn_beat = 10
+available_slots = 4
+available_actions = Array[int]([4, 5])
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
 tile_map_data = PackedByteArray("AAD//wEAAAAAAA0AAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")

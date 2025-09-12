@@ -165,7 +165,6 @@ animations = [{
 
 [node name="TilemapLevelBase" instance=ExtResource("1_apvbp")]
 display_name = "Shakespeare's Greatest Hits"
-available_slots = 1
 available_actions = Array[int]([4])
 
 [node name="Floor" parent="." index="1"]

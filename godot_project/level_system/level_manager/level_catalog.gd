@@ -31,6 +31,19 @@ func get_index(level: RhythmRailLevel) -> Dictionary:
 				return index_dict
 	return index_dict
 
+## Returns display name that is defined in each rhythm rail level
+func get_display_name(world: int, level: int):
+	
+	if world >= world_definitions.size():
+		return "requested world index out of bounds"
+	if level >= world_definitions[world].level_list.size():
+		return "requested level index out of bounds"
+	
+	var level_state = world_definitions[world].level_list[level].get_state()
+	for i in range(level_state.get_node_property_count(0)): #0 is always root node
+		if level_state.get_node_property_name(0, i) == "display_name":
+				return level_state.get_node_property_value(0, i)
+
 ## Returns the next level based on internal state. Updates state to returned level index. Returns null if level doesn't exist
 func get_next_level() -> PackedScene:
 	# check if any more levels in this world
@@ -46,7 +59,11 @@ func get_next_level() -> PackedScene:
 			return world_definitions[_current_world].level_list[_current_level]
 		_current_world += 1
 	return null
-	
+
+## Returns the level select scene associated with a given world	
+func get_level_select_scene(world_number: int) -> Enums.Scenes:
+	return world_definitions[world_number].level_select_scene
+
 ## Returns true iff most recent get level was a world different from the previous
 func is_new_world() -> bool:
 	return !_previous_world == _current_world
