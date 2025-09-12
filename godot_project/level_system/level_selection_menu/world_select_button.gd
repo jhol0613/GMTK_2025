@@ -2,12 +2,15 @@ extends TextureButton
 
 class_name WorldSelectButton
 
+@onready var record_animation: AnimationPlayer = $RecordAnimation
+
 @export var destination_scene: Enums.Scenes
 
 var original_size := scale
 var grow_size := Vector2(1.1, 1.1)
 
 func lvl_btn_on_mouse_entered() -> void:
+	record_animation.play("Move")
 	grow_btn(grow_size, .1)
 
 func lvl_btn_on_mouse_exited() -> void:
