@@ -32,13 +32,12 @@ func collect_if_queued():
 func reset():
 	visible = true
 	collision_area.set_collision_layer_value(3, true)
-	print(global_position)
 	#global_position = _actor_initial_position
 	queued_for_collect = false
 	#sprite.position = _sprite_initial_position
 	sprite.scale = Vector2(1,1)
 	sprite.play("default")
-	super.reset()
+	#super.reset()
 
 func _on_collision_shape_2d_area_entered(area: Area2D) -> void:
 	collision_area.collision_layer = 0;
@@ -54,3 +53,4 @@ func _triggered_callback(alpha: float):
 
 func _on_triggered():
 	visible = false
+	sprite.position.y = _sprite_initial_position.y

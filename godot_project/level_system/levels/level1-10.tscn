@@ -1,13 +1,17 @@
-[gd_scene load_steps=3 format=4 uid="uid://dqleuvyixoqjp"]
+[gd_scene load_steps=4 format=4 uid="uid://dqleuvyixoqjp"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_jmibm"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_hri01"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://collectibles/collectible.tscn" id="3_fxioa"]
 
 [node name="LevelBase" instance=ExtResource("1_jmibm")]
 display_name = "1-10"
 player_spawn_position = Vector2i(0, 3)
-conductor_spawn_beat = 8
+conductor_spawn_beat = 6
 available_actions = Array[int]([4, 3, 1, 2])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAKAP//AgAAAAAAAAAKAAAAAgAAAAEAAAA=")
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
 tile_map_data = PackedByteArray("AAD//wEAAAAAAAwAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
@@ -30,3 +34,6 @@ beam_length = 95
 [node name="Laser4" parent="." index="11" instance=ExtResource("2_hri01")]
 position = Vector2(272, 4)
 beam_length = 95
+
+[node name="Collectible" parent="." index="12" instance=ExtResource("3_fxioa")]
+position = Vector2(176, 23)

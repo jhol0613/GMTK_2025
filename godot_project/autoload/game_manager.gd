@@ -46,7 +46,7 @@ func _load_save_data():
 func _save_save_data():
 	var json_string = JSON.stringify(_save_data)
 	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
-	print(file.get_open_error())
+	print(FileAccess.get_open_error())
 	file.store_string(json_string)
 	file.close()
 

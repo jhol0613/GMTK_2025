@@ -19,7 +19,7 @@
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("3_oivuf")
-level_list = Array[PackedScene]([ExtResource("3_c7ff2"), ExtResource("4_mxdnx"), ExtResource("5_lyfvt"), ExtResource("6_2v3yu"), ExtResource("7_v7251"), ExtResource("8_ycrwo"), ExtResource("9_itwhn"), ExtResource("10_4rfef"), ExtResource("12_5m3b8"), ExtResource("13_jxvy8"), ExtResource("14_8ct51"), ExtResource("14_ajqrw")])
+level_list = Array[PackedScene]([ExtResource("3_c7ff2"), ExtResource("4_mxdnx"), ExtResource("8_ycrwo"), ExtResource("5_lyfvt"), ExtResource("6_2v3yu"), ExtResource("7_v7251"), ExtResource("9_itwhn"), ExtResource("10_4rfef"), ExtResource("12_5m3b8"), ExtResource("13_jxvy8"), ExtResource("14_8ct51"), ExtResource("14_ajqrw")])
 level_select_scene = 4
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
