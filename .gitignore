@@ -11,3 +11,6 @@ godot_project/addons/fmod/libs/windows/~libGodotFmod.windows.editor.x86_64.dll
 # Mac
 .DS_Store
 .icloud
+
+# Builds
+builds/
