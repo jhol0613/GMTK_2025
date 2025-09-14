@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://dql50aatpoank"]
+
+[ext_resource type="Texture2D" uid="uid://vy7dmf4n5igk" path="res://menus/level_selection_menu/visual_assests/Map ver1.png" id="1_80rdn"]
+[ext_resource type="Texture2D" uid="uid://bs5fx7unbtaa4" path="res://menus/level_selection_menu/visual_assests/Route.png" id="2_flad7"]
+[ext_resource type="PackedScene" uid="uid://b2svcmsisjih5" path="res://menus/level_selection_menu/world_select_button.tscn" id="2_m5yvn"]
+[ext_resource type="Texture2D" uid="uid://cijetmw8sa7mq" path="res://menus/level_selection_menu/visual_assests/album cover/SnowyPeakCover.png" id="4_a6itq"]
+[ext_resource type="Texture2D" uid="uid://c7b1ywxrbh382" path="res://menus/level_selection_menu/visual_assests/Record.png" id="5_gkbjk"]
+
+[sub_resource type="Animation" id="Animation_80rdn"]
+resource_name = "Move"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Record:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(28, 24), Vector2(73, 25)]
+}
+
+[sub_resource type="Animation" id="Animation_flad7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Record:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(28, 24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6itq"]
+_data = {
+&"Move": SubResource("Animation_80rdn"),
+&"RESET": SubResource("Animation_flad7")
+}
+
+[node name="PrimaryLevelSelectionMenu" type="Node2D"]
+
+[node name="Map" type="TextureRect" parent="."]
+z_index = -2
+offset_right = 601.0
+offset_bottom = 449.0
+texture = ExtResource("1_80rdn")
+
+[node name="Route" type="TextureRect" parent="."]
+z_index = -2
+offset_right = 600.0
+offset_bottom = 451.0
+texture = ExtResource("2_flad7")
+
+[node name="WorldSelectButton" parent="." instance=ExtResource("2_m5yvn")]
+z_index = 1
+offset_left = 72.0
+offset_top = 273.0
+offset_right = 129.0
+offset_bottom = 323.0
+texture_normal = ExtResource("4_a6itq")
+destination_scene = 4
+
+[node name="Record" type="Sprite2D" parent="WorldSelectButton"]
+z_index = -1
+position = Vector2(28, 24)
+rotation = 2.08427
+texture = ExtResource("5_gkbjk")
+
+[node name="RecordAnimation" type="AnimationPlayer" parent="WorldSelectButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_a6itq")
+}
