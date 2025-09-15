@@ -125,8 +125,8 @@ func advance_level():
 	_action_sequencer.tutorial_mode = _level_scene.tutorial_mode
 
 	# Connect to animation signals from agents
-	for movable in _level_scene.movables:
-		movable.animation_signal.connect(_on_animation_signal_received)
+	for agent in _level_scene.agents:
+		agent.animation_signal.connect(_on_animation_signal_received)
 
 	# load following level
 	load_next_level()
