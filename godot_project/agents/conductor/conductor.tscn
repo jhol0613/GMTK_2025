@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="Conductor" type="Node2D" node_paths=PackedStringArray("sprite", "sound_emitters")]
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("sound_emitters", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_eb2fl")
@@ -31,7 +31,6 @@ follow_on_animations = Dictionary[int, String]({
 3: "idle_right",
 4: "idle_right"
 })
-sprite = NodePath("Shadow/AnimatedSprite2D")
 beat_delays = Dictionary[int, float]({
 1: 0.0,
 2: 0.0,
@@ -44,6 +43,7 @@ sound_emitters = {
 3: NodePath("Sound/JumpSound"),
 4: NodePath("Sound/JumpSound")
 }
+sprite = NodePath("Shadow/AnimatedSprite2D")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -6)

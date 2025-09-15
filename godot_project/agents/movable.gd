@@ -24,9 +24,6 @@ class_name Movable
 @export var follow_on_animations: Dictionary[Enums.PlayerAction, String]
 @export var default_animation: String
 
-@export_subgroup("Nodes")
-@export var sprite: AnimatedSprite2DSignals
-
 @export_subgroup("Sound")
 ## How long to wait after sequencer signal to start an animation
 @export var beat_delays: Dictionary[Enums.PlayerAction, float]
@@ -43,15 +40,12 @@ var follow_on_animation: String
 var should_interrupt_queued_animation: bool
 
 signal action_executed(action: Enums.PlayerAction)
-##Pass on signals from agents animation sprite
-signal animation_signal(id: String)
 
 func _ready():
 	super._ready()
 	_timer.one_shot = true
 	add_child(_timer)
 	_timer.timeout.connect(_on_beat)
-	sprite.connect("animation_signal", _on_animation_signal)
 
 func execute_action(action : Enums.PlayerAction) -> void:
 	match action:
@@ -171,6 +165,3 @@ func _is_action_bonk(action: Enums.PlayerAction):
 		(action == Enums.PlayerAction.RIGHT_BONK) or \
 		(action == Enums.PlayerAction.UP_BONK) or \
 		(action == Enums.PlayerAction.DOWN_BONK)
-
-func _on_animation_signal(signal_id):
-	animation_signal.emit(signal_id)

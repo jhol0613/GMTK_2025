@@ -149,7 +149,9 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 func _on_thinking_action_performed():
 	_update_agents()
 	_current_beat += 1
-
+	
+#func _update_movables():
+	
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
