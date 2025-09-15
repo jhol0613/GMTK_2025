@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://dllxdbplfy1bs"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_dqfa4"]
-[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://collectibles/collectible.tscn" id="2_w4kwt"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="2_w4kwt"]
 
 [sub_resource type="Gradient" id="Gradient_c2bmi"]
 offsets = PackedFloat32Array(0, 0.716783)

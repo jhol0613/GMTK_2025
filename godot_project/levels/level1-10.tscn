@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_hri01"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_233cq"]
-[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://collectibles/collectible.tscn" id="3_m351s"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_m351s"]
 
 [node name="LevelBase" instance=ExtResource("1_hri01")]
 display_name = "1-10"

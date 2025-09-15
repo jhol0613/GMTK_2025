@@ -27,10 +27,13 @@ class_name RhythmRailLevel
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 
+##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
+@onready var _obstacle_overrides: Array[Vector2i]
+
 ## agents in the level to call update function to
 var agents := []
-## movables in the level except the player and conductor
-var movables := []
+## movable_obstacles in the level except the player and conductor
+var movable_obstacles := []
 ## collectibles in the level
 var collectibles := []
 
@@ -49,12 +52,12 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	for child in get_children():
-		if child is Agent: # movables are probably fine being in here
-			agents.append(child)
-		if child is Movable:
-			movables.append(child)
-		if child is Collectible: # TODO: add collectibles into agent hierarchy
+		if child is Collectible:
 			collectibles.append(child)
+		elif child is MovableObstacle:
+			movable_obstacles.append(child)
+		elif child is Agent:
+			agents.append(child)
 	for agent in agents:
 		agent.local_origin = map_to_local(Vector2i.ZERO)
 		agent.tile_size = get_tile_size()
@@ -71,9 +74,9 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 
 		var tile_data = _obstacle_layer.get_cell_tile_data(neighbor)
 		var cell_traversible = true # Traversible if the cell is unoccupied
-
 		if tile_data:
 			cell_traversible = tile_data.get_custom_data("Traversible")
+		cell_traversible = cell_traversible and not _obstacle_overrides.has(neighbor)
 
 		if cell_exists and cell_traversible:
 			neighbors_to_return.append(neighbor)
@@ -93,6 +96,13 @@ func global_to_map(coordinates : Vector2):
 
 func map_to_local(grid_position: Vector2i):
 	return _floor_layer.map_to_local(grid_position)
+	
+func update_obstacle_grid(grid_position: Vector2i, traversible: bool):
+	if traversible:
+		_obstacle_overrides.erase(grid_position)
+	else:
+		_obstacle_overrides.append(grid_position)
+	path_grid.set_point_solid(grid_position, !traversible) # update A* grid
 
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
@@ -107,11 +117,11 @@ func _initialize_path_finding():
 	path_grid.update()
 
 	for tile in _obstacle_layer.get_used_cells():
-		if _obstacle_layer.get_cell_tile_data(tile) != null:
-			if not _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
-				path_grid.set_point_solid(tile)
+		if not _obstacle_overrides.has(tile):
+			if _obstacle_layer.get_cell_tile_data(tile) != null:
+				if not _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
+					path_grid.set_point_solid(tile)
 	path_grid.update()
-
 
 func _on_target_area_entered(_area: Area2D) -> void:
 	target_reached.emit()

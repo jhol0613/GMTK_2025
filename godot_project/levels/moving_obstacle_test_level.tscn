@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqus7ea6hnmos"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
+[ext_resource type="PackedScene" uid="uid://cw2v8ikkeilu1" path="res://agents/movable_obstacles/movable_obstacle.tscn" id="2_daiop"]
+
+[node name="LevelBase" instance=ExtResource("1_svhcm")]
+conductor_spawn_beat = 4
+available_actions = Array[int]([1, 3, 4, 2])
+
+[node name="TestObstacle" parent="." index="8" instance=ExtResource("2_daiop")]
+position = Vector2(80, 49)
+movement_path = Array[int]([4, 4, 3, 3])

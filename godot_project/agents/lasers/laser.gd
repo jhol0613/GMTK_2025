@@ -61,7 +61,6 @@ func set_direction(new_direction: Enums.Direction):
 	_construct()
 
 func _fire(beat: int):
-	print(beat)
 	if activation_sequence[beat % activation_sequence.size()]:
 		await get_tree().create_timer(animation_delay).timeout
 		_sprite.play(direction_data.get(direction).animation_name)

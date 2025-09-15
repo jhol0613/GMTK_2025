@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cwr6q03gr1165" path="res://levels/level1-13.tscn" id="12_bxvsn"]
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/level1-14.tscn" id="13_e7wa4"]
 [ext_resource type="PackedScene" uid="uid://bis4mmgrdtses" path="res://levels/MonkeyLevel.tscn" id="14_wvvmg"]
-[ext_resource type="PackedScene" uid="uid://cqus7ea6hnmos" path="res://levels/moving_obstacle_test.tscn" id="15_8o3tm"]
+[ext_resource type="PackedScene" uid="uid://cqus7ea6hnmos" path="res://levels/moving_obstacle_test_level.tscn" id="15_8o3tm"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")

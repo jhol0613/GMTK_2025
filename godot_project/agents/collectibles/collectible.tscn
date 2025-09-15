@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://dtwktrcf8naij"]
 
-[ext_resource type="Script" uid="uid://ce7pnxivjemsb" path="res://collectibles/collectible.gd" id="1_k5esu"]
-[ext_resource type="Texture2D" uid="uid://tnwnw8oanb0n" path="res://collectibles/placeholder.png" id="1_m0tds"]
+[ext_resource type="Script" uid="uid://ce7pnxivjemsb" path="res://agents/collectibles/collectible.gd" id="1_k5esu"]
+[ext_resource type="Texture2D" uid="uid://tnwnw8oanb0n" path="res://agents/collectibles/placeholder.png" id="1_m0tds"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_k5esu"]
-[ext_resource type="Curve" uid="uid://cmtntxx3ce38e" path="res://collectibles/collectible_curve.tres" id="2_pjpvi"]
-[ext_resource type="Curve" uid="uid://7ugs1ovuv74r" path="res://collectibles/collectible_scale_curve.tres" id="3_aa1be"]
+[ext_resource type="Curve" uid="uid://cmtntxx3ce38e" path="res://agents/collectibles/collectible_curve.tres" id="2_pjpvi"]
+[ext_resource type="Curve" uid="uid://7ugs1ovuv74r" path="res://agents/collectibles/collectible_scale_curve.tres" id="3_aa1be"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_our3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjpvi"]

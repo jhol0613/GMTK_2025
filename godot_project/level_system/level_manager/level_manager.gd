@@ -69,6 +69,7 @@ func _ready() -> void:
 	_level_scene.position = initial_train_position
 
 	_spawn_player()
+	_initialize_moving_obstacles()
 
 	# Currently just uses default action quantities
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions)
@@ -136,10 +137,12 @@ func advance_level():
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
 	_spawn_player()
+	_initialize_moving_obstacles()
 	_reset_level()
 
 # Called when sequencer emits an action in play mode
 func _on_action_performed(action: Enums.PlayerAction) -> void:
+	_update_obstacles() # Need to be updated first so player and conductor movement take new grid into account
 	_update_player(action)
 	_update_conductor()
 	_update_agents()
@@ -147,10 +150,16 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 
 # Called when sequencer emits an action in thinking mode
 func _on_thinking_action_performed():
+	_update_obstacles()
 	_update_agents()
 	_current_beat += 1
 	
-#func _update_movables():
+func _update_obstacles():
+	for obstacle in _level_scene.movable_obstacles:
+		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		obstacle.execute_action(obstacle.get_next_move())
+		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+	pass #TODO: have levels keep track of moving obstacles, have functionality for executing move and passing move data back up to level manager to update the grid
 	
 
 func _update_player(action: Enums.PlayerAction) -> void:
@@ -191,13 +200,16 @@ func _update_agents() -> void:
 # instantiates the movable, adds it to the level, places it into the correct spot
 func _spawn_movable(scene: PackedScene, grid_position: Vector2i) -> Movable:
 	var movable = scene.instantiate()
+	_initialize_movable(movable, grid_position)
+	_level_scene.add_child(movable)
+	return movable
+	
+func _initialize_movable(movable: Movable, grid_position: Vector2i) -> void:
 	movable.grid_position = grid_position
 	movable.grid_origin = grid_position
 	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
 	movable.tile_size = _level_scene.get_tile_size()
-	_level_scene.add_child(movable)
 	movable.animation_signal.connect(_on_animation_signal_received)
-	return movable
 
 func _spawn_player() -> void:
 	if _player_character != null:
@@ -209,6 +221,10 @@ func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
+	
+func _initialize_moving_obstacles() -> void:
+	for obstacle in _level_scene.movable_obstacles:
+		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
 
 func _on_animation_signal_received(signal_id: String):
 	match signal_id:

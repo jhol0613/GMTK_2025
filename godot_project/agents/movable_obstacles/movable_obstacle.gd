@@ -2,12 +2,25 @@ extends Movable
 
 class_name MovableObstacle
 
-@export_subgroup("Path")
-@export var movement_path: Array[Vector2i]
+##Repeating path for this object to follow
+@export var movement_path: Array[Enums.PlayerAction]
+##Delay after sequencer fires before grid is updated
+@export var update_delay: float
+
+@onready var _move_cursor := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	tick.connect(_on_tick)
+
+func get_next_move():
+	if movement_path.size() == 0:
+		return Enums.PlayerAction.NONE
+	var move_to_return = movement_path[_move_cursor]
+	_move_cursor += 1
+	if _move_cursor >= movement_path.size():
+		_move_cursor = 0
+	return movement_path[_move_cursor]
 
 func _on_tick(beat: int) -> void:
 	print("ticked")
