@@ -571,7 +571,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "collision", "jump_collision_timer", "sprite", "sound_emitters")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "collision", "jump_collision_timer", "sound_emitters", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_1ty04")
@@ -609,7 +609,6 @@ follow_on_animations = Dictionary[int, String]({
 11: "idle_down"
 })
 default_animation = "idle_down"
-sprite = NodePath("Shadow/PlayerSprite")
 beat_delays = Dictionary[int, float]({
 1: 1.5,
 2: 1.5,
@@ -634,6 +633,7 @@ sound_emitters = {
 10: NodePath("Sounds/Bonk"),
 11: NodePath("Sounds/Bonk")
 }
+sprite = NodePath("Shadow/PlayerSprite")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -6)

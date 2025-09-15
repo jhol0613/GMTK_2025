@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c21fyghohuwvu" path="res://action_sequencer/sequencer_visuals/replay_button/unpushed.png" id="9_62g22"]
 [ext_resource type="Texture2D" uid="uid://588sh1rfj8xg" path="res://action_sequencer/sequencer_visuals/replay_button/pushed.png" id="10_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://b86m10fqu8guc" path="res://action_sequencer/sequencer_visuals/replay_button/hover.png" id="11_krlbp"]
-[ext_resource type="Texture2D" uid="uid://iqat4cj40yyy" path="res://ui/big_arrow.png" id="12_ja8dg"]
+[ext_resource type="Texture2D" uid="uid://iqat4cj40yyy" path="res://ui_icons/big_arrow.png" id="12_ja8dg"]
 [ext_resource type="Texture2D" uid="uid://du8f75wcldg6o" path="res://action_sequencer/sequencer_visuals/volume_control_slider/volune_control_slider.png" id="13_reiol"]
 [ext_resource type="Texture2D" uid="uid://cw10a68fok6ou" path="res://action_sequencer/sequencer_visuals/speed_control_switch/SingleTime.png" id="14_gqgsu"]
 [ext_resource type="Texture2D" uid="uid://dyslse4pkfdyx" path="res://action_sequencer/sequencer_visuals/speed_control_switch/DoubleTime.png" id="15_4oryb"]

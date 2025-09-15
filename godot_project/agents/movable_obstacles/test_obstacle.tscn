@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cw2v8ikkeilu1"]
+
+[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_c3qve"]
+[ext_resource type="Texture2D" uid="uid://dgjaowdxxet16" path="res://tilemaps/tilesheets/SampleTiles.png" id="2_2f75q"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_v4ol2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wclvs"]
+atlas = ExtResource("2_2f75q")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oxejr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wclvs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TestObstacle" type="Node2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_c3qve")
+sprite = NodePath("AnimatedSprite2DSignals")
+metadata/_custom_type_script = "uid://cyio44hidbx4l"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_oxejr")
+script = ExtResource("3_v4ol2")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

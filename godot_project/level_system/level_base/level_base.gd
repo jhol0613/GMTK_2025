@@ -27,11 +27,11 @@ class_name RhythmRailLevel
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 
-# agents in the level to call update function to
+## agents in the level to call update function to
 var agents := []
-# movables in the level except the player and conductor
+## movables in the level except the player and conductor
 var movables := []
-# collectibles in the level
+## collectibles in the level
 var collectibles := []
 
 signal target_reached

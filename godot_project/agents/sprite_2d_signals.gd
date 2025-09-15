@@ -11,12 +11,12 @@ signal animation_signal(signal_id: String)
 	
 func play_with_signals(animation_name: StringName = &"", custom_speed: float = 1.0, from_end: bool = false):
 	play(animation_name, custom_speed, from_end)
-	if !sprite_frames.has_animation(name):
+	if !sprite_frames.has_animation(animation_name):
 		return
 
-	var signal_frames = _get_signals(name)
+	var signal_frames = _get_signals(animation_name)
 	for frame_number in signal_frames:
-		var timer = get_tree().create_timer(_get_time_at_frame(name, frame_number))
+		var timer = get_tree().create_timer(_get_time_at_frame(animation_name, frame_number))
 		timer.timeout.connect(_on_timeout.bind(signal_frames.get(frame_number)))
 
 func _on_timeout(signal_id: String):

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=4 uid="uid://bthrchsoqpjv4"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_28bq4"]
+
+[sub_resource type="Gradient" id="Gradient_yheth"]
+offsets = PackedFloat32Array(0, 0.716783)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_28bq4"]
+gradient = SubResource("Gradient_yheth")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[node name="LevelBase" instance=ExtResource("1_28bq4")]
+display_name = "1-4"
+conductor_spawn_beat = 14
+available_actions = Array[int]([4, 3, 1, 2])
+
+[node name="Decorative" parent="." index="0"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAAIAAMABAAAAAIAAAAAAAMABAAAAAMAAAADAP//AwAAAAAAAAABAAUABgAAAAEAAAAEAAUABgAAAAEAAAAHAAUABgAAAAEAAAAKAAUABgAAAAEAAAABAAQABQAAAAAAAAA=")
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAAAAQAAAABAAIAABAAAAUAAAABAAMAABACAAMAAAABAAAAAAACAAQAAAABAAIAAAACAAUAAAABAAMAAAAFAAMAAAABAAAAAAAFAAQAAAABAAIAAAAFAAUAAAABAAMAAAADAAMAAAABAAAAABADAAQAAAABAAIAABADAAUAAAABAAMAABAGAAMAAAABAAAAABAGAAQAAAABAAIAABAGAAUAAAABAAMAABAJAAMAAAABAAAAABAJAAQAAAABAAIAABAJAAUAAAABAAMAABAIAAQAAAABAAIAAAAIAAUAAAABAAMAAAABAAEABgAAAAAAAAABAAIABgAAAAEAAAADAP//BQAAAAAAAAADAAAABQAAAAEAAAADAAEABQAAAAIAAAABAAMABgAAAAIAAAABAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAKAAUAAwAAAAAAAAAAAAMAAAABAAAAABAIAAMAAAABAAAAAAA=")
+
+[node name="PointLight2D5" type="PointLight2D" parent="BackWall" index="5"]
+position = Vector2(48, 72.37)
+color = Color(1, 1, 0.486275, 1)
+energy = 0.94
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_28bq4")
+texture_scale = 1.4
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+tile_map_data = PackedByteArray("AAD//wEAAAAAABAAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAABAAABA=")

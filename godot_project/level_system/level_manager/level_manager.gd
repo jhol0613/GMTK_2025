@@ -125,8 +125,8 @@ func advance_level():
 	_action_sequencer.tutorial_mode = _level_scene.tutorial_mode
 
 	# Connect to animation signals from agents
-	for movable in _level_scene.movables:
-		movable.animation_signal.connect(_on_animation_signal_received)
+	for agent in _level_scene.agents:
+		agent.animation_signal.connect(_on_animation_signal_received)
 
 	# load following level
 	load_next_level()
@@ -149,7 +149,9 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 func _on_thinking_action_performed():
 	_update_agents()
 	_current_beat += 1
-
+	
+#func _update_movables():
+	
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)

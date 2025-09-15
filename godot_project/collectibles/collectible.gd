@@ -13,7 +13,6 @@ class_name Collectible
 @export var collected_duration := 1.0
 
 @onready var collision_area = $Shadow/CollisionArea
-@onready var sprite = $AnimatedSprite2D
 
 @onready var _sprite_initial_position = sprite.position
 #@onready var _actor_initial_position = global_position

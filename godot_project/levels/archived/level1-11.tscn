@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://bksx64kgphvmo"]
+
+[ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_obcty"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_kn66j"]
+
+[node name="LevelBase" instance=ExtResource("1_obcty")]
+display_name = "1-11"
+player_spawn_position = Vector2i(0, 3)
+conductor_spawn_beat = 4
+available_slots = 6
+available_actions = Array[int]([4, 3, 1, 2, 5])
+
+[node name="Laser" parent="." index="8" instance=ExtResource("2_kn66j")]
+position = Vector2(304, 3)
+activation_sequence = Array[bool]([false, false, true])
+
+[node name="Laser2" parent="." index="9" instance=ExtResource("2_kn66j")]
+position = Vector2(209, 98)
+direction = 0
+activation_sequence = Array[bool]([false, false, true])
+
+[node name="Laser3" parent="." index="10" instance=ExtResource("2_kn66j")]
+position = Vector2(176, 98)
+direction = 0
+activation_sequence = Array[bool]([false, false, true])
+
+[node name="Laser4" parent="." index="11" instance=ExtResource("2_kn66j")]
+position = Vector2(48, 4)
+activation_sequence = Array[bool]([false, false, true])

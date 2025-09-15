@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dtwktrcf8naij"]
+[gd_scene load_steps=12 format=3 uid="uid://dtwktrcf8naij"]
 
 [ext_resource type="Script" uid="uid://ce7pnxivjemsb" path="res://collectibles/collectible.gd" id="1_k5esu"]
 [ext_resource type="Texture2D" uid="uid://tnwnw8oanb0n" path="res://collectibles/placeholder.png" id="1_m0tds"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_k5esu"]
 [ext_resource type="Curve" uid="uid://cmtntxx3ce38e" path="res://collectibles/collectible_curve.tres" id="2_pjpvi"]
 [ext_resource type="Curve" uid="uid://7ugs1ovuv74r" path="res://collectibles/collectible_scale_curve.tres" id="3_aa1be"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_our3d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pjpvi"]
 atlas = ExtResource("1_m0tds")
@@ -44,16 +45,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17veg"]
 size = Vector2(20, 14)
 
-[node name="Collectible" type="Node2D"]
+[node name="Collectible" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_k5esu")
 collected_y_curve = ExtResource("2_pjpvi")
 collected_scale_curve = ExtResource("3_aa1be")
+sprite = NodePath("AnimatedSprite2DSignals")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 z_index = 1
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_u11dx")
 autoplay = "default"
+script = ExtResource("5_our3d")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("2_k5esu")
