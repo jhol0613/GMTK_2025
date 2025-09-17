@@ -114,6 +114,8 @@ DebugAction={
 2d_physics/layer_2="Triggers"
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Collectibles"
+2d_physics/layer_5="Pushers"
+2d_physics/layer_6="obstacles"
 
 [rendering]
 

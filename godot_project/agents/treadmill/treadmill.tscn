@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://mtxspsqlab42"]
+
+[ext_resource type="Script" uid="uid://bjbsyatg6tdh0" path="res://agents/treadmill/treadmill.gd" id="1_vf448"]
+[ext_resource type="Texture2D" uid="uid://dlkyjf11353s3" path="res://agents/treadmill/treadmill_placeholder.png" id="2_vf448"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_pstgr"]
+[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_niail"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20g2x"]
+atlas = ExtResource("2_vf448")
+region = Rect2(0, 0, 32, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alc0r"]
+atlas = ExtResource("2_vf448")
+region = Rect2(32, 0, 32, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_splbt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20g2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_alc0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
+size = Vector2(24, 13)
+
+[node name="Treadmill" type="Node2D"]
+script = ExtResource("1_vf448")
+metadata/_custom_type_script = "uid://dxn7tnanjy6px"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_splbt")
+autoplay = "default"
+script = ExtResource("3_pstgr")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Pusher" type="Area2D" parent="."]
+script = ExtResource("4_niail")
+metadata/_custom_type_script = "uid://du4ysr150id7h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_pifmq")

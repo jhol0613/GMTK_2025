@@ -30,12 +30,15 @@ class_name RhythmRailLevel
 ##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
 @onready var _obstacle_overrides: Array[Vector2i]
 
+#TODO: These arrays could be refactored to use Godot's Groups system
 ## agents in the level to call update function to
 var agents := []
 ## movable_obstacles in the level except the player and conductor
 var movable_obstacles := []
 ## collectibles in the level
 var collectibles := []
+## pushers in the level
+var pushers := []
 
 signal target_reached
 
@@ -61,6 +64,7 @@ func _ready() -> void:
 	for agent in agents:
 		agent.local_origin = map_to_local(Vector2i.ZERO)
 		agent.tile_size = get_tile_size()
+	pushers = get_tree().get_nodes_in_group("pushers")
 	_initialize_path_finding()
 
 

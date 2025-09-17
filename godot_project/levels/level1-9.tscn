@@ -5,7 +5,7 @@
 
 [node name="LevelBase2" instance=ExtResource("1_1kcp2")]
 display_name = "1-9"
-conductor_spawn_beat = 10
+conductor_spawn_beat = 8
 available_slots = 4
 available_actions = Array[int]([4, 5])
 

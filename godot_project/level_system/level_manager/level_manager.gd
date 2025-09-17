@@ -1,6 +1,6 @@
 extends Node2D
 
-
+#region Export Variables
 @export_category("Scenes")
 @export_subgroup("Player", "player")
 @export var player_scene: PackedScene
@@ -35,8 +35,9 @@ extends Node2D
 ## All train cars in order
 #@export var level_list: Array[PackedScene]
 @export var level_catalog: LevelCatalog
+#endregion
 
-
+#region Level Manager Initialization
 @onready var _level_scene : RhythmRailLevel
 @onready var _world_scene : Node = GameManager.level_catalog.get_world_scene().instantiate()
 @onready var _action_sequencer : ActionSequencer = $SequencerLayer/ActionSequencer
@@ -62,37 +63,24 @@ var _replay_enabled := true
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
 
-	#_level_scene = level_list[0].instantiate()
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)
 
 	_level_scene.position = initial_train_position
 
-	_spawn_player()
-	_initialize_moving_obstacles()
-
-	# Currently just uses default action quantities
-	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions)
+	_initialize_level()
+	_on_level_advanced()
 
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
 
-	_level_scene.connect("target_reached", _on_level_complete)
-	load_next_level()
-
-	# Turn on thinking mode
-	_reset_level()
-
 	GameManager.pause_enabled = true
+#endregion
 
+#region Level Switching Management
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("SkipLevel"):
-		_advance_car_for_play(0.0)
-		advance_level()
-
+## Loads next level into scene (does not initialize any functional components of that level)
 func load_next_level():
-	#_next_level = level_list[(_level_number + 1) % level_list.size()].instantiate()
 	var _next_level_packed = GameManager.level_catalog.get_next_level()
 	if _next_level_packed != null:
 		_next_level = _next_level_packed.instantiate()
@@ -103,11 +91,16 @@ func load_next_level():
 	_on_the_train.call_deferred("add_child", _next_level)
 	_next_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
 
+## Pysically advances the level and initializes the new car with proper timing
 func advance_level():
 	_level_number += 1
 
 	_action_sequencer.stop_sequencer()
 	await get_tree().create_timer(level_success_delay).timeout
+	
+	# Update reference to new level and initialize
+	_level_scene = _next_level
+	_initialize_level()
 
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
@@ -115,9 +108,21 @@ func advance_level():
 	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_level_advanced)
+	
 
-	# Update reference to new level and connect to signals
-	_level_scene = _next_level
+## Scene initialization steps that are called AFTER the level has been fully advanced
+func _on_level_advanced():
+	_action_sequencer.set_action_icons_hidden(false)
+	_spawn_player()
+	_reset_level()
+
+# Handle connecting to signals, running initialization code for agents in new level
+func _initialize_level():
+	# Initialize new obstacles and pushers
+	_initialize_moving_obstacles()
+	_initialize_pushers()
+	
+	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
 
 	# Update sequencer with new level data
@@ -131,72 +136,41 @@ func advance_level():
 
 	# load following level
 	load_next_level()
+	
+func _on_level_complete() -> void:
+	_player_character.disable_collisions()
+	_player_character.notify_success()
+	for collectible in _level_scene.collectibles:
+		collectible.collect_if_queued()
+	advance_level()
+	_replay_enabled = false
+	
+func _on_level_fail() -> void:
+	_action_sequencer.stop_sequencer()
+	if _conductor != null:
+		_conductor.visible = false
+	await get_tree().create_timer(level_failure_delay).timeout
+	_action_sequencer.push_replay_button()
 
+func _reset_level() -> void:
+	if _conductor != null:
+		_conductor.queue_free()
+	_conductor = null
+	#_current_beat = 0
 
-# Called when level has been fully advanced
-func _on_level_advanced():
+	_fade_to_thinking_shader()
+	_replay_enabled = true
+
+	for collectible in _level_scene.collectibles:
+		collectible.reset()
+
+func _on_reset_animation_finished():
 	_action_sequencer.set_action_icons_hidden(false)
-	_spawn_player()
-	_initialize_moving_obstacles()
-	_reset_level()
+	# TODO: maybe put a reset animation here
+	_player_character.reset()
+#endregion
 
-# Called when sequencer emits an action in play mode
-func _on_action_performed(action: Enums.PlayerAction) -> void:
-	_update_obstacles() # Need to be updated first so player and conductor movement take new grid into account
-	_update_player(action)
-	_update_conductor()
-	_update_agents()
-	_current_beat += 1
-
-# Called when sequencer emits an action in thinking mode
-func _on_thinking_action_performed():
-	_update_obstacles()
-	_update_agents()
-	_current_beat += 1
-	
-func _update_obstacles():
-	for obstacle in _level_scene.movable_obstacles:
-		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		obstacle.execute_action(obstacle.get_next_move())
-		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
-	pass #TODO: have levels keep track of moving obstacles, have functionality for executing move and passing move data back up to level manager to update the grid
-	
-
-func _update_player(action: Enums.PlayerAction) -> void:
-	var move_direction : Vector2i = Enums.player_action_to_vector(action)
-	if _level_scene.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
-		_player_character.execute_action(action)
-	else:
-		match action:
-			Enums.PlayerAction.LEFT:
-				_player_character.execute_action(Enums.PlayerAction.LEFT_BONK)
-			Enums.PlayerAction.RIGHT:
-				_player_character.execute_action(Enums.PlayerAction.RIGHT_BONK)
-			Enums.PlayerAction.UP:
-				_player_character.execute_action(Enums.PlayerAction.UP_BONK)
-			Enums.PlayerAction.DOWN:
-				_player_character.execute_action(Enums.PlayerAction.DOWN_BONK)
-
-
-func _update_conductor() -> void:
-	if _conductor == null \
-		and _current_beat < _level_scene.conductor_spawn_beat \
-		or not _level_scene.conductor_enabled:
-		return
-	if _conductor == null:
-		_spawn_conductor()
-	var conductor_path = _level_scene.path_grid \
-		.get_id_path(_conductor.grid_position, _player_character.grid_position, true)
-	if conductor_path.size() < 2:
-		return
-	_conductor.execute_action(
-		Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)
-	)
-
-func _update_agents() -> void:
-	for agent in _level_scene.agents:
-		agent.tick.emit(_current_beat)
-
+#region Level Component Initializations
 # instantiates the movable, adds it to the level, places it into the correct spot
 func _spawn_movable(scene: PackedScene, grid_position: Vector2i) -> Movable:
 	var movable = scene.instantiate()
@@ -225,40 +199,79 @@ func _spawn_conductor() -> void:
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
+		
+func _initialize_pushers() -> void:
+	for pusher in _level_scene.pushers:
+		print("pushe recognized by level manager")
+		pusher.connect("overlapped_movable", _on_pusher_triggered)
 
-func _on_animation_signal_received(signal_id: String):
-	match signal_id:
-		"door_slammed":
-			_shake_camera.apply_shake()
+#endregion
 
-func _reset_level() -> void:
-	if _conductor != null:
-		_conductor.queue_free()
-	_conductor = null
-	#_current_beat = 0
+#region Beat Actions
+# Called when sequencer emits an action in play mode
+func _on_action_performed(action: Enums.PlayerAction) -> void:
+	_update_obstacles() # Need to be updated first so player and conductor movement take new grid into account
+	_update_player(action)
+	_update_conductor()
+	_update_agents()
+	_current_beat += 1
 
-	_fade_to_thinking_shader()
-	_replay_enabled = true
+# Called when sequencer emits an action in thinking mode
+func _on_thinking_action_performed():
+	_update_obstacles()
+	_update_agents()
+	_current_beat += 1
+	
+func _update_obstacles():
+	for obstacle in _level_scene.movable_obstacles:
+		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		obstacle.execute_action(obstacle.get_next_move())
+		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
-	for collectible in _level_scene.collectibles:
-		collectible.reset()
+func _update_player(action: Enums.PlayerAction) -> void:
+	var move_direction : Vector2i = Enums.player_action_to_vector(action)
+	if _level_scene.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
+		_player_character.execute_action(action)
+	else:
+		match action:
+			Enums.PlayerAction.LEFT:
+				_player_character.execute_action(Enums.PlayerAction.LEFT_BONK)
+			Enums.PlayerAction.RIGHT:
+				_player_character.execute_action(Enums.PlayerAction.RIGHT_BONK)
+			Enums.PlayerAction.UP:
+				_player_character.execute_action(Enums.PlayerAction.UP_BONK)
+			Enums.PlayerAction.DOWN:
+				_player_character.execute_action(Enums.PlayerAction.DOWN_BONK)
 
+func _update_conductor() -> void:
+	if _conductor == null \
+		and _current_beat < _level_scene.conductor_spawn_beat \
+		or not _level_scene.conductor_enabled:
+		return
+	if _conductor == null:
+		_spawn_conductor()
+	var conductor_path = _level_scene.path_grid \
+		.get_id_path(_conductor.grid_position, _player_character.grid_position, true)
+	if conductor_path.size() < 2:
+		return
+	_conductor.execute_action(
+		Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)
+	)
 
-func _on_music_bar():
-	_animation_player.play("train_rock")
+func _update_agents() -> void:
+	for agent in _level_scene.agents:
+		agent.tick.emit(_current_beat)
+		
+func _on_pusher_triggered(movable: Movable):
+	print("pusher triggered!")
 
+#endregion
 
+#region Sequencer Callbacks
 func _on_action_sequencer_play_started() -> void:
 	_current_beat = 0
 	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
-
-func _advance_car_for_play(animation_time: float):
-	var tween = create_tween()
-	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
-	tween.tween_property(_train_center, "position", target_pos, animation_time) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
 
 func _on_action_sequencer_replay_pressed() -> void:
 	if not _replay_enabled:
@@ -267,31 +280,9 @@ func _on_action_sequencer_replay_pressed() -> void:
 	var target_pos := Vector2(-_level_number * next_car_offset, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_callback(_on_car_position_moved_back)
+	tween.tween_callback(_on_reset_animation_finished)
 	_reset_level()
 
-
-func _on_car_position_moved_back():
-	_action_sequencer.set_action_icons_hidden(false)
-	# TODO: maybe put a reset animation here
-	_player_character.reset()
-
-
-func _on_level_complete() -> void:
-	_player_character.disable_collisions()
-	_player_character.notify_success()
-	for collectible in _level_scene.collectibles:
-		collectible.collect_if_queued()
-	advance_level()
-	_replay_enabled = false
-
-
-func _on_level_fail() -> void:
-	_action_sequencer.stop_sequencer()
-	if _conductor != null:
-		_conductor.visible = false
-	await get_tree().create_timer(level_failure_delay).timeout
-	_action_sequencer.push_replay_button()
 
 func _fade_to_running_shader():
 	var tween = create_tween().set_parallel(true)
@@ -306,3 +297,27 @@ func _fade_to_thinking_shader():
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
+#endregion
+
+#region Animation
+func _on_music_bar():
+	_animation_player.play("train_rock")
+	
+func _on_animation_signal_received(signal_id: String):
+	match signal_id:
+		"door_slammed":
+			_shake_camera.apply_shake()
+#endregion
+
+#region Debug
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("SkipLevel"):
+		_advance_car_for_play(0.0)
+		advance_level()
+
+func _advance_car_for_play(animation_time: float):
+	var tween = create_tween()
+	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
+	tween.tween_property(_train_center, "position", target_pos, animation_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+#endregion
