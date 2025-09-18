@@ -30,6 +30,10 @@ class_name Movable
 ## Sound emitter for each action
 @export var sound_emitters: Dictionary[Enums.PlayerAction, FmodEventEmitter2D]
 
+@export_subgroup("Nodes")
+@export var collision_area: Area2D
+# local position of collision area
+var _collision_area_initial_position
 #endregion
 
 @onready var _sprite_default_y = sprite.position.y
@@ -39,6 +43,9 @@ class_name Movable
 var follow_on_animation: String
 var should_interrupt_queued_animation: bool
 
+# Allows collision to move immediately while visuals catch up
+var _frozen_collision_position_during_move: Vector2i
+
 signal action_executed(action: Enums.PlayerAction)
 
 func _ready():
@@ -46,6 +53,8 @@ func _ready():
 	_timer.one_shot = true
 	add_child(_timer)
 	_timer.timeout.connect(_on_beat)
+	if collision_area != null:
+		_collision_area_initial_position = collision_area.position
 
 func execute_action(action : Enums.PlayerAction) -> void:
 	match action:
@@ -58,7 +67,11 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		Enums.PlayerAction.RIGHT:
 			grid_position += Vector2i.RIGHT
 	action_executed.emit(action)
-
+	
+	if collision_area != null:
+		#collision_area.top_level = false
+		collision_area.position = _collision_area_initial_position
+	
 	var emitter = sound_emitters.get(action, null)
 	if emitter:
 		emitter.play()
@@ -77,8 +90,10 @@ func play_animation(animation_name: String, follow_on = null):
 	sprite.play_with_signals(animation_name)
 	if follow_on != null:
 		follow_on_animation = follow_on
-		sprite.animation_finished.connect(_on_animation_finished)
+		if not sprite.animation_finished.has_connections():
+			sprite.animation_finished.connect(_on_animation_finished)
 
+## Called on the beat when the action starts visually (as opposed to sequencer signal)
 func _on_beat(action: Enums.PlayerAction) -> void:
 	if should_interrupt_queued_animation:
 		should_interrupt_queued_animation = false
@@ -106,11 +121,15 @@ func _on_animation_finished():
 
 func reset() -> void:
 	super.reset()
+	should_interrupt_queued_animation = false
 	if default_animation != "":
 		sprite.play_with_signals(default_animation)
 
-
 func _initiate_move(new_target : Vector2):
+	# First move collision area instantly out ahead, then freeze in place while movable visuals catch up
+	if collision_area != null:
+		_frozen_collision_position_during_move = collision_area.global_position + (new_target - position)
+		#collision_area.top_level = true
 	var tween = create_tween()
 	tween.tween_method(_move_callback.bind(position, new_target), 0.0, 1.0, move_duration)
 
@@ -124,6 +143,8 @@ func _initiate_jump():
 
 
 func _move_callback(alpha: float, start_position: Vector2, target_position: Vector2):
+	if collision_area != null:
+		collision_area.global_position = _frozen_collision_position_during_move
 	var position_difference = target_position - start_position
 	position = direct_movement_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y

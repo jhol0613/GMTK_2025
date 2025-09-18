@@ -10,7 +10,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="Conductor" type="Node2D" node_paths=PackedStringArray("sound_emitters", "sprite")]
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("sound_emitters", "collision_area", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_eb2fl")
@@ -43,6 +43,7 @@ sound_emitters = {
 3: NodePath("Sound/JumpSound"),
 4: NodePath("Sound/JumpSound")
 }
+collision_area = NodePath("Shadow/AnimatedSprite2D/Area2D")
 sprite = NodePath("Shadow/AnimatedSprite2D")
 
 [node name="Shadow" type="Sprite2D" parent="."]
@@ -59,7 +60,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(-2.42, 21.47)
-collision_layer = 4
+collision_layer = 68
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
 position = Vector2(0, 9)

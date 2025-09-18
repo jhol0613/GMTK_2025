@@ -28,7 +28,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
-size = Vector2(24, 13)
+size = Vector2(24, 18)
 
 [node name="Treadmill" type="Node2D"]
 script = ExtResource("1_vf448")
@@ -45,5 +45,4 @@ script = ExtResource("4_niail")
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_pifmq")

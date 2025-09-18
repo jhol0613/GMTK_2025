@@ -57,9 +57,6 @@ var _next_level: RhythmRailLevel
 var _level_number := 0
 var _current_beat := 0
 
-# Prevents registering replay button while success animation is playing
-var _replay_enabled := true
-
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
 
@@ -138,18 +135,20 @@ func _initialize_level():
 	load_next_level()
 	
 func _on_level_complete() -> void:
-	_player_character.disable_collisions()
+	_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
 	_player_character.notify_success()
 	for collectible in _level_scene.collectibles:
 		collectible.collect_if_queued()
 	advance_level()
-	_replay_enabled = false
+	_action_sequencer.buttons_enabled = false
 	
 func _on_level_fail() -> void:
+	_action_sequencer.buttons_enabled = false
 	_action_sequencer.stop_sequencer()
 	if _conductor != null:
 		_conductor.visible = false
 	await get_tree().create_timer(level_failure_delay).timeout
+	_action_sequencer.buttons_enabled = true
 	_action_sequencer.push_replay_button()
 
 func _reset_level() -> void:
@@ -159,7 +158,7 @@ func _reset_level() -> void:
 	#_current_beat = 0
 
 	_fade_to_thinking_shader()
-	_replay_enabled = true
+	_action_sequencer.buttons_enabled = true
 
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
@@ -262,7 +261,11 @@ func _update_agents() -> void:
 	for agent in _level_scene.agents:
 		agent.tick.emit(_current_beat)
 		
-func _on_pusher_triggered(movable: Movable):
+func _on_pusher_triggered(pusher: Pusher, movable: Movable):
+	if movable is PlayerCharacter:
+		_update_player(pusher.push_action)
+	else:
+		movable.execute_action(pusher.push_action)
 	print("pusher triggered!")
 
 #endregion
@@ -273,14 +276,19 @@ func _on_action_sequencer_play_started() -> void:
 	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
 
+func _advance_car_for_play(animation_time: float):
+	var tween = create_tween()
+	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
+	tween.tween_property(_train_center, "position", target_pos, animation_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+
 func _on_action_sequencer_replay_pressed() -> void:
-	if not _replay_enabled:
-		return
 	var tween = create_tween()
 	var target_pos := Vector2(-_level_number * next_car_offset, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_reset_animation_finished)
+	#_on_reset_animation_finished()
 	_reset_level()
 
 
@@ -314,10 +322,4 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
 		_advance_car_for_play(0.0)
 		advance_level()
-
-func _advance_car_for_play(animation_time: float):
-	var tween = create_tween()
-	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
-	tween.tween_property(_train_center, "position", target_pos, animation_time) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 #endregion

@@ -43,7 +43,11 @@ enum MusicMode {
 enum CollisionLayer {
 	PLAYER = 1,
 	TRIGGERS = 2,
-	ENEMIES = 4,
+	CONDUCTOR = 3,
+	COLLECTIBLES = 4,
+	PUSHERS = 5,
+	JUMPABLE = 6,
+	ENEMIES = 7
 }
 
 enum Scenes {
@@ -71,6 +75,13 @@ enum CollectibleType {
 enum SaveDataItem {
 	COLLECTIBLES_ACQUIRED,
 	FARTHEST_LEVEL_REACHED
+}
+
+enum PushMode {
+	##If push on beat, pusher will only perform a check for overlaps on specified beat
+	ON_BEAT,
+	##In instant mode, a pusher will send signal the moment an overlap is detected
+	INSTANT
 }
 
 func player_action_to_vector(action: PlayerAction) -> Vector2i:

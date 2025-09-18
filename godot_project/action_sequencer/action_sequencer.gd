@@ -70,6 +70,8 @@ enum SequencingState {
 	FINISHED,
 }
 
+@onready var buttons_enabled = true
+
 #endregion
 
 #region Internal state
@@ -256,6 +258,8 @@ func _on_advance() -> void:
 
 
 func _on_play_button_pressed() -> void:
+	if not buttons_enabled:
+		return
 	if not tutorial_mode:
 		_play_button.disabled = true
 		_play_light1.visible = true
@@ -265,9 +269,10 @@ func _on_play_button_pressed() -> void:
 
 
 func _on_replay_button_pressed() -> void:
-	_enter_thinking_mode()
-	replay_pressed.emit()
-	replay_button_press_emitter.play()
+	if buttons_enabled:
+		_enter_thinking_mode()
+		replay_pressed.emit()
+		replay_button_press_emitter.play()
 
 func _on_action_item_clicked(new_action_item: ActionItem):
 	if tutorial_mode:

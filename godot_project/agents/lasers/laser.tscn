@@ -320,7 +320,7 @@ position = Vector2(0, 100)
 texture = ExtResource("3_to654")
 
 [node name="Collision" type="Area2D" parent="BeamLine"]
-collision_layer = 4
+collision_layer = 96
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BeamLine/Collision"]
 shape = SubResource("SegmentShape2D_gmiso")
