@@ -6,12 +6,14 @@ class_name MovableObstacle
 @export var movement_path: Array[Enums.PlayerAction]
 ##Delay after sequencer fires before grid is updated
 @export var update_delay: float
+@export var pusher: Pusher
 
 @onready var _move_cursor := 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	tick.connect(_on_tick)
+	pass
+	#tick.connect(_on_tick)
 
 func get_next_move():
 	if movement_path.size() == 0:
@@ -20,11 +22,11 @@ func get_next_move():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
+	pusher.push_action = movement_path[_move_cursor]
 	return movement_path[_move_cursor]
 
 func _on_tick(beat: int) -> void:
-	print("ticked")
+	pass
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
-	print("action executed")
 	pass

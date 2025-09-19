@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cw2v8ikkeilu1"]
+[gd_scene load_steps=10 format=3 uid="uid://cw2v8ikkeilu1"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_c3qve"]
 [ext_resource type="Texture2D" uid="uid://dgjaowdxxet16" path="res://tilemaps/tilesheets/SampleTiles.png" id="2_2f75q"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_v4ol2"]
+[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_55bno"]
 
 [sub_resource type="Curve" id="Curve_83u4k"]
 _limits = [0.0, 1.15206, 0.0, 1.0]
@@ -28,10 +29,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="MovableObstacle" type="Node2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_thhtm"]
+size = Vector2(20, 13)
+
+[node name="MovableObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_c3qve")
+pusher = NodePath("Pusher")
 direct_movement_curve = SubResource("Curve_83u4k")
 y_movement_curve = SubResource("Curve_55bno")
 y_movement_magnitude = 0.0
@@ -44,3 +49,12 @@ position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_oxejr")
 script = ExtResource("3_v4ol2")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Pusher" type="Area2D" parent="."]
+script = ExtResource("4_55bno")
+push_mode = 1
+metadata/_custom_type_script = "uid://du4ysr150id7h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_thhtm")

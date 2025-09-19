@@ -57,9 +57,9 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Collectible:
 			collectibles.append(child)
-		elif child is MovableObstacle:
+		if child is MovableObstacle:
 			movable_obstacles.append(child)
-		elif child is Agent:
+		if child is Agent:
 			agents.append(child)
 	for agent in agents:
 		agent.local_origin = map_to_local(Vector2i.ZERO)

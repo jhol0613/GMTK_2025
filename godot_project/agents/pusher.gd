@@ -29,7 +29,6 @@ func _on_area_entered(overlapped_area: Area2D):
 			
 func _on_music_bar():
 	if push_mode == Enums.PushMode.ON_BEAT:
-		print(push_beat * AudioManager.beat_time_seconds)
 		get_tree().create_timer(push_beat * AudioManager.beat_time_seconds).timeout.connect(_on_push_beat_timeout)
 	# Trigger overlaps again if movable is still overlapping
 	#for area in get_overlapping_areas():
@@ -37,6 +36,5 @@ func _on_music_bar():
 		
 func _on_push_beat_timeout():
 	# No check that it's a movable because mask should already be set appropriately
-	print("checking")
 	for overlapped_area in get_overlapping_areas():
 		overlapped_movable.emit(self, overlapped_area.owner)

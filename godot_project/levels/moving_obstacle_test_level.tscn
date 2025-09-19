@@ -6,14 +6,12 @@
 
 [node name="LevelBase" instance=ExtResource("1_svhcm")]
 conductor_spawn_beat = 4
+conductor_enabled = false
 available_actions = Array[int]([1, 3, 4, 2])
 
-[node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray(0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0)
-
 [node name="TestObstacle" parent="." index="8" instance=ExtResource("2_daiop")]
-position = Vector2(272, 30)
-movement_path = Array[int]([4, 4, 3, 3])
+position = Vector2(304, 49)
+movement_path = Array[int]([3, 3])
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_daiop")]
-position = Vector2(48, 42)
+position = Vector2(144, 23)
