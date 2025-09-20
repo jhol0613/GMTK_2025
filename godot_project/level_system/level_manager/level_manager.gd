@@ -198,7 +198,6 @@ func _spawn_conductor() -> void:
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
-		#obstacle.reset()
 		
 func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
@@ -277,6 +276,7 @@ func _on_action_sequencer_play_started() -> void:
 	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
 	for obstacle in _level_scene.movable_obstacles:
+		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.reset()
 
 func _advance_car_for_play(animation_time: float):
@@ -325,4 +325,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
 		_advance_car_for_play(0.0)
 		advance_level()
+		
 #endregion

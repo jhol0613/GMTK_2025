@@ -15,6 +15,7 @@ func _ready() -> void:
 	pass
 	#tick.connect(_on_tick)
 
+## This has a side effect of advancing the move cursor each time it is called
 func get_next_move():
 	if movement_path.size() == 0:
 		return Enums.PlayerAction.NONE
@@ -30,3 +31,7 @@ func _on_tick(beat: int) -> void:
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
 	pass
+	
+func reset():
+	super.reset()
+	_move_cursor = 0

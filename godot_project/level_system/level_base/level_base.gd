@@ -26,6 +26,7 @@ class_name RhythmRailLevel
 
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
+@onready var _debug_drawing_layer : DebugDrawing = $DebugDrawing
 
 ##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
 @onready var _obstacle_overrides: Array[Vector2i]
@@ -66,6 +67,9 @@ func _ready() -> void:
 		agent.tile_size = get_tile_size()
 	pushers = get_tree().get_nodes_in_group("pushers")
 	_initialize_path_finding()
+	
+	if get_tree().debug_collisions_hint:
+		_draw_obstacle_traversibility()
 
 
 func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
@@ -107,6 +111,9 @@ func update_obstacle_grid(grid_position: Vector2i, traversible: bool):
 	else:
 		_obstacle_overrides.append(grid_position)
 	path_grid.set_point_solid(grid_position, !traversible) # update A* grid
+	
+	if get_tree().debug_collisions_hint:
+		_draw_obstacle_traversibility()
 
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
@@ -129,3 +136,12 @@ func _initialize_path_finding():
 
 func _on_target_area_entered(_area: Area2D) -> void:
 	target_reached.emit()
+	
+func _draw_obstacle_traversibility() -> void:
+	_debug_drawing_layer.rectangle_centers.clear()
+	for tile in _obstacle_layer.get_used_cells():
+		if not _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
+			_debug_drawing_layer.rectangle_centers.append(map_to_local(tile))
+	for tile in _obstacle_overrides:
+		_debug_drawing_layer.rectangle_centers.append(map_to_local(tile))
+	_debug_drawing_layer.queue_redraw()
