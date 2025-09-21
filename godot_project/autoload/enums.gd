@@ -12,7 +12,11 @@ enum PlayerAction {
 	LEFT_BONK,
 	RIGHT_BONK,
 	UP_BONK,
-	DOWN_BONK
+	DOWN_BONK,
+	UP_FALL,
+	DOWN_FALL,
+	LEFT_FALL,
+	RIGHT_FALL
 }
 
 enum Direction {

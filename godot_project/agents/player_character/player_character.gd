@@ -27,7 +27,7 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		Enums.PlayerAction.JUMP:
 			jump_collision_timer.start()
 			_jumping = true
-			collision_area.set_collision_layer_value(6, false)
+			#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
 
 func notify_success():
 	play_animation("success")
@@ -35,12 +35,12 @@ func notify_success():
 
 func notify_failure():
 	failure_emitter.play()
-	interrupt_queued_animation()
+	interrupt_queued_action()
 	play_animation("failure")
-
+	
 func disable_collisions() -> void:
-	collision_area.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE # I don't think this line is doing anything relevant any more, just nervous to take it out
-
+	collision_area.process_mode = Node.PROCESS_MODE_DISABLED
+	#collision_area.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE # I don't think this line is doing anything relevant any more, just nervous to take it out
 
 func _on_collision(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
@@ -48,7 +48,11 @@ func _on_collision(area: Area2D) -> void:
 			return
 		notify_failure()
 		failure.emit()
+		
+func reset():
+	super.reset()
+	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 func on_jump_collision_disabled_expire() -> void:
 	_jumping = false
-	collision_area.set_collision_layer_value(6, true)
+	#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)

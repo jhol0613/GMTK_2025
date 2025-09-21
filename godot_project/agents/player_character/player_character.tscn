@@ -386,6 +386,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fy7jl")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_wmbr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7oxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkvkj")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_s6mum")
 }, {
 "duration": 1.0,
@@ -594,7 +611,11 @@ animations = Dictionary[int, String]({
 8: "bonk_left",
 9: "bonk_right",
 10: "bonk_up",
-11: "bonk_down"
+11: "bonk_down",
+12: "fall",
+13: "fall",
+14: "fall",
+15: "fall"
 })
 follow_on_animations = Dictionary[int, String]({
 1: "idle_up",
@@ -605,7 +626,11 @@ follow_on_animations = Dictionary[int, String]({
 8: "idle_down",
 9: "idle_down",
 10: "idle_down",
-11: "idle_down"
+11: "idle_down",
+12: "idle_down",
+13: "idle_down",
+14: "idle_down",
+15: "idle_down"
 })
 default_animation = "idle_down"
 beat_delays = Dictionary[int, float]({
@@ -619,7 +644,11 @@ beat_delays = Dictionary[int, float]({
 8: 1.5,
 9: 1.5,
 10: 1.5,
-11: 1.5
+11: 1.5,
+12: 0.0,
+13: 0.0,
+14: 0.0,
+15: 0.0
 })
 sound_emitters = {
 1: NodePath("Sounds/MoveUp"),
@@ -630,7 +659,11 @@ sound_emitters = {
 8: NodePath("Sounds/Bonk"),
 9: NodePath("Sounds/Bonk"),
 10: NodePath("Sounds/Bonk"),
-11: NodePath("Sounds/Bonk")
+11: NodePath("Sounds/Bonk"),
+12: NodePath("Sounds/QuickBonk"),
+13: NodePath("Sounds/QuickBonk"),
+14: NodePath("Sounds/QuickBonk"),
+15: NodePath("Sounds/QuickBonk")
 }
 collision_area = NodePath("Shadow/Area2D")
 sprite = NodePath("Shadow/PlayerSprite")
@@ -642,7 +675,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"bonk_down"
+animation = &"fall"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
@@ -689,6 +722,10 @@ event_guid = "{6f08cbf7-1e72-4d0c-bbad-e7070c4ea5bd}"
 [node name="Failure" type="FmodEventEmitter2D" parent="Sounds"]
 event_name = "event:/Conductor Speak"
 event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
+
+[node name="QuickBonk" type="FmodEventEmitter2D" parent="Sounds"]
+event_name = "event:/Quick_Bonk"
+event_guid = "{c3a979a0-a28d-494e-9d61-d9958cea0062}"
 
 [node name="JumpCollisionDisable" type="Timer" parent="."]
 one_shot = true

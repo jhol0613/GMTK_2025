@@ -23,7 +23,7 @@ func get_next_move():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	pusher.push_action = movement_path[_move_cursor]
+	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
 	return movement_path[_move_cursor]
 
 func _on_tick(beat: int) -> void:
@@ -31,6 +31,19 @@ func _on_tick(beat: int) -> void:
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
 	pass
+
+##Push action is what happens to a movable that overlaps the obstacle
+func _direction_to_push_action(move_direction: Enums.PlayerAction) -> Enums.PlayerAction:
+	match move_direction:
+		Enums.PlayerAction.UP:
+			return Enums.PlayerAction.UP_FALL
+		Enums.PlayerAction.DOWN:
+			return Enums.PlayerAction.DOWN_FALL
+		Enums.PlayerAction.LEFT:
+			return Enums.PlayerAction.LEFT_FALL
+		Enums.PlayerAction.RIGHT:
+			return Enums.PlayerAction.RIGHT_FALL
+	return Enums.PlayerAction.LEFT_FALL
 	
 func reset():
 	super.reset()

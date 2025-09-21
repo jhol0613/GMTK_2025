@@ -52,6 +52,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Pusher" type="Area2D" parent="."]
 script = ExtResource("4_55bno")
+push_action = 14
 push_mode = 1
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 

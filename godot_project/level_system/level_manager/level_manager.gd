@@ -155,7 +155,6 @@ func _reset_level() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
-	#_current_beat = 0
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
@@ -262,11 +261,11 @@ func _update_agents() -> void:
 		agent.tick.emit(_current_beat)
 		
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
+	movable.interrupt_queued_action()
 	if movable is PlayerCharacter:
 		_update_player(pusher.push_action)
 	else:
 		movable.execute_action(pusher.push_action)
-	print("pusher triggered!")
 
 #endregion
 
@@ -293,7 +292,7 @@ func _on_action_sequencer_replay_pressed() -> void:
 	tween.tween_callback(_on_reset_animation_finished)
 	#_on_reset_animation_finished()
 	_reset_level()
-
+	_player_character.disable_collisions()
 
 func _fade_to_running_shader():
 	var tween = create_tween().set_parallel(true)

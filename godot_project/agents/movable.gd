@@ -37,11 +37,12 @@ var _collision_area_initial_position
 #endregion
 
 @onready var _sprite_default_y = sprite.position.y
+##Timer for delaying action to desired beat
 @onready var _timer = Timer.new()
 
 
 var follow_on_animation: String
-var should_interrupt_queued_animation: bool
+var currently_playing_emitter: FmodEventEmitter2D
 
 # Allows collision to move immediately while visuals catch up
 var _frozen_collision_position_during_move: Vector2i
@@ -57,30 +58,22 @@ func _ready():
 		_collision_area_initial_position = collision_area.position
 
 func execute_action(action : Enums.PlayerAction) -> void:
-	match action:
-		Enums.PlayerAction.UP:
-			grid_position += Vector2i.UP
-		Enums.PlayerAction.DOWN:
-			grid_position += Vector2i.DOWN
-		Enums.PlayerAction.LEFT:
-			grid_position += Vector2i.LEFT
-		Enums.PlayerAction.RIGHT:
-			grid_position += Vector2i.RIGHT
-	action_executed.emit(action)
+
 	
 	if collision_area != null:
 		#collision_area.top_level = false
 		collision_area.position = _collision_area_initial_position
 	
-	var emitter = sound_emitters.get(action, null)
-	if emitter:
-		emitter.play()
+	currently_playing_emitter = sound_emitters.get(action, null)
+	if currently_playing_emitter:
+		currently_playing_emitter.play()
 
 	if _get_delay_seconds(action) == 0.0:
 		_on_beat(action)
 	else:
 		# stupid timer can't rebind the function
-		_timer.timeout.disconnect(_on_beat)
+		if _timer.is_connected("timeout", _on_beat):
+			_timer.timeout.disconnect(_on_beat)
 		_timer.stop()
 		_timer.timeout.connect(_on_beat.bind(action))
 		_timer.start(_get_delay_seconds(action))
@@ -95,9 +88,17 @@ func play_animation(animation_name: String, follow_on = null):
 
 ## Called on the beat when the action starts visually (as opposed to sequencer signal)
 func _on_beat(action: Enums.PlayerAction) -> void:
-	if should_interrupt_queued_animation:
-		should_interrupt_queued_animation = false
-		return
+		
+	match action:
+		Enums.PlayerAction.UP, Enums.PlayerAction.UP_FALL:
+			grid_position += Vector2i.UP
+		Enums.PlayerAction.DOWN, Enums.PlayerAction.DOWN_FALL:
+			grid_position += Vector2i.DOWN
+		Enums.PlayerAction.LEFT, Enums.PlayerAction.LEFT_FALL:
+			grid_position += Vector2i.LEFT
+		Enums.PlayerAction.RIGHT, Enums.PlayerAction.RIGHT_FALL:
+			grid_position += Vector2i.RIGHT
+	action_executed.emit(action)
 
 	var animation_name = _get_animation_name(action)
 	if animation_name != "":
@@ -112,8 +113,13 @@ func _on_beat(action: Enums.PlayerAction) -> void:
 	elif action != Enums.PlayerAction.NONE:
 		_initiate_move(_grid_to_local(grid_position))
 
-func interrupt_queued_animation():
-	should_interrupt_queued_animation = true
+func interrupt_queued_action():
+	if _timer.is_connected("timeout", _on_beat):
+		_timer.disconnect("timeout", _on_beat)
+	_timer.stop()
+	
+	if currently_playing_emitter:
+		currently_playing_emitter.stop()
 
 func _on_animation_finished():
 	sprite.play_with_signals(follow_on_animation)
@@ -121,7 +127,7 @@ func _on_animation_finished():
 
 func reset() -> void:
 	super.reset()
-	should_interrupt_queued_animation = false
+	#_should_interrupt_queued_action = false
 	if default_animation != "":
 		sprite.play_with_signals(default_animation)
 
@@ -134,6 +140,9 @@ func _initiate_move(new_target : Vector2):
 	tween.tween_method(_move_callback.bind(position, new_target), 0.0, 1.0, move_duration)
 
 func _initiate_bonk(attempted_target: Vector2):
+	# Keep collision area on current square if you're going to bonk anyway
+	if collision_area != null:
+		_frozen_collision_position_during_move = collision_area.global_position
 	var tween = create_tween()
 	tween.tween_method(_bonk_callback.bind(position, attempted_target), 0.0, 1.0, move_duration)
 
@@ -150,6 +159,8 @@ func _move_callback(alpha: float, start_position: Vector2, target_position: Vect
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
 
 func _bonk_callback(alpha: float, start_position: Vector2, attempted_position: Vector2):
+	if collision_area != null:
+		collision_area.global_position = _frozen_collision_position_during_move
 	var position_difference = attempted_position - start_position
 	position = bonk_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
