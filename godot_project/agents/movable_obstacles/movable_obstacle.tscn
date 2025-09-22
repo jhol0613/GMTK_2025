@@ -47,6 +47,7 @@ metadata/_custom_type_script = "uid://cyio44hidbx4l"
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_oxejr")
+autoplay = "default"
 script = ExtResource("3_v4ol2")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

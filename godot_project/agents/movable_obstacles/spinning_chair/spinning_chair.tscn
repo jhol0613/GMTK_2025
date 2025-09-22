@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://co40kyi743tku"]
+
+[ext_resource type="PackedScene" uid="uid://cw2v8ikkeilu1" path="res://agents/movable_obstacles/movable_obstacle.tscn" id="1_atl20"]
+[ext_resource type="Texture2D" uid="uid://bxaquj755vadl" path="res://agents/movable_obstacles/spinning_chair/spinning_chair_placeholder.png" id="2_f142e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6j3f"]
+atlas = ExtResource("2_f142e")
+region = Rect2(0, 0, 96, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ixrmc"]
+atlas = ExtResource("2_f142e")
+region = Rect2(96, 0, 96, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48c64"]
+atlas = ExtResource("2_f142e")
+region = Rect2(192, 0, 96, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_our0k"]
+atlas = ExtResource("2_f142e")
+region = Rect2(288, 0, 96, 70)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irv77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6j3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ixrmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48c64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_our0k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SpinningChair" instance=ExtResource("1_atl20")]
+
+[node name="AnimatedSprite2DSignals" parent="." index="0"]
+position = Vector2(0, 7)
+sprite_frames = SubResource("SpriteFrames_irv77")
+frame_progress = 0.47703
