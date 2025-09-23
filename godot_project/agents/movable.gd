@@ -10,14 +10,20 @@ class_name Movable
 ## The y value the movable should add to their movement as they move to another tile (to add a "jumping" component instead of just linear motion)
 @export var y_movement_curve: Curve
 @export var y_movement_magnitude := 16.0
+## The curve the movable should follow if "sliding" from one tile to another
+@export var slide_curve: Curve
 @export var bonk_curve: Curve
 @export var jump_curve: Curve
 @export var jump_magnitude := 24.0
 @export var jump_duration := .53
+## Should be a curve of 0.0 from 0 to 1
+@export var null_curve: Curve
 
 @export_subgroup("Frames")
 ## Amount of time for movement animation
 @export var move_duration := .3
+## When sliding instead of moving (e.g. on a treadmill)
+@export var slide_duration := .3
 ## Animation names from the animated sprite for actions
 @export var animations: Dictionary[Enums.PlayerAction, String]
 ## If a follow-on animation is defined for a given action, that animation will play after an action animation is finished
@@ -59,7 +65,6 @@ func _ready():
 
 func execute_action(action : Enums.PlayerAction) -> void:
 
-	
 	if collision_area != null:
 		#collision_area.top_level = false
 		collision_area.position = _collision_area_initial_position
@@ -89,15 +94,8 @@ func play_animation(animation_name: String, follow_on = null):
 ## Called on the beat when the action starts visually (as opposed to sequencer signal)
 func _on_beat(action: Enums.PlayerAction) -> void:
 		
-	match action:
-		Enums.PlayerAction.UP, Enums.PlayerAction.UP_FALL:
-			grid_position += Vector2i.UP
-		Enums.PlayerAction.DOWN, Enums.PlayerAction.DOWN_FALL:
-			grid_position += Vector2i.DOWN
-		Enums.PlayerAction.LEFT, Enums.PlayerAction.LEFT_FALL:
-			grid_position += Vector2i.LEFT
-		Enums.PlayerAction.RIGHT, Enums.PlayerAction.RIGHT_FALL:
-			grid_position += Vector2i.RIGHT
+	grid_position += Enums.player_action_to_vector(action)
+	
 	action_executed.emit(action)
 
 	var animation_name = _get_animation_name(action)
@@ -110,15 +108,18 @@ func _on_beat(action: Enums.PlayerAction) -> void:
 		_initiate_bonk(bonk_target)
 	elif action == Enums.PlayerAction.JUMP:
 		_initiate_jump()
+	elif [Enums.PlayerAction.UP_SLIDE, Enums.PlayerAction.DOWN_SLIDE, Enums.PlayerAction.LEFT_SLIDE, 
+		Enums.PlayerAction.RIGHT_SLIDE].has(action):
+			_initiate_slide(_grid_to_local(grid_position))
 	elif action != Enums.PlayerAction.NONE:
 		_initiate_move(_grid_to_local(grid_position))
 
-func interrupt_queued_action():
+func interrupt_queued_action(cancel_sound := true):
 	if _timer.is_connected("timeout", _on_beat):
 		_timer.disconnect("timeout", _on_beat)
 	_timer.stop()
 	
-	if currently_playing_emitter:
+	if currently_playing_emitter and cancel_sound:
 		currently_playing_emitter.stop()
 
 func _on_animation_finished():
@@ -137,33 +138,35 @@ func _initiate_move(new_target : Vector2):
 		_frozen_collision_position_during_move = collision_area.global_position + (new_target - position)
 		#collision_area.top_level = true
 	var tween = create_tween()
-	tween.tween_method(_move_callback.bind(position, new_target), 0.0, 1.0, move_duration)
+	tween.tween_method(_move_action_callback.bind(position, new_target, direct_movement_curve, 
+		y_movement_curve, y_movement_magnitude), 0.0, 1.0, move_duration)
+	
+func _initiate_slide(new_target: Vector2):
+	if collision_area != null:
+		_frozen_collision_position_during_move = collision_area.global_position + (new_target - position)
+	var tween = create_tween()
+	tween.tween_method(_move_action_callback.bind(position, new_target, slide_curve), 0.0, 1.0, slide_duration)
 
 func _initiate_bonk(attempted_target: Vector2):
 	# Keep collision area on current square if you're going to bonk anyway
 	if collision_area != null:
 		_frozen_collision_position_during_move = collision_area.global_position
 	var tween = create_tween()
-	tween.tween_method(_bonk_callback.bind(position, attempted_target), 0.0, 1.0, move_duration)
+	tween.tween_method(_move_action_callback.bind(position, attempted_target, bonk_curve,
+		y_movement_curve, y_movement_magnitude), 0.0, 1.0, move_duration)
+	#tween.tween_method(_bonk_callback.bind(position, attempted_target), 0.0, 1.0, move_duration)
 
 func _initiate_jump():
 	var tween = create_tween()
 	tween.tween_method(_jump_callback.bind(), 0.0, 1.0, jump_duration)
 
-
-func _move_callback(alpha: float, start_position: Vector2, target_position: Vector2):
+func _move_action_callback(alpha: float, start_position: Vector2, target_position: Vector2, \
+	move_curve: Curve, y_curve: Curve = null_curve, y_magnitude: float = 1.0):
 	if collision_area != null:
 		collision_area.global_position = _frozen_collision_position_during_move
 	var position_difference = target_position - start_position
-	position = direct_movement_curve.sample(alpha) * position_difference + start_position
-	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
-
-func _bonk_callback(alpha: float, start_position: Vector2, attempted_position: Vector2):
-	if collision_area != null:
-		collision_area.global_position = _frozen_collision_position_during_move
-	var position_difference = attempted_position - start_position
-	position = bonk_curve.sample(alpha) * position_difference + start_position
-	sprite.position.y = -y_movement_curve.sample(alpha) * y_movement_magnitude + _sprite_default_y
+	position = move_curve.sample(alpha) * position_difference + start_position
+	sprite.position.y = -y_curve.sample(alpha) * y_magnitude + _sprite_default_y
 
 func _jump_callback(alpha: float):
 	sprite.position.y = -jump_curve.sample(alpha) * jump_magnitude + _sprite_default_y

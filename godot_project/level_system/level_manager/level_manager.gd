@@ -231,14 +231,14 @@ func _update_player(action: Enums.PlayerAction) -> void:
 	if _level_scene.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
 		_player_character.execute_action(action)
 	else:
-		match action:
-			Enums.PlayerAction.LEFT:
+		match move_direction:
+			Vector2i.LEFT:
 				_player_character.execute_action(Enums.PlayerAction.LEFT_BONK)
-			Enums.PlayerAction.RIGHT:
+			Vector2i.RIGHT:
 				_player_character.execute_action(Enums.PlayerAction.RIGHT_BONK)
-			Enums.PlayerAction.UP:
+			Vector2i.UP:
 				_player_character.execute_action(Enums.PlayerAction.UP_BONK)
-			Enums.PlayerAction.DOWN:
+			Vector2i.DOWN:
 				_player_character.execute_action(Enums.PlayerAction.DOWN_BONK)
 
 func _update_conductor() -> void:
@@ -261,7 +261,7 @@ func _update_agents() -> void:
 		agent.tick.emit(_current_beat)
 		
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
-	movable.interrupt_queued_action()
+	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	if movable is PlayerCharacter:
 		_update_player(pusher.push_action)
 	else:

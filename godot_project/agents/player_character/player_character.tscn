@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=83 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -22,6 +22,10 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 
+[sub_resource type="Curve" id="Curve_gvvi5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_2bapq"]
 _data = [Vector2(0, 0), 0.0, 1.86627, 0, 0, Vector2(0.195506, 0.532075), 2.72153, -2.1701, 1, 0, Vector2(0.51573, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -29,6 +33,10 @@ point_count = 4
 [sub_resource type="Curve" id="Curve_wkvkj"]
 _data = [Vector2(0, 0), 0.0, 0.0361968, 0, 0, Vector2(0.390295, 0), 0.0, 0.0, 0, 0, Vector2(0.575949, 1), 0.0, 0.0, 0, 0, Vector2(0.725738, 1), 0.0, 0.0, 0, 0, Vector2(0.877528, 0), -7.46179, 0.0, 0, 0, Vector2(0.937079, 0.115395), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 7
+
+[sub_resource type="Curve" id="Curve_efbsa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_txkxt"]
 atlas = ExtResource("8_2bapq")
@@ -262,7 +270,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bonk_down",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -282,7 +290,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bonk_left",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -302,7 +310,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bonk_right",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -322,7 +330,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bonk_up",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -399,7 +407,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fall",
-"speed": 10.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -597,10 +605,12 @@ failure_emitter = NodePath("Sounds/Failure")
 jump_collision_timer = NodePath("JumpCollisionDisable")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_wkvkj")
+slide_curve = SubResource("Curve_gvvi5")
 bonk_curve = SubResource("Curve_2bapq")
 jump_curve = SubResource("Curve_wkvkj")
 jump_magnitude = 42.0
 jump_duration = 0.8
+null_curve = SubResource("Curve_efbsa")
 animations = Dictionary[int, String]({
 1: "walk_up",
 2: "walk_down",
@@ -675,7 +685,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"fall"
+animation = &"bonk_down"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])

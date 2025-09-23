@@ -16,7 +16,11 @@ enum PlayerAction {
 	UP_FALL,
 	DOWN_FALL,
 	LEFT_FALL,
-	RIGHT_FALL
+	RIGHT_FALL,
+	UP_SLIDE,
+	DOWN_SLIDE,
+	LEFT_SLIDE,
+	RIGHT_SLIDE
 }
 
 enum Direction {
@@ -90,13 +94,13 @@ enum PushMode {
 
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
-		PlayerAction.UP:
+		PlayerAction.UP, PlayerAction.UP_FALL, PlayerAction.UP_SLIDE:
 			return Vector2i.UP
-		PlayerAction.DOWN:
+		PlayerAction.DOWN, PlayerAction.DOWN_FALL, PlayerAction.DOWN_SLIDE:
 			return Vector2i.DOWN
-		PlayerAction.LEFT:
+		PlayerAction.LEFT, PlayerAction.LEFT_FALL, PlayerAction.LEFT_SLIDE:
 			return Vector2i.LEFT
-		PlayerAction.RIGHT:
+		PlayerAction.RIGHT, PlayerAction.RIGHT_FALL, PlayerAction.RIGHT_SLIDE:
 			return Vector2i.RIGHT
 		_:
 			return Vector2i.ZERO

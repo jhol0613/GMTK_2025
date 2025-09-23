@@ -8,6 +8,9 @@ class_name Pusher
 @export var push_mode := Enums.PushMode.ON_BEAT
 ##The downbeat is beat 0.0
 @export var push_beat := 2.0
+##If true, push action will cancel the sound that was queued with the action. If not, push action
+##sound will just play on top of the queud action sound
+@export var should_cancel_sound := true
 
 #Returns self and overlapped movable
 signal overlapped_movable(pusher: Pusher, movable: Movable)
