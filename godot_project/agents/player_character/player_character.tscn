@@ -611,6 +611,7 @@ jump_curve = SubResource("Curve_wkvkj")
 jump_magnitude = 42.0
 jump_duration = 0.8
 null_curve = SubResource("Curve_efbsa")
+slide_duration = 0.5
 animations = Dictionary[int, String]({
 1: "walk_up",
 2: "walk_down",

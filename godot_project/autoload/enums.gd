@@ -20,7 +20,11 @@ enum PlayerAction {
 	UP_SLIDE,
 	DOWN_SLIDE,
 	LEFT_SLIDE,
-	RIGHT_SLIDE
+	RIGHT_SLIDE,
+	UP_LEFT,
+	UP_RIGHT,
+	DOWN_RIGHT,
+	DOWN_LEFT
 }
 
 enum Direction {
@@ -92,6 +96,13 @@ enum PushMode {
 	INSTANT
 }
 
+
+#region Action and Vector conversions
+var NORTHEAST = Vector2i.UP + Vector2i.RIGHT
+var NORTHWEST = Vector2i.UP + Vector2i.LEFT
+var SOUTHEAST = Vector2i.DOWN + Vector2i.RIGHT
+var SOUTHWEST = Vector2i.DOWN + Vector2i.LEFT
+
 func player_action_to_vector(action: PlayerAction) -> Vector2i:
 	match action:
 		PlayerAction.UP, PlayerAction.UP_FALL, PlayerAction.UP_SLIDE:
@@ -102,6 +113,14 @@ func player_action_to_vector(action: PlayerAction) -> Vector2i:
 			return Vector2i.LEFT
 		PlayerAction.RIGHT, PlayerAction.RIGHT_FALL, PlayerAction.RIGHT_SLIDE:
 			return Vector2i.RIGHT
+		PlayerAction.UP_LEFT:
+			return NORTHWEST
+		PlayerAction.UP_RIGHT:
+			return NORTHEAST
+		PlayerAction.DOWN_LEFT:
+			return SOUTHWEST
+		PlayerAction.DOWN_RIGHT:
+			return SOUTHEAST
 		_:
 			return Vector2i.ZERO
 
@@ -115,5 +134,14 @@ func vector_to_player_action(vector: Vector2i) -> PlayerAction:
 			return PlayerAction.LEFT
 		Vector2i.RIGHT:
 			return PlayerAction.RIGHT
+		NORTHEAST:
+			return PlayerAction.UP_RIGHT
+		NORTHWEST:
+			return PlayerAction.UP_LEFT
+		SOUTHEAST:
+			return PlayerAction.DOWN_RIGHT
+		SOUTHWEST:
+			return PlayerAction.DOWN_LEFT
 		_:
 			return PlayerAction.NONE
+#endregion

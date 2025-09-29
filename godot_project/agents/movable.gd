@@ -57,6 +57,7 @@ signal action_executed(action: Enums.PlayerAction)
 
 func _ready():
 	super._ready()
+	add_to_group("movables")
 	_timer.one_shot = true
 	add_child(_timer)
 	_timer.timeout.connect(_on_beat)

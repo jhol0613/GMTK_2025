@@ -30,7 +30,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thhtm"]
-size = Vector2(20, 13)
+size = Vector2(15, 8.5)
 
 [node name="MovableObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 z_index = 1

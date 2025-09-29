@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=15 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="7_x6ye1"]
 [ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://backgrounds/world1/car_connector.png" id="8_4d8y1"]
 [ext_resource type="Script" uid="uid://b3m7gnsl48bka" path="res://level_system/level_base/debug_drawing.gd" id="10_ais3r"]
+[ext_resource type="FontFile" uid="uid://bge7vr6k48ykd" path="res://debug/Roboto-VariableFont_wdth,wght.ttf" id="11_ucxu3"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.716783)
@@ -151,5 +152,6 @@ texture = ExtResource("8_4d8y1")
 z_index = 4096
 z_as_relative = false
 script = ExtResource("10_ais3r")
+font = ExtResource("11_ucxu3")
 
 [connection signal="area_entered" from="Target" to="." method="_on_target_area_entered"]

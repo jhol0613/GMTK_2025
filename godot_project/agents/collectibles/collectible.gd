@@ -22,6 +22,7 @@ class_name Collectible
 
 func _ready() -> void:
 	super._ready()
+	add_to_group("collectibles")
 
 ## Saves a collectible to the save file if it's been queued for collect
 func collect_if_queued():

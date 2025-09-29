@@ -10,6 +10,7 @@ var _first_action = true
 
 func _ready():
 	super._ready()
+	reset()
 	action_executed.connect(_on_action_executed)
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:

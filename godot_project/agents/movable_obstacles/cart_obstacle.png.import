@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxaquj755vadl"
-path="res://.godot/imported/spinning_chair_placeholder.png-354da29cb96643025bd5924197a740c6.ctex"
+uid="uid://cncr5apvrqh7b"
+path="res://.godot/imported/cart_obstacle.png-1002a8c054c024a663f4f2def2735c07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://agents/movable_obstacles/spinning_chair/spinning_chair_placeholder.png"
-dest_files=["res://.godot/imported/spinning_chair_placeholder.png-354da29cb96643025bd5924197a740c6.ctex"]
+source_file="res://agents/movable_obstacles/cart_obstacle.png"
+dest_files=["res://.godot/imported/cart_obstacle.png-1002a8c054c024a663f4f2def2735c07.ctex"]
 
 [params]
 

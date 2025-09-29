@@ -26,6 +26,7 @@ class_name Laser
 
 
 func _ready() -> void:
+	add_to_group("agents")
 	_construct()
 	beam_line.visible = false
 	tick.connect(_fire)

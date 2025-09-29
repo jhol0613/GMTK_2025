@@ -55,16 +55,22 @@ func _enter_tree() -> void:
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
 func _ready() -> void:
-	for child in get_children():
-		if child is Collectible:
-			collectibles.append(child)
-		if child is MovableObstacle:
-			movable_obstacles.append(child)
-		if child is Agent:
-			agents.append(child)
+	#for child in get_children():
+		#if child is Collectible:
+			#collectibles.append(child)
+		#if child is MovableObstacle:
+			#movable_obstacles.append(child)
+		#if child is Agent:
+			#agents.append(child)
+	agents = get_tree().get_nodes_in_group("agents")
 	for agent in agents:
-		agent.local_origin = map_to_local(Vector2i.ZERO)
+		# The position of the agent in level space
+		#agent.reparent(self, true)
+		var local_offset = to_local(agent.global_position) - agent.position
+		agent.local_origin = map_to_local(Vector2i.ZERO) - local_offset
 		agent.tile_size = get_tile_size()
+	collectibles = get_tree().get_nodes_in_group("collectibles")
+	movable_obstacles = get_tree().get_nodes_in_group("movable_obstacles")
 	pushers = get_tree().get_nodes_in_group("pushers")
 	_initialize_path_finding()
 	
@@ -138,7 +144,7 @@ func _on_target_area_entered(_area: Area2D) -> void:
 	target_reached.emit()
 	
 func _draw_obstacle_traversibility() -> void:
-	_debug_drawing_layer.rectangle_centers.clear()
+	_debug_drawing_layer.clear_data()
 	for tile in _obstacle_layer.get_used_cells():
 		if not _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
 			_debug_drawing_layer.rectangle_centers.append(map_to_local(tile))
