@@ -128,7 +128,7 @@ func _initialize_level():
 	_action_sequencer.tutorial_mode = _level_scene.tutorial_mode
 
 	# Connect to animation signals from agents
-	for agent in _level_scene.agents:
+	for agent in get_tree().get_nodes_in_group("agents"): # _level_scene.agents:
 		agent.animation_signal.connect(_on_animation_signal_received)
 
 	# load following level
@@ -137,7 +137,7 @@ func _initialize_level():
 func _on_level_complete() -> void:
 	_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
 	_player_character.notify_success()
-	for collectible in _level_scene.collectibles:
+	for collectible in get_tree().get_nodes_in_group("collectibles"): # _level_scene.collectibles:
 		collectible.collect_if_queued()
 	advance_level()
 	_action_sequencer.buttons_enabled = false
@@ -159,7 +159,7 @@ func _reset_level() -> void:
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
 
-	for collectible in _level_scene.collectibles:
+	for collectible in get_tree().get_nodes_in_group("collectibles"): #_level_scene.collectibles:
 		collectible.reset()
 
 func _on_reset_animation_finished():
@@ -195,12 +195,11 @@ func _spawn_conductor() -> void:
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
 	
 func _initialize_moving_obstacles() -> void:
-	for obstacle in _level_scene.movable_obstacles:
+	for obstacle in get_tree().get_nodes_in_group("movable_obstacles"): #_level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
 		
 func _initialize_pushers() -> void:
-	for pusher in _level_scene.pushers:
-		print("pushe recognized by level manager")
+	for pusher in get_tree().get_nodes_in_group("pushers"): # _level_scene.pushers:
 		pusher.connect("overlapped_movable", _on_pusher_triggered)
 
 #endregion
@@ -221,7 +220,7 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 	
 func _update_obstacles():
-	for obstacle in _level_scene.movable_obstacles:
+	for obstacle in get_tree().get_nodes_in_group("movable_obstacles"): # _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.execute_action(obstacle.get_next_move())
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
@@ -257,7 +256,7 @@ func _update_conductor() -> void:
 	)
 
 func _update_agents() -> void:
-	for agent in _level_scene.agents:
+	for agent in get_tree().get_nodes_in_group("agents"): # _level_scene.agents:
 		agent.tick.emit(_current_beat)
 		
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
@@ -274,7 +273,7 @@ func _on_action_sequencer_play_started() -> void:
 	_current_beat = 0
 	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
-	for obstacle in _level_scene.movable_obstacles:
+	for obstacle in get_tree().get_nodes_in_group("movable_obstacles"): #_level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.reset()
 

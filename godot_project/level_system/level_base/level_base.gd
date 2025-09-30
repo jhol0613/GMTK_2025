@@ -56,12 +56,14 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	#for child in get_children():
-		#if child is Collectible:
-			#collectibles.append(child)
-		#if child is MovableObstacle:
-			#movable_obstacles.append(child)
-		#if child is Agent:
+		#if child.is_in_group("agents"):
 			#agents.append(child)
+		#if child.is_in_group("collectibles"):
+			#collectibles.append(child)
+		#if child.is_in_group("movable_obstacles"):
+			#movable_obstacles.append(child)
+		#if child.is_in_group("pushers"):
+			#pushers.append(child)
 	agents = get_tree().get_nodes_in_group("agents")
 	for agent in agents:
 		# The position of the agent in level space
@@ -69,9 +71,9 @@ func _ready() -> void:
 		var local_offset = to_local(agent.global_position) - agent.position
 		agent.local_origin = map_to_local(Vector2i.ZERO) - local_offset
 		agent.tile_size = get_tile_size()
-	collectibles = get_tree().get_nodes_in_group("collectibles")
-	movable_obstacles = get_tree().get_nodes_in_group("movable_obstacles")
-	pushers = get_tree().get_nodes_in_group("pushers")
+	#collectibles = get_tree().get_nodes_in_group("collectibles")
+	#movable_obstacles = get_tree().get_nodes_in_group("movable_obstacles")
+	#pushers = get_tree().get_nodes_in_group("pushers")
 	_initialize_path_finding()
 	
 	if get_tree().debug_collisions_hint:
