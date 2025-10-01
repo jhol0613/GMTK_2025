@@ -228,6 +228,8 @@ func _enter_thinking_mode():
 	for i in range(_available_slots):
 		_initialized_slots[i].ui_interaction_enabled = true
 		_initialized_slots[i].set_to_thinking_mode_color()
+	_redo_btn.disabled = false
+	_eraser_btn.disabled = false
 
 func set_action_icons_hidden(should_hide: bool):
 	_action_items.visible = !should_hide
@@ -266,6 +268,9 @@ func _on_play_button_pressed() -> void:
 		_play_light2.visible = true
 		play_button_press_emitter.play()
 		play()
+	_eraser_btn.disabled = true
+	_redo_btn.disabled = true
+	_exit_erase_mode()
 
 
 func _on_replay_button_pressed() -> void:
@@ -344,9 +349,11 @@ func _on_speed_toggled(pressed: bool) -> void:
 		AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
 
 func _on_redo_button_mouse_entered() -> void:
-	redo_btn_hover_emitter.play()
+	if not _redo_btn.disabled:
+		redo_btn_hover_emitter.play()
 	
 func _on_redo_button_pressed() -> void:
+	_exit_erase_mode()
 	redo_btn_press_emitter.play()
 	_clear_action_slots()
 
@@ -358,15 +365,19 @@ func _setup_eraser_button() -> void:
 	_eraser_btn.toggled.connect(_on_eraser_toggled)
 	
 func _on_eraser_button_mouse_entered() -> void:
-	eraser_btn_hover_emitter.play()
+	if not _eraser_btn.disabled:
+		eraser_btn_hover_emitter.play()
 
 func _on_eraser_toggled(pressed: bool) -> void:
-	_eraser_mode = pressed
-	if pressed:
-		_enter_erase_mode()
-		_update_slot_action_previews()
+	if current_state == SequencingState.SEQUENCING:
+		_eraser_mode = pressed
+		if pressed:
+			_enter_erase_mode()
+			_update_slot_action_previews()
+		else:
+			_exit_erase_mode()
 	else:
-		_exit_erase_mode()
+		_eraser_btn.pressed
 
 ## Deselect all action items, set current action to NONE, and set eraser cursor
 func _enter_erase_mode():
