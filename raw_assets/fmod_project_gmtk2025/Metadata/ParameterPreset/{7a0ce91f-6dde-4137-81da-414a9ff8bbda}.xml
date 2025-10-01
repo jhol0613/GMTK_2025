@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{7a0ce91f-6dde-4137-81da-414a9ff8bbda}">
+		<property name="name">
+			<value>GameOver</value>
+		</property>
+		<relationship name="folder">
+			<destination>{24d93029-5501-46c5-88c8-a6ddec4015bb}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{06648bd7-b84a-48e8-97e7-12b7bbacfb99}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{06648bd7-b84a-48e8-97e7-12b7bbacfb99}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
