@@ -35,7 +35,6 @@ func _get_time_at_frame(animation_name: String, frame_number: int):
 	var single_frame_duration = 1.0 / sprite_frames.get_animation_speed(animation_name)
 	for i in range(frame_number):
 		frame_time += sprite_frames.get_frame_duration(animation_name, i) * single_frame_duration
-		print(frame_time)
 		
 	return frame_time
 		

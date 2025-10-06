@@ -5,7 +5,7 @@ extends FmodBankLoader
 @export var time_multiplier := Enums.TimeMultiplier.SINGLE: set = _time_multiplier_changed
 ## The amount of time for a single beat in seconds
 @onready var beat_time_seconds := 60.0 * time_multiplier / (bpm * 4)
-@onready var music_event = $MusicEvent
+@onready var music_event := $MusicEvent
 
 signal music_bar
 
@@ -20,7 +20,6 @@ signal music_bar
 @onready var _bar := 0
 
 func _on_music_event_timeline_beat(_params: Dictionary) -> void:
-	
 	if _params.get("bar") == _bar:
 		return
 	_bar = _params.get("bar")
@@ -34,3 +33,12 @@ func _time_multiplier_changed(new_multiplier: Enums.TimeMultiplier):
 
 func set_music_mode(mode: Enums.MusicMode):
 	music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))
+	
+func play_world_complete_music():
+	music_event.set_parameter("GameOver", 1.0)
+	
+func play_music_event(event_name: String):
+	music_event.stop()
+	music_event.event_name = "event:/" + event_name
+	music_event.play()
+	

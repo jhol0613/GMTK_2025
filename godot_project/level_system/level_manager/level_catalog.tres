@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=18 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=20 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -16,15 +16,25 @@
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/level1-14.tscn" id="13_e7wa4"]
 [ext_resource type="PackedScene" uid="uid://bis4mmgrdtses" path="res://levels/MonkeyLevel.tscn" id="14_wvvmg"]
 [ext_resource type="PackedScene" uid="uid://cqus7ea6hnmos" path="res://levels/moving_obstacle_test_level.tscn" id="15_8o3tm"]
+[ext_resource type="PackedScene" uid="uid://44m1kxxusxto" path="res://backgrounds/world2/world2_placeholder.tscn" id="17_rcuhu"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("3_oivuf")
-level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"), ExtResource("5_peuoq"), ExtResource("6_cto6e"), ExtResource("7_xo8rd"), ExtResource("8_5wr1n"), ExtResource("9_nmtjp"), ExtResource("10_y8p5u"), ExtResource("11_y48yf"), ExtResource("12_bxvsn"), ExtResource("13_e7wa4"), ExtResource("14_wvvmg"), ExtResource("15_8o3tm")])
+level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"), ExtResource("5_peuoq"), ExtResource("6_cto6e"), ExtResource("7_xo8rd"), ExtResource("8_5wr1n"), ExtResource("9_nmtjp"), ExtResource("10_y8p5u"), ExtResource("11_y48yf"), ExtResource("12_bxvsn"), ExtResource("13_e7wa4"), ExtResource("14_wvvmg")])
 level_select_scene = 4
+music_event_name = "World1_BGM"
+metadata/_custom_type_script = "uid://dk64rba8fhrtt"
+
+[sub_resource type="Resource" id="Resource_ydpb6"]
+script = ExtResource("2_lqinw")
+world_scene = ExtResource("17_rcuhu")
+level_list = Array[PackedScene]([ExtResource("15_8o3tm"), ExtResource("15_8o3tm")])
+level_select_scene = 4
+music_event_name = "World2_BGM"
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [resource]
 script = ExtResource("1_vetjv")
-world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c")])
+world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6")])
 metadata/_custom_type_script = "uid://4j1dtwn2r7t1"

@@ -63,6 +63,10 @@ func get_next_level() -> PackedScene:
 ## Returns the level select scene associated with a given world	
 func get_level_select_scene(world_number: int) -> Enums.Scenes:
 	return world_definitions[world_number].level_select_scene
+	
+## Gets music event associated with current world
+func get_world_music_event_name():
+	return world_definitions[_current_world].music_event_name
 
 ## Returns true iff most recent get level was a world different from the previous
 func is_new_world() -> bool:

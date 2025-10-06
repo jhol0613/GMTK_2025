@@ -19,7 +19,6 @@ func _ready() -> void:
 	connect("pressed", lvl_btn_on_pressed)
 
 func lvl_btn_on_mouse_entered() -> void:
-	print("mouse entered")
 	grow_btn(grow_size, .1)
 
 func lvl_btn_on_mouse_exited() -> void:

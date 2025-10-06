@@ -8,7 +8,7 @@ script = ExtResource("1_u6vuv")
 bpm = 170.0
 
 [node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/BackgroundMusic"
+event_name = "event:/World1_BGM"
 event_guid = "{fb5c7b3a-5579-445e-b53a-759b365b69e7}"
 autoplay = true
 fmod_parameters/ThinkingMode/id = 5318922715226752698

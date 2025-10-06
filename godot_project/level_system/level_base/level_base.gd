@@ -55,19 +55,19 @@ func _enter_tree() -> void:
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
 func _ready() -> void:
-	#for child in get_children():
-		#if child.is_in_group("agents"):
-			#agents.append(child)
-		#if child.is_in_group("collectibles"):
-			#collectibles.append(child)
-		#if child.is_in_group("movable_obstacles"):
-			#movable_obstacles.append(child)
-		#if child.is_in_group("pushers"):
-			#pushers.append(child)
-	agents = get_tree().get_nodes_in_group("agents")
+	var children = find_children("*", "", true)
+	for child in children:
+		if child.is_in_group("agents"):
+			agents.append(child)
+		if child.is_in_group("collectibles"):
+			collectibles.append(child)
+		if child.is_in_group("movable_obstacles"):
+			movable_obstacles.append(child)
+		if child.is_in_group("pushers"):
+			pushers.append(child)
+	#agents = get_tree().get_nodes_in_group("agents")
 	for agent in agents:
 		# The position of the agent in level space
-		#agent.reparent(self, true)
 		var local_offset = to_local(agent.global_position) - agent.position
 		agent.local_origin = map_to_local(Vector2i.ZERO) - local_offset
 		agent.tile_size = get_tile_size()

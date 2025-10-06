@@ -34,7 +34,6 @@ func _load_save_data():
 		var error = json.parse(json_string)
 		if error == OK:
 			if typeof(json.data) == TYPE_DICTIONARY:
-				print(json.data)
 				_save_data = json.data
 	else:
 		# Create new save data if it doesn't exist yet
