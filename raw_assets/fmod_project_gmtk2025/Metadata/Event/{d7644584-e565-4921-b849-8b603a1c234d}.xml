@@ -147,6 +147,9 @@
 		<property name="length">
 			<value>13.5</value>
 		</property>
+		<property name="startOffset">
+			<value>10.5</value>
+		</property>
 		<relationship name="audioFile">
 			<destination>{8b8567d7-734f-4090-8dda-85850e225a73}</destination>
 		</relationship>
@@ -190,6 +193,9 @@
 		</property>
 		<property name="length">
 			<value>13.5</value>
+		</property>
+		<property name="startOffset">
+			<value>10.5</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{8b8567d7-734f-4090-8dda-85850e225a73}</destination>
@@ -331,6 +337,7 @@
 		<relationship name="automationPoints">
 			<destination>{d5705340-785e-4a27-9a52-539e9d4460ac}</destination>
 			<destination>{71fdd7f7-0e6b-4c24-8c1b-d8714165d3a2}</destination>
+			<destination>{fcab8bff-fb55-4090-889b-73e2b7bb740f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{363095fb-3d34-4784-abfd-292bc663ae61}" />
@@ -349,12 +356,20 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>0</value>
+			<value>-80</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{71fdd7f7-0e6b-4c24-8c1b-d8714165d3a2}">
 		<property name="position">
 			<value>0.5</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{fcab8bff-fb55-4090-889b-73e2b7bb740f}">
+		<property name="position">
+			<value>1</value>
 		</property>
 		<property name="value">
 			<value>-80</value>
