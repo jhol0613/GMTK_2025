@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://nvxx5syory5t"]
+
+[ext_resource type="Script" uid="uid://c8dgb6wiaesd4" path="res://backgrounds/tunnel.gd" id="1_wot0p"]
+
+[node name="PlaceholderTunnel" type="Node2D"]
+script = ExtResource("1_wot0p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 606.0
+offset_top = 98.0
+offset_right = 2293.0
+offset_bottom = 448.0
+color = Color(0.811289, 0.409343, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 601.0
+offset_top = 151.0
+offset_right = 1819.0
+offset_bottom = 198.0
+text = "Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel Placeholder Tunnel"

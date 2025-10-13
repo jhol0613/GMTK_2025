@@ -25,6 +25,8 @@ extends Node2D
 @export var level_success_delay := 2.0
 ## How long to wait to reset the level after a failure
 @export var level_failure_delay := 2.0
+##Amount of time to wait before beginning world transition
+@export var world_transition_begin_delay := 5.0
 @export_subgroup("Thinking Mode Filter")
 @export_range(0, 1, .01) var brightness: float
 @export_range(0, 1, .01) var contrast: float
@@ -59,7 +61,6 @@ var _current_beat := 0
 
 # True when loaded level is a new world
 var _queue_world_transition = false
-var _queue_music_transition = false
 
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
@@ -97,9 +98,6 @@ func load_next_level():
 ## Pysically advances the level and initializes the new car with proper timing
 func advance_level():
 	_level_number += 1
-
-	_action_sequencer.stop_sequencer()
-	await get_tree().create_timer(level_success_delay).timeout
 	
 	# Update reference to new level and initialize
 	_level_scene = _next_level
@@ -116,10 +114,6 @@ func advance_level():
 ## Scene initialization steps that are called AFTER the level has been fully advanced
 func _on_level_advanced():
 	_action_sequencer.set_action_icons_hidden(false)
-	if _queue_music_transition:
-		AudioManager.play_music_event(level_catalog.get_world_music_event_name())
-		_queue_music_transition = false
-		_queue_world_transition = false
 	_spawn_player()
 	_reset_level()
 
@@ -149,10 +143,17 @@ func _on_level_complete() -> void:
 	_player_character.notify_success()
 	for collectible in _level_scene.collectibles:
 		collectible.collect_if_queued()
-	if _queue_world_transition:
-		_queue_music_transition = true
-	advance_level()
 	_action_sequencer.buttons_enabled = false
+	
+	_action_sequencer.stop_sequencer()
+	await get_tree().create_timer(level_success_delay).timeout
+	
+	if _queue_world_transition:
+		_execute_world_transition()
+		return
+	
+	advance_level()
+	
 	
 func _on_level_fail() -> void:
 	_action_sequencer.buttons_enabled = false
@@ -178,6 +179,21 @@ func _on_reset_animation_finished():
 	_action_sequencer.set_action_icons_hidden(false)
 	# TODO: maybe put a reset animation here
 	_player_character.reset()
+
+## Run once final world level complete (i.e. new world level already loaded)
+func _execute_world_transition():
+	AudioManager.play_world_complete_music()
+	var transition_scene = level_catalog.get_transition_scene().instantiate()
+	assert(transition_scene is WorldTransitionTunnel)
+	await AudioManager.music_complete
+	add_child(transition_scene)
+	AudioManager.play_music_event(level_catalog.get_world_music_event_name())
+	await get_tree().create_timer(transition_scene.get_time_until_screen_covered()).timeout
+	_world_scene.queue_free()
+	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
+	add_child(_world_scene)
+	advance_level()
+	
 #endregion
 
 #region Level Component Initializations

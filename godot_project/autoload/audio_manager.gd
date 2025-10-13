@@ -8,6 +8,7 @@ extends FmodBankLoader
 @onready var music_event := $MusicEvent
 
 signal music_bar
+signal music_complete
 
 # Parameter values for music modes
 @onready var _mode_dictionary = {
@@ -38,7 +39,10 @@ func play_world_complete_music():
 	music_event.set_parameter("GameOver", 1.0)
 	
 func play_music_event(event_name: String):
+	music_event.set_parameter("GameOver", 0.0)
 	music_event.stop()
 	music_event.event_name = "event:/" + event_name
 	music_event.play()
 	
+func on_music_stopped():
+	music_complete.emit()

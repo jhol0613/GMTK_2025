@@ -74,5 +74,9 @@ func is_new_world() -> bool:
 	
 func get_world_scene() -> PackedScene:
 	return world_definitions[_current_world].world_scene
+
+## Returns transition scene for current (most recently loaded level's) world
+func get_transition_scene() -> PackedScene:
+	return world_definitions[_current_world].transition_scene
 	
 	

@@ -8,13 +8,10 @@ script = ExtResource("1_u6vuv")
 bpm = 170.0
 
 [node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/World1_BGM"
-event_guid = "{fb5c7b3a-5579-445e-b53a-759b365b69e7}"
-autoplay = true
-fmod_parameters/ThinkingMode/id = 5318922715226752698
-fmod_parameters/ThinkingMode = 0.0
-fmod_parameters/ThinkingMode/variant_type = 3
+event_name = "event:/PickBlock"
+event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
 [node name="Listener" type="FmodListener2D" parent="."]
 
+[connection signal="stopped" from="MusicEvent" to="." method="on_music_stopped"]
 [connection signal="timeline_beat" from="MusicEvent" to="." method="_on_music_event_timeline_beat"]
