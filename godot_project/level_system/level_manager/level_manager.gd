@@ -122,6 +122,7 @@ func _initialize_level():
 	# Initialize new obstacles and pushers
 	_initialize_moving_obstacles()
 	_initialize_pushers()
+	_initialize_interactables()
 	
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
@@ -133,7 +134,8 @@ func _initialize_level():
 
 	# Connect to animation signals from agents
 	for agent in _level_scene.agents:
-		agent.animation_signal.connect(_on_animation_signal_received)
+		if not agent.animation_signal.is_connected(_on_animation_signal_received):
+			agent.animation_signal.connect(_on_animation_signal_received)
 
 	# load following level
 	load_next_level()
@@ -153,8 +155,7 @@ func _on_level_complete() -> void:
 		return
 	
 	advance_level()
-	
-	
+
 func _on_level_fail() -> void:
 	_action_sequencer.buttons_enabled = false
 	_action_sequencer.stop_sequencer()
@@ -204,7 +205,7 @@ func _spawn_movable(scene: PackedScene, grid_position: Vector2i) -> Movable:
 	_level_scene.add_child(movable)
 	return movable
 	
-func _initialize_movable(movable: Movable, grid_position: Vector2i) -> void:
+func _initialize_movable(movable: Agent, grid_position: Vector2i) -> void:
 	movable.grid_position = grid_position
 	movable.grid_origin = grid_position
 	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
@@ -225,6 +226,15 @@ func _spawn_conductor() -> void:
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
+	for spawner in _level_scene.obstacle_spawners:
+		spawner.obstacle_spawned.connect(_on_obstacle_spawned)
+		
+func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
+	_level_scene.movable_obstacles.append(_spawn_movable(obstacle, grid_position))
+
+func _initialize_interactables() -> void:
+	for interactable in _level_scene.interactables:
+		_initialize_movable(interactable, _level_scene.global_to_map(interactable.global_position))
 		
 func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
@@ -239,6 +249,7 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
 	_update_agents()
+	_update_interactables(action)
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
@@ -287,6 +298,15 @@ func _update_agents() -> void:
 	for agent in _level_scene.agents:
 		agent.tick.emit(_current_beat)
 		
+func _update_interactables(action: Enums.PlayerAction) -> void:
+	if action == Enums.PlayerAction.INTERACT:
+		for interactable in _level_scene.interactables:
+			print("player position:" , _player_character.grid_position)
+			print("interactable position", interactable.grid_position)
+			if interactable.is_in_range(_player_character.grid_position):
+				print("interactable in range")
+				interactable.interact(action)
+
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	if movable is PlayerCharacter:

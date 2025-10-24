@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpv7o05l1e0xk"]
+
+[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_ymfx7"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="2_2iqmr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjhgq"]
+
+[node name="GenericInvisibleObstacle" type="Node2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_ymfx7")
+sprite = NodePath("AnimatedSprite2DSignals")
+metadata/_custom_type_script = "uid://cyio44hidbx4l"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fjhgq")
+script = ExtResource("2_2iqmr")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

@@ -1,0 +1,98 @@
+[gd_scene load_steps=13 format=3 uid="uid://cbc0cwtj1xkvi"]
+
+[ext_resource type="Script" uid="uid://cu75o0mvlcwpl" path="res://agents/movable_obstacles/snack_cart_obstacle.gd" id="1_2w8mm"]
+[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart_curve.tres" id="2_koxf5"]
+[ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/cart_obstacle.png" id="2_ldseh"]
+[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_h3hhy"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_koxf5"]
+[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnaji"]
+atlas = ExtResource("2_ldseh")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8yhf8"]
+atlas = ExtResource("2_ldseh")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koxf5"]
+atlas = ExtResource("2_ldseh")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3hhy"]
+atlas = ExtResource("2_ldseh")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_koxf5"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_vnaji")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_8yhf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnaji")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnaji")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koxf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3hhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koxf5")
+}],
+"loop": false,
+"name": &"updown",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hhy"]
+size = Vector2(20, 10)
+
+[node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
+script = ExtResource("1_2w8mm")
+movement_path = Array[int]([3, 4])
+pusher = NodePath("Pusher")
+direct_movement_curve = ExtResource("2_koxf5")
+y_movement_curve = ExtResource("3_h3hhy")
+y_movement_magnitude = 0.0
+animations = Dictionary[int, String]({
+1: "updown",
+2: "updown",
+3: "left",
+4: "right"
+})
+sprite = NodePath("AnimatedSprite2DSignals")
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -31)
+sprite_frames = SubResource("SpriteFrames_koxf5")
+animation = &"left"
+script = ExtResource("3_koxf5")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Pusher" type="Area2D" parent="."]
+position = Vector2(0, -5)
+script = ExtResource("4_h3hhy")
+push_mode = 1
+metadata/_custom_type_script = "uid://du4ysr150id7h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+shape = SubResource("RectangleShape2D_h3hhy")

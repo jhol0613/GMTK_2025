@@ -23,17 +23,11 @@ func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:
 		return Enums.PlayerAction.NONE
 	var move_to_return = movement_path[_move_cursor]
+	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
 	return move_to_return
-
-func _on_tick(beat: int) -> void:
-	pass
-
-func _on_action_executed(action: Enums.PlayerAction) -> void:
-	pass
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
 ##return the same push action that's currently set
@@ -52,7 +46,7 @@ func _direction_to_push_action(move_direction: Enums.PlayerAction) -> Enums.Play
 ##Sets the position in the move sequence where the cursor should start
 func set_move_cursor_start_position(new_start_position: int):
 	_move_cursor_start_position = new_start_position
-	
+
 func reset():
 	super.reset()
 	_move_cursor = _move_cursor_start_position

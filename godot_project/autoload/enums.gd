@@ -8,7 +8,7 @@ enum PlayerAction {
 	RIGHT,
 	JUMP,
 	DUCK,
-	HIDE,
+	INTERACT,
 	LEFT_BONK,
 	RIGHT_BONK,
 	UP_BONK,

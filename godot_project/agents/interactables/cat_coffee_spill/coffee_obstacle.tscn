@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cynt7wbxbhgdg"]
+
+[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_g1vmw"]
+[ext_resource type="Texture2D" uid="uid://3t188arwni8n" path="res://agents/interactables/cat_coffee_spill/coffee_spill.png" id="2_o1c63"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_ly127"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot43s"]
+atlas = ExtResource("2_o1c63")
+region = Rect2(0, 0, 32, 57)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0bwnl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot43s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CoffeeObstacle" type="Node2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_g1vmw")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://cyio44hidbx4l"
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 2)
+sprite_frames = SubResource("SpriteFrames_0bwnl")
+script = ExtResource("3_ly127")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

@@ -1,21 +1,17 @@
 [gd_scene load_steps=10 format=3 uid="uid://cw2v8ikkeilu1"]
 
-[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_c3qve"]
-[ext_resource type="Texture2D" uid="uid://dgjaowdxxet16" path="res://tilemaps/tilesheets/SampleTiles.png" id="2_2f75q"]
-[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_v4ol2"]
-[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_55bno"]
-
-[sub_resource type="Curve" id="Curve_83u4k"]
-_limits = [0.0, 1.15206, 0.0, 1.0]
-_data = [Vector2(0, 0.0077101), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_6ffc4"]
+[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart_curve.tres" id="2_7i3og"]
+[ext_resource type="Texture2D" uid="uid://dgjaowdxxet16" path="res://tilemaps/tilesheets/SampleTiles.png" id="2_wvjgg"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_7i3og"]
+[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_055nj"]
 
 [sub_resource type="Curve" id="Curve_55bno"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.529536, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wclvs"]
-atlas = ExtResource("2_2f75q")
+atlas = ExtResource("2_wvjgg")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_oxejr"]
@@ -35,9 +31,10 @@ size = Vector2(15, 8.5)
 [node name="MovableObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 z_index = 1
 y_sort_enabled = true
-script = ExtResource("1_c3qve")
+script = ExtResource("1_6ffc4")
+movement_path = Array[int]([4, 3])
 pusher = NodePath("Pusher")
-direct_movement_curve = SubResource("Curve_83u4k")
+direct_movement_curve = ExtResource("2_7i3og")
 y_movement_curve = SubResource("Curve_55bno")
 y_movement_magnitude = 0.0
 default_animation = "default"
@@ -48,11 +45,11 @@ metadata/_custom_type_script = "uid://cyio44hidbx4l"
 position = Vector2(0, -13)
 sprite_frames = SubResource("SpriteFrames_oxejr")
 autoplay = "default"
-script = ExtResource("3_v4ol2")
+script = ExtResource("3_7i3og")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Pusher" type="Area2D" parent="."]
-script = ExtResource("4_55bno")
+script = ExtResource("4_055nj")
 push_action = 14
 push_mode = 1
 metadata/_custom_type_script = "uid://du4ysr150id7h"

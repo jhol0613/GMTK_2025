@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c2yuwdalgstuj"]
+[gd_scene load_steps=12 format=3 uid="uid://c2yuwdalgstuj"]
 
 [ext_resource type="Script" uid="uid://cds2tru0s15j4" path="res://action_sequencer/action_slots/action_slot.gd" id="1_5idlh"]
 [ext_resource type="Texture2D" uid="uid://c68c60ps82r03" path="res://action_sequencer/action_slots/action_slot_inactive.png" id="2_5idlh"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ud0y87hpu6s3" path="res://action_sequencer/action_slots/Move_Right.png" id="7_xtiu8"]
 [ext_resource type="Texture2D" uid="uid://dg7s4hknhtvo8" path="res://action_sequencer/action_slots/Jump.png" id="8_bi66e"]
 [ext_resource type="Texture2D" uid="uid://7i3ye02vrbp2" path="res://action_sequencer/action_slots/Duck.png" id="9_8fu2t"]
+[ext_resource type="Texture2D" uid="uid://r2k05kuv4v62" path="res://action_sequencer/action_slots/Interact_Placeholder.png" id="10_5msto"]
 
 [node name="ActionSlot" type="CenterContainer"]
 mouse_filter = 0
@@ -22,7 +23,8 @@ action_textures = Dictionary[int, CompressedTexture2D]({
 3: ExtResource("6_hidq3"),
 4: ExtResource("7_xtiu8"),
 5: ExtResource("8_bi66e"),
-6: ExtResource("9_8fu2t")
+6: ExtResource("9_8fu2t"),
+7: ExtResource("10_5msto")
 })
 playing_light_color = Color(0, 0.984314, 0, 0.87451)
 thinking_light_color = Color(1, 1, 0.54902, 0.223529)

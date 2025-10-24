@@ -40,6 +40,10 @@ var movable_obstacles := []
 var collectibles := []
 ## pushers in the level
 var pushers := []
+## interactables in the level
+var interactables := []
+## obstacle spawners in the level
+var obstacle_spawners := []
 
 signal target_reached
 
@@ -55,7 +59,7 @@ func _enter_tree() -> void:
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
 func _ready() -> void:
-	var children = find_children("*", "", true)
+	var children = find_children("*", "", true) # find children recursively
 	for child in children:
 		if child.is_in_group("agents"):
 			agents.append(child)
@@ -65,6 +69,10 @@ func _ready() -> void:
 			movable_obstacles.append(child)
 		if child.is_in_group("pushers"):
 			pushers.append(child)
+		if child.is_in_group("interactables"):
+			interactables.append(child)
+		if child.is_in_group("obstacle_spawners"):
+			obstacle_spawners.append(child)
 	#agents = get_tree().get_nodes_in_group("agents")
 	for agent in agents:
 		# The position of the agent in level space
@@ -105,7 +113,6 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 func get_tile_size() -> Vector2i:
 	return _floor_layer.tile_set.tile_size
 
-
 ## Take global coordinates and convert to map coordinates
 func global_to_map(coordinates : Vector2):
 	return _floor_layer.local_to_map(_floor_layer.to_local(coordinates))
@@ -144,7 +151,7 @@ func _initialize_path_finding():
 
 func _on_target_area_entered(_area: Area2D) -> void:
 	target_reached.emit()
-	
+
 func _draw_obstacle_traversibility() -> void:
 	_debug_drawing_layer.clear_data()
 	for tile in _obstacle_layer.get_used_cells():

@@ -1,17 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqus7ea6hnmos"]
+[gd_scene load_steps=6 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_daiop"]
-[ext_resource type="PackedScene" uid="uid://cw2v8ikkeilu1" path="res://agents/movable_obstacles/movable_obstacle.tscn" id="4_1oiv2"]
+[ext_resource type="PackedScene" uid="uid://cw2v8ikkeilu1" path="res://agents/movable_obstacles/sample_movable_obstacle.tscn" id="4_1oiv2"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart_obstacle.tscn" id="4_re3re"]
 [ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="5_re3re"]
 
 [node name="LevelBase" instance=ExtResource("1_svhcm")]
+player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 4
 conductor_enabled = false
 available_actions = Array[int]([1, 3, 4, 2])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray(0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 4, 0, 255, 255, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_daiop")]
 z_index = 1
@@ -27,8 +29,12 @@ animation_speed = 3.0
 animation_loops = 3
 
 [node name="MovableObstacle" parent="." index="11" instance=ExtResource("4_1oiv2")]
-position = Vector2(208, 68)
-movement_path = Array[int]([4, 3])
+position = Vector2(80, 67)
+movement_path = Array[int]([3, 4])
 
-[node name="SpinningChair" parent="." index="12" instance=ExtResource("5_re3re")]
-position = Vector2(112, 32)
+[node name="SnackCartObstacle" parent="." index="12" instance=ExtResource("4_re3re")]
+position = Vector2(112, 87)
+movement_path = Array[int]([3, 2, 4, 1])
+
+[node name="SpinningChair" parent="." index="13" instance=ExtResource("5_re3re")]
+position = Vector2(208, 49)

@@ -33,16 +33,22 @@ func _time_multiplier_changed(new_multiplier: Enums.TimeMultiplier):
 	beat_time_seconds = 60.0 * time_multiplier / (bpm * 4.0)
 
 func set_music_mode(mode: Enums.MusicMode):
-	music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))
+	if music_event.get_parameter("ThinkingMode") != null:
+		music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))
 	
 func play_world_complete_music():
-	music_event.set_parameter("GameOver", 1.0)
+	if music_event.get_parameter("GameOver") != null:
+		music_event.set_parameter("GameOver", 1.0)
 	
 func play_music_event(event_name: String):
-	music_event.set_parameter("GameOver", 0.0)
+	if music_event.get_parameter("GameOver") != null:
+		music_event.set_parameter("GameOver", 0.0)
 	music_event.stop()
 	music_event.event_name = "event:/" + event_name
 	music_event.play()
 	
 func on_music_stopped():
 	music_complete.emit()
+
+func get_fps_from_bpm():
+	return bpm / 30.0
