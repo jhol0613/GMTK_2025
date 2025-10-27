@@ -108,5 +108,6 @@ func _set_start_direction(new_direction: FacingDirection):
 func reset():
 	# Don't call super so position of the chair doesn't reset
 	_facing_direction = start_direction
-	_frame_timer.stop() #prevent frame from getting off by one if reset in the middle of rotate animation
+	if _frame_timer != null:
+		_frame_timer.stop() #prevent frame from getting off by one if reset in the middle of rotate animation
 	_construct()

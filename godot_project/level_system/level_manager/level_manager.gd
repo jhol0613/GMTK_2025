@@ -70,7 +70,7 @@ func _ready() -> void:
 
 	_level_scene.position = initial_train_position
 	
-	AudioManager.play_music_event(level_catalog.get_world_music_event_name())
+	AudioManager.play_music_event(level_catalog.get_world_music_event_name(), level_catalog.get_world_music_event_bpm())
 
 	_initialize_level()
 	_on_level_advanced()
@@ -188,7 +188,7 @@ func _execute_world_transition():
 	assert(transition_scene is WorldTransitionTunnel)
 	await AudioManager.music_complete
 	add_child(transition_scene)
-	AudioManager.play_music_event(level_catalog.get_world_music_event_name())
+	AudioManager.play_music_event(level_catalog.get_world_music_event_name(), level_catalog.get_world_music_event_bpm())
 	await get_tree().create_timer(transition_scene.get_time_until_screen_covered()).timeout
 	_world_scene.queue_free()
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
@@ -211,6 +211,7 @@ func _initialize_movable(movable: Agent, grid_position: Vector2i) -> void:
 	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
 	movable.tile_size = _level_scene.get_tile_size()
 	movable.animation_signal.connect(_on_animation_signal_received)
+	movable.reset()
 
 func _spawn_player() -> void:
 	if _player_character != null:

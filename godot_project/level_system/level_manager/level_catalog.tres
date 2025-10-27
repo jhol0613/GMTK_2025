@@ -26,14 +26,16 @@ world_scene = ExtResource("3_oivuf")
 level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"), ExtResource("5_peuoq"), ExtResource("6_cto6e"), ExtResource("7_xo8rd"), ExtResource("8_5wr1n"), ExtResource("9_nmtjp"), ExtResource("10_y8p5u"), ExtResource("11_y48yf"), ExtResource("12_bxvsn"), ExtResource("13_e7wa4"), ExtResource("14_wvvmg")])
 level_select_scene = 4
 music_event_name = "World1_BGM"
+music_event_bpm = 170.0
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_ydpb6"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("17_rcuhu")
-level_list = Array[PackedScene]([ExtResource("15_8o3tm"), ExtResource("17_cto6e"), ExtResource("17_cto6e")])
+level_list = Array[PackedScene]([ExtResource("17_cto6e"), ExtResource("15_8o3tm"), ExtResource("17_cto6e")])
 level_select_scene = 4
 music_event_name = "World2_BGM"
+music_event_bpm = 160.0
 transition_scene = ExtResource("17_peuoq")
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
