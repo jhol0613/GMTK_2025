@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ud0y87hpu6s3" path="res://action_sequencer/action_slots/Move_Right.png" id="7_xtiu8"]
 [ext_resource type="Texture2D" uid="uid://dg7s4hknhtvo8" path="res://action_sequencer/action_slots/Jump.png" id="8_bi66e"]
 [ext_resource type="Texture2D" uid="uid://7i3ye02vrbp2" path="res://action_sequencer/action_slots/Duck.png" id="9_8fu2t"]
-[ext_resource type="Texture2D" uid="uid://r2k05kuv4v62" path="res://action_sequencer/action_slots/Interact_Placeholder.png" id="10_5msto"]
+[ext_resource type="Texture2D" uid="uid://b2pduu0l3dwqt" path="res://action_sequencer/action_slots/Interact.png" id="10_5msto"]
 
 [node name="ActionSlot" type="CenterContainer"]
 mouse_filter = 0

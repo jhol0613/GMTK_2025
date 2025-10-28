@@ -1,0 +1,106 @@
+[gd_scene load_steps=15 format=3 uid="uid://btqpm3f7775os"]
+
+[ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
+[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="2_qdawk"]
+[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_fbmii"]
+[ext_resource type="Texture2D" uid="uid://c1gtr8fe1bwo1" path="res://agents/movable_obstacles/snack_cart/empty_cart.png" id="4_j04bu"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_ix653"]
+[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="6_fo802"]
+[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="7_qdawk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdawk"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbmii"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dy6ey"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ix653"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo802"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(144, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tn4fa"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_qdawk")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_fbmii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdawk")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dy6ey")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix653")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fo802")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ix653")
+}],
+"loop": false,
+"name": &"updown",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hhy"]
+size = Vector2(20, 10)
+
+[node name="CatCartObstacle" type="Node2D" node_paths=PackedStringArray("interactable", "pusher", "sprite")]
+script = ExtResource("1_j04bu")
+interactable = NodePath("CatCoffeeSpill")
+pusher = NodePath("Pusher")
+direct_movement_curve = ExtResource("2_qdawk")
+y_movement_curve = ExtResource("3_fbmii")
+y_movement_magnitude = 0.0
+animations = Dictionary[int, String]({
+1: "updown",
+2: "updown",
+3: "left",
+4: "right"
+})
+sprite = NodePath("AnimatedSprite2DSignals")
+metadata/_custom_type_script = "uid://cn4dwhpu81vam"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -31)
+sprite_frames = SubResource("SpriteFrames_tn4fa")
+animation = &"right"
+script = ExtResource("5_ix653")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Pusher" type="Area2D" parent="."]
+position = Vector2(0, -5)
+script = ExtResource("6_fo802")
+push_mode = 1
+metadata/_custom_type_script = "uid://du4ysr150id7h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+shape = SubResource("RectangleShape2D_h3hhy")
+
+[node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
