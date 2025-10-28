@@ -37,6 +37,7 @@ class_name Movable
 @export var sound_emitters: Dictionary[Enums.PlayerAction, FmodEventEmitter2D]
 
 @export_subgroup("Nodes")
+##If this is set, this area will jump out ahead at the start of the move before animation visuals catch up
 @export var collision_area: Area2D
 # local position of collision area
 var _collision_area_initial_position

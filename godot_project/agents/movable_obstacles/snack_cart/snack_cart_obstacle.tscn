@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://cbc0cwtj1xkvi"]
 
-[ext_resource type="Script" uid="uid://cu75o0mvlcwpl" path="res://agents/movable_obstacles/snack_cart_obstacle.gd" id="1_2w8mm"]
-[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart_curve.tres" id="2_koxf5"]
-[ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/cart_obstacle.png" id="2_ldseh"]
+[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
+[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="2_koxf5"]
+[ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_h3hhy"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_koxf5"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
@@ -43,7 +43,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vnaji")
 }],
-"loop": true,
+"loop": false,
 "name": &"right",
 "speed": 5.0
 }, {
@@ -66,8 +66,7 @@ animations = [{
 size = Vector2(20, 10)
 
 [node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
-script = ExtResource("1_2w8mm")
-movement_path = Array[int]([3, 4])
+script = ExtResource("1_kw233")
 pusher = NodePath("Pusher")
 direct_movement_curve = ExtResource("2_koxf5")
 y_movement_curve = ExtResource("3_h3hhy")
@@ -79,12 +78,13 @@ animations = Dictionary[int, String]({
 4: "right"
 })
 sprite = NodePath("AnimatedSprite2DSignals")
+metadata/_custom_type_script = "uid://cyio44hidbx4l"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 z_index = 1
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_koxf5")
-animation = &"left"
+animation = &"updown"
 script = ExtResource("3_koxf5")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

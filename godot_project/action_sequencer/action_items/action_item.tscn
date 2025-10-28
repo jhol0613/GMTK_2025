@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dlg1qbsky6kec" path="res://action_sequencer/action_items/Duck.png" id="6_6fshn"]
 [ext_resource type="Texture2D" uid="uid://btldhiqu02jpj" path="res://action_sequencer/action_items/Move_Right.png" id="6_k5l37"]
 [ext_resource type="Texture2D" uid="uid://bqmnwiqi44a8p" path="res://action_sequencer/action_items/Jump.png" id="7_6fshn"]
-[ext_resource type="Texture2D" uid="uid://cdhd4f5hj7pws" path="res://action_sequencer/action_items/Interact_Placeholder.png" id="9_j0qn6"]
+[ext_resource type="Texture2D" uid="uid://dutdmu2qmdc33" path="res://action_sequencer/action_items/Interact.png" id="9_j0qn6"]
 [ext_resource type="Texture2D" uid="uid://cr282lrn7fubk" path="res://action_sequencer/action_items/SelectedBorder.png" id="10_6fshn"]
 [ext_resource type="Texture2D" uid="uid://bvovbxr6f7vd2" path="res://action_sequencer/action_slots/square_light.tres" id="11_j0qn6"]
 
