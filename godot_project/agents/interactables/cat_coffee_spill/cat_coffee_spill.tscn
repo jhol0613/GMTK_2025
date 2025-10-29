@@ -139,7 +139,6 @@ sprite = NodePath("AnimatedSprite2DSignals")
 z_index = 1
 position = Vector2(0, -28)
 sprite_frames = SubResource("SpriteFrames_qfg0r")
-animation = &"wake_up"
 autoplay = "default"
 script = ExtResource("1_uvexm")
 signals = Array[ExtResource("4_37f55")]([SubResource("Resource_g10dl")])

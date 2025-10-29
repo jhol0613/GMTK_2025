@@ -48,7 +48,6 @@ func play_music_event(event_name: String, new_bpm: float):
 		music_event.set_parameter("GameOver", 0.0)
 	music_event.stop()
 	music_event.event_name = "event:/" + event_name
-	var mus : FmodEventEmitter2D
 	bpm = new_bpm
 	bpm_changed.emit(bpm)
 	music_event.play()

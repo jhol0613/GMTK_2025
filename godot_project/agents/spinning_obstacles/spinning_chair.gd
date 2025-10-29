@@ -84,14 +84,14 @@ func _ready() -> void:
 	_frame_timer.timeout.connect(_advance_sprite_frame)
 	add_child(_frame_timer)
 
-func _on_left_obstacle_move(action_executed: Enums.PlayerAction):
+func _on_left_obstacle_move(_action: Enums.PlayerAction):
 	# change sprite frame on obstacle move. The fact that it's left obstacle is arbitrary
 	_advance_sprite_frame()
 	_frame_timer.start(AudioManager.beat_time_seconds * beats_per_quarter_turn)
 	
 	left_obstacle.pusher.push_action = _left_push_action_cycle[left_obstacle._move_cursor]
 	
-func _on_right_obstacle_move(action_executed: Enums.PlayerAction):
+func _on_right_obstacle_move(_action: Enums.PlayerAction):
 	right_obstacle.pusher.push_action = _right_push_action_cycle[right_obstacle._move_cursor]
 	
 func _on_halfway_through_move(obstacle: MovableObstacle, new_action: Enums.PlayerAction):
