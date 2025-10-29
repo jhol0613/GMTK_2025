@@ -157,3 +157,7 @@ script = ExtResource("5_to1gp")
 obstacle_scene = ExtResource("6_pa7bf")
 grid_offset = Vector2i(-1, 1)
 metadata/_custom_type_script = "uid://cqh2y73sdi1js"
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/CoffeeSpill"
+event_guid = "{e241a3d9-7242-4e08-956e-df0f2beefdfd}"

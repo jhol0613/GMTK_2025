@@ -14,7 +14,7 @@ point_count = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="Conductor" type="Node2D" node_paths=PackedStringArray("sound_emitters", "collision_area", "sprite")]
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("default_sound_emitter", "collision_area", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_eb2fl")
@@ -42,12 +42,7 @@ beat_delays = Dictionary[int, float]({
 3: 0.0,
 4: 0.0
 })
-sound_emitters = {
-1: NodePath("Sound/JumpSound"),
-2: NodePath("Sound/JumpSound"),
-3: NodePath("Sound/JumpSound"),
-4: NodePath("Sound/JumpSound")
-}
+default_sound_emitter = NodePath("Sound/JumpSound")
 collision_area = NodePath("Shadow/AnimatedSprite2D/Area2D")
 sprite = NodePath("Shadow/AnimatedSprite2D")
 

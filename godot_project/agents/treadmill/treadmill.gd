@@ -11,6 +11,7 @@ class_name Treadmill
 
 @export var _pusher: Pusher
 
+@onready var sound := $FmodEventEmitter2D
 @onready var _animation_loop_counter := 0
 
 func _construct():
@@ -29,6 +30,7 @@ func _ready() -> void:
 
 func _on_tick(beat):
 	await get_tree().create_timer(_pusher.push_beat * AudioManager.beat_time_seconds).timeout
+	sound.play()
 	sprite.play_with_signals(_direction_data[direction].animation_name)
 	sprite.animation_looped.connect(_on_animation_looped)
 

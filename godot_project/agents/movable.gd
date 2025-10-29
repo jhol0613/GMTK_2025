@@ -34,7 +34,9 @@ class_name Movable
 ## How long to wait after sequencer signal to start an animation
 @export var beat_delays: Dictionary[Enums.PlayerAction, float]
 ## Sound emitter for each action
-@export var sound_emitters: Dictionary[Enums.PlayerAction, FmodEventEmitter2D]
+@export var action_sound_emitters: Dictionary[Enums.PlayerAction, FmodEventEmitter2D]
+## Play this emitter if no emitter is defined for a particular action
+@export var default_sound_emitter: FmodEventEmitter2D
 
 @export_subgroup("Nodes")
 ##If this is set, this area will jump out ahead at the start of the move before animation visuals catch up
@@ -71,8 +73,11 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		#collision_area.top_level = false
 		collision_area.position = _collision_area_initial_position
 	
-	currently_playing_emitter = sound_emitters.get(action, null)
+	currently_playing_emitter = action_sound_emitters.get(action, null)
 	if currently_playing_emitter:
+		currently_playing_emitter.play()
+	elif default_sound_emitter:
+		currently_playing_emitter = default_sound_emitter
 		currently_playing_emitter.play()
 
 	if _get_delay_seconds(action) == 0.0:

@@ -25,7 +25,7 @@ animation_loops = 3
 
 [node name="Treadmill2" parent="." index="10" instance=ExtResource("3_daiop")]
 z_index = 1
-position = Vector2(272, 13)
+position = Vector2(48, 68)
 animation_speed = 3.0
 animation_loops = 3
 
@@ -34,12 +34,12 @@ position = Vector2(272, 106)
 movement_path = Array[int]([3, 4])
 
 [node name="SpinningChair" parent="." index="12" instance=ExtResource("5_re3re")]
-position = Vector2(208, 49)
+position = Vector2(208, 52)
 
 [node name="SnackCartObstacle" parent="." index="13" instance=ExtResource("4_re3re")]
 position = Vector2(145, 106)
 movement_path = Array[int]([3, 4])
 
 [node name="CatCartObstacle" parent="." index="14" instance=ExtResource("5_lkfn0")]
-position = Vector2(81, 69)
+position = Vector2(305, 88)
 movement_path = Array[int]([3, 4])
