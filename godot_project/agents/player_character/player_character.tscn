@@ -596,7 +596,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(15, 10)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "sound_emitters", "collision_area", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "action_sound_emitters", "collision_area", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_1ty04")
@@ -661,7 +661,7 @@ beat_delays = Dictionary[int, float]({
 14: 0.0,
 15: 0.0
 })
-sound_emitters = {
+action_sound_emitters = {
 1: NodePath("Sounds/MoveUp"),
 2: NodePath("Sounds/MoveDown"),
 3: NodePath("Sounds/MoveSideways"),

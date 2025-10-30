@@ -14,6 +14,7 @@ signal interaction_succeeded
 		Vector2i.RIGHT
 	]
 @export var repeatable := false
+@export var default_animation_name := "default"
 	
 var _interacted = false
 
@@ -24,9 +25,6 @@ func _ready() -> void:
 	on_bpm_changed(0.0) # just uses the bpm from the audio manager anyway so 0.0 doesn't matter
 
 func interact(action: Enums.PlayerAction):
-	# reset animations to match bpm in case it has changed
-	for animation_name in sprite.sprite_frames.get_animation_names():
-		sprite.sprite_frames.set_animation_speed(animation_name, AudioManager.get_fps_from_bpm())
 	if not _interacted or repeatable:
 		interaction_succeeded.emit()
 		_interacted = true
@@ -38,5 +36,14 @@ func is_in_range(interact_position: Vector2i) -> bool:
 	return false
 	
 func on_bpm_changed(new_bpm: float):
+	for animation_name in sprite.sprite_frames.get_animation_names():
+		sprite.sprite_frames.set_animation_speed(animation_name, AudioManager.get_fps_from_bpm())
+		
+func reset():
+	super.reset()
+	_interacted = false
+	sprite.play_with_signals(default_animation_name)
+	
+	# reset animations to match bpm in case it has changed
 	for animation_name in sprite.sprite_frames.get_animation_names():
 		sprite.sprite_frames.set_animation_speed(animation_name, AudioManager.get_fps_from_bpm())

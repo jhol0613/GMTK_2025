@@ -216,3 +216,7 @@ metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
 shape = SubResource("RectangleShape2D_pifmq")
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Treadmill"
+event_guid = "{54ca2f07-b4b0-4eb5-84af-c99140d3f2e2}"

@@ -175,6 +175,8 @@ func _reset_level() -> void:
 
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
+	for interactable in _level_scene.interactables:
+		interactable.reset()
 
 func _on_reset_animation_finished():
 	_action_sequencer.set_action_icons_hidden(false)

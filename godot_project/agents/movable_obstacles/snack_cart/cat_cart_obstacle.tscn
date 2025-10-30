@@ -104,3 +104,4 @@ metadata/_custom_type_script = "uid://du4ysr150id7h"
 shape = SubResource("RectangleShape2D_h3hhy")
 
 [node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
+position = Vector2(-2, -20)
