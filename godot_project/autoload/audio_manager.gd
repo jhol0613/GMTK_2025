@@ -34,10 +34,8 @@ func _time_multiplier_changed(new_multiplier: Enums.TimeMultiplier):
 	beat_time_seconds = 60.0 * time_multiplier / (bpm * 4.0)
 
 func set_music_mode(mode: Enums.MusicMode):
-	if music_event.event_name != "": #Ensure event has been initialized
-		music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))
-		pass
-		
+	FmodServer.set_global_parameter_by_name("ThinkingMode", _mode_dictionary.get(mode))
+
 ##Note that level transitions rely on game over music actually playing, or the transition will hang. Ensure GameOver
 ##is a valid parameter and properly transitions to the music event ending
 func play_world_complete_music():
