@@ -1,11 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=15 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
 [ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="2_koxf5"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_h3hhy"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_koxf5"]
+[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_26gw8"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
+[ext_resource type="Curve" uid="uid://dcaaavg8b5xr7" path="res://agents/movable_obstacles/snack_cart/snack_cart_bonk.tres" id="5_26gw8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnaji"]
 atlas = ExtResource("2_ldseh")
@@ -71,6 +73,8 @@ pusher = NodePath("Pusher")
 direct_movement_curve = ExtResource("2_koxf5")
 y_movement_curve = ExtResource("3_h3hhy")
 y_movement_magnitude = 0.0
+slide_curve = ExtResource("4_26gw8")
+bonk_curve = ExtResource("5_26gw8")
 animations = Dictionary[int, String]({
 1: "updown",
 2: "updown",

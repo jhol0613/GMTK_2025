@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_bvxdu"]
 [ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://agents/conductor/conductor_y_curve.tres" id="3_wkvkj"]
+[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_vkpdm"]
 [ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://agents/player_character/sprites/ActionBonk.png" id="5_2bapq"]
+[ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_xrlin"]
 [ext_resource type="Texture2D" uid="uid://b1yloh6w3ao8m" path="res://agents/player_character/sprites/player360.png" id="6_aodji"]
 [ext_resource type="Texture2D" uid="uid://dm6rcc2g6isnk" path="res://agents/player_character/sprites/ActionJump.png" id="6_xgp35"]
 [ext_resource type="Texture2D" uid="uid://by4ds17usv1yq" path="res://agents/player_character/sprites/PWalkB.png" id="7_dx1gn"]
@@ -21,14 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
-
-[sub_resource type="Curve" id="Curve_gvvi5"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Curve" id="Curve_2bapq"]
-_data = [Vector2(0, 0), 0.0, 1.86627, 0, 0, Vector2(0.195506, 0.532075), 2.72153, -2.1701, 1, 0, Vector2(0.51573, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
 
 [sub_resource type="Curve" id="Curve_wkvkj"]
 _data = [Vector2(0, 0), 0.0, 0.0361968, 0, 0, Vector2(0.390295, 0), 0.0, 0.0, 0, 0, Vector2(0.575949, 1), 0.0, 0.0, 0, 0, Vector2(0.725738, 1), 0.0, 0.0, 0, 0, Vector2(0.877528, 0), -7.46179, 0.0, 0, 0, Vector2(0.937079, 0.115395), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -605,8 +599,8 @@ failure_emitter = NodePath("Sounds/Failure")
 jump_collision_timer = NodePath("JumpCollisionDisable")
 direct_movement_curve = ExtResource("2_bvxdu")
 y_movement_curve = ExtResource("3_wkvkj")
-slide_curve = SubResource("Curve_gvvi5")
-bonk_curve = SubResource("Curve_2bapq")
+slide_curve = ExtResource("4_vkpdm")
+bonk_curve = ExtResource("5_xrlin")
 jump_curve = SubResource("Curve_wkvkj")
 jump_magnitude = 42.0
 jump_duration = 0.8

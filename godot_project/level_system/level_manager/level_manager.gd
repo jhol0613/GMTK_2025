@@ -62,6 +62,9 @@ var _current_beat := 0
 # True when loaded level is a new world
 var _queue_world_transition = false
 
+# Keeps track of obstacles spawned in the level so they can be reset
+var _spawned_obstacles : Array[MovableObstacle]
+
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
 
@@ -177,6 +180,11 @@ func _reset_level() -> void:
 		collectible.reset()
 	for interactable in _level_scene.interactables:
 		interactable.reset()
+	for obstacle in _spawned_obstacles: # clear out spawned obstacles
+		_level_scene.movable_obstacles.erase(obstacle)
+		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		obstacle.queue_free()
+	_spawned_obstacles.clear()
 
 func _on_reset_animation_finished():
 	_action_sequencer.set_action_icons_hidden(false)
@@ -233,7 +241,9 @@ func _initialize_moving_obstacles() -> void:
 		spawner.obstacle_spawned.connect(_on_obstacle_spawned)
 		
 func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
-	_level_scene.movable_obstacles.append(_spawn_movable(obstacle, grid_position))
+	var spawned_obstacle = _spawn_movable(obstacle, grid_position)
+	_level_scene.movable_obstacles.append(spawned_obstacle)
+	_spawned_obstacles.append(spawned_obstacle)
 
 func _initialize_interactables() -> void:
 	for interactable in _level_scene.interactables:
@@ -264,23 +274,11 @@ func _on_thinking_action_performed():
 func _update_obstacles():
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		obstacle.execute_action(obstacle.get_next_move())
+		obstacle.execute_action(_bonk_check(obstacle, obstacle.get_next_move()))
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
-	var move_direction : Vector2i = Enums.player_action_to_vector(action)
-	if _level_scene.get_traversible_neighbors(_player_character.grid_position).has(_player_character.grid_position + move_direction):
-		_player_character.execute_action(action)
-	else:
-		match move_direction:
-			Vector2i.LEFT:
-				_player_character.execute_action(Enums.PlayerAction.LEFT_BONK)
-			Vector2i.RIGHT:
-				_player_character.execute_action(Enums.PlayerAction.RIGHT_BONK)
-			Vector2i.UP:
-				_player_character.execute_action(Enums.PlayerAction.UP_BONK)
-			Vector2i.DOWN:
-				_player_character.execute_action(Enums.PlayerAction.DOWN_BONK)
+	_player_character.execute_action(_bonk_check(_player_character, action))
 
 func _update_conductor() -> void:
 	if _conductor == null \
@@ -294,8 +292,25 @@ func _update_conductor() -> void:
 	if conductor_path.size() < 2:
 		return
 	_conductor.execute_action(
-		Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)
+		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position))
 	)
+
+##If desired direction clear, return that direction. Otherwise return a bonk in that direction
+func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAction:
+	var move_direction : Vector2i = Enums.player_action_to_vector(action)
+	if _level_scene.get_traversible_neighbors(movable.grid_position).has(movable.grid_position + move_direction):
+		return action
+	else:
+		match move_direction:
+			Vector2i.LEFT:
+				return Enums.PlayerAction.LEFT_BONK
+			Vector2i.RIGHT:
+				return Enums.PlayerAction.RIGHT_BONK
+			Vector2i.UP:
+				return Enums.PlayerAction.UP_BONK
+			Vector2i.DOWN:
+				return Enums.PlayerAction.DOWN_BONK
+	return Enums.PlayerAction.NONE
 
 func _update_agents() -> void:
 	for agent in _level_scene.agents:

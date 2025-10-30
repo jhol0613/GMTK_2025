@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=11 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_m234f"]
 [ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://agents/conductor/conductor_y_curve.tres" id="3_lda0w"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="4_lda0w"]
 [ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://agents/player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
+[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_py0t2"]
+[ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_34788"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
 
 [sub_resource type="Curve" id="Curve_mq2pu"]
@@ -21,6 +23,8 @@ script = ExtResource("1_eb2fl")
 direct_movement_curve = ExtResource("2_m234f")
 y_movement_curve = ExtResource("3_lda0w")
 y_movement_magnitude = 5.0
+slide_curve = ExtResource("4_py0t2")
+bonk_curve = ExtResource("5_34788")
 jump_duration = 0.7
 null_curve = SubResource("Curve_mq2pu")
 move_duration = 0.5
