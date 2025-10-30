@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqus7ea6hnmos"]
+[gd_scene load_steps=4 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="3_daiop"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="5_lkfn0"]
 
 [node name="LevelBase" instance=ExtResource("1_svhcm")]
@@ -15,3 +16,6 @@ tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
 [node name="CatCartObstacle" parent="." index="9" instance=ExtResource("5_lkfn0")]
 position = Vector2(82, 30)
 movement_path = Array[int]([3])
+
+[node name="SpinningChair" parent="." index="10" instance=ExtResource("3_daiop")]
+position = Vector2(194, 36)

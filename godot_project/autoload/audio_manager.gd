@@ -36,7 +36,8 @@ func _time_multiplier_changed(new_multiplier: Enums.TimeMultiplier):
 func set_music_mode(mode: Enums.MusicMode):
 	if music_event.event_name != "": #Ensure event has been initialized
 		music_event.set_parameter("ThinkingMode", _mode_dictionary.get(mode))
-
+		pass
+		
 ##Note that level transitions rely on game over music actually playing, or the transition will hang. Ensure GameOver
 ##is a valid parameter and properly transitions to the music event ending
 func play_world_complete_music():
