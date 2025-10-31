@@ -65,7 +65,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hhy"]
-size = Vector2(20, 10)
+size = Vector2(14, 10)
 
 [node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_kw233")
@@ -79,7 +79,11 @@ animations = Dictionary[int, String]({
 1: "updown",
 2: "updown",
 3: "left",
-4: "right"
+4: "right",
+8: "left",
+9: "right",
+10: "updown",
+11: "updown"
 })
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
@@ -96,6 +100,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, -5)
 script = ExtResource("4_h3hhy")
 push_mode = 1
+pusher_collision_layer = 144
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]

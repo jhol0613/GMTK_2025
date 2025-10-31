@@ -12,13 +12,28 @@ class_name Pusher
 ##sound will just play on top of the queud action sound
 @export var should_cancel_sound := true
 
+##Use this instead of setting collision layers directly
+@export_subgroup("collision")
+##Use this instead of setting collision layers directly
+@export_flags_2d_physics var pusher_collision_layer: int = 16 : set = _set_collision_layer
+##Use this instead of setting collision layers directly
+@export_flags_2d_physics var pusher_collision_mask: int = 133 : set = _set_collision_mask
+
 #Returns self and overlapped movable
 signal overlapped_movable(pusher: Pusher, movable: Movable)
 
 # Set a new default collision layer and mask when dropped in the editor
 func _init() -> void:
-	collision_layer = 16
-	collision_mask = 5 #player and enemies
+	collision_layer = pusher_collision_layer
+	collision_mask = pusher_collision_mask #player and enemies
+
+func _set_collision_layer(new_layer):
+	pusher_collision_layer = new_layer
+	collision_layer = pusher_collision_layer
+
+func _set_collision_mask(new_layer):
+	pusher_collision_mask = new_layer
+	collision_mask = pusher_collision_mask
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

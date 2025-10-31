@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=82 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -27,10 +27,6 @@
 [sub_resource type="Curve" id="Curve_wkvkj"]
 _data = [Vector2(0, 0), 0.0, 0.0361968, 0, 0, Vector2(0.390295, 0), 0.0, 0.0, 0, 0, Vector2(0.575949, 1), 0.0, 0.0, 0, 0, Vector2(0.725738, 1), 0.0, 0.0, 0, 0, Vector2(0.877528, 0), -7.46179, 0.0, 0, 0, Vector2(0.937079, 0.115395), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 7
-
-[sub_resource type="Curve" id="Curve_efbsa"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_txkxt"]
 atlas = ExtResource("8_2bapq")
@@ -604,7 +600,6 @@ bonk_curve = ExtResource("5_xrlin")
 jump_curve = SubResource("Curve_wkvkj")
 jump_magnitude = 42.0
 jump_duration = 0.8
-null_curve = SubResource("Curve_efbsa")
 slide_duration = 0.5
 animations = Dictionary[int, String]({
 1: "walk_up",

@@ -18,16 +18,25 @@ func _ready() -> void:
 	add_to_group("movable_obstacles")
 	#tick.connect(_on_tick)
 
-## This has a side effect of advancing the move cursor each time it is called
+# override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
+func execute_action(action: Enums.PlayerAction, skip_animation := false):
+	# if action is a fall action, rather than using the pusher action, just go back the way you came
+	if Enums.is_action_fall(action):
+		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)
+	else:
+		super.execute_action(action, skip_animation)
+		
 func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:
 		return Enums.PlayerAction.NONE
-	var move_to_return = movement_path[_move_cursor]
-	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
+	return movement_path[_move_cursor]
+
+## Move to next action in the sequence (for example, call this after a move or a bonk but not after a slide)
+func advance_move_cursor():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	return move_to_return
+	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
 ##return the same push action that's currently set

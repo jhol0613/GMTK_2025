@@ -117,6 +117,7 @@ DebugAction={
 2d_physics/layer_5="Pushers"
 2d_physics/layer_6="Jumpable"
 2d_physics/layer_7="Enemies"
+2d_physics/layer_8="Pushable"
 
 [rendering]
 

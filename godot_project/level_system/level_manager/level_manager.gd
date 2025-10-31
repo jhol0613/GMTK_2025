@@ -272,10 +272,33 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 	
 func _update_obstacles():
+	
+	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
+	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
+	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
+		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		obstacle.execute_action(_bonk_check(obstacle, obstacle.get_next_move()))
+		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]))
+		obstacle.advance_move_cursor()
+	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+	
+	## first check if any obstacles are trying to move into the same place
+	#var targets: Dictionary
+	#for obstacle: MovableObstacle in _level_scene.movable_obstacles:
+		#targets.get_or_add(obstacle, obstacle.grid_position + Enums.player_action_to_vector(obstacle.get_next_move()))
+	#for obstacle in _level_scene.movable_obstacles:
+		#_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		#var action = obstacle.get_next_move()
+		#for other_obstacle in _level_scene.movable_obstacles:
+			## Bonk if obstacle is trying to move into the same place as another
+			#if obstacle != other_obstacle and targets[obstacle] == targets[other_obstacle]:
+				#action = Enums.action_to_bonk(action)
+				#break
+		#obstacle.execute_action(_bonk_check(obstacle, action))
+		#obstacle.advance_move_cursor()
+		#_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	_player_character.execute_action(_bonk_check(_player_character, action))
@@ -301,16 +324,7 @@ func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAc
 	if _level_scene.get_traversible_neighbors(movable.grid_position).has(movable.grid_position + move_direction):
 		return action
 	else:
-		match move_direction:
-			Vector2i.LEFT:
-				return Enums.PlayerAction.LEFT_BONK
-			Vector2i.RIGHT:
-				return Enums.PlayerAction.RIGHT_BONK
-			Vector2i.UP:
-				return Enums.PlayerAction.UP_BONK
-			Vector2i.DOWN:
-				return Enums.PlayerAction.DOWN_BONK
-	return Enums.PlayerAction.NONE
+		return Enums.action_to_bonk(action)
 
 func _update_agents() -> void:
 	for agent in _level_scene.agents:
@@ -327,10 +341,16 @@ func _update_interactables(action: Enums.PlayerAction) -> void:
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
+	var was_a_slide = Enums.is_action_slide(pusher.push_action)
+	var action = _bonk_check(movable, pusher.push_action)
 	if movable is PlayerCharacter:
-		_update_player(pusher.push_action)
-	else:
-		movable.execute_action(pusher.push_action)
+		_player_character.execute_action(action)
+	elif movable is MovableObstacle:
+		_level_scene.update_obstacle_grid(movable.grid_position, true)
+		# skip animation if bonk was caused by a slide
+		print(was_a_slide)
+		movable.execute_action(action, was_a_slide)
+		_level_scene.update_obstacle_grid(movable.grid_position, false)
 
 #endregion
 

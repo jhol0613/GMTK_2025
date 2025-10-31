@@ -17,7 +17,7 @@ class_name Movable
 @export var jump_magnitude := 24.0
 @export var jump_duration := .53
 ## Should be a curve of 0.0 from 0 to 1
-@export var null_curve: Curve
+#@export var null_curve: Curve = preload("res://agents/null_curve.tres")
 
 @export_subgroup("Frames")
 ## Amount of time for movement animation
@@ -48,6 +48,8 @@ var _collision_area_initial_position
 @onready var _sprite_default_y = sprite.position.y
 ##Timer for delaying action to desired beat
 @onready var _timer = Timer.new()
+##Null curve for when curve not specified
+@onready var null_curve = Curve.new()
 
 
 var follow_on_animation: String
@@ -67,7 +69,7 @@ func _ready():
 	if collision_area != null:
 		_collision_area_initial_position = collision_area.position
 
-func execute_action(action : Enums.PlayerAction) -> void:
+func execute_action(action : Enums.PlayerAction, skip_animation := false) -> void:
 
 	if collision_area != null:
 		#collision_area.top_level = false
@@ -81,7 +83,7 @@ func execute_action(action : Enums.PlayerAction) -> void:
 		currently_playing_emitter.play()
 
 	if _get_delay_seconds(action) == 0.0:
-		_on_beat(action)
+		_on_beat(action, skip_animation)
 	else:
 		# stupid timer can't rebind the function
 		if _timer.is_connected("timeout", _on_beat):
@@ -99,15 +101,16 @@ func play_animation(animation_name: String, follow_on = null):
 			sprite.animation_finished.connect(_on_animation_finished)
 
 ## Called on the beat when the action starts visually (as opposed to sequencer signal)
-func _on_beat(action: Enums.PlayerAction) -> void:
+func _on_beat(action: Enums.PlayerAction, skip_animation:= false) -> void:
 		
 	grid_position += Enums.player_action_to_vector(action)
 	
 	action_executed.emit(action)
 
-	var animation_name = _get_animation_name(action)
-	if animation_name != "":
-		play_animation(animation_name, follow_on_animations.get(action))
+	if not skip_animation:
+		var animation_name = _get_animation_name(action)
+		if animation_name != "":
+			play_animation(animation_name, follow_on_animations.get(action))
 
 	if _is_action_bonk(action):
 		# Bonk target is where the player tried to go

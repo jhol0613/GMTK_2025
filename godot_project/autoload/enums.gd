@@ -144,4 +144,47 @@ func vector_to_player_action(vector: Vector2i) -> PlayerAction:
 			return PlayerAction.DOWN_LEFT
 		_:
 			return PlayerAction.NONE
+			
+func action_to_bonk(action: PlayerAction) -> PlayerAction:
+	match action:
+		PlayerAction.RIGHT, PlayerAction.RIGHT_SLIDE, PlayerAction.RIGHT_BONK:
+			return PlayerAction.RIGHT_BONK
+		PlayerAction.LEFT, PlayerAction.LEFT_SLIDE , PlayerAction.LEFT_BONK:
+			return PlayerAction.LEFT_BONK
+		PlayerAction.UP, PlayerAction.UP_SLIDE , PlayerAction.UP_BONK:
+			return PlayerAction.UP_BONK
+		PlayerAction.DOWN, PlayerAction.DOWN_SLIDE , PlayerAction.DOWN_BONK:
+			return PlayerAction.DOWN_BONK
+		_:
+			return PlayerAction.NONE
+		
+func is_action_fall(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP_FALL or
+		action == PlayerAction.DOWN_FALL or
+		action == PlayerAction.LEFT_FALL or
+		action == PlayerAction.RIGHT_FALL
+	)
+
+func is_action_slide(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP_SLIDE or
+		action == PlayerAction.DOWN_SLIDE or
+		action == PlayerAction.LEFT_SLIDE or
+		action == PlayerAction.RIGHT_SLIDE
+	)
+	
+func get_reverse_action(action: PlayerAction) -> PlayerAction:
+	match action:
+		PlayerAction.RIGHT:
+			return PlayerAction.LEFT
+		PlayerAction.LEFT:
+			return PlayerAction.RIGHT
+		PlayerAction.UP:
+			return PlayerAction.DOWN
+		PlayerAction.DOWN:
+			return PlayerAction.UP
+		_:
+			return PlayerAction.NONE
+	
 #endregion

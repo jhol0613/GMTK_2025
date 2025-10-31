@@ -85,7 +85,11 @@ animations = Dictionary[int, String]({
 1: "updown",
 2: "updown",
 3: "left",
-4: "right"
+4: "right",
+8: "left",
+9: "right",
+10: "updown",
+11: "updown"
 })
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://cn4dwhpu81vam"
@@ -102,6 +106,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, -5)
 script = ExtResource("6_fo802")
 push_mode = 1
+pusher_collision_layer = 144
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]

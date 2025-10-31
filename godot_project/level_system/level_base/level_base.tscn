@@ -83,6 +83,7 @@ tile_set = ExtResource("3_fo6gb")
 
 [node name="LeftExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
+z_index = 3
 position = Vector2(-9.345, 0)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("4_p76ks")
@@ -107,7 +108,7 @@ tile_set = ExtResource("7_uv04d")
 
 [node name="RightExteriorFloor" type="TileMapLayer" parent="."]
 light_mask = 2
-z_index = -3
+z_index = 3
 position = Vector2(360.655, 0)
 scale = Vector2(-1, 1)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
