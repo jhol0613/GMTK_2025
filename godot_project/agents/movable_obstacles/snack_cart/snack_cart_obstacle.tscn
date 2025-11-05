@@ -75,16 +75,6 @@ y_movement_curve = ExtResource("3_h3hhy")
 y_movement_magnitude = 0.0
 slide_curve = ExtResource("4_26gw8")
 bonk_curve = ExtResource("5_26gw8")
-animations = Dictionary[int, String]({
-1: "updown",
-2: "updown",
-3: "left",
-4: "right",
-8: "left",
-9: "right",
-10: "updown",
-11: "updown"
-})
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 

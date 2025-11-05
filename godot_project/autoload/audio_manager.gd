@@ -55,4 +55,8 @@ func on_music_stopped():
 	music_complete.emit()
 
 func get_fps_from_bpm():
-	return bpm / 30.0
+	#divide by 30
+	return bpm * .0333333333333333
+
+func get_bpm_from_fps():
+	return bpm * 30.0

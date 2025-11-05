@@ -74,8 +74,6 @@ size = Vector2(20, 10)
 
 [node name="CatCartObstacle" type="Node2D" node_paths=PackedStringArray("interactable", "pusher", "sprite")]
 script = ExtResource("1_j04bu")
-interactable = NodePath("CatCoffeeSpill")
-pusher = NodePath("Pusher")
 direct_movement_curve = ExtResource("2_qdawk")
 y_movement_curve = ExtResource("3_fbmii")
 y_movement_magnitude = 0.0
@@ -91,6 +89,8 @@ animations = Dictionary[int, String]({
 10: "updown",
 11: "updown"
 })
+interactable = NodePath("CatCoffeeSpill")
+pusher = NodePath("Pusher")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 

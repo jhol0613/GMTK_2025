@@ -21,7 +21,7 @@ func _ready() -> void:
 	super._ready()
 	reset()
 	action_executed.connect(_on_action_executed)
-	play_animation("enter", "idle_right")
+	play_animation_with_follow_on("enter", "idle_right")
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
 	match action:
@@ -31,13 +31,13 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 			#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
 
 func notify_success():
-	play_animation("success")
+	play_animation_with_follow_on("success")
 	success_emitter.play()
 
 func notify_failure():
 	failure_emitter.play()
 	interrupt_queued_action()
-	play_animation("failure")
+	play_animation_with_follow_on("failure")
 	
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED

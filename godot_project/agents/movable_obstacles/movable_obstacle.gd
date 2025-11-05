@@ -19,7 +19,7 @@ func _ready() -> void:
 	#tick.connect(_on_tick)
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
-func execute_action(action: Enums.PlayerAction, skip_animation := false):
+func execute_action(action: Enums.PlayerAction, skip_animation := false): #TODO: Why does this not call super?
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
 	if Enums.is_action_fall(action):
 		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)

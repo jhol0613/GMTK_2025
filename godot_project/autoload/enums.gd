@@ -173,6 +173,22 @@ func is_action_slide(action: PlayerAction) -> bool:
 		action == PlayerAction.LEFT_SLIDE or
 		action == PlayerAction.RIGHT_SLIDE
 	)
+
+func is_action_bonk(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP_BONK or
+		action == PlayerAction.DOWN_BONK or
+		action == PlayerAction.LEFT_BONK or
+		action == PlayerAction.RIGHT_BONK
+	)
+
+func is_action_move(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP or
+		action == PlayerAction.DOWN or
+		action == PlayerAction.LEFT or
+		action == PlayerAction.RIGHT
+	)
 	
 func get_reverse_action(action: PlayerAction) -> PlayerAction:
 	match action:
