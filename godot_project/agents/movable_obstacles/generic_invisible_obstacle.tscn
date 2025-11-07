@@ -1,12 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpv7o05l1e0xk"]
+[gd_scene load_steps=7 format=3 uid="uid://cpv7o05l1e0xk"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_ymfx7"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="2_2iqmr"]
+[ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_f6j1s"]
+[ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_xngg1"]
+[ext_resource type="Resource" uid="uid://cktp3akff2k1p" path="res://agents/player_character/player_slide_action_data.tres" id="4_lqkdu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fjhgq"]
 
 [node name="GenericInvisibleObstacle" type="Node2D" node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_ymfx7")
+standard_move_data = ExtResource("2_f6j1s")
+bonk_data = ExtResource("3_xngg1")
+slide_data = ExtResource("4_lqkdu")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 

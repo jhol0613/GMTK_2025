@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://btqpm3f7775os"]
+[gd_scene load_steps=16 format=3 uid="uid://btqpm3f7775os"]
 
 [ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
-[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="2_qdawk"]
-[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_fbmii"]
-[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_dy6ey"]
+[ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_fbmii"]
+[ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_dy6ey"]
+[ext_resource type="Resource" uid="uid://cktp3akff2k1p" path="res://agents/player_character/player_slide_action_data.tres" id="4_ix653"]
 [ext_resource type="Texture2D" uid="uid://c1gtr8fe1bwo1" path="res://agents/movable_obstacles/snack_cart/empty_cart.png" id="4_j04bu"]
-[ext_resource type="Curve" uid="uid://dcaaavg8b5xr7" path="res://agents/movable_obstacles/snack_cart/snack_cart_bonk.tres" id="5_dy6ey"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_ix653"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="6_fo802"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="7_qdawk"]
@@ -74,23 +73,11 @@ size = Vector2(20, 10)
 
 [node name="CatCartObstacle" type="Node2D" node_paths=PackedStringArray("interactable", "pusher", "sprite")]
 script = ExtResource("1_j04bu")
-direct_movement_curve = ExtResource("2_qdawk")
-y_movement_curve = ExtResource("3_fbmii")
-y_movement_magnitude = 0.0
-slide_curve = ExtResource("4_dy6ey")
-bonk_curve = ExtResource("5_dy6ey")
-animations = Dictionary[int, String]({
-1: "updown",
-2: "updown",
-3: "left",
-4: "right",
-8: "left",
-9: "right",
-10: "updown",
-11: "updown"
-})
 interactable = NodePath("CatCoffeeSpill")
 pusher = NodePath("Pusher")
+standard_move_data = ExtResource("2_fbmii")
+bonk_data = ExtResource("3_dy6ey")
+slide_data = ExtResource("4_ix653")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 

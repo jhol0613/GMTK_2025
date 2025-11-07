@@ -1,49 +1,53 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=14 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_m234f"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="3_34788"]
 [ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://agents/conductor/conductor_y_curve.tres" id="3_lda0w"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="4_lda0w"]
 [ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://agents/player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
-[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_py0t2"]
 [ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_34788"]
+[ext_resource type="Resource" uid="uid://cktp3akff2k1p" path="res://agents/player_character/player_slide_action_data.tres" id="6_46wui"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_46wui"]
+
+[sub_resource type="Resource" id="Resource_thsup"]
+script = ExtResource("3_34788")
+direct_movement_curve = ExtResource("2_m234f")
+y_movement_curve = ExtResource("3_lda0w")
+y_movement_magnitude = 16.0
+move_duration = 0.3
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
+
+[sub_resource type="Resource" id="Resource_k3trg"]
+script = ExtResource("3_34788")
+direct_movement_curve = ExtResource("5_34788")
+y_movement_curve = ExtResource("3_lda0w")
+y_movement_magnitude = 16.0
+move_duration = 0.3
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
 
-[node name="Conductor" type="Node2D" node_paths=PackedStringArray("default_sound_emitter", "collision_area", "sprite")]
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_eb2fl")
-direct_movement_curve = ExtResource("2_m234f")
-y_movement_curve = ExtResource("3_lda0w")
-y_movement_magnitude = 5.0
-slide_curve = ExtResource("4_py0t2")
-bonk_curve = ExtResource("5_34788")
-jump_duration = 0.7
-move_duration = 0.5
-animations = Dictionary[int, String]({
-1: "jump_right",
-2: "jump_right",
-3: "jump_right",
-4: "jump_right"
-})
+standard_move_data = SubResource("Resource_thsup")
+bonk_data = SubResource("Resource_k3trg")
+slide_data = ExtResource("6_46wui")
+collision_area = NodePath("Shadow/AnimatedSprite2D/Area2D")
+default_sound_emitter = NodePath("")
+sprite = NodePath("Shadow/AnimatedSprite2D")
 follow_on_animations = Dictionary[int, String]({
 1: "idle_right",
 2: "idle_right",
 3: "idle_right",
 4: "idle_right"
 })
-beat_delays = Dictionary[int, float]({
-1: 0.0,
-2: 0.0,
-3: 0.0,
-4: 0.0
-})
-default_sound_emitter = NodePath("Sound/JumpSound")
-collision_area = NodePath("Shadow/AnimatedSprite2D/Area2D")
-sprite = NodePath("Shadow/AnimatedSprite2D")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -6)
@@ -70,11 +74,17 @@ shape = SubResource("RectangleShape2D_lda0w")
 [node name="JumpSound" type="FmodEventEmitter2D" parent="Sound"]
 event_name = "event:/Conductor Footsteps"
 event_guid = "{1db1ae96-b392-45ab-95a1-02448391848b}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="EnteredSound" type="FmodEventEmitter2D" parent="Sound"]
 event_name = "event:/Door Opens (Conductor Enters)"
 event_guid = "{eba7682c-5954-49ed-a01d-f8fbbd6d8628}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="Voice" type="FmodEventEmitter2D" parent="Sound"]
 event_name = "event:/Conductor Speak"
 event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"

@@ -1,14 +1,14 @@
-[gd_scene load_steps=86 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=85 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_bvxdu"]
 [ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_gvvi5"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_xrlin"]
-[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_vkpdm"]
 [ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://agents/player_character/sprites/ActionBonk.png" id="5_2bapq"]
 [ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_xrlin"]
 [ext_resource type="Texture2D" uid="uid://b1yloh6w3ao8m" path="res://agents/player_character/sprites/player360.png" id="6_aodji"]
+[ext_resource type="Resource" uid="uid://cktp3akff2k1p" path="res://agents/player_character/player_slide_action_data.tres" id="6_gli1f"]
 [ext_resource type="Texture2D" uid="uid://dm6rcc2g6isnk" path="res://agents/player_character/sprites/ActionJump.png" id="6_xgp35"]
 [ext_resource type="Texture2D" uid="uid://by4ds17usv1yq" path="res://agents/player_character/sprites/PWalkB.png" id="7_dx1gn"]
 [ext_resource type="Texture2D" uid="uid://b86ry21nd6xfc" path="res://agents/player_character/sprites/PWalkF.png" id="8_2bapq"]
@@ -40,14 +40,6 @@ script = ExtResource("2_gvvi5")
 direct_movement_curve = ExtResource("5_xrlin")
 y_movement_curve = ExtResource("3_xrlin")
 y_movement_magnitude = 16.0
-move_duration = 0.3
-timing_offset = 0.0
-metadata/_custom_type_script = "uid://bqsf0t8306cyy"
-
-[sub_resource type="Resource" id="Resource_0y67j"]
-script = ExtResource("2_gvvi5")
-direct_movement_curve = ExtResource("4_vkpdm")
-y_movement_magnitude = 0.0
 move_duration = 0.3
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
@@ -619,7 +611,7 @@ failure_emitter = NodePath("Sounds/Failure")
 jump_collision_timer = NodePath("JumpCollisionDisable")
 standard_move_data = SubResource("Resource_vkpdm")
 bonk_data = SubResource("Resource_gli1f")
-slide_data = SubResource("Resource_0y67j")
+slide_data = ExtResource("6_gli1f")
 collision_area = NodePath("Shadow/Area2D")
 action_beats = Dictionary[int, float]({
 5: 0.0,
