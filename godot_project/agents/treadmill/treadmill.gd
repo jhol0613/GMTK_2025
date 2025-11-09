@@ -20,18 +20,17 @@ func _construct():
 	if not Engine.is_editor_hint():
 		#sprite.play_with_signals(_direction_data[direction].animation_name)
 		_pusher.push_action = _direction_data[direction].push_action
+		default_animation = _direction_data[direction].animation_name
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
 	set_direction(direction)
 	sprite.speed_scale = animation_speed
-	tick.connect(_on_tick)
+	action_executed.connect(_on_action_executed)
+	_pusher.push_beat = default_action_beat
 
-func _on_tick(beat):
-	await get_tree().create_timer(_pusher.push_beat * AudioManager.beat_time_seconds).timeout
-	sound.play()
-	sprite.play_with_signals(_direction_data[direction].animation_name)
+func _on_action_executed(action):
 	sprite.animation_looped.connect(_on_animation_looped)
 
 func _on_animation_looped():

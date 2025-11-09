@@ -198,6 +198,7 @@ _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
 3: SubResource("Resource_alc0r")
 })
 _pusher = NodePath("Pusher")
+default_action_beat = 2.0
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"
 
