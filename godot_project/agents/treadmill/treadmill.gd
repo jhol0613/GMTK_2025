@@ -29,6 +29,7 @@ func _ready() -> void:
 	sprite.speed_scale = animation_speed
 	action_executed.connect(_on_action_executed)
 	_pusher.push_beat = default_action_beat
+	pass
 
 func _on_action_executed(action):
 	sprite.animation_looped.connect(_on_animation_looped)

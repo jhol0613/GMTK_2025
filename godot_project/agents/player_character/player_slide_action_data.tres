@@ -7,6 +7,6 @@
 script = ExtResource("2_oqdph")
 direct_movement_curve = ExtResource("1_3gfq6")
 y_movement_magnitude = 0.0
-move_duration = 0.3
+move_duration = 0.6
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
