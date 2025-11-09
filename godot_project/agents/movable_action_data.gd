@@ -15,3 +15,9 @@ class_name MovableActionData
 ## Time to offset the initiation of this curve from the defining beat of the action (e.g. a jump might
 ## start by moving player lower befor the beat so the beat lines up with leaving the ground)
 @export var timing_offset := 0.0
+
+func _init():
+	if not y_movement_curve:
+		y_movement_curve = Curve.new()
+	if not direct_movement_curve:
+		direct_movement_curve = Curve.new()

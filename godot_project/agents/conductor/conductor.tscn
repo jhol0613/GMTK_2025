@@ -16,7 +16,7 @@ script = ExtResource("3_34788")
 direct_movement_curve = ExtResource("2_m234f")
 y_movement_curve = ExtResource("3_lda0w")
 y_movement_magnitude = 16.0
-move_duration = 0.3
+move_duration = 0.5
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -25,7 +25,7 @@ script = ExtResource("3_34788")
 direct_movement_curve = ExtResource("5_34788")
 y_movement_curve = ExtResource("3_lda0w")
 y_movement_magnitude = 16.0
-move_duration = 0.3
+move_duration = 0.5
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -40,8 +40,14 @@ standard_move_data = SubResource("Resource_thsup")
 bonk_data = SubResource("Resource_k3trg")
 slide_data = ExtResource("6_46wui")
 collision_area = NodePath("Shadow/AnimatedSprite2D/Area2D")
-default_sound_emitter = NodePath("")
+default_sound_emitter = NodePath("Sound/JumpSound")
 sprite = NodePath("Shadow/AnimatedSprite2D")
+action_animations = Dictionary[int, String]({
+1: "jump_right",
+2: "jump_right",
+3: "jump_right",
+4: "jump_right"
+})
 follow_on_animations = Dictionary[int, String]({
 1: "idle_right",
 2: "idle_right",

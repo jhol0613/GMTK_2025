@@ -13,6 +13,9 @@ class_name Agent
 @export var action_beats: Dictionary[Enums.PlayerAction, float]
 ## The action beat to use when nothing is defined for a particular action
 @export var default_action_beat := 0.0
+## If not empty, agent will only perform an action on the beats in the sequence marked "true". For example,
+## for a laser with [false, true], laser would fire every second beat
+@export var activation_sequence : Array[bool]
 
 @export_subgroup("Sounds")
 
@@ -52,8 +55,6 @@ var lock_local_origin = false
 ## grid total size
 var grid_size := Vector2i.ZERO
 
-##Emitted for all agents on every sequencer stage (regardless of play/thinking mode). Level manager actually calls emit
-signal tick(beat: int)
 ##Emitted on the actual beat of an action
 signal action_executed(action: Enums.PlayerAction)
 
@@ -74,6 +75,8 @@ func _ready() -> void:
 	_sound_timer.timeout.connect(_on_sound_start)
 	_animation_timer.timeout.connect(_on_animation_start)
 	
+	assert(sprite != null, "Sprite not defined for agent " + name)
+	
 	#Connect to animation signals to feed up to level manager
 	if sprite != null:
 		sprite.connect("animation_signal", _on_animation_signal)
@@ -84,7 +87,10 @@ func reset() -> void:
 	if default_animation != "":
 		sprite.play_with_signals(default_animation)
 	
-func execute_action(action : Enums.PlayerAction, skip_animation := false) -> void:
+func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
+	if not activation_sequence.is_empty():
+		if not activation_sequence[beat % activation_sequence.size()]:
+			return
 	# Determine amount of time before action, sound, and animation are executed (in seconds)
 	var action_delay = action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
 	
@@ -108,6 +114,7 @@ func execute_action(action : Enums.PlayerAction, skip_animation := false) -> voi
 func _execute_callable_on_timer(timer: Timer, delay: float, callable: Callable):
 	if delay == 0.0:
 		callable.call()
+		return
 	if timer.is_connected("timeout", callable):
 		timer.timeout.disconnect(callable)
 	timer.stop()
@@ -117,6 +124,12 @@ func _execute_callable_on_timer(timer: Timer, delay: float, callable: Callable):
 func interrupt_queued_action(cancel_sound := true):
 	if _animation_timer.is_connected("timeout", _on_animation_start):
 		_animation_timer.disconnect("timeout", _on_animation_start)
+	if _action_timer.is_connected("timeout", _on_action_beat):
+		_action_timer.disconnect("timeout", _on_action_beat)
+	if _sound_timer.is_connected("timeout", _on_sound_start) and cancel_sound:
+		_sound_timer.disconnect("timeout", _on_sound_start)
+		if currently_playing_emitter:
+			currently_playing_emitter.stop()
 	_animation_timer.stop()
 	
 	if not cancel_sound:
@@ -136,7 +149,8 @@ func _on_sound_start(action: Enums.PlayerAction):
 	currently_playing_emitter = action_sound_emitters.get(action, null)
 	if not currently_playing_emitter and default_sound_emitter: #switch to default sound if no specific sound defined for a given action
 		currently_playing_emitter = default_sound_emitter
-	currently_playing_emitter.play()
+	if currently_playing_emitter:
+		currently_playing_emitter.play()
 	
 func _on_animation_start(action: Enums.PlayerAction):
 	var animation_name = action_animations.get(action, default_animation)
@@ -144,7 +158,7 @@ func _on_animation_start(action: Enums.PlayerAction):
 	play_animation_with_follow_on(animation_name, follow_on)
 	
 func play_animation_with_follow_on(animation_name: String, follow_on_animation := ""):
-	assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attemtping to call play movable animation that does not exisst")
+	assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attempting to call play animation that does not exist")
 	sprite.play_with_signals(animation_name)
 	if follow_on_animation != "":
 		if not sprite.animation_finished.has_connections():

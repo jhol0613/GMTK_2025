@@ -16,15 +16,14 @@ class_name MovableObstacle
 func _ready() -> void:
 	super._ready()
 	add_to_group("movable_obstacles")
-	#tick.connect(_on_tick)
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
-func execute_action(action: Enums.PlayerAction, skip_animation := false): #TODO: Why does this not call super?
+func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
 	if Enums.is_action_fall(action):
 		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)
 	else:
-		super.execute_action(action, skip_animation)
+		super.execute_action(action, beat, skip_animation)
 		
 func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:

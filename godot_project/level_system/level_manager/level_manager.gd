@@ -279,7 +279,7 @@ func _update_obstacles():
 		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]))
+		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]), _current_beat)
 		obstacle.advance_move_cursor()
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
@@ -301,7 +301,7 @@ func _update_obstacles():
 		#_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
-	_player_character.execute_action(_bonk_check(_player_character, action))
+	_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
 	if _conductor == null \
@@ -315,7 +315,8 @@ func _update_conductor() -> void:
 	if conductor_path.size() < 2:
 		return
 	_conductor.execute_action(
-		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position))
+		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
+		_current_beat
 	)
 
 ##If desired direction clear, return that direction. Otherwise return a bonk in that direction
@@ -328,7 +329,8 @@ func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAc
 
 func _update_agents() -> void:
 	for agent in _level_scene.agents:
-		agent.tick.emit(_current_beat)
+		if agent is not Movable: # movables are sorted out into their own update functions
+			agent.execute_action(Enums.PlayerAction.NONE, _current_beat, false)
 		
 func _update_interactables(action: Enums.PlayerAction) -> void:
 	if action == Enums.PlayerAction.INTERACT:
@@ -340,16 +342,16 @@ func _update_interactables(action: Enums.PlayerAction) -> void:
 				interactable.interact(action)
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
+	print("pusher triggered")
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
 	var action = _bonk_check(movable, pusher.push_action)
 	if movable is PlayerCharacter:
-		_player_character.execute_action(action)
+		_player_character.execute_action(action, _current_beat)
 	elif movable is MovableObstacle:
 		_level_scene.update_obstacle_grid(movable.grid_position, true)
 		# skip animation if bonk was caused by a slide
-		print(was_a_slide)
-		movable.execute_action(action, was_a_slide)
+		movable.execute_action(action, _current_beat, was_a_slide)
 		_level_scene.update_obstacle_grid(movable.grid_position, false)
 
 #endregion

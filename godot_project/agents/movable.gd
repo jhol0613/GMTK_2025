@@ -17,6 +17,7 @@ class_name Movable
 ### How to offset 
 #@export var timing_offset := 0.0
 
+@export_subgroup("Movement Curve Data")
 ## Curve and timing data for standard moves (up, down, left, and right)
 @export var standard_move_data: MovableActionData
 ## Curve and timing data for bonks (bonk up, bonk down, bonk left, bonk right)
@@ -70,21 +71,26 @@ func _ready():
 	add_to_group("movables")
 	
 	_movement_timer.one_shot = true
+	_movement_timer.autostart = false
 	add_child(_movement_timer)
-	_movement_timer.timeout.connect(_on_movement_start)
+	#_movement_timer.timeout.connect(_on_movement_start)
 	
+	null_curve.add_point(Vector2(0,0))
+	null_curve.add_point(Vector2(1,0))
 	#tick.connect(_on_sequencer_beat)
 	#action_executed.connect(_on_action_executed)
 	if collision_area != null:
 		_collision_area_initial_position = collision_area.position
 
-func execute_action(action : Enums.PlayerAction, skip_animation := false) -> void:
-	super.execute_action(action, skip_animation)
-	
+func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
+	super.execute_action(action, beat, skip_animation)
 	var action_data: MovableActionData
 	var should_move_collision := false
 	var move_target := grid_position + Enums.player_action_to_vector(action)
 	
+	
+	if action == Enums.PlayerAction.NONE:
+		return
 	if Enums.is_action_move(action):
 		action_data = standard_move_data
 		should_move_collision = true
@@ -92,12 +98,12 @@ func execute_action(action : Enums.PlayerAction, skip_animation := false) -> voi
 		action_data = bonk_data
 		move_target = _get_bonk_target(action)
 	elif Enums.is_action_slide(action):
-		action_data = bonk_data
+		action_data = slide_data
 		should_move_collision = true
 	else:
 		action_data = other_action_data.get(action)
 	if !action_data:
-		push_error("Attempting to call an action on a movable that doesn't have defined data")
+		push_error("Attempting to call an action on a movable that doesn't have defined data for that action")
 		return
 	
 	# Reset collision position if it's defined
@@ -107,7 +113,6 @@ func execute_action(action : Enums.PlayerAction, skip_animation := false) -> voi
 		collision_area.position = _collision_area_initial_position
 	
 	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
-	
 	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, move_target, action_data, should_move_collision))
 
 # move_target is where the agent is moving, or where it attempted to move (i.e. bonk)
@@ -125,7 +130,7 @@ func _on_movement_start(action: Enums.PlayerAction, move_target: Vector2i, actio
 		action_data.y_movement_curve, action_data.y_movement_magnitude), 0.0, 1.0, action_data.move_duration)
 	
 func _action_movement_callback(alpha: float, start_position: Vector2, target_position: Vector2, \
-	move_curve: Curve, y_curve: Curve = null_curve, y_magnitude: float = 16.0):
+	move_curve: Curve = null_curve, y_curve: Curve = null_curve, y_magnitude: float = 16.0):
 	
 	if collision_area != null:
 		collision_area.global_position = _frozen_collision_position_during_move
@@ -133,6 +138,10 @@ func _action_movement_callback(alpha: float, start_position: Vector2, target_pos
 	position = move_curve.sample(alpha) * position_difference + start_position
 	sprite.position.y = -y_curve.sample(alpha) * y_magnitude + _sprite_default_y
 
+func interrupt_queued_action(should_cancel_sound := true):
+	super.interrupt_queued_action()
+	if _movement_timer.is_connected("timeout", _on_movement_start):
+		_movement_timer.disconnect("timeout", _on_movement_start)
 #func play_animation(animation_name: String, follow_on = null):
 	#assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attemtping to call play movable animation that does not exisst")
 	#sprite.play_with_signals(animation_name)

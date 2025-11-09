@@ -73,6 +73,13 @@ standard_move_data = ExtResource("2_nmw7r")
 bonk_data = ExtResource("3_26gw8")
 slide_data = ExtResource("4_kgp0j")
 sprite = NodePath("AnimatedSprite2DSignals")
+action_animations = Dictionary[int, String]({
+1: "updown",
+2: "updown",
+3: "left",
+4: "right"
+})
+default_animation = "updown"
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
@@ -81,6 +88,7 @@ position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_koxf5")
 animation = &"updown"
 script = ExtResource("3_koxf5")
+synch_framerates_to_bpm = false
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Pusher" type="Area2D" parent="."]
