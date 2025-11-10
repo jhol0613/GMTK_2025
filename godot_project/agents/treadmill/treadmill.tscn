@@ -199,7 +199,7 @@ _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
 3: SubResource("Resource_alc0r")
 })
 _pusher = NodePath("Pusher")
-default_action_beat = 2.5
+default_action_beat = 2.0
 default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"
@@ -214,6 +214,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 [node name="Pusher" type="Area2D" parent="."]
 position = Vector2(0, -10)
 script = ExtResource("4_niail")
+push_beat = 2.5
 should_cancel_sound = false
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
