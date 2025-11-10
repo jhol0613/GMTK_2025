@@ -637,7 +637,7 @@ action_beats = Dictionary[int, float]({
 18: 0.0,
 19: 0.0
 })
-default_action_beat = 1.5
+default_action_beat = 2.0
 action_sound_emitters = {
 1: NodePath("Sounds/MoveUp"),
 2: NodePath("Sounds/MoveDown"),
@@ -715,6 +715,7 @@ event_name = "event:/Move_Right&Left"
 event_guid = "{58f2ff27-c93a-4ac7-a79d-5f99c877b787}"
 position = Vector2(1, -27)
 script = ExtResource("24_xrlin")
+offset_seconds = -0.08
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="MoveUp" type="FmodEventEmitter2D" parent="Sounds"]
@@ -722,6 +723,7 @@ event_name = "event:/Move_Up"
 event_guid = "{331ded67-6d48-4da7-a3fd-ae3bbc917335}"
 position = Vector2(1, -27)
 script = ExtResource("24_xrlin")
+offset_seconds = -0.08
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="MoveDown" type="FmodEventEmitter2D" parent="Sounds"]
@@ -729,6 +731,7 @@ event_name = "event:/Move_Down"
 event_guid = "{b1ddc327-83af-45c5-9e56-c362653fdc63}"
 position = Vector2(1, -27)
 script = ExtResource("24_xrlin")
+offset_seconds = -0.08
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="Jump" type="FmodEventEmitter2D" parent="Sounds"]

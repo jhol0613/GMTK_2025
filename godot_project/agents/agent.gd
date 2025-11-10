@@ -92,17 +92,12 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		if not activation_sequence[beat % activation_sequence.size()]:
 			return
 	# Determine amount of time before action, sound, and animation are executed (in seconds)
-	var action_delay = action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
+	var action_delay = _get_action_delay_in_seconds(action)#action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
 	
 	# Determine delay for FMOD event emitter
-	var emitter = action_sound_emitters.get(action, default_sound_emitter)
-	var sound_delay: float
-	if emitter:
-		sound_delay = emitter.offset_seconds
-	else:
-		sound_delay = 0.0
+	var sound_delay = _get_sound_delay_in_seconds(action)
 	
-	var animation_delay = action_delay + sprite.get_animation_offset_seconds(action_animations.get(action, default_animation))
+	var animation_delay = _get_animation_delay_in_seconds(action)# action_delay + sprite.get_animation_offset_seconds(action_animations.get(action, default_animation))
 	
 	_execute_callable_on_timer(_action_timer, action_delay, _on_action_beat.bind(action))
 	_execute_callable_on_timer(_sound_timer, sound_delay, _on_sound_start.bind(action))
@@ -112,7 +107,7 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 
 ## Helper to help manage timing signals for action emitter, animation, sound, etc.
 func _execute_callable_on_timer(timer: Timer, delay: float, callable: Callable):
-	if delay == 0.0:
+	if delay <= 0.0:
 		callable.call()
 		return
 	if timer.is_connected("timeout", callable):
@@ -173,14 +168,17 @@ func _get_action_delay_in_seconds(action: Enums.PlayerAction) -> float:
 	return action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
 
 ##Returns proper sound offset in seconds taking into account both target beat and the sound's individual offset parameter
-func _get_sound_offset_in_seconds(action: Enums.PlayerAction) -> float:
-	var emitter = action_sound_emitters.get(action, default_sound_emitter)
+func _get_sound_delay_in_seconds(action: Enums.PlayerAction) -> float:
+	var emitter: FmodEventEmitter2DOffset = action_sound_emitters.get(action, default_sound_emitter)
 	# if no action beat defined, just use the downbeat
-	return action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds + emitter.offset
+	if emitter:
+		return action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds + emitter.offset_seconds
+	else:
+		return action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
 
 ##Returns proper animation offset in seconds taking into account both target beat and animation's individual offset parameter
-func _get_animation_offset_in_seconds(action: Enums.PlayerAction) -> float:
-	var animation_name = action_animations.get(action)
+func _get_animation_delay_in_seconds(action: Enums.PlayerAction) -> float:
+	var animation_name = action_animations.get(action, default_animation)
 	return action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds + sprite.get_animation_offset_seconds(animation_name)
 
 func _grid_to_local(grid_coordinates: Vector2i) -> Vector2:

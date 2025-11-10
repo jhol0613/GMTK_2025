@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://mtxspsqlab42"]
+[gd_scene load_steps=32 format=3 uid="uid://mtxspsqlab42"]
 
 [ext_resource type="Script" uid="uid://bjbsyatg6tdh0" path="res://agents/treadmill/treadmill.gd" id="1_vf448"]
 [ext_resource type="Script" uid="uid://dbiams5fxic7a" path="res://agents/treadmill/treadmill_direction_data.gd" id="2_pstgr"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_pstgr"]
 [ext_resource type="Texture2D" uid="uid://c7gtony23dw85" path="res://agents/treadmill/treadmill.png" id="4_20g2x"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_niail"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="7_20g2x"]
 
 [sub_resource type="Resource" id="Resource_pstgr"]
 script = ExtResource("2_pstgr")
@@ -188,7 +189,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
 size = Vector2(24, 18)
 
-[node name="Treadmill" type="Node2D" node_paths=PackedStringArray("_pusher", "sprite")]
+[node name="Treadmill" type="Node2D" node_paths=PackedStringArray("_pusher", "default_sound_emitter", "sprite")]
 y_sort_enabled = true
 script = ExtResource("1_vf448")
 _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
@@ -198,7 +199,8 @@ _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
 3: SubResource("Resource_alc0r")
 })
 _pusher = NodePath("Pusher")
-default_action_beat = 2.0
+default_action_beat = 2.5
+default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"
 
@@ -221,3 +223,6 @@ shape = SubResource("RectangleShape2D_pifmq")
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/Treadmill"
 event_guid = "{54ca2f07-b4b0-4eb5-84af-c99140d3f2e2}"
+script = ExtResource("7_20g2x")
+offset_seconds = -0.08
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
