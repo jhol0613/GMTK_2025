@@ -9,9 +9,9 @@ class_name Agent
 @export_subgroup("Action Beats")
 ## On which beat should an action "execute". This is the anchor point for the whole action and is tied
 ## to bpm. Offsets to sounds and animations can be applied individually, and those offsets are based off of
-## the beats defined here.
+## the beats defined here. Keep in mind beats here are 0 indexed, so the downbeat is beat 0.0
 @export var action_beats: Dictionary[Enums.PlayerAction, float]
-## The action beat to use when nothing is defined for a particular action
+## The action beat to use when nothing is defined for a particular action (downbeat = 0.0)
 @export var default_action_beat := 0.0
 ## If not empty, agent will only perform an action on the beats in the sequence marked "true". For example,
 ## for a laser with [false, true], laser would fire every second beat

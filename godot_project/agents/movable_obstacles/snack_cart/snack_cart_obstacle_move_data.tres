@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="MovableActionData" load_steps=3 format=3 uid="uid://ctslejt33rjmg"]
 
 [ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="1_wr5t4"]
-[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_r7n2w"]
+[ext_resource type="Script" path="res://agents/movable_action_data.gd" id="2_r7n2w"]
 
 [resource]
 script = ExtResource("2_r7n2w")

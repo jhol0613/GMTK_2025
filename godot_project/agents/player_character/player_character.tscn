@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_bvxdu"]
-[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_gvvi5"]
+[ext_resource type="Script" path="res://agents/movable_action_data.gd" id="2_gvvi5"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_xrlin"]
 [ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://agents/player_character/sprites/ActionBonk.png" id="5_2bapq"]
 [ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_xrlin"]
@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
-[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
+[ext_resource type="Script" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
 
 [sub_resource type="Resource" id="Resource_vkpdm"]
 script = ExtResource("2_gvvi5")
@@ -637,7 +637,7 @@ action_beats = Dictionary[int, float]({
 18: 0.0,
 19: 0.0
 })
-default_action_beat = 1.5
+default_action_beat = 1.0
 action_sound_emitters = {
 1: NodePath("Sounds/MoveUp"),
 2: NodePath("Sounds/MoveDown"),

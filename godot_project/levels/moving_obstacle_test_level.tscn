@@ -16,4 +16,4 @@ tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
 position = Vector2(112, 47.37)
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_daiop")]
-position = Vector2(48, 54)
+position = Vector2(48, 52)
