@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_fbmii"]
 [ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_dy6ey"]
-[ext_resource type="Resource" uid="uid://cktp3akff2k1p" path="res://agents/player_character/player_slide_action_data.tres" id="4_ix653"]
+[ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_ix653"]
 [ext_resource type="Texture2D" uid="uid://c1gtr8fe1bwo1" path="res://agents/movable_obstacles/snack_cart/empty_cart.png" id="4_j04bu"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_ix653"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="6_fo802"]

@@ -1,14 +1,14 @@
-[gd_scene load_steps=86 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=88 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_bvxdu"]
-[ext_resource type="Script" path="res://agents/movable_action_data.gd" id="2_gvvi5"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_gvvi5"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_xrlin"]
 [ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://agents/player_character/sprites/ActionBonk.png" id="5_2bapq"]
 [ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_xrlin"]
 [ext_resource type="Texture2D" uid="uid://b1yloh6w3ao8m" path="res://agents/player_character/sprites/player360.png" id="6_aodji"]
-[ext_resource type="Resource" uid="uid://cktp3akff2k1p" path="res://agents/player_character/player_slide_action_data.tres" id="6_gli1f"]
+[ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="6_gli1f"]
 [ext_resource type="Texture2D" uid="uid://dm6rcc2g6isnk" path="res://agents/player_character/sprites/ActionJump.png" id="6_xgp35"]
 [ext_resource type="Texture2D" uid="uid://by4ds17usv1yq" path="res://agents/player_character/sprites/PWalkB.png" id="7_dx1gn"]
 [ext_resource type="Texture2D" uid="uid://b86ry21nd6xfc" path="res://agents/player_character/sprites/PWalkF.png" id="8_2bapq"]
@@ -24,7 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
-[ext_resource type="Script" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
 
 [sub_resource type="Resource" id="Resource_vkpdm"]
 script = ExtResource("2_gvvi5")
@@ -41,6 +41,18 @@ direct_movement_curve = ExtResource("5_xrlin")
 y_movement_curve = ExtResource("3_xrlin")
 y_movement_magnitude = 16.0
 move_duration = 0.3
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
+
+[sub_resource type="Curve" id="Curve_gli1f"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.507484), 1.828, -2.842, 0, 0, Vector2(0.711055, 0.00888669), -0.319065, -0.319065, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Resource" id="Resource_qasg8"]
+script = ExtResource("2_gvvi5")
+direct_movement_curve = SubResource("Curve_gli1f")
+y_movement_magnitude = 16.0
+move_duration = 0.6
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -425,6 +437,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fy7jl")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_wmbr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e7oxi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkvkj")
+}],
+"loop": false,
+"name": &"fall_delayed",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_s6mum")
 }, {
 "duration": 1.0,
@@ -620,24 +649,17 @@ jump_collision_timer = NodePath("JumpCollisionDisable")
 standard_move_data = SubResource("Resource_vkpdm")
 bonk_data = SubResource("Resource_gli1f")
 slide_data = ExtResource("6_gli1f")
+slide_bonk_data = SubResource("Resource_qasg8")
 other_action_data = Dictionary[int, ExtResource("2_gvvi5")]({
 5: SubResource("Resource_0y67j")
 })
 collision_area = NodePath("Shadow/Area2D")
 action_beats = Dictionary[int, float]({
-0: 0.0,
-5: 0.0,
-7: 0.0,
-12: 0.0,
-13: 0.0,
-14: 0.0,
-15: 0.0,
-16: 0.0,
-17: 0.0,
-18: 0.0,
-19: 0.0
+1: 2.0,
+2: 2.0,
+3: 2.0,
+4: 2.0
 })
-default_action_beat = 1.0
 action_sound_emitters = {
 1: NodePath("Sounds/MoveUp"),
 2: NodePath("Sounds/MoveDown"),
@@ -651,7 +673,11 @@ action_sound_emitters = {
 12: NodePath("Sounds/QuickBonk"),
 13: NodePath("Sounds/QuickBonk"),
 14: NodePath("Sounds/QuickBonk"),
-15: NodePath("Sounds/QuickBonk")
+15: NodePath("Sounds/QuickBonk"),
+20: NodePath("Sounds/Bonk"),
+21: NodePath("Sounds/Bonk"),
+22: NodePath("Sounds/Bonk"),
+23: NodePath("Sounds/Bonk")
 }
 sprite = NodePath("Shadow/PlayerSprite")
 action_animations = Dictionary[int, String]({
@@ -668,7 +694,11 @@ action_animations = Dictionary[int, String]({
 12: "fall",
 13: "fall",
 14: "fall",
-15: "fall"
+15: "fall",
+20: "fall_delayed",
+21: "fall_delayed",
+22: "fall_delayed",
+23: "fall_delayed"
 })
 follow_on_animations = Dictionary[int, String]({
 1: "idle_up",
@@ -694,10 +724,13 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"bonk_down"
+animation = &"fall_delayed"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
+animation_offsets = Dictionary[String, float]({
+"fall_delayed": 0.2
+})
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Area2D" type="Area2D" parent="Shadow"]

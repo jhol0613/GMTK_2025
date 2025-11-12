@@ -108,6 +108,8 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 ## Helper to help manage timing signals for action emitter, animation, sound, etc.
 func _execute_callable_on_timer(timer: Timer, delay: float, callable: Callable):
 	if delay <= 0.0:
+		if delay < 0.0:
+			push_error("Timing offset for " + name + " sound, animation, or movement is prior to downbeat")
 		callable.call()
 		return
 	if timer.is_connected("timeout", callable):

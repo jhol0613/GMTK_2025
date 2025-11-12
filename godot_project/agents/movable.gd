@@ -24,6 +24,8 @@ class_name Movable
 @export var bonk_data: MovableActionData
 ## Curve and timing for slides
 @export var slide_data: MovableActionData
+## Curve and timing for slide bonks
+@export var slide_bonk_data: MovableActionData
 ## Curve and movement data for any additional actions that the movable will use
 @export var other_action_data: Dictionary[Enums.PlayerAction, MovableActionData]
 
@@ -89,8 +91,10 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	var move_target := grid_position + Enums.player_action_to_vector(action)
 	
 	
+	
 	if action == Enums.PlayerAction.NONE:
 		return
+
 	if Enums.is_action_move(action):
 		action_data = standard_move_data
 		should_move_collision = true
@@ -100,6 +104,9 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	elif Enums.is_action_slide(action):
 		action_data = slide_data
 		should_move_collision = true
+	elif Enums.is_action_slide_bonk(action):
+		action_data = slide_bonk_data
+		move_target = _get_bonk_target(action)
 	else:
 		action_data = other_action_data.get(action)
 	if !action_data:
@@ -235,13 +242,13 @@ func interrupt_queued_action(should_cancel_sound := true):
 func _get_bonk_target(action: Enums.PlayerAction) -> Vector2i:
 	var attempted_position: Vector2i
 	match action:
-		Enums.PlayerAction.UP_BONK:
+		Enums.PlayerAction.UP_BONK, Enums.PlayerAction.UP_SLIDE_BONK:
 			attempted_position = grid_position + Vector2i.UP
-		Enums.PlayerAction.DOWN_BONK:
+		Enums.PlayerAction.DOWN_BONK, Enums.PlayerAction.DOWN_SLIDE_BONK:
 			attempted_position = grid_position + Vector2i.DOWN
-		Enums.PlayerAction.LEFT_BONK:
+		Enums.PlayerAction.LEFT_BONK, Enums.PlayerAction.LEFT_SLIDE_BONK:
 			attempted_position = grid_position + Vector2i.LEFT
-		Enums.PlayerAction.RIGHT_BONK:
+		Enums.PlayerAction.RIGHT_BONK, Enums.PlayerAction.RIGHT_SLIDE_BONK:
 			attempted_position = grid_position + Vector2i.RIGHT
 		_:
 			attempted_position = grid_position + Vector2i.ZERO
