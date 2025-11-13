@@ -1,8 +1,8 @@
-[gd_scene load_steps=88 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=87 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
-[ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_bvxdu"]
+[ext_resource type="Resource" uid="uid://bty48bsp3nunh" path="res://agents/player_character/player_move_action_data.tres" id="2_gli1f"]
 [ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_gvvi5"]
 [ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_xrlin"]
 [ext_resource type="Texture2D" uid="uid://bd83pfh6nbmrb" path="res://agents/player_character/sprites/ActionBonk.png" id="5_2bapq"]
@@ -25,15 +25,6 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
-
-[sub_resource type="Resource" id="Resource_vkpdm"]
-script = ExtResource("2_gvvi5")
-direct_movement_curve = ExtResource("2_bvxdu")
-y_movement_curve = ExtResource("3_xrlin")
-y_movement_magnitude = 16.0
-move_duration = 0.3
-timing_offset = 0.0
-metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="Resource" id="Resource_gli1f"]
 script = ExtResource("2_gvvi5")
@@ -646,12 +637,16 @@ script = ExtResource("1_1ty04")
 success_emitter = NodePath("Sounds/Success")
 failure_emitter = NodePath("Sounds/Failure")
 jump_collision_timer = NodePath("JumpCollisionDisable")
-standard_move_data = SubResource("Resource_vkpdm")
+standard_move_data = ExtResource("2_gli1f")
 bonk_data = SubResource("Resource_gli1f")
 slide_data = ExtResource("6_gli1f")
 slide_bonk_data = SubResource("Resource_qasg8")
 other_action_data = Dictionary[int, ExtResource("2_gvvi5")]({
-5: SubResource("Resource_0y67j")
+5: SubResource("Resource_0y67j"),
+12: ExtResource("2_gli1f"),
+13: ExtResource("2_gli1f"),
+14: ExtResource("2_gli1f"),
+15: ExtResource("2_gli1f")
 })
 collision_area = NodePath("Shadow/Area2D")
 action_beats = Dictionary[int, float]({

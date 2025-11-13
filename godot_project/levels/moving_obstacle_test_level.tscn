@@ -19,6 +19,6 @@ position = Vector2(112, 47.37)
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_daiop")]
 position = Vector2(48, 52)
 
-[node name="SnackCartObstacle" parent="Treadmill" index="3" instance=ExtResource("3_1oiv2")]
-position = Vector2(256, 18)
+[node name="SnackCartObstacle" parent="." index="10" instance=ExtResource("3_1oiv2")]
+position = Vector2(304, 70)
 movement_path = Array[int]([3, 3])

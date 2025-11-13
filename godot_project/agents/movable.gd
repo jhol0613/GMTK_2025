@@ -108,6 +108,8 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		action_data = slide_bonk_data
 		move_target = _get_bonk_target(action)
 	else:
+		if Enums.is_action_fall(action):
+			should_move_collision = true
 		action_data = other_action_data.get(action)
 	if !action_data:
 		push_error("Attempting to call an action on a movable that doesn't have defined data for that action")

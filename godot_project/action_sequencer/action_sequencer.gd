@@ -274,6 +274,7 @@ func _on_play_button_pressed() -> void:
 
 
 func _on_replay_button_pressed() -> void:
+	current_action = 0
 	if buttons_enabled:
 		_enter_thinking_mode()
 		replay_pressed.emit()

@@ -169,13 +169,17 @@ func _on_level_fail() -> void:
 	_action_sequencer.push_replay_button()
 
 func _reset_level() -> void:
+	_current_beat = 0
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
-
+	
+	for obstacle in _level_scene.movable_obstacles:
+		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		obstacle.reset()
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
 	for interactable in _level_scene.interactables:
@@ -342,12 +346,17 @@ func _update_interactables(action: Enums.PlayerAction) -> void:
 				interactable.interact(action)
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
-	print("pusher triggered")
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
+	#print(_bonk_check(movable, pusher.push_action))
 	var action = _bonk_check(movable, pusher.push_action)
 	if movable is PlayerCharacter:
-		_player_character.execute_action(action, _current_beat)
+		# Fail if crushed (i.e. a fall would result in a bonk
+		if Enums.is_action_bonk(action):
+			_player_character.notify_failure()
+			_on_level_fail()
+		else:
+			_player_character.execute_action(action, _current_beat)
 	elif movable is MovableObstacle:
 		_level_scene.update_obstacle_grid(movable.grid_position, true)
 		# skip animation if bonk was caused by a slide

@@ -150,19 +150,19 @@ func vector_to_player_action(vector: Vector2i) -> PlayerAction:
 			
 func action_to_bonk(action: PlayerAction) -> PlayerAction:
 	match action:
-		PlayerAction.RIGHT, PlayerAction.RIGHT_BONK:
+		PlayerAction.RIGHT, PlayerAction.RIGHT_BONK, PlayerAction.RIGHT_FALL:
 			return PlayerAction.RIGHT_BONK
 		PlayerAction.RIGHT_SLIDE, PlayerAction.RIGHT_SLIDE_BONK:
 			return PlayerAction.RIGHT_SLIDE_BONK
-		PlayerAction.LEFT, PlayerAction.LEFT_BONK:
+		PlayerAction.LEFT, PlayerAction.LEFT_BONK, PlayerAction.LEFT_FALL:
 			return PlayerAction.LEFT_BONK
 		PlayerAction.LEFT_SLIDE, PlayerAction.LEFT_SLIDE_BONK:
 			return PlayerAction.LEFT_SLIDE_BONK
-		PlayerAction.UP, PlayerAction.UP_BONK:
+		PlayerAction.UP, PlayerAction.UP_BONK, PlayerAction.UP_FALL:
 			return PlayerAction.UP_BONK
 		PlayerAction.UP_SLIDE, PlayerAction.UP_SLIDE_BONK:
 			return PlayerAction.UP_SLIDE_BONK
-		PlayerAction.DOWN, PlayerAction.DOWN_BONK:
+		PlayerAction.DOWN, PlayerAction.DOWN_BONK, PlayerAction.DOWN_FALL:
 			return PlayerAction.DOWN_BONK
 		PlayerAction.DOWN_SLIDE, PlayerAction.DOWN_SLIDE_BONK:
 			return PlayerAction.DOWN_SLIDE_BONK
