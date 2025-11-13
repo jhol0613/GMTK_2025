@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=17 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
@@ -7,6 +7,19 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_koxf5"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="5_26gw8"]
+
+[sub_resource type="Curve" id="Curve_kgp0j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.238693, 0.118335), 0.49576, 0.126811, 1, 0, Vector2(0.404523, 0.100093), 0.0, 0.0, 0, 0, Vector2(0.59799, 0.118335), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_s1287"]
+script = ExtResource("5_26gw8")
+direct_movement_curve = SubResource("Curve_kgp0j")
+y_movement_magnitude = 16.0
+move_duration = 0.6
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnaji"]
 atlas = ExtResource("2_ldseh")
@@ -72,6 +85,7 @@ pusher = NodePath("Pusher")
 standard_move_data = ExtResource("2_nmw7r")
 bonk_data = ExtResource("3_26gw8")
 slide_data = ExtResource("4_kgp0j")
+slide_bonk_data = SubResource("Resource_s1287")
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
 1: "updown",

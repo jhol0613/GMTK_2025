@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqus7ea6hnmos"]
+[gd_scene load_steps=4 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_1oiv2"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_daiop"]
 
 [node name="LevelBase" instance=ExtResource("1_svhcm")]
@@ -17,3 +18,7 @@ position = Vector2(112, 47.37)
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_daiop")]
 position = Vector2(48, 52)
+
+[node name="SnackCartObstacle" parent="Treadmill" index="3" instance=ExtResource("3_1oiv2")]
+position = Vector2(256, 18)
+movement_path = Array[int]([3, 3])
