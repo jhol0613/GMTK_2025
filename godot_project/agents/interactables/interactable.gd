@@ -14,18 +14,19 @@ signal interaction_succeeded
 		Vector2i.RIGHT
 	]
 @export var repeatable := false
-@export var default_animation_name := "default"
 	
 var _interacted = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("interactables")
+	super._ready()
 
-func interact(action: Enums.PlayerAction):
+func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
 	if not _interacted or repeatable:
 		interaction_succeeded.emit()
 		_interacted = true
+		super.execute_action(action, beat, skip_animation)
 
 func is_in_range(interact_position: Vector2i) -> bool:
 	for relative_position in interactable_positions:
@@ -36,4 +37,4 @@ func is_in_range(interact_position: Vector2i) -> bool:
 func reset():
 	super.reset()
 	_interacted = false
-	sprite.play_with_signals(default_animation_name)
+	sprite.play_with_signals(default_animation)

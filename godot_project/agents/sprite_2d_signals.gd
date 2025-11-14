@@ -17,6 +17,8 @@ class_name AnimatedSprite2DSignals
 
 ##If true, frame rate stays synched to bpm
 @export var synch_framerates_to_bpm := true
+##Even if synch framerates to bmp is true, 
+@export var bpm_synch_exceptions: Array[String]
 
 ## Beats per second
 var old_bps
@@ -53,6 +55,8 @@ func _on_timeout(signal_id: String):
 	
 func _on_bpm_changed(new_bpm: float):
 	for animation_name in sprite_frames.get_animation_names():
+		if bpm_synch_exceptions.has(animation_name):
+			continue
 		# Use the frame rate set in the animation player to determine what to multiply the new frame rate by. 
 		# e.g. If bpm is 170 (5.67 frame rate) and the frame rate defined in the animation player is 12.0, frame
 		# rate for beat_synched animation will be 11.3333

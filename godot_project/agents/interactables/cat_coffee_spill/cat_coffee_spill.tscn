@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bxq0hfxmg5ct1"]
+[gd_scene load_steps=25 format=3 uid="uid://bxq0hfxmg5ct1"]
 
 [ext_resource type="Script" uid="uid://wn7v33ph18qx" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.gd" id="1_qfg0r"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="1_uvexm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cynt7wbxbhgdg" path="res://agents/interactables/cat_coffee_spill/coffee_obstacle.tscn" id="5_pa7bf"]
 [ext_resource type="Script" uid="uid://cqh2y73sdi1js" path="res://agents/movable_obstacles/obstacle_spawner.gd" id="5_to1gp"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_pa7bf"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="8_eux06"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pa7bf"]
 atlas = ExtResource("2_to1gp")
@@ -131,17 +132,27 @@ animation = "wake_up"
 frame = 3
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
-[node name="CatCoffeeSpill" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="CatCoffeeSpill" type="Node2D" node_paths=PackedStringArray("default_sound_emitter", "sprite")]
 script = ExtResource("1_qfg0r")
+default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
+action_animations = Dictionary[int, String]({
+7: "wake_up"
+})
+follow_on_animations = Dictionary[int, String]({
+7: "idle"
+})
+default_animation = "default"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 z_index = 1
 position = Vector2(0, -28)
 sprite_frames = SubResource("SpriteFrames_qfg0r")
+animation = &"wake_up"
 autoplay = "default"
 script = ExtResource("1_uvexm")
 signals = Array[ExtResource("4_37f55")]([SubResource("Resource_g10dl")])
+bpm_synch_exceptions = Array[String](["wake_up"])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="VisibleObstacleSpawner" type="Node2D" parent="."]
@@ -160,3 +171,6 @@ metadata/_custom_type_script = "uid://cqh2y73sdi1js"
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/CoffeeSpill"
 event_guid = "{e241a3d9-7242-4e08-956e-df0f2beefdfd}"
+script = ExtResource("8_eux06")
+offset_seconds = 0.8
+metadata/_custom_type_script = "uid://deg3tw8squr8x"

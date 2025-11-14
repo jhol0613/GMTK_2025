@@ -129,7 +129,6 @@ sprite_frames = ExtResource("7_use4v")
 animation = &"fire_down"
 script = ExtResource("11_gmiso")
 default_animation_offset = -0.2
-synch_framerates_to_bpm = false
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

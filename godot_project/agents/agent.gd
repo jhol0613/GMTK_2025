@@ -155,7 +155,7 @@ func _on_animation_start(action: Enums.PlayerAction):
 	play_animation_with_follow_on(animation_name, follow_on)
 	
 func play_animation_with_follow_on(animation_name: String, follow_on_animation := ""):
-	assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attempting to call play animation that does not exist")
+	#assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attempting to call play animation that does not exist")
 	sprite.play_with_signals(animation_name)
 	if follow_on_animation != "":
 		if not sprite.animation_finished.has_connections():

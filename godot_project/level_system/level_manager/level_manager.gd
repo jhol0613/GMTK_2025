@@ -265,8 +265,8 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_obstacles() # Need to be updated first so player and conductor movement take new grid into account
 	_update_player(action)
 	_update_conductor()
-	_update_agents()
 	_update_interactables(action)
+	_update_agents()
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
@@ -333,17 +333,14 @@ func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAc
 
 func _update_agents() -> void:
 	for agent in _level_scene.agents:
-		if agent is not Movable: # movables are sorted out into their own update functions
+		if agent is not Movable and agent is not Interactable: # movables are sorted out into their own update functions
 			agent.execute_action(Enums.PlayerAction.NONE, _current_beat, false)
 		
 func _update_interactables(action: Enums.PlayerAction) -> void:
 	if action == Enums.PlayerAction.INTERACT:
 		for interactable in _level_scene.interactables:
-			print("player position:" , _player_character.grid_position)
-			print("interactable position", interactable.grid_position)
 			if interactable.is_in_range(_player_character.grid_position):
-				print("interactable in range")
-				interactable.interact(action)
+				interactable.execute_action(action, _current_beat)
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)

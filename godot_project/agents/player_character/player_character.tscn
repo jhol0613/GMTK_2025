@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=88 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -51,6 +51,14 @@ metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 script = ExtResource("2_gvvi5")
 y_movement_curve = ExtResource("3_xrlin")
 y_movement_magnitude = 40.0
+move_duration = 0.3
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
+
+[sub_resource type="Resource" id="Resource_qcujq"]
+script = ExtResource("2_gvvi5")
+y_movement_curve = ExtResource("3_xrlin")
+y_movement_magnitude = 20.0
 move_duration = 0.3
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
@@ -643,6 +651,7 @@ slide_data = ExtResource("6_gli1f")
 slide_bonk_data = SubResource("Resource_qasg8")
 other_action_data = Dictionary[int, ExtResource("2_gvvi5")]({
 5: SubResource("Resource_0y67j"),
+7: SubResource("Resource_qcujq"),
 12: ExtResource("2_gli1f"),
 13: ExtResource("2_gli1f"),
 14: ExtResource("2_gli1f"),

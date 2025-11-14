@@ -35,7 +35,8 @@ func advance_move_cursor():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
+	if pusher and movement_path.size() > 0:	
+		pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
 ##return the same push action that's currently set
