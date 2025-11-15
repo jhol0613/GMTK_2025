@@ -59,6 +59,11 @@ var _next_level: RhythmRailLevel
 var _level_number := 0
 var _current_beat := 0
 
+#Variables for interrupting car advance for play if reset is pressed
+var _initial_train_center_pos
+var _advancing_car_for_play := false
+var _advance_car_tween
+
 # True when loaded level is a new world
 var _queue_world_transition = false
 
@@ -169,6 +174,7 @@ func _on_level_fail() -> void:
 	_action_sequencer.push_replay_button()
 
 func _reset_level() -> void:
+	print("level reset")
 	_current_beat = 0
 	if _conductor != null:
 		_conductor.queue_free()
@@ -188,6 +194,7 @@ func _reset_level() -> void:
 		_level_scene.movable_obstacles.erase(obstacle)
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.queue_free()
+	_player_character.reset()
 	_spawned_obstacles.clear()
 
 func _on_reset_animation_finished():
@@ -288,22 +295,6 @@ func _update_obstacles():
 		obstacle.advance_move_cursor()
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
-	
-	## first check if any obstacles are trying to move into the same place
-	#var targets: Dictionary
-	#for obstacle: MovableObstacle in _level_scene.movable_obstacles:
-		#targets.get_or_add(obstacle, obstacle.grid_position + Enums.player_action_to_vector(obstacle.get_next_move()))
-	#for obstacle in _level_scene.movable_obstacles:
-		#_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		#var action = obstacle.get_next_move()
-		#for other_obstacle in _level_scene.movable_obstacles:
-			## Bonk if obstacle is trying to move into the same place as another
-			#if obstacle != other_obstacle and targets[obstacle] == targets[other_obstacle]:
-				#action = Enums.action_to_bonk(action)
-				#break
-		#obstacle.execute_action(_bonk_check(obstacle, action))
-		#obstacle.advance_move_cursor()
-		#_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
@@ -374,17 +365,28 @@ func _on_action_sequencer_play_started() -> void:
 		obstacle.reset()
 
 func _advance_car_for_play(animation_time: float):
-	var tween = create_tween()
+	_advancing_car_for_play = true
+	_advance_car_tween = create_tween()
+	_initial_train_center_pos = _train_center.position
 	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
-	tween.tween_property(_train_center, "position", target_pos, animation_time) \
+	_advance_car_tween.tween_property(_train_center, "position", target_pos, animation_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	_advance_car_tween.tween_callback(_on_advance_for_play_finished)
+	
+func _on_advance_for_play_finished():
+	_advancing_car_for_play = false
 
 func _on_action_sequencer_replay_pressed() -> void:
-	var tween = create_tween()
-	var target_pos := Vector2(-_level_number * next_car_offset, 0)
-	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_callback(_on_reset_animation_finished)
+	if _advancing_car_for_play:
+		_train_center.position = _initial_train_center_pos
+		_on_advance_for_play_finished()
+		_advance_car_tween.kill()
+	else:
+		var tween = create_tween()
+		var target_pos := Vector2(-_level_number * next_car_offset, 0)
+		tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_callback(_on_reset_animation_finished)
 	#_on_reset_animation_finished()
 	_reset_level()
 	_player_character.disable_collisions()

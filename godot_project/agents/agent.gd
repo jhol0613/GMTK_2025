@@ -84,7 +84,16 @@ func reset() -> void:
 	position = _grid_to_local(grid_position)
 	if default_animation != "":
 		sprite.play_with_signals(default_animation)
-	
+	_reset_timer(_action_timer)
+	_reset_timer(_sound_timer)
+	_reset_timer(_animation_timer)
+	if currently_playing_emitter:
+		currently_playing_emitter.stop()
+		
+func _reset_timer(timer: Timer):
+	if timer:
+		timer.stop()
+
 func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
 	if not activation_sequence.is_empty():
 		if not activation_sequence[beat % activation_sequence.size()]:

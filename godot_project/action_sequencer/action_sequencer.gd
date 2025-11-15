@@ -90,6 +90,9 @@ var _initialized_items := [ActionItem]
 
 var _active_action_item : ActionItem
 
+# Prevents play mode from being triggered if replay is pressed while waiting for the beat
+var _lock_thinking_mode := true
+
 #endregion
 
 #region Signals
@@ -127,8 +130,8 @@ func play():
 	_action_items.visible = false
 
 	# Wait for specified delay (for external animations) to start sequencing actions
-	await get_tree().create_timer(play_action_delay).timeout
-	
+	#await get_tree().create_timer(play_action_delay).timeout
+
 	play_started.emit()
 	
 	current_action = 0	
@@ -275,6 +278,7 @@ func _on_play_button_pressed() -> void:
 
 func _on_replay_button_pressed() -> void:
 	current_action = 0
+	_lock_thinking_mode = true
 	if buttons_enabled:
 		_enter_thinking_mode()
 		replay_pressed.emit()
