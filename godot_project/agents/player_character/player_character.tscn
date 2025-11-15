@@ -51,8 +51,8 @@ metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 script = ExtResource("2_gvvi5")
 y_movement_curve = ExtResource("3_xrlin")
 y_movement_magnitude = 40.0
-move_duration = 0.3
-timing_offset = 0.0
+move_duration = 0.6
+timing_offset = 0.2
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="Resource" id="Resource_qcujq"]
@@ -733,7 +733,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"fall_delayed"
+animation = &"jump"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
