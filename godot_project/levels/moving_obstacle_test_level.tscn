@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqus7ea6hnmos"]
+[gd_scene load_steps=6 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_1oiv2"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_daiop"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="4_1oiv2"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="5_re3re"]
 
 [node name="LevelBase" instance=ExtResource("1_svhcm")]
 player_spawn_position = Vector2i(0, 3)
@@ -26,3 +27,6 @@ movement_path = Array[int]([3, 3])
 
 [node name="CatCoffeeSpill" parent="." index="11" instance=ExtResource("4_1oiv2")]
 position = Vector2(46, 34)
+
+[node name="SpinningChair" parent="." index="12" instance=ExtResource("5_re3re")]
+position = Vector2(176, 71)

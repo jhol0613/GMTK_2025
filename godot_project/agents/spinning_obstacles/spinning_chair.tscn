@@ -69,7 +69,6 @@ sprite = NodePath("AnimatedSprite2DSignals")
 [node name="LeftObstacle" parent="." instance=ExtResource("1_atl20")]
 position = Vector2(-32, 0.5)
 movement_path = Array[int]([21, 23, 22, 20])
-y_movement_magnitude = 20.0
 
 [node name="AnimatedSprite2DSignals" parent="LeftObstacle" index="0"]
 visible = false
