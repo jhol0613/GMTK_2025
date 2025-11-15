@@ -52,8 +52,6 @@ var tile_size: Vector2i
 ## in the node hierarchy
 var local_origin := Vector2.ZERO: set = _set_local_origin
 var lock_local_origin = false
-## grid total size
-var grid_size := Vector2i.ZERO
 
 ##Emitted on the actual beat of an action
 signal action_executed(action: Enums.PlayerAction)

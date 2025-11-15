@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cw2v8ikkeilu1"]
+[gd_scene load_steps=11 format=3 uid="uid://cm0cjux44y8lh"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_6ffc4"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_7i3og"]

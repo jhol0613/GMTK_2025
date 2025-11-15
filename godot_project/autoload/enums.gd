@@ -167,7 +167,7 @@ func action_to_bonk(action: PlayerAction) -> PlayerAction:
 		PlayerAction.DOWN_SLIDE, PlayerAction.DOWN_SLIDE_BONK:
 			return PlayerAction.DOWN_SLIDE_BONK
 		_:
-			return PlayerAction.NONE
+			return action
 		
 func is_action_fall(action: PlayerAction) -> bool:
 	return (
@@ -206,7 +206,11 @@ func is_action_move(action: PlayerAction) -> bool:
 		action == PlayerAction.UP or
 		action == PlayerAction.DOWN or
 		action == PlayerAction.LEFT or
-		action == PlayerAction.RIGHT
+		action == PlayerAction.RIGHT or
+		action == PlayerAction.UP_RIGHT or
+		action == PlayerAction.UP_LEFT or
+		action == PlayerAction.DOWN_RIGHT or
+		action == PlayerAction.DOWN_LEFT
 	)
 	
 func get_reverse_action(action: PlayerAction) -> PlayerAction:

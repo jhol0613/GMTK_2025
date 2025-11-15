@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://brth7xhog3y76"]
+[gd_scene load_steps=12 format=3 uid="uid://brth7xhog3y76"]
 
 [ext_resource type="Script" uid="uid://dik0gek0s1qv2" path="res://agents/spinning_obstacles/spinning_chair.gd" id="1_2duu5"]
-[ext_resource type="PackedScene" uid="uid://cw2v8ikkeilu1" path="res://agents/movable_obstacles/sample_movable_obstacle.tscn" id="1_atl20"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_2duu5"]
 [ext_resource type="Texture2D" uid="uid://bnl1m4ksmpuur" path="res://agents/spinning_obstacles/spinning_chair_v2.png" id="3_u2psr"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_u2psr"]
+[ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_neb5q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_neb5q"]
 atlas = ExtResource("3_u2psr")
@@ -52,55 +53,45 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_nipkn")
 }],
-"loop": true,
-"name": &"default",
+"loop": false,
+"name": &"spin",
 "speed": 5.0
 }]
 
-[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "default_sound_emitter", "sprite")]
+[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "sprite")]
 script = ExtResource("1_2duu5")
 beats_per_quarter_turn = 0.3
 left_obstacle = NodePath("LeftObstacle")
 middle_obstacle = NodePath("MiddleObstacle")
 right_obstacle = NodePath("RightObstacle")
-default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
-
-[node name="LeftObstacle" parent="." instance=ExtResource("1_atl20")]
-position = Vector2(-32, 0.5)
-movement_path = Array[int]([21, 23, 22, 20])
-
-[node name="AnimatedSprite2DSignals" parent="LeftObstacle" index="0"]
-visible = false
-
-[node name="Pusher" parent="LeftObstacle" index="1"]
-push_action = 15
-
-[node name="MiddleObstacle" parent="." instance=ExtResource("1_atl20")]
-position = Vector2(0, 0.5)
-movement_path = Array[int]([])
-
-[node name="AnimatedSprite2DSignals" parent="MiddleObstacle" index="0"]
-visible = false
-
-[node name="RightObstacle" parent="." instance=ExtResource("1_atl20")]
-position = Vector2(32, 0.5)
-movement_path = Array[int]([23, 21, 20, 22])
-
-[node name="AnimatedSprite2DSignals" parent="RightObstacle" index="0"]
-visible = false
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -28.5)
+position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_u2psr")
+animation = &"spin"
 script = ExtResource("3_2duu5")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/Spinning Chair"
 event_guid = "{2be3c815-7fee-4641-9ff6-873878e8e7ff}"
+script = ExtResource("5_u2psr")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="LeftObstacle" parent="." instance=ExtResource("6_neb5q")]
+z_index = 1
+position = Vector2(-32, -5)
+movement_path = Array[int]([25, 27, 26, 24])
+
+[node name="RightObstacle" parent="." instance=ExtResource("6_neb5q")]
+z_index = 1
+position = Vector2(32, -5)
+movement_path = Array[int]([27, 25, 24, 26])
+
+[node name="MiddleObstacle" parent="." instance=ExtResource("6_neb5q")]
+z_index = 1
+position = Vector2(0, -5)
 
 [editable path="LeftObstacle"]
-[editable path="MiddleObstacle"]
-[editable path="RightObstacle"]

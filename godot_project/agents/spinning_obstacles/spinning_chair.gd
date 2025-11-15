@@ -20,7 +20,7 @@ enum FacingDirection {
 
 @export_group("Spinning Chair Data")
 ##At runtime, actual grid size will be used to calculate pusher positions. This is for visualizing in level editor
-@export var visualization_grid_size := Vector2i(32, 19)
+@export var visualization_tile_size := Vector2i(32, 19)
 
 @export_group("Nodes")
 @export var left_obstacle: MovableObstacle
@@ -28,16 +28,16 @@ enum FacingDirection {
 @export var right_obstacle: MovableObstacle
 
 @onready var _left_push_action_cycle = [
-	Enums.PlayerAction.UP_FALL,
 	Enums.PlayerAction.RIGHT_FALL,
 	Enums.PlayerAction.DOWN_FALL,
-	Enums.PlayerAction.RIGHT_FALL
+	Enums.PlayerAction.RIGHT_FALL,
+	Enums.PlayerAction.UP_FALL
 ]
 @onready var _right_push_action_cycle = [
-	Enums.PlayerAction.DOWN_FALL,
 	Enums.PlayerAction.LEFT_FALL,
 	Enums.PlayerAction.UP_FALL,
-	Enums.PlayerAction.LEFT_FALL
+	Enums.PlayerAction.LEFT_FALL,
+	Enums.PlayerAction.DOWN_FALL
 ]
 
 var _frame_timer: Timer
@@ -48,15 +48,15 @@ func _construct():
 	sprite.frame = 2 * start_direction #see enum description for why this works
 	var initial_spacing
 	if Engine.is_editor_hint():
-		initial_spacing = visualization_grid_size
+		initial_spacing = visualization_tile_size
 	else:
-		initial_spacing = visualization_grid_size
+		initial_spacing = tile_size
 
 	#Set starting positions for left and right pushers
 	match _facing_direction:
 		FacingDirection.FRONT_CLOCKWISE, FacingDirection.FRONT_COUNTERCLOCKWISE:
-			left_obstacle.position = Vector2(middle_obstacle.position.x - initial_spacing.x, middle_obstacle.position.y)
-			right_obstacle.position = Vector2(middle_obstacle.position.x + initial_spacing.x, middle_obstacle.position.y)
+			left_obstacle.global_position = Vector2(middle_obstacle.global_position.x - initial_spacing.x, middle_obstacle.global_position.y)
+			right_obstacle.global_position = Vector2(middle_obstacle.global_position.x + initial_spacing.x, middle_obstacle.global_position.y)
 		FacingDirection.LEFT:
 			left_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y - initial_spacing.y)
 			right_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y + initial_spacing.y)
@@ -66,15 +66,15 @@ func _construct():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super._ready()
 	_construct()
+	super._ready()
 	#add_to_group("movable_obstacles") #This is so reset code gets called when play button pressed
 	
 	left_obstacle.set_move_cursor_start_position(_facing_direction)
 	right_obstacle.set_move_cursor_start_position(_facing_direction)
 	
-	left_obstacle.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
-	right_obstacle.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
+	left_obstacle.standard_move_data.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
+	right_obstacle.standard_move_data.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
 	
 	left_obstacle.action_executed.connect(_on_left_obstacle_move)
 	right_obstacle.action_executed.connect(_on_right_obstacle_move)
@@ -84,14 +84,22 @@ func _ready() -> void:
 	_frame_timer.timeout.connect(_advance_sprite_frame)
 	add_child(_frame_timer)
 
+# Bypass agent's animation system
+func _on_animation_start(action):
+	pass
+
 func _on_left_obstacle_move(_action: Enums.PlayerAction):
+	#print("left obstacle move")
 	# change sprite frame on obstacle move. The fact that it's left obstacle is arbitrary
 	_advance_sprite_frame()
 	_frame_timer.start(AudioManager.beat_time_seconds * beats_per_quarter_turn)
 	
 	left_obstacle.pusher.push_action = _left_push_action_cycle[left_obstacle._move_cursor]
+	print(Enums.PlayerAction.find_key(left_obstacle.pusher.push_action))
+	pass
 	
 func _on_right_obstacle_move(_action: Enums.PlayerAction):
+	#print("right obstacle move")
 	right_obstacle.pusher.push_action = _right_push_action_cycle[right_obstacle._move_cursor]
 	
 func _on_halfway_through_move(obstacle: MovableObstacle, new_action: Enums.PlayerAction):
@@ -106,6 +114,7 @@ func _set_start_direction(new_direction: FacingDirection):
 	
 	
 func reset():
+	super.reset()
 	# Don't call super so position of the chair doesn't reset
 	_facing_direction = start_direction
 	if _frame_timer != null:

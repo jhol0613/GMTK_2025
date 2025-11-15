@@ -4,8 +4,6 @@ class_name MovableObstacle
 
 ##Repeating path for this object to follow
 @export var movement_path: Array[Enums.PlayerAction]
-##Delay after sequencer fires before grid is updated
-@export var update_delay: float
 @export var pusher: Pusher
 
 @onready var _move_cursor_start_position := 0
@@ -14,8 +12,8 @@ class_name MovableObstacle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super._ready()
 	add_to_group("movable_obstacles")
+	super._ready()
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
 func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):

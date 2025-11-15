@@ -24,6 +24,7 @@ func _ready() -> void:
 	play_animation_with_follow_on("enter", "idle_right")
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
+	#print(Enums.PlayerAction.find_key(action))
 	match action:
 		Enums.PlayerAction.JUMP:
 			jump_collision_timer.start()

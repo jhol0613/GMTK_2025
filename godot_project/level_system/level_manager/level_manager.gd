@@ -347,7 +347,9 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
 	#print(_bonk_check(movable, pusher.push_action))
 	var action = _bonk_check(movable, pusher.push_action)
+	print(Enums.PlayerAction.find_key(action))
 	if movable is PlayerCharacter:
+		print(Enums.PlayerAction.find_key(action))
 		# Fail if crushed (i.e. a fall would result in a bonk
 		if Enums.is_action_bonk(action):
 			_player_character.notify_failure()
