@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MovableActionData" load_steps=4 format=3 uid="uid://bty48bsp3nunh"]
+
+[ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="1_1opc5"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_v8kcp"]
+[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_6n18t"]
+
+[resource]
+script = ExtResource("2_v8kcp")
+direct_movement_curve = ExtResource("1_1opc5")
+y_movement_curve = ExtResource("3_6n18t")
+y_movement_magnitude = 16.0
+move_duration = 0.3
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"

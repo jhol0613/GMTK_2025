@@ -16,28 +16,30 @@ class_name PlayerCharacter
 @onready var _jumping = false
 
 signal failure
+signal interacted
 
 func _ready() -> void:
 	super._ready()
 	reset()
 	action_executed.connect(_on_action_executed)
-	play_animation("enter", "idle_right")
+	play_animation_with_follow_on("enter", "idle_right")
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
-	match action:
-		Enums.PlayerAction.JUMP:
-			jump_collision_timer.start()
-			_jumping = true
-			#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
+	#print(Enums.PlayerAction.find_key(action))
+	if action == Enums.PlayerAction.JUMP:
+		jump_collision_timer.start()
+		_jumping = true
+	elif Enums.is_action_interact(action):
+		interacted.emit(self, action)
 
 func notify_success():
-	play_animation("success")
+	play_animation_with_follow_on("success")
 	success_emitter.play()
 
 func notify_failure():
 	failure_emitter.play()
 	interrupt_queued_action()
-	play_animation("failure")
+	play_animation_with_follow_on("failure")
 	
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED

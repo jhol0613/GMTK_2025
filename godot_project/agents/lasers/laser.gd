@@ -14,22 +14,23 @@ class_name Laser
 @export var direction := Enums.Direction.DOWN: set = set_direction
 ## Length of the laser beam
 @export var beam_length := 100: set = set_beam_length
-## Beat sequence: for each item in the array, on that beat the laser will fire/not fire
-@export var activation_sequence: Array[bool] = [false, true]
 
 @export_subgroup("Laser Data")
-@export var animation_delay := 0.1
 ## How long to wait after laser animation starts to draw beam and implement collision
-@export var collision_delay := 0.4
+#@export var collision_delay := 0.4
 @export var beam_width := 4
 @export var direction_data: Dictionary[Enums.Direction, LaserDirectionData]
 
 
 func _ready() -> void:
+	super._ready()
 	add_to_group("agents")
 	_construct()
 	beam_line.visible = false
-	tick.connect(_fire)
+	action_executed.connect(_fire)
+	if name == "Laser4":
+		print(sprite.sprite_frames.get_frame_count(default_animation))
+		print(sprite.sprite_frames.get_animation_speed(default_animation))
 
 # Called when certain exports are changed so they can be visualized in the editor
 func _construct():
@@ -38,6 +39,7 @@ func _construct():
 
 	# Laser visuals
 	_sprite.set_animation(direction_data.get(direction).animation_name)
+	default_animation = direction_data.get(direction).animation_name
 	beam_line.position = direction_data.get(direction).start_position_offset
 	beam_line.points[1] = beam_length * direction_data.get(direction).vector_direction
 	beam_line.visible = false
@@ -45,7 +47,6 @@ func _construct():
 	beam_end.position = beam_line.points[1]
 	_sprite.frame = 0
 	beam_line.visible = true
-
 
 	# Laser collision
 	var new_shape = collision_shape.shape.duplicate()
@@ -62,9 +63,10 @@ func set_direction(new_direction: Enums.Direction):
 	_construct()
 
 func _fire(beat: int):
-	if activation_sequence[beat % activation_sequence.size()]:
-		await get_tree().create_timer(animation_delay).timeout
-		_sprite.play(direction_data.get(direction).animation_name)
-		sound.play()
-		await get_tree().create_timer(collision_delay * AudioManager.time_multiplier * .25).timeout
-		animation_player.play("laser_fire")
+	animation_player.play("laser_fire")
+	#if activation_sequence[beat % activation_sequence.size()]:
+		#await get_tree().create_timer(animation_delay).timeout
+		#_sprite.play(direction_data.get(direction).animation_name)
+		#sound.play()
+		#await get_tree().create_timer(collision_delay * AudioManager.time_multiplier * .25).timeout
+		#animation_player.play("laser_fire")

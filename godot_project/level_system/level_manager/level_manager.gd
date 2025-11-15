@@ -59,6 +59,11 @@ var _next_level: RhythmRailLevel
 var _level_number := 0
 var _current_beat := 0
 
+#Variables for interrupting car advance for play if reset is pressed
+var _initial_train_center_pos
+var _advancing_car_for_play := false
+var _advance_car_tween
+
 # True when loaded level is a new world
 var _queue_world_transition = false
 
@@ -169,13 +174,18 @@ func _on_level_fail() -> void:
 	_action_sequencer.push_replay_button()
 
 func _reset_level() -> void:
+	print("level reset")
+	_current_beat = 0
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
-
+	
+	for obstacle in _level_scene.movable_obstacles:
+		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		obstacle.reset()
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
 	for interactable in _level_scene.interactables:
@@ -184,6 +194,7 @@ func _reset_level() -> void:
 		_level_scene.movable_obstacles.erase(obstacle)
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.queue_free()
+	_player_character.reset()
 	_spawned_obstacles.clear()
 
 func _on_reset_animation_finished():
@@ -228,6 +239,7 @@ func _spawn_player() -> void:
 		_player_character.queue_free()
 	_player_character = _spawn_movable(player_scene, _level_scene.player_spawn_position)
 	_player_character.failure.connect(_on_level_fail)
+	_player_character.interacted.connect(_on_interact_action)
 
 func _spawn_conductor() -> void:
 	if _conductor != null:
@@ -244,6 +256,7 @@ func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
 	var spawned_obstacle = _spawn_movable(obstacle, grid_position)
 	_level_scene.movable_obstacles.append(spawned_obstacle)
 	_spawned_obstacles.append(spawned_obstacle)
+	_level_scene.update_obstacle_grid(spawned_obstacle.grid_position, false)
 
 func _initialize_interactables() -> void:
 	for interactable in _level_scene.interactables:
@@ -262,7 +275,6 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
 	_update_agents()
-	_update_interactables(action)
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
@@ -279,29 +291,13 @@ func _update_obstacles():
 		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]))
+		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]), _current_beat)
 		obstacle.advance_move_cursor()
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
-	
-	## first check if any obstacles are trying to move into the same place
-	#var targets: Dictionary
-	#for obstacle: MovableObstacle in _level_scene.movable_obstacles:
-		#targets.get_or_add(obstacle, obstacle.grid_position + Enums.player_action_to_vector(obstacle.get_next_move()))
-	#for obstacle in _level_scene.movable_obstacles:
-		#_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		#var action = obstacle.get_next_move()
-		#for other_obstacle in _level_scene.movable_obstacles:
-			## Bonk if obstacle is trying to move into the same place as another
-			#if obstacle != other_obstacle and targets[obstacle] == targets[other_obstacle]:
-				#action = Enums.action_to_bonk(action)
-				#break
-		#obstacle.execute_action(_bonk_check(obstacle, action))
-		#obstacle.advance_move_cursor()
-		#_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
-	_player_character.execute_action(_bonk_check(_player_character, action))
+	_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
 	if _conductor == null \
@@ -315,7 +311,8 @@ func _update_conductor() -> void:
 	if conductor_path.size() < 2:
 		return
 	_conductor.execute_action(
-		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position))
+		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
+		_current_beat
 	)
 
 ##If desired direction clear, return that direction. Otherwise return a bonk in that direction
@@ -328,28 +325,32 @@ func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAc
 
 func _update_agents() -> void:
 	for agent in _level_scene.agents:
-		agent.tick.emit(_current_beat)
+		if agent is not Movable and agent is not Interactable: # movables are sorted out into their own update functions
+			agent.execute_action(Enums.PlayerAction.NONE, _current_beat, false)
 		
-func _update_interactables(action: Enums.PlayerAction) -> void:
-	if action == Enums.PlayerAction.INTERACT:
-		for interactable in _level_scene.interactables:
-			print("player position:" , _player_character.grid_position)
-			print("interactable position", interactable.grid_position)
-			if interactable.is_in_range(_player_character.grid_position):
-				print("interactable in range")
-				interactable.interact(action)
+func _on_interact_action(agent: Agent, action: Enums.PlayerAction) -> void:
+	for interactable in _level_scene.interactables:
+		if interactable.is_in_range(agent.grid_position):
+			interactable.execute_action(action, _current_beat)
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
+	#print(_bonk_check(movable, pusher.push_action))
 	var action = _bonk_check(movable, pusher.push_action)
+	print(Enums.PlayerAction.find_key(action))
 	if movable is PlayerCharacter:
-		_player_character.execute_action(action)
+		print(Enums.PlayerAction.find_key(action))
+		# Fail if crushed (i.e. a fall would result in a bonk
+		if Enums.is_action_bonk(action):
+			_player_character.notify_failure()
+			_on_level_fail()
+		else:
+			_player_character.execute_action(action, _current_beat)
 	elif movable is MovableObstacle:
 		_level_scene.update_obstacle_grid(movable.grid_position, true)
 		# skip animation if bonk was caused by a slide
-		print(was_a_slide)
-		movable.execute_action(action, was_a_slide)
+		movable.execute_action(action, _current_beat, was_a_slide)
 		_level_scene.update_obstacle_grid(movable.grid_position, false)
 
 #endregion
@@ -364,17 +365,28 @@ func _on_action_sequencer_play_started() -> void:
 		obstacle.reset()
 
 func _advance_car_for_play(animation_time: float):
-	var tween = create_tween()
+	_advancing_car_for_play = true
+	_advance_car_tween = create_tween()
+	_initial_train_center_pos = _train_center.position
 	var target_pos := Vector2(-_level_number * next_car_offset + train_move_right_on_play_distance, 0)
-	tween.tween_property(_train_center, "position", target_pos, animation_time) \
+	_advance_car_tween.tween_property(_train_center, "position", target_pos, animation_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	_advance_car_tween.tween_callback(_on_advance_for_play_finished)
+	
+func _on_advance_for_play_finished():
+	_advancing_car_for_play = false
 
 func _on_action_sequencer_replay_pressed() -> void:
-	var tween = create_tween()
-	var target_pos := Vector2(-_level_number * next_car_offset, 0)
-	tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
-		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_callback(_on_reset_animation_finished)
+	if _advancing_car_for_play:
+		_train_center.position = _initial_train_center_pos
+		_on_advance_for_play_finished()
+		_advance_car_tween.kill()
+	else:
+		var tween = create_tween()
+		var target_pos := Vector2(-_level_number * next_car_offset, 0)
+		tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
+			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_callback(_on_reset_animation_finished)
 	#_on_reset_animation_finished()
 	_reset_level()
 	_player_character.disable_collisions()

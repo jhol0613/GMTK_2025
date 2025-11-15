@@ -1,13 +1,25 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=17 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
-[ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="2_koxf5"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
-[ext_resource type="Curve" uid="uid://14ax5lunhg47" path="res://agents/player_character/y_move_curve.tres" id="3_h3hhy"]
+[ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_nmw7r"]
+[ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_26gw8"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_koxf5"]
-[ext_resource type="Curve" uid="uid://c0g1rhoqdbs0w" path="res://agents/player_character/slide_curve.tres" id="4_26gw8"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
-[ext_resource type="Curve" uid="uid://dcaaavg8b5xr7" path="res://agents/movable_obstacles/snack_cart/snack_cart_bonk.tres" id="5_26gw8"]
+[ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="5_26gw8"]
+
+[sub_resource type="Curve" id="Curve_kgp0j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.238693, 0.118335), 0.49576, 0.126811, 1, 0, Vector2(0.404523, 0.100093), 0.0, 0.0, 0, 0, Vector2(0.59799, 0.118335), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Resource" id="Resource_s1287"]
+script = ExtResource("5_26gw8")
+direct_movement_curve = SubResource("Curve_kgp0j")
+y_movement_magnitude = 16.0
+move_duration = 0.6
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnaji"]
 atlas = ExtResource("2_ldseh")
@@ -70,22 +82,18 @@ size = Vector2(14, 10)
 [node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_kw233")
 pusher = NodePath("Pusher")
-direct_movement_curve = ExtResource("2_koxf5")
-y_movement_curve = ExtResource("3_h3hhy")
-y_movement_magnitude = 0.0
-slide_curve = ExtResource("4_26gw8")
-bonk_curve = ExtResource("5_26gw8")
-animations = Dictionary[int, String]({
+standard_move_data = ExtResource("2_nmw7r")
+bonk_data = ExtResource("3_26gw8")
+slide_data = ExtResource("4_kgp0j")
+slide_bonk_data = SubResource("Resource_s1287")
+sprite = NodePath("AnimatedSprite2DSignals")
+action_animations = Dictionary[int, String]({
 1: "updown",
 2: "updown",
 3: "left",
-4: "right",
-8: "left",
-9: "right",
-10: "updown",
-11: "updown"
+4: "right"
 })
-sprite = NodePath("AnimatedSprite2DSignals")
+default_animation = "updown"
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]

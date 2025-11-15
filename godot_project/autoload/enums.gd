@@ -1,5 +1,4 @@
 extends Node
-
 enum PlayerAction {
 	NONE,
 	UP,
@@ -21,6 +20,10 @@ enum PlayerAction {
 	DOWN_SLIDE,
 	LEFT_SLIDE,
 	RIGHT_SLIDE,
+	UP_SLIDE_BONK,
+	DOWN_SLIDE_BONK,
+	LEFT_SLIDE_BONK,
+	RIGHT_SLIDE_BONK,
 	UP_LEFT,
 	UP_RIGHT,
 	DOWN_RIGHT,
@@ -147,16 +150,24 @@ func vector_to_player_action(vector: Vector2i) -> PlayerAction:
 			
 func action_to_bonk(action: PlayerAction) -> PlayerAction:
 	match action:
-		PlayerAction.RIGHT, PlayerAction.RIGHT_SLIDE, PlayerAction.RIGHT_BONK:
+		PlayerAction.RIGHT, PlayerAction.RIGHT_BONK, PlayerAction.RIGHT_FALL:
 			return PlayerAction.RIGHT_BONK
-		PlayerAction.LEFT, PlayerAction.LEFT_SLIDE , PlayerAction.LEFT_BONK:
+		PlayerAction.RIGHT_SLIDE, PlayerAction.RIGHT_SLIDE_BONK:
+			return PlayerAction.RIGHT_SLIDE_BONK
+		PlayerAction.LEFT, PlayerAction.LEFT_BONK, PlayerAction.LEFT_FALL:
 			return PlayerAction.LEFT_BONK
-		PlayerAction.UP, PlayerAction.UP_SLIDE , PlayerAction.UP_BONK:
+		PlayerAction.LEFT_SLIDE, PlayerAction.LEFT_SLIDE_BONK:
+			return PlayerAction.LEFT_SLIDE_BONK
+		PlayerAction.UP, PlayerAction.UP_BONK, PlayerAction.UP_FALL:
 			return PlayerAction.UP_BONK
-		PlayerAction.DOWN, PlayerAction.DOWN_SLIDE , PlayerAction.DOWN_BONK:
+		PlayerAction.UP_SLIDE, PlayerAction.UP_SLIDE_BONK:
+			return PlayerAction.UP_SLIDE_BONK
+		PlayerAction.DOWN, PlayerAction.DOWN_BONK, PlayerAction.DOWN_FALL:
 			return PlayerAction.DOWN_BONK
+		PlayerAction.DOWN_SLIDE, PlayerAction.DOWN_SLIDE_BONK:
+			return PlayerAction.DOWN_SLIDE_BONK
 		_:
-			return PlayerAction.NONE
+			return action
 		
 func is_action_fall(action: PlayerAction) -> bool:
 	return (
@@ -172,6 +183,40 @@ func is_action_slide(action: PlayerAction) -> bool:
 		action == PlayerAction.DOWN_SLIDE or
 		action == PlayerAction.LEFT_SLIDE or
 		action == PlayerAction.RIGHT_SLIDE
+	)
+
+func is_action_bonk(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP_BONK or
+		action == PlayerAction.DOWN_BONK or
+		action == PlayerAction.LEFT_BONK or
+		action == PlayerAction.RIGHT_BONK
+	)
+
+func is_action_slide_bonk(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP_SLIDE_BONK or
+		action == PlayerAction.DOWN_SLIDE_BONK or
+		action == PlayerAction.LEFT_SLIDE_BONK or 
+		action == PlayerAction.RIGHT_SLIDE_BONK
+	)
+
+func is_action_move(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.UP or
+		action == PlayerAction.DOWN or
+		action == PlayerAction.LEFT or
+		action == PlayerAction.RIGHT or
+		action == PlayerAction.UP_RIGHT or
+		action == PlayerAction.UP_LEFT or
+		action == PlayerAction.DOWN_RIGHT or
+		action == PlayerAction.DOWN_LEFT
+	)
+
+#Throw more interact actions in here if they end up getting subdivided
+func is_action_interact(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.INTERACT
 	)
 	
 func get_reverse_action(action: PlayerAction) -> PlayerAction:

@@ -4,8 +4,6 @@ class_name MovableObstacle
 
 ##Repeating path for this object to follow
 @export var movement_path: Array[Enums.PlayerAction]
-##Delay after sequencer fires before grid is updated
-@export var update_delay: float
 @export var pusher: Pusher
 
 @onready var _move_cursor_start_position := 0
@@ -14,17 +12,16 @@ class_name MovableObstacle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super._ready()
 	add_to_group("movable_obstacles")
-	#tick.connect(_on_tick)
+	super._ready()
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
-func execute_action(action: Enums.PlayerAction, skip_animation := false):
+func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
 	if Enums.is_action_fall(action):
 		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)
 	else:
-		super.execute_action(action, skip_animation)
+		super.execute_action(action, beat, skip_animation)
 		
 func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:
@@ -36,7 +33,8 @@ func advance_move_cursor():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
+	if pusher and movement_path.size() > 0:	
+		pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
 ##return the same push action that's currently set

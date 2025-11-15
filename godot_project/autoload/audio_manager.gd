@@ -54,5 +54,11 @@ func play_music_event(event_name: String, new_bpm: float):
 func on_music_stopped():
 	music_complete.emit()
 
-func get_fps_from_bpm():
-	return bpm / 30.0
+## If query bpm is supplied, does the math with that bpm. Otherwise uses current bpm
+func get_fps_from_bpm(query_bpm = bpm):
+	#divide by 30
+	return query_bpm * .0333333333333333
+
+## If query bpm is supplied, does the math with that bpm. Otherwise uses current bpm
+func get_bpm_from_fps(query_bpm = bpm):
+	return query_bpm * 30.0
