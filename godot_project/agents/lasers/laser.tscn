@@ -117,7 +117,7 @@ direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
 2: SubResource("Resource_yjehw"),
 3: SubResource("Resource_use4v")
 })
-default_action_beat = 1.0
+default_action_beat = 2.0
 activation_sequence = Array[bool]([false, true])
 default_sound_emitter = NodePath("SoundEmitter")
 sprite = NodePath("Sprite")
