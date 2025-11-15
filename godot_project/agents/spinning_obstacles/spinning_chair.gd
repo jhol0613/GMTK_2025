@@ -89,17 +89,13 @@ func _on_animation_start(action):
 	pass
 
 func _on_left_obstacle_move(_action: Enums.PlayerAction):
-	#print("left obstacle move")
 	# change sprite frame on obstacle move. The fact that it's left obstacle is arbitrary
 	_advance_sprite_frame()
 	_frame_timer.start(AudioManager.beat_time_seconds * beats_per_quarter_turn)
 	
 	left_obstacle.pusher.push_action = _left_push_action_cycle[left_obstacle._move_cursor]
-	print(Enums.PlayerAction.find_key(left_obstacle.pusher.push_action))
-	pass
 	
 func _on_right_obstacle_move(_action: Enums.PlayerAction):
-	#print("right obstacle move")
 	right_obstacle.pusher.push_action = _right_push_action_cycle[right_obstacle._move_cursor]
 	
 func _on_halfway_through_move(obstacle: MovableObstacle, new_action: Enums.PlayerAction):

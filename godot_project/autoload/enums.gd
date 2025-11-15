@@ -212,6 +212,12 @@ func is_action_move(action: PlayerAction) -> bool:
 		action == PlayerAction.DOWN_RIGHT or
 		action == PlayerAction.DOWN_LEFT
 	)
+
+#Throw more interact actions in here if they end up getting subdivided
+func is_action_interact(action: PlayerAction) -> bool:
+	return (
+		action == PlayerAction.INTERACT
+	)
 	
 func get_reverse_action(action: PlayerAction) -> PlayerAction:
 	match action:

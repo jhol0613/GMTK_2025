@@ -232,6 +232,7 @@ func _spawn_player() -> void:
 		_player_character.queue_free()
 	_player_character = _spawn_movable(player_scene, _level_scene.player_spawn_position)
 	_player_character.failure.connect(_on_level_fail)
+	_player_character.interacted.connect(_on_interact_action)
 
 func _spawn_conductor() -> void:
 	if _conductor != null:
@@ -248,6 +249,7 @@ func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
 	var spawned_obstacle = _spawn_movable(obstacle, grid_position)
 	_level_scene.movable_obstacles.append(spawned_obstacle)
 	_spawned_obstacles.append(spawned_obstacle)
+	_level_scene.update_obstacle_grid(spawned_obstacle.grid_position, false)
 
 func _initialize_interactables() -> void:
 	for interactable in _level_scene.interactables:
@@ -265,7 +267,6 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_obstacles() # Need to be updated first so player and conductor movement take new grid into account
 	_update_player(action)
 	_update_conductor()
-	_update_interactables(action)
 	_update_agents()
 	_current_beat += 1
 
@@ -336,11 +337,10 @@ func _update_agents() -> void:
 		if agent is not Movable and agent is not Interactable: # movables are sorted out into their own update functions
 			agent.execute_action(Enums.PlayerAction.NONE, _current_beat, false)
 		
-func _update_interactables(action: Enums.PlayerAction) -> void:
-	if action == Enums.PlayerAction.INTERACT:
-		for interactable in _level_scene.interactables:
-			if interactable.is_in_range(_player_character.grid_position):
-				interactable.execute_action(action, _current_beat)
+func _on_interact_action(agent: Agent, action: Enums.PlayerAction) -> void:
+	for interactable in _level_scene.interactables:
+		if interactable.is_in_range(agent.grid_position):
+			interactable.execute_action(action, _current_beat)
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
