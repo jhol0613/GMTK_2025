@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3ups0rsbp08v"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_7jeda"]
+
+[node name="LevelBase" instance=ExtResource("1_7jeda")]
+conductor_enabled = false
+available_actions = Array[int]([5, 6, 4])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=90 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -51,7 +51,7 @@ metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 script = ExtResource("2_gvvi5")
 y_movement_curve = ExtResource("3_xrlin")
 y_movement_magnitude = 40.0
-move_duration = 0.6
+move_duration = 0.5
 timing_offset = 0.2
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -60,6 +60,19 @@ script = ExtResource("2_gvvi5")
 y_movement_curve = ExtResource("3_xrlin")
 y_movement_magnitude = 20.0
 move_duration = 0.3
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
+
+[sub_resource type="Curve" id="Curve_0y67j"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.139037, -1), 0.0, 0.0, 0, 0, Vector2(0.807487, -1), 0.0, 0.0, 0, 0, Vector2(0.903743, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.959893, -0.339326), 0.0, 0.0, 0, 0, Vector2(1, 0.0701353), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Resource" id="Resource_2rm4m"]
+script = ExtResource("2_gvvi5")
+y_movement_curve = SubResource("Curve_0y67j")
+y_movement_magnitude = 10.0
+move_duration = 0.65
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -199,13 +212,13 @@ region = Rect2(0, 0, 27, 63)
 atlas = ExtResource("16_im6gk")
 region = Rect2(0, 63, 27, 63)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qcujq"]
-atlas = ExtResource("6_xgp35")
-region = Rect2(0, 0, 41, 63)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rm4m"]
 atlas = ExtResource("6_xgp35")
 region = Rect2(0, 63, 41, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcujq"]
+atlas = ExtResource("6_xgp35")
+region = Rect2(0, 0, 41, 63)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p7lr1"]
 atlas = ExtResource("6_xgp35")
@@ -367,12 +380,15 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e1bv2")
 }, {
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_wc5pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6kvw")
 }],
 "loop": false,
 "name": &"duck",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -497,9 +513,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qcujq")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_2rm4m")
 }, {
 "duration": 1.0,
@@ -508,11 +521,8 @@ animations = [{
 "duration": 2.0,
 "texture": SubResource("AtlasTexture_p7lr1")
 }, {
-"duration": 2.0,
-"texture": SubResource("AtlasTexture_p7lr1")
-}, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qcujq")
+"texture": SubResource("AtlasTexture_p7lr1")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_2rm4m")
@@ -651,6 +661,7 @@ slide_data = ExtResource("6_gli1f")
 slide_bonk_data = SubResource("Resource_qasg8")
 other_action_data = Dictionary[int, ExtResource("2_gvvi5")]({
 5: SubResource("Resource_0y67j"),
+6: SubResource("Resource_2rm4m"),
 7: SubResource("Resource_qcujq"),
 12: ExtResource("2_gli1f"),
 13: ExtResource("2_gli1f"),
@@ -664,6 +675,7 @@ action_beats = Dictionary[int, float]({
 3: 2.0,
 4: 2.0,
 5: 1.5,
+6: 1.5,
 7: 2.0,
 8: 2.0,
 9: 2.0,
@@ -676,6 +688,7 @@ action_sound_emitters = {
 3: NodePath("Sounds/MoveSideways"),
 4: NodePath("Sounds/MoveSideways"),
 5: NodePath("Sounds/Jump"),
+6: NodePath("Sounds/Jump"),
 8: NodePath("Sounds/Bonk"),
 9: NodePath("Sounds/Bonk"),
 10: NodePath("Sounds/Bonk"),
@@ -716,6 +729,7 @@ follow_on_animations = Dictionary[int, String]({
 3: "idle_left",
 4: "idle_right",
 5: "idle_down",
+6: "idle_down",
 8: "idle_down",
 9: "idle_down",
 10: "idle_down",

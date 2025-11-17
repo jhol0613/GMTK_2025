@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=22 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=23 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dbaky6c84qdhh" path="res://levels/interactable_test_level.tscn" id="17_cto6e"]
 [ext_resource type="PackedScene" uid="uid://nvxx5syory5t" path="res://backgrounds/tunnel.tscn" id="17_peuoq"]
 [ext_resource type="PackedScene" uid="uid://44m1kxxusxto" path="res://backgrounds/world2/world2_placeholder.tscn" id="17_rcuhu"]
+[ext_resource type="PackedScene" uid="uid://b3ups0rsbp08v" path="res://levels/laser_test_level.tscn" id="18_xo8rd"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
@@ -32,7 +33,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 [sub_resource type="Resource" id="Resource_ydpb6"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("17_rcuhu")
-level_list = Array[PackedScene]([ExtResource("17_cto6e"), ExtResource("15_8o3tm"), ExtResource("17_cto6e")])
+level_list = Array[PackedScene]([ExtResource("17_cto6e"), ExtResource("15_8o3tm"), ExtResource("17_cto6e"), ExtResource("18_xo8rd")])
 level_select_scene = 4
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
