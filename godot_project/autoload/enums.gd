@@ -62,7 +62,8 @@ enum CollisionLayer {
 	COLLECTIBLES = 4,
 	PUSHERS = 5,
 	JUMPABLE = 6,
-	ENEMIES = 7
+	ENEMIES = 7,
+	DUCKABLE = 9
 }
 
 enum Scenes {

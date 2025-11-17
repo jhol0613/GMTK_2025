@@ -648,13 +648,14 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(15, 10)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "collision_area", "action_sound_emitters", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "duck_collision_timer", "collision_area", "action_sound_emitters", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_1ty04")
 success_emitter = NodePath("Sounds/Success")
 failure_emitter = NodePath("Sounds/Failure")
 jump_collision_timer = NodePath("JumpCollisionDisable")
+duck_collision_timer = NodePath("DuckCollisionDisable")
 standard_move_data = ExtResource("2_gli1f")
 bonk_data = SubResource("Resource_gli1f")
 slide_data = ExtResource("6_gli1f")
@@ -825,5 +826,8 @@ metadata/_custom_type_script = "uid://deg3tw8squr8x"
 [node name="JumpCollisionDisable" type="Timer" parent="."]
 one_shot = true
 
+[node name="DuckCollisionDisable" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Shadow/Area2D" to="." method="_on_collision"]
 [connection signal="timeout" from="JumpCollisionDisable" to="." method="on_jump_collision_disabled_expire"]
+[connection signal="timeout" from="DuckCollisionDisable" to="." method="on_duck_collision_disabled_expire"]

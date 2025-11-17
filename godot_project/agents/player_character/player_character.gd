@@ -12,8 +12,10 @@ class_name PlayerCharacter
 ## Collision object to disable after the event happens
 #@export var collision: CollisionObject2D
 @export var jump_collision_timer: Timer
+@export var duck_collision_timer: Timer
 
 @onready var _jumping = false
+@onready var _ducking = false
 
 signal failure
 signal interacted
@@ -29,6 +31,9 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 	if action == Enums.PlayerAction.JUMP:
 		jump_collision_timer.start()
 		_jumping = true
+	elif action == Enums.PlayerAction.DUCK:
+		duck_collision_timer.start()
+		_ducking = true
 	elif Enums.is_action_interact(action):
 		interacted.emit(self, action)
 
@@ -49,6 +54,8 @@ func _on_collision(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
 		if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
 			return
+		if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
+			return
 		notify_failure()
 		failure.emit()
 		
@@ -59,3 +66,6 @@ func reset():
 func on_jump_collision_disabled_expire() -> void:
 	_jumping = false
 	#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
+	
+func on_duck_collision_disabled_expire() -> void:
+	_ducking = false
