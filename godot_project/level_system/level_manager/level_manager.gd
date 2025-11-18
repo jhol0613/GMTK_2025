@@ -131,6 +131,7 @@ func _initialize_level():
 	_initialize_moving_obstacles()
 	_initialize_pushers()
 	_initialize_interactables()
+	_initialize_lasers()
 	
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
@@ -266,6 +267,10 @@ func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
 		pusher.connect("overlapped_movable", _on_pusher_triggered)
 
+func _initialize_lasers() -> void:
+	for laser: Laser in _level_scene.lasers:
+		laser.set_max_fire_distance(_level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction))
+
 #endregion
 
 #region Beat Actions
@@ -314,6 +319,7 @@ func _update_conductor() -> void:
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
 	)
+
 
 ##If desired direction clear, return that direction. Otherwise return a bonk in that direction
 func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAction:

@@ -44,6 +44,8 @@ var pushers := []
 var interactables := []
 ## obstacle spawners in the level
 var obstacle_spawners := []
+## lasers in the level
+var lasers := []
 
 signal target_reached
 
@@ -73,42 +75,72 @@ func _ready() -> void:
 			interactables.append(child)
 		if child.is_in_group("obstacle_spawners"):
 			obstacle_spawners.append(child)
+		if child.is_in_group("lasers"):
+			lasers.append(child)
 	#agents = get_tree().get_nodes_in_group("agents")
 	for agent in agents:
 		# The position of the agent in level space
 		var local_offset = to_local(agent.global_position) - agent.position
 		agent.local_origin = map_to_local(Vector2i.ZERO) - local_offset
 		agent.tile_size = get_tile_size()
-	#collectibles = get_tree().get_nodes_in_group("collectibles")
-	#movable_obstacles = get_tree().get_nodes_in_group("movable_obstacles")
-	#pushers = get_tree().get_nodes_in_group("pushers")
+		
+		#Initialize agent's position in the level.
+		agent.grid_position = global_to_map(agent.global_position)
+		agent.grid_origin = global_to_map(agent.global_position)
+		agent.local_origin = map_to_local(Vector2i.ZERO)
+		agent.tile_size = get_tile_size()
+		agent.reset()
+
 	_initialize_path_finding()
 	
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 
+## Returns number of cells in given direction before hitting an obstacle
+func get_cells_to_obstacle(grid_position: Vector2i, direction: Enums.Direction):
+	var cells = 0
+	var check_position = grid_position
+	for i in range(100):
+		cells += 1
+		check_position = check_position + Enums.direction_to_vector(direction)
+		if !is_cell_navigable(check_position):
+			return cells
 
 func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 	var neighbors = _obstacle_layer.get_surrounding_cells(grid_position)
 	var neighbors_to_return : Array[Vector2i]
 
 	for neighbor in neighbors:
-		var cell_exists = (_floor_layer.get_cell_source_id(neighbor) != -1 and
-			_floor_layer.get_cell_atlas_coords(neighbor) != Vector2i(-1,-1))
-
-		var tile_data = _obstacle_layer.get_cell_tile_data(neighbor)
-		var cell_traversible = true # Traversible if the cell is unoccupied
-		if tile_data:
-			cell_traversible = tile_data.get_custom_data("Traversible")
-		cell_traversible = cell_traversible and not _obstacle_overrides.has(neighbor)
-
-		if cell_exists and cell_traversible:
+		if is_cell_navigable(neighbor):
 			neighbors_to_return.append(neighbor)
+		#var cell_exists = (_floor_layer.get_cell_source_id(neighbor) != -1 and
+			#_floor_layer.get_cell_atlas_coords(neighbor) != Vector2i(-1,-1))
+#
+		#var tile_data = _obstacle_layer.get_cell_tile_data(neighbor)
+		#var cell_traversible = true # Traversible if the cell is unoccupied
+		#if tile_data:
+			#cell_traversible = tile_data.get_custom_data("Traversible")
+		#cell_traversible = cell_traversible and not _obstacle_overrides.has(neighbor)
+#
+		#if cell_exists and cell_traversible:
+			#neighbors_to_return.append(neighbor)
 
 	# Your own position is traversible, too! For actions that keep you in the same square
 	neighbors_to_return.append(grid_position)
 
 	return neighbors_to_return
+
+func is_cell_navigable(grid_position: Vector2i) -> bool:
+	var cell_exists = (_floor_layer.get_cell_source_id(grid_position) != -1 and
+			_floor_layer.get_cell_atlas_coords(grid_position) != Vector2i(-1,-1))
+
+	var tile_data = _obstacle_layer.get_cell_tile_data(grid_position)
+	var cell_traversible = true # Traversible if the cell is unoccupied
+	if tile_data:
+		cell_traversible = tile_data.get_custom_data("Traversible")
+	cell_traversible = cell_traversible and not _obstacle_overrides.has(grid_position)
+
+	return cell_exists and cell_traversible
 
 func get_tile_size() -> Vector2i:
 	return _floor_layer.tile_set.tile_size

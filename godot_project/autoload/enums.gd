@@ -148,6 +148,19 @@ func vector_to_player_action(vector: Vector2i) -> PlayerAction:
 			return PlayerAction.DOWN_LEFT
 		_:
 			return PlayerAction.NONE
+
+func direction_to_vector(direction: Direction) -> Vector2i:
+	match direction:
+		Direction.UP:
+			return Vector2i.UP
+		Direction.DOWN:
+			return Vector2i.DOWN
+		Direction.LEFT:
+			return Vector2i.LEFT
+		Direction.RIGHT:
+			return Vector2i.RIGHT
+		_:
+			return Vector2i.ZERO
 			
 func action_to_bonk(action: PlayerAction) -> PlayerAction:
 	match action:
