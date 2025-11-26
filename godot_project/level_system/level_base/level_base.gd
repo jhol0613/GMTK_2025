@@ -78,18 +78,13 @@ func _ready() -> void:
 		if child.is_in_group("lasers"):
 			lasers.append(child)
 	#agents = get_tree().get_nodes_in_group("agents")
-	for agent in agents:
+	for agent: Agent in agents:
 		# The position of the agent in level space
 		var local_offset = to_local(agent.global_position) - agent.position
 		agent.local_origin = map_to_local(Vector2i.ZERO) - local_offset
 		agent.tile_size = get_tile_size()
-		
-		#Initialize agent's position in the level.
 		agent.grid_position = global_to_map(agent.global_position)
 		agent.grid_origin = global_to_map(agent.global_position)
-		agent.local_origin = map_to_local(Vector2i.ZERO)
-		agent.tile_size = get_tile_size()
-		agent.reset()
 
 	_initialize_path_finding()
 	
@@ -101,10 +96,10 @@ func get_cells_to_obstacle(grid_position: Vector2i, direction: Enums.Direction):
 	var cells = 0
 	var check_position = grid_position
 	for i in range(100):
-		cells += 1
 		check_position = check_position + Enums.direction_to_vector(direction)
 		if !is_cell_navigable(check_position):
 			return cells
+		cells += 1
 
 func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 	var neighbors = _obstacle_layer.get_surrounding_cells(grid_position)
