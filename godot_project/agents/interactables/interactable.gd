@@ -4,7 +4,7 @@ class_name Interactable
 
 signal interaction_succeeded
 
-##Grid locations (relative to interactable location) from which you can interact
+## Grid locations (relative to interactable location) from which you can interact
 @export var interactable_positions: Array[Vector2i] = \
 	[
 		Vector2i.ZERO,
@@ -14,6 +14,8 @@ signal interaction_succeeded
 		Vector2i.RIGHT
 	]
 @export var repeatable := false
+## On successful interaction, what animation should player do?
+@export var player_animation_on_success : String
 	
 var _interacted = false
 
@@ -22,8 +24,12 @@ func _ready() -> void:
 	add_to_group("interactables")
 	super._ready()
 
+## True if action will successfully execute if execute_action is called
+func can_interact():
+	return not _interacted or repeatable
+
 func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
-	if not _interacted or repeatable:
+	if can_interact():
 		interaction_succeeded.emit()
 		_interacted = true
 		super.execute_action(action, beat, skip_animation)

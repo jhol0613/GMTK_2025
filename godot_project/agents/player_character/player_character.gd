@@ -18,7 +18,6 @@ class_name PlayerCharacter
 @onready var _ducking = false
 
 signal failure
-signal interacted
 
 func _ready() -> void:
 	super._ready()
@@ -34,8 +33,6 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 	elif action == Enums.PlayerAction.DUCK:
 		duck_collision_timer.start()
 		_ducking = true
-	elif Enums.is_action_interact(action):
-		interacted.emit(self, action)
 
 func notify_success():
 	play_animation_with_follow_on("success")

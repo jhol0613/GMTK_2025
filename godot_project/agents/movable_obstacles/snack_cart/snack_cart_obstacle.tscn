@@ -81,7 +81,7 @@ animations = [{
 size = Vector2(14, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1287"]
-size = Vector2(24, 52)
+size = Vector2(24, 50)
 
 [node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 z_index = 1
@@ -126,5 +126,5 @@ metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
 z_index = 1
-position = Vector2(0, -25)
+position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_s1287")

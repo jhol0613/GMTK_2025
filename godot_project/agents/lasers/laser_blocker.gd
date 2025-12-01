@@ -8,11 +8,21 @@ func _ready() -> void:
 	set_collision_layer_value(Enums.CollisionLayer.LASER_BLOCKER, true)
 
 func get_lowest_point_global_coordinates() -> int:
-	var lowest_point = INF
+	var lowest_point = -INF
 	for child in get_children():
 		if child is CollisionShape2D:
 			# use bounding box to get lowest point in collision shape
 			var new_lowest = child.global_position.y + child.shape.get_rect().end.y
-			if new_lowest < lowest_point:
+			if new_lowest > lowest_point:
 				lowest_point = new_lowest
 	return lowest_point
+
+func get_highest_point_global_coordinates() -> int:
+	var highest_point = INF
+	for child in get_children():
+		if child is CollisionShape2D:
+			# use bounding box to get lowest point in collision shape
+			var new_highest = child.global_position.y
+			if new_highest < highest_point:
+				highest_point = new_highest
+	return highest_point

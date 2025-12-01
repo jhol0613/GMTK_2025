@@ -51,7 +51,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/Collision/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Visuals/BeamLine/Collision/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -63,7 +63,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine:visible")
+tracks/1/path = NodePath("Visuals/BeamLine:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -75,7 +75,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/BeamEnd:visible")
+tracks/2/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -92,7 +92,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/Collision/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Visuals/BeamLine/Collision/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -104,7 +104,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine:visible")
+tracks/1/path = NodePath("Visuals/BeamLine:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -116,7 +116,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/BeamEnd:visible")
+tracks/2/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -131,9 +131,6 @@ _data = {
 &"RESET": SubResource("Animation_2u3lt"),
 &"laser_fire": SubResource("Animation_e1xtw")
 }
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_lyym0"]
-b = Vector2(0, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tquva"]
 atlas = ExtResource("9_tquva")
@@ -174,20 +171,23 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lyym0"]
+b = Vector2(0, 0)
+
 [node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "beam_line", "beam_end", "raycast", "pole1", "pole2", "shadow", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
-collision_area = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/Collision")
-collision_shape = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/Collision/CollisionShape2D")
+collision_area = NodePath("Visuals/BeamLine/Collision")
+collision_shape = NodePath("Visuals/BeamLine/Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
-beam_line = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine")
-beam_end = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/BeamEnd")
-raycast = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/RayCast2D")
+beam_line = NodePath("Visuals/BeamLine")
+beam_end = NodePath("Visuals/BeamLine/BeamEnd")
+raycast = NodePath("Visuals/BeamLine/RayCast2D")
 pole1 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1")
 pole2 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2")
 shadow = NodePath("Visuals/Pole1Shadow")
-direction = 2
+direction = 3
 jumpable_threshhold = 16.0
 beam_width = 1
 direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
@@ -201,7 +201,7 @@ default_action_beat = 2.0
 activation_sequence = Array[bool]([false, true])
 default_sound_emitter = NodePath("SoundEmitter")
 sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
-default_animation = "fire_left"
+default_animation = "fire_right"
 metadata/_edit_vertical_guides_ = [-55.0]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -257,42 +257,41 @@ texture = ExtResource("11_tquva")
 [node name="LaserHead" type="AnimatedSprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2"]
 position = Vector2(0, -21)
 sprite_frames = ExtResource("7_use4v")
-animation = &"fire_up"
-frame = 6
-frame_progress = 1.0
+animation = &"fire_right"
 script = ExtResource("11_gmiso")
 default_animation_offset = -0.5
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="BeamLine" type="Line2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead"]
+[node name="Pole1Shadow" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, 3)
+sprite_frames = SubResource("SpriteFrames_chnl6")
+animation = &"stowed"
+frame_progress = 1.0
+script = ExtResource("11_gmiso")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="BeamLine" type="Line2D" parent="Visuals"]
 visible = false
-position = Vector2(-9, -2)
+position = Vector2(300, 300)
 points = PackedVector2Array(0, 0, 0, 0)
 width = 4.0
 texture = ExtResource("7_dshi8")
 texture_mode = 2
 
-[node name="BeamEnd" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine"]
+[node name="BeamEnd" type="Sprite2D" parent="Visuals/BeamLine"]
 visible = false
-texture = ExtResource("4_2o4ih")
+texture = ExtResource("5_tquva")
 
-[node name="Collision" type="Area2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine"]
+[node name="Collision" type="Area2D" parent="Visuals/BeamLine"]
 collision_layer = 96
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine/Collision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/BeamLine/Collision"]
 shape = SubResource("SegmentShape2D_lyym0")
 disabled = true
 
-[node name="RayCast2D" type="RayCast2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead/BeamLine"]
+[node name="RayCast2D" type="RayCast2D" parent="Visuals/BeamLine"]
 visible = false
 target_position = Vector2(0, 0)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
-
-[node name="Pole1Shadow" type="AnimatedSprite2D" parent="Visuals"]
-position = Vector2(0, 3)
-sprite_frames = SubResource("SpriteFrames_chnl6")
-animation = &"low"
-script = ExtResource("11_gmiso")
-metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

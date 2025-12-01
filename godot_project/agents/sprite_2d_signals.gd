@@ -1,23 +1,23 @@
 extends AnimatedSprite2D
 
 
-##A sprite 2D with the ability to attach signals to animation frames, and hold data for an offset from the beat
+## A sprite 2D with the ability to attach signals to animation frames, and hold data for an offset from the beat
 class_name AnimatedSprite2DSignals
 
-##Data containing a dictionary of signals that should be emitted at certain frames in the animation player
+## Data containing a dictionary of signals that should be emitted at certain frames in the animation player
 @export var signals: Array[Sprite2DSignalData]
 
-##When the animation should be offset from the defining beat (e.g. a jump might happen on beat 2, but the warmup
-##animation might need to start a few seconds prior). If synch_framerates_to_bpm is true, these offsets should be
-##beats. If it's false, these offsets should be seconds. Note that this is just a data field. The owning class must
-##implement the actual offset.
+## When the animation should be offset from the defining beat (e.g. a jump might happen on beat 2, but the warmup
+## animation might need to start a few seconds prior). If synch_framerates_to_bpm is true, these offsets should be
+## beats. If it's false, these offsets should be seconds. Note that this is just a data field. The owning class must
+## implement the actual offset.
 @export var animation_offsets: Dictionary[String, float]
 
 @export var default_animation_offset := 0.0
 
-##If true, frame rate stays synched to bpm
+## If true, frame rate stays synched to bpm
 @export var synch_framerates_to_bpm := true
-##Even if synch framerates to bmp is true, 
+## Even if synch framerates to bmp is true, these animations won't synch to bpm
 @export var bpm_synch_exceptions: Array[String]
 
 ## Beats per second

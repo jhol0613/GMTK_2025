@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3ups0rsbp08v"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_7jeda"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_ajk6o"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_rpli6"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_tbd4h"]
+
+[node name="LevelBase" instance=ExtResource("1_7jeda")]
+conductor_enabled = false
+available_actions = Array[int]([5, 6, 4, 1])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
+
+[node name="SnackCartObstacle" parent="." index="9" instance=ExtResource("3_rpli6")]
+position = Vector2(176, 31)
+
+[node name="SnackCartObstacle2" parent="." index="10" instance=ExtResource("3_rpli6")]
+position = Vector2(80, 32)
+
+[node name="SnackCartObstacle3" parent="." index="11" instance=ExtResource("3_rpli6")]
+position = Vector2(240, 107)
+
+[node name="Laser" parent="." index="12" instance=ExtResource("2_ajk6o")]
+position = Vector2(176, 98)
+direction = 0
+deployed_transition = 13
+default_animation = "fire_up"
+
+[node name="ComputerTerminal" parent="." index="13" instance=ExtResource("4_tbd4h")]
+position = Vector2(80, 61)
+interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0)])
+repeatable = false
+grid_origin = Vector2i(0, 0)
+action_beats = Dictionary[int, float]({})
+default_action_beat = 0.0
+activation_sequence = Array[bool]([])
+follow_on_animations = Dictionary[int, float]({})

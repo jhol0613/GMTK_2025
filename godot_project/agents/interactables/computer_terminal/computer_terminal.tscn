@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://balkn08c5sj37"]
+
+[ext_resource type="Script" uid="uid://dp30hkkvpxa3q" path="res://agents/interactables/computer_terminal/computer_terminal.gd" id="1_vgobs"]
+[ext_resource type="Texture2D" uid="uid://dnkv7pbsb1qwr" path="res://agents/interactables/computer_terminal/terminal_placeholder.png" id="2_anuqy"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_plk7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dd7v"]
+atlas = ExtResource("2_anuqy")
+region = Rect2(64, 0, 32, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkvs6"]
+atlas = ExtResource("2_anuqy")
+region = Rect2(0, 0, 32, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmqd5"]
+atlas = ExtResource("2_anuqy")
+region = Rect2(32, 0, 32, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bv8hh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dd7v")
+}],
+"loop": true,
+"name": &"activate",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_lkvs6")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_lmqd5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="ComputerTerminal" type="Node2D" node_paths=PackedStringArray("sprite")]
+z_index = 1
+script = ExtResource("1_vgobs")
+interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
+player_animation_on_success = "type"
+sprite = NodePath("AnimatedSprite2DSignals")
+action_animations = Dictionary[int, String]({
+7: "activate"
+})
+default_animation = "idle"
+metadata/_custom_type_script = "uid://xq6vhxpiybio"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -25)
+sprite_frames = SubResource("SpriteFrames_bv8hh")
+animation = &"idle"
+script = ExtResource("3_plk7m")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

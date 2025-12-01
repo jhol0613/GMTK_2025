@@ -57,8 +57,7 @@ func _construct():
 	# Laser visuals
 	_sprite.set_animation(direction_data.get(direction).animation_name)
 	default_animation = direction_data.get(direction).animation_name
-	beam_line.position = direction_data.get(direction).start_position_offset
-	beam_line.visible = false
+	#beam_line.position = direction_data.get(direction).start_position_offset
 	beam_end.texture = direction_data.get(direction).end_image
 	_sprite.frame = 0
 	beam_line.visible = Engine.is_editor_hint()
@@ -66,9 +65,11 @@ func _construct():
 	# Laser collision
 	raycast.target_position = max_beam_length_vector
 	
+	beam_line.global_position = Vector2(300, 300)
+	
 	_update_endpoint(max_beam_length_vector)
 
-
+## Endpoint should be given relative to the beam_line position
 func _update_endpoint(endpoint: Vector2):
 	# Visuals
 	beam_line.points[1] = endpoint
@@ -86,7 +87,7 @@ func set_max_fire_distance_by_grid_spaces(grid_spaces: int):
 		return
 	var correction = beam_end_correction_factor * Enums.direction_to_vector(direction)
 	max_beam_length_vector = grid_spaces * tile_size * Enums.direction_to_vector(direction) + \
-		correction  + Vector2i(0.0, height)
+		correction
 	_construct()
 
 func set_max_beam_length(new_length: int):
@@ -107,14 +108,19 @@ func _fire(beat: int):
 	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		var collision_point = raycast.get_collision_point()
-		# If laser shooting vertically, take height into account
-		if direction == Enums.Direction.UP or direction == Enums.Direction.DOWN:
-			var blocker: LaserBlocker = raycast.get_collider()
-			var collision_y = blocker.get_lowest_point_global_coordinates() - height
-			collision_point = Vector2(collision_point.x, collision_y)
+		var blocker: LaserBlocker = raycast.get_collider()
+		var blocker_lowpoint = blocker.get_lowest_point_global_coordinates()
+		var blocker_highpoint = blocker.get_highest_point_global_coordinates()
+		# If laser shooting vertically and laser is shorter than blocker, take height into account
+		if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN) \
+		and (blocker_lowpoint - blocker_highpoint > height):
+			collision_point = Vector2(collision_point.x, blocker_lowpoint - height)
+		#if Direction is LEFT or RIGHT, just use the returned collision point since height doesn't have to be adjusted
 		_update_endpoint(collision_point - beam_line.global_position)
-	else:
-		_update_endpoint(max_beam_length_vector)
+		raycast.enabled = false
+		animation_player.play("laser_fire")
+		return
+	_update_endpoint(max_beam_length_vector)
 	raycast.enabled = false
 	
 	# Fire laser property animation
