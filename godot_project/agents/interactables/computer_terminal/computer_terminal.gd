@@ -2,8 +2,6 @@
 
 extends Interactable
 
-@export var programs : TerminalProgram
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
@@ -22,3 +20,10 @@ func _on_successful_interaction():
 	for child in get_children():
 		if child is TerminalProgram:
 			child.run()
+
+func reset():
+	super.reset()
+	for child in get_children():
+		if child is TerminalProgram:
+			child.reset()
+	

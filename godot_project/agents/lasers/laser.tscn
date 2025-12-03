@@ -51,34 +51,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BeamLine/Collision/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Visuals/BeamLine:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BeamLine:visible")
+tracks/1/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -92,19 +80,19 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BeamLine/Collision/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Visuals/BeamLine:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [true, false, false, true]
+"values": [false, true, true, false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BeamLine:visible")
+tracks/1/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -116,14 +104,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
+tracks/2/path = NodePath("Collision/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true, true, false]
+"values": [true, false, false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aar76"]
@@ -172,14 +160,13 @@ animations = [{
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lyym0"]
-b = Vector2(0, 0)
 
 [node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "beam_line", "beam_end", "raycast", "pole1", "pole2", "shadow", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
-collision_area = NodePath("Visuals/BeamLine/Collision")
-collision_shape = NodePath("Visuals/BeamLine/Collision/CollisionShape2D")
+collision_area = NodePath("Collision")
+collision_shape = NodePath("Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
 beam_line = NodePath("Visuals/BeamLine")
 beam_end = NodePath("Visuals/BeamLine/BeamEnd")
@@ -196,7 +183,6 @@ direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
 2: SubResource("Resource_yjehw"),
 3: SubResource("Resource_use4v")
 })
-deployed_transition = null
 default_action_beat = 2.0
 activation_sequence = Array[bool]([false, true])
 default_sound_emitter = NodePath("SoundEmitter")
@@ -282,16 +268,16 @@ texture_mode = 2
 visible = false
 texture = ExtResource("5_tquva")
 
-[node name="Collision" type="Area2D" parent="Visuals/BeamLine"]
-collision_layer = 96
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/BeamLine/Collision"]
-shape = SubResource("SegmentShape2D_lyym0")
-disabled = true
-
 [node name="RayCast2D" type="RayCast2D" parent="Visuals/BeamLine"]
 visible = false
 target_position = Vector2(0, 0)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Collision" type="Area2D" parent="."]
+collision_layer = 96
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("SegmentShape2D_lyym0")
+disabled = true

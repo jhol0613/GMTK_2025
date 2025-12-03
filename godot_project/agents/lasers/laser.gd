@@ -41,6 +41,8 @@ var max_beam_length_vector: Vector2
 # Corrects beam endpoint based on the offset between beam origin from laser direction data and cell center
 var current_beam_length: Vector2
 
+var new_height_tween: Tween
+
 func _ready() -> void:
 	super._ready()
 	add_to_group("agents")
@@ -57,15 +59,12 @@ func _construct():
 	# Laser visuals
 	_sprite.set_animation(direction_data.get(direction).animation_name)
 	default_animation = direction_data.get(direction).animation_name
-	#beam_line.position = direction_data.get(direction).start_position_offset
 	beam_end.texture = direction_data.get(direction).end_image
 	_sprite.frame = 0
 	beam_line.visible = Engine.is_editor_hint()
 
 	# Laser collision
 	raycast.target_position = max_beam_length_vector
-	
-	beam_line.global_position = Vector2(300, 300)
 	
 	_update_endpoint(max_beam_length_vector)
 
@@ -102,6 +101,9 @@ func set_direction(new_direction: Enums.Direction):
 	_construct()
 
 func _fire(beat: int):
+	if new_height_tween:
+		new_height_tween.pause()
+	
 	beam_line.global_position = _sprite.global_position + direction_data.get(direction).start_position_offset
 	# Check for laser blockers
 	raycast.enabled = true
@@ -116,21 +118,25 @@ func _fire(beat: int):
 		and (blocker_lowpoint - blocker_highpoint > height):
 			collision_point = Vector2(collision_point.x, blocker_lowpoint - height)
 		#if Direction is LEFT or RIGHT, just use the returned collision point since height doesn't have to be adjusted
-		_update_endpoint(collision_point - beam_line.global_position)
-		raycast.enabled = false
-		animation_player.play("laser_fire")
-		return
+			_update_endpoint(collision_point - beam_line.global_position)
+			raycast.enabled = false
+			animation_player.play("laser_fire")
+			return
 	_update_endpoint(max_beam_length_vector)
 	raycast.enabled = false
 	
 	# Fire laser property animation
 	animation_player.play("laser_fire")
+	
+	if new_height_tween:
+		await animation_player.animation_finished
+		if new_height_tween.is_valid():
+			new_height_tween.play()
 
 func _set_height(new_height: int):
-	height = new_height
+	# Gets rid of old height modifier for max_beam_length_vector and adds new height
 	
-	# Sets max beam length vector to take into account new height
-	set_max_beam_length(max_beam_length)
+	height = new_height
 	
 	if !is_inside_tree():
 		return 
@@ -153,3 +159,7 @@ func _set_height(new_height: int):
 		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
 	else:
 		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
+
+func set_height_animated(new_height: int, duration: float):
+	new_height_tween = create_tween()
+	new_height_tween.tween_property(self, "height", new_height, duration)

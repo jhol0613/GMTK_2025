@@ -8,26 +8,25 @@
 
 [node name="LevelBase" instance=ExtResource("1_7jeda")]
 conductor_enabled = false
-available_actions = Array[int]([5, 6, 4, 1, 2, 7])
+available_actions = Array[int]([6, 4, 7])
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
 [node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("3_rpli6")]
-position = Vector2(80, 32)
+position = Vector2(81, 32)
 movement_path = Array[int]([4, 4, 3, 3])
 
 [node name="Laser" parent="." index="10" instance=ExtResource("2_ajk6o")]
-position = Vector2(144, 98)
+position = Vector2(80, 98)
 direction = 0
-deployed_transition = 13
 default_animation = "fire_up"
 
 [node name="ComputerTerminal" parent="." index="11" instance=ExtResource("4_tbd4h")]
 position = Vector2(49, 30)
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]
 script = ExtResource("5_vuivj")
 lasers = [NodePath("../../Laser")]
-new_height = 64
+new_height = 58
 metadata/_custom_type_script = "uid://brjyxyhy640eh"

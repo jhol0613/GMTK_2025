@@ -108,7 +108,6 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 
 # move_target is where the agent is moving, or where it attempted to move (i.e. bonk)
 func _on_movement_start(action: Enums.PlayerAction, move_target: Vector2i, action_data: MovableActionData, should_move_collision: bool):
-	print("movement started")
 	# Grid position not updated until movement actually executed on the target beat
 	grid_position += Enums.player_action_to_vector(action)
 	var move_target_local_space = _grid_to_local(move_target)
