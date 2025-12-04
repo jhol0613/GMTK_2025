@@ -1,9 +1,10 @@
-[gd_resource type="TileSet" load_steps=15 format=3 uid="uid://cyxpoxyaw6ve8"]
+[gd_resource type="TileSet" load_steps=17 format=3 uid="uid://cyxpoxyaw6ve8"]
 
 [ext_resource type="Texture2D" uid="uid://cp82khvck1cs1" path="res://tilemaps/tilesheets/Obstacleseats.png" id="1_m64dk"]
 [ext_resource type="Texture2D" uid="uid://dgjaowdxxet16" path="res://tilemaps/tilesheets/SampleTiles.png" id="2_hr27s"]
 [ext_resource type="Texture2D" uid="uid://co8n38ccjwbev" path="res://tilemaps/tilesheets/obstaclesuitcase.png" id="3_hr27s"]
 [ext_resource type="Texture2D" uid="uid://bcm1qrtvhjkvs" path="res://tilemaps/tilesheets/ObstaclTables.png" id="4_6xxht"]
+[ext_resource type="Texture2D" uid="uid://bmlgwcdh7raya" path="res://tilemaps/tilesheets/GreenBench.png" id="5_1jhey"]
 [ext_resource type="Texture2D" uid="uid://bw2qgwlapurgl" path="res://tilemaps/tilesheets/Table1^3Up.png" id="6_qcwxt"]
 [ext_resource type="Texture2D" uid="uid://d242hjwmsu4gm" path="res://tilemaps/tilesheets/Coffee Spill.png" id="6_xy6vo"]
 [ext_resource type="Texture2D" uid="uid://8x7t3h88deow" path="res://tilemaps/tilesheets/VerticalTable.png" id="7_xy6vo"]
@@ -203,6 +204,22 @@ texture_region_size = Vector2i(32, 32)
 3:0/0/custom_data_1 = 19.0
 3:1/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bp0b6"]
+texture = ExtResource("5_1jhey")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 5)
+0:0/0/y_sort_origin = 8
+0:0/0/custom_data_1 = 19.0
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 5)
+1:0/0/y_sort_origin = 8
+1:0/0/custom_data_1 = 19.0
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 5)
+2:0/0/y_sort_origin = 8
+2:0/0/custom_data_1 = 19.0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xy6vo"]
 texture = ExtResource("6_qcwxt")
 texture_region_size = Vector2i(32, 19)
@@ -249,3 +266,4 @@ sources/3 = SubResource("TileSetAtlasSource_s8jpv")
 sources/5 = SubResource("TileSetAtlasSource_xy6vo")
 sources/6 = SubResource("TileSetAtlasSource_1jhey")
 sources/7 = SubResource("TileSetAtlasSource_k81md")
+sources/4 = SubResource("TileSetAtlasSource_bp0b6")

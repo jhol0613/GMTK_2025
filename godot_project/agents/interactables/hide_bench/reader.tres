@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ddc77qj3h71yt"]
+
+[ext_resource type="Texture2D" uid="uid://dbnrmmou0ysqk" path="res://agents/interactables/hide_bench/Bench sitters.png" id="1_irebk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnq4x"]
+atlas = ExtResource("1_irebk")
+region = Rect2(32, 64, 32, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnq4x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
