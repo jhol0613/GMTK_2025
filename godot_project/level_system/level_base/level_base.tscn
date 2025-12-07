@@ -136,10 +136,10 @@ tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAAAAP3/AwAAAAAAABAAAP7/AwAAAAE
 tile_set = ExtResource("7_uv04d")
 
 [node name="Target" type="Area2D" parent="."]
+position = Vector2(336, 52)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
-position = Vector2(336, 53)
 shape = SubResource("RectangleShape2D_bsh3f")
 
 [node name="AdditionalSprites" type="Node2D" parent="."]

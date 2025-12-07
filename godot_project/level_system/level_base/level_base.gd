@@ -27,6 +27,7 @@ class_name RhythmRailLevel
 @onready var _floor_layer : TileMapLayer = $Floor
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 @onready var _debug_drawing_layer : DebugDrawing = $DebugDrawing
+@onready var _target := $Target
 
 ##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
 @onready var _obstacle_overrides: Array[Vector2i]
@@ -50,6 +51,7 @@ var lasers := []
 signal target_reached
 
 var path_grid: AStarGrid2D
+var target_position: Vector2i
 
 func _enter_tree() -> void:
 	# If scene is started and isn't the child of the level manager, load itself properly via the level manager.
@@ -87,6 +89,8 @@ func _ready() -> void:
 		agent.grid_origin = global_to_map(agent.global_position)
 
 	_initialize_path_finding()
+	
+	target_position = global_to_map(_target.global_position)
 	
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()

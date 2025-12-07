@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=18 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Curve" uid="uid://oxkrtc3bff8o" path="res://agents/player_character/direct_move_curve.tres" id="2_m234f"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="6_46wui"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_46wui"]
+[ext_resource type="Texture2D" uid="uid://b8wd4ix6y8p2w" path="res://agents/conductor/emotes.png" id="10_thsup"]
 
 [sub_resource type="Resource" id="Resource_thsup"]
 script = ExtResource("3_34788")
@@ -31,6 +32,33 @@ metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
 size = Vector2(20, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thsup"]
+atlas = ExtResource("10_thsup")
+region = Rect2(0, 40, 23, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3trg"]
+atlas = ExtResource("10_thsup")
+region = Rect2(23, 20, 23, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46wui"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_thsup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3trg")
+}],
+"loop": false,
+"name": &"aware",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
 z_index = 1
@@ -74,6 +102,15 @@ collision_layer = 68
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_lda0w")
+
+[node name="Emotes" type="AnimatedSprite2D" parent="Shadow/AnimatedSprite2D"]
+position = Vector2(17.425, -24.43)
+sprite_frames = SubResource("SpriteFrames_46wui")
+animation = &"aware"
+frame = 1
+frame_progress = 1.0
+script = ExtResource("6_mq2pu")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Sound" type="Node" parent="."]
 

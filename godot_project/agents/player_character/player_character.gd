@@ -45,7 +45,9 @@ func notify_failure():
 	
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED
-	#collision_area.disable_mode = CollisionObject2D.DISABLE_MODE_REMOVE # I don't think this line is doing anything relevant any more, just nervous to take it out
+	
+func enable_collisions() -> void:
+	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
 func _on_collision(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
@@ -58,7 +60,7 @@ func _on_collision(area: Area2D) -> void:
 		
 func reset():
 	super.reset()
-	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
+	enable_collisions()
 
 func on_jump_collision_disabled_expire() -> void:
 	_jumping = false

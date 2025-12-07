@@ -1,21 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://43urct8w48ps"]
 
-[ext_resource type="Script" uid="uid://xq6vhxpiybio" path="res://agents/interactables/interactable.gd" id="1_84x1r"]
+[ext_resource type="Script" uid="uid://b6i8hkyn2si42" path="res://agents/interactables/hide_bench/hide_bench.gd" id="1_ekhmm"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="2_6nn3b"]
 [ext_resource type="SpriteFrames" uid="uid://ddc77qj3h71yt" path="res://agents/interactables/hide_bench/reader.tres" id="2_ekhmm"]
 
-[node name="HideBench" type="Node2D"]
-script = ExtResource("1_84x1r")
+[node name="HideBench" type="Node2D" node_paths=PackedStringArray("sprite")]
+z_index = 1
+script = ExtResource("1_ekhmm")
+hide_duration = 5
+interactable_positions = Array[Vector2i]([Vector2i(0, 1), Vector2i(0, -1)])
+repeatable = true
+player_animation_on_success = "hide"
+follow_on_animation_on_success = "hiding"
+sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://xq6vhxpiybio"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
-position = Vector2(-32, 0)
+position = Vector2(-28, -11)
 sprite_frames = ExtResource("2_ekhmm")
 script = ExtResource("2_6nn3b")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="AnimatedSprite2DSignals2" type="AnimatedSprite2D" parent="."]
-position = Vector2(33, 0)
+position = Vector2(30, -11)
 sprite_frames = ExtResource("2_ekhmm")
 script = ExtResource("2_6nn3b")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

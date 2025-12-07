@@ -70,6 +70,11 @@ var _queue_world_transition = false
 # Keeps track of obstacles spawned in the level so they can be reset
 var _spawned_obstacles : Array[MovableObstacle]
 
+# Additional state variables
+var _player_hidden = false
+var _player_newly_hidden = false
+var _conductor_aware_of_player = true
+
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
 
@@ -245,6 +250,8 @@ func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
+	if _player_hidden:
+		_conductor_aware_of_player = false
 	
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
@@ -261,6 +268,20 @@ func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
 func _initialize_interactables() -> void:
 	for interactable in _level_scene.interactables:
 		_initialize_movable(interactable, _level_scene.global_to_map(interactable.global_position))
+		if interactable is HideBench:
+			interactable.started_hiding.connect(_hide_player.bind(true))
+			interactable.finished_hiding.connect(_hide_player.bind(false))
+
+# 
+func _hide_player(new_hide_status: bool):
+	_player_hidden = new_hide_status
+	_player_newly_hidden = new_hide_status
+	if new_hide_status:
+		_player_character.disable_collisions()
+	else:
+		_player_character.play_animation_with_follow_on("unhide", "idle_down")
+		_player_character.enable_collisions()
+		_update_conductor_awareness()
 		
 func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
@@ -303,7 +324,9 @@ func _update_obstacles():
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
-	_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
+	if _player_newly_hidden or not _player_hidden:
+		_player_newly_hidden = false
+		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
 	if _conductor == null \
@@ -312,8 +335,11 @@ func _update_conductor() -> void:
 		return
 	if _conductor == null:
 		_spawn_conductor()
+	_update_conductor_awareness()
+	# Target next train car if player's hidden
+	var target = _player_character.grid_position if _conductor_aware_of_player else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
-		.get_id_path(_conductor.grid_position, _player_character.grid_position, true)
+		.get_id_path(_conductor.grid_position, target, true)
 	if conductor_path.size() < 2:
 		return
 	_conductor.execute_action(
@@ -321,13 +347,27 @@ func _update_conductor() -> void:
 		_current_beat
 	)
 	
+##Use conductor facing direction, player hide status and position to determine if conductor should become aware
+func _update_conductor_awareness():
+	if not _player_hidden: # Only update awareness if hidden
+		var new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
+		if _conductor.facing_direction == Enums.Direction.LEFT:
+			new_awareness = !new_awareness
+		if not _conductor_aware_of_player and new_awareness:
+			_conductor.play_aware_animation()
+		_conductor_aware_of_player = new_awareness
+			
+		
+
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:
 		if interactable.is_in_range(_player_character.grid_position) and interactable.can_interact():
 			_player_character.action_animations.set(Enums.PlayerAction.INTERACT, interactable.player_animation_on_success)
+			_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, interactable.follow_on_animation_on_success)
 			interactable.execute_action(Enums.PlayerAction.INTERACT, _current_beat)
-		else:
-			_player_character.action_animations.set(Enums.PlayerAction.INTERACT, "")
+			return
+	_player_character.action_animations.set(Enums.PlayerAction.INTERACT, "")
+	_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, "")
 
 
 ##If desired direction clear, return that direction. Otherwise return a bonk in that direction

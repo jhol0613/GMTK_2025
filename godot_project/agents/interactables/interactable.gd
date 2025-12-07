@@ -16,6 +16,7 @@ signal interaction_succeeded
 @export var repeatable := false
 ## On successful interaction, what animation should player do?
 @export var player_animation_on_success : String
+@export var follow_on_animation_on_success := "idle_down"
 	
 var _interacted = false
 
