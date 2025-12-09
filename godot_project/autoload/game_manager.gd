@@ -75,8 +75,8 @@ func unpause_game():
 	get_tree().paused = false
 	_pause_layer.queue_free()
 	
-func update_furthest_level_reached(world: int, level: int):
-	pass
+#func update_furthest_level_reached(world: int, level: int):
+	#pass
 	
 func save_collectible(id: String):
 	if  !_save_data["collectibles_acquired"].has(id):
@@ -117,7 +117,7 @@ func _build_fadeout_rect(alpha: float) -> ColorRect:
 	fadeout_rect.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
 	return fadeout_rect
 	
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("Pause"):
 		if get_tree().paused:
 			unpause_game()

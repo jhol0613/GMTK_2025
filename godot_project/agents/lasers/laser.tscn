@@ -160,6 +160,7 @@ animations = [{
 }]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lyym0"]
+b = Vector2(0, 0)
 
 [node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "beam_line", "beam_end", "raycast", "pole1", "pole2", "shadow", "default_sound_emitter", "sprite")]
 z_index = 1
@@ -252,7 +253,6 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"stowed"
-frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

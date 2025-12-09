@@ -17,11 +17,10 @@ func _ready() -> void:
 	_position_offset = interactable.position #position relative to obstacle
 	action_executed.connect(_on_action_executed)
 
-func _on_action_executed(action: Enums.PlayerAction):
+func _on_action_executed(_action: Enums.PlayerAction): # is it intentional that this doesn't call super._on_action_executed?
 	interactable.grid_position = grid_position + _grid_position_offset
 
 # Could theoretically be turned off when movable's not moving, but performance savings probably negligible for added complexity
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	interactable.global_position = global_position + _position_offset
 	interactable.grid_position = grid_position + _grid_position_offset
-	pass

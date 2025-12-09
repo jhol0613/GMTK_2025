@@ -61,7 +61,6 @@ func _on_bpm_changed(new_bpm: float):
 		# e.g. If bpm is 170 (5.67 frame rate) and the frame rate defined in the animation player is 12.0, frame
 		# rate for beat_synched animation will be 11.3333
 		var animation_speed_multiplier = roundf(sprite_frames.get_animation_speed(animation_name) / AudioManager.get_fps_from_bpm(old_bps * 60.0))
-		var test = AudioManager.get_fps_from_bpm() * animation_speed_multiplier
 		sprite_frames.set_animation_speed(animation_name, AudioManager.get_fps_from_bpm() * animation_speed_multiplier)
 		
 	old_bps = new_bpm * .01666666666 #1/60

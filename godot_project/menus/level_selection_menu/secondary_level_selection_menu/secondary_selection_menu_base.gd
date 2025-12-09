@@ -10,7 +10,3 @@ func _ready() -> void:
 	for i in range(levels.size()):
 		var level_button = LevelSelectButton.new(world_number, i)
 		_level_list_container.add_child(level_button)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

@@ -37,7 +37,7 @@ func reset():
 	sprite.play("default")
 	#super.reset()
 
-func _on_collision_shape_2d_area_entered(area: Area2D) -> void:
+func _on_collision_shape_2d_area_entered(_area: Area2D) -> void:
 	collision_area.collision_layer = 0;
 	queued_for_collect = true
 	var tween = create_tween()

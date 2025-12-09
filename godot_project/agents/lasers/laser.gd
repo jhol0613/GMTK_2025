@@ -100,7 +100,7 @@ func set_direction(new_direction: Enums.Direction):
 	direction = new_direction
 	_construct()
 
-func _fire(beat: int):
+func _fire(_beat: int):
 	if new_height_tween:
 		new_height_tween.pause()
 	

@@ -28,4 +28,4 @@ func _draw() -> void:
 		var rect = Rect2(centerpoint - .5 * rectangle_size + offset, rectangle_size)
 		draw_rect(rect, rectangle_color, true)
 	for i in range(text_instances.size()):
-		draw_string(font, text_positions[i], text_instances[i], 0, -1, 5)
+		draw_string(font, text_positions[i], text_instances[i], HORIZONTAL_ALIGNMENT_LEFT, -1, 5)

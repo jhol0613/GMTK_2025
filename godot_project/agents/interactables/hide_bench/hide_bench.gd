@@ -28,7 +28,3 @@ func _on_music_bar():
 		finished_hiding.emit()
 		hiding = false
 		AudioManager.music_bar.disconnect(_on_music_bar)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

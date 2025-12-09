@@ -130,7 +130,7 @@ func play():
 	_action_items.visible = false
 
 	# Wait for specified delay (for external animations) to start sequencing actions
-	await get_tree().create_timer(play_action_delay).timeout
+	#await get_tree().create_timer(play_action_delay).timeout
 
 	play_started.emit()
 	
@@ -171,7 +171,7 @@ func advance():
 
 # should be called when a new level wants to update sequencer parameters
 func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction], 
-	new_action_quantities := default_action_quantities, new_tutorial_mode := false):
+	new_action_quantities := default_action_quantities):
 
 	# Update state variables
 	_available_slots = new_available_slots
@@ -328,13 +328,13 @@ func _on_music_slider_changed(value):
 func _on_music_slider_drag_started() -> void:
 	music_slider_click_emitter.play()
 
-func _on_music_slider_drag_ended(value_changed: bool) -> void:
+func _on_music_slider_drag_ended(_value_changed: bool) -> void:
 	music_slider_release_emitter.play()
 	
 func _on_sfx_slider_drag_started() -> void:
 	sfx_slider_click_emitter.play()
 
-func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
+func _on_sfx_slider_drag_ended(_value_changed: bool) -> void:
 	sfx_slider_release_emitter.play()
 
 func _on_sfx_slider_changed(value):
@@ -381,8 +381,8 @@ func _on_eraser_toggled(pressed: bool) -> void:
 			_update_slot_action_previews()
 		else:
 			_exit_erase_mode()
-	else:
-		_eraser_btn.pressed
+	#else:
+		#_eraser_btn.pressed
 
 ## Deselect all action items, set current action to NONE, and set eraser cursor
 func _enter_erase_mode():

@@ -356,8 +356,6 @@ func _update_conductor_awareness():
 		if not _conductor_aware_of_player and new_awareness:
 			_conductor.play_aware_animation()
 		_conductor_aware_of_player = new_awareness
-			
-		
 
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:
@@ -437,7 +435,6 @@ func _on_action_sequencer_replay_pressed() -> void:
 		tween.tween_property(_train_center, "position", target_pos, train_move_right_on_play_time) \
 			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_callback(_on_reset_animation_finished)
-	#_on_reset_animation_finished()
 	_reset_level()
 	_player_character.disable_collisions()
 

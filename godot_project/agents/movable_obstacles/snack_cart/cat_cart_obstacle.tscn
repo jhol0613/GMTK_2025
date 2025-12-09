@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://btqpm3f7775os"]
+[gd_scene load_steps=18 format=3 uid="uid://btqpm3f7775os"]
 
 [ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_fbmii"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_ix653"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="6_fo802"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="7_qdawk"]
+[ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_dy6ey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qdawk"]
 atlas = ExtResource("4_j04bu")
@@ -71,6 +72,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hhy"]
 size = Vector2(20, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ix653"]
+size = Vector2(30, 46)
+
 [node name="CatCartObstacle" type="Node2D" node_paths=PackedStringArray("interactable", "pusher", "sprite")]
 script = ExtResource("1_j04bu")
 interactable = NodePath("CatCoffeeSpill")
@@ -101,3 +105,11 @@ shape = SubResource("RectangleShape2D_h3hhy")
 
 [node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
 position = Vector2(-2, -20)
+
+[node name="LaserBlocker" type="Area2D" parent="."]
+position = Vector2(0, -23)
+script = ExtResource("9_dy6ey")
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
+shape = SubResource("RectangleShape2D_ix653")

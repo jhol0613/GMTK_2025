@@ -50,7 +50,6 @@ var _frozen_collision_position_during_move: Vector2i
 
 # If reset in middle of a move
 var _moving_tween: Tween
-var _pretween_position: Tween
 
 func _ready():
 	super._ready()
@@ -138,7 +137,7 @@ func reset():
 	super.reset()
 
 func interrupt_queued_action(should_cancel_sound := true):
-	super.interrupt_queued_action()
+	super.interrupt_queued_action(should_cancel_sound)
 	if _movement_timer.is_connected("timeout", _on_movement_start):
 		_movement_timer.disconnect("timeout", _on_movement_start)
 
