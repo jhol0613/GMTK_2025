@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cynt7wbxbhgdg"]
+[gd_scene load_steps=8 format=3 uid="uid://cynt7wbxbhgdg"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_g1vmw"]
 [ext_resource type="Texture2D" uid="uid://3t188arwni8n" path="res://agents/interactables/cat_coffee_spill/coffee_spill.png" id="2_o1c63"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_ly127"]
+[ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_o6cmp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ot43s"]
 atlas = ExtResource("2_o1c63")
@@ -19,8 +20,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CoffeeObstacle" type="Node2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42xvd"]
+size = Vector2(20, 36.5)
+
+[node name="CoffeeObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_g1vmw")
+pusher = NodePath("Pusher")
 sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 
@@ -29,3 +34,13 @@ position = Vector2(0, 2)
 sprite_frames = SubResource("SpriteFrames_0bwnl")
 script = ExtResource("3_ly127")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Pusher" type="Area2D" parent="."]
+script = ExtResource("4_o6cmp")
+push_action = 14
+push_mode = 1
+metadata/_custom_type_script = "uid://du4ysr150id7h"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_42xvd")

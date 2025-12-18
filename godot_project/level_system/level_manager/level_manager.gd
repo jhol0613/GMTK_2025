@@ -260,7 +260,9 @@ func _initialize_moving_obstacles() -> void:
 		spawner.obstacle_spawned.connect(_on_obstacle_spawned)
 		
 func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
-	var spawned_obstacle = _spawn_movable(obstacle, grid_position)
+	var spawned_obstacle : MovableObstacle = _spawn_movable(obstacle, grid_position)
+	if spawned_obstacle.pusher:
+		spawned_obstacle.pusher.connect("overlapped_movable", _on_pusher_triggered)
 	_level_scene.movable_obstacles.append(spawned_obstacle)
 	_spawned_obstacles.append(spawned_obstacle)
 	_level_scene.update_obstacle_grid(spawned_obstacle.grid_position, false)
@@ -400,6 +402,8 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 		# skip animation if bonk was caused by a slide
 		movable.execute_action(action, _current_beat, was_a_slide)
 		_level_scene.update_obstacle_grid(movable.grid_position, false)
+	else: # conductor
+		movable.execute_action(action, _current_beat)
 
 #endregion
 
