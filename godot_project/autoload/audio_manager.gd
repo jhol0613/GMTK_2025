@@ -39,12 +39,12 @@ func set_music_mode(mode: Enums.MusicMode):
 ##Note that level transitions rely on game over music actually playing, or the transition will hang. Ensure GameOver
 ##is a valid parameter and properly transitions to the music event ending
 func play_world_complete_music():
-	if music_event.event_name != "":
-		music_event.set_parameter("GameOver", 1.0)
+	FmodServer.set_global_parameter_by_name("GameOver", 1.0)
+	#if music_event.event_name != "":
+		#music_event.set_parameter("GameOver", 1.0)
 	
 func play_music_event(event_name: String, new_bpm: float):
-	if music_event.get_parameter("GameOver") != null:
-		music_event.set_parameter("GameOver", 0.0)
+	FmodServer.set_global_parameter_by_name("GameOver", 0.0)
 	music_event.stop()
 	music_event.event_name = "event:/" + event_name
 	bpm = new_bpm

@@ -1,0 +1,519 @@
+[gd_scene load_steps=24 format=3 uid="uid://brvdaasnky18k"]
+
+[ext_resource type="Texture2D" uid="uid://csd70wwn77q11" path="res://backgrounds/world1/Tracks.png" id="3_88dbm"]
+[ext_resource type="Texture2D" uid="uid://dip8yg5mg0v8t" path="res://backgrounds/world1/Snowfloor.png" id="4_x3cic"]
+[ext_resource type="Texture2D" uid="uid://bsqe55ncksgbo" path="res://backgrounds/world1/Treesclose.png" id="5_6mckb"]
+[ext_resource type="Texture2D" uid="uid://cmo4fe0twg8et" path="res://backgrounds/world2/animals.png" id="6_60kwc"]
+[ext_resource type="Texture2D" uid="uid://btcstjn6poc2a" path="res://backgrounds/world2/mid_clouds.png" id="7_y6i8f"]
+[ext_resource type="Texture2D" uid="uid://c3fgdhmmqlxs6" path="res://backgrounds/world2/far_clouds.png" id="8_eti37"]
+[ext_resource type="Texture2D" uid="uid://3e4rpfdydqt" path="res://backgrounds/world2/moon.png" id="9_1dge3"]
+[ext_resource type="Script" uid="uid://cfynp6ase3h7d" path="res://backgrounds/world2/stars.gd" id="10_7a7ca"]
+[ext_resource type="Texture2D" uid="uid://drlbh836sbw30" path="res://backgrounds/world2/small_stars.png" id="10_lsrbh"]
+[ext_resource type="Texture2D" uid="uid://dr7nx6nslraqq" path="res://backgrounds/world2/background.png" id="11_60kwc"]
+[ext_resource type="Texture2D" uid="uid://b5xdxleqmk0yu" path="res://backgrounds/world2/star1.png" id="12_7a7ca"]
+[ext_resource type="Texture2D" uid="uid://cy7kg4fnm8rbe" path="res://backgrounds/world2/star2.png" id="13_pfdlx"]
+[ext_resource type="Texture2D" uid="uid://cfs1vreiui1ei" path="res://backgrounds/world2/star3.png" id="14_erlue"]
+[ext_resource type="Shader" uid="uid://3oxy4uti43th" path="res://backgrounds/world2/water_reflection.gdshader" id="14_lsrbh"]
+[ext_resource type="Script" uid="uid://drrj1h21yg1cy" path="res://backgrounds/world2/water_rect.gd" id="15_60kwc"]
+[ext_resource type="Texture2D" uid="uid://giu77u76ylo" path="res://backgrounds/world2/star4.png" id="15_wfvco"]
+
+[sub_resource type="Animation" id="Animation_7a7ca"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Star2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(310, 133)]
+}
+
+[sub_resource type="Animation" id="Animation_60kwc"]
+resource_name = "stardrift"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Star1:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(58, 87), Vector2(58, 85), Vector2(58, 87)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Star2:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.733333, 2.23333, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(326, 134), Vector2(326, 133), Vector2(326, 135), Vector2(326, 134)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Star3:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(450, 66), Vector2(450, 68), Vector2(450, 66)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Star4:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.73333, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(528, 48), Vector2(528, 50), Vector2(528, 48), Vector2(528, 47), Vector2(528, 48)]
+}
+
+[sub_resource type="Animation" id="Animation_pfdlx"]
+resource_name = "startransform"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Star1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(42, 67), Vector2(82, 54)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("Star2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(361, 111.533), Vector2(193, 57)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Star3:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(450, 76), Vector2(316, 58)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath("Star4:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(528, 54), Vector2(429, 57)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("Star1/Star5:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(54, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/path = NodePath("Star2/Star6:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(54, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = false
+tracks/6/path = NodePath("Star3/Star7:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(54, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = false
+tracks/7/path = NodePath("Star4/Star8:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(54, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:z_index")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [-2, 20]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Animals/Animals:self_modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.235294), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../CloudsFar/CloudsFar:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(301, 226), Vector2(301, 270)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../CloudsClose/CloudsClose:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 198), Vector2(300, 242)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../Moon/Moon:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(297, 217), Vector2(297, 261)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Star1:self_modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 1, 1)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Star1/Star5:self_modulate")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0.392157, 0, 1)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Star2:self_modulate")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Star2/Star6:self_modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.843137, 0, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Star3:self_modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 0, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Star3/Star7:self_modulate")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 1, 1, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Star4:self_modulate")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 1, 1)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Star4/Star8:self_modulate")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.713726, 0.756863, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pfdlx"]
+_data = {
+&"RESET": SubResource("Animation_7a7ca"),
+&"stardrift": SubResource("Animation_60kwc"),
+&"startransform": SubResource("Animation_pfdlx")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_60kwc"]
+frequency = 0.0496
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pfdlx"]
+seamless = true
+noise = SubResource("FastNoiseLite_60kwc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_erlue"]
+shader = ExtResource("14_lsrbh")
+shader_parameter/tint_color = Color(0.0980392, 0.2, 0.423529, 1)
+shader_parameter/fast_noise = SubResource("NoiseTexture2D_pfdlx")
+shader_parameter/wave_speed = Vector2(0.005, 0.01)
+shader_parameter/wave_strength = Vector2(2, 0.5)
+shader_parameter/scale_y = 208.0
+shader_parameter/y_zoom = 1.0
+
+[node name="World1Background" type="Node2D"]
+z_index = -100
+
+[node name="Tracks" type="Parallax2D" parent="."]
+visible = false
+z_index = -3
+repeat_size = Vector2(572.17, 0)
+autoscroll = Vector2(-250, 0)
+
+[node name="Tracks" type="Sprite2D" parent="Tracks"]
+visible = false
+light_mask = 2
+z_index = -2
+position = Vector2(300, 202)
+texture = ExtResource("3_88dbm")
+
+[node name="Ground" type="Sprite2D" parent="Tracks"]
+visible = false
+light_mask = 2
+z_index = -3
+position = Vector2(298, 230)
+texture = ExtResource("4_x3cic")
+
+[node name="TreesClose" type="Parallax2D" parent="."]
+visible = false
+z_index = -3
+repeat_size = Vector2(605.99, 0)
+autoscroll = Vector2(-80, 0)
+
+[node name="TreesClose" type="Sprite2D" parent="TreesClose"]
+visible = false
+light_mask = 2
+z_index = -4
+position = Vector2(299, 209)
+texture = ExtResource("5_6mckb")
+
+[node name="Animals" type="Parallax2D" parent="."]
+z_index = -3
+scroll_offset = Vector2(0, 18)
+repeat_size = Vector2(606.32, 0)
+
+[node name="Animals" type="Sprite2D" parent="Animals"]
+self_modulate = Color(1, 1, 1, 0.235294)
+light_mask = 2
+z_index = -6
+position = Vector2(277, 175)
+texture = ExtResource("6_60kwc")
+
+[node name="CloudsClose" type="Parallax2D" parent="."]
+z_index = -3
+scroll_offset = Vector2(0, 25)
+repeat_size = Vector2(607.595, 0)
+autoscroll = Vector2(-3, 0)
+
+[node name="CloudsClose" type="Sprite2D" parent="CloudsClose"]
+light_mask = 2
+position = Vector2(300, 198)
+texture = ExtResource("7_y6i8f")
+
+[node name="CloudsFar" type="Parallax2D" parent="."]
+z_index = -3
+scroll_offset = Vector2(-2, -6)
+repeat_size = Vector2(607.53, 0)
+autoscroll = Vector2(-3, 0)
+
+[node name="CloudsFar" type="Sprite2D" parent="CloudsFar"]
+light_mask = 2
+z_index = -4
+position = Vector2(301, 226)
+texture = ExtResource("8_eti37")
+
+[node name="Moon" type="Parallax2D" parent="."]
+z_index = -3
+scroll_offset = Vector2(0, 9)
+repeat_size = Vector2(607.98, 0)
+
+[node name="Moon" type="Sprite2D" parent="Moon"]
+light_mask = 2
+z_index = -9
+position = Vector2(297, 217)
+texture = ExtResource("9_1dge3")
+
+[node name="Sky" type="Parallax2D" parent="."]
+z_index = -3
+
+[node name="Stars" type="Sprite2D" parent="Sky"]
+light_mask = 2
+z_index = -12
+position = Vector2(301, 221)
+texture = ExtResource("10_lsrbh")
+
+[node name="Backdrop" type="Sprite2D" parent="Sky"]
+light_mask = 2
+z_index = -13
+position = Vector2(300, 224)
+texture = ExtResource("11_60kwc")
+
+[node name="Stars" type="Node2D" parent="." node_paths=PackedStringArray("target_positions", "animation_player")]
+z_index = -2
+script = ExtResource("10_7a7ca")
+target_positions = {
+NodePath("Star1"): Vector2(82, 54),
+NodePath("Star2"): Vector2(193, 57),
+NodePath("Star3"): Vector2(316, 58),
+NodePath("Star4"): Vector2(429, 57),
+NodePath("Star1/Star5"): Vector2(54, 1),
+NodePath("Star2/Star6"): Vector2(54, 1),
+NodePath("Star3/Star7"): Vector2(54, 1),
+NodePath("Star4/Star8"): Vector2(54, 1)
+}
+animation_player = NodePath("AnimationPlayer")
+
+[node name="Star1" type="Sprite2D" parent="Stars"]
+position = Vector2(58, 87)
+texture = ExtResource("12_7a7ca")
+
+[node name="Star5" type="Sprite2D" parent="Stars/Star1"]
+texture = ExtResource("12_7a7ca")
+
+[node name="Star2" type="Sprite2D" parent="Stars"]
+position = Vector2(310, 133)
+texture = ExtResource("13_pfdlx")
+
+[node name="Star6" type="Sprite2D" parent="Stars/Star2"]
+texture = ExtResource("13_pfdlx")
+
+[node name="Star3" type="Sprite2D" parent="Stars"]
+position = Vector2(450, 66)
+texture = ExtResource("14_erlue")
+
+[node name="Star7" type="Sprite2D" parent="Stars/Star3"]
+texture = ExtResource("14_erlue")
+
+[node name="Star4" type="Sprite2D" parent="Stars"]
+position = Vector2(528, 48)
+texture = ExtResource("15_wfvco")
+
+[node name="Star8" type="Sprite2D" parent="Stars/Star4"]
+texture = ExtResource("15_wfvco")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Stars"]
+libraries = {
+&"": SubResource("AnimationLibrary_pfdlx")
+}
+autoplay = "stardrift"
+
+[node name="WaterRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_erlue")
+offset_left = -2.0
+offset_top = 205.0
+offset_right = 599.0
+offset_bottom = 450.0
+script = ExtResource("15_60kwc")

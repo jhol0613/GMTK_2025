@@ -35,14 +35,14 @@ metadata/_custom_type_script = "uid://duifkavk2c1j8"
 [sub_resource type="Resource" id="Resource_yjehw"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_left"
-start_position_offset = Vector2(-9, -2)
+start_position_offset = Vector2(-9, -5)
 end_image = ExtResource("4_2o4ih")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_use4v"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_right"
-start_position_offset = Vector2(9, -2)
+start_position_offset = Vector2(9, -5)
 end_image = ExtResource("5_tquva")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -120,23 +120,23 @@ _data = {
 &"laser_fire": SubResource("Animation_e1xtw")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tquva"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyym0"]
 atlas = ExtResource("9_tquva")
-region = Rect2(0, 0, 16, 6)
+region = Rect2(0, 0, 20, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtygs"]
 atlas = ExtResource("16_lyym0")
-region = Rect2(0, 0, 16, 6)
+region = Rect2(0, 0, 20, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mgkp8"]
 atlas = ExtResource("16_chnl6")
-region = Rect2(0, 0, 16, 6)
+region = Rect2(0, 0, 20, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_chnl6"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tquva")
+"texture": SubResource("AtlasTexture_lyym0")
 }],
 "loop": false,
 "name": &"deployed",
@@ -242,9 +242,9 @@ position = Vector2(10, 66)
 texture = ExtResource("11_tquva")
 
 [node name="LaserHead" type="AnimatedSprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2"]
-position = Vector2(0, -21)
+position = Vector2(0, -19)
 sprite_frames = ExtResource("7_use4v")
-animation = &"fire_right"
+animation = &"fire_up"
 script = ExtResource("11_gmiso")
 default_animation_offset = -0.5
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

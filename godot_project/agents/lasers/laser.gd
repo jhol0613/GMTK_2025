@@ -15,6 +15,11 @@ class_name Laser
 @export var pole2 : Sprite2D
 @export var shadow : AnimatedSprite2DSignals
 
+##Height corresponding to a laser shooting out of the ground
+const popup_height := 7
+const pole1_height := 33
+const pole2_height := 24
+
 @export_subgroup("Instance Setup")
 @export var direction := Enums.Direction.DOWN: set = set_direction
 ##Length of the laser beam (if it were at 0 height). If set to 0, laser will determine length using
@@ -30,10 +35,7 @@ class_name Laser
 @export var beam_width := 4
 @export var direction_data: Dictionary[Enums.Direction, LaserDirectionData]
 @export var beam_end_correction_factor := Vector2i(3, 0)
-##Height corresponding to a laser shooting out of the ground
-const popup_height := 7
-const pole1_height := 33
-const pole2_height := 24
+
 ##Point at which shadow changes to low deployed sprite
 @export var deployed_transition := 13
 
@@ -50,6 +52,7 @@ func _ready() -> void:
 	_construct()
 	_set_height(height)
 	action_executed.connect(_fire)
+	_sprite.animation_finished.connect(_reset_shadow)
 
 # Called when certain exports are changed so they can be visualized in the editor
 func _construct():
@@ -103,6 +106,9 @@ func set_direction(new_direction: Enums.Direction):
 func _fire(_beat: int):
 	if new_height_tween:
 		new_height_tween.pause()
+		
+	if height == popup_height:
+		shadow.play("low")
 	
 	beam_line.global_position = _sprite.global_position + direction_data.get(direction).start_position_offset
 	# Check for laser blockers
@@ -132,6 +138,12 @@ func _fire(_beat: int):
 		await animation_player.animation_finished
 		if new_height_tween.is_valid():
 			new_height_tween.play()
+
+##If laser is baseline height, set shadow back to stowed after laser retracts (kind of a lazy solution here)
+func _reset_shadow():
+	if height == popup_height:
+		shadow.play("stowed")
+	
 
 func _set_height(new_height: int):
 	# Gets rid of old height modifier for max_beam_length_vector and adds new height
