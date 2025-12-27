@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=4 uid="uid://wc1pswyquc1g"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_xgeqg"]
+[ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_apg4g"]
+
+[node name="LevelBase" instance=ExtResource("1_xgeqg")]
+conductor_spawn_beat = 3
+available_slots = 4
+available_actions = Array[int]([1, 2, 4, 7])
+
+[node name="Decorative" parent="." index="0"]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAAFAAAABwAAAAEAAAAGAAAABwACAAEAAAAIAAAABwABAAEAAAAJAAAABwABAAMAAAAFAAEABwAAAAIAAAAGAAEABwACAAIAAAAIAAEABwABAAIAAAAJAAEABwABAAQAAAA=")
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAABAAEABAAAAAAAAAADAAEABAABAAAAAAACAAEABAACAAAAAAAFAAEABAAAAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAABAAAAAAA=")
+
+[node name="HideBench" parent="." index="9" instance=ExtResource("2_apg4g")]
+position = Vector2(80, 26)
+
+[editable path="HideBench"]

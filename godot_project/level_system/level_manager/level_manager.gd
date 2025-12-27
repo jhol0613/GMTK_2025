@@ -281,7 +281,7 @@ func _hide_player(new_hide_status: bool):
 	if new_hide_status:
 		_player_character.disable_collisions()
 	else:
-		_player_character.play_animation_with_follow_on("unhide", "idle_down")
+		#_player_character.play_animation_with_follow_on("unhide", "idle_down")
 		_player_character.enable_collisions()
 		_update_conductor_awareness()
 		
@@ -351,7 +351,7 @@ func _update_conductor() -> void:
 	
 ##Use conductor facing direction, player hide status and position to determine if conductor should become aware
 func _update_conductor_awareness():
-	if not _player_hidden: # Only update awareness if hidden
+	if not _player_hidden and _conductor: # Only update awareness if hidden (and conductor exists)
 		var new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
 		if _conductor.facing_direction == Enums.Direction.LEFT:
 			new_awareness = !new_awareness
