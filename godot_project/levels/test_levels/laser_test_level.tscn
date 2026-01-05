@@ -39,3 +39,5 @@ movement_path = Array[int]([3, 3, 4, 4])
 
 [node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
 position = Vector2(112, 80)
+direction = 1
+default_animation = "fire_down"

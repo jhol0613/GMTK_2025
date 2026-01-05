@@ -253,6 +253,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"stowed"
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
