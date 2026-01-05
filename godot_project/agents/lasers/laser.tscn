@@ -244,7 +244,9 @@ texture = ExtResource("11_tquva")
 [node name="LaserHead" type="AnimatedSprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2"]
 position = Vector2(0, -19)
 sprite_frames = ExtResource("7_use4v")
-animation = &"fire_up"
+animation = &"fire_right"
+frame = 3
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 default_animation_offset = -0.5
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
