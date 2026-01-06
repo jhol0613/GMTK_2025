@@ -2,6 +2,8 @@
 
 extends MovableObstacle
 
+class_name SpinningChair
+
 ##Enum int values also correspond to the corresponding move cursor position for the linked moving obstacles
 ##Corresponding frame number should be double the enum int values
 enum FacingDirection {
@@ -17,6 +19,8 @@ enum FacingDirection {
 ##Number of beats it takes for chair to rotate 90 degrees
 @export var beats_per_quarter_turn := 1.0
 @export var start_direction := FacingDirection.FRONT_CLOCKWISE: set = _set_start_direction
+##If true, chair will only turn if commanded to do so externally (i.e. not "on the beat"
+@export var terminal_controlled := true
 
 @export_group("Spinning Chair Data")
 ##At runtime, actual grid size will be used to calculate pusher positions. This is for visualizing in level editor
@@ -76,8 +80,9 @@ func _ready() -> void:
 	left_obstacle.standard_move_data.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
 	right_obstacle.standard_move_data.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
 	
-	left_obstacle.action_executed.connect(_on_left_obstacle_move)
-	right_obstacle.action_executed.connect(_on_right_obstacle_move)
+	if not terminal_controlled:
+		left_obstacle.action_executed.connect(_on_left_obstacle_move)
+		right_obstacle.action_executed.connect(_on_right_obstacle_move)
 	
 	_frame_timer = Timer.new()
 	_frame_timer.one_shot = true
@@ -108,6 +113,9 @@ func _set_start_direction(new_direction: FacingDirection):
 	start_direction = new_direction
 	_construct()
 	
+func spin():
+	_on_left_obstacle_move(Enums.PlayerAction.NONE)
+	_on_right_obstacle_move(Enums.PlayerAction.NONE)
 	
 func reset():
 	super.reset()

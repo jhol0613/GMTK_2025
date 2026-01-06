@@ -21,6 +21,7 @@ movement_path = Array[int]([4, 4, 3, 3])
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
 position = Vector2(176, 29)
+input_delay_beats = null
 follow_on_animation_on_success = "idle"
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]

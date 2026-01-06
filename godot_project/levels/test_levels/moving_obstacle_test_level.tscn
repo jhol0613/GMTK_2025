@@ -24,6 +24,7 @@ position = Vector2(112, 47.37)
 
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("2_7jd0e")]
 position = Vector2(273, 105)
+input_delay_beats = null
 
 [node name="TerminalProgram" type="Node" parent="ComputerTerminal" index="2" node_paths=PackedStringArray("lasers")]
 script = ExtResource("3_cv2wv")
@@ -45,6 +46,7 @@ direction = 1
 [node name="SpinningChair" parent="." index="13" instance=ExtResource("7_y0wce")]
 position = Vector2(272, 49)
 start_direction = 1
+terminal_controlled = null
 
 [node name="CatCoffeeSpill" parent="." index="14" instance=ExtResource("8_ekeum")]
 position = Vector2(49, 28)

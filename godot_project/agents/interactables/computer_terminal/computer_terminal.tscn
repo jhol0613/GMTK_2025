@@ -20,10 +20,10 @@ region = Rect2(32, 0, 32, 50)
 [sub_resource type="SpriteFrames" id="SpriteFrames_bv8hh"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_anuqy")
 }],
-"loop": true,
+"loop": false,
 "name": &"activate",
 "speed": 5.0
 }, {
@@ -45,6 +45,7 @@ size = Vector2(15, 38)
 [node name="ComputerTerminal" type="Node2D" node_paths=PackedStringArray("sprite")]
 z_index = 1
 script = ExtResource("1_vgobs")
+input_delay_beats = null
 interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
 player_animation_on_success = "type"
 sprite = NodePath("AnimatedSprite2DSignals")
@@ -57,7 +58,7 @@ metadata/_custom_type_script = "uid://xq6vhxpiybio"
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_bv8hh")
-animation = &"idle"
+animation = &"activate"
 script = ExtResource("3_plk7m")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
