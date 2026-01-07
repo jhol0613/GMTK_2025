@@ -256,6 +256,7 @@ func _spawn_conductor() -> void:
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
+		obstacle.request_offbeat_action.connect(_on_obstacle_request_offbeat_action)
 	for spawner in _level_scene.obstacle_spawners:
 		spawner.obstacle_spawned.connect(_on_obstacle_spawned)
 		
@@ -321,9 +322,19 @@ func _update_obstacles():
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]), _current_beat)
-		obstacle.advance_move_cursor()
+		#only update the move cursor if the action was executed (per the activation sequence)
+		if obstacle.check_activation_for_beat(_current_beat):
+			obstacle.advance_move_cursor()
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+
+##Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
+func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction):
+	_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+	obstacle.execute_action(_bonk_check(obstacle, desired_action), -1)
+	obstacle.advance_move_cursor()
+	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+	
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	if _player_newly_hidden or not _player_hidden:

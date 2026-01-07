@@ -9,6 +9,9 @@ class_name MovableObstacle
 @onready var _move_cursor_start_position := 0
 @onready var _move_cursor := _move_cursor_start_position
 
+# Not used by base class, but can be used by children
+signal request_offbeat_action(obstacle: MovableObstacle, action: Enums.PlayerAction)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("movable_obstacles")

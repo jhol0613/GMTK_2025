@@ -31,18 +31,37 @@ enum FacingDirection {
 @export var middle_obstacle: MovableObstacle
 @export var right_obstacle: MovableObstacle
 
+
+#@onready var _left_move_cycle = [
+	#Enums.PlayerAction.UP_RIGHT,
+	#Enums.PlayerAction.DOWN_LEFT,
+	#Enums.PlayerAction.DOWN_RIGHT,
+	#Enums.PlayerAction.UP_LEFT
+#]
+
 @onready var _left_push_action_cycle = [
 	Enums.PlayerAction.RIGHT_FALL,
 	Enums.PlayerAction.DOWN_FALL,
 	Enums.PlayerAction.RIGHT_FALL,
 	Enums.PlayerAction.UP_FALL
 ]
+
+#@onready var _right_move_cycle = [
+	#Enums.PlayerAction.DOWN_LEFT,
+	#Enums.PlayerAction.UP_RIGHT,
+	#Enums.PlayerAction.UP_LEFT,
+	#Enums.PlayerAction.DOWN_RIGHT
+#]
+
 @onready var _right_push_action_cycle = [
 	Enums.PlayerAction.LEFT_FALL,
 	Enums.PlayerAction.UP_FALL,
 	Enums.PlayerAction.LEFT_FALL,
 	Enums.PlayerAction.DOWN_FALL
 ]
+
+##This is so the move cursor doesn
+@onready var _spin_chair_move_cursor
 
 var _frame_timer: Timer
 var _facing_direction: FacingDirection
@@ -114,6 +133,8 @@ func _set_start_direction(new_direction: FacingDirection):
 	_construct()
 	
 func spin():
+	left_obstacle.request_offbeat_action.emit(left_obstacle, left_obstacle.get_next_move())
+	right_obstacle.request_offbeat_action.emit(right_obstacle, right_obstacle.get_next_move())
 	_on_left_obstacle_move(Enums.PlayerAction.NONE)
 	_on_right_obstacle_move(Enums.PlayerAction.NONE)
 	

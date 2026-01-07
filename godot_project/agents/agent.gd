@@ -7,30 +7,30 @@ class_name Agent
 @export var grid_origin := Vector2i.ZERO
 
 @export_subgroup("Action Beats")
-## On which beat should an action "execute". This is the anchor point for the whole action and is tied
-## to bpm. Offsets to sounds and animations can be applied individually, and those offsets are based off of
-## the beats defined here. Keep in mind beats here are 0 indexed, so the downbeat is beat 0.0
+##On which beat should an action "execute". This is the anchor point for the whole action and is tied
+##to bpm. Offsets to sounds and animations can be applied individually, and those offsets are based off of
+##the beats defined here. Keep in mind beats here are 0 indexed, so the downbeat is beat 0.0
 @export var action_beats: Dictionary[Enums.PlayerAction, float]
-## The action beat to use when nothing is defined for a particular action (downbeat = 0.0)
+##The action beat to use when nothing is defined for a particular action (downbeat = 0.0)
 @export var default_action_beat := 0.0
-## If not empty, agent will only perform an action on the beats in the sequence marked "true". For example,
-## for a laser with [false, true], laser would fire every second beat
+##If not empty, agent will only perform an action on the beats in the sequence marked "true". For example,
+##for a laser with [false, true], laser would fire every second beat
 @export var activation_sequence : Array[bool]
 
 @export_subgroup("Sounds")
 
-## Sound emitter for each action
+##Sound emitter for each action
 @export var action_sound_emitters: Dictionary[Enums.PlayerAction, FmodEventEmitter2DOffset]
-## Play this emitter if no emitter is defined for a particular action
+##Play this emitter if no emitter is defined for a particular action
 @export var default_sound_emitter: FmodEventEmitter2D
 
 @export_subgroup("Animation")
 @export var sprite: AnimatedSprite2DSignals
-## Animation names from the animated sprite for actions
+##Animation names from the animated sprite for actions
 @export var action_animations: Dictionary[Enums.PlayerAction, String]
-## If a follow-on animation is defined for a given action, that animation will play after an action animation is finished (e.g. idle in the proper direction)
+##If a follow-on animation is defined for a given action, that animation will play after an action animation is finished (e.g. idle in the proper direction)
 @export var follow_on_animations: Dictionary[Enums.PlayerAction, String]
-## Default animation will play if animation is not defined for a specific action
+##Default animation will play if animation is not defined for a specific action
 @export var default_animation: String
 
 ##Timer for delaying action_executed signal to the beat defined in action_beats (or default_action_beat)
@@ -42,14 +42,14 @@ class_name Agent
 
 var currently_playing_emitter: FmodEventEmitter2DOffset
 
-## agent's position inside of the grid
+##agent's position inside of the grid
 var grid_position := Vector2i(0, 0)
-## grid's tile size for calculating the local position
+##grid's tile size for calculating the local position
 var tile_size: Vector2i
-## grid origin in local coordinate space. This should be the coordinate space where position is calculated,
-## i.e. local with respect to the level itself. It should include the difference between a cell's top left
-## corner vice its center as well as any offset from parents (i.e. nodes between the agent and and the level
-## in the node hierarchy
+##grid origin in local coordinate space. This should be the coordinate space where position is calculated,
+##i.e. local with respect to the level itself. It should include the difference between a cell's top left
+##corner vice its center as well as any offset from parents (i.e. nodes between the agent and and the level
+##in the node hierarchy
 var local_origin := Vector2.ZERO: set = _set_local_origin
 var lock_local_origin = false
 
@@ -95,9 +95,8 @@ func _reset_timer(timer: Timer):
 		timer.stop()
 
 func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
-	if not activation_sequence.is_empty():
-		if not activation_sequence[beat % activation_sequence.size()]:
-			return
+	if not check_activation_for_beat(beat):
+		return
 	# Determine amount of time before action, sound, and animation are executed (in seconds)
 	var action_delay = _get_action_delay_in_seconds(action)#action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
 	
@@ -111,6 +110,15 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	if skip_animation:
 		return
 	_execute_callable_on_timer(_animation_timer, animation_delay, _on_animation_start.bind(action))
+
+##Return true if action should be executed this beat based on activation sequence, false otherwise. Negative beat will always return true
+func check_activation_for_beat(beat: int):
+	if beat >= 0 and (not activation_sequence.is_empty()):
+		if not activation_sequence[beat % activation_sequence.size()]:
+			return false
+	return true
+		
+	
 
 ## Helper to help manage timing signals for action emitter, animation, sound, etc.
 func _execute_callable_on_timer(timer: Timer, delay: float, callable: Callable):

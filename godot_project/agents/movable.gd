@@ -56,6 +56,8 @@ func _ready():
 
 func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
 	super.execute_action(action, beat, skip_animation)
+	if not check_activation_for_beat(beat):
+		return
 	var action_data: MovableActionData
 	var should_move_collision := false
 	var move_target := grid_position + Enums.player_action_to_vector(action)

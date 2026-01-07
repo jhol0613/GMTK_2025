@@ -10,8 +10,7 @@ conductor_enabled = false
 available_actions = Array[int]([4, 7])
 
 [node name="SpinningChair" parent="." index="9" instance=ExtResource("2_8bkav")]
-position = Vector2(240, 46)
-start_direction = 1
+position = Vector2(210, 30)
 terminal_controlled = true
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("3_np4t2")]
