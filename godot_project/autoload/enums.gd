@@ -246,5 +246,18 @@ func get_reverse_action(action: PlayerAction) -> PlayerAction:
 			return PlayerAction.UP
 		_:
 			return PlayerAction.NONE
-	
+
+func get_reverse_fall(action: PlayerAction) -> PlayerAction:
+	match action:
+		PlayerAction.RIGHT_FALL:
+			return PlayerAction.LEFT_FALL
+		PlayerAction.LEFT_FALL:
+			return PlayerAction.RIGHT_FALL
+		PlayerAction.UP_FALL:
+			return PlayerAction.DOWN_FALL
+		PlayerAction.DOWN_FALL:
+			return PlayerAction.UP_FALL
+		_:
+			return PlayerAction.NONE
+
 #endregion
