@@ -397,16 +397,14 @@ func _update_agents() -> void:
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
-	var action = _bonk_check(movable, pusher.push_action)
-	print(Enums.PlayerAction.find_key(action))
+	var action = _bonk_check(movable, Enums.get_reverse_fall(pusher.push_action))
 	if movable is PlayerCharacter:
-		print("Pusher collided with the player. Action: %s" % Enums.PlayerAction.find_key(action))
 		# Fail if crushed (i.e. a fall would result in a bonk)
 		if Enums.is_action_bonk(action):
 			_player_character.notify_failure()
 			_on_level_fail()
 		else:
-			_player_character.execute_action(Enums.get_reverse_fall(action), _current_beat)
+			_player_character.execute_action(action, _current_beat)
 	elif movable is MovableObstacle:
 		_level_scene.update_obstacle_grid(movable.grid_position, true)
 		# skip animation if bonk was caused by a slide
