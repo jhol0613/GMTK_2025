@@ -17,10 +17,14 @@ enum FacingDirection {
 
 @export_group("Instance Setup")
 ##Number of beats it takes for chair to rotate 90 degrees
-@export var beats_per_quarter_turn := 1.0
+@export var beats_per_quarter_turn := 2.0
 @export var start_direction := FacingDirection.FRONT_CLOCKWISE: set = _set_start_direction
 ##If true, chair will only turn if commanded to do so externally (i.e. not "on the beat"
 @export var terminal_controlled := true
+##Nodes listed here will move with the animation on the left side of the bench
+@export var left_anchored_nodes : Array[Node2D]
+##Nodes listed here will move with the animation on the right side of the bench
+@export var right_anchored_nodes : Array[Node2D]
 
 @export_group("Spinning Chair Data")
 ##At runtime, actual grid size will be used to calculate pusher positions. This is for visualizing in level editor
@@ -30,14 +34,12 @@ enum FacingDirection {
 @export var left_obstacle: MovableObstacle
 @export var middle_obstacle: MovableObstacle
 @export var right_obstacle: MovableObstacle
-
-
-#@onready var _left_move_cycle = [
-	#Enums.PlayerAction.UP_RIGHT,
-	#Enums.PlayerAction.DOWN_LEFT,
-	#Enums.PlayerAction.DOWN_RIGHT,
-	#Enums.PlayerAction.UP_LEFT
-#]
+@export var right_anchor_path: Line2D
+@export var left_anchor_path: Line2D
+##Used to filter nodes that are part of this scene, vs what's added as a child in the scene tree
+@onready var my_nodes = [sprite, default_sound_emitter, left_obstacle, middle_obstacle, right_obstacle]
+##Nodes that should be anchored to couch rotation. Vector2 is the initial position
+var anchored_nodes: Dictionary[Node, Vector2]
 
 @onready var _left_push_action_cycle = [
 	Enums.PlayerAction.RIGHT_FALL,
@@ -45,13 +47,6 @@ enum FacingDirection {
 	Enums.PlayerAction.RIGHT_FALL,
 	Enums.PlayerAction.UP_FALL
 ]
-
-#@onready var _right_move_cycle = [
-	#Enums.PlayerAction.DOWN_LEFT,
-	#Enums.PlayerAction.UP_RIGHT,
-	#Enums.PlayerAction.UP_LEFT,
-	#Enums.PlayerAction.DOWN_RIGHT
-#]
 
 @onready var _right_push_action_cycle = [
 	Enums.PlayerAction.LEFT_FALL,
@@ -68,7 +63,8 @@ var _facing_direction: FacingDirection
 
 func _construct():
 	_facing_direction = start_direction
-	sprite.frame = 2 * start_direction #see enum description for why this works
+	_update_frame(2 * start_direction) #see enum description for why this works
+	#sprite.frame = 2 * start_direction
 	var initial_spacing
 	if Engine.is_editor_hint():
 		initial_spacing = visualization_tile_size
@@ -86,6 +82,24 @@ func _construct():
 		FacingDirection.RIGHT:
 			left_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y + initial_spacing.y)
 			right_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y - initial_spacing.y)
+			
+##Use this instead of updating frame directly so that anchored nodes also get moved
+func _update_frame(new_sprite_frame: int):
+	var child_rotation
+	if new_sprite_frame == sprite.frame:
+		child_rotation = 0.0
+	elif [1, 2, 7, 0].has(new_sprite_frame): #counterclockwise frames
+		child_rotation = PI / 4.0
+		#rotate clockwise
+	elif [3, 4, 5, 6].has(new_sprite_frame): #clockwise frames
+		child_rotation = - PI / 4.0
+		
+	sprite.frame = new_sprite_frame
+	
+	if not anchored_nodes:
+		return
+	for child in anchored_nodes:
+		child.position = child.position.rotated(child_rotation)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -107,9 +121,17 @@ func _ready() -> void:
 	_frame_timer.one_shot = true
 	_frame_timer.timeout.connect(_advance_sprite_frame)
 	add_child(_frame_timer)
+	
+	for child in get_children():
+		if not my_nodes.has(child) and child is  Node2D:
+			anchored_nodes[child] = child.position
 
-# Bypass agent's animation system
+# Bypass agent's animation system with override
 func _on_animation_start(action):
+	pass
+
+# Bypass agent's sound system with override
+func _on_sound_start(action):
 	pass
 
 func _on_left_obstacle_move(_action: Enums.PlayerAction):
@@ -126,17 +148,20 @@ func _on_halfway_through_move(obstacle: MovableObstacle, new_action: Enums.Playe
 	obstacle.pusher.push_action = new_action
 	
 func _advance_sprite_frame():
-	sprite.frame = (sprite.frame + 1) % sprite.sprite_frames.get_frame_count(sprite.animation)
+	_update_frame((sprite.frame + 1) % sprite.sprite_frames.get_frame_count(sprite.animation))
+	#sprite.frame = (sprite.frame + 1) % sprite.sprite_frames.get_frame_count(sprite.animation)
 	
 func _set_start_direction(new_direction: FacingDirection):
 	start_direction = new_direction
 	_construct()
 	
-func spin():
-	left_obstacle.request_offbeat_action.emit(left_obstacle, left_obstacle.get_next_move())
-	right_obstacle.request_offbeat_action.emit(right_obstacle, right_obstacle.get_next_move())
-	_on_left_obstacle_move(Enums.PlayerAction.NONE)
-	_on_right_obstacle_move(Enums.PlayerAction.NONE)
+func spin(number_of_quarter_turns: int = 1):
+	for i in range(number_of_quarter_turns):
+		left_obstacle.request_offbeat_action.emit(left_obstacle, left_obstacle.get_next_move())
+		right_obstacle.request_offbeat_action.emit(right_obstacle, right_obstacle.get_next_move())
+		_on_left_obstacle_move(Enums.PlayerAction.NONE)
+		_on_right_obstacle_move(Enums.PlayerAction.NONE)
+		await _frame_timer.timeout
 	
 func reset():
 	super.reset()
@@ -144,4 +169,7 @@ func reset():
 	_facing_direction = start_direction
 	if _frame_timer != null:
 		_frame_timer.stop() #prevent frame from getting off by one if reset in the middle of rotate animation
+	# Reset child positions
 	_construct()
+	for child in anchored_nodes.keys():
+		child.position = anchored_nodes[child]

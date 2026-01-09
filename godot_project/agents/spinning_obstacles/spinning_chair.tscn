@@ -55,21 +55,24 @@ animations = [{
 }],
 "loop": false,
 "name": &"spin",
-"speed": 5.0
+"speed": 1.0
 }]
 
-[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "sprite")]
+[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "right_anchor_path", "left_anchor_path", "default_sound_emitter", "sprite")]
 script = ExtResource("1_2duu5")
 beats_per_quarter_turn = 0.3
 terminal_controlled = null
 left_obstacle = NodePath("LeftObstacle")
 middle_obstacle = NodePath("MiddleObstacle")
 right_obstacle = NodePath("RightObstacle")
+right_anchor_path = NodePath("")
+left_anchor_path = NodePath("")
+default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -25)
+position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_u2psr")
 animation = &"spin"
 script = ExtResource("3_2duu5")
@@ -83,17 +86,17 @@ metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="LeftObstacle" parent="." instance=ExtResource("6_neb5q")]
 z_index = 1
-position = Vector2(-32, -5)
+position = Vector2(-32, 15)
 movement_path = Array[int]([25, 27, 26, 24])
 activation_sequence = Array[bool]([false])
 
 [node name="RightObstacle" parent="." instance=ExtResource("6_neb5q")]
 z_index = 1
-position = Vector2(32, -5)
+position = Vector2(32, 15)
 movement_path = Array[int]([27, 25, 24, 26])
 activation_sequence = Array[bool]([false])
 
 [node name="MiddleObstacle" parent="." instance=ExtResource("6_neb5q")]
 z_index = 1
-position = Vector2(0, -5)
+position = Vector2(0, 15)
 activation_sequence = Array[bool]([false])

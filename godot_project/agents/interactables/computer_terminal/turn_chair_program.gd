@@ -3,6 +3,7 @@ extends TerminalProgram
 class_name TurnChairProgram
 
 @export var chairs : Array[SpinningChair]
+@export var number_of_quarter_turns := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,7 +11,7 @@ func _ready() -> void:
 
 func run():
 	for chair in chairs:
-		chair.spin()
+		chair.spin(number_of_quarter_turns)
 
 func reset():
 	pass
