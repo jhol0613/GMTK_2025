@@ -23,7 +23,7 @@ position = Vector2(112, 47.37)
 position = Vector2(112, 99)
 
 [node name="CatCoffeeSpill" parent="." index="10" instance=ExtResource("8_ekeum")]
-position = Vector2(49, 28)
+position = Vector2(46, 29)
 
 [node name="CatCartObstacle" parent="." index="11" instance=ExtResource("9_bmc3v")]
 position = Vector2(177, 69)

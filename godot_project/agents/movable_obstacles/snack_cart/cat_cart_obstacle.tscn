@@ -104,7 +104,7 @@ metadata/_custom_type_script = "uid://du4ysr150id7h"
 shape = SubResource("RectangleShape2D_h3hhy")
 
 [node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
-position = Vector2(-2, -20)
+position = Vector2(-3, -21)
 
 [node name="LaserBlocker" type="Area2D" parent="."]
 position = Vector2(0, -23)
