@@ -17,6 +17,10 @@ func _ready() -> void:
 	add_to_group("movable_obstacles")
 	super._ready()
 
+func _process(delta):
+	if pusher:
+		print(pusher.push_action)
+
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
 func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
@@ -24,7 +28,7 @@ func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := fal
 		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)
 	else:
 		super.execute_action(action, beat, skip_animation)
-		
+
 func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:
 		return Enums.PlayerAction.NONE
@@ -36,7 +40,7 @@ func advance_move_cursor():
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
 	if pusher and movement_path.size() > 0:	
-		pusher.push_action = _direction_to_push_action(movement_path[_move_cursor])
+		pusher.push_action = _direction_to_push_action(movement_path[(_move_cursor-1) % movement_path.size()])
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
 ##return the same push action that's currently set

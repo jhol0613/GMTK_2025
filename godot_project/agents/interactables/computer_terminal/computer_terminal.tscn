@@ -46,7 +46,6 @@ size = Vector2(15, 38)
 [node name="ComputerTerminal" type="Node2D" node_paths=PackedStringArray("sprite")]
 z_index = 1
 script = ExtResource("1_vgobs")
-input_delay_beats = null
 interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
 player_animation_on_success = "type"
 sprite = NodePath("AnimatedSprite2DSignals")

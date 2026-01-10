@@ -82,7 +82,7 @@ func _construct():
 		FacingDirection.RIGHT:
 			left_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y + initial_spacing.y)
 			right_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y - initial_spacing.y)
-			
+
 ##Use this instead of updating frame directly so that anchored nodes also get moved
 func _update_frame(new_sprite_frame: int):
 	var child_rotation
@@ -140,21 +140,21 @@ func _on_left_obstacle_move(_action: Enums.PlayerAction):
 	_frame_timer.start(AudioManager.beat_time_seconds * beats_per_quarter_turn)
 	
 	left_obstacle.pusher.push_action = _left_push_action_cycle[left_obstacle._move_cursor]
-	
+
 func _on_right_obstacle_move(_action: Enums.PlayerAction):
 	right_obstacle.pusher.push_action = _right_push_action_cycle[right_obstacle._move_cursor]
-	
+
 func _on_halfway_through_move(obstacle: MovableObstacle, new_action: Enums.PlayerAction):
 	obstacle.pusher.push_action = new_action
-	
+
 func _advance_sprite_frame():
 	_update_frame((sprite.frame + 1) % sprite.sprite_frames.get_frame_count(sprite.animation))
 	#sprite.frame = (sprite.frame + 1) % sprite.sprite_frames.get_frame_count(sprite.animation)
-	
+
 func _set_start_direction(new_direction: FacingDirection):
 	start_direction = new_direction
 	_construct()
-	
+
 func spin(number_of_quarter_turns: int = 1):
 	for i in range(number_of_quarter_turns):
 		left_obstacle.request_offbeat_action.emit(left_obstacle, left_obstacle.get_next_move())
@@ -162,7 +162,7 @@ func spin(number_of_quarter_turns: int = 1):
 		_on_left_obstacle_move(Enums.PlayerAction.NONE)
 		_on_right_obstacle_move(Enums.PlayerAction.NONE)
 		await _frame_timer.timeout
-	
+
 func reset():
 	super.reset()
 	# Don't call super so position of the chair doesn't reset

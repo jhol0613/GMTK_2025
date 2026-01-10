@@ -314,7 +314,6 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 
 func _update_obstacles():
-
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
@@ -397,7 +396,7 @@ func _update_agents() -> void:
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
-	var action = _bonk_check(movable, Enums.get_reverse_fall(pusher.push_action))
+	var action = _bonk_check(movable, pusher.push_action)
 	if movable is PlayerCharacter:
 		# Fail if crushed (i.e. a fall would result in a bonk)
 		if Enums.is_action_bonk(action):

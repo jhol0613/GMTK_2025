@@ -58,15 +58,12 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "right_anchor_path", "left_anchor_path", "default_sound_emitter", "sprite")]
+[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "default_sound_emitter", "sprite")]
 script = ExtResource("1_2duu5")
 beats_per_quarter_turn = 0.3
-terminal_controlled = null
 left_obstacle = NodePath("LeftObstacle")
 middle_obstacle = NodePath("MiddleObstacle")
 right_obstacle = NodePath("RightObstacle")
-right_anchor_path = NodePath("")
-left_anchor_path = NodePath("")
 default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 
