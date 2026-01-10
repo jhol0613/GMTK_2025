@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=4 uid="uid://defrgrdfsdmu3"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_hj5e0"]
+[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_hj5e0"]
+
+[node name="LevelBase" instance=ExtResource("1_hj5e0")]
+conductor_spawn_beat = 4
+available_actions = Array[int]([1, 2, 4, 3])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAEAAAABAAAAAAAAAAFAAAABAABAAAAAAAIAAAABAAAAAAAAAAJAAAABAABAAAAAAAAAAAABAAAAAAAAAABAAAABAABAAAAAAACAAAAAwABAAAAAAAGAAAAAwABAAAAAAACAAQAAAABAAIAAAACAAUAAAABAAMAAAADAAQAAAABAAIAABADAAUAAAABAAMAABACAAMAAAABAAAAAAADAAMAAAABAAAAABA=")
+
+[node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_hj5e0")]
+position = Vector2(209, 68)
+movement_path = Array[int]([4, 4, 3, 3])
