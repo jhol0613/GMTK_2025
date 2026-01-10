@@ -17,13 +17,23 @@ signal interaction_succeeded
 ## On successful interaction, what animation should player do?
 @export var player_animation_on_success : String
 @export var follow_on_animation_on_success := "idle_down"
+##Note that a horizontal flip won't appear in the editor
+@export var flip_horizontal := false: set = _on_flip_horizontal
 	
 var _interacted = false
+
+signal updated_position(this_interactable: Interactable, new_global_position: Vector2)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("interactables")
+	_on_flip_horizontal(flip_horizontal)
 	super._ready()
+
+#Override in children if additional flip functionality desired (e.g. cat coffee spill spawn location)
+func _on_flip_horizontal(new_flipped_status):
+	flip_horizontal = new_flipped_status
+	sprite.flip_h = new_flipped_status
 
 ## True if action will successfully execute if execute_action is called
 func can_interact():

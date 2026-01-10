@@ -21,10 +21,6 @@ enum FacingDirection {
 @export var start_direction := FacingDirection.FRONT_CLOCKWISE: set = _set_start_direction
 ##If true, chair will only turn if commanded to do so externally (i.e. not "on the beat"
 @export var terminal_controlled := true
-##Nodes listed here will move with the animation on the left side of the bench
-@export var left_anchored_nodes : Array[Node2D]
-##Nodes listed here will move with the animation on the right side of the bench
-@export var right_anchored_nodes : Array[Node2D]
 
 @export_group("Spinning Chair Data")
 ##At runtime, actual grid size will be used to calculate pusher positions. This is for visualizing in level editor
@@ -34,12 +30,11 @@ enum FacingDirection {
 @export var left_obstacle: MovableObstacle
 @export var middle_obstacle: MovableObstacle
 @export var right_obstacle: MovableObstacle
-@export var right_anchor_path: Line2D
-@export var left_anchor_path: Line2D
-##Used to filter nodes that are part of this scene, vs what's added as a child in the scene tree
-@onready var my_nodes = [sprite, default_sound_emitter, left_obstacle, middle_obstacle, right_obstacle]
+@export var visual_center: VisualCenter
+@onready var my_nodes = [sprite, default_sound_emitter, left_obstacle, middle_obstacle, right_obstacle, visual_center]
 ##Nodes that should be anchored to couch rotation. Vector2 is the initial position
 var anchored_nodes: Dictionary[Node, Vector2]
+var anchored_node_centers: Dictionary[Node, VisualCenter]
 
 @onready var _left_push_action_cycle = [
 	Enums.PlayerAction.RIGHT_FALL,
@@ -83,24 +78,6 @@ func _construct():
 			left_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y + initial_spacing.y)
 			right_obstacle.position = Vector2(middle_obstacle.position.x, middle_obstacle.position.y - initial_spacing.y)
 
-##Use this instead of updating frame directly so that anchored nodes also get moved
-func _update_frame(new_sprite_frame: int):
-	var child_rotation
-	if new_sprite_frame == sprite.frame:
-		child_rotation = 0.0
-	elif [1, 2, 7, 0].has(new_sprite_frame): #counterclockwise frames
-		child_rotation = PI / 4.0
-		#rotate clockwise
-	elif [3, 4, 5, 6].has(new_sprite_frame): #clockwise frames
-		child_rotation = - PI / 4.0
-		
-	sprite.frame = new_sprite_frame
-	
-	if not anchored_nodes:
-		return
-	for child in anchored_nodes:
-		child.position = child.position.rotated(child_rotation)
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_construct()
@@ -124,7 +101,27 @@ func _ready() -> void:
 	
 	for child in get_children():
 		if not my_nodes.has(child) and child is  Node2D:
-			anchored_nodes[child] = child.position
+			#Store positions as the relative position from spin chair's vis center to child's visual center (if it has one)
+			anchored_nodes[child] = _get_visual_center_position(child)
+
+##Use this instead of updating frame directly so that anchored nodes also get moved
+func _update_frame(new_sprite_frame: int):
+	var child_rotation
+	if new_sprite_frame == sprite.frame:
+		child_rotation = 0.0
+	elif [1, 2, 7, 0].has(new_sprite_frame): #counterclockwise frames
+		child_rotation = PI / 4.0
+		#rotate clockwise
+	elif [3, 4, 5, 6].has(new_sprite_frame): #clockwise frames
+		child_rotation = - PI / 4.0
+		
+	sprite.frame = new_sprite_frame
+	
+	if not anchored_nodes:
+		return
+	for child in anchored_nodes:
+		_set_position_based_on_visual_center(child, _get_visual_center_position(child).rotated(child_rotation))
+		#child.position = child.position.rotated(child_rotation) - offset
 
 # Bypass agent's animation system with override
 func _on_animation_start(action):
@@ -155,6 +152,36 @@ func _set_start_direction(new_direction: FacingDirection):
 	start_direction = new_direction
 	_construct()
 
+##Returns position of a Node's visual center relative to this Spinning Chair. Uses the node's base
+##position if there is no visual center defined
+func _get_visual_center_position(node: Node2D) -> Vector2:
+	for child in node.get_children():
+		if child is VisualCenter:
+			return child.global_position - visual_center.global_position
+	return node.global_position - visual_center.global_position
+
+func _get_visual_center(node: Node2D) -> VisualCenter:
+	for child in node.get_children():
+		if child is VisualCenter:
+			return child
+	return null
+
+##Give new_position in terms of what you want the visual center's position to be
+func _set_position_based_on_visual_center(node: Node2D, new_position: Vector2):
+	var old_position = _get_visual_center_position(node)
+	var child_vis_center = _get_visual_center(node)
+	if child_vis_center:
+		node.position = new_position + visual_center.position - child_vis_center.position
+	else:
+		node.position = new_position + visual_center.position
+	#I don't love this, I shouldn't be accounting for different types of another agent in an agent class
+	if node is Interactable:
+		node.updated_position.emit(node, node.global_position)
+		#If new and old signs are different, flip the interactable (can't just multiply to check sign flip
+		#or it will flip twice if the hy value stops on exactly 0 for a frame)
+		if (new_position.y > 0 and old_position.y <= 0) or (new_position.y < 0 and old_position.y >= 0):
+			node.flip_horizontal = not node.flip_horizontal
+
 func spin(number_of_quarter_turns: int = 1):
 	for i in range(number_of_quarter_turns):
 		left_obstacle.request_offbeat_action.emit(left_obstacle, left_obstacle.get_next_move())
@@ -172,4 +199,5 @@ func reset():
 	# Reset child positions
 	_construct()
 	for child in anchored_nodes.keys():
-		child.position = anchored_nodes[child]
+		_set_position_based_on_visual_center(child, anchored_nodes[child])
+		#child.position = anchored_nodes[child]

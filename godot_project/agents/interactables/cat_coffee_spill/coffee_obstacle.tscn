@@ -21,7 +21,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42xvd"]
-size = Vector2(20, 36.5)
+size = Vector2(20, 29.25)
 
 [node name="CoffeeObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_g1vmw")
@@ -42,5 +42,5 @@ push_mode = 1
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
-position = Vector2(0, 6)
+position = Vector2(0, 2.375)
 shape = SubResource("RectangleShape2D_42xvd")

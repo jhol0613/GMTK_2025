@@ -17,10 +17,6 @@ func _ready() -> void:
 	add_to_group("movable_obstacles")
 	super._ready()
 
-func _process(delta):
-	if pusher:
-		print(pusher.push_action)
-
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
 func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):
 	# if action is a fall action, rather than using the pusher action, just go back the way you came

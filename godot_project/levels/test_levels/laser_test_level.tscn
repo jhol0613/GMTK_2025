@@ -23,6 +23,7 @@ movement_path = Array[int]([4, 4, 3, 3])
 position = Vector2(176, 29)
 input_delay_beats = 2.0
 follow_on_animation_on_success = "idle"
+flip_horizontal = null
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]
 script = ExtResource("5_h05u1")

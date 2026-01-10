@@ -232,13 +232,15 @@ func _spawn_movable(scene: PackedScene, grid_position: Vector2i) -> Movable:
 	_level_scene.add_child(movable)
 	return movable
 
-func _initialize_movable(movable: Agent, grid_position: Vector2i) -> void:
+func _initialize_movable(movable: Agent, grid_position: Vector2i, should_reset = true) -> void:
 	movable.grid_position = grid_position
 	movable.grid_origin = grid_position
 	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
 	movable.tile_size = _level_scene.get_tile_size()
-	movable.animation_signal.connect(_on_animation_signal_received)
-	movable.reset()
+	if not movable.is_connected("animation_signal", _on_animation_signal_received):
+		movable.animation_signal.connect(_on_animation_signal_received)
+	if should_reset:
+		movable.reset()
 
 func _spawn_player() -> void:
 	if _player_character != null:
@@ -269,13 +271,17 @@ func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
 	_level_scene.update_obstacle_grid(spawned_obstacle.grid_position, false)
 
 func _initialize_interactables() -> void:
-	for interactable in _level_scene.interactables:
+	for interactable: Interactable in _level_scene.interactables:
 		_initialize_movable(interactable, _level_scene.global_to_map(interactable.global_position))
+		interactable.updated_position.connect(_on_interactable_updated_position)
 		if interactable is HideBench:
 			interactable.started_hiding.connect(_hide_player.bind(true))
 			interactable.finished_hiding.connect(_hide_player.bind(false))
 
-#
+##Reinitialize interactable to updated position if it calls that its position was updated
+func _on_interactable_updated_position(interactable: Interactable, new_global_position: Vector2):
+	_initialize_movable(interactable, _level_scene.global_to_map(interactable.global_position), false)
+	
 func _hide_player(new_hide_status: bool):
 	_player_hidden = new_hide_status
 	_player_newly_hidden = new_hide_status

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://brth7xhog3y76"]
+[gd_scene load_steps=13 format=3 uid="uid://brth7xhog3y76"]
 
 [ext_resource type="Script" uid="uid://dik0gek0s1qv2" path="res://agents/spinning_obstacles/spinning_chair.gd" id="1_2duu5"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_2duu5"]
 [ext_resource type="Texture2D" uid="uid://bnl1m4ksmpuur" path="res://agents/spinning_obstacles/spinning_chair_v2.png" id="3_u2psr"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_u2psr"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_neb5q"]
+[ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="6_r40w5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_neb5q"]
 atlas = ExtResource("3_u2psr")
@@ -55,21 +56,22 @@ animations = [{
 }],
 "loop": false,
 "name": &"spin",
-"speed": 1.0
+"speed": 5.0
 }]
 
-[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "default_sound_emitter", "sprite")]
+[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "visual_center", "default_sound_emitter", "sprite")]
 script = ExtResource("1_2duu5")
 beats_per_quarter_turn = 0.3
 left_obstacle = NodePath("LeftObstacle")
 middle_obstacle = NodePath("MiddleObstacle")
 right_obstacle = NodePath("RightObstacle")
+visual_center = NodePath("VisualCenter")
 default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -6)
+position = Vector2(0, -46)
 sprite_frames = SubResource("SpriteFrames_u2psr")
 animation = &"spin"
 script = ExtResource("3_2duu5")
@@ -83,17 +85,22 @@ metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="LeftObstacle" parent="." instance=ExtResource("6_neb5q")]
 z_index = 1
-position = Vector2(-32, 15)
+position = Vector2(-32, -23)
 movement_path = Array[int]([25, 27, 26, 24])
 activation_sequence = Array[bool]([false])
 
 [node name="RightObstacle" parent="." instance=ExtResource("6_neb5q")]
 z_index = 1
-position = Vector2(32, 15)
+position = Vector2(32, -23)
 movement_path = Array[int]([27, 25, 24, 26])
 activation_sequence = Array[bool]([false])
 
 [node name="MiddleObstacle" parent="." instance=ExtResource("6_neb5q")]
 z_index = 1
-position = Vector2(0, 15)
+position = Vector2(0, -23)
 activation_sequence = Array[bool]([false])
+
+[node name="VisualCenter" type="Node2D" parent="."]
+position = Vector2(0, -40)
+script = ExtResource("6_r40w5")
+metadata/_custom_type_script = "uid://cc284jdpqgups"

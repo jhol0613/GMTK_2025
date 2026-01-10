@@ -3,12 +3,25 @@ extends Interactable
 ## Two obstacle spawners for an obstacle that spans 2 tiles (only one has the visuals)
 @onready var obstacle_spawner_visible := $VisibleObstacleSpawner
 @onready var obstacle_spawner_invisible := $InvisibleObstacleSpawner
+@onready var original_visible_grid_offset_x = obstacle_spawner_visible.grid_offset.x
+@onready var original_invisible_grid_offset_x = obstacle_spawner_visible.grid_offset.x
 #@onready var sound := $FmodEventEmitter2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
 	interaction_succeeded.connect(_on_successful_interaction)
+
+func _on_flip_horizontal(new_flip_status):
+	super._on_flip_horizontal(new_flip_status)
+	if not obstacle_spawner_visible or not obstacle_spawner_invisible:
+		return
+	if new_flip_status:
+		obstacle_spawner_visible.grid_offset.x = -original_visible_grid_offset_x
+		obstacle_spawner_invisible.grid_offset.x = -original_invisible_grid_offset_x
+	else:
+		obstacle_spawner_visible.grid_offset.x = original_visible_grid_offset_x
+		obstacle_spawner_invisible.grid_offset.x = original_invisible_grid_offset_x
 
 func _on_successful_interaction():
 	#sprite.play_with_signals("wake_up")

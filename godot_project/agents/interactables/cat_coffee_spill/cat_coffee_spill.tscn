@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bxq0hfxmg5ct1"]
+[gd_scene load_steps=26 format=3 uid="uid://bxq0hfxmg5ct1"]
 
 [ext_resource type="Script" uid="uid://wn7v33ph18qx" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.gd" id="1_qfg0r"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="1_uvexm"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cqh2y73sdi1js" path="res://agents/movable_obstacles/obstacle_spawner.gd" id="5_to1gp"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_pa7bf"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="8_eux06"]
+[ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="10_11q1a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s82q2"]
 atlas = ExtResource("2_hsr7u")
@@ -158,13 +159,13 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(112, -1)
 script = ExtResource("5_to1gp")
 obstacle_scene = ExtResource("5_pa7bf")
-grid_offset = Vector2i(-1, 0)
+grid_offset = Vector2i(1, 0)
 metadata/_custom_type_script = "uid://cqh2y73sdi1js"
 
 [node name="InvisibleObstacleSpawner" type="Node2D" parent="."]
 script = ExtResource("5_to1gp")
 obstacle_scene = ExtResource("6_pa7bf")
-grid_offset = Vector2i(-1, 1)
+grid_offset = Vector2i(1, 1)
 metadata/_custom_type_script = "uid://cqh2y73sdi1js"
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
@@ -173,3 +174,8 @@ event_guid = "{e241a3d9-7242-4e08-956e-df0f2beefdfd}"
 script = ExtResource("8_eux06")
 offset_seconds = 1.1
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="VisualCenter" type="Node2D" parent="."]
+position = Vector2(0, -25)
+script = ExtResource("10_11q1a")
+metadata/_custom_type_script = "uid://cc284jdpqgups"

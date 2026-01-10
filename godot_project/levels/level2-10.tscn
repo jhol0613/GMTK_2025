@@ -8,12 +8,17 @@
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_linlt"]
 
 [node name="LevelBase" instance=ExtResource("1_psfox")]
-conductor_enabled = false
+player_spawn_position = Vector2i(0, 3)
+conductor_spawn_beat = 7
 available_actions = Array[int]([4, 7, 1, 2])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 9, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
 position = Vector2(49, 9)
 repeatable = true
+flip_horizontal = false
 follow_on_animations = Dictionary[int, String]({
 7: "idle"
 })
@@ -23,26 +28,33 @@ script = ExtResource("4_ytems")
 chairs = [NodePath("../../SpinningChair"), NodePath("../../SpinningChair2"), NodePath("../../SpinningChair3"), NodePath("../../SpinningChair4")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
-[node name="SpinningChair" parent="." index="10" node_paths=PackedStringArray("right_anchored_nodes") instance=ExtResource("2_8bkav")]
-position = Vector2(112, 9)
-start_direction = 1
-right_anchored_nodes = [NodePath("CatCoffeeSpill")]
+[node name="SpinningChair" parent="." index="10" instance=ExtResource("2_8bkav")]
+position = Vector2(112, 48)
+start_direction = 3
 
-[node name="CatCoffeeSpill" parent="SpinningChair" index="5" instance=ExtResource("5_ytems")]
-position = Vector2(-1, 8)
+[node name="SpinningChair2" parent="." index="11" instance=ExtResource("2_8bkav")]
+position = Vector2(176, 105)
+start_direction = 3
 
-[node name="SpinningChair2" parent="." index="11" node_paths=PackedStringArray("right_anchored_nodes") instance=ExtResource("2_8bkav")]
-position = Vector2(176, 66)
-start_direction = 1
-right_anchored_nodes = [null]
+[node name="CatCoffeeSpill" parent="SpinningChair2" index="5" instance=ExtResource("5_ytems")]
+position = Vector2(-1, 5)
 
 [node name="SpinningChair3" parent="." index="12" instance=ExtResource("2_8bkav")]
-position = Vector2(48, 66)
-start_direction = 1
+position = Vector2(48, 105)
+start_direction = 3
 
 [node name="SpinningChair4" parent="." index="13" instance=ExtResource("2_8bkav")]
-position = Vector2(240, 10)
-start_direction = 1
+position = Vector2(240, 49)
+start_direction = 3
 
 [node name="Treadmill" parent="." index="14" instance=ExtResource("7_linlt")]
-position = Vector2(16, 32)
+position = Vector2(144, 33)
+direction = 1
+
+[node name="SpinningChair5" parent="." index="15" instance=ExtResource("2_8bkav")]
+position = Vector2(305, 105)
+start_direction = 3
+
+[node name="Treadmill2" parent="." index="16" instance=ExtResource("7_linlt")]
+position = Vector2(80, 32)
+direction = 1
