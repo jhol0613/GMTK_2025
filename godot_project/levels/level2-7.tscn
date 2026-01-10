@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqob6deb6rmuc"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_llv2y"]
+
+[node name="LevelBase" instance=ExtResource("1_llv2y")]
+conductor_spawn_beat = 6
+available_actions = Array[int]([1, 2, 4, 7])

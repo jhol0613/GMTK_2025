@@ -28,43 +28,38 @@ tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABY
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_ufyiq")]
 position = Vector2(48, 3)
-beam_length = 36
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_ufyiq")]
 position = Vector2(48, 98)
 direction = 0
-beam_length = 16
+default_animation = "fire_up"
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_ufyiq")]
 position = Vector2(112, 3)
-beam_length = 36
 
 [node name="Laser4" parent="." index="11" instance=ExtResource("2_ufyiq")]
 position = Vector2(112, 98)
 direction = 0
-beam_length = 16
+default_animation = "fire_up"
 
 [node name="Laser5" parent="." index="12" instance=ExtResource("2_ufyiq")]
 position = Vector2(176, 3)
-beam_length = 36
 
 [node name="Laser6" parent="." index="13" instance=ExtResource("2_ufyiq")]
 position = Vector2(176, 98)
 direction = 0
-beam_length = 16
+default_animation = "fire_up"
 
 [node name="Laser7" parent="." index="14" instance=ExtResource("2_ufyiq")]
 position = Vector2(240, 3)
-beam_length = 36
 
 [node name="Laser8" parent="." index="15" instance=ExtResource("2_ufyiq")]
 position = Vector2(240, 98)
 direction = 0
-beam_length = 16
+default_animation = "fire_up"
 
 [node name="Laser9" parent="." index="16" instance=ExtResource("2_ufyiq")]
 position = Vector2(304, 3)
-beam_length = 99
 
 [node name="Collectible" parent="." index="17" instance=ExtResource("3_d0gv4")]
 position = Vector2(272, 99)
