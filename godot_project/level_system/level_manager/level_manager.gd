@@ -82,7 +82,7 @@ func _ready() -> void:
 	add_child(_world_scene)
 
 	_level_scene.position = initial_train_position
-	
+
 	AudioManager.play_music_event(level_catalog.get_world_music_event_name(), level_catalog.get_world_music_event_bpm())
 
 	_initialize_level()
@@ -111,7 +111,7 @@ func load_next_level():
 ## Pysically advances the level and initializes the new car with proper timing
 func advance_level():
 	_level_number += 1
-	
+
 	# Update reference to new level and initialize
 	_level_scene = _next_level
 	_initialize_level()
@@ -122,7 +122,7 @@ func advance_level():
 	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_level_advanced)
-	
+
 
 ## Scene initialization steps that are called AFTER the level has been fully advanced
 func _on_level_advanced():
@@ -137,12 +137,12 @@ func _initialize_level():
 	_initialize_pushers()
 	_initialize_interactables()
 	_initialize_lasers()
-	
+
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
 
 	# Update sequencer with new level data
-	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions, 
+	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions,
 		_level_scene.action_quantities)
 	_action_sequencer.tutorial_mode = _level_scene.tutorial_mode
 
@@ -153,21 +153,21 @@ func _initialize_level():
 
 	# load following level
 	load_next_level()
-	
+
 func _on_level_complete() -> void:
 	_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
 	_player_character.notify_success()
 	for collectible in _level_scene.collectibles:
 		collectible.collect_if_queued()
 	_action_sequencer.buttons_enabled = false
-	
+
 	_action_sequencer.stop_sequencer()
 	await get_tree().create_timer(level_success_delay).timeout
-	
+
 	if _queue_world_transition:
 		_execute_world_transition()
 		return
-	
+
 	advance_level()
 
 func _on_level_fail() -> void:
@@ -188,7 +188,7 @@ func _reset_level() -> void:
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
-	
+
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.reset()
@@ -221,7 +221,7 @@ func _execute_world_transition():
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
 	add_child(_world_scene)
 	advance_level()
-	
+
 #endregion
 
 #region Level Component Initializations
@@ -231,7 +231,7 @@ func _spawn_movable(scene: PackedScene, grid_position: Vector2i) -> Movable:
 	_initialize_movable(movable, grid_position)
 	_level_scene.add_child(movable)
 	return movable
-	
+
 func _initialize_movable(movable: Agent, grid_position: Vector2i) -> void:
 	movable.grid_position = grid_position
 	movable.grid_origin = grid_position
@@ -252,14 +252,14 @@ func _spawn_conductor() -> void:
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
 	if _player_hidden:
 		_conductor_aware_of_player = false
-	
+
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
 		obstacle.request_offbeat_action.connect(_on_obstacle_request_offbeat_action)
 	for spawner in _level_scene.obstacle_spawners:
 		spawner.obstacle_spawned.connect(_on_obstacle_spawned)
-		
+
 func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
 	var spawned_obstacle : MovableObstacle = _spawn_movable(obstacle, grid_position)
 	if spawned_obstacle.pusher:
@@ -275,7 +275,7 @@ func _initialize_interactables() -> void:
 			interactable.started_hiding.connect(_hide_player.bind(true))
 			interactable.finished_hiding.connect(_hide_player.bind(false))
 
-# 
+#
 func _hide_player(new_hide_status: bool):
 	_player_hidden = new_hide_status
 	_player_newly_hidden = new_hide_status
@@ -285,7 +285,7 @@ func _hide_player(new_hide_status: bool):
 		#_player_character.play_animation_with_follow_on("unhide", "idle_down")
 		_player_character.enable_collisions()
 		_update_conductor_awareness()
-		
+
 func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
 		pusher.connect("overlapped_movable", _on_pusher_triggered)
@@ -312,9 +312,9 @@ func _on_thinking_action_performed():
 	_update_obstacles()
 	_update_agents()
 	_current_beat += 1
-	
+
 func _update_obstacles():
-	
+
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
@@ -359,7 +359,7 @@ func _update_conductor() -> void:
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
 	)
-	
+
 ##Use conductor facing direction, player hide status and position to determine if conductor should become aware
 func _update_conductor_awareness():
 	if not _player_hidden and _conductor: # Only update awareness if hidden (and conductor exists)
@@ -397,12 +397,9 @@ func _update_agents() -> void:
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
-	#print(_bonk_check(movable, pusher.push_action))
-	var action = _bonk_check(movable, pusher.push_action)
-	print(Enums.PlayerAction.find_key(action))
+	var action = _bonk_check(movable, Enums.get_reverse_fall(pusher.push_action))
 	if movable is PlayerCharacter:
-		print(Enums.PlayerAction.find_key(action))
-		# Fail if crushed (i.e. a fall would result in a bonk
+		# Fail if crushed (i.e. a fall would result in a bonk)
 		if Enums.is_action_bonk(action):
 			_player_character.notify_failure()
 			_on_level_fail()
@@ -435,7 +432,7 @@ func _advance_car_for_play(animation_time: float):
 	_advance_car_tween.tween_property(_train_center, "position", target_pos, animation_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	_advance_car_tween.tween_callback(_on_advance_for_play_finished)
-	
+
 func _on_advance_for_play_finished():
 	_advancing_car_for_play = false
 
@@ -471,7 +468,7 @@ func _fade_to_thinking_shader():
 #region Animation
 func _on_music_bar():
 	_animation_player.play("train_rock")
-	
+
 func _on_animation_signal_received(signal_id: String):
 	match signal_id:
 		"door_slammed":
@@ -483,5 +480,5 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
 		_advance_car_for_play(0.0)
 		advance_level()
-		
+
 #endregion
