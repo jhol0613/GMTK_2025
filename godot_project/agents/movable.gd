@@ -4,19 +4,6 @@ class_name Movable
 
 #region Exports
 
-### All curves should be normalized with domain (time) from 0.0 to 1.0, and range representing starting
-### to ending position (0.0 is old grid space, 1.0 is new grid space)
-#@export_subgroup("Standard Move")
-### The curve the movable should follow moving from one tile to another
-#@export var direct_movement_curve: Curve
-### The y value the movable should add to their movement as they move to another tile (to add a "jumping" component instead of just linear motion)
-#@export var y_movement_curve: Curve
-#@export var y_movement_magnitude := 16.0
-### Amount of time for movement animation
-#@export var move_duration := .3
-### How to offset 
-#@export var timing_offset := 0.0
-
 @export_subgroup("Movement Curve Data")
 ## Curve and timing data for standard moves (up, down, left, and right)
 @export var standard_move_data: MovableActionData
@@ -69,6 +56,8 @@ func _ready():
 
 func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
 	super.execute_action(action, beat, skip_animation)
+	if not check_activation_for_beat(beat):
+		return
 	var action_data: MovableActionData
 	var should_move_collision := false
 	var move_target := grid_position + Enums.player_action_to_vector(action)

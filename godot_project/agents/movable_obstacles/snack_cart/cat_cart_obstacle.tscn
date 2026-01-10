@@ -89,7 +89,7 @@ metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 z_index = 1
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_tn4fa")
-animation = &"right"
+animation = &"left"
 script = ExtResource("5_ix653")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
@@ -104,7 +104,7 @@ metadata/_custom_type_script = "uid://du4ysr150id7h"
 shape = SubResource("RectangleShape2D_h3hhy")
 
 [node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
-position = Vector2(-2, -20)
+position = Vector2(-3, -21)
 
 [node name="LaserBlocker" type="Area2D" parent="."]
 position = Vector2(0, -23)

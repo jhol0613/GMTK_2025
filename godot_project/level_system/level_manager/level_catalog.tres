@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=24 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=26 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -17,10 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://bis4mmgrdtses" path="res://levels/MonkeyLevel.tscn" id="14_wvvmg"]
 [ext_resource type="PackedScene" uid="uid://dltltis5tahy2" path="res://levels/level2-1.tscn" id="16_5wr1n"]
 [ext_resource type="PackedScene" uid="uid://dbaky6c84qdhh" path="res://levels/test_levels/interactable_test_level.tscn" id="17_nmtjp"]
-[ext_resource type="PackedScene" uid="uid://nvxx5syory5t" path="res://backgrounds/tunnel.tscn" id="17_peuoq"]
-[ext_resource type="PackedScene" uid="uid://44m1kxxusxto" path="res://backgrounds/world2/world2_placeholder.tscn" id="17_rcuhu"]
 [ext_resource type="PackedScene" uid="uid://cqus7ea6hnmos" path="res://levels/test_levels/moving_obstacle_test_level.tscn" id="18_y8p5u"]
 [ext_resource type="PackedScene" uid="uid://b3ups0rsbp08v" path="res://levels/test_levels/laser_test_level.tscn" id="19_y48yf"]
+[ext_resource type="PackedScene" uid="uid://nvxx5syory5t" path="res://backgrounds/transition/tunnel.tscn" id="20_5wr1n"]
+[ext_resource type="PackedScene" uid="uid://wc1pswyquc1g" path="res://levels/level2-9.tscn" id="20_nmtjp"]
+[ext_resource type="PackedScene" uid="uid://brvdaasnky18k" path="res://backgrounds/world2/world2_background.tscn" id="21_5wr1n"]
+[ext_resource type="PackedScene" uid="uid://cy0877omjeja8" path="res://levels/level2-10.tscn" id="21_y8p5u"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
@@ -33,12 +35,12 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_ydpb6"]
 script = ExtResource("2_lqinw")
-world_scene = ExtResource("17_rcuhu")
-level_list = Array[PackedScene]([ExtResource("16_5wr1n"), ExtResource("17_nmtjp"), ExtResource("18_y8p5u"), ExtResource("17_nmtjp"), ExtResource("19_y48yf")])
+world_scene = ExtResource("21_5wr1n")
+level_list = Array[PackedScene]([ExtResource("16_5wr1n"), ExtResource("17_nmtjp"), ExtResource("18_y8p5u"), ExtResource("17_nmtjp"), ExtResource("19_y48yf"), ExtResource("20_nmtjp"), ExtResource("21_y8p5u")])
 level_select_scene = 4
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
-transition_scene = ExtResource("17_peuoq")
+transition_scene = ExtResource("20_5wr1n")
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [resource]

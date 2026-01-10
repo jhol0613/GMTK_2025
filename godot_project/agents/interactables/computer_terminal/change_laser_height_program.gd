@@ -13,8 +13,6 @@ func _ready() -> void:
 	for laser in lasers:
 		original_heights.append(laser.height)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func run():
 	for laser in lasers:
 		laser.set_height_animated(new_height, animation_speed)

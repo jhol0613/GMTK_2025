@@ -19,13 +19,9 @@ tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0, 2, 0, 
 position = Vector2(243, 31)
 movement_path = Array[int]([4, 4, 3, 3])
 
-[node name="Laser" parent="." index="10" instance=ExtResource("3_1o8fn")]
-position = Vector2(208, 99)
-direction = 0
-default_animation = "fire_up"
-
-[node name="ComputerTerminal" parent="." index="11" instance=ExtResource("4_5i52b")]
+[node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
 position = Vector2(176, 29)
+input_delay_beats = 2.0
 follow_on_animation_on_success = "idle"
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]
@@ -34,10 +30,14 @@ lasers = [NodePath("../../Laser")]
 new_height = 58
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="HideBench" parent="." index="12" instance=ExtResource("6_qymky")]
+[node name="HideBench" parent="." index="11" instance=ExtResource("6_qymky")]
 position = Vector2(112, 27)
 hide_duration = 3
 
-[node name="CatCartObstacle" parent="." index="13" instance=ExtResource("7_x68qa")]
+[node name="CatCartObstacle" parent="." index="12" instance=ExtResource("7_x68qa")]
 position = Vector2(209, 87)
 movement_path = Array[int]([3, 3, 4, 4])
+
+[node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
+position = Vector2(112, 80)
+height = 64

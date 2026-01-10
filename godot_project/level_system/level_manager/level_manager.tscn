@@ -89,6 +89,7 @@ libraries = {
 
 [node name="ShakeCamera" type="Camera2D" parent="."]
 position = Vector2(300, 226)
+process_callback = 0
 script = ExtResource("19_xwfi3")
 
 [node name="SequencerLayer" type="CanvasLayer" parent="."]

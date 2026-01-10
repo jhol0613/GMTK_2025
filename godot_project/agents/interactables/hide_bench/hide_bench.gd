@@ -17,14 +17,29 @@ func _ready() -> void:
 	connect("interaction_succeeded", _on_interaction_succeeded)
 
 func _on_interaction_succeeded():
-	AudioManager.music_bar.connect(_on_music_bar)
-	started_hiding.emit()
-	hiding = true
-	beats_hidden = 0
+	#AudioManager.music_bar.connect(_on_music_bar)
+	if hiding:
+		_finish_hiding()
+	else:
+		_start_hiding()
+	#beats_hidden = 0
 	
-func _on_music_bar():
-	beats_hidden += 1
-	if beats_hidden >= hide_duration:
-		finished_hiding.emit()
-		hiding = false
-		AudioManager.music_bar.disconnect(_on_music_bar)
+	
+func _start_hiding():
+	player_animation_on_success = "unhide"
+	follow_on_animation_on_success = "idle_down"
+	hiding = true
+	started_hiding.emit()
+
+func _finish_hiding():
+	player_animation_on_success = "hide"
+	follow_on_animation_on_success = "hiding"
+	hiding = false
+	finished_hiding.emit()
+	
+#func _on_music_bar():
+	#beats_hidden += 1
+	#if beats_hidden >= hide_duration:
+		#finished_hiding.emit()
+		#hiding = false
+		#AudioManager.music_bar.disconnect(_on_music_bar)

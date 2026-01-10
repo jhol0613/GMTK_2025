@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://cy0877omjeja8"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_psfox"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="2_8bkav"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_np4t2"]
+[ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/turn_chair_program.gd" id="4_ytems"]
+[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="5_ytems"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_linlt"]
+
+[node name="LevelBase" instance=ExtResource("1_psfox")]
+conductor_enabled = false
+available_actions = Array[int]([4, 7, 1, 2])
+
+[node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
+position = Vector2(49, 9)
+repeatable = true
+follow_on_animations = Dictionary[int, String]({
+7: "idle"
+})
+
+[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="2" node_paths=PackedStringArray("chairs")]
+script = ExtResource("4_ytems")
+chairs = [NodePath("../../SpinningChair"), NodePath("../../SpinningChair2"), NodePath("../../SpinningChair3"), NodePath("../../SpinningChair4")]
+metadata/_custom_type_script = "uid://blcr4qlisfk4a"
+
+[node name="SpinningChair" parent="." index="10" node_paths=PackedStringArray("right_anchored_nodes") instance=ExtResource("2_8bkav")]
+position = Vector2(112, 9)
+start_direction = 1
+right_anchored_nodes = [NodePath("CatCoffeeSpill")]
+
+[node name="CatCoffeeSpill" parent="SpinningChair" index="5" instance=ExtResource("5_ytems")]
+position = Vector2(-1, 8)
+
+[node name="SpinningChair2" parent="." index="11" node_paths=PackedStringArray("right_anchored_nodes") instance=ExtResource("2_8bkav")]
+position = Vector2(176, 66)
+start_direction = 1
+right_anchored_nodes = [null]
+
+[node name="SpinningChair3" parent="." index="12" instance=ExtResource("2_8bkav")]
+position = Vector2(48, 66)
+start_direction = 1
+
+[node name="SpinningChair4" parent="." index="13" instance=ExtResource("2_8bkav")]
+position = Vector2(240, 10)
+start_direction = 1
+
+[node name="Treadmill" parent="." index="14" instance=ExtResource("7_linlt")]
+position = Vector2(16, 32)
