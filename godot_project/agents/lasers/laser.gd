@@ -58,6 +58,10 @@ func _ready() -> void:
 func _construct():
 	# Setters might be called before initialization
 	if !is_inside_tree(): return
+	
+	if !Engine.is_editor_hint() and max_beam_length > 0:
+		max_beam_length_vector = Vector2i(max_beam_length, max_beam_length) * \
+			Enums.direction_to_vector(direction)
 
 	# Laser visuals
 	_sprite.set_animation(direction_data.get(direction).animation_name)
@@ -88,21 +92,23 @@ func _update_endpoint(endpoint: Vector2):
 	#new_shape.b = beam_line.points[1]
 	#collision_shape.shape = new_shape
 	#collision_shape.disabled = true
-	
-func set_max_fire_distance_by_grid_spaces(grid_spaces: int):
-	##Don't use level geometry if max beam length is manually set
+
+##Called to set max fire distance based on static obstacles. Laser blockers can still cause this
+##distance to be shorter. If limit_is_wall is true, down-pointing lasers will apply an exception so 
+##that their visual range extends all the way to the train car wall
+func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool):
+	var down_laser_height_correction = Vector2i(0, 0)
 	if max_beam_length > 0:
 		return
+	if direction == Enums.Direction.DOWN and limit_is_wall:
+		down_laser_height_correction = Vector2i(0, height)
 	var correction = beam_end_correction_factor * Enums.direction_to_vector(direction)
 	max_beam_length_vector = grid_spaces * tile_size * Enums.direction_to_vector(direction) + \
-		correction
+		correction + down_laser_height_correction
 	_construct()
 
 func set_max_beam_length(new_length: int):
 	max_beam_length = new_length
-	if !Engine.is_editor_hint():
-		max_beam_length_vector = Vector2i(max_beam_length, max_beam_length + height) * \
-			Enums.direction_to_vector(direction)
 	_construct()
 
 func set_direction(new_direction: Enums.Direction):
@@ -153,7 +159,6 @@ func _reset_shadow():
 
 func _set_height(new_height: int):
 	# Gets rid of old height modifier for max_beam_length_vector and adds new height
-	
 	height = new_height
 	
 	if !is_inside_tree():
@@ -179,5 +184,13 @@ func _set_height(new_height: int):
 		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
 
 func set_height_animated(new_height: int, duration: float):
+	var old_height = height
 	new_height_tween = create_tween()
 	new_height_tween.tween_property(self, "height", new_height, duration)
+	new_height_tween.tween_callback(_update_max_firing_distance_for_down_laser_height_change.bind(old_height))
+
+func _update_max_firing_distance_for_down_laser_height_change(old_height: int):
+	if direction == Enums.Direction.DOWN:
+		var height_adjustment = Vector2((height - old_height) * Enums.direction_to_vector(Enums.Direction.DOWN))
+		max_beam_length_vector = max_beam_length_vector + height_adjustment
+		_construct()

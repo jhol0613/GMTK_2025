@@ -298,7 +298,9 @@ func _initialize_pushers() -> void:
 
 func _initialize_lasers() -> void:
 	for laser: Laser in _level_scene.lasers:
-		laser.set_max_fire_distance_by_grid_spaces(_level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction))
+		var cells_to_obstacle = _level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction)
+		var cells_to_wall = _level_scene.get_cells_to_level_edge(laser.grid_position, laser.direction)
+		laser.set_max_fire_distance_by_grid_spaces(cells_to_obstacle, cells_to_obstacle == cells_to_wall)
 
 #endregion
 

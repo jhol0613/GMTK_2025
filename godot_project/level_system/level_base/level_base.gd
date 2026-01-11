@@ -105,6 +105,15 @@ func get_cells_to_obstacle(grid_position: Vector2i, direction: Enums.Direction):
 			return cells
 		cells += 1
 
+func get_cells_to_level_edge(grid_position: Vector2i, direction: Enums.Direction):
+	var cells = 0
+	var check_position = grid_position
+	for i in range(100):
+		check_position = check_position + Enums.direction_to_vector(direction)
+		if !does_cell_exist(check_position):
+			return cells
+		cells += 1
+
 func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 	var neighbors = _obstacle_layer.get_surrounding_cells(grid_position)
 	var neighbors_to_return : Array[Vector2i]
@@ -130,8 +139,7 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 	return neighbors_to_return
 
 func is_cell_navigable(grid_position: Vector2i) -> bool:
-	var cell_exists = (_floor_layer.get_cell_source_id(grid_position) != -1 and
-			_floor_layer.get_cell_atlas_coords(grid_position) != Vector2i(-1,-1))
+	var cell_exists = does_cell_exist(grid_position)
 
 	var tile_data = _obstacle_layer.get_cell_tile_data(grid_position)
 	var cell_traversible = true # Traversible if the cell is unoccupied
@@ -140,6 +148,10 @@ func is_cell_navigable(grid_position: Vector2i) -> bool:
 	cell_traversible = cell_traversible and not _obstacle_overrides.has(grid_position)
 
 	return cell_exists and cell_traversible
+
+func does_cell_exist(grid_position: Vector2i) -> bool:
+	return (_floor_layer.get_cell_source_id(grid_position) != -1 and
+			_floor_layer.get_cell_atlas_coords(grid_position) != Vector2i(-1,-1))
 
 func get_tile_size() -> Vector2i:
 	return _floor_layer.tile_set.tile_size

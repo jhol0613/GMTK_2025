@@ -37,6 +37,14 @@ hide_duration = 3
 position = Vector2(209, 87)
 movement_path = Array[int]([3, 3, 4, 4])
 
-[node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
-position = Vector2(112, 80)
-height = 64
+[node name="ComputerTerminal2" parent="." index="13" instance=ExtResource("4_5i52b")]
+position = Vector2(17, 29)
+
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="6" node_paths=PackedStringArray("lasers")]
+script = ExtResource("5_h05u1")
+lasers = [NodePath("../../Laser")]
+new_height = 7
+metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="Laser" parent="." index="14" instance=ExtResource("3_1o8fn")]
+position = Vector2(47, 3)
