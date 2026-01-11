@@ -17,7 +17,7 @@ extends Node2D
 ##The distance that a train car will move (right) when play is pressed
 @export var train_move_right_on_play_distance := -22
 ##The amount of time it takes for train car to offset on pressing play
-@export var train_move_right_on_play_time := 1.2
+@export var train_move_right_on_play_time := 1.0
 ##The amount of time required for the level to visually advance
 @export var train_car_advance_play_time := 2.5
 @export_subgroup("Reset Delays")
@@ -206,7 +206,7 @@ func _reset_level() -> void:
 func _on_reset_animation_finished():
 	_action_sequencer.set_action_icons_hidden(false)
 	# TODO: maybe put a reset animation here
-	_player_character.reset()
+	_player_character.enable_collisions()
 
 ## Run once final world level complete (i.e. new world level already loaded)
 func _execute_world_transition():
@@ -442,10 +442,12 @@ func _on_advance_for_play_finished():
 	_advancing_car_for_play = false
 
 func _on_action_sequencer_replay_pressed() -> void:
+	_player_character.disable_collisions()
 	if _advancing_car_for_play:
 		_train_center.position = _initial_train_center_pos
 		_on_advance_for_play_finished()
 		_advance_car_tween.kill()
+		_on_reset_animation_finished()
 	else:
 		var tween = create_tween()
 		var target_pos := Vector2(-_level_number * next_car_offset, 0)
@@ -453,7 +455,6 @@ func _on_action_sequencer_replay_pressed() -> void:
 			.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 		tween.tween_callback(_on_reset_animation_finished)
 	_reset_level()
-	_player_character.disable_collisions()
 
 func _fade_to_running_shader():
 	var tween = create_tween().set_parallel(true)
