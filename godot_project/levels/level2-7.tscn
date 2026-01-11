@@ -42,6 +42,7 @@ collision_area = NodePath("../Target")
 position = Vector2(176, 98)
 direction = 0
 height = 64
+activation_sequence = Array[bool]([true, false])
 default_animation = "fire_up"
 
 [node name="Laser6" parent="." index="15" instance=ExtResource("2_llv2y")]

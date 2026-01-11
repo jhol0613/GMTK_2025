@@ -44,6 +44,7 @@ default_animation = "fire_down"
 position = Vector2(176, 3)
 direction = 1
 height = 64
+beam_end_correction_factor = Vector2i(0, 0)
 default_animation = "fire_down"
 
 [node name="Laser6" parent="." index="16" instance=ExtResource("4_5iht7")]
