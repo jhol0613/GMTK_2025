@@ -18,7 +18,6 @@ tile_map_data = PackedByteArray(0, 0, 9, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
 position = Vector2(49, 9)
 repeatable = true
-flip_horizontal = false
 follow_on_animations = Dictionary[int, String]({
 7: "idle"
 })

@@ -1,7 +1,73 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqob6deb6rmuc"]
+[gd_scene load_steps=4 format=3 uid="uid://cqob6deb6rmuc"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_llv2y"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_llv2y"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_vq6kx"]
 
 [node name="LevelBase" instance=ExtResource("1_llv2y")]
+player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 6
-available_actions = Array[int]([1, 2, 4, 7])
+available_actions = Array[int]([1, 2, 4, 3, 5, 6])
+
+[node name="Laser" parent="." index="9" instance=ExtResource("2_llv2y")]
+position = Vector2(48, 3)
+direction = 1
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_down"
+
+[node name="Laser2" parent="." index="10" instance=ExtResource("2_llv2y")]
+position = Vector2(80, 3)
+direction = 1
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_down"
+
+[node name="Laser3" parent="." index="11" instance=ExtResource("2_llv2y")]
+position = Vector2(112, 3)
+direction = 1
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_down"
+
+[node name="Laser4" parent="." index="12" instance=ExtResource("2_llv2y")]
+position = Vector2(144, 3)
+direction = 1
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_down"
+
+[node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("collision_area") instance=ExtResource("3_vq6kx")]
+position = Vector2(80, 69)
+movement_path = Array[int]([3, 1, 4, 4, 4, 2, 3, 3])
+collision_area = NodePath("../Target")
+
+[node name="Laser5" parent="." index="14" instance=ExtResource("2_llv2y")]
+position = Vector2(176, 98)
+direction = 0
+height = 64
+default_animation = "fire_up"
+
+[node name="Laser6" parent="." index="15" instance=ExtResource("2_llv2y")]
+position = Vector2(208, 98)
+direction = 0
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_up"
+
+[node name="Laser7" parent="." index="16" instance=ExtResource("2_llv2y")]
+position = Vector2(240, 98)
+direction = 0
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_up"
+
+[node name="Laser8" parent="." index="17" instance=ExtResource("2_llv2y")]
+position = Vector2(272, 98)
+direction = 0
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_up"
+
+[node name="Laser9" parent="." index="18" instance=ExtResource("2_llv2y")]
+position = Vector2(304, 98)
+direction = 0
+activation_sequence = Array[bool]([true, true])
+default_animation = "fire_up"
+
+[node name="SnackCartObstacle2" parent="." index="19" instance=ExtResource("3_vq6kx")]
+position = Vector2(208, 49)
+movement_path = Array[int]([2, 4, 4, 4, 1, 3, 3, 3])
