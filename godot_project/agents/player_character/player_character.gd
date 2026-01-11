@@ -13,6 +13,8 @@ class_name PlayerCharacter
 #@export var collision: CollisionObject2D
 @export var jump_collision_timer: Timer
 @export var duck_collision_timer: Timer
+@export var laser_blocker: LaserBlocker
+@export var laser_blocker_collision_shape: CollisionShape2D
 
 @export_subgroup("Animation")
 ##Time to wait before playing success animation (to give sprite a chance to physically catch up to triggered location)
@@ -54,6 +56,17 @@ func disable_collisions() -> void:
 func enable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
+func _on_laser_hit(area: Area2D):
+	pass
+	#var test = Enums.CollisionLayer.ENEMIES
+	#if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
+		#if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
+			#return
+		#if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
+			#return
+		#notify_failure()
+		#failure.emit()
+
 func _on_collision(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
 		if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
@@ -69,7 +82,9 @@ func reset():
 
 func on_jump_collision_disabled_expire() -> void:
 	_jumping = false
+	laser_blocker_collision_shape.disabled = false
 	#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
 	
 func on_duck_collision_disabled_expire() -> void:
+	laser_blocker_collision_shape.disabled = false
 	_ducking = false
