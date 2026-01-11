@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=4 uid="uid://di4gyyyyfrf2u"]
+[gd_scene load_steps=3 format=4 uid="uid://c0i1muwqc86y0"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_hckjy"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_hckjy"]

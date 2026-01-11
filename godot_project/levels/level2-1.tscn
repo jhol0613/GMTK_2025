@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=4 uid="uid://bsay3jq0vshq2"]
+[gd_scene load_steps=4 format=4 uid="uid://bsay3jq0vshq2"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_g0u3c"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="2_y1s2r"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_y1s2r"]
 
-[node name="LevelBase" instance=ExtResource("1_g0u3c")]
+[node name="LevelBase2" instance=ExtResource("1_g0u3c")]
 conductor_spawn_beat = 6
 available_actions = Array[int]([1, 2, 4, 7])
 
@@ -13,3 +14,6 @@ tile_map_data = PackedByteArray("AAADAAAAAAABAAIAAAADAAEAAAABAAMAAAADAP//AAABAAA
 [node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("2_y1s2r")]
 position = Vector2(111, 48)
 flip_horizontal = true
+
+[node name="Collectible" parent="." index="10" instance=ExtResource("3_y1s2r")]
+position = Vector2(335, 99)

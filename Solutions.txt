@@ -1,2 +1,4 @@
 Level
-2-1 (interactable intro) U R R D D R I R
+2-1 (interactable intro) U R R D D R I R (Collectible: R R D D R I U U)
+2-9 R R I R
+2-10 U U R I R D R R

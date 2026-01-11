@@ -14,6 +14,10 @@ class_name PlayerCharacter
 @export var jump_collision_timer: Timer
 @export var duck_collision_timer: Timer
 
+@export_subgroup("Animation")
+##Time to wait before playing success animation (to give sprite a chance to physically catch up to triggered location)
+var success_animation_delay := 0.3
+
 @onready var _jumping = false
 @onready var _ducking = false
 
@@ -35,6 +39,7 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		_ducking = true
 
 func notify_success():
+	await get_tree().create_timer(success_animation_delay).timeout
 	play_animation_with_follow_on("success")
 	success_emitter.play()
 
