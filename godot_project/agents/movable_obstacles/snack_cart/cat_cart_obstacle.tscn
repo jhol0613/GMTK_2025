@@ -105,6 +105,7 @@ shape = SubResource("RectangleShape2D_h3hhy")
 
 [node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
 position = Vector2(-3, -21)
+flip_horizontal = true
 
 [node name="LaserBlocker" type="Area2D" parent="."]
 position = Vector2(0, -23)
