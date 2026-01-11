@@ -70,18 +70,24 @@ func _construct():
 	raycast.target_position = max_beam_length_vector
 	
 	_update_endpoint(max_beam_length_vector)
-
-## Endpoint should be given relative to the beam_line position
-func _update_endpoint(endpoint: Vector2):
-	# Visuals
-	beam_line.points[1] = endpoint
-	beam_end.position = beam_line.points[1]
 	
 	# Collision
 	var new_shape = collision_shape.shape.duplicate()
 	new_shape.b = beam_line.points[1]
 	collision_shape.shape = new_shape
 	collision_shape.disabled = true
+
+##Endpoint should be given relative to the beam_line position
+func _update_endpoint(endpoint: Vector2):
+	# Visuals
+	beam_line.points[1] = endpoint
+	beam_end.position = beam_line.points[1]
+	
+	## Collision
+	#var new_shape = collision_shape.shape.duplicate()
+	#new_shape.b = beam_line.points[1]
+	#collision_shape.shape = new_shape
+	#collision_shape.disabled = true
 	
 func set_max_fire_distance_by_grid_spaces(grid_spaces: int):
 	##Don't use level geometry if max beam length is manually set

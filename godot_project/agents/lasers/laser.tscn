@@ -21,14 +21,14 @@
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_up"
-start_position_offset = Vector2(0, -9)
+start_position_offset = Vector2(0, -13)
 end_image = ExtResource("6_chnl6")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_knkgi"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_down"
-start_position_offset = Vector2(0, 2)
+start_position_offset = Vector2(0, -2)
 end_image = ExtResource("3_to654")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -175,7 +175,7 @@ raycast = NodePath("Visuals/BeamLine/RayCast2D")
 pole1 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1")
 pole2 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2")
 shadow = NodePath("Visuals/Pole1Shadow")
-direction = 3
+height = 64
 jumpable_threshhold = 16.0
 beam_width = 1
 direction_data = Dictionary[int, ExtResource("2_g7y3a")]({
@@ -188,7 +188,7 @@ default_action_beat = 2.0
 activation_sequence = Array[bool]([false, true])
 default_sound_emitter = NodePath("SoundEmitter")
 sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
-default_animation = "fire_right"
+default_animation = "fire_down"
 metadata/_edit_vertical_guides_ = [-55.0]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -226,6 +226,7 @@ texture = ExtResource("9_to654")
 position = Vector2(16, 112)
 
 [node name="Pole1" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset"]
+position = Vector2(0, -33)
 texture = ExtResource("10_2o4ih")
 
 [node name="RenderBox2" type="TextureRect" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1"]
@@ -239,12 +240,15 @@ offset_bottom = -13.0
 position = Vector2(10, 66)
 
 [node name="Pole2" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset"]
+position = Vector2(0, -24)
 texture = ExtResource("11_tquva")
 
 [node name="LaserHead" type="AnimatedSprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2"]
 position = Vector2(0, -19)
 sprite_frames = ExtResource("7_use4v")
-animation = &"fire_right"
+animation = &"fire_down"
+frame = 6
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 default_animation_offset = -0.5
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
@@ -252,7 +256,8 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 [node name="Pole1Shadow" type="AnimatedSprite2D" parent="Visuals"]
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
-animation = &"stowed"
+animation = &"deployed"
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
@@ -266,7 +271,7 @@ texture_mode = 2
 
 [node name="BeamEnd" type="Sprite2D" parent="Visuals/BeamLine"]
 visible = false
-texture = ExtResource("5_tquva")
+texture = ExtResource("3_to654")
 
 [node name="RayCast2D" type="RayCast2D" parent="Visuals/BeamLine"]
 visible = false
@@ -276,7 +281,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="Collision" type="Area2D" parent="."]
-collision_layer = 96
+collision_layer = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("SegmentShape2D_lyym0")

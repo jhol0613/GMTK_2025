@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cl46e5b8lrrmo"]
+[gd_scene load_steps=5 format=3 uid="uid://cl46e5b8lrrmo"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_nxyie"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_x7b4s"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_ahmw1"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_ahmw1"]
 
 [node name="LevelBase" instance=ExtResource("1_nxyie")]
 conductor_spawn_beat = 6
@@ -27,28 +28,27 @@ direction = 3
 [node name="Laser" parent="." index="13" instance=ExtResource("2_x7b4s")]
 position = Vector2(48, 98)
 direction = 0
+height = 7
 default_animation = "fire_up"
 
 [node name="Laser2" parent="." index="14" instance=ExtResource("2_x7b4s")]
 position = Vector2(112, 3)
-direction = 1
-height = 64
-default_animation = "fire_down"
+height = 48
 
 [node name="Laser3" parent="." index="15" instance=ExtResource("2_x7b4s")]
 position = Vector2(177, 98)
 direction = 0
+height = 7
 default_animation = "fire_up"
 
 [node name="Laser4" parent="." index="16" instance=ExtResource("2_x7b4s")]
 position = Vector2(241, 3)
-direction = 1
-height = 64
-default_animation = "fire_down"
+height = 48
 
 [node name="Laser5" parent="." index="17" instance=ExtResource("2_x7b4s")]
 position = Vector2(305, 98)
 direction = 0
+height = 7
 default_animation = "fire_up"
 
 [node name="Treadmill5" parent="." index="18" instance=ExtResource("3_ahmw1")]
@@ -66,3 +66,6 @@ direction = 3
 [node name="Treadmill8" parent="." index="21" instance=ExtResource("3_ahmw1")]
 position = Vector2(272, 54)
 direction = 3
+
+[node name="SnackCartObstacle" parent="." index="22" instance=ExtResource("4_ahmw1")]
+position = Vector2(16, 31)
