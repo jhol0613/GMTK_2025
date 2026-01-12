@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://m8c53vf6waxo"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_oxi8i"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_743l8"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_rkh4g"]
+
+[node name="LevelBase" instance=ExtResource("1_oxi8i")]
+conductor_enabled = false
+available_actions = Array[int]([1, 2, 3, 4, 5, 6])
+
+[node name="Laser" parent="." index="9" instance=ExtResource("2_743l8")]
+visible = false
+position = Vector2(241, 22)
+activation_sequence = Array[bool]([true, false, false, false])
+
+[node name="Laser2" parent="." index="10" instance=ExtResource("2_743l8")]
+visible = false
+position = Vector2(303, 59)
+direction = 2
+activation_sequence = Array[bool]([false, true, false, false])
+default_animation = "fire_left"
+
+[node name="Laser3" parent="." index="11" instance=ExtResource("2_743l8")]
+visible = false
+position = Vector2(176, 61)
+direction = 3
+activation_sequence = Array[bool]([false, false, false, true])
+default_animation = "fire_right"
+
+[node name="Laser4" parent="." index="12" instance=ExtResource("2_743l8")]
+visible = false
+position = Vector2(240, 98)
+direction = 0
+activation_sequence = Array[bool]([false, false, true, false])
+default_animation = "fire_up"
+
+[node name="Laser5" parent="." index="13" instance=ExtResource("2_743l8")]
+position = Vector2(79, 2)
+activation_sequence = Array[bool]([true, false, false, false])
+
+[node name="Laser6" parent="." index="14" instance=ExtResource("2_743l8")]
+visible = false
+position = Vector2(112, 99)
+direction = 2
+activation_sequence = Array[bool]([false, true, false, false])
+default_animation = "fire_left"
+
+[node name="Laser8" parent="." index="15" instance=ExtResource("2_743l8")]
+position = Vector2(16, 80)
+direction = 3
+activation_sequence = Array[bool]([false, false, false, true])
+default_animation = "fire_right"
+
+[node name="Laser7" parent="." index="16" instance=ExtResource("2_743l8")]
+position = Vector2(49, 40)
+direction = 0
+activation_sequence = Array[bool]([false, false, true, false])
+default_animation = "fire_up"
+
+[node name="SnackCartObstacle" parent="." index="17" instance=ExtResource("3_rkh4g")]
+position = Vector2(241, 50)

@@ -56,6 +56,7 @@ func disable_collisions() -> void:
 func enable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
+#not detecting laser hits for some reason
 func _on_laser_hit(area: Area2D):
 	pass
 	#var test = Enums.CollisionLayer.ENEMIES
@@ -68,6 +69,7 @@ func _on_laser_hit(area: Area2D):
 		#failure.emit()
 
 func _on_collision(area: Area2D) -> void:
+	#pass
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
 		if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
 			return

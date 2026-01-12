@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=35 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="11_gmiso"]
 [ext_resource type="Texture2D" uid="uid://oe5ye3277wus" path="res://agents/lasers/new_laser_visuals/telescope2.png" id="11_tquva"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="12_to654"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="14_mgkp8"]
 [ext_resource type="Texture2D" uid="uid://dqk05pfcdke64" path="res://agents/lasers/new_laser_visuals/stowed_shadow.png" id="16_chnl6"]
 [ext_resource type="Texture2D" uid="uid://cnmot5c0cn1y4" path="res://agents/lasers/new_laser_visuals/low_shadow.png" id="16_lyym0"]
 
@@ -120,6 +121,34 @@ _data = {
 &"laser_fire": SubResource("Animation_e1xtw")
 }
 
+[sub_resource type="Resource" id="Resource_jtygs"]
+script = ExtResource("14_mgkp8")
+signal_id = "fire"
+animation = "fire_up"
+frame = 3
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_7lqwi"]
+script = ExtResource("14_mgkp8")
+signal_id = "fire"
+animation = "fire_down"
+frame = 3
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_u3qbj"]
+script = ExtResource("14_mgkp8")
+signal_id = "fire"
+animation = "fire_left"
+frame = 3
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_kbih7"]
+script = ExtResource("14_mgkp8")
+signal_id = "fire"
+animation = "fire_right"
+frame = 3
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyym0"]
 atlas = ExtResource("9_tquva")
 region = Rect2(0, 0, 20, 10)
@@ -162,16 +191,18 @@ animations = [{
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lyym0"]
 b = Vector2(0, 0)
 
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "beam_line", "beam_end", "raycast", "pole1", "pole2", "shadow", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_line", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
 collision_area = NodePath("Collision")
 collision_shape = NodePath("Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
+visuals = NodePath("Visuals")
 beam_line = NodePath("Visuals/BeamLine")
 beam_end = NodePath("Visuals/BeamLine/BeamEnd")
-raycast = NodePath("Visuals/BeamLine/RayCast2D")
+base_raycast = NodePath("Visuals/BaseRaycast")
+beam_raycast = NodePath("Visuals/BeamLine/BeamRaycast")
 pole1 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1")
 pole2 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2")
 shadow = NodePath("Visuals/Pole1Shadow")
@@ -248,6 +279,7 @@ position = Vector2(0, -19)
 sprite_frames = ExtResource("7_use4v")
 animation = &"fire_down"
 script = ExtResource("11_gmiso")
+signals = Array[ExtResource("14_mgkp8")]([SubResource("Resource_jtygs"), SubResource("Resource_7lqwi"), SubResource("Resource_u3qbj"), SubResource("Resource_kbih7")])
 default_animation_offset = -0.5
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
@@ -259,9 +291,13 @@ frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
+[node name="BaseRaycast" type="RayCast2D" parent="Visuals"]
+collision_mask = 512
+collide_with_areas = true
+collide_with_bodies = false
+
 [node name="BeamLine" type="Line2D" parent="Visuals"]
 visible = false
-position = Vector2(300, 300)
 points = PackedVector2Array(0, 0, 0, 0)
 width = 4.0
 texture = ExtResource("7_dshi8")
@@ -271,9 +307,7 @@ texture_mode = 2
 visible = false
 texture = ExtResource("3_to654")
 
-[node name="RayCast2D" type="RayCast2D" parent="Visuals/BeamLine"]
-visible = false
-target_position = Vector2(0, 0)
+[node name="BeamRaycast" type="RayCast2D" parent="Visuals/BeamLine"]
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
