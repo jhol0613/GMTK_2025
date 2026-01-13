@@ -11,6 +11,8 @@ class_name Pusher
 ##If true, push action will cancel the sound that was queued with the action. If not, push action
 ##sound will just play on top of the queud action sound
 @export var should_cancel_sound := true
+##A disabled pusher will not react to overlaps
+@export var enabled := true: set = _set_enabled
 
 ##Use this instead of setting collision layers directly
 @export_subgroup("collision")
@@ -51,6 +53,10 @@ func _on_music_bar():
 	# Trigger overlaps again if movable is still overlapping
 	#for area in get_overlapping_areas():
 		#_on_area_entered(area)
+
+func _set_enabled(new_enabled):
+	monitoring = new_enabled
+	monitorable = new_enabled
 
 func _on_push_beat_timeout():
 	# No check that it's a movable because mask should already be set appropriately

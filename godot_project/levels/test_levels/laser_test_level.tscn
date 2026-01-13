@@ -48,5 +48,5 @@ metadata/_custom_type_script = "uid://brjyxyhy640eh"
 [node name="Laser" parent="." index="14" instance=ExtResource("3_1o8fn")]
 position = Vector2(48, 99)
 direction = 0
-height = 48
+height = 7
 default_animation = "fire_up"

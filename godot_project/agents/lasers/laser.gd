@@ -18,6 +18,7 @@ class_name Laser
 @export var pole1 : Sprite2D
 @export var pole2 : Sprite2D
 @export var shadow : AnimatedSprite2DSignals
+@export var obstacle : MovableObstacle
 
 ##Height corresponding to a laser shooting out of the ground
 const popup_height := 7
@@ -221,11 +222,13 @@ func _set_height(new_height: int):
 	
 	if height <= popup_height:
 		shadow.play("stowed")
+		obstacle.enabled = false
 	elif height <= deployed_transition:
 		shadow.play("low")
+		obstacle.enabled = true
 	else:
 		shadow.play("deployed")
-		
+		obstacle.enabled = true
 	if height >= duckable_threshhold:
 		collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, true)
 	else:

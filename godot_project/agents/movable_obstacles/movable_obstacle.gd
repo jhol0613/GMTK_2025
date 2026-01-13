@@ -5,6 +5,8 @@ class_name MovableObstacle
 ##Repeating path for this object to follow
 @export var movement_path: Array[Enums.PlayerAction]
 @export var pusher: Pusher
+##A disabled obstacle will not move or use its pusher, and its grid space will be considered unoccupied
+@export var enabled := true: set = _set_enabled
 
 @onready var _move_cursor_start_position := 0
 @onready var _move_cursor := _move_cursor_start_position
@@ -19,6 +21,8 @@ func _ready() -> void:
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
 func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):
+	if not enabled:
+		return
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
 	if Enums.is_action_fall(action):
 		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)
@@ -35,7 +39,7 @@ func advance_move_cursor():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	if pusher and movement_path.size() > 0:	
+	if pusher and movement_path.size() > 0: 
 		pusher.push_action = _direction_to_push_action(movement_path[(_move_cursor-1) % movement_path.size()])
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
@@ -55,6 +59,10 @@ func _direction_to_push_action(move_direction: Enums.PlayerAction) -> Enums.Play
 ##Sets the position in the move sequence where the cursor should start
 func set_move_cursor_start_position(new_start_position: int):
 	_move_cursor_start_position = new_start_position
+
+func _set_enabled(new_enabled):
+	pusher._set_enabled(new_enabled)
+	enabled = new_enabled
 
 func reset():
 	super.reset()

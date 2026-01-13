@@ -333,7 +333,8 @@ func _update_obstacles():
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
 	for obstacle in _level_scene.movable_obstacles:
-		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+		if obstacle.enabled:
+			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 ##Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
 func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction):
