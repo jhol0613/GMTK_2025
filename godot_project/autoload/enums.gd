@@ -101,6 +101,11 @@ enum PushMode {
 	INSTANT
 }
 
+enum ConductorState {
+	PURSUE,
+	UNAWARE,
+	FOUND # transitional, goes directly to pursue
+}
 
 #region Action and Vector conversions
 var NORTHEAST = Vector2i.UP + Vector2i.RIGHT

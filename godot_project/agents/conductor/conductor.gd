@@ -10,6 +10,7 @@ class_name Conductor
 var _first_action = true
 
 var facing_direction = Enums.Direction.RIGHT
+var state = Enums.ConductorState.UNAWARE
 
 func _ready():
 	super._ready()

@@ -73,7 +73,6 @@ var _spawned_obstacles : Array[MovableObstacle]
 # Additional state variables
 var _player_hidden = false
 var _player_newly_hidden = false
-var _conductor_aware_of_player = true
 
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
@@ -252,8 +251,8 @@ func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
-	if _player_hidden:
-		_conductor_aware_of_player = false
+	if not _player_hidden:
+		_conductor.state = Enums.ConductorState.PURSUE
 
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
@@ -358,7 +357,7 @@ func _update_conductor() -> void:
 		_spawn_conductor()
 	_update_conductor_awareness()
 	# Target next train car if player's hidden
-	var target = _player_character.grid_position if _conductor_aware_of_player else _level_scene.target_position
+	var target = _player_character.grid_position if _conductor.state == Enums.ConductorState.PURSUE else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
 		.get_id_path(_conductor.grid_position, target, true)
 	if conductor_path.size() < 2:
@@ -370,13 +369,25 @@ func _update_conductor() -> void:
 
 ##Use conductor facing direction, player hide status and position to determine if conductor should become aware
 func _update_conductor_awareness():
-	if not _player_hidden and _conductor: # Only update awareness if hidden (and conductor exists)
-		var new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
-		if _conductor.facing_direction == Enums.Direction.LEFT:
-			new_awareness = !new_awareness
-		if not _conductor_aware_of_player and new_awareness:
+	if _player_hidden or not _conductor:
+		return
+
+	match _conductor.state:
+		# a little state machine for conductor awareness
+		# the conductor can lose the player when not hiding
+		Enums.ConductorState.UNAWARE, Enums.ConductorState.PURSUE:
+			var new_awareness := true
+			if _conductor.facing_direction == Enums.Direction.LEFT:
+				new_awareness = _player_character.grid_position.x <= _conductor.grid_position.x
+			else:
+				new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
+
+			if new_awareness and _conductor.state == Enums.ConductorState.UNAWARE:
+				_conductor.state = Enums.ConductorState.FOUND
+		Enums.ConductorState.FOUND:
+			print("ConductorState: FOUND")
+			_conductor.state = Enums.ConductorState.PURSUE
 			_conductor.play_aware_animation()
-		_conductor_aware_of_player = new_awareness
 
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:
