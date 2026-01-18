@@ -16,7 +16,7 @@ activation_sequence = Array[bool]([true, false, false, false])
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("3_45wtd")]
 position = Vector2(17, 29)
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="6" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="3" node_paths=PackedStringArray("lasers")]
 script = ExtResource("4_dtmfp")
 lasers = [NodePath("../../Laser")]
 new_height = 7
@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://brjyxyhy640eh"
 position = Vector2(16, 85)
 interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1), Vector2i(0, -1)])
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="6" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
 script = ExtResource("4_dtmfp")
 lasers = [NodePath("../../Laser")]
 new_height = 38

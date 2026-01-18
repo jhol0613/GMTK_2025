@@ -357,11 +357,15 @@ func _update_conductor() -> void:
 		_spawn_conductor()
 	_update_conductor_awareness()
 	# Target next train car if player's hidden
-	var target = _player_character.grid_position if _conductor.state == Enums.ConductorState.PURSUE else _level_scene.target_position
+	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
 		.get_id_path(_conductor.grid_position, target, true)
 	if conductor_path.size() < 2:
+		# catch the seated player
+		if _conductor.state != Enums.ConductorState.UNAWARE and _player_hidden:
+			_hide_player(false) # optionally, another failure animation
 		return
+
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
@@ -369,25 +373,32 @@ func _update_conductor() -> void:
 
 ##Use conductor facing direction, player hide status and position to determine if conductor should become aware
 func _update_conductor_awareness():
-	if _player_hidden or not _conductor:
+	if not _conductor:
 		return
 
 	match _conductor.state:
 		# a little state machine for conductor awareness
 		# the conductor can lose the player when not hiding
-		Enums.ConductorState.UNAWARE, Enums.ConductorState.PURSUE:
+		Enums.ConductorState.PURSUE:
+			if _player_hidden:
+				_conductor.state = Enums.ConductorState.ANGRY
+				_conductor.play_current_emotion()
+		Enums.ConductorState.UNAWARE:
+			if _player_hidden:
+				return
 			var new_awareness := true
 			if _conductor.facing_direction == Enums.Direction.LEFT:
 				new_awareness = _player_character.grid_position.x <= _conductor.grid_position.x
 			else:
 				new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
 
-			if new_awareness and _conductor.state == Enums.ConductorState.UNAWARE:
+			if new_awareness:
 				_conductor.state = Enums.ConductorState.FOUND
 		Enums.ConductorState.FOUND:
-			print("ConductorState: FOUND")
 			_conductor.state = Enums.ConductorState.PURSUE
-			_conductor.play_aware_animation()
+			_conductor.play_current_emotion()
+		Enums.ConductorState.ANGRY:
+			pass
 
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:

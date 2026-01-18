@@ -30,8 +30,14 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 			sprite.flip_h = true
 			facing_direction = Enums.Direction.LEFT
 
-func play_aware_animation():
-	emotes.animation = "aware"
+func play_current_emotion():
+	match state:
+		Enums.ConductorState.ANGRY:
+			emotes.animation = "angry"
+		Enums.ConductorState.FOUND:
+			emotes.animation = "aware"
+		_:
+			return
 	emotes.play()
 	await emotes.animation_finished
 	emotes.animation = "default"

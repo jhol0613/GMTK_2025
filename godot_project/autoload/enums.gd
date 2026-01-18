@@ -104,7 +104,8 @@ enum PushMode {
 enum ConductorState {
 	PURSUE,
 	UNAWARE,
-	FOUND # transitional, goes directly to pursue
+	FOUND, # transitional, goes directly to pursue
+	ANGRY # goes here from pursue, when conductor sees the player hide
 }
 
 #region Action and Vector conversions
