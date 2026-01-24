@@ -11,7 +11,7 @@ conductor_spawn_beat = 6
 available_actions = Array[int]([1, 2, 4, 3, 5, 6])
 
 [node name="SnackCartObstacle" parent="." index="9" instance=ExtResource("2_kmakh")]
-position = Vector2(80, 50)
+position = Vector2(84, 46)
 movement_path = Array[int]([3, 1, 4, 4, 4, 2, 3, 3])
 
 [node name="SnackCartObstacle2" parent="." index="10" instance=ExtResource("2_kmakh")]

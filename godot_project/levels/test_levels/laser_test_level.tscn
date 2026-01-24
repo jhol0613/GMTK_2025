@@ -1,25 +1,32 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3ups0rsbp08v"]
+[gd_scene load_steps=9 format=3 uid="uid://b3ups0rsbp08v"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_21cbe"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_u3brs"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_1o8fn"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_5i52b"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/change_laser_height_program.gd" id="5_h05u1"]
-[ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="6_qymky"]
+[ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="7_21cbe"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
+size = Vector2(19, 23)
 
 [node name="LevelBase" instance=ExtResource("1_21cbe")]
 conductor_spawn_beat = 5
-available_actions = Array[int]([6, 4, 7, 1, 2])
+conductor_enabled = false
+available_actions = Array[int]([6, 4, 7, 1, 2, 5])
+
+[node name="Decorative" parent="." index="0"]
+tile_map_data = PackedByteArray(0, 0, 3, 0, 253, 255, 1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 253, 255, 1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0)
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0, 2, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 4, 0, 2, 0, 0, 0, 0, 0, 4, 0, 1, 0, 4, 0, 1, 0, 0, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
 [node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("2_u3brs")]
-position = Vector2(210, 87)
+position = Vector2(243, 49)
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
-position = Vector2(176, 29)
+position = Vector2(175, 51)
 follow_on_animation_on_success = "idle"
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]
@@ -28,15 +35,11 @@ lasers = [NodePath("../../Laser")]
 new_height = 58
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="HideBench" parent="." index="11" instance=ExtResource("6_qymky")]
-position = Vector2(112, 27)
-hide_duration = 3
-
-[node name="CatCartObstacle" parent="." index="12" instance=ExtResource("7_x68qa")]
-position = Vector2(271, 50)
+[node name="CatCartObstacle" parent="." index="11" instance=ExtResource("7_x68qa")]
+position = Vector2(273, 10)
 movement_path = Array[int]([3, 3, 4, 4])
 
-[node name="ComputerTerminal2" parent="." index="13" instance=ExtResource("4_5i52b")]
+[node name="ComputerTerminal2" parent="." index="12" instance=ExtResource("4_5i52b")]
 position = Vector2(209, 31)
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
@@ -45,8 +48,20 @@ lasers = [NodePath("../../Laser")]
 new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="Laser" parent="." index="14" instance=ExtResource("3_1o8fn")]
+[node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
 position = Vector2(48, 99)
 direction = 0
 height = 7
 default_animation = "fire_up"
+
+[node name="LaserBlocker" type="Area2D" parent="." index="14"]
+z_index = 1
+collision_layer = 512
+collision_mask = 0
+script = ExtResource("7_21cbe")
+altitude = 30
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker" index="0"]
+position = Vector2(144, 15)
+shape = SubResource("RectangleShape2D_u3brs")

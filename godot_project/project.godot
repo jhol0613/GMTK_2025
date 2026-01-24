@@ -120,6 +120,7 @@ DebugAction={
 2d_physics/layer_8="Pushable"
 2d_physics/layer_9="Duckable"
 2d_physics/layer_10="LaserBlocker"
+2d_physics/layer_11="SelfDetect"
 
 [rendering]
 

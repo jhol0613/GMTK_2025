@@ -6,7 +6,7 @@
 
 [node name="LevelBase" instance=ExtResource("1_qgrj8")]
 conductor_enabled = false
-available_actions = Array[int]([4, 1, 2, 7])
+available_actions = Array[int]([4, 1, 2, 7, 5, 6])
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray(0, 0, 2, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 4, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0)
