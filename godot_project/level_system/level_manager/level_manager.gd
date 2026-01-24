@@ -360,12 +360,28 @@ func _update_conductor() -> void:
 	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
 		.get_id_path(_conductor.grid_position, target, true)
-	if conductor_path.size() < 2:
+
+	# find path state
+	var traversible = true
+	var reached = conductor_path.size() < 2
+	for node in conductor_path:
+		if node[0] < 0 or node[1] < 0:
+			traversible = false
+			break
+
+	if reached:
 		# catch the seated player
 		if _conductor.state != Enums.ConductorState.UNAWARE and _player_hidden:
 			_hide_player(false) # optionally, another failure animation
 		return
 
+	# launch the animation only once
+	if not traversible and _conductor.state != Enums.ConductorState.UNREACHABLE:
+		_conductor.state = Enums.ConductorState.UNREACHABLE_START
+
+	# skip the next action if the conductor is trying to leave the map
+	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
+		return
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
@@ -395,10 +411,16 @@ func _update_conductor_awareness():
 			if new_awareness:
 				_conductor.state = Enums.ConductorState.FOUND
 		Enums.ConductorState.FOUND:
-			_conductor.state = Enums.ConductorState.PURSUE
 			_conductor.play_current_emotion()
+			_conductor.state = Enums.ConductorState.PURSUE
 		Enums.ConductorState.ANGRY:
 			pass
+		Enums.ConductorState.UNREACHABLE_START:
+			_conductor.play_current_emotion()
+			_conductor.state = Enums.ConductorState.UNREACHABLE
+		Enums.ConductorState.UNREACHABLE:
+			pass
+
 
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:

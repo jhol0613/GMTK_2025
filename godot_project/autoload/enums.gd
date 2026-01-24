@@ -105,7 +105,9 @@ enum ConductorState {
 	PURSUE,
 	UNAWARE,
 	FOUND, # transitional, goes directly to pursue
-	ANGRY # goes here from pursue, when conductor sees the player hide
+	ANGRY, # goes here from pursue, when conductor sees the player hide
+	UNREACHABLE_START, # transitional, can't reach the player
+	UNREACHABLE # can't reach the player
 }
 
 #region Action and Vector conversions

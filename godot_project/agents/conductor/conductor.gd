@@ -36,6 +36,8 @@ func play_current_emotion():
 			emotes.animation = "angry"
 		Enums.ConductorState.FOUND:
 			emotes.animation = "aware"
+		Enums.ConductorState.UNREACHABLE_START:
+			emotes.animation = "unreachable"
 		_:
 			return
 	emotes.play()
