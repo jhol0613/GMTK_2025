@@ -261,4 +261,9 @@ func get_reverse_fall(action: PlayerAction) -> PlayerAction:
 		_:
 			return PlayerAction.NONE
 
+func is_vertical(direction: Direction) -> bool:
+	if direction == Direction.LEFT or direction == Direction.RIGHT:
+		return false
+	else:
+		return true
 #endregion

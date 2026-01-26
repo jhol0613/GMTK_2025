@@ -23,7 +23,7 @@
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_up"
-start_position_offset = Vector2(0, -13)
+start_position_offset = Vector2(0, -3)
 end_image = ExtResource("6_chnl6")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -37,14 +37,14 @@ metadata/_custom_type_script = "uid://duifkavk2c1j8"
 [sub_resource type="Resource" id="Resource_yjehw"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_left"
-start_position_offset = Vector2(-9, -5)
+start_position_offset = Vector2(-9, 3)
 end_image = ExtResource("4_2o4ih")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_use4v"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_right"
-start_position_offset = Vector2(9, -5)
+start_position_offset = Vector2(9, 3)
 end_image = ExtResource("5_tquva")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -189,7 +189,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jtygs"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7lqwi"]
 b = Vector2(0, 0)
 
 [node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_line", "beam_line_extension_1", "beam_line_extension_2", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
@@ -296,6 +296,7 @@ script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="BaseRaycast" type="RayCast2D" parent="Visuals"]
+visible = false
 target_position = Vector2(0, 0)
 collision_mask = 512
 collide_with_areas = true
@@ -337,7 +338,7 @@ texture_mode = 2
 collision_layer = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-shape = SubResource("SegmentShape2D_jtygs")
+shape = SubResource("SegmentShape2D_7lqwi")
 disabled = true
 
 [node name="GenericInvisibleObstacle" parent="." instance=ExtResource("19_jtygs")]
