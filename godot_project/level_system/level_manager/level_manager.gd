@@ -184,6 +184,8 @@ func _reset_level() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
+	_player_hidden = false
+	_player_newly_hidden = false
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
