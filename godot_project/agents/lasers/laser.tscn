@@ -192,7 +192,7 @@ animations = [{
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jtygs"]
 b = Vector2(0, 0)
 
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_line", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_line", "beam_line_extension_1", "beam_line_extension_2", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
@@ -201,6 +201,8 @@ collision_shape = NodePath("Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
 visuals = NodePath("Visuals")
 beam_line = NodePath("Visuals/BeamLine")
+beam_line_extension_1 = NodePath("Visuals/BeamLine/BeamLineExtension1")
+beam_line_extension_2 = NodePath("Visuals/BeamLine/BeamLineExtension1/BeamLineExtension2")
 beam_end = NodePath("Visuals/BeamLine/BeamEnd")
 base_raycast = NodePath("Visuals/BaseRaycast")
 beam_raycast = NodePath("Visuals/BeamLine/BeamRaycast")
@@ -314,6 +316,21 @@ target_position = Vector2(0, 0)
 collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="BeamLineExtension1" type="Line2D" parent="Visuals/BeamLine"]
+z_as_relative = false
+points = PackedVector2Array(0, 0, 0, 0)
+width = 4.0
+default_color = Color(0.621663, 0.388947, 0.938421, 1)
+texture_mode = 2
+
+[node name="BeamLineExtension2" type="Line2D" parent="Visuals/BeamLine/BeamLineExtension1"]
+z_as_relative = false
+points = PackedVector2Array(0, 0, 0, 0)
+width = 4.0
+default_color = Color(2.98411e-06, 0.634633, 0.415616, 1)
+texture = ExtResource("7_dshi8")
+texture_mode = 2
 
 [node name="Collision" type="Area2D" parent="."]
 collision_layer = 320

@@ -746,7 +746,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 size = Vector2(15, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rm4m"]
-size = Vector2(15, 53)
+size = Vector2(15, 65.5)
 
 [node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "duck_collision_timer", "laser_blocker", "laser_blocker_collision_shape", "collision_area", "action_sound_emitters", "sprite")]
 z_index = 1
@@ -851,7 +851,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"unhide"
+animation = &"duck"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
@@ -931,13 +931,14 @@ one_shot = true
 [node name="DuckCollisionDisable" type="Timer" parent="."]
 
 [node name="LaserBlocker" type="Area2D" parent="."]
-z_index = 4
 position = Vector2(1, -28)
+collision_layer = 512
+collision_mask = 192
 script = ExtResource("28_qcujq")
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
-position = Vector2(0.5, 1)
+position = Vector2(0.5, -5.25)
 shape = SubResource("RectangleShape2D_2rm4m")
 
 [connection signal="area_entered" from="Shadow/Area2D" to="." method="_on_collision"]
