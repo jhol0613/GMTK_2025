@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=18 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Resource" uid="uid://bm2ri4ouxapyi" path="res://agents/conductor/conductor_move_action_data.tres" id="2_thsup"]
@@ -31,6 +31,10 @@ region = Rect2(0, 40, 23, 20)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k3trg"]
 atlas = ExtResource("10_thsup")
 region = Rect2(23, 20, 23, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6kqq"]
+atlas = ExtResource("10_thsup")
+region = Rect2(23, 40, 23, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_46wui"]
 animations = [{
@@ -66,7 +70,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_thsup")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k3trg")
+"texture": SubResource("AtlasTexture_h6kqq")
 }],
 "loop": true,
 "name": &"unreachable",
@@ -125,6 +129,7 @@ shape = SubResource("RectangleShape2D_lda0w")
 [node name="Emotes" type="AnimatedSprite2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(17.425, -24.43)
 sprite_frames = SubResource("SpriteFrames_46wui")
+animation = &"unreachable"
 script = ExtResource("6_mq2pu")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
