@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="1_uvexm"]
 [ext_resource type="Texture2D" uid="uid://bepd3531r0gee" path="res://agents/interactables/cat_coffee_spill/new_cat.png" id="2_hsr7u"]
 [ext_resource type="Texture2D" uid="uid://bbj4pciq21j2" path="res://agents/interactables/cat_coffee_spill/cat_no_coffee.png" id="3_11q1a"]
-[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="4_37f55"]
+[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="4_37f55"]
 [ext_resource type="PackedScene" uid="uid://cynt7wbxbhgdg" path="res://agents/interactables/cat_coffee_spill/coffee_obstacle.tscn" id="5_pa7bf"]
 [ext_resource type="Script" uid="uid://cqh2y73sdi1js" path="res://agents/movable_obstacles/obstacle_spawner.gd" id="5_to1gp"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_pa7bf"]

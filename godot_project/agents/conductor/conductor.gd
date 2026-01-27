@@ -10,6 +10,7 @@ class_name Conductor
 var _first_action = true
 
 var facing_direction = Enums.Direction.RIGHT
+var state = Enums.ConductorState.UNAWARE
 
 func _ready():
 	super._ready()
@@ -29,8 +30,16 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 			sprite.flip_h = true
 			facing_direction = Enums.Direction.LEFT
 
-func play_aware_animation():
-	emotes.animation = "aware"
+func play_current_emotion():
+	match state:
+		Enums.ConductorState.ANGRY:
+			emotes.animation = "angry"
+		Enums.ConductorState.FOUND:
+			emotes.animation = "aware"
+		Enums.ConductorState.UNREACHABLE_START:
+			emotes.animation = "unreachable"
+		_:
+			return
 	emotes.play()
 	await emotes.animation_finished
 	emotes.animation = "default"

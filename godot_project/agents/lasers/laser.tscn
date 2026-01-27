@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="11_gmiso"]
 [ext_resource type="Texture2D" uid="uid://oe5ye3277wus" path="res://agents/lasers/new_laser_visuals/telescope2.png" id="11_tquva"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="12_to654"]
-[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="14_mgkp8"]
+[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="14_mgkp8"]
 [ext_resource type="Texture2D" uid="uid://dqk05pfcdke64" path="res://agents/lasers/new_laser_visuals/stowed_shadow.png" id="16_chnl6"]
 [ext_resource type="Texture2D" uid="uid://cnmot5c0cn1y4" path="res://agents/lasers/new_laser_visuals/low_shadow.png" id="16_lyym0"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="19_jtygs"]
@@ -291,7 +291,6 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"deployed"
-frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

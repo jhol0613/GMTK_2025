@@ -73,7 +73,6 @@ var _spawned_obstacles : Array[MovableObstacle]
 # Additional state variables
 var _player_hidden = false
 var _player_newly_hidden = false
-var _conductor_aware_of_player = true
 
 func _ready() -> void:
 	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
@@ -185,6 +184,8 @@ func _reset_level() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = null
+	_player_hidden = false
+	_player_newly_hidden = false
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
@@ -252,8 +253,8 @@ func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
-	if _player_hidden:
-		_conductor_aware_of_player = false
+	if not _player_hidden:
+		_conductor.state = Enums.ConductorState.PURSUE
 
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
@@ -358,10 +359,30 @@ func _update_conductor() -> void:
 		_spawn_conductor()
 	_update_conductor_awareness()
 	# Target next train car if player's hidden
-	var target = _player_character.grid_position if _conductor_aware_of_player else _level_scene.target_position
+	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
 		.get_id_path(_conductor.grid_position, target, true)
-	if conductor_path.size() < 2:
+
+	# find path state
+	var traversible = true
+	var reached = conductor_path.size() < 2
+	for node in conductor_path:
+		if node[0] < 0 or node[1] < 0:
+			traversible = false
+			break
+
+	if reached:
+		# catch the seated player
+		if _conductor.state != Enums.ConductorState.UNAWARE and _player_hidden:
+			_hide_player(false) # optionally, another failure animation
+		return
+
+	# launch the animation only once
+	if not traversible and _conductor.state != Enums.ConductorState.UNREACHABLE:
+		_conductor.state = Enums.ConductorState.UNREACHABLE_START
+
+	# skip the next action if the conductor is trying to leave the map
+	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
 		return
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
@@ -370,13 +391,38 @@ func _update_conductor() -> void:
 
 ##Use conductor facing direction, player hide status and position to determine if conductor should become aware
 func _update_conductor_awareness():
-	if not _player_hidden and _conductor: # Only update awareness if hidden (and conductor exists)
-		var new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
-		if _conductor.facing_direction == Enums.Direction.LEFT:
-			new_awareness = !new_awareness
-		if not _conductor_aware_of_player and new_awareness:
-			_conductor.play_aware_animation()
-		_conductor_aware_of_player = new_awareness
+	if not _conductor:
+		return
+
+	match _conductor.state:
+		# a little state machine for conductor awareness
+		# the conductor can lose the player when not hiding
+		Enums.ConductorState.PURSUE:
+			if _player_hidden:
+				_conductor.state = Enums.ConductorState.ANGRY
+				_conductor.play_current_emotion()
+		Enums.ConductorState.UNAWARE:
+			if _player_hidden:
+				return
+			var new_awareness := true
+			if _conductor.facing_direction == Enums.Direction.LEFT:
+				new_awareness = _player_character.grid_position.x <= _conductor.grid_position.x
+			else:
+				new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
+
+			if new_awareness:
+				_conductor.state = Enums.ConductorState.FOUND
+		Enums.ConductorState.FOUND:
+			_conductor.play_current_emotion()
+			_conductor.state = Enums.ConductorState.PURSUE
+		Enums.ConductorState.ANGRY:
+			pass
+		Enums.ConductorState.UNREACHABLE_START:
+			_conductor.play_current_emotion()
+			_conductor.state = Enums.ConductorState.UNREACHABLE
+		Enums.ConductorState.UNREACHABLE:
+			pass
+
 
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:

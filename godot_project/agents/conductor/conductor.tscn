@@ -41,6 +41,17 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_k3trg")
 }],
+"loop": true,
+"name": &"angry",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_thsup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3trg")
+}],
 "loop": false,
 "name": &"aware",
 "speed": 1.0
@@ -49,6 +60,17 @@ animations = [{
 "loop": false,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_thsup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3trg")
+}],
+"loop": true,
+"name": &"unreachable",
+"speed": 1.0
 }]
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
@@ -103,9 +125,6 @@ shape = SubResource("RectangleShape2D_lda0w")
 [node name="Emotes" type="AnimatedSprite2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(17.425, -24.43)
 sprite_frames = SubResource("SpriteFrames_46wui")
-animation = &"aware"
-frame = 1
-frame_progress = 1.0
 script = ExtResource("6_mq2pu")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
