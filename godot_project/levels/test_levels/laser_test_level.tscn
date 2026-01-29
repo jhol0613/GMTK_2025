@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
-size = Vector2(19, 23)
+size = Vector2(19, 25.5)
 
 [node name="LevelBase" instance=ExtResource("1_21cbe")]
 conductor_spawn_beat = 5

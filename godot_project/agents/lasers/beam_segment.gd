@@ -17,6 +17,8 @@ var self_scene : Resource
 #Distance to offset segment start visuals
 var line_offset : Vector2
 var child: BeamSegment
+##Fire another recursive beam even if this beam doesn't hit anything (i.e. max beam length is the limiting factor)
+var fire_again = false
 
 const jostle_amount := .01
 
@@ -55,48 +57,65 @@ func _refresh_target():
 # 1. Gets to max beam length (end case, draw laser end)
 # 2. Hits laser blocker (new segment drawn under/over as required)
 # 3. Hits end of laser blocker (new segment drawn back on main layer)
-func fire() -> void:
+##Returns null if no additional laser should be fired, otherwise returns collision point
+func fire():
 	enabled = true
 	force_raycast_update()
-	var collision_point = get_collision_point()
+	var collision_point : Vector2 #Global coordinates
 	
-	# Case 1: Laser hits target position
-	if not is_colliding():
-		line.points[1] = target_position
-		return
-		
-	# Case 2: Laser encounters blocker
-	var blocker: LaserBlocker = get_collider()
-	var blocker_lowpoint = blocker.get_lowest_point_global_coordinates()
-	var blocker_highpoint = blocker.get_highest_point_global_coordinates()
-	var blocker_height = blocker_lowpoint - blocker_highpoint + blocker.altitude
-
-	if height > blocker_height: # Laser goes over blocker
+	# if colliding, a new child beam segment must be added
+	if is_colliding():
+		# fire again will already be true if ray is stopping at the back end of a laser blocker
+		fire_again = true
+		collision_point = get_collision_point()
 		line.points[1] = collision_point - line.global_position
-		child = self_scene.instantiate()
-		child.setup(direction, height, _quick_distance(collision_point, global_position), self_scene)
-		add_child(child)
-		var blocker_exit_point = blocker.get_collision_exit_point(collision_point, get_collision_normal())
-		child.position = _jostle(line.points[1] + line.position, get_collision_normal())
-		child.beam_end_length = beam_end_length
-		child.max_beam_length = _quick_distance(blocker_exit_point, line.global_position + line.points[1])
+	else: # if not colliding with anything new, "collision point" will just be the exit point of the blocker
+		collision_point = target_position + line.global_position
+		line.points[1] = target_position
+	if not fire_again:
+		line.points[1] = collision_point
+		return
+
+	#line.points[1] = collision_point - line.global_position
+	#Spawn child to shoot next raycast
+	child = self_scene.instantiate()
+	child.setup(direction, height, previous_length + _quick_distance(collision_point, global_position), self_scene)
+	add_child(child)
+	child.position = line.points[1]
+	child.beam_end_length = beam_end_length
+	child.modulate.g = 255
+	
+	if is_colliding():
+		# Case 2: Laser encounters blocker
+		var blocker: LaserBlocker = get_collider()
+		var blocker_lowpoint = blocker.get_lowest_point_global_coordinates()
+		var blocker_highpoint = blocker.get_highest_point_global_coordinates()
+		var blocker_height = blocker_lowpoint - blocker_highpoint + blocker.altitude
+
+		if height > blocker_height: # Laser goes over blocker
+			var blocker_exit_point = blocker.get_collision_exit_point(collision_point, get_collision_normal())
+			child.max_beam_length = _quick_distance(blocker_exit_point, line.global_position + line.points[1])
+			child.fire_again = not child.beam_end_limited
+			# Draw segment one z order higher than blocker up until blocker exit point, 
+			# new blocker hit, or max distance
+		elif height < blocker.altitude: # Laser goes under blocker
+			# Draw segment one z order lower than blocker up until blocker exit point, new blocker
+			# hit, or max distance
+			pass
+		else: # laser blocked
+			#set endpoint with appropriate height
+			if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
+				collision_point = Vector2(collision_point.x, blocker_lowpoint - height)
+		#else: #direction left or right
+			#if hit_check_raycast.is_colliding(): #should always be true since we already did a height check
+				#collision_point = get_collision_point()# - beam_line.global_position
+	if fire_again:
 		child.fire()
-		# Draw segment one z order higher than blocker up until blocker exit point, 
-		# new blocker hit, or max distance
-	elif height < blocker.altitude: # Laser goes under blocker
-		# Draw segment one z order lower than blocker up until blocker exit point, new blocker
-		# hit, or max distance
-		pass
-	else: # laser blocked
-		#set endpoint with appropriate height
-		if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
-			collision_point = Vector2(collision_point.x, blocker_lowpoint - height) - line.global_position
-	#else: #direction left or right
-		#if hit_check_raycast.is_colliding(): #should always be true since we already did a height check
-			#collision_point = get_collision_point()# - beam_line.global_position
-			
+	
 	# Case 3: Laser reaches end of blocker
+	collision_point = collision_point - line.global_position #convert to local
 	line.points[1] = collision_point
+	return
 
 ##Distance to points that share an axis coordinate
 func _quick_distance(point1: Vector2, point2: Vector2) -> float:
