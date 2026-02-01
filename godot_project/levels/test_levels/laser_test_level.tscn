@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
-size = Vector2(19, 25.5)
+size = Vector2(19, 23.0938)
 
 [node name="LevelBase" instance=ExtResource("1_21cbe")]
 conductor_spawn_beat = 5
@@ -51,7 +51,7 @@ metadata/_custom_type_script = "uid://brjyxyhy640eh"
 [node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
 position = Vector2(144, 99)
 direction = 0
-height = 52
+height = 37
 default_animation = "fire_up"
 
 [node name="LaserBlocker" type="Area2D" parent="." index="14"]
@@ -62,5 +62,5 @@ script = ExtResource("7_21cbe")
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker" index="0"]
-position = Vector2(144, 15)
+position = Vector2(144, 16)
 shape = SubResource("RectangleShape2D_u3brs")

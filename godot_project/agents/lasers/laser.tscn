@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=37 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -19,18 +19,19 @@
 [ext_resource type="Texture2D" uid="uid://dqk05pfcdke64" path="res://agents/lasers/new_laser_visuals/stowed_shadow.png" id="16_chnl6"]
 [ext_resource type="Texture2D" uid="uid://cnmot5c0cn1y4" path="res://agents/lasers/new_laser_visuals/low_shadow.png" id="16_lyym0"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="19_jtygs"]
+[ext_resource type="PackedScene" uid="uid://bgspuqigwj2us" path="res://agents/lasers/beam_segment.tscn" id="20_7lqwi"]
 
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_up"
-start_position_offset = Vector2(0, -3)
+start_position_offset = Vector2(0, 0)
 end_image = ExtResource("6_chnl6")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_knkgi"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_down"
-start_position_offset = Vector2(0, -2)
+start_position_offset = Vector2(0, 0)
 end_image = ExtResource("3_to654")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -189,10 +190,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jtygs"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7lqwi"]
 b = Vector2(0, 0)
 
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_line", "beam_line_extension_1", "beam_line_extension_2", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_root", "beam_line", "beam_line_extension_1", "beam_line_extension_2", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
@@ -200,6 +201,7 @@ collision_area = NodePath("Collision")
 collision_shape = NodePath("Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
 visuals = NodePath("Visuals")
+beam_root = NodePath("BeamSegment")
 beam_line = NodePath("Visuals/BeamLine")
 beam_line_extension_1 = NodePath("Visuals/BeamLine/BeamLineExtension1")
 beam_line_extension_2 = NodePath("Visuals/BeamLine/BeamLineExtension1/BeamLineExtension2")
@@ -291,6 +293,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"deployed"
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
@@ -337,8 +340,10 @@ texture_mode = 2
 collision_layer = 320
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-shape = SubResource("SegmentShape2D_jtygs")
+shape = SubResource("SegmentShape2D_7lqwi")
 disabled = true
 
 [node name="GenericInvisibleObstacle" parent="." instance=ExtResource("19_jtygs")]
 position = Vector2(0, 3)
+
+[node name="BeamSegment" parent="." instance=ExtResource("20_7lqwi")]
