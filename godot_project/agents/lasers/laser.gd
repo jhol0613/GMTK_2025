@@ -10,14 +10,14 @@ class_name Laser
 @export var animation_player : AnimationPlayer
 @export var visuals : Node2D
 @export var beam_root : BeamSegment
-@export var beam_line : Line2D
-@export var beam_line_extension_1 : Line2D
-@export var beam_line_extension_2 : Line2D
-@export var beam_end : Sprite2D
+#@export var beam_line : Line2D
+#@export var beam_line_extension_1 : Line2D
+#@export var beam_line_extension_2 : Line2D
+#@export var beam_end : Sprite2D
 ##Determines IF an object is hit for up/left/right Origin is laser base
-@export var base_raycast : RayCast2D
+#@export var base_raycast : RayCast2D
 ##Determines WHERE an object gets hit (for left/right lasers), and IF an object gets hit for down lasers. Origin coincident with visual beamline
-@export var beam_raycast : RayCast2D
+#@export var beam_raycast : RayCast2D
 @export var pole1 : Sprite2D
 @export var pole2 : Sprite2D
 @export var shadow : AnimatedSprite2DSignals
@@ -65,7 +65,8 @@ func _ready() -> void:
 	
 	#Set up beam
 	var beam_segment_scene = preload('res://agents/lasers/beam_segment.tscn')
-	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).start_position_offset)
+	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).end_image,
+		direction_data.get(direction).start_position_offset)
 	if direction == Enums.Direction.UP:
 		beam_root.max_beam_length = height - direction_data.get(direction).start_position_offset.y
 		#beam_root.self_modulate = Color(1, 0, 0)
@@ -74,7 +75,7 @@ func _ready() -> void:
 	elif direction == Enums.Direction.DOWN:
 		#for down shooting lasers, draw visuals from laser head (even though collision checks start from base)
 		var beam_dummy_root = beam_segment_scene.instantiate()
-		beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene)
+		beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene, direction_data.get(direction).end_image)
 		beam_dummy_root.enabled = false
 		beam_dummy_root.beam_end_length = height
 		beam_root.add_child(beam_dummy_root)
@@ -98,30 +99,30 @@ func _construct():
 	# Laser visuals
 	_sprite.set_animation(direction_data.get(direction).animation_name)
 	default_animation = direction_data.get(direction).animation_name
-	beam_end.texture = direction_data.get(direction).end_image
+	#beam_end.texture = direction_data.get(direction).end_image
 	_sprite.frame = 0
-	beam_line.visible = Engine.is_editor_hint()
+	#beam_line.visible = Engine.is_editor_hint()
 
 	# Laser collision
-	base_raycast.target_position = max_beam_length_vector
-	beam_raycast.target_position = max_beam_length_vector
+	#base_raycast.target_position = max_beam_length_vector
+	#beam_raycast.target_position = max_beam_length_vector
 	
 	_update_endpoint(max_beam_length_vector, max_beam_length_vector, max_beam_length_vector)
 	
 	# Collision
 	var new_shape = collision_shape.shape.duplicate()
-	new_shape.b = beam_line.points[1]
+	#new_shape.b = beam_line.points[1]
 	collision_shape.shape = new_shape
 	collision_shape.disabled = true
 
 ##Endpoint should be given in global coordinates
 func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
 	# Visuals
-	beam_line.points[1] = beam1_endpoint
+	#beam_line.points[1] = beam1_endpoint
 	#beam_line_extension_1.global_position = beam_line.global_position
-	beam_line_extension_1.points[1] = beam2_endpoint
-	beam_line_extension_2.position = beam_line_extension_1.points[1]
-	beam_line_extension_2.points[1] = beam3_endpoint - beam_line_extension_2.position
+	#beam_line_extension_1.points[1] = beam2_endpoint
+	#beam_line_extension_2.position = beam_line_extension_1.points[1]
+	#beam_line_extension_2.points[1] = beam3_endpoint - beam_line_extension_2.position
 	#beam_end.position = beam3_endpoint
 	
 	#beam_line_extension_2.points[1] = endpoint# - beam_line_extension_2.global_position
@@ -132,7 +133,7 @@ func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_en
 
 	#Collision
 	var new_shape = collision_shape.shape.duplicate()
-	new_shape.b = beam_line_extension_2.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
+	#new_shape.b = beam_line_extension_2.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
 	#new_shape.b = beam_line.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
 	collision_shape.shape = new_shape
 	collision_shape.disabled = true
@@ -181,66 +182,66 @@ func _fire(anim_signal_id: String):
 	if height == popup_height:
 		shadow.play("low")
 	
-	beam_end.global_position = beam_root.fire(0)
+	beam_root.fire(0)
 
-	beam_line.global_position = _sprite.global_position + direction_data.get(direction).start_position_offset
-	# Check for laser blockers
-	base_raycast.enabled = true
-	beam_raycast.enabled = true
-	base_raycast.force_raycast_update()
-	beam_raycast.force_raycast_update()
-	var collision_point := max_beam_length_vector #default if there's no collision happening
-	
-	var hit_check_raycast: RayCast2D
-	match direction:
-		Enums.Direction.UP:
-			hit_check_raycast = base_raycast
-		Enums.Direction.DOWN, Enums.Direction.LEFT, Enums.Direction.RIGHT:
-			hit_check_raycast = beam_raycast
-	
-	if not hit_check_raycast.is_colliding():
-		#_reset_beamline_extensions()
-		_finish_fire(collision_point, collision_point, collision_point)
-		return
-	
-	#if hit_check_raycast.is_colliding():
-	var blocker: LaserBlocker = hit_check_raycast.get_collider()
-	var blocker_lowpoint = blocker.get_lowest_point_global_coordinates()
-	var blocker_highpoint = blocker.get_highest_point_global_coordinates()
-	var blocker_height = blocker_lowpoint - blocker_highpoint
-	
-	var blocker_absolute_z_index = _get_absolute_z_index(blocker)
-	var z_modifier : int
-	if height > blocker_height:
-		z_modifier = 1
-	elif height < blocker.altitude:
-		z_modifier = -1
-	else:
-		z_modifier = 0	
-	if z_modifier != 0:
-		var unmodified_collision_point = hit_check_raycast.get_collision_point()
-		beam_line_extension_1.z_index = blocker_absolute_z_index + z_modifier
-		beam_line_extension_2.z_index = _get_absolute_z_index(beam_line)
-		
-		var beam1_end = hit_check_raycast.get_collision_point() - beam_line.global_position
-		var beam2_end = blocker.get_collision_exit_point(hit_check_raycast.get_collision_point(), hit_check_raycast.get_collision_normal()) - beam_line.global_position
-		var beam3_end = collision_point
-		_finish_fire(beam1_end, beam2_end, beam3_end)
-		return
-	else:
-		_reset_beamline_extensions() # turn line back into one segment
+	#beam_line.global_position = _sprite.global_position + direction_data.get(direction).start_position_offset
+	## Check for laser blockers
+	#base_raycast.enabled = true
+	#beam_raycast.enabled = true
+	#base_raycast.force_raycast_update()
+	#beam_raycast.force_raycast_update()
+	#var collision_point := max_beam_length_vector #default if there's no collision happening
+	#
+	#var hit_check_raycast: RayCast2D
+	#match direction:
+		#Enums.Direction.UP:
+			#hit_check_raycast = base_raycast
+		#Enums.Direction.DOWN, Enums.Direction.LEFT, Enums.Direction.RIGHT:
+			#hit_check_raycast = beam_raycast
+	#
+	#if not hit_check_raycast.is_colliding():
+		##_reset_beamline_extensions()
+		#_finish_fire(collision_point, collision_point, collision_point)
+		#return
+	#
+	##if hit_check_raycast.is_colliding():
+	#var blocker: LaserBlocker = hit_check_raycast.get_collider()
+	#var blocker_lowpoint = blocker.get_lowest_point_global_coordinates()
+	#var blocker_highpoint = blocker.get_highest_point_global_coordinates()
+	#var blocker_height = blocker_lowpoint - blocker_highpoint
+	#
+	#var blocker_absolute_z_index = _get_absolute_z_index(blocker)
+	#var z_modifier : int
+	#if height > blocker_height:
+		#z_modifier = 1
+	#elif height < blocker.altitude:
+		#z_modifier = -1
+	#else:
+		#z_modifier = 0	
+	#if z_modifier != 0:
+		#var unmodified_collision_point = hit_check_raycast.get_collision_point()
+		#beam_line_extension_1.z_index = blocker_absolute_z_index + z_modifier
+		#beam_line_extension_2.z_index = _get_absolute_z_index(beam_line)
+		#
+		#var beam1_end = hit_check_raycast.get_collision_point() - beam_line.global_position
+		#var beam2_end = blocker.get_collision_exit_point(hit_check_raycast.get_collision_point(), hit_check_raycast.get_collision_normal()) - beam_line.global_position
+		#var beam3_end = collision_point
+		#_finish_fire(beam1_end, beam2_end, beam3_end)
+		#return
+	#else:
+		#_reset_beamline_extensions() # turn line back into one segment
 	
 	#if height > blocker_height or height < blocker.altitude:
 		#_finish_fire(collision_point)
 		#return
 	
-	if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
-		collision_point = hit_check_raycast.get_collision_point()
-		collision_point = Vector2(collision_point.x, blocker_lowpoint - height) - beam_line.global_position
-	else: #direction left or right
-		if hit_check_raycast.is_colliding(): #should always be true since we already did a height check
-			collision_point = hit_check_raycast.get_collision_point() - beam_line.global_position
-	_finish_fire(collision_point, collision_point, collision_point)
+	#if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
+		#collision_point = hit_check_raycast.get_collision_point()
+		#collision_point = Vector2(collision_point.x, blocker_lowpoint - height) - beam_line.global_position
+	#else: #direction left or right
+		#if hit_check_raycast.is_colliding(): #should always be true since we already did a height check
+			#collision_point = hit_check_raycast.get_collision_point() - beam_line.global_position
+	_finish_fire()#collision_point, collision_point, collision_point)
 
 func _is_point_in_area(point: Vector2, area: Area2D):
 	var query := PhysicsPointQueryParameters2D.new()
@@ -264,15 +265,15 @@ func _get_absolute_z_index(target: Node2D) -> int:
 		node = node.get_parent();
 	return z_index;
 
-func _reset_beamline_extensions():
-	beam_line_extension_1.points[1] = Vector2(0,0)
-	beam_line_extension_2.points[1] = Vector2(0,0)
+#func _reset_beamline_extensions():
+	#beam_line_extension_1.points[1] = Vector2(0,0)
+	#beam_line_extension_2.points[1] = Vector2(0,0)
 
 ##Collision point should be given in global position
-func _finish_fire(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
-	_update_endpoint(beam1_endpoint, beam2_endpoint, beam3_endpoint)
-	beam_raycast.enabled = false
-	base_raycast.enabled = true
+func _finish_fire():#beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
+	#_update_endpoint(beam1_endpoint, beam2_endpoint, beam3_endpoint)
+	#beam_raycast.enabled = false
+	#base_raycast.enabled = true
 
 	# Fire laser property animation
 	animation_player.play("laser_fire")

@@ -7,12 +7,12 @@ var beam_end_length := 1000.0 : set = set_beam_end_length
 ##If beam hits max beam length, it will only go this far but it will spawn another beam
 var max_beam_length := beam_end_length : set = set_max_beam_length
 var direction: Enums.Direction
-
 var height: int : set = set_height
 ##Previous length of all beam segments up to the start of this one
 var previous_length: float
 @onready var line := $BeamLine
 var self_scene : Resource
+var beam_end_texture : CompressedTexture2D
 #Distance to offset segment start visuals
 var line_offset : Vector2
 var child: BeamSegment
@@ -32,12 +32,14 @@ const horizontal_laser_height_offset = 3
 func _ready() -> void:
 	set_height(height)
 
-func setup(new_direction: Enums.Direction, new_height: int, new_previous_length: float, preloaded_self_scene: Resource, new_line_offset := Vector2(0,0)):
+func setup(new_direction: Enums.Direction, new_height: int, new_previous_length: float, 
+	preloaded_self_scene: Resource, new_beam_end_texture: CompressedTexture2D, new_line_offset := Vector2(0,0)):
 	direction = new_direction
 	height = new_height
 	previous_length = new_previous_length
 	self_scene = preloaded_self_scene
 	line_offset = new_line_offset
+	beam_end_texture = new_beam_end_texture
 
 func set_height(new_height: int) -> void:
 	height = new_height
@@ -62,7 +64,7 @@ func _refresh_target():
 		target_position = Enums.direction_to_vector(direction) * max_beam_length
 
 # returns the position where the fire ended (e.g. for the purpose of drawing laser endpoint)
-func fire(depth: int) -> Vector2:
+func fire(depth: int):# -> Vector2:
 	var should_spawn_child = false
 	print("depth: ", depth)
 	enabled = true
@@ -77,14 +79,19 @@ func fire(depth: int) -> Vector2:
 		should_spawn_child = true
 	else: #hits beam end
 		line.points[1] = target_position
-		return line.points[1] + line.global_position
+		var beam_end = Sprite2D.new()
+		beam_end.texture = beam_end_texture
+		beam_end.position = line.points[1] + Vector2(0, -horizontal_laser_height_offset)
+		beam_end.z_index = -1
+		add_child(beam_end)
+		return# line.points[1] + line.global_position
 		
 	line.points[1] = collision_point - global_position
 	child = self_scene.instantiate()
-	child.setup(direction, height, previous_length + _quick_distance(collision_point, global_position), self_scene)
+	child.setup(direction, height, previous_length + _quick_distance(collision_point, global_position), 
+		self_scene, beam_end_texture)
 	add_child(child)
 	child.position = _jostle(line.points[1], Enums.direction_to_vector(direction))
-	#child.line.position =  _jostle(child.line.position, -5*Enums.direction_to_vector(direction))
 	child.beam_end_length = beam_end_length
 	child.z_index = -z_index #start child z-index at parent's baseline
 	if get_tree().debug_collisions_hint: #in debug mode, make different laser segments distinct
@@ -117,14 +124,14 @@ func fire(depth: int) -> Vector2:
 				#collision_point = get_collision_point()# - beam_line.global_position
 	#if fire_again:
 	if should_spawn_child:
-		return_point = child.fire(depth + 1)
+		child.fire(depth + 1)
 	
 	# Case 3: Laser reaches end of blocker
 	collision_point = collision_point - global_position #de-globalize collision point
 	#await get_tree().create_timer(1.0).timeout
 	#child.queue_free()
 	_destroy_after_time(child, 1.0)
-	return return_point
+	return# return_point
 
 #time in seconds
 func _destroy_after_time(node: Node2D, time: float):
