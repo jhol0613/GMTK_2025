@@ -24,14 +24,14 @@
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_up"
-start_position_offset = Vector2(0, 0)
+start_position_offset = Vector2(0, -3)
 end_image = ExtResource("6_chnl6")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_knkgi"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_down"
-start_position_offset = Vector2(0, 0)
+start_position_offset = Vector2(0, 6)
 end_image = ExtResource("3_to654")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -54,7 +54,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BeamLine:visible")
+tracks/0/path = NodePath("BeamSegment/BeamEnd:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,7 +66,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
+tracks/1/path = NodePath("BeamSegment:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -83,38 +83,38 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BeamLine:visible")
+tracks/0/path = NodePath("BeamSegment/BeamEnd:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true, true, false]
+"values": [false, true, false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
+tracks/1/path = NodePath("Collision/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true, true, false]
+"values": [true, false, false, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Collision/CollisionShape2D:disabled")
+tracks/2/path = NodePath("BeamSegment:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [true, false, false, true]
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aar76"]
@@ -205,7 +205,7 @@ beam_root = NodePath("BeamSegment")
 beam_line = NodePath("Visuals/BeamLine")
 beam_line_extension_1 = NodePath("Visuals/BeamLine/BeamLineExtension1")
 beam_line_extension_2 = NodePath("Visuals/BeamLine/BeamLineExtension1/BeamLineExtension2")
-beam_end = NodePath("Visuals/BeamLine/BeamEnd")
+beam_end = NodePath("BeamSegment/BeamEnd")
 base_raycast = NodePath("Visuals/BaseRaycast")
 beam_raycast = NodePath("Visuals/BeamLine/BeamRaycast")
 pole1 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1")
@@ -305,15 +305,10 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="BeamLine" type="Line2D" parent="Visuals"]
-visible = false
 points = PackedVector2Array(0, 0, 0, 0)
 width = 4.0
 texture = ExtResource("7_dshi8")
 texture_mode = 2
-
-[node name="BeamEnd" type="Sprite2D" parent="Visuals/BeamLine"]
-visible = false
-texture = ExtResource("3_to654")
 
 [node name="BeamRaycast" type="RayCast2D" parent="Visuals/BeamLine"]
 target_position = Vector2(0, 0)
@@ -347,3 +342,8 @@ disabled = true
 position = Vector2(0, 3)
 
 [node name="BeamSegment" parent="." instance=ExtResource("20_7lqwi")]
+visible = false
+
+[node name="BeamEnd" type="Sprite2D" parent="BeamSegment"]
+visible = false
+texture = ExtResource("3_to654")

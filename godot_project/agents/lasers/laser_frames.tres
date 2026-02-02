@@ -95,7 +95,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire_down",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -121,7 +121,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire_left",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -147,7 +147,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire_right",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,5 +173,5 @@ animations = [{
 }],
 "loop": false,
 "name": &"fire_up",
-"speed": 10.0
+"speed": 15.0
 }]

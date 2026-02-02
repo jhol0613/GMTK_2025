@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://beocf37m2g2mh" path="res://agents/lasers/beam_segment.gd" id="2_xgeit"]
 
 [node name="BeamSegment" type="RayCast2D"]
-collision_mask = 513
+collision_mask = 512
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("2_xgeit")

@@ -62,19 +62,29 @@ func _ready() -> void:
 	#action_executed.connect(_fire)
 	_sprite.animation_finished.connect(_reset_shadow)
 	_sprite.connect("animation_signal", _fire)
-	var beam_segment_scene = preload('res://agents/lasers/beam_segment.tscn')
-	#beam_root = beam_segment_scene.instantiate()
-	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).start_position_offset)
-	if Enums.is_vertical(direction):
-		beam_root.max_beam_length = height
-		beam_root.self_modulate = Color(1, 0, 0)
-		beam_root.fire_again_on_no_hit = true
-		if direction == Enums.Direction.DOWN:
-			beam_root.enabled = false #disable initial beam root so that hit detection starts at laser base
-	#add_child(beam_root)
-	#beam_root.line.position = direction_data.get(direction).start_position_offset
-	#beam_root = BeamSegment.new(direction, height, 0.0, preload('res://agents/lasers/beam_segment.tscn'))
 	
+	#Set up beam
+	var beam_segment_scene = preload('res://agents/lasers/beam_segment.tscn')
+	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).start_position_offset)
+	if direction == Enums.Direction.UP:
+		beam_root.max_beam_length = height - direction_data.get(direction).start_position_offset.y
+		#beam_root.self_modulate = Color(1, 0, 0)
+		beam_root.fire_again_on_no_hit = true
+		beam_root.line.visible = false
+	elif direction == Enums.Direction.DOWN:
+		#for down shooting lasers, draw visuals from laser head (even though collision checks start from base)
+		var beam_dummy_root = beam_segment_scene.instantiate()
+		beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene)
+		beam_dummy_root.enabled = false
+		beam_dummy_root.beam_end_length = height
+		beam_root.add_child(beam_dummy_root)
+		beam_dummy_root.line.points[1] = beam_dummy_root.target_position + direction_data.get(direction).start_position_offset
+	else:
+		#beam_root.position = Vector2(0, - height + 2)
+		beam_root.max_beam_length = abs(direction_data.get(direction).start_position_offset.x)
+		beam_root.fire_again_on_no_hit = true
+		beam_root.line.visible = false
+		#beam_root.reparent(_sprite, false)
 
 # Called when certain exports are changed so they can be visualized in the editor
 func _construct():
@@ -112,7 +122,7 @@ func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_en
 	beam_line_extension_1.points[1] = beam2_endpoint
 	beam_line_extension_2.position = beam_line_extension_1.points[1]
 	beam_line_extension_2.points[1] = beam3_endpoint - beam_line_extension_2.position
-	beam_end.position = beam3_endpoint
+	#beam_end.position = beam3_endpoint
 	
 	#beam_line_extension_2.points[1] = endpoint# - beam_line_extension_2.global_position
 	#beam_end.position = endpoint
@@ -133,12 +143,14 @@ func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_en
 func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool):
 	
 	## New using beam root ------------------------------------------------------------------------
-	if Enums.is_vertical(direction):
-		beam_root.beam_end_length = grid_spaces * tile_size.y + height #beam_end_correction_factor.y
+	if direction == Enums.Direction.UP:
+		beam_root.beam_end_length = grid_spaces * tile_size.y + .5 * tile_size.y + height #beam_end_correction_factor.y
+	elif direction == Enums.Direction.DOWN:
+		beam_root.beam_end_length = grid_spaces * tile_size.y
 	else:
-		beam_root.beam_end_length = grid_spaces * tile_size.x# + beam_end_correction_factor.x
-	if direction == Enums.Direction.DOWN and limit_is_wall:
-		beam_root.beam_end_length += height
+		beam_root.beam_end_length = grid_spaces * tile_size.x + .5 * tile_size.x# + beam_end_correction_factor.x
+	#if direction == Enums.Direction.DOWN and limit_is_wall:
+		#beam_root.beam_end_length += height
 	#----------------------------------------------------------------------------------------------
 	
 	var down_laser_height_correction = Vector2i(0, 0)
@@ -169,7 +181,7 @@ func _fire(anim_signal_id: String):
 	if height == popup_height:
 		shadow.play("low")
 	
-	beam_root.fire(0)
+	beam_end.global_position = beam_root.fire(0)
 
 	beam_line.global_position = _sprite.global_position + direction_data.get(direction).start_position_offset
 	# Check for laser blockers
@@ -263,7 +275,7 @@ func _finish_fire(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoi
 	base_raycast.enabled = true
 
 	# Fire laser property animation
-	#animation_player.play("laser_fire")
+	animation_player.play("laser_fire")
 
 	if new_height_tween:
 		await animation_player.animation_finished
