@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
-size = Vector2(19, 24.5)
+size = Vector2(19, 63.125)
 
 [node name="LevelBase" instance=ExtResource("1_21cbe")]
 conductor_spawn_beat = 5
@@ -20,7 +20,7 @@ available_actions = Array[int]([6, 4, 7, 1, 2, 5])
 tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
 [node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("2_u3brs")]
-position = Vector2(249, 81)
+position = Vector2(112, 68)
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
 position = Vector2(306, 30)
@@ -46,13 +46,13 @@ new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
 [node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
-position = Vector2(48, 99)
+position = Vector2(47, 98)
 direction = 0
-height = 47
+height = 34
 default_animation = "fire_up"
 
 [node name="Laser2" parent="." index="14" instance=ExtResource("3_1o8fn")]
-position = Vector2(80, 99)
+position = Vector2(209, 98)
 direction = 0
 height = 7
 default_animation = "fire_up"
@@ -65,5 +65,5 @@ script = ExtResource("7_21cbe")
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker" index="0"]
-position = Vector2(145, 26)
+position = Vector2(282, 50)
 shape = SubResource("RectangleShape2D_u3brs")

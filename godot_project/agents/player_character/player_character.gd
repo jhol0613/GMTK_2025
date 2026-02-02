@@ -72,9 +72,9 @@ func enable_collisions() -> void:
 
 #not detecting laser hits for some reason
 func _on_laser_hit(area: Area2D):
-	var test = Enums.CollisionLayer.ENEMIES
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
-		pass
+		notify_failure()
+		failure.emit()
 		#if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
 			#return
 		#if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):

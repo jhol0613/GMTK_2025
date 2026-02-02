@@ -5,8 +5,8 @@ class_name Laser
 
 @export_subgroup("Nodes")
 @export var _sprite : AnimatedSprite2DSignals
-@export var collision_area : Area2D
-@export var collision_shape : CollisionShape2D
+#@export var collision_area : Area2D
+#@export var collision_shape : CollisionShape2D
 @export var animation_player : AnimationPlayer
 @export var visuals : Node2D
 @export var beam_root : BeamSegment
@@ -75,7 +75,8 @@ func _ready() -> void:
 	elif direction == Enums.Direction.DOWN:
 		#for down shooting lasers, draw visuals from laser head (even though collision checks start from base)
 		var beam_dummy_root = beam_segment_scene.instantiate()
-		beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene, direction_data.get(direction).end_image)
+		beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene, 
+		direction_data.get(direction).end_image)
 		beam_dummy_root.enabled = false
 		beam_dummy_root.beam_end_length = height
 		beam_root.add_child(beam_dummy_root)
@@ -107,16 +108,16 @@ func _construct():
 	#base_raycast.target_position = max_beam_length_vector
 	#beam_raycast.target_position = max_beam_length_vector
 	
-	_update_endpoint(max_beam_length_vector, max_beam_length_vector, max_beam_length_vector)
+	#_update_endpoint(max_beam_length_vector, max_beam_length_vector, max_beam_length_vector)
 	
 	# Collision
-	var new_shape = collision_shape.shape.duplicate()
+	#var new_shape = collision_shape.shape.duplicate()
 	#new_shape.b = beam_line.points[1]
-	collision_shape.shape = new_shape
-	collision_shape.disabled = true
+	#collision_shape.shape = new_shape
+	#collision_shape.disabled = true
 
 ##Endpoint should be given in global coordinates
-func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
+#func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
 	# Visuals
 	#beam_line.points[1] = beam1_endpoint
 	#beam_line_extension_1.global_position = beam_line.global_position
@@ -132,11 +133,11 @@ func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_en
 	#beam_end.position = beam_line.points[1]
 
 	#Collision
-	var new_shape = collision_shape.shape.duplicate()
+	#var new_shape = collision_shape.shape.duplicate()
 	#new_shape.b = beam_line_extension_2.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
 	#new_shape.b = beam_line.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
-	collision_shape.shape = new_shape
-	collision_shape.disabled = true
+	#collision_shape.shape = new_shape
+	#collision_shape.disabled = true
 
 ##Called to set max fire distance based on static obstacles. Laser blockers can still cause this
 ##distance to be shorter. If limit_is_wall is true, down-pointing lasers will apply an exception so 
@@ -308,14 +309,14 @@ func _set_height(new_height: int):
 	else:
 		shadow.play("deployed")
 		obstacle.enabled = true
-	if height >= duckable_threshhold:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, true)
-	else:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, false)
-	if height <= jumpable_threshhold:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
-	else:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
+	#if height >= duckable_threshhold:
+		#collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, true)
+	#else:
+		#collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, false)
+	#if height <= jumpable_threshhold:
+		#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
+	#else:
+		#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
 
 func set_height_animated(new_height: int, duration: float):
 	var old_height = height

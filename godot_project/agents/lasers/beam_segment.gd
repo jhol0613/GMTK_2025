@@ -44,7 +44,8 @@ func setup(new_direction: Enums.Direction, new_height: int, new_previous_length:
 func set_height(new_height: int) -> void:
 	height = new_height
 	if not Enums.is_vertical(direction) and line:
-		line.position.y = -height + horizontal_laser_height_offset
+		position.y = -height + horizontal_laser_height_offset
+		#line.position.y = -height + horizontal_laser_height_offset
 	#if line:
 		#line.position = Vector2(0, -height) + line_offset
 
@@ -63,10 +64,9 @@ func _refresh_target():
 	else:
 		target_position = Enums.direction_to_vector(direction) * max_beam_length
 
-# returns the position where the fire ended (e.g. for the purpose of drawing laser endpoint)
-func fire(depth: int):# -> Vector2:
+#depth argument for debug purposes
+func fire(depth: int):
 	var should_spawn_child = false
-	print("depth: ", depth)
 	enabled = true
 	force_raycast_update()
 	var collision_point : Vector2 #Global coordinates
@@ -79,13 +79,11 @@ func fire(depth: int):# -> Vector2:
 		should_spawn_child = true
 	else: #hits beam end
 		line.points[1] = target_position
-		var beam_end = Sprite2D.new()
-		beam_end.texture = beam_end_texture
-		beam_end.position = line.points[1] + Vector2(0, -horizontal_laser_height_offset)
-		beam_end.z_index = -1
-		add_child(beam_end)
-		return# line.points[1] + line.global_position
-		
+		var end_point : Vector2 = line.points[1] + int(not Enums.is_vertical(direction)) * \
+			Vector2(0, -height + horizontal_laser_height_offset)
+		_generate_beam_end(end_point, -1, false)
+		return
+
 	line.points[1] = collision_point - global_position
 	child = self_scene.instantiate()
 	child.setup(direction, height, previous_length + _quick_distance(collision_point, global_position), 
@@ -107,6 +105,8 @@ func fire(depth: int):# -> Vector2:
 		if height <= blocker_height + blocker.altitude and height >= blocker.altitude: #laser blocked
 			if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
 				collision_point = Vector2(collision_point.x, blocker_lowpoint - height + blocker.altitude)
+			line.points[1] = collision_point - global_position
+			_generate_beam_end(line.points[1], 1, true)
 		else:
 			var blocker_exit_point = blocker.get_collision_exit_point(collision_point, get_collision_normal())
 			child.max_beam_length = _quick_distance(blocker_exit_point, line.global_position + line.points[1])
@@ -117,26 +117,34 @@ func fire(depth: int):# -> Vector2:
 				child.z_index += 1
 			else:
 				child.z_index -= 1
-			
 
-		#else: #direction left or right
-			#if hit_check_raycast.is_colliding(): #should always be true since we already did a height check
-				#collision_point = get_collision_point()# - beam_line.global_position
-	#if fire_again:
 	if should_spawn_child:
 		child.fire(depth + 1)
-	
-	# Case 3: Laser reaches end of blocker
-	collision_point = collision_point - global_position #de-globalize collision point
-	#await get_tree().create_timer(1.0).timeout
-	#child.queue_free()
 	_destroy_after_time(child, 1.0)
-	return# return_point
+	return
 
 #time in seconds
 func _destroy_after_time(node: Node2D, time: float):
 	await get_tree().create_timer(1.0).timeout
 	node.queue_free()
+
+##Position given relative to self. If check collisions is true, area will be generated around beam end
+##that can trigger collisions with character
+func _generate_beam_end(end_position: Vector2, z_index_offset: int, check_collisions):
+	var beam_end = Sprite2D.new()
+	beam_end.texture = beam_end_texture
+	beam_end.position = end_position
+	beam_end.z_index = z_index_offset
+	add_child(beam_end)
+	if check_collisions:
+		var collider = Area2D.new()
+		var shape = CollisionShape2D.new()
+		shape.shape = CircleShape2D.new()
+		shape.shape.radius = 3
+		collider.collision_layer = 0
+		collider.set_collision_layer_value(Enums.CollisionLayer.ENEMIES, true)
+		beam_end.add_child(collider)
+		collider.add_child(shape)
 
 ##Distance to points that share an axis coordinate
 func _quick_distance(point1: Vector2, point2: Vector2) -> float:

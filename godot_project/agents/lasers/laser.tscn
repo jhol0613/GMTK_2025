@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=35 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -70,22 +70,10 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("BeamSegment/Collision/CollisionShape2D:disabled")
+tracks/0/path = NodePath("BeamSegment:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BeamSegment:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -165,15 +153,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jtygs"]
-b = Vector2(0, 0)
-
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
-collision_area = NodePath("BeamSegment/Collision")
-collision_shape = NodePath("BeamSegment/Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
 visuals = NodePath("Visuals")
 beam_root = NodePath("BeamSegment")
@@ -271,10 +254,3 @@ position = Vector2(0, 3)
 
 [node name="BeamSegment" parent="." instance=ExtResource("20_7lqwi")]
 visible = false
-
-[node name="Collision" type="Area2D" parent="BeamSegment"]
-collision_layer = 320
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BeamSegment/Collision"]
-shape = SubResource("SegmentShape2D_jtygs")
-disabled = true
