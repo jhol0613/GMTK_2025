@@ -455,7 +455,7 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	if movable is PlayerCharacter:
 		# Fail if crushed (i.e. a fall would result in a bonk)
 		if Enums.is_action_bonk(action):
-			_player_character.notify_failure()
+			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
 		else:
 			_player_character.execute_action(action, _current_beat)
