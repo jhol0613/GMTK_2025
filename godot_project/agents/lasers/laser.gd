@@ -65,8 +65,7 @@ func _ready() -> void:
 	
 	#Set up beam
 	var beam_segment_scene = preload('res://agents/lasers/beam_segment.tscn')
-	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).end_image,
-		direction_data.get(direction).start_position_offset)
+	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).end_image)
 	if direction == Enums.Direction.UP:
 		beam_root.max_beam_length = height - direction_data.get(direction).start_position_offset.y
 		#beam_root.self_modulate = Color(1, 0, 0)

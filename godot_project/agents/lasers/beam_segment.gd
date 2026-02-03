@@ -13,8 +13,6 @@ var previous_length: float
 @onready var line := $BeamLine
 var self_scene : Resource
 var beam_end_texture : CompressedTexture2D
-#Distance to offset segment start visuals
-var line_offset : Vector2
 var child: BeamSegment
 ##Whether or not this beam should fire recursively again if there's not collision. For example, this would be
 ##true for beam segments that go through blockers up to the blocker endpoint, or for up-pointing lasers for the
@@ -25,29 +23,22 @@ const jostle_amount := .01
 #Just setting beam height to laser height is off by a few pixels
 const horizontal_laser_height_offset = 3
 
-#TODO: If laser blockers are ever something besides a rectangle, we will need 2 raycasts, one for sensing and 
-#one for determining where to split the beam
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	set_height(height)
 
 func setup(new_direction: Enums.Direction, new_height: int, new_previous_length: float, 
-	preloaded_self_scene: Resource, new_beam_end_texture: CompressedTexture2D, new_line_offset := Vector2(0,0)):
+	preloaded_self_scene: Resource, new_beam_end_texture: CompressedTexture2D):
 	direction = new_direction
 	height = new_height
 	previous_length = new_previous_length
 	self_scene = preloaded_self_scene
-	line_offset = new_line_offset
 	beam_end_texture = new_beam_end_texture
 
 func set_height(new_height: int) -> void:
 	height = new_height
 	if not Enums.is_vertical(direction) and line:
 		position.y = -height + horizontal_laser_height_offset
-		#line.position.y = -height + horizontal_laser_height_offset
-	#if line:
-		#line.position = Vector2(0, -height) + line_offset
 
 func set_beam_end_length(new_beam_end_length):
 	beam_end_length = new_beam_end_length
@@ -81,7 +72,7 @@ func fire(depth: int):
 		line.points[1] = target_position
 		var end_point : Vector2 = line.points[1] + int(not Enums.is_vertical(direction)) * \
 			Vector2(0, -height + horizontal_laser_height_offset)
-		_generate_beam_end(end_point, -1, false)
+		_generate_beam_end(line.points[1], -1, false)
 		return
 
 	line.points[1] = collision_point - global_position
@@ -103,10 +94,17 @@ func fire(depth: int):
 		var blocker_height = blocker_lowpoint - blocker_highpoint + blocker.altitude
 
 		if height <= blocker_height + blocker.altitude and height >= blocker.altitude: #laser blocked
-			if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
+			if (Enums.is_vertical(direction)):
 				collision_point = Vector2(collision_point.x, blocker_lowpoint - height + blocker.altitude)
-			line.points[1] = collision_point - global_position
-			_generate_beam_end(line.points[1], 1, true)
+				line.points[1] = collision_point - global_position
+				_generate_beam_end(line.points[1], 1, true)
+			# for horizontal laserrs, if blocker extends down to laser base, collide. otherwise don't
+			elif (blocker_lowpoint >= global_position.y + height - horizontal_laser_height_offset - 9)\
+				and (blocker_lowpoint <= global_position.y + height - horizontal_laser_height_offset + 9):
+				line.points[1] = collision_point - global_position
+				_generate_beam_end(line.points[1], 1, true)
+			else:
+				should_spawn_child = true
 		else:
 			var blocker_exit_point = blocker.get_collision_exit_point(collision_point, get_collision_normal())
 			child.max_beam_length = _quick_distance(blocker_exit_point, line.global_position + line.points[1])
