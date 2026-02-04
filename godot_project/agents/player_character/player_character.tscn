@@ -473,6 +473,40 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_aw7cp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abjfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cplg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4ltr")
+}],
+"loop": true,
+"name": &"failure_laser",
+"speed": 5.67
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aw7cp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abjfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cplg4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4ltr")
+}],
+"loop": true,
+"name": &"failure_squish",
+"speed": 5.67
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fy7jl")
 }, {
 "duration": 3.0,
@@ -851,7 +885,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"duck"
+animation = &"failure_laser"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])

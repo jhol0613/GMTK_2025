@@ -37,6 +37,12 @@ enum Direction {
 	RIGHT
 }
 
+enum FailureCause {
+	CAUGHT,
+	LASER,
+	SQUISHED
+}
+
 ## FMOD event runs in quad time. TimeMultiplier is "FMOD bars per sequencer step"
 enum TimeMultiplier {
 	## 8
