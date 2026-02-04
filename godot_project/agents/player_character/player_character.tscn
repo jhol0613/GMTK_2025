@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=107 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -22,9 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://dbyla8txd5j7u" path="res://agents/player_character/sprites/PidleR.png" id="15_5yn4y"]
 [ext_resource type="Texture2D" uid="uid://je5jv4uoiyvl" path="res://agents/player_character/sprites/PidleB.png" id="16_im6gk"]
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
+[ext_resource type="Texture2D" uid="uid://dlp8xqph7se2h" path="res://agents/player_character/sprites/LaserGameover_placeholder.png" id="18_p7lr1"]
 [ext_resource type="Texture2D" uid="uid://cgby283x4o0cu" path="res://agents/player_character/sprites/ActionHide.png" id="18_qasg8"]
+[ext_resource type="Texture2D" uid="uid://dv3q4d6vpvk44" path="res://agents/player_character/sprites/SquishedGameover_placeholder.png" id="19_e7oxi"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
-[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 [ext_resource type="Texture2D" uid="uid://d4h5psowgp800" path="res://agents/player_character/sprites/ActionType.png" id="23_0y67j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="28_qcujq"]
@@ -181,6 +183,14 @@ region = Rect2(0, 140, 72, 70)
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4ltr"]
 atlas = ExtResource("13_im6gk")
 region = Rect2(0, 210, 72, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8fog"]
+atlas = ExtResource("18_p7lr1")
+region = Rect2(0, 0, 27, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta6ci"]
+atlas = ExtResource("19_e7oxi")
+region = Rect2(0, 0, 27, 63)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7is6j"]
 atlas = ExtResource("18_qasg8")
@@ -473,16 +483,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aw7cp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_abjfc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cplg4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c4ltr")
+"texture": SubResource("AtlasTexture_d8fog")
 }],
 "loop": true,
 "name": &"failure_laser",
@@ -490,16 +491,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aw7cp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_abjfc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cplg4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c4ltr")
+"texture": SubResource("AtlasTexture_ta6ci")
 }],
 "loop": true,
 "name": &"failure_squish",
@@ -885,7 +877,7 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"failure_laser"
+animation = &"failure_squish"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])

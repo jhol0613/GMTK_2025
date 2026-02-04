@@ -23,10 +23,10 @@ tile_map_data = PackedByteArray(0, 0, 3, 0, 253, 255, 1, 0, 0, 0, 0, 0, 0, 0, 7,
 tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
 [node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("2_u3brs")]
-position = Vector2(243, 49)
+position = Vector2(78, 30)
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
-position = Vector2(175, 51)
+position = Vector2(79, 49)
 follow_on_animation_on_success = "idle"
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]
@@ -49,7 +49,7 @@ new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
 [node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
-position = Vector2(48, 99)
+position = Vector2(80, 99)
 direction = 0
 height = 7
 default_animation = "fire_up"
