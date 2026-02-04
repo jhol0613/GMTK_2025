@@ -61,7 +61,6 @@ func fire(depth: int):
 	enabled = true
 	force_raycast_update()
 	var collision_point : Vector2 #Global coordinates
-	var return_point : Vector2
 	
 	if is_colliding():
 		collision_point = get_collision_point()
@@ -93,12 +92,18 @@ func fire(depth: int):
 		var blocker_highpoint = blocker.get_highest_point_global_coordinates()
 		var blocker_height = blocker_lowpoint - blocker_highpoint + blocker.altitude
 
+		#TODO: all this logic could probably be cleaned up to be slightly more readable/performant
 		if height <= blocker_height + blocker.altitude and height >= blocker.altitude: #laser blocked
-			if (Enums.is_vertical(direction)):
+			# Down laser shouldn't hit things behind it (lower y coordinate
+			if direction == Enums.Direction.DOWN and blocker_lowpoint <= global_position.y + height:
+				line.points[1] = collision_point - global_position
+				should_spawn_child = true
+			elif (Enums.is_vertical(direction)):
 				collision_point = Vector2(collision_point.x, blocker_lowpoint - height + blocker.altitude)
 				line.points[1] = collision_point - global_position
-				_generate_beam_end(line.points[1], 1, true)
+				_generate_beam_end(line.points[1], 0, true)
 			# for horizontal laserrs, if blocker extends down to laser base, collide. otherwise don't
+			#TODO: the nines in this check should technically be half the tile size
 			elif (blocker_lowpoint >= global_position.y + height - horizontal_laser_height_offset - 9)\
 				and (blocker_lowpoint <= global_position.y + height - horizontal_laser_height_offset + 9):
 				line.points[1] = collision_point - global_position

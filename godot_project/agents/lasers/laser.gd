@@ -22,6 +22,8 @@ class_name Laser
 @export var pole2 : Sprite2D
 @export var shadow : AnimatedSprite2DSignals
 @export var obstacle : MovableObstacle
+#Clips base of laser visuals so you don't see them through laser body if laser changes its draw order due to hitting something
+@export var up_laser_clipper : TextureRect
 
 ##Height corresponding to a laser shooting out of the ground
 const popup_height := 7
@@ -66,25 +68,33 @@ func _ready() -> void:
 	#Set up beam
 	var beam_segment_scene = preload('res://agents/lasers/beam_segment.tscn')
 	beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).end_image)
+	#this should all be packaged into a function that can be called when height/direction changes
 	if direction == Enums.Direction.UP:
-		beam_root.max_beam_length = height - direction_data.get(direction).start_position_offset.y
-		#beam_root.self_modulate = Color(1, 0, 0)
-		beam_root.fire_again_on_no_hit = true
-		beam_root.line.visible = false
+		up_laser_clipper.position.y = -up_laser_clipper.size.y - height + direction_data.get(direction).start_position_offset.y
+		beam_root.global_position = global_position
 	elif direction == Enums.Direction.DOWN:
+		#new down laser strategy: hit checks will start from laser head, but will ignore the hit if 
+		#bottom of collider is above it. Also needs to hit from inside.
+		up_laser_clipper.position.y = -height - 10#10 is arbitrary, just to maker sure everything's in frame
+		beam_root.global_position = global_position + Vector2(0, -height + direction_data.get(direction).start_position_offset.y) #laser head position
+		
 		#for down shooting lasers, draw visuals from laser head (even though collision checks start from base)
-		var beam_dummy_root = beam_segment_scene.instantiate()
-		beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene, 
-		direction_data.get(direction).end_image)
-		beam_dummy_root.enabled = false
-		beam_dummy_root.beam_end_length = height
-		beam_root.add_child(beam_dummy_root)
-		beam_dummy_root.line.points[1] = beam_dummy_root.target_position + direction_data.get(direction).start_position_offset
+		#var beam_dummy_root = beam_segment_scene.instantiate()
+		#beam_dummy_root.setup(Enums.Direction.UP, 0, 0.0, beam_segment_scene, 
+		#direction_data.get(direction).end_image)
+		#beam_dummy_root.enabled = false
+		#beam_dummy_root.beam_end_length = height
+		#beam_root.add_child(beam_dummy_root)
+		#beam_dummy_root.line.points[1] = beam_dummy_root.target_position + direction_data.get(direction).start_position_offset
+		#up_laser_clipper.position.y = -height - 10#10 is arbirtrary, just to make sure everything's in frame
+		#beam_root.global_position = global_position
 	else:
 		#beam_root.position = Vector2(0, - height + 2)
 		beam_root.max_beam_length = abs(direction_data.get(direction).start_position_offset.x)
 		beam_root.fire_again_on_no_hit = true
 		beam_root.line.visible = false
+		up_laser_clipper.position.y = -up_laser_clipper.size.y + 10#10 is arbitrary, just to maker sure everything's in frame
+		beam_root.global_position = global_position + Vector2(0, -height + 2) #laser head position
 		#beam_root.reparent(_sprite, false)
 
 # Called when certain exports are changed so they can be visualized in the editor
@@ -145,9 +155,9 @@ func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool)
 	
 	## New using beam root ------------------------------------------------------------------------
 	if direction == Enums.Direction.UP:
-		beam_root.beam_end_length = grid_spaces * tile_size.y + .5 * tile_size.y + height #beam_end_correction_factor.y
+		beam_root.beam_end_length = grid_spaces * tile_size.y + .3 * tile_size.y + height
 	elif direction == Enums.Direction.DOWN:
-		beam_root.beam_end_length = grid_spaces * tile_size.y
+		beam_root.beam_end_length = grid_spaces * tile_size.y + height - 5
 	else:
 		beam_root.beam_end_length = grid_spaces * tile_size.x + .5 * tile_size.x# + beam_end_correction_factor.x
 	#if direction == Enums.Direction.DOWN and limit_is_wall:
