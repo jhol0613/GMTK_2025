@@ -127,8 +127,8 @@ func fire(depth: int):
 	return
 
 #time in seconds
-func _destroy_after_time(node: Node2D, time: float):
-	await get_tree().create_timer(1.0).timeout
+func _destroy_after_time(node: Node2D, time: float = 1.0):
+	await get_tree().create_timer(time).timeout
 	node.queue_free()
 
 ##Position given relative to self. If check collisions is true, area will be generated around beam end
@@ -148,6 +148,7 @@ func _generate_beam_end(end_position: Vector2, z_index_offset: int, check_collis
 		collider.set_collision_layer_value(Enums.CollisionLayer.ENEMIES, true)
 		beam_end.add_child(collider)
 		collider.add_child(shape)
+	_destroy_after_time(beam_end)
 
 ##Distance to points that share an axis coordinate
 func _quick_distance(point1: Vector2, point2: Vector2) -> float:

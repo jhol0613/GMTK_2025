@@ -12,7 +12,6 @@
 size = Vector2(19, 30)
 
 [node name="LevelBase" instance=ExtResource("1_21cbe")]
-position = Vector2(-1, 0)
 conductor_spawn_beat = 5
 conductor_enabled = false
 available_actions = Array[int]([6, 4, 7, 1, 2, 5])
@@ -21,42 +20,28 @@ available_actions = Array[int]([6, 4, 7, 1, 2, 5])
 tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
 [node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("2_u3brs")]
-position = Vector2(145, 59)
+position = Vector2(81, 28)
 
-[node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
-position = Vector2(306, 30)
-follow_on_animation_on_success = "idle"
-
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="1" node_paths=PackedStringArray("lasers")]
-script = ExtResource("5_h05u1")
-lasers = [NodePath("../../Laser")]
-new_height = 58
-metadata/_custom_type_script = "uid://brjyxyhy640eh"
-
-[node name="CatCartObstacle" parent="." index="11" instance=ExtResource("7_x68qa")]
+[node name="CatCartObstacle" parent="." index="10" instance=ExtResource("7_x68qa")]
 position = Vector2(273, 10)
 movement_path = Array[int]([3, 3, 4, 4])
 
-[node name="ComputerTerminal2" parent="." index="12" instance=ExtResource("4_5i52b")]
-position = Vector2(143, 31)
+[node name="ComputerTerminal2" parent="." index="11" instance=ExtResource("4_5i52b")]
+position = Vector2(16, 29)
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
 script = ExtResource("5_h05u1")
-lasers = [NodePath("../../Laser")]
-new_height = 7
+lasers = [NodePath("../../Laser2")]
+new_height = 64
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
-position = Vector2(79, 42)
-height = 34
-
-[node name="Laser2" parent="." index="14" instance=ExtResource("3_1o8fn")]
-position = Vector2(143, 99)
+[node name="Laser2" parent="." index="12" instance=ExtResource("3_1o8fn")]
+position = Vector2(48, 98)
 direction = 0
 height = 7
 default_animation = "fire_up"
 
-[node name="LaserBlocker" type="Area2D" parent="." index="15"]
+[node name="LaserBlocker" type="Area2D" parent="." index="13"]
 z_index = 1
 position = Vector2(80, 33)
 collision_layer = 512
@@ -65,5 +50,5 @@ script = ExtResource("7_21cbe")
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker" index="0"]
-position = Vector2(0, 17)
+position = Vector2(197, 16)
 shape = SubResource("RectangleShape2D_u3brs")
