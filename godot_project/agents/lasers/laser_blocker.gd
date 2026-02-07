@@ -4,6 +4,8 @@ class_name LaserBlocker
 
 ##The height off the ground of a laser blocker (so a laser beam could go under it if it's greater than that laser's height)
 @export var altitude := 0
+##Whether this laser blocker should trigger beam end to spawn a collision shape (e.g. for use on player to trigger game overs)
+@export var trigger_beam_end_collisions := false
 
 ##The biggest distance across any dimension of a blocker. If a blocker is bigger than this, laser exit point may not be computed correctly
 const MAX_DIMENSION := 100

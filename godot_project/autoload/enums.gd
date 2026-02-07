@@ -65,7 +65,7 @@ enum CollisionLayer {
 	ENEMIES = 7,
 	DUCKABLE = 9,
 	LASER_BLOCKER = 10,
-	SELF_DETECT = 11 #turn this layer on then instantly off when you need it
+	SELF_DETECT = 11, #turn this layer on then instantly off when you need it
 }
 
 enum Scenes {

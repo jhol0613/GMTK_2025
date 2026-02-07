@@ -101,13 +101,14 @@ func fire(depth: int):
 			elif (Enums.is_vertical(direction)):
 				collision_point = Vector2(collision_point.x, blocker_lowpoint - height + blocker.altitude)
 				line.points[1] = collision_point - global_position
-				_generate_beam_end(line.points[1], 0, true)
+				#TODO: This might eventually require a check for conductor as well to determine whether to run collision check
+				_generate_beam_end(line.points[1], 0, blocker.trigger_beam_end_collisions)
 			# for horizontal laserrs, if blocker extends down to laser base, collide. otherwise don't
 			#TODO: the nines in this check should technically be half the tile size
 			elif (blocker_lowpoint >= global_position.y + height - horizontal_laser_height_offset - 9)\
 				and (blocker_lowpoint <= global_position.y + height - horizontal_laser_height_offset + 9):
 				line.points[1] = collision_point - global_position
-				_generate_beam_end(line.points[1], 1, true)
+				_generate_beam_end(line.points[1], 1, blocker.trigger_beam_end_collisions)
 			else:
 				should_spawn_child = true
 		else:
