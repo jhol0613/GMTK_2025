@@ -67,7 +67,7 @@ enum CollisionLayer {
 	CONDUCTOR = 3,
 	COLLECTIBLES = 4,
 	PUSHERS = 5,
-	JUMPABLE = 6,
+	LASERS = 6,
 	ENEMIES = 7,
 	DUCKABLE = 9,
 	LASER_BLOCKER = 10,

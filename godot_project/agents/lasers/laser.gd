@@ -95,8 +95,6 @@ func _finish_fire():
 
 	# Fire laser property animation
 	animation_player.play("laser_fire")
-	
-	print(beam_root.get_child_count())
 
 	if new_height_tween:
 		await animation_player.animation_finished

@@ -73,7 +73,7 @@ func notify_failure(cause: Enums.FailureCause):
 		Enums.FailureCause.SQUISHED:
 			animation_to_play = "failure_squish"
 	print("Failure animation: %s" % animation_to_play)
-	play_animation_with_follow_on(animation_to_play)
+	play_animation_with_follow_on(animation_to_play, "cancel_follow_on")
 	
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED
@@ -81,26 +81,17 @@ func disable_collisions() -> void:
 func enable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
-#not detecting laser hits for some reason
 func _on_laser_hit(area: Area2D):
-	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
+	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
 		notify_failure(Enums.FailureCause.LASER)
 		failure.emit()
-		#if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
-			#return
-		#if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
-			#return
-		#notify_failure(Enums.FailureCause.LASER)
-		#failure.emit()
 
 func _on_collision(area: Area2D) -> void:
-	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
-		if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
-			return
-		if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
-			return
+	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
+		return #let laser blocker area deal with it
+	elif area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
 		var cause = Enums.FailureCause.CAUGHT
-		if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) or area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE)):
+		if (area.get_collision_layer_value(Enums.CollisionLayer.LASERS)):
 			cause = Enums.FailureCause.LASER
 		notify_failure(cause)
 		failure.emit()

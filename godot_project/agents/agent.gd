@@ -168,11 +168,15 @@ func _on_animation_start(action: Enums.PlayerAction):
 	var animation_name = action_animations.get(action, default_animation)
 	var follow_on = follow_on_animations.get(action, "")
 	play_animation_with_follow_on(animation_name, follow_on)
-	
+
+#Cancel current follow-on anim by setting follow_on_animation to "cancel_follow_on"
 func play_animation_with_follow_on(animation_name: String, follow_on_animation := ""):
 	#assert(sprite.sprite_frames.get_animation_names().has(animation_name), "Attempting to call play animation that does not exist")
 	sprite.play_with_signals(animation_name)
-	if follow_on_animation != "":
+	if follow_on_animation == "cancel_follow_on":
+		if sprite.animation_finished.is_connected(_on_animation_finished):
+			sprite.animation_finished.disconnect(_on_animation_finished)
+	elif follow_on_animation != "":
 		if not sprite.animation_finished.has_connections():
 			sprite.animation_finished.connect(_on_animation_finished.bind(follow_on_animation))
 

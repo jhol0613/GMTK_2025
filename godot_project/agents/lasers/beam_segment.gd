@@ -117,7 +117,7 @@ func fire(depth: int):
 			child.max_beam_length = _quick_distance(blocker_exit_point, line.global_position + line.points[1])
 			child.fire_again_on_no_hit = true
 			should_spawn_child = true
-			
+
 			if height > blocker_height:
 				child.z_index += 1
 			else:
@@ -129,17 +129,17 @@ func fire(depth: int):
 	return
 
 ##Check whether a point collides with a laser blocker that has trigger_beam_end_collisions as true.
-func _should_trigger_collision(point: Vector2):
-	var query := PhysicsPointQueryParameters2D.new()
-	query.position = point
-	query.collide_with_areas = true
-	query.collide_with_bodies = false
-	query.collision_mask = collision_mask #laser blockers
-	for blocker in get_world_2d().direct_space_state.intersect_point(query):
-		if blocker.collider is LaserBlocker:
-			if blocker.collider.trigger_beam_end_collisions:
-				return true
-	return false
+#func _should_trigger_collision(point: Vector2):
+	#var query := PhysicsPointQueryParameters2D.new()
+	#query.position = point
+	#query.collide_with_areas = true
+	#query.collide_with_bodies = false
+	#query.collision_mask = collision_mask #laser blockers
+	#for blocker in get_world_2d().direct_space_state.intersect_point(query):
+		#if blocker.collider is LaserBlocker:
+			#if blocker.collider.trigger_beam_end_collisions:
+				#return true
+	#return false
 
 #time in seconds
 func _destroy_after_time(node: Node2D, time: float = 1.0):
@@ -161,6 +161,7 @@ func _generate_beam_end(end_position: Vector2, z_index_offset: int, check_collis
 		shape.shape.radius = 3
 		collider.collision_layer = 0
 		collider.set_collision_layer_value(Enums.CollisionLayer.ENEMIES, true)
+		collider.set_collision_layer_value(Enums.CollisionLayer.LASERS, true)
 		beam_end.add_child(collider)
 		collider.add_child(shape)
 	_destroy_after_time(beam_end)
