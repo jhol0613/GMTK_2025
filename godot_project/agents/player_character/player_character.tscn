@@ -55,21 +55,21 @@ metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 [sub_resource type="Resource" id="Resource_0y67j"]
 script = ExtResource("2_gvvi5")
 y_movement_curve = ExtResource("3_xrlin")
-y_movement_magnitude = 40.0
+y_movement_magnitude = 35.0
 move_duration = 0.5
 timing_offset = 0.2
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="Curve" id="Curve_0y67j"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.139037, -1), 0.0, 0.0, 0, 0, Vector2(0.807487, -1), 0.0, 0.0, 0, 0, Vector2(0.903743, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.959893, -0.339326), 0.0, 0.0, 0, 0, Vector2(1, 0.0701353), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0858896, -1), 0.0, 0.0, 0, 0, Vector2(0.889571, -1), 0.0, 0.0, 0, 0, Vector2(0.903743, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.959893, -0.339326), 0.0, 0.0, 0, 0, Vector2(1, 0.0701353), 0.0, 0.0, 0, 0]
 point_count = 6
 
 [sub_resource type="Resource" id="Resource_2rm4m"]
 script = ExtResource("2_gvvi5")
 y_movement_curve = SubResource("Curve_0y67j")
 y_movement_magnitude = 10.0
-move_duration = 0.65
+move_duration = 0.8
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -428,7 +428,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e1bv2")
 }, {
-"duration": 2.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_wc5pn")
 }, {
 "duration": 1.0,
@@ -772,7 +772,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 size = Vector2(15, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rm4m"]
-size = Vector2(15, 65.5)
+size = Vector2(17.5, 65.5)
 
 [node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "duck_collision_timer", "laser_blocker", "laser_blocker_collision_shape", "collision_area", "action_sound_emitters", "sprite")]
 z_index = 1
@@ -957,14 +957,16 @@ one_shot = true
 [node name="DuckCollisionDisable" type="Timer" parent="."]
 
 [node name="LaserBlocker" type="Area2D" parent="."]
+z_index = 5
 position = Vector2(1, -28)
 collision_layer = 512
 collision_mask = 192
 script = ExtResource("28_qcujq")
+trigger_beam_end_collisions = true
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
-position = Vector2(0.5, -5.25)
+position = Vector2(0.25, -5)
 shape = SubResource("RectangleShape2D_2rm4m")
 
 [connection signal="area_entered" from="Shadow/Area2D" to="." method="_on_collision"]

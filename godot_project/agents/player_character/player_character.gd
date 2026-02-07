@@ -23,6 +23,8 @@ class_name PlayerCharacter
 @export_subgroup("Dodging")
 ##Jumping will dodge lasers of up to this height
 @export var jump_clearance := 28
+##Laser blocker will shrink to this height during jump
+@export var jump_player_height := 42
 ##Ducking will dodge lasers as low as this height
 @export var duck_height := 28
 
@@ -46,6 +48,8 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		jump_collision_timer.start()
 		#use y magnitude of jump for 
 		laser_blocker.altitude = jump_clearance
+		laser_blocker.position.y -= jump_clearance
+		_laser_blocker_collision_rectangle.size.y = jump_player_height
 		_jumping = true
 	elif action == Enums.PlayerAction.DUCK:
 		# Move blocker down so the base of the blocker stays in the same place when it changes sizes
@@ -79,9 +83,9 @@ func enable_collisions() -> void:
 
 #not detecting laser hits for some reason
 func _on_laser_hit(area: Area2D):
-	var test = Enums.CollisionLayer.ENEMIES
 	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
-		pass
+		notify_failure()
+		failure.emit()
 		#if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
 			#return
 		#if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
@@ -109,6 +113,8 @@ func on_jump_collision_disabled_expire() -> void:
 	_jumping = false
 	laser_blocker.altitude = 0
 	laser_blocker_collision_shape.disabled = false
+	laser_blocker.position = _original_laser_blocker_position
+	_laser_blocker_collision_rectangle.size.y = _original_laser_blocker_height
 	#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
 	
 func on_duck_collision_disabled_expire() -> void:
