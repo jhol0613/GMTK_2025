@@ -246,6 +246,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"deployed"
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
@@ -260,12 +261,13 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -357.0
-offset_top = -254.0
+offset_top = -74.0
 offset_right = 358.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="BeamSegment" parent="UpLaserClipper" instance=ExtResource("20_7lqwi")]
 visible = false
-position = Vector2(357, 254)
+position = Vector2(357, 16)
 hit_from_inside = true

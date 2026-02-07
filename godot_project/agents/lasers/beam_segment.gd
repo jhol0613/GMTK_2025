@@ -69,8 +69,6 @@ func fire(depth: int):
 		should_spawn_child = true
 	else: #hits beam end
 		line.points[1] = target_position
-		var end_point : Vector2 = line.points[1] + int(not Enums.is_vertical(direction)) * \
-			Vector2(0, -height + horizontal_laser_height_offset)
 		_generate_beam_end(line.points[1], -1, false)
 		return
 
@@ -93,15 +91,18 @@ func fire(depth: int):
 		var blocker_height = blocker_lowpoint - blocker_highpoint + blocker.altitude
 
 		#TODO: all this logic could probably be cleaned up to be slightly more readable/performant
+		
 		if height <= blocker_height + blocker.altitude and height >= blocker.altitude: #laser blocked
-			# Down laser shouldn't hit things behind it (lower y coordinate
+			# Down laser shouldn't hit things behind it
 			if direction == Enums.Direction.DOWN and blocker_lowpoint <= global_position.y + height:
 				line.points[1] = collision_point - global_position
 				should_spawn_child = true
 			elif (Enums.is_vertical(direction)):
 				collision_point = Vector2(collision_point.x, blocker_lowpoint - height + blocker.altitude)
 				line.points[1] = collision_point - global_position
-				#TODO: This might eventually require a check for conductor as well to determine whether to run collision check
+				child.beam_end_length = abs(blocker_lowpoint - height + blocker.altitude - global_position.y)
+				child.previous_length = 0
+				should_spawn_child = true
 				_generate_beam_end(line.points[1], 0, blocker.trigger_beam_end_collisions)
 			# for horizontal laserrs, if blocker extends down to laser base, collide. otherwise don't
 			#TODO: the nines in this check should technically be half the tile size
@@ -126,6 +127,19 @@ func fire(depth: int):
 		child.fire(depth + 1)
 	_destroy_after_time(child, 1.0)
 	return
+
+##Check whether a point collides with a laser blocker that has trigger_beam_end_collisions as true.
+func _should_trigger_collision(point: Vector2):
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = point
+	query.collide_with_areas = true
+	query.collide_with_bodies = false
+	query.collision_mask = collision_mask #laser blockers
+	for blocker in get_world_2d().direct_space_state.intersect_point(query):
+		if blocker.collider is LaserBlocker:
+			if blocker.collider.trigger_beam_end_collisions:
+				return true
+	return false
 
 #time in seconds
 func _destroy_after_time(node: Node2D, time: float = 1.0):
