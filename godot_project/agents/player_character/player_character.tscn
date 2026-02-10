@@ -1,4 +1,4 @@
-[gd_scene load_steps=103 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=111 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -22,9 +22,11 @@
 [ext_resource type="Texture2D" uid="uid://dbyla8txd5j7u" path="res://agents/player_character/sprites/PidleR.png" id="15_5yn4y"]
 [ext_resource type="Texture2D" uid="uid://je5jv4uoiyvl" path="res://agents/player_character/sprites/PidleB.png" id="16_im6gk"]
 [ext_resource type="Texture2D" uid="uid://0sgjwqw0xvto" path="res://agents/player_character/sprites/successcombined.png" id="17_5yn4y"]
+[ext_resource type="Texture2D" uid="uid://542md4gsu4xn" path="res://agents/player_character/sprites/LaserGameover.png" id="18_p7lr1"]
 [ext_resource type="Texture2D" uid="uid://cgby283x4o0cu" path="res://agents/player_character/sprites/ActionHide.png" id="18_qasg8"]
+[ext_resource type="Texture2D" uid="uid://dv3q4d6vpvk44" path="res://agents/player_character/sprites/SquishedGameover_placeholder.png" id="19_e7oxi"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
-[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 [ext_resource type="Texture2D" uid="uid://d4h5psowgp800" path="res://agents/player_character/sprites/ActionType.png" id="23_0y67j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="28_qcujq"]
@@ -53,21 +55,21 @@ metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 [sub_resource type="Resource" id="Resource_0y67j"]
 script = ExtResource("2_gvvi5")
 y_movement_curve = ExtResource("3_xrlin")
-y_movement_magnitude = 40.0
+y_movement_magnitude = 35.0
 move_duration = 0.5
 timing_offset = 0.2
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="Curve" id="Curve_0y67j"]
 _limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.139037, -1), 0.0, 0.0, 0, 0, Vector2(0.807487, -1), 0.0, 0.0, 0, 0, Vector2(0.903743, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.959893, -0.339326), 0.0, 0.0, 0, 0, Vector2(1, 0.0701353), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0858896, -1), 0.0, 0.0, 0, 0, Vector2(0.889571, -1), 0.0, 0.0, 0, 0, Vector2(0.903743, 0.505618), 0.0, 0.0, 0, 0, Vector2(0.959893, -0.339326), 0.0, 0.0, 0, 0, Vector2(1, 0.0701353), 0.0, 0.0, 0, 0]
 point_count = 6
 
 [sub_resource type="Resource" id="Resource_2rm4m"]
 script = ExtResource("2_gvvi5")
 y_movement_curve = SubResource("Curve_0y67j")
 y_movement_magnitude = 10.0
-move_duration = 0.65
+move_duration = 0.8
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
@@ -181,6 +183,30 @@ region = Rect2(0, 140, 72, 70)
 [sub_resource type="AtlasTexture" id="AtlasTexture_c4ltr"]
 atlas = ExtResource("13_im6gk")
 region = Rect2(0, 210, 72, 70)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvokp"]
+atlas = ExtResource("18_p7lr1")
+region = Rect2(0, 128, 42, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lrs8"]
+atlas = ExtResource("18_p7lr1")
+region = Rect2(0, 64, 42, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8fog"]
+atlas = ExtResource("18_p7lr1")
+region = Rect2(0, 0, 42, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b33ha"]
+atlas = ExtResource("18_p7lr1")
+region = Rect2(0, 256, 42, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnduv"]
+atlas = ExtResource("18_p7lr1")
+region = Rect2(0, 192, 42, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta6ci"]
+atlas = ExtResource("19_e7oxi")
+region = Rect2(0, 0, 27, 63)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7is6j"]
 atlas = ExtResource("18_qasg8")
@@ -418,7 +444,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_e1bv2")
 }, {
-"duration": 2.0,
+"duration": 4.0,
 "texture": SubResource("AtlasTexture_wc5pn")
 }, {
 "duration": 1.0,
@@ -469,6 +495,61 @@ animations = [{
 }],
 "loop": true,
 "name": &"failure",
+"speed": 5.67
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvokp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lrs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8fog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvokp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lrs8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8fog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b33ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnduv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b33ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnduv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b33ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnduv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b33ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnduv")
+}],
+"loop": false,
+"name": &"failure_laser",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta6ci")
+}],
+"loop": true,
+"name": &"failure_squish",
 "speed": 5.67
 }, {
 "frames": [{
@@ -746,7 +827,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 size = Vector2(15, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rm4m"]
-size = Vector2(15, 65.5)
+size = Vector2(17.5, 65.5)
 
 [node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "failure_emitter", "jump_collision_timer", "duck_collision_timer", "laser_blocker", "laser_blocker_collision_shape", "collision_area", "action_sound_emitters", "sprite")]
 z_index = 1
@@ -851,8 +932,10 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"duck"
+animation = &"failure_laser"
 autoplay = "idle_down"
+frame = 8
+frame_progress = 1.0
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
 animation_offsets = Dictionary[String, float]({
@@ -931,14 +1014,16 @@ one_shot = true
 [node name="DuckCollisionDisable" type="Timer" parent="."]
 
 [node name="LaserBlocker" type="Area2D" parent="."]
+z_index = 5
 position = Vector2(1, -28)
 collision_layer = 512
 collision_mask = 192
 script = ExtResource("28_qcujq")
+trigger_beam_end_collisions = true
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
-position = Vector2(0.5, -5.25)
+position = Vector2(0.25, -5)
 shape = SubResource("RectangleShape2D_2rm4m")
 
 [connection signal="area_entered" from="Shadow/Area2D" to="." method="_on_collision"]

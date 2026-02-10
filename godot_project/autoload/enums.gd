@@ -37,6 +37,12 @@ enum Direction {
 	RIGHT
 }
 
+enum FailureCause {
+	CAUGHT,
+	LASER,
+	SQUISHED
+}
+
 ## FMOD event runs in quad time. TimeMultiplier is "FMOD bars per sequencer step"
 enum TimeMultiplier {
 	## 8
@@ -61,11 +67,11 @@ enum CollisionLayer {
 	CONDUCTOR = 3,
 	COLLECTIBLES = 4,
 	PUSHERS = 5,
-	JUMPABLE = 6,
+	LASERS = 6,
 	ENEMIES = 7,
 	DUCKABLE = 9,
 	LASER_BLOCKER = 10,
-	SELF_DETECT = 11 #turn this layer on then instantly off when you need it
+	SELF_DETECT = 11, #turn this layer on then instantly off when you need it
 }
 
 enum Scenes {
@@ -269,4 +275,9 @@ func get_reverse_fall(action: PlayerAction) -> PlayerAction:
 		_:
 			return PlayerAction.NONE
 
+func is_vertical(direction: Direction) -> bool:
+	if direction == Direction.LEFT or direction == Direction.RIGHT:
+		return false
+	else:
+		return true
 #endregion

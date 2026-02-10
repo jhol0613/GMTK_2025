@@ -69,6 +69,7 @@ visible = false
 layout_mode = 0
 offset_right = 599.0
 offset_bottom = 451.0
+mouse_filter = 2
 color = Color(0, 0, 0, 0.152941)
 
 [node name="pause_menu" type="Control" parent="."]

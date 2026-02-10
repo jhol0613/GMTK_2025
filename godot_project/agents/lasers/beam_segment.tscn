@@ -1,12 +1,16 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgspuqigwj2us"]
 
 [ext_resource type="Texture2D" uid="uid://bfvugq7fmqx7m" path="res://agents/lasers/beam_line.png" id="1_rygpp"]
-[ext_resource type="Script" uid="uid://0ffxflm02aqj" path="res://agents/lasers/beam_segment.gd" id="2_xgeit"]
+[ext_resource type="Script" uid="uid://beocf37m2g2mh" path="res://agents/lasers/beam_segment.gd" id="2_xgeit"]
 
-[node name="BeamSegment" type="Line2D"]
+[node name="BeamSegment" type="RayCast2D"]
+collision_mask = 512
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("2_xgeit")
+
+[node name="BeamLine" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
 width = 4.0
 texture = ExtResource("1_rygpp")
 texture_mode = 2
-script = ExtResource("2_xgeit")
-
-[node name="RayCast2D" type="RayCast2D" parent="."]

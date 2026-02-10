@@ -136,6 +136,7 @@ func _initialize_level():
 	_initialize_pushers()
 	_initialize_interactables()
 	_initialize_lasers()
+	_initialize_terminals()
 
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
@@ -303,6 +304,10 @@ func _initialize_lasers() -> void:
 		var cells_to_wall = _level_scene.get_cells_to_level_edge(laser.grid_position, laser.direction)
 		laser.set_max_fire_distance_by_grid_spaces(cells_to_obstacle, cells_to_obstacle == cells_to_wall)
 
+func _initialize_terminals() -> void:
+	for terminal: Terminal in _level_scene.terminals:
+		terminal.selected.connect(_on_terminal_selected)
+
 #endregion
 
 #region Beat Actions
@@ -455,7 +460,7 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	if movable is PlayerCharacter:
 		# Fail if crushed (i.e. a fall would result in a bonk)
 		if Enums.is_action_bonk(action):
-			_player_character.notify_failure()
+			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
 		else:
 			_player_character.execute_action(action, _current_beat)
@@ -517,7 +522,10 @@ func _fade_to_thinking_shader():
 	tween.tween_property(_shader.material, "shader_parameter/bcs",
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
-	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
+	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)	
+
+func _on_terminal_selected(programs):
+	_action_sequencer.connect_terminal_to_screen(programs[0])
 #endregion
 
 #region Animation

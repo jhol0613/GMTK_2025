@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=35 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://ctksnhewbao21" path="res://agents/lasers/beam_leftt_end.png" id="4_2o4ih"]
 [ext_resource type="Texture2D" uid="uid://bychifjwksuae" path="res://agents/lasers/beam_right_end.png" id="5_tquva"]
 [ext_resource type="Texture2D" uid="uid://bwoierraggsp3" path="res://agents/lasers/beam_up_end.png" id="6_chnl6"]
-[ext_resource type="Texture2D" uid="uid://bfvugq7fmqx7m" path="res://agents/lasers/beam_line.png" id="7_dshi8"]
 [ext_resource type="SpriteFrames" uid="uid://1v425u1v0bil" path="res://agents/lasers/laser_frames.tres" id="7_use4v"]
 [ext_resource type="Texture2D" uid="uid://b71l6k47nchmt" path="res://agents/lasers/new_laser_visuals/laser_base.png" id="8_gmiso"]
 [ext_resource type="Texture2D" uid="uid://durhkh2dngimg" path="res://agents/lasers/new_laser_visuals/laser_head_clipper.png" id="9_to654"]
@@ -15,36 +14,37 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="11_gmiso"]
 [ext_resource type="Texture2D" uid="uid://oe5ye3277wus" path="res://agents/lasers/new_laser_visuals/telescope2.png" id="11_tquva"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="12_to654"]
-[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="14_mgkp8"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="14_mgkp8"]
 [ext_resource type="Texture2D" uid="uid://dqk05pfcdke64" path="res://agents/lasers/new_laser_visuals/stowed_shadow.png" id="16_chnl6"]
 [ext_resource type="Texture2D" uid="uid://cnmot5c0cn1y4" path="res://agents/lasers/new_laser_visuals/low_shadow.png" id="16_lyym0"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="19_jtygs"]
+[ext_resource type="PackedScene" uid="uid://bgspuqigwj2us" path="res://agents/lasers/beam_segment.tscn" id="20_7lqwi"]
 
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_up"
-start_position_offset = Vector2(0, -13)
+start_position_offset = Vector2(0, -3)
 end_image = ExtResource("6_chnl6")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_knkgi"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_down"
-start_position_offset = Vector2(0, -2)
+start_position_offset = Vector2(0, 6)
 end_image = ExtResource("3_to654")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_yjehw"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_left"
-start_position_offset = Vector2(-9, -5)
+start_position_offset = Vector2(-9, 3)
 end_image = ExtResource("4_2o4ih")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
 [sub_resource type="Resource" id="Resource_use4v"]
 script = ExtResource("2_g7y3a")
 animation_name = "fire_right"
-start_position_offset = Vector2(9, -5)
+start_position_offset = Vector2(9, 3)
 end_image = ExtResource("5_tquva")
 metadata/_custom_type_script = "uid://duifkavk2c1j8"
 
@@ -53,22 +53,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BeamLine:visible")
+tracks/0/path = NodePath("UpLaserClipper/BeamSegment:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -82,38 +70,14 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Visuals/BeamLine:visible")
+tracks/0/path = NodePath("UpLaserClipper/BeamSegment:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true, true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visuals/BeamLine/BeamEnd:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [false, true, true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Collision/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [true, false, false, true]
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aar76"]
@@ -189,27 +153,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_jtygs"]
-b = Vector2(0, 0)
-
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "collision_area", "collision_shape", "animation_player", "visuals", "beam_line", "beam_line_extension_1", "beam_line_extension_2", "beam_end", "base_raycast", "beam_raycast", "pole1", "pole2", "shadow", "obstacle", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "up_laser_clipper", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
-collision_area = NodePath("Collision")
-collision_shape = NodePath("Collision/CollisionShape2D")
 animation_player = NodePath("AnimationPlayer")
 visuals = NodePath("Visuals")
-beam_line = NodePath("Visuals/BeamLine")
-beam_line_extension_1 = NodePath("Visuals/BeamLine/BeamLineExtension1")
-beam_line_extension_2 = NodePath("Visuals/BeamLine/BeamLineExtension1/BeamLineExtension2")
-beam_end = NodePath("Visuals/BeamLine/BeamEnd")
-base_raycast = NodePath("Visuals/BaseRaycast")
-beam_raycast = NodePath("Visuals/BeamLine/BeamRaycast")
+beam_root = NodePath("UpLaserClipper/BeamSegment")
 pole1 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1")
 pole2 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2")
 shadow = NodePath("Visuals/Pole1Shadow")
 obstacle = NodePath("GenericInvisibleObstacle")
+up_laser_clipper = NodePath("UpLaserClipper")
 height = 64
 jumpable_threshhold = 16.0
 beam_width = 1
@@ -255,6 +210,7 @@ offset_top = -108.0
 offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("9_to654")
 
 [node name="RenderBoxOffset" type="Node2D" parent="Visuals/LaserBase/RenderBox"]
@@ -270,6 +226,7 @@ offset_left = -10.0
 offset_top = -67.0
 offset_right = 10.0
 offset_bottom = -13.0
+mouse_filter = 2
 
 [node name="RenderBox2Offset" type="Node2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2"]
 position = Vector2(10, 66)
@@ -291,53 +248,29 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"deployed"
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="BaseRaycast" type="RayCast2D" parent="Visuals"]
-target_position = Vector2(0, 0)
-collision_mask = 512
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="BeamLine" type="Line2D" parent="Visuals"]
-visible = false
-points = PackedVector2Array(0, 0, 0, 0)
-width = 4.0
-texture = ExtResource("7_dshi8")
-texture_mode = 2
-
-[node name="BeamEnd" type="Sprite2D" parent="Visuals/BeamLine"]
-visible = false
-texture = ExtResource("3_to654")
-
-[node name="BeamRaycast" type="RayCast2D" parent="Visuals/BeamLine"]
-target_position = Vector2(0, 0)
-collision_mask = 512
-collide_with_areas = true
-collide_with_bodies = false
-
-[node name="BeamLineExtension1" type="Line2D" parent="Visuals/BeamLine"]
-z_as_relative = false
-points = PackedVector2Array(0, 0, 0, 0)
-width = 4.0
-default_color = Color(0.621663, 0.388947, 0.938421, 1)
-texture_mode = 2
-
-[node name="BeamLineExtension2" type="Line2D" parent="Visuals/BeamLine/BeamLineExtension1"]
-z_as_relative = false
-points = PackedVector2Array(0, 0, 0, 0)
-width = 4.0
-default_color = Color(2.98411e-06, 0.634633, 0.415616, 1)
-texture = ExtResource("7_dshi8")
-texture_mode = 2
-
-[node name="Collision" type="Area2D" parent="."]
-collision_layer = 320
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collision"]
-shape = SubResource("SegmentShape2D_jtygs")
-disabled = true
-
 [node name="GenericInvisibleObstacle" parent="." instance=ExtResource("19_jtygs")]
 position = Vector2(0, 3)
+
+[node name="UpLaserClipper" type="TextureRect" parent="."]
+clip_contents = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -357.0
+offset_top = -74.0
+offset_right = 358.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="BeamSegment" parent="UpLaserClipper" instance=ExtResource("20_7lqwi")]
+visible = false
+position = Vector2(357, 16)
+hit_from_inside = true

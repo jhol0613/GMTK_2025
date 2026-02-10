@@ -58,6 +58,8 @@ class_name ActionSequencer
 @onready var eraser_btn_press_emitter = $TextureRect/EraserButton/EraserButtonPress
 var _eraser_mode := false
 
+@onready var _screen = $SequencerScreen
+
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
 
@@ -244,6 +246,9 @@ func stop_sequencer():
 func push_replay_button():
 	_on_replay_button_pressed()
 
+func connect_terminal_to_screen(terminal_program: TerminalProgram):
+	_screen.set_test_text(terminal_program.get_parent().name)
+
 # Clears out all slots and resets action quanitities
 func _clear_action_slots():
 	for i in range(_available_actions.size()):
@@ -254,6 +259,7 @@ func _clear_action_slots():
 func _turn_off_sequencer_lights():
 	for i in range(_available_slots):
 		_initialized_slots[i].sequence_light_on = false
+
 
 #region Signal connections
 
@@ -407,7 +413,5 @@ func _update_slot_action_previews():
 			
 		if tutorial_mode:
 			_initialized_slots[i].start_flashing()
-
-
 
 #endregion

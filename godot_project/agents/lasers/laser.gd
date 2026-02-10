@@ -5,22 +5,15 @@ class_name Laser
 
 @export_subgroup("Nodes")
 @export var _sprite : AnimatedSprite2DSignals
-@export var collision_area : Area2D
-@export var collision_shape : CollisionShape2D
 @export var animation_player : AnimationPlayer
 @export var visuals : Node2D
-@export var beam_line : Line2D
-@export var beam_line_extension_1 : Line2D
-@export var beam_line_extension_2 : Line2D
-@export var beam_end : Sprite2D
-##Determines IF an object is hit for up/left/right Origin is laser base
-@export var base_raycast : RayCast2D
-##Determines WHERE an object gets hit (for left/right lasers), and IF an object gets hit for down lasers. Origin coincident with visual beamline
-@export var beam_raycast : RayCast2D
+@export var beam_root : BeamSegment
 @export var pole1 : Sprite2D
 @export var pole2 : Sprite2D
 @export var shadow : AnimatedSprite2DSignals
 @export var obstacle : MovableObstacle
+#Clips base of laser visuals so you don't see them through laser body if laser changes its draw order due to hitting something
+@export var up_laser_clipper : TextureRect
 
 ##Height corresponding to a laser shooting out of the ground
 const popup_height := 7
@@ -31,7 +24,9 @@ const pole2_height := 24
 @export var direction := Enums.Direction.DOWN: set = set_direction
 ##Length of the laser beam (if it were at 0 height). If set to 0, laser will determine length using
 ##static level geometry. This will not prevent laser from getting cut short by laser blockers
-@export var max_beam_length := 0: set = set_max_beam_length
+#TODO: Manual max beam length setting no longer supported in recursisve lasers. Re-implement this feature
+#if we need it.
+#@export var max_beam_length := 0: set = set_max_beam_length
 @export_range(popup_height, popup_height + pole1_height + pole2_height, 1) var height := 7: set = _set_height
 
 @export_subgroup("Laser Data")
@@ -45,10 +40,6 @@ const pole2_height := 24
 
 ##Point at which shadow changes to low deployed sprite
 @export var deployed_transition := 13
-
-var max_beam_length_vector: Vector2
-# Corrects beam endpoint based on the offset between beam origin from laser direction data and cell center
-var current_beam_length: Vector2
 
 var new_height_tween: Tween
 
@@ -66,69 +57,22 @@ func _ready() -> void:
 func _construct():
 	# Setters might be called before initialization
 	if !is_inside_tree(): return
-	
-	if !Engine.is_editor_hint() and max_beam_length > 0:
-		max_beam_length_vector = Vector2i(max_beam_length, max_beam_length) * \
-			Enums.direction_to_vector(direction)
 
 	# Laser visuals
 	_sprite.set_animation(direction_data.get(direction).animation_name)
 	default_animation = direction_data.get(direction).animation_name
-	beam_end.texture = direction_data.get(direction).end_image
 	_sprite.frame = 0
-	beam_line.visible = Engine.is_editor_hint()
-
-	# Laser collision
-	base_raycast.target_position = max_beam_length_vector
-	beam_raycast.target_position = max_beam_length_vector
-	
-	_update_endpoint(max_beam_length_vector, max_beam_length_vector, max_beam_length_vector)
-	
-	# Collision
-	var new_shape = collision_shape.shape.duplicate()
-	new_shape.b = beam_line.points[1]
-	collision_shape.shape = new_shape
-	collision_shape.disabled = true
-
-##Endpoint should be given in global coordinates
-func _update_endpoint(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
-	# Visuals
-	beam_line.points[1] = beam1_endpoint
-	#beam_line_extension_1.global_position = beam_line.global_position
-	beam_line_extension_1.points[1] = beam2_endpoint
-	beam_line_extension_2.position = beam_line_extension_1.points[1]
-	beam_line_extension_2.points[1] = beam3_endpoint - beam_line_extension_2.position
-	beam_end.position = beam3_endpoint
-	
-	#beam_line_extension_2.points[1] = endpoint# - beam_line_extension_2.global_position
-	#beam_end.position = endpoint
-	
-	#beam_line.points[1] = endpoint
-	#beam_end.position = beam_line.points[1]
-
-	#Collision
-	var new_shape = collision_shape.shape.duplicate()
-	new_shape.b = beam_line_extension_2.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
-	#new_shape.b = beam_line.points[1] + Vector2(0, -int(direction == Enums.Direction.UP) * height)
-	collision_shape.shape = new_shape
-	collision_shape.disabled = true
 
 ##Called to set max fire distance based on static obstacles. Laser blockers can still cause this
 ##distance to be shorter. If limit_is_wall is true, down-pointing lasers will apply an exception so 
 ##that their visual range extends all the way to the train car wall
 func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool):
-	var down_laser_height_correction = Vector2i(0, 0)
-	if max_beam_length > 0:
-		return
-	if direction == Enums.Direction.DOWN and limit_is_wall:
-		down_laser_height_correction = Vector2i(0, height)
-	var correction = beam_end_correction_factor * Enums.direction_to_vector(direction)
-	max_beam_length_vector = grid_spaces * tile_size * Enums.direction_to_vector(direction) + \
-		correction + down_laser_height_correction
-	_construct()
-
-func set_max_beam_length(new_length: int):
-	max_beam_length = new_length
+	if direction == Enums.Direction.UP:
+		beam_root.beam_end_length = grid_spaces * tile_size.y + .3 * tile_size.y + height
+	elif direction == Enums.Direction.DOWN:
+		beam_root.beam_end_length = grid_spaces * tile_size.y + height - 5
+	else:
+		beam_root.beam_end_length = grid_spaces * tile_size.x + .5 * tile_size.x
 	_construct()
 
 func set_direction(new_direction: Enums.Direction):
@@ -138,103 +82,16 @@ func set_direction(new_direction: Enums.Direction):
 func _fire(anim_signal_id: String):
 	if anim_signal_id != "fire":
 		return
-
 	if new_height_tween:
 		new_height_tween.pause()
-
 	if height == popup_height:
 		shadow.play("low")
+	beam_root.fire(0)
+	_finish_fire()
 
-	beam_line.global_position = _sprite.global_position + direction_data.get(direction).start_position_offset
-	# Check for laser blockers
-	base_raycast.enabled = true
-	beam_raycast.enabled = true
-	base_raycast.force_raycast_update()
-	beam_raycast.force_raycast_update()
-	var collision_point := max_beam_length_vector #default if there's no collision happening
-	
-	var hit_check_raycast: RayCast2D
-	match direction:
-		Enums.Direction.UP:
-			hit_check_raycast = base_raycast
-		Enums.Direction.DOWN, Enums.Direction.LEFT, Enums.Direction.RIGHT:
-			hit_check_raycast = beam_raycast
-	
-	if not hit_check_raycast.is_colliding():
-		#_reset_beamline_extensions()
-		_finish_fire(collision_point, collision_point, collision_point)
-		return
-	
-	#if hit_check_raycast.is_colliding():
-	var blocker: LaserBlocker = hit_check_raycast.get_collider()
-	var blocker_lowpoint = blocker.get_lowest_point_global_coordinates()
-	var blocker_highpoint = blocker.get_highest_point_global_coordinates()
-	var blocker_height = blocker_lowpoint - blocker_highpoint
-	
-	var blocker_absolute_z_index = _get_absolute_z_index(blocker)
-	var z_modifier : int
-	if height > blocker_height:
-		z_modifier = 1
-	elif height < blocker.altitude:
-		z_modifier = -1
-	else:
-		z_modifier = 0	
-	if z_modifier != 0:
-		var unmodified_collision_point = hit_check_raycast.get_collision_point()
-		beam_line_extension_1.z_index = blocker_absolute_z_index + z_modifier
-		beam_line_extension_2.z_index = _get_absolute_z_index(beam_line)
-		
-		var beam1_end = hit_check_raycast.get_collision_point() - beam_line.global_position
-		var beam2_end = blocker.get_collision_exit_point(hit_check_raycast.get_collision_point(), hit_check_raycast.get_collision_normal()) - beam_line.global_position
-		var beam3_end = collision_point
-		_finish_fire(beam1_end, beam2_end, beam3_end)
-		return
-	else:
-		_reset_beamline_extensions() # turn line back into one segment
-	
-	#if height > blocker_height or height < blocker.altitude:
-		#_finish_fire(collision_point)
-		#return
-	
-	if (direction == Enums.Direction.UP or direction == Enums.Direction.DOWN):
-		collision_point = hit_check_raycast.get_collision_point()
-		collision_point = Vector2(collision_point.x, blocker_lowpoint - height) - beam_line.global_position
-	else: #direction left or right
-		if hit_check_raycast.is_colliding(): #should always be true since we already did a height check
-			collision_point = hit_check_raycast.get_collision_point() - beam_line.global_position
-	_finish_fire(collision_point, collision_point, collision_point)
-
-func _is_point_in_area(point: Vector2, area: Area2D):
-	var query := PhysicsPointQueryParameters2D.new()
-	query.position = point
-	query.collide_with_areas = true
-	query.collide_with_bodies = false
-	query.collision_mask = area.collision_layer
-
-	for hit in area.get_world_2d().direct_space_state.intersect_point(query):
-		if hit.collider == area:
-			return true
-	return false
-
-func _get_absolute_z_index(target: Node2D) -> int:
-	var node = target
-	var z_index = 0
-	while node and node.is_class('Node2D'):
-		z_index += node.z_index
-		if !node.z_as_relative:
-			break;
-		node = node.get_parent();
-	return z_index;
-
-func _reset_beamline_extensions():
-	beam_line_extension_1.points[1] = Vector2(0,0)
-	beam_line_extension_2.points[1] = Vector2(0,0)
 
 ##Collision point should be given in global position
-func _finish_fire(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoint: Vector2):
-	_update_endpoint(beam1_endpoint, beam2_endpoint, beam3_endpoint)
-	beam_raycast.enabled = false
-	base_raycast.enabled = true
+func _finish_fire():
 
 	# Fire laser property animation
 	animation_player.play("laser_fire")
@@ -248,18 +105,17 @@ func _finish_fire(beam1_endpoint: Vector2, beam2_endpoint: Vector2, beam3_endpoi
 func _reset_shadow():
 	if height == popup_height:
 		shadow.play("stowed")
-	
 
 func _set_height(new_height: int):
 	# Gets rid of old height modifier for max_beam_length_vector and adds new height
 	height = new_height
-	
+
 	if !is_inside_tree():
 		return 
-	
+
 	pole1.position.y = max(-height + popup_height, -pole1_height)
 	pole2.position.y = min(max(-height + pole1_height + popup_height, -pole2_height), 0)
-	
+
 	if height <= popup_height:
 		shadow.play("stowed")
 		obstacle.enabled = false
@@ -269,23 +125,28 @@ func _set_height(new_height: int):
 	else:
 		shadow.play("deployed")
 		obstacle.enabled = true
-	if height >= duckable_threshhold:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, true)
+
+	#Set up beam
+	if not Engine.is_editor_hint():
+		var beam_segment_scene = preload('res://agents/lasers/beam_segment.tscn')
+		beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).end_image)
+
+	if direction == Enums.Direction.UP:
+		up_laser_clipper.position.y = -up_laser_clipper.size.y - height + direction_data.get(direction).start_position_offset.y
+		beam_root.global_position = global_position
+	elif direction == Enums.Direction.DOWN:
+		#down laser strategy: hit checks will start from laser head, but will ignore the hit if 
+		#bottom of collider is above it. Also needs to hit from inside.
+		up_laser_clipper.position.y = -height - 10
+		beam_root.global_position = global_position + Vector2(0, -height + direction_data.get(direction).start_position_offset.y) #laser head position
 	else:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.DUCKABLE, false)
-	if height <= jumpable_threshhold:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
-	else:
-		collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, false)
+		beam_root.max_beam_length = abs(direction_data.get(direction).start_position_offset.x)
+		beam_root.fire_again_on_no_hit = true
+		beam_root.line.visible = false
+		up_laser_clipper.position.y = -up_laser_clipper.size.y + 10#10 is arbitrary, just to maker sure everything's in frame
+		beam_root.global_position = global_position + Vector2(0, -height + 2) #laser head position
 
 func set_height_animated(new_height: int, duration: float):
 	var old_height = height
 	new_height_tween = create_tween()
 	new_height_tween.tween_property(self, "height", new_height, duration)
-	new_height_tween.tween_callback(_update_max_firing_distance_for_down_laser_height_change.bind(old_height))
-
-func _update_max_firing_distance_for_down_laser_height_change(old_height: int):
-	if direction == Enums.Direction.DOWN:
-		var height_adjustment = Vector2((height - old_height) * Enums.direction_to_vector(Enums.Direction.DOWN))
-		max_beam_length_vector = max_beam_length_vector + height_adjustment
-		_construct()

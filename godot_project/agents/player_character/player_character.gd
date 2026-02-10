@@ -23,6 +23,8 @@ class_name PlayerCharacter
 @export_subgroup("Dodging")
 ##Jumping will dodge lasers of up to this height
 @export var jump_clearance := 28
+##Laser blocker will shrink to this height during jump
+@export var jump_player_height := 42
 ##Ducking will dodge lasers as low as this height
 @export var duck_height := 28
 
@@ -46,6 +48,8 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		jump_collision_timer.start()
 		#use y magnitude of jump for 
 		laser_blocker.altitude = jump_clearance
+		laser_blocker.position.y -= jump_clearance
+		_laser_blocker_collision_rectangle.size.y = jump_player_height
 		_jumping = true
 	elif action == Enums.PlayerAction.DUCK:
 		# Move blocker down so the base of the blocker stays in the same place when it changes sizes
@@ -59,10 +63,17 @@ func notify_success():
 	play_animation_with_follow_on("success")
 	success_emitter.play()
 
-func notify_failure():
+func notify_failure(cause: Enums.FailureCause):
 	failure_emitter.play()
 	interrupt_queued_action()
-	play_animation_with_follow_on("failure")
+	var animation_to_play = "failure"
+	match cause:
+		Enums.FailureCause.LASER:
+			animation_to_play = "failure_laser"
+		Enums.FailureCause.SQUISHED:
+			animation_to_play = "failure_squish"
+	print("Failure animation: %s" % animation_to_play)
+	play_animation_with_follow_on(animation_to_play, "cancel_follow_on")
 	
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED
@@ -70,25 +81,19 @@ func disable_collisions() -> void:
 func enable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
-#not detecting laser hits for some reason
 func _on_laser_hit(area: Area2D):
-	var test = Enums.CollisionLayer.ENEMIES
-	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
-		pass
-		#if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
-			#return
-		#if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
-			#return
-		#notify_failure()
-		#failure.emit()
+	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
+		notify_failure(Enums.FailureCause.LASER)
+		failure.emit()
 
 func _on_collision(area: Area2D) -> void:
-	if area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
-		if (area.get_collision_layer_value(Enums.CollisionLayer.JUMPABLE) and _jumping):
-			return
-		if (area.get_collision_layer_value(Enums.CollisionLayer.DUCKABLE) and _ducking):
-			return
-		notify_failure()
+	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
+		return #let laser blocker area deal with it
+	elif area.get_collision_layer_value(Enums.CollisionLayer.ENEMIES):
+		var cause = Enums.FailureCause.CAUGHT
+		if (area.get_collision_layer_value(Enums.CollisionLayer.LASERS)):
+			cause = Enums.FailureCause.LASER
+		notify_failure(cause)
 		failure.emit()
 		
 func reset():
@@ -99,6 +104,8 @@ func on_jump_collision_disabled_expire() -> void:
 	_jumping = false
 	laser_blocker.altitude = 0
 	laser_blocker_collision_shape.disabled = false
+	laser_blocker.position = _original_laser_blocker_position
+	_laser_blocker_collision_rectangle.size.y = _original_laser_blocker_height
 	#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
 	
 func on_duck_collision_disabled_expire() -> void:

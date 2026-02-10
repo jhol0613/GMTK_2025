@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=27 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://cb7s3d3886edf" path="res://action_sequencer/sequencer_visuals/redo_button/RedoHover.png" id="18_krlbp"]
 [ext_resource type="Texture2D" uid="uid://cmut2moeovys1" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserOn.png" id="19_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://m410en01fm5j" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserHover.png" id="20_krlbp"]
+[ext_resource type="PackedScene" uid="uid://ygiewg3wyml2" path="res://action_sequencer/sequencer_screen.tscn" id="22_krlbp"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
 offsets = PackedFloat32Array(0.0582751, 0.764569)
@@ -42,6 +43,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 616.0
 offset_bottom = 346.0
+mouse_filter = 2
 script = ExtResource("1_t1wqv")
 action_item_scene = ExtResource("2_reiol")
 action_slot_scene = ExtResource("3_1tigw")
@@ -246,6 +248,12 @@ event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 [node name="EraserButtonPress" type="FmodEventEmitter2D" parent="TextureRect/EraserButton"]
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
+
+[node name="SequencerScreen" parent="." instance=ExtResource("22_krlbp")]
+offset_left = 438.0
+offset_top = 247.0
+offset_right = 438.0
+offset_bottom = 247.0
 
 [connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]

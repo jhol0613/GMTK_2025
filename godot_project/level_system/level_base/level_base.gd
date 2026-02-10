@@ -47,6 +47,8 @@ var interactables := []
 var obstacle_spawners := []
 ## lasers in the level
 var lasers := []
+## terminals in the level
+var terminals := []
 
 signal target_reached
 
@@ -79,6 +81,8 @@ func _ready() -> void:
 			obstacle_spawners.append(child)
 		if child.is_in_group("lasers"):
 			lasers.append(child)
+		if child.is_in_group("terminals"):
+			terminals.append(child)
 	#agents = get_tree().get_nodes_in_group("agents")
 	for agent: Agent in agents:
 		# The position of the agent in level space

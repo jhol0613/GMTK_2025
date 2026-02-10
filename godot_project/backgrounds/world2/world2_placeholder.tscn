@@ -1,11 +1,12 @@
 [gd_scene format=3 uid="uid://44m1kxxusxto"]
 
-[node name="Node2D" type="Node2D"]
+[node name="TestBackground" type="Node2D"]
 z_index = -100
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 600.0
 offset_bottom = 450.0
+mouse_filter = 2
 color = Color(0.56364, 0.00235456, 0.811909, 1)
 
 [node name="Label" type="Label" parent="."]
@@ -13,11 +14,11 @@ offset_left = 216.0
 offset_top = 39.0
 offset_right = 405.0
 offset_bottom = 62.0
-text = "WORLD 2 PLACEHOLDER"
+text = "TEST WORLD"
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 219.0
 offset_top = 385.0
 offset_right = 408.0
 offset_bottom = 408.0
-text = "WORLD 2 PLACEHOLDER"
+text = "TEST WORLD"
