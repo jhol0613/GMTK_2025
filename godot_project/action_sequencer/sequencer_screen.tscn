@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ygiewg3wyml2"]
+
+[ext_resource type="Script" uid="uid://ylyg1dlt5ty5" path="res://action_sequencer/sequencer_screen.gd" id="1_auwkr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1p0ne"]
+font_size = 12
+
+[node name="SequencerScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_auwkr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 36.0
+color = Color(0.0792604, 0.508232, 0.230981, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 62.0
+offset_bottom = 23.0
+text = "Test"
+label_settings = SubResource("LabelSettings_1p0ne")

@@ -210,6 +210,7 @@ offset_top = -108.0
 offset_bottom = -15.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 texture = ExtResource("9_to654")
 
 [node name="RenderBoxOffset" type="Node2D" parent="Visuals/LaserBase/RenderBox"]
@@ -225,6 +226,7 @@ offset_left = -10.0
 offset_top = -67.0
 offset_right = 10.0
 offset_bottom = -13.0
+mouse_filter = 2
 
 [node name="RenderBox2Offset" type="Node2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2"]
 position = Vector2(10, 66)
@@ -266,6 +268,7 @@ offset_right = 358.0
 offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="BeamSegment" parent="UpLaserClipper" instance=ExtResource("20_7lqwi")]
 visible = false
