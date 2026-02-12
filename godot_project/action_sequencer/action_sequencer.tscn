@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_1tigw"]
-[ext_resource type="Texture2D" uid="uid://2xutjhw601p8" path="res://action_sequencer/sequencer_visuals/sequencer_v9.png" id="4_ja8dg"]
+[ext_resource type="Texture2D" uid="uid://clfgt5qa40waq" path="res://action_sequencer/sequencer_visuals/sequencer_v10.png" id="4_62g22"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/sequencer_visuals/play_button/start_unpushed.png" id="5_t1wqv"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/sequencer_visuals/play_button/start_pushed.png" id="6_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/sequencer_visuals/play_button/start_mouse_hover.png" id="7_qhuj8"]
@@ -17,8 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://dyslse4pkfdyx" path="res://action_sequencer/sequencer_visuals/speed_control_switch/DoubleTime.png" id="15_4oryb"]
 [ext_resource type="Texture2D" uid="uid://dgdw1436w52je" path="res://action_sequencer/sequencer_visuals/eraser_button/Eraser.png" id="17_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://cmut2moeovys1" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserOn.png" id="19_cdoyw"]
-[ext_resource type="Texture2D" uid="uid://dlyl8em160xva" path="res://action_sequencer/sequencer_screen/mockup_laser_dial_2.png" id="20_62g22"]
 [ext_resource type="Texture2D" uid="uid://m410en01fm5j" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserHover.png" id="20_krlbp"]
+[ext_resource type="Texture2D" uid="uid://cjiyq2l7ngpuc" path="res://action_sequencer/sequencer_screen/Screen_Turn_On.png" id="22_ja8dg"]
 [ext_resource type="Texture2D" uid="uid://ce8bpklr860v" path="res://action_sequencer/sequencer_screen/Screen_Turn_Off.png" id="23_vmoa0"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
@@ -60,7 +60,7 @@ offset_left = -2.0
 offset_top = 230.0
 offset_right = 598.0
 offset_bottom = 356.0
-texture = ExtResource("4_ja8dg")
+texture = ExtResource("4_62g22")
 stretch_mode = 2
 
 [node name="ActionSlots" type="HBoxContainer" parent="TextureRect"]
@@ -133,9 +133,9 @@ event_guid = "{df1895b1-8e9a-4528-a47a-b66cad41c2d8}"
 [node name="ActionItems" type="GridContainer" parent="TextureRect"]
 z_index = 11
 layout_mode = 1
-offset_left = 44.0
+offset_left = 56.0
 offset_top = 20.0
-offset_right = 44.0
+offset_right = 56.0
 offset_bottom = 72.0
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
@@ -252,7 +252,7 @@ position = Vector2(458, 35)
 texture = ExtResource("23_vmoa0")
 
 [node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff"]
-texture = ExtResource("20_62g22")
+texture = ExtResource("22_ja8dg")
 
 [connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]

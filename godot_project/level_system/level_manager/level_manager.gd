@@ -307,6 +307,8 @@ func _initialize_lasers() -> void:
 func _initialize_terminals() -> void:
 	for terminal: Terminal in _level_scene.terminals:
 		terminal.selected.connect(_on_terminal_selected)
+	for antenna: Antenna in _level_scene.antennas:
+		antenna.selected.connect(_on_terminal_selected)
 
 #endregion
 
@@ -526,6 +528,7 @@ func _fade_to_thinking_shader():
 
 func _on_terminal_selected(programs):
 	_action_sequencer.connect_terminal_to_screen(programs[0])
+	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna	
 #endregion
 
 #region Animation

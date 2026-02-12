@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3ups0rsbp08v"]
+[gd_scene load_steps=13 format=3 uid="uid://b3ups0rsbp08v"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_21cbe"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_u3brs"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_1o8fn"]
 [ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="4_1o8fn"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_5i52b"]
-[ext_resource type="PackedScene" uid="uid://70ih8s0lu4px" path="res://agents/interactables/computer_terminal/terminal_programs/digipad.tscn" id="5_5i52b"]
+[ext_resource type="PackedScene" uid="uid://70ih8s0lu4px" path="res://action_sequencer/sequencer_screen/screen_scenes/digipad.tscn" id="5_5i52b"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_h05u1"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="7_21cbe"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://agents/interactables/computer_terminal/terminal_programs/antenna.tscn" id="9_5i52b"]
+[ext_resource type="PackedScene" uid="uid://dw1sgggrlnrke" path="res://action_sequencer/sequencer_screen/screen_scenes/change_laser_direction_screen.tscn" id="10_h05u1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
 size = Vector2(19, 23)
@@ -57,6 +59,19 @@ position = Vector2(48, 99)
 direction = 0
 height = 7
 default_animation = "fire_up"
+
+[node name="Antenna" parent="Laser" index="5" instance=ExtResource("9_5i52b")]
+offset_left = -16.0
+offset_top = -9.0
+offset_right = 15.355
+offset_bottom = 10.105
+mouse_default_cursor_shape = 2
+
+[node name="TurnLaserProgram" type="Node" parent="Laser/Antenna" index="1" node_paths=PackedStringArray("lasers")]
+script = ExtResource("4_1o8fn")
+lasers = [NodePath("../..")]
+sequencer_control_scene = ExtResource("10_h05u1")
+metadata/_custom_type_script = "uid://b23y6rruo1ixg"
 
 [node name="LaserBlocker" type="Area2D" parent="." index="14"]
 z_index = 1
