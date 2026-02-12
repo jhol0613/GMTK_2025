@@ -60,7 +60,6 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		return
 	var action_data: MovableActionData
 	var should_move_collision := false
-	var move_target := grid_position + Enums.player_action_to_vector(action)
 	
 	if action == Enums.PlayerAction.NONE:
 		return
@@ -70,13 +69,11 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		should_move_collision = true
 	elif Enums.is_action_bonk(action):
 		action_data = bonk_data
-		move_target = _get_bonk_target(action)
 	elif Enums.is_action_slide(action):
 		action_data = slide_data
 		should_move_collision = true
 	elif Enums.is_action_slide_bonk(action):
 		action_data = slide_bonk_data
-		move_target = _get_bonk_target(action)
 	else:
 		if Enums.is_action_fall(action):
 			should_move_collision = true
@@ -92,13 +89,13 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		collision_area.position = _collision_area_initial_position
 	
 	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
-	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, move_target, action_data, should_move_collision))
+	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, action_data, should_move_collision))
 
-# move_target is where the agent is moving, or where it attempted to move (i.e. bonk)
-func _on_movement_start(action: Enums.PlayerAction, move_target: Vector2i, action_data: MovableActionData, should_move_collision: bool):
+func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionData, should_move_collision: bool):
 	# Grid position not updated until movement actually executed on the target beat
 	grid_position += Enums.player_action_to_vector(action)
-	var move_target_local_space = _grid_to_local(move_target)
+	# _get_bonk_target ignores non-bonk actions, but uses the updated grid_position
+	var move_target_local_space = _grid_to_local(_get_bonk_target(action))
 	
 	if collision_area != null:
 		_frozen_collision_position_during_move = collision_area.global_position +  \
@@ -156,3 +153,8 @@ func _is_action_bonk(action: Enums.PlayerAction):
 		(action == Enums.PlayerAction.RIGHT_BONK) or \
 		(action == Enums.PlayerAction.UP_BONK) or \
 		(action == Enums.PlayerAction.DOWN_BONK)
+
+
+func set_grid_position(new_grid_position: Vector2i) -> void:
+	grid_position = new_grid_position
+	position = _grid_to_local(new_grid_position)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=40 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=41 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://44m1kxxusxto" path="res://backgrounds/world2/world2_placeholder.tscn" id="34_3js1v"]
 [ext_resource type="PackedScene" uid="uid://i0ptr4hy1cj6" path="res://levels/test_levels/laser_unit_tests_3.tscn" id="34_6wlqo"]
 [ext_resource type="PackedScene" uid="uid://wtckv38k5hfs" path="res://levels/test_levels/conductor_test_level.tscn" id="35_b2pns"]
+[ext_resource type="PackedScene" uid="uid://c0lpb8u54s0rd" path="res://levels/test_levels/teleporter_test_level.tscn" id="36_5wfa6"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
@@ -59,7 +60,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 [sub_resource type="Resource" id="Resource_u7mwr"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("34_3js1v")
-level_list = Array[PackedScene]([ExtResource("29_pbglx"), ExtResource("26_8o3tm"), ExtResource("31_6wlqo"), ExtResource("32_b2pns"), ExtResource("33_5wfa6"), ExtResource("34_6wlqo"), ExtResource("35_b2pns")])
+level_list = Array[PackedScene]([ExtResource("29_pbglx"), ExtResource("26_8o3tm"), ExtResource("31_6wlqo"), ExtResource("32_b2pns"), ExtResource("33_5wfa6"), ExtResource("34_6wlqo"), ExtResource("35_b2pns"), ExtResource("36_5wfa6")])
 level_select_scene = 0
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0

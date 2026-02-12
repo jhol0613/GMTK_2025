@@ -101,7 +101,7 @@ enum SaveDataItem {
 	FARTHEST_LEVEL_REACHED
 }
 
-enum PushMode {
+enum MoveMode {
 	##If push on beat, pusher will only perform a check for overlaps on specified beat
 	ON_BEAT,
 	##In instant mode, a pusher will send signal the moment an overlap is detected

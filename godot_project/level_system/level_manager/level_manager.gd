@@ -136,6 +136,7 @@ func _initialize_level():
 	_initialize_pushers()
 	_initialize_interactables()
 	_initialize_lasers()
+	_initialize_teleporters()
 
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
@@ -303,6 +304,13 @@ func _initialize_lasers() -> void:
 		var cells_to_wall = _level_scene.get_cells_to_level_edge(laser.grid_position, laser.direction)
 		laser.set_max_fire_distance_by_grid_spaces(cells_to_obstacle, cells_to_obstacle == cells_to_wall)
 
+func _initialize_teleporters() -> void:
+	for teleporter: Teleporter in _level_scene.teleporters:
+		# set a high value of traversing through a teleporter to discourage the conductor from going
+		# into the teleporter accidentally. The player can force the conductor into going through,
+		# but only if there is no other path
+		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
+
 #endregion
 
 #region Beat Actions
@@ -327,23 +335,24 @@ func _update_obstacles():
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
 		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
+
 	for obstacle in _level_scene.movable_obstacles:
-		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]), _current_beat)
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
+	_level_scene.clear_obstacle_overrides()
 	for obstacle in _level_scene.movable_obstacles:
 		if obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
-##Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
+## Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
 func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction):
 	_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 	obstacle.execute_action(_bonk_check(obstacle, desired_action), -1)
 	obstacle.advance_move_cursor()
 	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
-	
+
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	if _player_newly_hidden or not _player_hidden:
@@ -435,7 +444,7 @@ func _update_interactables() -> void:
 	_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, "")
 
 
-##If desired direction clear, return that direction. Otherwise return a bonk in that direction
+## If desired direction clear, return that direction. Otherwise return a bonk in that direction
 func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAction:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _level_scene.get_traversible_neighbors(movable.grid_position).has(movable.grid_position + move_direction):
