@@ -46,8 +46,6 @@ size = Vector2(15, 38)
 [node name="ComputerTerminal" type="Node2D" node_paths=PackedStringArray("select_button", "sprite")]
 z_index = 1
 script = ExtResource("1_vgobs")
-selectable = null
-mouse_hover_modulate = null
 select_button = NodePath("Select")
 interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
 player_animation_on_success = "type"
@@ -81,7 +79,7 @@ self_modulate = Color(1, 1, 1, 0)
 offset_left = -9.0
 offset_top = -41.0
 offset_right = 9.0
-mouse_default_cursor_shape = 2
+disabled = true
 
 [connection signal="mouse_entered" from="Select" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Select" to="." method="_on_mouse_exited"]
