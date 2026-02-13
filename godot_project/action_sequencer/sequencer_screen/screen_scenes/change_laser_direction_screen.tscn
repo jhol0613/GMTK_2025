@@ -17,3 +17,17 @@ offset_top = -19.0
 offset_right = 46.0
 offset_bottom = 21.0
 texture = ExtResource("1_34dti")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -4.0
+offset_right = 34.0
+offset_bottom = 4.0
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -7.0
+offset_right = 41.0
+offset_bottom = 7.0

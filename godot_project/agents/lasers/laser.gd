@@ -43,6 +43,8 @@ const pole2_height := 24
 
 var new_height_tween: Tween
 
+signal direction_changed(laser: Laser)
+
 func _ready() -> void:
 	super._ready()
 	add_to_group("agents")
@@ -78,6 +80,8 @@ func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool)
 func set_direction(new_direction: Enums.Direction):
 	direction = new_direction
 	_construct()
+	# Level manager needs to set new max beam length based on the obstacle grid
+	direction_changed.emit(self)
 
 func _fire(anim_signal_id: String):
 	if anim_signal_id != "fire":

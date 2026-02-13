@@ -10,7 +10,8 @@ func _ready() -> void:
 	pass
 
 func run():
-	print("turning laser to direction")
+	for laser in lasers:
+		laser.direction = new_direction
 
 func reset():
 	pass

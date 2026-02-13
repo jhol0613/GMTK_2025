@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://70ih8s0lu4px"]
+
+[ext_resource type="Texture2D" uid="uid://dp1ai2n1l82r6" path="res://action_sequencer/sequencer_screen/button_left.png" id="1_os064"]
+[ext_resource type="Texture2D" uid="uid://drbk47smnoqaw" path="res://action_sequencer/sequencer_screen/button_left_selected.png" id="2_byy6h"]
+[ext_resource type="Texture2D" uid="uid://cegft13gxlhh1" path="res://action_sequencer/sequencer_screen/button_up.png" id="3_t4xgi"]
+[ext_resource type="Texture2D" uid="uid://bmhwaynt86t5i" path="res://action_sequencer/sequencer_screen/button_up_selected.png" id="4_bxi0r"]
+[ext_resource type="Texture2D" uid="uid://cjiix4pwbdxmx" path="res://action_sequencer/sequencer_screen/button_down.png" id="5_wfykw"]
+[ext_resource type="Texture2D" uid="uid://bxb0ygiipoxo" path="res://action_sequencer/sequencer_screen/button_down_selected.png" id="6_bxwqp"]
+[ext_resource type="Texture2D" uid="uid://c1dtj7eosmm3w" path="res://action_sequencer/sequencer_screen/button_right.png" id="7_0myrl"]
+[ext_resource type="Texture2D" uid="uid://d1dd2tvdko8s0" path="res://action_sequencer/sequencer_screen/button_right_selected.png" id="8_ref7l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k2ok3"]
+
+[node name="Digipad" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_k2ok3")
+
+[node name="Left" type="TextureButton" parent="."]
+offset_left = -26.0
+offset_top = -5.0
+offset_right = -21.0
+offset_bottom = 5.0
+texture_normal = ExtResource("1_os064")
+texture_pressed = ExtResource("2_byy6h")
+
+[node name="Up" type="TextureButton" parent="."]
+offset_left = -13.0
+offset_top = -3.0
+offset_right = -4.0
+offset_bottom = 3.0
+texture_normal = ExtResource("3_t4xgi")
+texture_pressed = ExtResource("4_bxi0r")
+
+[node name="Down" type="TextureButton" parent="."]
+offset_left = 4.0
+offset_top = -3.0
+offset_right = 13.0
+offset_bottom = 3.0
+texture_normal = ExtResource("5_wfykw")
+texture_pressed = ExtResource("6_bxwqp")
+
+[node name="Right" type="TextureButton" parent="."]
+offset_left = 21.0
+offset_top = -5.0
+offset_right = 26.0
+offset_bottom = 5.0
+texture_normal = ExtResource("7_0myrl")
+texture_pressed = ExtResource("8_ref7l")
