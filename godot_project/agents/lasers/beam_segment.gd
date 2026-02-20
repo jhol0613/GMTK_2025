@@ -128,19 +128,6 @@ func fire(depth: int):
 	_destroy_after_time(child, 1.0)
 	return
 
-##Check whether a point collides with a laser blocker that has trigger_beam_end_collisions as true.
-#func _should_trigger_collision(point: Vector2):
-	#var query := PhysicsPointQueryParameters2D.new()
-	#query.position = point
-	#query.collide_with_areas = true
-	#query.collide_with_bodies = false
-	#query.collision_mask = collision_mask #laser blockers
-	#for blocker in get_world_2d().direct_space_state.intersect_point(query):
-		#if blocker.collider is LaserBlocker:
-			#if blocker.collider.trigger_beam_end_collisions:
-				#return true
-	#return false
-
 #time in seconds
 func _destroy_after_time(node: Node2D, time: float = 1.0):
 	await get_tree().create_timer(time).timeout

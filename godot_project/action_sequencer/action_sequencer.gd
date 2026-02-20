@@ -59,6 +59,8 @@ class_name ActionSequencer
 var _eraser_mode := false
 
 @onready var _screen = $TextureRect/ScreenOff/ScreenOn
+@onready var _antenna = $TextureRect/Antenna
+@onready var _antenna_deployed = false
 
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
@@ -247,10 +249,18 @@ func push_replay_button():
 	_on_replay_button_pressed()
 
 func connect_terminal_to_screen(terminal_program: TerminalProgram):
+	for child in _screen.get_children():
+		child.queue_free()
 	if terminal_program.sequencer_control_scene:
 		_screen.visible = true
 		var control_screen = terminal_program.sequencer_control_scene.instantiate()
+		terminal_program.initialize_screen(control_screen)
 		_screen.add_child(control_screen)
+
+func deploy_antenna():
+	if not _antenna_deployed:
+		_antenna.play()
+	_antenna_deployed = true
 
 # Clears out all slots and resets action quanitities
 func _clear_action_slots():

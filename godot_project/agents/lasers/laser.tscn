@@ -53,7 +53,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UpLaserClipper/BeamSegment:visible")
+tracks/0/path = NodePath("UpLaserClipper/BeamRoot:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -70,7 +70,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("UpLaserClipper/BeamSegment:visible")
+tracks/0/path = NodePath("UpLaserClipper/BeamRoot:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -159,7 +159,7 @@ script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
 animation_player = NodePath("AnimationPlayer")
 visuals = NodePath("Visuals")
-beam_root = NodePath("UpLaserClipper/BeamSegment")
+beam_root = NodePath("UpLaserClipper/BeamRoot")
 pole1 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1")
 pole2 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2")
 shadow = NodePath("Visuals/Pole1Shadow")
@@ -270,7 +270,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="BeamSegment" parent="UpLaserClipper" instance=ExtResource("20_7lqwi")]
+[node name="BeamRoot" parent="UpLaserClipper" instance=ExtResource("20_7lqwi")]
 visible = false
 position = Vector2(357, 16)
 hit_from_inside = true

@@ -10,8 +10,21 @@ var original_heights: Array[int]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	sequencer_control_scene = load("uid://d8l1lrlubiip")
+	super._ready()
 	for laser in lasers:
 		original_heights.append(laser.height)
+
+func initialize_screen(screen_scene: ChangeLaserHeightScreen):
+	super.initialize_screen(screen_scene)
+	if screen_scene is not ChangeLaserHeightScreen:
+		push_error("Ensure that change_treadmill_direction_program has change_laser_direction_screen and its
+		sequencer control scene")
+	screen_scene.value_updated.connect(_on_height_updated)
+
+func _on_height_updated(new_height: int):
+	for laser in lasers:
+		laser.height = new_height
 
 func run():
 	for laser in lasers:

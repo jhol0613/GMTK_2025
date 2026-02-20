@@ -76,21 +76,27 @@ direction = 0
 height = 7
 default_animation = "fire_up"
 
-[node name="Antenna" parent="Laser" index="5" instance=ExtResource("9_5i52b")]
+[node name="Antenna" parent="Laser" index="5" node_paths=PackedStringArray("lasers") instance=ExtResource("9_5i52b")]
+offset_left = -48.0
+offset_top = -99.0
+offset_right = -17.0
+offset_bottom = -80.0
+script = ExtResource("5_h05u1")
+lasers = []
+new_height = 0
+animation_speed = 0.4
 
 [node name="AnimatedSprite2DSignals" parent="Laser/Antenna" index="0"]
-position = Vector2(12, -16)
+position = Vector2(59, 84)
 
 [node name="Button" parent="Laser/Antenna" index="1"]
-offset_left = -16.0
-offset_top = -9.0
-offset_right = 16.0
-offset_bottom = 10.0
+offset_left = 32.0
+offset_top = 90.0
+offset_right = 64.0
+offset_bottom = 109.0
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="Laser/Antenna" index="2" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="Laser" index="9"]
 script = ExtResource("5_h05u1")
-lasers = [NodePath("../..")]
-new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
 [node name="LaserBlocker" type="Area2D" parent="." index="15"]

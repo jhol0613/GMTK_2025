@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=45 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_1tigw"]
-[ext_resource type="Texture2D" uid="uid://clfgt5qa40waq" path="res://action_sequencer/sequencer_visuals/sequencer_v10.png" id="4_62g22"]
+[ext_resource type="Texture2D" uid="uid://2xutjhw601p8" path="res://action_sequencer/sequencer_visuals/sequencer_v9.png" id="4_62g22"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/sequencer_visuals/play_button/start_unpushed.png" id="5_t1wqv"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/sequencer_visuals/play_button/start_pushed.png" id="6_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/sequencer_visuals/play_button/start_mouse_hover.png" id="7_qhuj8"]
@@ -18,7 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://dgdw1436w52je" path="res://action_sequencer/sequencer_visuals/eraser_button/Eraser.png" id="17_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://cmut2moeovys1" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserOn.png" id="19_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://m410en01fm5j" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserHover.png" id="20_krlbp"]
+[ext_resource type="Texture2D" uid="uid://cb8lc47bmuqpw" path="res://action_sequencer/antenna/sequencer_antenna.png" id="21_krlbp"]
 [ext_resource type="Texture2D" uid="uid://cjiyq2l7ngpuc" path="res://action_sequencer/sequencer_screen/Screen_Turn_On.png" id="22_ja8dg"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="22_vmoa0"]
 [ext_resource type="Texture2D" uid="uid://ce8bpklr860v" path="res://action_sequencer/sequencer_screen/Screen_Turn_Off.png" id="23_vmoa0"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
@@ -35,6 +37,138 @@ fill_from = Vector2(0.5, 0.5)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_reiol"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tigw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krlbp"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk6ra"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hlyd"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm25e"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dye17"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ncrp"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiqsn"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki1vm"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbrj7"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo06d"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgxm1"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltml8"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46r4g"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tfvx"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 471, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhyo0"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 471, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt0nv"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 471, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84e1n"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 471, 164, 157)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pvfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krlbp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk6ra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hlyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm25e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dye17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ncrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiqsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ki1vm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbrj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo06d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgxm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltml8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46r4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tfvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhyo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt0nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84e1n")
+}],
+"loop": false,
+"name": &"deploy",
+"speed": 20.0
+}]
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
@@ -133,10 +267,10 @@ event_guid = "{df1895b1-8e9a-4528-a47a-b66cad41c2d8}"
 [node name="ActionItems" type="GridContainer" parent="TextureRect"]
 z_index = 11
 layout_mode = 1
-offset_left = 56.0
-offset_top = 20.0
-offset_right = 56.0
-offset_bottom = 72.0
+offset_left = 44.0
+offset_top = 19.0
+offset_right = 44.0
+offset_bottom = 71.0
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
 columns = 4
@@ -253,6 +387,13 @@ texture = ExtResource("23_vmoa0")
 
 [node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff"]
 texture = ExtResource("22_ja8dg")
+
+[node name="Antenna" type="AnimatedSprite2D" parent="TextureRect"]
+position = Vector2(111, -71)
+sprite_frames = SubResource("SpriteFrames_5pvfp")
+animation = &"deploy"
+script = ExtResource("22_vmoa0")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]
