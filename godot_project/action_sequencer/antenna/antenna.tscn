@@ -68,6 +68,7 @@ offset_right = 31.0
 offset_bottom = 19.0
 mouse_default_cursor_shape = 2
 script = ExtResource("1_83gm2")
+mouse_hover_modulate = Color(1.25, 1.25, 1.25, 1)
 sprite = NodePath("AnimatedSprite2DSignals")
 buttton = NodePath("Button")
 

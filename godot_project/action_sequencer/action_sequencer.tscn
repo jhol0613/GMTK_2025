@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=46 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
@@ -169,6 +169,15 @@ animations = [{
 "name": &"deploy",
 "speed": 20.0
 }]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_krlbp"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -6, 0)
+spread = 180.0
+initial_velocity_min = 100.68
+initial_velocity_max = 443.95
+gravity = Vector3(0, 1000, 0)
+color = Color(0.643137, 0.866667, 0.858824, 1)
 
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
@@ -392,8 +401,20 @@ texture = ExtResource("22_ja8dg")
 position = Vector2(111, -71)
 sprite_frames = SubResource("SpriteFrames_5pvfp")
 animation = &"deploy"
+frame = 15
+frame_progress = 1.0
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="AntennaTip" type="GPUParticles2D" parent="TextureRect/Antenna"]
+position = Vector2(-75, -68)
+emitting = false
+amount = 60
+lifetime = 0.23
+one_shot = true
+trail_enabled = true
+trail_lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_krlbp")
 
 [connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]

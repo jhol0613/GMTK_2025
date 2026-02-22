@@ -25,6 +25,10 @@ class_name ActionSequencer
 @export var total_slots := 8
 @export var max_actions := 8
 
+@export_category("Animation")
+##Amount of time that screen flashes when new antenna is selected
+@export var _screen_flash_time := 0.20
+
 #endregion
 
 #region Type declarations
@@ -60,6 +64,7 @@ var _eraser_mode := false
 
 @onready var _screen = $TextureRect/ScreenOff/ScreenOn
 @onready var _antenna = $TextureRect/Antenna
+@onready var antenna_tip = $TextureRect/Antenna/AntennaTip
 @onready var _antenna_deployed = false
 
 const P_MUSIC := "Music_Vol"
@@ -248,7 +253,7 @@ func stop_sequencer():
 func push_replay_button():
 	_on_replay_button_pressed()
 
-func connect_terminal_to_screen(terminal_program: TerminalProgram):
+func connect_antenna_to_screen(terminal_program: TerminalProgram):
 	for child in _screen.get_children():
 		child.queue_free()
 	if terminal_program.sequencer_control_scene:
@@ -256,6 +261,11 @@ func connect_terminal_to_screen(terminal_program: TerminalProgram):
 		var control_screen = terminal_program.sequencer_control_scene.instantiate()
 		terminal_program.initialize_screen(control_screen)
 		_screen.add_child(control_screen)
+	antenna_tip.emitting = true
+	_screen.modulate = Color(5,5,5)
+	await get_tree().create_timer(_screen_flash_time).timeout
+	_screen.modulate = Color(1,1,1)
+
 
 func deploy_antenna():
 	if not _antenna_deployed:

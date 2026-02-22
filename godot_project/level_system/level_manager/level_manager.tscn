@@ -1,11 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=17 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_system/level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
 [ext_resource type="PackedScene" uid="uid://bq8pyr55mrptp" path="res://agents/player_character/player_character.tscn" id="3_oyr8j"]
 [ext_resource type="Texture2D" uid="uid://c6r7se21vvsjk" path="res://level_system/level_manager/Vignette.png" id="9_aoawx"]
+[ext_resource type="Shader" uid="uid://ubvksb86n4ul" path="res://action_sequencer/antenna_connect_shader.tres" id="9_csudx"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer.tscn" id="9_hv4d1"]
+[ext_resource type="Texture2D" uid="uid://4dncw8muxbdw" path="res://action_sequencer/antenna/antenna_lightning_back.png" id="10_4isrh"]
 [ext_resource type="Resource" uid="uid://bhskeg8clmay6" path="res://level_system/level_manager/level_catalog.tres" id="10_4koax"]
+[ext_resource type="Texture2D" uid="uid://cjvmxsdt748ep" path="res://action_sequencer/antenna/antenna_lightning.png" id="10_8vhqa"]
 [ext_resource type="Script" uid="uid://rvmpbi1h4oil" path="res://level_system/level_manager/shake_camera.gd" id="19_xwfi3"]
 [ext_resource type="Shader" uid="uid://ddfo0lf2lp4ro" path="res://level_system/level_manager/level_manager.gdshader" id="21_grapr"]
 
@@ -52,6 +55,14 @@ _data = {
 &"RESET": SubResource("Animation_n2acl"),
 &"train_rock": SubResource("Animation_dtys8")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4isrh"]
+shader = ExtResource("9_csudx")
+shader_parameter/MainBeamSpeed = -3.6
+shader_parameter/basic_texture = ExtResource("10_8vhqa")
+shader_parameter/AuxBeamSpeed = -4.0
+shader_parameter/background_texture = ExtResource("10_4isrh")
+shader_parameter/Transparency = 0.0
 
 [node name="LevelManager" type="Node2D"]
 y_sort_enabled = true
@@ -100,6 +111,16 @@ offset_left = 4.0
 offset_top = 107.0
 offset_right = 620.0
 offset_bottom = 453.0
+
+[node name="Lightning" type="Line2D" parent="SequencerLayer"]
+visible = false
+z_index = 80
+material = SubResource("ShaderMaterial_4isrh")
+instance_shader_parameters/Color = Color(0.643137, 0.866667, 0.858824, 1)
+position = Vector2(1, 4)
+points = PackedVector2Array(0, 0, 39, 194)
+width = 150.0
+texture_mode = 1
 
 [connection signal="perform_action" from="SequencerLayer/ActionSequencer" to="." method="_on_action_performed"]
 [connection signal="perform_thinking_action" from="SequencerLayer/ActionSequencer" to="." method="_on_thinking_action_performed"]

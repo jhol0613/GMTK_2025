@@ -2,7 +2,7 @@ extends Control
 
 class_name ChangeTreadmillDirectionScreen
 
-@export var digipad: Digipad
+@export var digipad: DigipadRotate
 
 signal direction_pressed(direction: Enums.Direction)
 

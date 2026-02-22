@@ -5,7 +5,7 @@ extends Control
 class_name Antenna
 
 ##Use the "RAW" tab in color picker to select modulate values >1 (to make sprite lighter)
-@export var mouse_hover_modulate := Color(1.25, 1.25, 1.25)
+@export var mouse_hover_modulate := Color(1.5, 1.5, 1.5)
 @export var sprite : AnimatedSprite2DSignals
 @export var buttton : Button
 
@@ -14,7 +14,7 @@ var _original_parent_modulate
 
 var programs : Array[TerminalProgram]
 
-signal selected(programs: Array[TerminalProgram])
+signal selected(programs: Antenna)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -37,8 +37,18 @@ func _on_mouse_exited():
 		_parent.modulate = _original_parent_modulate
 
 func _on_clicked() -> void:
-	sprite.play("active")
-	selected.emit(programs)
+	selected.emit(self)
+
+func get_sprite_global_position():
+	return sprite.global_position
+
+func set_active_animation(new_active: bool):
+	if new_active:
+		sprite.play_with_signals("active")
+	else:
+		sprite.play_with_signals("inactive")
+
+
 
 # Ensure terminal program is configured as a child node
 func _get_configuration_warnings() -> PackedStringArray:
