@@ -37,11 +37,10 @@ func _ready() -> void:
 #region Editor-only reticle
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint() and not _editor_has_target:
 		_editor_has_target = true
 		_debug_update_target_position()
-
 
 
 func _debug_update_target_position() -> void:
@@ -60,7 +59,8 @@ func _debug_update_target_position() -> void:
 func _teleport(entity: Movable) -> void:
 	# TODO: add animation
 	# TODO: add sound
-	entity.set_grid_position(destination)
+	print("Queueing teleport")
+	entity.queue_teleportation(destination)
 
 
 func _on_music_bar():
@@ -70,6 +70,12 @@ func _on_music_bar():
 
 
 func _on_push_beat_timeout():
+	return
 	for area in collision.get_overlapping_areas():
 		if area.owner is Movable:
 			_teleport(area.owner)
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.owner is Movable:
+		_teleport(area.owner)

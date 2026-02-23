@@ -38,6 +38,12 @@ var _frozen_collision_position_during_move: Vector2i
 # If reset in middle of a move
 var _moving_tween: Tween
 
+# Teleportation happens right before the next action is taken, so we need to
+# queue the next position
+var _should_teleport := false
+var _skip_teleport := false
+var _teleportation_position := Vector2i.ZERO
+
 func _ready():
 	super._ready()
 	add_to_group("movables")
@@ -88,6 +94,15 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	else:
 		collision_area.position = _collision_area_initial_position
 	
+	_skip_teleport = false # teleportation skip expires after 1 action max
+	print("resetting skipping")
+	if _should_teleport:
+		# play teleportation animation here
+		set_grid_position(_teleportation_position)
+		_should_teleport = false
+		_skip_teleport = true
+		print("setting skipping")
+		_teleportation_position = Vector2i.ZERO
 	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
 	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, action_data, should_move_collision))
 
@@ -158,3 +173,11 @@ func _is_action_bonk(action: Enums.PlayerAction):
 func set_grid_position(new_grid_position: Vector2i) -> void:
 	grid_position = new_grid_position
 	position = _grid_to_local(new_grid_position)
+
+func queue_teleportation(teleportation_position: Vector2i) -> void:
+	if _skip_teleport:
+		print("skipping teleport")
+		_skip_teleport = false
+		return
+	_should_teleport = true
+	_teleportation_position = teleportation_position

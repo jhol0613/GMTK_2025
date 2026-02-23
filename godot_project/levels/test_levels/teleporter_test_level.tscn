@@ -20,17 +20,22 @@ position = Vector2(48, 49)
 destination = Vector2i(5, 1)
 grid_origin = Vector2i(1, 2)
 
-[node name="TeleportB" parent="." index="10" instance=ExtResource("2_ew41l")]
+[node name="TeleportA2" parent="." index="10" instance=ExtResource("2_ew41l")]
+position = Vector2(81, 51)
+destination = Vector2i(3, 1)
+grid_origin = Vector2i(2, 2)
+
+[node name="TeleportB" parent="." index="11" instance=ExtResource("2_ew41l")]
 position = Vector2(177, 32)
 destination = Vector2i(1, 2)
 grid_origin = Vector2i(5, 1)
 
-[node name="Treadmill" parent="." index="11" instance=ExtResource("3_ykv58")]
+[node name="Treadmill" parent="." index="12" instance=ExtResource("3_ykv58")]
 position = Vector2(207, 33)
 direction = 3
 grid_origin = Vector2i(6, 1)
 
-[node name="SnackCartObstacle" parent="." index="12" instance=ExtResource("4_ew41l")]
+[node name="SnackCartObstacle" parent="." index="13" instance=ExtResource("4_ew41l")]
 position = Vector2(145, 29)
 movement_path = Array[int]([4])
 grid_origin = Vector2i(1, 1)

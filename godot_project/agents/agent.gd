@@ -53,10 +53,10 @@ var tile_size: Vector2i
 var local_origin := Vector2.ZERO: set = _set_local_origin
 var lock_local_origin = false
 
-##Emitted on the actual beat of an action
+# Emitted on the actual beat of an action
 signal action_executed(action: Enums.PlayerAction)
 
-##Pass on signals from agent's animation sprite
+# Pass on signals from agent's animation sprite
 signal animation_signal(id: String)
 
 func _ready() -> void:
