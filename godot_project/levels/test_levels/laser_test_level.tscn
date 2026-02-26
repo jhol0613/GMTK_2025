@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3ups0rsbp08v"]
+[gd_scene load_steps=15 format=3 uid="uid://b3ups0rsbp08v"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_21cbe"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_u3brs"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="9_5i52b"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="9_5tchc"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="12_qymky"]
+[ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="13_x68qa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
 size = Vector2(19, 23)
@@ -31,10 +33,9 @@ position = Vector2(177, 106)
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
 position = Vector2(113, 29)
-selectable = true
 follow_on_animation_on_success = "idle"
 
-[node name="TurnLaserProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("lasers")]
+[node name="TurnLaserProgram" type="Node" parent="ComputerTerminal" index="3" node_paths=PackedStringArray("lasers")]
 script = ExtResource("4_1o8fn")
 lasers = [NodePath("../../Laser")]
 metadata/_custom_type_script = "uid://b23y6rruo1ixg"
@@ -62,7 +63,6 @@ metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
 [node name="ComputerTerminal2" parent="." index="13" instance=ExtResource("4_5i52b")]
 position = Vector2(49, 65)
-selectable = true
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
 script = ExtResource("5_h05u1")
@@ -71,7 +71,7 @@ new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
 [node name="Laser" parent="." index="14" instance=ExtResource("3_1o8fn")]
-position = Vector2(48, 99)
+position = Vector2(48, 3)
 direction = 0
 height = 7
 default_animation = "fire_up"
@@ -105,5 +105,28 @@ metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 position = Vector2(144, 15)
 shape = SubResource("RectangleShape2D_u3brs")
 
+[node name="SpinningChair" parent="." index="16" instance=ExtResource("12_qymky")]
+z_index = 1
+position = Vector2(239, 88)
+
+[node name="Antenna" parent="SpinningChair" index="6" instance=ExtResource("9_5i52b")]
+offset_left = -43.0
+offset_top = -54.0
+offset_right = 43.0
+offset_bottom = -20.0
+
+[node name="AnimatedSprite2DSignals" parent="SpinningChair/Antenna" index="0"]
+position = Vector2(93, 9)
+
+[node name="Button" parent="SpinningChair/Antenna" index="1"]
+offset_right = 93.0
+offset_bottom = 32.0
+
+[node name="TurnChairProgram" type="Node" parent="SpinningChair/Antenna" index="2" node_paths=PackedStringArray("chairs")]
+script = ExtResource("13_x68qa")
+chairs = [NodePath("../..")]
+metadata/_custom_type_script = "uid://blcr4qlisfk4a"
+
 [editable path="Treadmill/Antenna"]
 [editable path="Laser/Antenna"]
+[editable path="SpinningChair/Antenna"]

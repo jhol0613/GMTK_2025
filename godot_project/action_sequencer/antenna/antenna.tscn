@@ -85,6 +85,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_top = -19.0
 offset_right = 32.0
+mouse_default_cursor_shape = 2
 
 [connection signal="mouse_entered" from="Button" to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Button" to="." method="_on_mouse_exited"]
