@@ -283,7 +283,7 @@ func _initialize_interactables() -> void:
 ##Reinitialize interactable to updated position if it calls that its position was updated
 func _on_interactable_updated_position(interactable: Interactable, new_global_position: Vector2):
 	_initialize_movable(interactable, _level_scene.global_to_map(interactable.global_position), false)
-	
+
 func _hide_player(new_hide_status: bool):
 	_player_hidden = new_hide_status
 	_player_newly_hidden = new_hide_status

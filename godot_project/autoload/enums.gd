@@ -177,7 +177,7 @@ func direction_to_vector(direction: Direction) -> Vector2i:
 			return Vector2i.RIGHT
 		_:
 			return Vector2i.ZERO
-			
+
 func action_to_bonk(action: PlayerAction) -> PlayerAction:
 	match action:
 		PlayerAction.RIGHT, PlayerAction.RIGHT_BONK, PlayerAction.RIGHT_FALL:
@@ -198,7 +198,7 @@ func action_to_bonk(action: PlayerAction) -> PlayerAction:
 			return PlayerAction.DOWN_SLIDE_BONK
 		_:
 			return action
-		
+
 func is_action_fall(action: PlayerAction) -> bool:
 	return (
 		action == PlayerAction.UP_FALL or
@@ -227,7 +227,7 @@ func is_action_slide_bonk(action: PlayerAction) -> bool:
 	return (
 		action == PlayerAction.UP_SLIDE_BONK or
 		action == PlayerAction.DOWN_SLIDE_BONK or
-		action == PlayerAction.LEFT_SLIDE_BONK or 
+		action == PlayerAction.LEFT_SLIDE_BONK or
 		action == PlayerAction.RIGHT_SLIDE_BONK
 	)
 
@@ -248,7 +248,7 @@ func is_action_interact(action: PlayerAction) -> bool:
 	return (
 		action == PlayerAction.INTERACT
 	)
-	
+
 func get_reverse_action(action: PlayerAction) -> PlayerAction:
 	match action:
 		PlayerAction.RIGHT:

@@ -96,9 +96,9 @@ func _ready() -> void:
 		agent.grid_origin = global_to_map(agent.global_position)
 
 	_initialize_path_finding()
-	
+
 	target_position = global_to_map(_target.global_position)
-	
+
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 
@@ -169,14 +169,14 @@ func global_to_map(coordinates : Vector2):
 
 func map_to_local(grid_position: Vector2i):
 	return _floor_layer.map_to_local(grid_position)
-	
+
 func update_obstacle_grid(grid_position: Vector2i, traversible: bool):
 	if traversible:
 		_obstacle_overrides.erase(grid_position)
 	else:
 		_obstacle_overrides.append(grid_position)
 	path_grid.set_point_solid(grid_position, !traversible) # update A* grid
-	
+
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 

@@ -50,8 +50,8 @@ func _debug_update_target_position() -> void:
 	if not _editor_only_target:
 		_editor_only_target = Sprite2D.new()
 		_editor_only_target.texture = _target_scene
-		add_child(_editor_only_target)
-	_editor_only_target.global_position = level_base.map_to_local(destination)
+		get_parent().add_child(_editor_only_target)
+	_editor_only_target.global_position = level_base.map_to_local(destination) + Vector2(0.,-4.)
 
 
 #endregion
@@ -59,23 +59,25 @@ func _debug_update_target_position() -> void:
 func _teleport(entity: Movable) -> void:
 	# TODO: add animation
 	# TODO: add sound
-	print("Queueing teleport")
+	#print("Queueing teleport for %s" % entity)
 	entity.queue_teleportation(destination)
 
 
 func _on_music_bar():
 	if move_mode == Enums.MoveMode.ON_BEAT:
+		get_tree().create_timer(push_beat * AudioManager.beat_time_seconds).timeout.connect(_on_push_beat_timeout)
+	else:
 		_on_push_beat_timeout()
-		#get_tree().create_timer(push_beat * AudioManager.beat_time_seconds).timeout.connect(_on_push_beat_timeout)
 
 
 func _on_push_beat_timeout():
-	return
 	for area in collision.get_overlapping_areas():
 		if area.owner is Movable:
 			_teleport(area.owner)
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.owner is Movable:
-		_teleport(area.owner)
+	if area.owner is not Movable or move_mode != Enums.MoveMode.INSTANT:
+		return
+
+	_teleport(area.owner)
