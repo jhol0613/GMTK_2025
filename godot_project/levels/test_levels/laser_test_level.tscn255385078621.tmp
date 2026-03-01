@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://b3ups0rsbp08v"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_21cbe"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_u3brs"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_1o8fn"]
+[ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="4_1o8fn"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_5i52b"]
+[ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_h05u1"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_7nff7"]
+[ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="7_21cbe"]
+[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="7_x68qa"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="9_5i52b"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="9_5tchc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3brs"]
+size = Vector2(19, 23)
+
+[node name="LevelBase" instance=ExtResource("1_21cbe")]
+conductor_spawn_beat = 5
+conductor_enabled = false
+available_actions = Array[int]([6, 4, 7, 1, 2, 5, 3])
+
+[node name="Decorative" parent="." index="0"]
+tile_map_data = PackedByteArray(0, 0, 3, 0, 253, 255, 1, 0, 0, 0, 0, 0, 0, 0, 7, 0, 253, 255, 1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
+
+[node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("2_u3brs")]
+position = Vector2(177, 106)
+
+[node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
+position = Vector2(113, 29)
+selectable = true
+follow_on_animation_on_success = "idle"
+
+[node name="TurnLaserProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("lasers")]
+script = ExtResource("4_1o8fn")
+lasers = [NodePath("../../Laser")]
+metadata/_custom_type_script = "uid://b23y6rruo1ixg"
+
+[node name="CatCartObstacle" parent="." index="11" instance=ExtResource("7_x68qa")]
+position = Vector2(273, 10)
+movement_path = Array[int]([3, 3, 4, 4])
+
+[node name="Treadmill" parent="." index="12" instance=ExtResource("7_7nff7")]
+position = Vector2(112, 71)
+
+[node name="Antenna" parent="Treadmill" index="3" instance=ExtResource("9_5i52b")]
+
+[node name="AnimatedSprite2DSignals" parent="Treadmill/Antenna" index="0"]
+position = Vector2(20, -31)
+
+[node name="Button" parent="Treadmill/Antenna" index="1"]
+offset_left = -16.0
+offset_right = 16.0
+
+[node name="TurnTreadmillProgram" type="Node" parent="Treadmill/Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("9_5tchc")
+treadmills = [NodePath("../..")]
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[node name="ComputerTerminal2" parent="." index="13" instance=ExtResource("4_5i52b")]
+position = Vector2(49, 65)
+selectable = true
+
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
+script = ExtResource("5_h05u1")
+lasers = [NodePath("../../Laser")]
+new_height = 7
+metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="Laser" parent="." index="14" instance=ExtResource("3_1o8fn")]
+position = Vector2(48, 99)
+direction = 0
+height = 7
+default_animation = "fire_up"
+
+[node name="Antenna" parent="Laser" index="5" node_paths=PackedStringArray("lasers") instance=ExtResource("9_5i52b")]
+offset_left = -48.0
+offset_top = -99.0
+offset_right = -17.0
+offset_bottom = -80.0
+script = ExtResource("5_h05u1")
+lasers = []
+new_height = 0
+animation_speed = 0.4
+
+[node name="AnimatedSprite2DSignals" parent="Laser/Antenna" index="0"]
+position = Vector2(59, 84)
+
+[node name="Button" parent="Laser/Antenna" index="1"]
+offset_left = 32.0
+offset_top = 90.0
+offset_right = 64.0
+offset_bottom = 109.0
+
+[node name="ChangeLaserHeightProgram" type="Node" parent="Laser" index="9"]
+script = ExtResource("5_h05u1")
+metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="LaserBlocker" type="Area2D" parent="." index="15"]
+z_index = 1
+collision_layer = 512
+collision_mask = 0
+script = ExtResource("7_21cbe")
+altitude = 30
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker" index="0"]
+position = Vector2(144, 15)
+shape = SubResource("RectangleShape2D_u3brs")
+
+[editable path="Treadmill/Antenna"]
+[editable path="Laser/Antenna"]

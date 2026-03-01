@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://d8l1lrlubiip"]
+
+[ext_resource type="Script" uid="uid://dg0nwr6dqt47i" path="res://action_sequencer/sequencer_screen/screen_scenes/change_laser_height_screen.gd" id="1_wpfdh"]
+[ext_resource type="Texture2D" uid="uid://fu352ntwnuli" path="res://action_sequencer/sequencer_screen/screen_scenes/agent_icons/laser_green.png" id="2_vk6oj"]
+[ext_resource type="Texture2D" uid="uid://c27md12wnvve6" path="res://action_sequencer/sequencer_screen/green_slider.png" id="3_wpfdh"]
+[ext_resource type="Texture2D" uid="uid://dlwrv1pjj47oe" path="res://action_sequencer/sequencer_screen/green_slider_hovered.png" id="4_vk6oj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wpfdh"]
+
+[node name="ChangeLaserHeightScreen" type="Control" node_paths=PackedStringArray("slider")]
+layout_mode = 3
+anchor_right = 0.038
+anchor_bottom = 0.024
+offset_right = 0.199999
+offset_bottom = 0.2
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wpfdh")
+slider = NodePath("HSlider")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-27, -1)
+texture = ExtResource("2_vk6oj")
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(-1.86667, 0)
+scale = Vector2(0.533333, 1)
+points = PackedVector2Array(67, 0, 0, 0)
+width = 4.0
+default_color = Color(0.290196, 0.290196, 0.290196, 1)
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -13.0
+offset_right = 35.0
+offset_bottom = 12.0
+focus_mode = 0
+theme_override_icons/grabber = ExtResource("3_wpfdh")
+theme_override_icons/grabber_highlight = ExtResource("4_vk6oj")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_wpfdh")
+min_value = 7.0
+max_value = 64.0
+value = 7.0
+scrollable = false

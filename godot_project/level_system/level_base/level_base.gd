@@ -50,6 +50,10 @@ var obstacle_spawners := []
 var lasers := []
 ## teleporters in the level
 var teleporters := []
+## terminals in the level
+var terminals := []
+## antennas in the level (treated like terminals, but aren't an agent so need their own array
+var antennas := []
 
 signal target_reached
 
@@ -86,6 +90,10 @@ func _ready() -> void:
 			lasers.append(child)
 		if child.is_in_group("teleporters"):
 			teleporters.append(child)
+		if child.is_in_group("terminals"):
+			terminals.append(child)
+		if child.is_in_group("antennas"):
+			antennas.append(child)
 	#agents = get_tree().get_nodes_in_group("agents")
 	for agent: Agent in agents:
 		# The position of the agent in level space

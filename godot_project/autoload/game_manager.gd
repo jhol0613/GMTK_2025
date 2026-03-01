@@ -115,6 +115,7 @@ func _build_fadeout_rect(alpha: float) -> ColorRect:
 	fadeout_rect.color = Color(0, 0, 0, 1)
 	fadeout_rect.modulate.a = alpha
 	fadeout_rect.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
+	fadeout_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return fadeout_rect
 
 func _input(_event: InputEvent):

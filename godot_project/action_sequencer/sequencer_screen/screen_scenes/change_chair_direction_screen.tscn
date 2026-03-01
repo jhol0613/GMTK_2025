@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://crorf1owblj5p"]
+
+[ext_resource type="Script" uid="uid://d18bgy5251pin" path="res://action_sequencer/sequencer_screen/screen_scenes/change_chair_direction_screen.gd" id="1_mrjj6"]
+[ext_resource type="Texture2D" uid="uid://c0haqmsx6vwmw" path="res://action_sequencer/sequencer_screen/screen_scenes/agent_icons/spinning_chair_green.png" id="1_o234r"]
+[ext_resource type="PackedScene" uid="uid://70ih8s0lu4px" path="res://action_sequencer/sequencer_screen/digipad/digipad_rotate.tscn" id="2_mrjj6"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_1iu8t"]
+
+[node name="ChangeChairDirectionScreen" type="Control" node_paths=PackedStringArray("digipad")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mrjj6")
+digipad = NodePath("Digipad")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-26, -2)
+texture = ExtResource("1_o234r")
+
+[node name="Digipad" parent="." instance=ExtResource("2_mrjj6")]
+position = Vector2(15, -2)
+button_group = SubResource("ButtonGroup_1iu8t")
+
+[node name="Left" parent="Digipad" index="0"]
+button_group = SubResource("ButtonGroup_1iu8t")
+
+[node name="Up" parent="Digipad" index="1"]
+visible = false
+button_group = SubResource("ButtonGroup_1iu8t")
+
+[node name="Down" parent="Digipad" index="2"]
+button_group = SubResource("ButtonGroup_1iu8t")
+
+[node name="Right" parent="Digipad" index="3"]
+button_group = SubResource("ButtonGroup_1iu8t")
+
+[editable path="Digipad"]

@@ -188,7 +188,23 @@ func spin(number_of_quarter_turns: int = 1):
 		right_obstacle.request_offbeat_action.emit(right_obstacle, right_obstacle.get_next_move())
 		_on_left_obstacle_move(Enums.PlayerAction.NONE)
 		_on_right_obstacle_move(Enums.PlayerAction.NONE)
+		_facing_direction += number_of_quarter_turns
+		_facing_direction %= FacingDirection.size()
 		await _frame_timer.timeout
+
+##Because arg is a direction and not a facing direction, will always return the smallest # quarter 
+##turns (e.g. if facing direction is LEFT and direction is DOWN, assumes the direction "down" translates to FRONT_COUNTERCLOCKWISE)
+func get_quarter_turns_to_direction(direction: Enums.Direction) -> int:
+	match direction:
+		Enums.Direction.LEFT:
+			return posmod(FacingDirection.LEFT - _facing_direction, FacingDirection.size())
+		Enums.Direction.RIGHT:
+			return posmod(FacingDirection.RIGHT - _facing_direction, FacingDirection.size())
+		_: #assumes up or down refers to "FRONT"
+			return min(
+				posmod(FacingDirection.FRONT_CLOCKWISE - _facing_direction, FacingDirection.size()), 
+				posmod(FacingDirection.FRONT_COUNTERCLOCKWISE - _facing_direction, FacingDirection.size())
+			)
 
 func reset():
 	super.reset()

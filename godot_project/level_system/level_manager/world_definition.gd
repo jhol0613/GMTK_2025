@@ -8,3 +8,4 @@ class_name WorldDefinition
 @export var music_event_name: String
 @export var music_event_bpm: float
 @export var transition_scene: PackedScene
+@export var antenna_deployed: bool

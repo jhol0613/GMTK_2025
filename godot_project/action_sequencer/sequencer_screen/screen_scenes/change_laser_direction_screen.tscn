@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw1sgggrlnrke"]
+
+[ext_resource type="Script" uid="uid://d22cw8lms01jr" path="res://action_sequencer/sequencer_screen/screen_scenes/change_laser_direction_screen.gd" id="1_cv4jw"]
+[ext_resource type="Texture2D" uid="uid://d33t60q4d64hi" path="res://action_sequencer/sequencer_screen/laser_green.png" id="2_com60"]
+[ext_resource type="PackedScene" uid="uid://70ih8s0lu4px" path="res://action_sequencer/sequencer_screen/digipad/digipad_rotate.tscn" id="3_wl7bb"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_com60"]
+
+[node name="ChangeLaserDirectionScreen" type="Control" node_paths=PackedStringArray("digipad")]
+layout_mode = 3
+anchor_right = 0.063
+anchor_bottom = 0.024
+offset_right = 0.200001
+offset_bottom = 0.2
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cv4jw")
+digipad = NodePath("Digipad")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-27, -1)
+texture = ExtResource("2_com60")
+
+[node name="Digipad" parent="." instance=ExtResource("3_wl7bb")]
+position = Vector2(15, -2)
+button_group = SubResource("ButtonGroup_com60")

@@ -45,6 +45,7 @@ level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"),
 level_select_scene = 4
 music_event_name = "World1_BGM"
 music_event_bpm = 170.0
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_ydpb6"]
@@ -55,6 +56,7 @@ level_select_scene = 4
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_u7mwr"]
@@ -64,6 +66,7 @@ level_list = Array[PackedScene]([ExtResource("29_pbglx"), ExtResource("26_8o3tm"
 level_select_scene = 0
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [resource]

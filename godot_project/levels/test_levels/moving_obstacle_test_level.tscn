@@ -21,6 +21,9 @@ position = Vector2(112, 47.37)
 
 [node name="Laser" parent="." index="9" instance=ExtResource("4_iaxri")]
 position = Vector2(112, 99)
+direction = 0
+height = 7
+default_animation = "fire_up"
 
 [node name="CatCoffeeSpill" parent="." index="10" instance=ExtResource("8_ekeum")]
 position = Vector2(46, 29)
@@ -34,5 +37,5 @@ position = Vector2(143, 70)
 direction = 1
 
 [node name="SnackCartObstacle" parent="." index="13" instance=ExtResource("5_cv2wv")]
-position = Vector2(50, 88)
-movement_path = Array[int]([4])
+position = Vector2(273, 89)
+movement_path = Array[int]([1])

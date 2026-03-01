@@ -1,0 +1,70 @@
+[gd_scene load_steps=15 format=3 uid="uid://cokbacpxj3ep0"]
+
+[ext_resource type="Script" uid="uid://bdavrthjdgpk7" path="res://action_sequencer/sequencer_screen/digipad/digipad_move.gd" id="1_j6nj7"]
+[ext_resource type="Texture2D" uid="uid://bhx0gfkqrnsum" path="res://action_sequencer/sequencer_screen/digipad/left_unselected.png" id="3_nv07m"]
+[ext_resource type="Texture2D" uid="uid://dabsvkcrhwqih" path="res://action_sequencer/sequencer_screen/digipad/left_selected.png" id="4_0iqj5"]
+[ext_resource type="Texture2D" uid="uid://bbajqdinllhdf" path="res://action_sequencer/sequencer_screen/digipad/left_hovered.png" id="5_2324i"]
+[ext_resource type="Script" uid="uid://cgts4xv44awd7" path="res://action_sequencer/sequencer_screen/screen_scenes/direction_button.gd" id="6_rvvfo"]
+[ext_resource type="Texture2D" uid="uid://chhml3enxlbh5" path="res://action_sequencer/sequencer_screen/digipad/up_unselected.png" id="7_hs4fv"]
+[ext_resource type="Texture2D" uid="uid://tt11xw4bkqmr" path="res://action_sequencer/sequencer_screen/digipad/up_selected.png" id="8_beya8"]
+[ext_resource type="Texture2D" uid="uid://bhfqaklv6pc55" path="res://action_sequencer/sequencer_screen/digipad/up_hovered.png" id="9_4ftys"]
+[ext_resource type="Texture2D" uid="uid://04bv4v4cjp5" path="res://action_sequencer/sequencer_screen/digipad/down_unselected.png" id="10_rth3t"]
+[ext_resource type="Texture2D" uid="uid://ug17apm76hdk" path="res://action_sequencer/sequencer_screen/digipad/down_selected.png" id="11_bteox"]
+[ext_resource type="Texture2D" uid="uid://h5daitayoe8t" path="res://action_sequencer/sequencer_screen/digipad/down_hovered.png" id="12_084tx"]
+[ext_resource type="Texture2D" uid="uid://q6nl70tqhple" path="res://action_sequencer/sequencer_screen/digipad/right_unselected.png" id="13_tf2tl"]
+[ext_resource type="Texture2D" uid="uid://qkjn05fh3jaa" path="res://action_sequencer/sequencer_screen/digipad/right_selected.png" id="14_osop2"]
+[ext_resource type="Texture2D" uid="uid://cy6hqkmyvj7xr" path="res://action_sequencer/sequencer_screen/digipad/right_hovered.png" id="15_xci14"]
+
+[node name="DigipadMove" type="Node2D"]
+script = ExtResource("1_j6nj7")
+
+[node name="Left" type="TextureButton" parent="."]
+offset_left = -25.0
+offset_top = -11.0
+offset_right = -14.0
+offset_bottom = 12.0
+texture_normal = ExtResource("3_nv07m")
+texture_pressed = ExtResource("4_0iqj5")
+texture_hover = ExtResource("5_2324i")
+script = ExtResource("6_rvvfo")
+direction = 2
+metadata/_custom_type_script = "uid://cgts4xv44awd7"
+
+[node name="Up" type="TextureButton" parent="."]
+offset_left = -11.0
+offset_top = -13.0
+offset_right = 10.0
+texture_normal = ExtResource("7_hs4fv")
+texture_pressed = ExtResource("8_beya8")
+texture_hover = ExtResource("9_4ftys")
+script = ExtResource("6_rvvfo")
+metadata/_custom_type_script = "uid://cgts4xv44awd7"
+
+[node name="Down" type="TextureButton" parent="."]
+offset_left = -11.0
+offset_top = 2.0
+offset_right = 10.0
+offset_bottom = 15.0
+texture_normal = ExtResource("10_rth3t")
+texture_pressed = ExtResource("11_bteox")
+texture_hover = ExtResource("12_084tx")
+script = ExtResource("6_rvvfo")
+direction = 1
+metadata/_custom_type_script = "uid://cgts4xv44awd7"
+
+[node name="Right" type="TextureButton" parent="."]
+offset_left = 13.0
+offset_top = -11.0
+offset_right = 24.0
+offset_bottom = 12.0
+texture_normal = ExtResource("13_tf2tl")
+texture_pressed = ExtResource("14_osop2")
+texture_hover = ExtResource("15_xci14")
+script = ExtResource("6_rvvfo")
+direction = 3
+metadata/_custom_type_script = "uid://cgts4xv44awd7"
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="Down" to="." method="_on_down_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

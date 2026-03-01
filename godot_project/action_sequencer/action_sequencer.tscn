@@ -1,9 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=46 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_1tigw"]
-[ext_resource type="Texture2D" uid="uid://b36omvjrj760p" path="res://action_sequencer/sequencer_visuals/sequencer_v8.png" id="4_cdoyw"]
+[ext_resource type="Texture2D" uid="uid://2xutjhw601p8" path="res://action_sequencer/sequencer_visuals/sequencer_v9.png" id="4_62g22"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/sequencer_visuals/play_button/start_unpushed.png" id="5_t1wqv"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/sequencer_visuals/play_button/start_pushed.png" id="6_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/sequencer_visuals/play_button/start_mouse_hover.png" id="7_qhuj8"]
@@ -15,12 +15,13 @@
 [ext_resource type="Texture2D" uid="uid://du8f75wcldg6o" path="res://action_sequencer/sequencer_visuals/volume_control_slider/volune_control_slider.png" id="13_reiol"]
 [ext_resource type="Texture2D" uid="uid://cw10a68fok6ou" path="res://action_sequencer/sequencer_visuals/speed_control_switch/SingleTime.png" id="14_gqgsu"]
 [ext_resource type="Texture2D" uid="uid://dyslse4pkfdyx" path="res://action_sequencer/sequencer_visuals/speed_control_switch/DoubleTime.png" id="15_4oryb"]
-[ext_resource type="Texture2D" uid="uid://dfgnu4b2l7620" path="res://action_sequencer/sequencer_visuals/redo_button/Redo.png" id="16_4oryb"]
-[ext_resource type="Texture2D" uid="uid://562dh07x4wjo" path="res://action_sequencer/sequencer_visuals/redo_button/RedoPress.png" id="17_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://dgdw1436w52je" path="res://action_sequencer/sequencer_visuals/eraser_button/Eraser.png" id="17_tq4nj"]
-[ext_resource type="Texture2D" uid="uid://cb7s3d3886edf" path="res://action_sequencer/sequencer_visuals/redo_button/RedoHover.png" id="18_krlbp"]
 [ext_resource type="Texture2D" uid="uid://cmut2moeovys1" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserOn.png" id="19_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://m410en01fm5j" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserHover.png" id="20_krlbp"]
+[ext_resource type="Texture2D" uid="uid://cb8lc47bmuqpw" path="res://action_sequencer/antenna/sequencer_antenna.png" id="21_krlbp"]
+[ext_resource type="Texture2D" uid="uid://cjiyq2l7ngpuc" path="res://action_sequencer/sequencer_screen/Screen_Turn_On.png" id="22_ja8dg"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="22_vmoa0"]
+[ext_resource type="Texture2D" uid="uid://ce8bpklr860v" path="res://action_sequencer/sequencer_screen/Screen_Turn_Off.png" id="23_vmoa0"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
 offsets = PackedFloat32Array(0.0582751, 0.764569)
@@ -37,11 +38,153 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tigw"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_krlbp"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yk6ra"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hlyd"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gm25e"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dye17"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 0, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ncrp"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kiqsn"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ki1vm"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbrj7"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 157, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo06d"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgxm1"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltml8"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46r4g"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 314, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tfvx"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(0, 471, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhyo0"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(164, 471, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gt0nv"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(328, 471, 164, 157)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84e1n"]
+atlas = ExtResource("21_krlbp")
+region = Rect2(492, 471, 164, 157)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5pvfp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krlbp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yk6ra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hlyd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gm25e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dye17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ncrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kiqsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ki1vm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbrj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo06d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgxm1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltml8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46r4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tfvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhyo0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gt0nv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84e1n")
+}],
+"loop": false,
+"name": &"deploy",
+"speed": 20.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_krlbp"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -6, 0)
+spread = 180.0
+initial_velocity_min = 100.68
+initial_velocity_max = 443.95
+gravity = Vector3(0, 1000, 0)
+color = Color(0.643137, 0.866667, 0.858824, 1)
+
 [node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 616.0
 offset_bottom = 346.0
+mouse_filter = 2
 script = ExtResource("1_t1wqv")
 action_item_scene = ExtResource("2_reiol")
 action_slot_scene = ExtResource("3_1tigw")
@@ -60,7 +203,7 @@ offset_left = -2.0
 offset_top = 230.0
 offset_right = 598.0
 offset_bottom = 356.0
-texture = ExtResource("4_cdoyw")
+texture = ExtResource("4_62g22")
 stretch_mode = 2
 
 [node name="ActionSlots" type="HBoxContainer" parent="TextureRect"]
@@ -83,10 +226,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -300.0
-offset_top = -112.0
-offset_right = -240.0
-offset_bottom = -78.0
+offset_left = -331.0
+offset_top = -110.0
+offset_right = -271.0
+offset_bottom = -76.0
 grow_horizontal = 0
 grow_vertical = 0
 tooltip_text = "Start Level"
@@ -117,10 +260,10 @@ event_guid = "{b12e8659-34c7-4bc6-8d91-2718a3690845}"
 
 [node name="ReplayButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 373.0
-offset_top = 14.0
-offset_right = 432.0
-offset_bottom = 48.0
+offset_left = 342.0
+offset_top = 16.0
+offset_right = 401.0
+offset_bottom = 50.0
 tooltip_text = "Restart Level"
 texture_normal = ExtResource("9_62g22")
 texture_pressed = ExtResource("10_cdoyw")
@@ -134,9 +277,9 @@ event_guid = "{df1895b1-8e9a-4528-a47a-b66cad41c2d8}"
 z_index = 11
 layout_mode = 1
 offset_left = 44.0
-offset_top = 20.0
+offset_top = 19.0
 offset_right = 44.0
-offset_bottom = 72.0
+offset_bottom = 71.0
 theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
 columns = 4
@@ -209,15 +352,15 @@ event_guid = "{4be42de0-2f0a-4ff1-ad9d-e2e8cf053fce}"
 
 [node name="RedoButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 262.0
-offset_top = 44.0
-offset_right = 279.0
-offset_bottom = 55.0
+offset_left = 223.0
+offset_top = 24.0
+offset_right = 240.0
+offset_bottom = 35.0
 tooltip_text = "Clear all slots
 "
-texture_normal = ExtResource("16_4oryb")
-texture_pressed = ExtResource("17_cdoyw")
-texture_hover = ExtResource("18_krlbp")
+texture_normal = ExtResource("17_tq4nj")
+texture_pressed = ExtResource("19_cdoyw")
+texture_hover = ExtResource("20_krlbp")
 
 [node name="RedoButtonHover" type="FmodEventEmitter2D" parent="TextureRect/RedoButton"]
 event_name = "event:/PickBlock"
@@ -229,9 +372,9 @@ event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
 [node name="EraserButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 226.0
+offset_left = 223.0
 offset_top = 44.0
-offset_right = 243.0
+offset_right = 240.0
 offset_bottom = 53.0
 tooltip_text = "Clear selected slot"
 toggle_mode = true
@@ -246,6 +389,32 @@ event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 [node name="EraserButtonPress" type="FmodEventEmitter2D" parent="TextureRect/EraserButton"]
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
+
+[node name="ScreenOff" type="Sprite2D" parent="TextureRect"]
+position = Vector2(458, 35)
+texture = ExtResource("23_vmoa0")
+
+[node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff"]
+texture = ExtResource("22_ja8dg")
+
+[node name="Antenna" type="AnimatedSprite2D" parent="TextureRect"]
+position = Vector2(111, -71)
+sprite_frames = SubResource("SpriteFrames_5pvfp")
+animation = &"deploy"
+frame = 15
+frame_progress = 1.0
+script = ExtResource("22_vmoa0")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="AntennaTip" type="GPUParticles2D" parent="TextureRect/Antenna"]
+position = Vector2(-75, -68)
+emitting = false
+amount = 60
+lifetime = 0.23
+one_shot = true
+trail_enabled = true
+trail_lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_krlbp")
 
 [connection signal="mouse_entered" from="TextureRect/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="TextureRect/PlayButton" to="." method="_on_play_button_pressed"]

@@ -32,6 +32,10 @@ extends Node2D
 @export_range(0, 1, .01) var contrast: float
 @export_range(0, 1, .01) var saturation: float
 @export var filter_animation_time := 1.5
+@export_subgroup("Antenna Lightning")
+@export var lightning_duration := 0.2
+@export var lightning_screen_shake_decay := 10.0
+@export var lightning_sreen_shake_strength := 8.0
 
 @export_category("Levels")
 ## All train cars in order
@@ -50,6 +54,7 @@ extends Node2D
 @onready var _animation_player := $AnimationPlayer
 @onready var _shader := $ShaderLayer/Shader
 @onready var _shake_camera := $ShakeCamera
+@onready var _lightning := $SequencerLayer/Lightning
 
 
 var _conductor: Conductor
@@ -137,6 +142,7 @@ func _initialize_level():
 	_initialize_interactables()
 	_initialize_lasers()
 	_initialize_teleporters()
+	_initialize_antennas()
 
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
@@ -300,9 +306,20 @@ func _initialize_pushers() -> void:
 
 func _initialize_lasers() -> void:
 	for laser: Laser in _level_scene.lasers:
-		var cells_to_obstacle = _level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction)
-		var cells_to_wall = _level_scene.get_cells_to_level_edge(laser.grid_position, laser.direction)
-		laser.set_max_fire_distance_by_grid_spaces(cells_to_obstacle, cells_to_obstacle == cells_to_wall)
+		laser.direction_changed.connect(_update_laser_firing_distance)
+		_update_laser_firing_distance(laser)
+
+##Update max laser firing distance based on level static obstacles
+func _update_laser_firing_distance(laser: Laser) -> void:
+	var cells_to_obstacle = _level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction)
+	var cells_to_wall = _level_scene.get_cells_to_level_edge(laser.grid_position, laser.direction)
+	laser.set_max_fire_distance_by_grid_spaces(cells_to_obstacle, cells_to_obstacle == cells_to_wall)
+
+func _initialize_antennas() -> void:
+	#for terminal: Terminal in _level_scene.terminals:
+		#terminal.selected.connect(_on_terminal_selected)
+	for antenna: Antenna in _level_scene.antennas:
+		antenna.selected.connect(_on_antenna_selected)
 
 func _initialize_teleporters() -> void:
 	for teleporter: Teleporter in _level_scene.teleporters:
@@ -526,7 +543,20 @@ func _fade_to_thinking_shader():
 	tween.tween_property(_shader.material, "shader_parameter/bcs",
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
-	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
+	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)	
+
+func _on_antenna_selected(new_antenna: Antenna):
+	for antenna: Antenna in _level_scene.antennas:
+		antenna.set_active_animation(false)
+	new_antenna.set_active_animation(true)
+	_lightning.global_position = new_antenna.get_sprite_global_position()
+	_lightning.points[1] = _action_sequencer.antenna_tip.global_position - _lightning.global_position
+	_lightning.visible = true
+	_shake_camera.apply_shake(lightning_sreen_shake_strength, lightning_screen_shake_decay)
+	_action_sequencer.connect_antenna_to_screen(new_antenna.programs[0]) #Only makes sense to connect single program to screen
+	await get_tree().create_timer(lightning_duration).timeout
+	_lightning.visible = false
+	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna	
 #endregion
 
 #region Animation
