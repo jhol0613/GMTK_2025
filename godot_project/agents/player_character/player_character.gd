@@ -74,7 +74,7 @@ func notify_failure(cause: Enums.FailureCause):
 			animation_to_play = "failure_squish"
 	print("Failure animation: %s" % animation_to_play)
 	play_animation_with_follow_on(animation_to_play, "cancel_follow_on")
-	
+
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED
 

@@ -543,7 +543,7 @@ func _fade_to_thinking_shader():
 	tween.tween_property(_shader.material, "shader_parameter/bcs",
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
-	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)	
+	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
 
 func _on_antenna_selected(new_antenna: Antenna):
 	for antenna: Antenna in _level_scene.antennas:
@@ -556,7 +556,7 @@ func _on_antenna_selected(new_antenna: Antenna):
 	_action_sequencer.connect_antenna_to_screen(new_antenna.programs[0]) #Only makes sense to connect single program to screen
 	await get_tree().create_timer(lightning_duration).timeout
 	_lightning.visible = false
-	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna	
+	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna
 #endregion
 
 #region Animation

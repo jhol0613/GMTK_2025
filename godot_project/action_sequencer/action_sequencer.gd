@@ -118,15 +118,15 @@ func _ready() -> void:
 	# Connect to beat signal
 	AudioManager.music_bar.connect(_on_advance)
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
-	
+
 	_music_slider.value = FmodServer.get_global_parameter_by_name(P_MUSIC)
 	_sfx_slider.value   = FmodServer.get_global_parameter_by_name(P_SFX)
 
 	_music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
 	_sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
-	
+
 	_speed_control_ready()
-	
+
 	_setup_eraser_button()
 
 
@@ -142,8 +142,8 @@ func play():
 	#await get_tree().create_timer(play_action_delay).timeout
 
 	play_started.emit()
-	
-	current_action = 0	
+
+	current_action = 0
 	_turn_off_sequencer_lights()
 	for i in range(_available_slots):
 		_initialized_slots[i].set_to_playing_mode_color()
@@ -162,24 +162,24 @@ func advance():
 
 	if _available_slots == current_action:
 		current_action = 0
-		
+
 	# Update lights while sequencing
 	_initialized_slots[current_action].sequence_light_on = true
 	if current_action > 0:
 		_initialized_slots[current_action-1].sequence_light_on = false#   set_light_status(Enums.LightStatus.OFF, true, should_set_default_only)
 	else:
-		_initialized_slots[_available_slots-1].sequence_light_on = false#  set_light_status(Enums.LightStatus.OFF, true, should_set_default_only)	
-		
+		_initialized_slots[_available_slots-1].sequence_light_on = false#  set_light_status(Enums.LightStatus.OFF, true, should_set_default_only)
+
 	# Sequencer stays running in thinking mode, but emits different type of signal for level manager to interpret
 	if current_state == SequencingState.RUNNING:
 		perform_action.emit(_initialized_slots[current_action].action)
 	elif current_state == SequencingState.SEQUENCING:
-		perform_thinking_action.emit()	
-	
+		perform_thinking_action.emit()
+
 	current_action += 1
 
 # should be called when a new level wants to update sequencer parameters
-func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction], 
+func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction],
 	new_action_quantities := default_action_quantities):
 
 	# Update state variables
@@ -316,7 +316,7 @@ func _on_replay_button_pressed() -> void:
 func _on_action_item_clicked(new_action_item: ActionItem):
 	if tutorial_mode:
 		_tutorial_arrow.visible = true
-		
+
 	if _active_action_item == new_action_item:
 		_enter_erase_mode()
 	else:
@@ -353,13 +353,13 @@ func _on_replay_button_mouse_entered() -> void:
 
 func _on_music_slider_changed(value):
 	FmodServer.set_global_parameter_by_name(P_MUSIC, value)
-	
+
 func _on_music_slider_drag_started() -> void:
 	music_slider_click_emitter.play()
 
 func _on_music_slider_drag_ended(_value_changed: bool) -> void:
 	music_slider_release_emitter.play()
-	
+
 func _on_sfx_slider_drag_started() -> void:
 	sfx_slider_click_emitter.play()
 
@@ -368,13 +368,13 @@ func _on_sfx_slider_drag_ended(_value_changed: bool) -> void:
 
 func _on_sfx_slider_changed(value):
 	FmodServer.set_global_parameter_by_name(P_SFX, value)
-	
+
 func _speed_control_ready() -> void:
 	_speed_btn.toggle_mode = true
 	_speed_btn.button_pressed = false
 	AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
 	_speed_btn.toggled.connect(_on_speed_toggled)
-	
+
 func _on_speed_toggled(pressed: bool) -> void:
 	speed_btn_emitter.play()
 	if pressed:
@@ -385,7 +385,7 @@ func _on_speed_toggled(pressed: bool) -> void:
 func _on_redo_button_mouse_entered() -> void:
 	if not _redo_btn.disabled:
 		redo_btn_hover_emitter.play()
-	
+
 func _on_redo_button_pressed() -> void:
 	_exit_erase_mode()
 	redo_btn_press_emitter.play()
@@ -397,7 +397,7 @@ func _setup_eraser_button() -> void:
 	if _eraser_btn.toggled.is_connected(_on_eraser_toggled):
 		_eraser_btn.toggled.disconnect(_on_eraser_toggled)
 	_eraser_btn.toggled.connect(_on_eraser_toggled)
-	
+
 func _on_eraser_button_mouse_entered() -> void:
 	if not _eraser_btn.disabled:
 		eraser_btn_hover_emitter.play()
@@ -433,7 +433,7 @@ func _update_slot_action_previews():
 			_initialized_slots[i].preview_action = Enums.PlayerAction.NONE
 		else:
 			_initialized_slots[i].preview_action = _active_action_item.action
-			
+
 		if tutorial_mode:
 			_initialized_slots[i].start_flashing()
 
