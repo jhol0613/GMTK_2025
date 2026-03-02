@@ -7,14 +7,11 @@ class_name TurnLaserProgram
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sequencer_control_scene_UID = "uid://dw1sgggrlnrke"
+	sequencer_control_scene = load("uid://dw1sgggrlnrke")
 	super._ready()
 
 func initialize_screen(screen_scene: ChangeLaserDirectionScreen):
 	super.initialize_screen(screen_scene)
-	if screen_scene is not ChangeLaserDirectionScreen:
-		push_error("Ensure that change_laser_direction_program has change_laser_direction_screen ans its
-		sequencer control scene")
 	screen_scene.direction_pressed.connect(_on_direction_selected)
 
 func _on_direction_selected(direction: Enums.Direction):

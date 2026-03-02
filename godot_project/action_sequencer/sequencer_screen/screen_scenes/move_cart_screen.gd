@@ -1,11 +1,14 @@
 extends Control
 
+class_name MoveCartScreen
+
+@export var digipad: DigipadMove
+
+signal direction_pressed(direction: Enums.Direction)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	digipad.direction_pressed.connect(_on_direction_pressed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_direction_pressed(direction: Enums.Direction):
+	direction_pressed.emit(direction)

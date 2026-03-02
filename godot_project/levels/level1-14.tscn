@@ -5,7 +5,7 @@
 
 [node name="LevelBase" instance=ExtResource("1_mw8yd")]
 display_name = "1-14"
-conductor_spawn_beat = 12
+conductor_spawn_beat = 14
 available_actions = Array[int]([4, 3, 1, 2, 5])
 
 [node name="Obstacles" parent="." index="2"]
@@ -13,12 +13,15 @@ tile_map_data = PackedByteArray("AAACAAIAAgACAAAAAAACAAMAAgACAAEAAAAFAAIAAgACAAA
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_a6vap")]
 position = Vector2(112, 4)
+height = 7
 activation_sequence = Array[bool]([true, false])
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_a6vap")]
 position = Vector2(208, 3)
+height = 7
 activation_sequence = Array[bool]([true, false])
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_a6vap")]
 position = Vector2(304, 3)
+height = 7
 activation_sequence = Array[bool]([true, false])

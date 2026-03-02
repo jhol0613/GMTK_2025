@@ -12,9 +12,6 @@ func _ready() -> void:
 
 func initialize_screen(screen_scene: ChangeTreadmillDirectionScreen):
 	super.initialize_screen(screen_scene)
-	if screen_scene is not ChangeTreadmillDirectionScreen:
-		push_error("Ensure that change_treadmill_direction_program has change_laser_direction_screen and its
-		sequencer control scene")
 	screen_scene.direction_pressed.connect(_on_direction_selected)
 
 func _on_direction_selected(direction: Enums.Direction):

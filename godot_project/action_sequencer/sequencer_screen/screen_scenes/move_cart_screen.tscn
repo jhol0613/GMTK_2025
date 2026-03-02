@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cokbacpxj3ep0" path="res://action_sequencer/sequencer_screen/digipad/digipad_move.tscn" id="2_vn6h8"]
 [ext_resource type="Texture2D" uid="uid://d0stl0wjqwhuu" path="res://action_sequencer/sequencer_screen/screen_scenes/agent_icons/cart_obstacle_green.png" id="3_mmuae"]
 
-[node name="MoveCartScreen" type="Control"]
+[node name="MoveCartScreen" type="Control" node_paths=PackedStringArray("digipad")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,10 +12,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jgl75")
+digipad = NodePath("DigipadMove")
 
 [node name="DigipadMove" parent="." instance=ExtResource("2_vn6h8")]
 position = Vector2(15, -2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-25, -4)
+position = Vector2(-25, -1)
 texture = ExtResource("3_mmuae")

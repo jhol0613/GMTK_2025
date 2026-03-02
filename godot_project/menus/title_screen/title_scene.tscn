@@ -78,7 +78,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7mo1b")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -173,6 +173,7 @@ process_material = SubResource("ParticleProcessMaterial_3h5pg")
 [node name="TrackSprite" type="AnimatedSprite2D" parent="Title"]
 position = Vector2(-41, -7)
 sprite_frames = SubResource("SpriteFrames_ehrfh")
+autoplay = "default"
 frame = 2
 frame_progress = 1.0
 
