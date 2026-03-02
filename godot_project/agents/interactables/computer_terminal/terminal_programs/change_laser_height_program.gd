@@ -17,9 +17,6 @@ func _ready() -> void:
 
 func initialize_screen(screen_scene: ChangeLaserHeightScreen):
 	super.initialize_screen(screen_scene)
-	if screen_scene is not ChangeLaserHeightScreen:
-		push_error("Ensure that change_treadmill_direction_program has change_laser_direction_screen and its
-		sequencer control scene")
 	screen_scene.value_updated.connect(_on_height_updated)
 
 func _on_height_updated(new_height: int):

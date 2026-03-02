@@ -177,7 +177,20 @@ func direction_to_vector(direction: Direction) -> Vector2i:
 			return Vector2i.RIGHT
 		_:
 			return Vector2i.ZERO
-			
+
+func direction_to_action(direction: Direction) -> PlayerAction:
+	match direction:
+		Direction.UP:
+			return PlayerAction.UP
+		Direction.DOWN:
+			return PlayerAction.DOWN
+		Direction.LEFT:
+			return PlayerAction.LEFT
+		Direction.RIGHT:
+			return PlayerAction.RIGHT
+		_:
+			return PlayerAction.NONE
+
 func action_to_bonk(action: PlayerAction) -> PlayerAction:
 	match action:
 		PlayerAction.RIGHT, PlayerAction.RIGHT_BONK, PlayerAction.RIGHT_FALL:

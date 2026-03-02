@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3ups0rsbp08v"]
+[gd_scene load_steps=16 format=3 uid="uid://b3ups0rsbp08v"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_21cbe"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_u3brs"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_1o8fn"]
 [ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="4_1o8fn"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_5i52b"]
+[ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="4_7nff7"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_h05u1"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_7nff7"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="7_21cbe"]
@@ -30,6 +31,26 @@ tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
 [node name="SnackCartObstacle2" parent="." index="9" instance=ExtResource("2_u3brs")]
 position = Vector2(177, 106)
+
+[node name="Antenna" parent="SnackCartObstacle2" index="3" instance=ExtResource("9_5i52b")]
+offset_left = -13.0
+offset_top = -55.0
+offset_right = 11.0
+offset_bottom = 0.0
+
+[node name="AnimatedSprite2DSignals" parent="SnackCartObstacle2/Antenna" index="0"]
+position = Vector2(18, 0)
+
+[node name="Button" parent="SnackCartObstacle2/Antenna" index="1"]
+offset_left = 2.0
+offset_top = 4.0
+offset_right = 24.0
+offset_bottom = 55.0
+
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle2/Antenna" index="2" node_paths=PackedStringArray("obstacles")]
+script = ExtResource("4_7nff7")
+obstacles = [NodePath("../..")]
+metadata/_custom_type_script = "uid://edi48oyem1ac"
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("4_5i52b")]
 position = Vector2(113, 29)
@@ -127,6 +148,7 @@ script = ExtResource("13_x68qa")
 chairs = [NodePath("../..")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
+[editable path="SnackCartObstacle2/Antenna"]
 [editable path="Treadmill/Antenna"]
 [editable path="Laser/Antenna"]
 [editable path="SpinningChair/Antenna"]

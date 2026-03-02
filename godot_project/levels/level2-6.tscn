@@ -22,7 +22,7 @@ position = Vector2(209, 69)
 direction = 3
 
 [node name="Treadmill4" parent="." index="12" instance=ExtResource("3_ahmw1")]
-position = Vector2(273, 69)
+position = Vector2(272, 69)
 direction = 3
 
 [node name="Laser" parent="." index="13" instance=ExtResource("2_x7b4s")]

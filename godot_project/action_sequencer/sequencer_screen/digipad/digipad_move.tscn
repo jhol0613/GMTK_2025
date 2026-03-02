@@ -15,8 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://qkjn05fh3jaa" path="res://action_sequencer/sequencer_screen/digipad/right_selected.png" id="14_osop2"]
 [ext_resource type="Texture2D" uid="uid://cy6hqkmyvj7xr" path="res://action_sequencer/sequencer_screen/digipad/right_hovered.png" id="15_xci14"]
 
-[node name="DigipadMove" type="Node2D"]
+[node name="DigipadMove" type="Node2D" node_paths=PackedStringArray("_buttons")]
 script = ExtResource("1_j6nj7")
+_buttons = [NodePath("Left"), NodePath("Up"), NodePath("Down"), NodePath("Right")]
 
 [node name="Left" type="TextureButton" parent="."]
 offset_left = -25.0
