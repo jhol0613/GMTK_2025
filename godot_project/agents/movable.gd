@@ -38,15 +38,23 @@ var _frozen_collision_position_during_move: Vector2i
 # If reset in middle of a move
 var _moving_tween: Tween
 
+# Teleportation handling: a small delay after teleportation to stop continuous teleportation
+var _can_teleport := true
+@onready var _teleportation_timer := Timer.new()
+
 func _ready():
 	super._ready()
 	add_to_group("movables")
-	
+
 	_movement_timer.one_shot = true
 	_movement_timer.autostart = false
 	add_child(_movement_timer)
 	#_movement_timer.timeout.connect(_on_movement_start)
-	
+
+	_teleportation_timer.one_shot = true
+	_teleportation_timer.autostart = false
+	add_child(_teleportation_timer)
+
 	null_curve.add_point(Vector2(0,0))
 	null_curve.add_point(Vector2(1,0))
 	#tick.connect(_on_sequencer_beat)
@@ -60,8 +68,7 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		return
 	var action_data: MovableActionData
 	var should_move_collision := false
-	var move_target := grid_position + Enums.player_action_to_vector(action)
-	
+
 	if action == Enums.PlayerAction.NONE:
 		return
 
@@ -70,13 +77,11 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		should_move_collision = true
 	elif Enums.is_action_bonk(action):
 		action_data = bonk_data
-		move_target = _get_bonk_target(action)
 	elif Enums.is_action_slide(action):
 		action_data = slide_data
 		should_move_collision = true
 	elif Enums.is_action_slide_bonk(action):
 		action_data = slide_bonk_data
-		move_target = _get_bonk_target(action)
 	else:
 		if Enums.is_action_fall(action):
 			should_move_collision = true
@@ -84,33 +89,33 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	if !action_data:
 		push_error("Attempting to call an action on a movable that doesn't have defined data for that action")
 		return
-	
+
 	# Reset collision position if it's defined
 	if collision_area == null:
 		should_move_collision = false
 	else:
 		collision_area.position = _collision_area_initial_position
-	
-	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
-	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, move_target, action_data, should_move_collision))
 
-# move_target is where the agent is moving, or where it attempted to move (i.e. bonk)
-func _on_movement_start(action: Enums.PlayerAction, move_target: Vector2i, action_data: MovableActionData, should_move_collision: bool):
+	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
+	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, action_data, should_move_collision))
+
+func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionData, should_move_collision: bool):
 	# Grid position not updated until movement actually executed on the target beat
 	grid_position += Enums.player_action_to_vector(action)
-	var move_target_local_space = _grid_to_local(move_target)
-	
+	# _get_bonk_target ignores non-bonk actions, but uses the updated grid_position
+	var move_target_local_space = _grid_to_local(_get_bonk_target(action))
+
 	if collision_area != null:
 		_frozen_collision_position_during_move = collision_area.global_position +  \
 		float(should_move_collision) * (move_target_local_space - position)
-	
+
 	_moving_tween = create_tween()
-	_moving_tween.tween_method(_action_movement_callback.bind(position, move_target_local_space, action_data.direct_movement_curve, 
+	_moving_tween.tween_method(_action_movement_callback.bind(position, move_target_local_space, action_data.direct_movement_curve,
 		action_data.y_movement_curve, action_data.y_movement_magnitude), 0.0, 1.0, action_data.move_duration)
-	
+
 func _action_movement_callback(alpha: float, start_position: Vector2, target_position: Vector2, \
 	move_curve: Curve = null_curve, y_curve: Curve = null_curve, y_magnitude: float = 16.0):
-	
+
 	if collision_area != null:
 		collision_area.global_position = _frozen_collision_position_during_move
 	var position_difference = target_position - start_position
@@ -156,3 +161,20 @@ func _is_action_bonk(action: Enums.PlayerAction):
 		(action == Enums.PlayerAction.RIGHT_BONK) or \
 		(action == Enums.PlayerAction.UP_BONK) or \
 		(action == Enums.PlayerAction.DOWN_BONK)
+
+
+func set_grid_position(new_grid_position: Vector2i) -> void:
+	print("Set position: %s" % new_grid_position)
+	grid_position = new_grid_position
+	position = _grid_to_local(new_grid_position)
+
+
+func _teleportation_clear() -> void:
+	_can_teleport = true
+
+func queue_teleportation(teleportation_position: Vector2i) -> void:
+	if not _can_teleport:
+		return
+	set_grid_position(teleportation_position)
+	_can_teleport = false
+	_execute_callable_on_timer(_teleportation_timer, .4, _teleportation_clear)

@@ -53,15 +53,15 @@ var tile_size: Vector2i
 var local_origin := Vector2.ZERO: set = _set_local_origin
 var lock_local_origin = false
 
-##Emitted on the actual beat of an action
+# Emitted on the actual beat of an action
 signal action_executed(action: Enums.PlayerAction)
 
-##Pass on signals from agent's animation sprite
+# Pass on signals from agent's animation sprite
 signal animation_signal(id: String)
 
 func _ready() -> void:
 	add_to_group("agents")
-	
+
 	#Set up timers for sound and animation offsets
 	_action_timer.one_shot = true
 	_sound_timer.one_shot = true
@@ -72,9 +72,9 @@ func _ready() -> void:
 	_action_timer.timeout.connect(_on_action_beat)
 	_sound_timer.timeout.connect(_on_sound_start)
 	_animation_timer.timeout.connect(_on_animation_start)
-	
+
 	assert(sprite != null, "Sprite not defined for agent " + name)
-	
+
 	#Connect to animation signals to feed up to level manager
 	if sprite != null:
 		sprite.connect("animation_signal", _on_animation_signal)
@@ -89,7 +89,7 @@ func reset() -> void:
 	_reset_timer(_animation_timer)
 	if currently_playing_emitter:
 		currently_playing_emitter.stop()
-		
+
 func _reset_timer(timer: Timer):
 	if timer:
 		timer.stop()
@@ -99,12 +99,12 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 		return
 	# Determine amount of time before action, sound, and animation are executed (in seconds)
 	var action_delay = _get_action_delay_in_seconds(action)#action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
-	
+
 	# Determine delay for FMOD event emitter
 	var sound_delay = _get_sound_delay_in_seconds(action)
-	
+
 	var animation_delay = _get_animation_delay_in_seconds(action)# action_delay + sprite.get_animation_offset_seconds(action_animations.get(action, default_animation))
-	
+
 	_execute_callable_on_timer(_action_timer, action_delay, _on_action_beat.bind(action))
 	_execute_callable_on_timer(_sound_timer, sound_delay, _on_sound_start.bind(action))
 	if skip_animation:
@@ -117,8 +117,8 @@ func check_activation_for_beat(beat: int):
 		if not activation_sequence[beat % activation_sequence.size()]:
 			return false
 	return true
-		
-	
+
+
 
 ## Helper to help manage timing signals for action emitter, animation, sound, etc.
 func _execute_callable_on_timer(timer: Timer, delay: float, callable: Callable):
@@ -143,10 +143,10 @@ func interrupt_queued_action(cancel_sound := true):
 		if currently_playing_emitter:
 			currently_playing_emitter.stop()
 	_animation_timer.stop()
-	
+
 	if not cancel_sound:
 		return
-		
+
 	if _sound_timer.is_connected("timeout", _on_sound_start):
 		_sound_timer.disconnect("timeout", _on_sound_start)
 	if currently_playing_emitter:
@@ -163,7 +163,7 @@ func _on_sound_start(action: Enums.PlayerAction):
 		currently_playing_emitter = default_sound_emitter
 	if currently_playing_emitter:
 		currently_playing_emitter.play()
-	
+
 func _on_animation_start(action: Enums.PlayerAction):
 	var animation_name = action_animations.get(action, default_animation)
 	var follow_on = follow_on_animations.get(action, "")
@@ -204,7 +204,7 @@ func _get_animation_delay_in_seconds(action: Enums.PlayerAction) -> float:
 
 func _grid_to_local(grid_coordinates: Vector2i) -> Vector2:
 	return local_origin + Vector2(grid_coordinates * tile_size)
-	
+
 func _on_animation_signal(signal_id):
 	animation_signal.emit(signal_id)
 

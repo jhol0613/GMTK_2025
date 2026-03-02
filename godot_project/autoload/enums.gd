@@ -101,7 +101,7 @@ enum SaveDataItem {
 	FARTHEST_LEVEL_REACHED
 }
 
-enum PushMode {
+enum MoveMode {
 	##If push on beat, pusher will only perform a check for overlaps on specified beat
 	ON_BEAT,
 	##In instant mode, a pusher will send signal the moment an overlap is detected
@@ -211,7 +211,7 @@ func action_to_bonk(action: PlayerAction) -> PlayerAction:
 			return PlayerAction.DOWN_SLIDE_BONK
 		_:
 			return action
-		
+
 func is_action_fall(action: PlayerAction) -> bool:
 	return (
 		action == PlayerAction.UP_FALL or
@@ -240,7 +240,7 @@ func is_action_slide_bonk(action: PlayerAction) -> bool:
 	return (
 		action == PlayerAction.UP_SLIDE_BONK or
 		action == PlayerAction.DOWN_SLIDE_BONK or
-		action == PlayerAction.LEFT_SLIDE_BONK or 
+		action == PlayerAction.LEFT_SLIDE_BONK or
 		action == PlayerAction.RIGHT_SLIDE_BONK
 	)
 
@@ -261,7 +261,7 @@ func is_action_interact(action: PlayerAction) -> bool:
 	return (
 		action == PlayerAction.INTERACT
 	)
-	
+
 func get_reverse_action(action: PlayerAction) -> PlayerAction:
 	match action:
 		PlayerAction.RIGHT:

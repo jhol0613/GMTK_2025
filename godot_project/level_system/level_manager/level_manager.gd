@@ -141,6 +141,7 @@ func _initialize_level():
 	_initialize_pushers()
 	_initialize_interactables()
 	_initialize_lasers()
+	_initialize_teleporters()
 	_initialize_antennas()
 
 	# Connect to level finished signal
@@ -288,7 +289,7 @@ func _initialize_interactables() -> void:
 ##Reinitialize interactable to updated position if it calls that its position was updated
 func _on_interactable_updated_position(interactable: Interactable, new_global_position: Vector2):
 	_initialize_movable(interactable, _level_scene.global_to_map(interactable.global_position), false)
-	
+
 func _hide_player(new_hide_status: bool):
 	_player_hidden = new_hide_status
 	_player_newly_hidden = new_hide_status
@@ -320,6 +321,13 @@ func _initialize_antennas() -> void:
 	for antenna: Antenna in _level_scene.antennas:
 		antenna.selected.connect(_on_antenna_selected)
 
+func _initialize_teleporters() -> void:
+	for teleporter: Teleporter in _level_scene.teleporters:
+		# set a high value of traversing through a teleporter to discourage the conductor from going
+		# into the teleporter accidentally. The player can force the conductor into going through,
+		# but only if there is no other path
+		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
+
 #endregion
 
 #region Beat Actions
@@ -344,23 +352,24 @@ func _update_obstacles():
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
 		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
+
 	for obstacle in _level_scene.movable_obstacles:
-		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]), _current_beat)
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
+	_level_scene.clear_obstacle_overrides()
 	for obstacle in _level_scene.movable_obstacles:
 		if obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
-##Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
+## Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
 func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction):
 	_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 	obstacle.execute_action(_bonk_check(obstacle, desired_action), -1)
 	obstacle.advance_move_cursor()
 	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
-	
+
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	if _player_newly_hidden or not _player_hidden:
@@ -452,7 +461,7 @@ func _update_interactables() -> void:
 	_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, "")
 
 
-##If desired direction clear, return that direction. Otherwise return a bonk in that direction
+## If desired direction clear, return that direction. Otherwise return a bonk in that direction
 func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAction:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _level_scene.get_traversible_neighbors(movable.grid_position).has(movable.grid_position + move_direction):
@@ -534,7 +543,7 @@ func _fade_to_thinking_shader():
 	tween.tween_property(_shader.material, "shader_parameter/bcs",
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
-	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)	
+	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
 
 func _on_antenna_selected(new_antenna: Antenna):
 	for antenna: Antenna in _level_scene.antennas:
@@ -547,7 +556,7 @@ func _on_antenna_selected(new_antenna: Antenna):
 	_action_sequencer.connect_antenna_to_screen(new_antenna.programs[0]) #Only makes sense to connect single program to screen
 	await get_tree().create_timer(lightning_duration).timeout
 	_lightning.visible = false
-	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna	
+	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna
 #endregion
 
 #region Animation

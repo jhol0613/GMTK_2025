@@ -1,3 +1,4 @@
+@tool # to show teleporter's destination reticle in editor
 extends Node2D
 
 class_name RhythmRailLevel
@@ -47,6 +48,8 @@ var interactables := []
 var obstacle_spawners := []
 ## lasers in the level
 var lasers := []
+## teleporters in the level
+var teleporters := []
 ## terminals in the level
 var terminals := []
 ## antennas in the level (treated like terminals, but aren't an agent so need their own array
@@ -67,6 +70,8 @@ func _enter_tree() -> void:
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
 	var children = find_children("*", "", true) # find children recursively
 	for child in children:
 		if child.is_in_group("agents"):
@@ -83,6 +88,8 @@ func _ready() -> void:
 			obstacle_spawners.append(child)
 		if child.is_in_group("lasers"):
 			lasers.append(child)
+		if child.is_in_group("teleporters"):
+			teleporters.append(child)
 		if child.is_in_group("terminals"):
 			terminals.append(child)
 		if child.is_in_group("antennas"):
@@ -97,9 +104,9 @@ func _ready() -> void:
 		agent.grid_origin = global_to_map(agent.global_position)
 
 	_initialize_path_finding()
-	
+
 	target_position = global_to_map(_target.global_position)
-	
+
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 
@@ -170,16 +177,28 @@ func global_to_map(coordinates : Vector2):
 
 func map_to_local(grid_position: Vector2i):
 	return _floor_layer.map_to_local(grid_position)
-	
+
 func update_obstacle_grid(grid_position: Vector2i, traversible: bool):
 	if traversible:
 		_obstacle_overrides.erase(grid_position)
 	else:
 		_obstacle_overrides.append(grid_position)
 	path_grid.set_point_solid(grid_position, !traversible) # update A* grid
-	
+
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
+
+func clear_obstacle_overrides() -> void:
+	for override in _obstacle_overrides:
+		path_grid.set_point_solid(override, false)
+	_obstacle_overrides.clear()
+
+	if get_tree().debug_collisions_hint:
+		_draw_obstacle_traversibility()
+
+## Multiply the cost of a tile by the given `weight_scale` argument
+func update_weight_grid(grid_position: Vector2i, weight_scale: float) -> void:
+	path_grid.set_point_weight_scale(grid_position, weight_scale)
 
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():

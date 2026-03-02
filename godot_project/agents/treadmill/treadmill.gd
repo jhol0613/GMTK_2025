@@ -22,14 +22,12 @@ func _construct():
 		_pusher.push_action = _direction_data[direction].push_action
 		default_animation = _direction_data[direction].animation_name
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
 	set_direction(direction)
 	sprite.speed_scale = animation_speed
 	action_executed.connect(_on_action_executed)
 	_pusher.push_beat = default_action_beat
-	pass
 
 func _on_action_executed(action):
 	sprite.animation_looped.connect(_on_animation_looped)

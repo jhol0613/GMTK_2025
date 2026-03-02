@@ -25,10 +25,10 @@ func _on_music_event_timeline_beat(_params: Dictionary) -> void:
 	if _params.get("bar") == _bar:
 		return
 	_bar = _params.get("bar")
-	
+
 	if _bar % time_multiplier == 1:
 		music_bar.emit()
-		
+
 func _time_multiplier_changed(new_multiplier: Enums.TimeMultiplier):
 	time_multiplier = new_multiplier
 	beat_time_seconds = 60.0 * time_multiplier / (bpm * 4.0)
@@ -42,7 +42,7 @@ func play_world_complete_music():
 	FmodServer.set_global_parameter_by_name("GameOver", 1.0)
 	#if music_event.event_name != "":
 		#music_event.set_parameter("GameOver", 1.0)
-	
+
 func play_music_event(event_name: String, new_bpm: float):
 	FmodServer.set_global_parameter_by_name("GameOver", 0.0)
 	music_event.stop()
@@ -50,7 +50,7 @@ func play_music_event(event_name: String, new_bpm: float):
 	bpm = new_bpm
 	bpm_changed.emit(bpm)
 	music_event.play()
-	
+
 func on_music_stopped():
 	music_complete.emit()
 

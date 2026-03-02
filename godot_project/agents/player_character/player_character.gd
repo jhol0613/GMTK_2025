@@ -43,10 +43,10 @@ func _ready() -> void:
 	play_animation_with_follow_on("enter", "idle_right")
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
-	#print(Enums.PlayerAction.find_key(action))
+	print(Enums.PlayerAction.find_key(action))
 	if action == Enums.PlayerAction.JUMP:
 		jump_collision_timer.start()
-		#use y magnitude of jump for 
+		#use y magnitude of jump for
 		laser_blocker.altitude = jump_clearance
 		laser_blocker.position.y -= jump_clearance
 		_laser_blocker_collision_rectangle.size.y = jump_player_height
@@ -74,10 +74,10 @@ func notify_failure(cause: Enums.FailureCause):
 			animation_to_play = "failure_squish"
 	print("Failure animation: %s" % animation_to_play)
 	play_animation_with_follow_on(animation_to_play, "cancel_follow_on")
-	
+
 func disable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_DISABLED
-	
+
 func enable_collisions() -> void:
 	collision_area.process_mode = Node.PROCESS_MODE_PAUSABLE
 
@@ -95,7 +95,7 @@ func _on_collision(area: Area2D) -> void:
 			cause = Enums.FailureCause.LASER
 		notify_failure(cause)
 		failure.emit()
-		
+
 func reset():
 	super.reset()
 	enable_collisions()
@@ -107,7 +107,7 @@ func on_jump_collision_disabled_expire() -> void:
 	laser_blocker.position = _original_laser_blocker_position
 	_laser_blocker_collision_rectangle.size.y = _original_laser_blocker_height
 	#collision_area.set_collision_layer_value(Enums.CollisionLayer.JUMPABLE, true)
-	
+
 func on_duck_collision_disabled_expire() -> void:
 	laser_blocker_collision_shape.disabled = false
 	_ducking = false
