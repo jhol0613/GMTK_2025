@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjiyq2l7ngpuc"
-path="res://.godot/imported/Screen_Turn_On.png-280fb1ebe51d4aaadde0d44558d2ad33.ctex"
+uid="uid://dbrigprpgr3av"
+path="res://.godot/imported/Button_Sleceted_Up.png-e242a926adc39c633319ceddf12495c4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/Screen_Turn_On.png"
-dest_files=["res://.godot/imported/Screen_Turn_On.png-280fb1ebe51d4aaadde0d44558d2ad33.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/Button_Sleceted_Up.png"
+dest_files=["res://.godot/imported/Button_Sleceted_Up.png-e242a926adc39c633319ceddf12495c4.ctex"]
 
 [params]
 

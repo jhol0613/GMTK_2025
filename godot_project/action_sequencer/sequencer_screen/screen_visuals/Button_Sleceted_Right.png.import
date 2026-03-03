@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpdjdgu14txgp"
-path="res://.godot/imported/treadmill_green.png-35a2cd309d52977548bf968b0fa566f7.ctex"
+uid="uid://ddfbcb7yixpwu"
+path="res://.godot/imported/Button_Sleceted_Right.png-a11b2008e5d6ecdcaa3496f012a477f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/screen_scenes/agent_icons/treadmill_green.png"
-dest_files=["res://.godot/imported/treadmill_green.png-35a2cd309d52977548bf968b0fa566f7.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/Button_Sleceted_Right.png"
+dest_files=["res://.godot/imported/Button_Sleceted_Right.png-a11b2008e5d6ecdcaa3496f012a477f8.ctex"]
 
 [params]
 

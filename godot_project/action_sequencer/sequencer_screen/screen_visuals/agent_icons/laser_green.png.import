@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1dtj7eosmm3w"
-path="res://.godot/imported/button_right.png-69c4206d694075552caeca01983907d5.ctex"
+uid="uid://fu352ntwnuli"
+path="res://.godot/imported/laser_green.png-1433fd118e3982fb97a1efe1a8b83e08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/button_right.png"
-dest_files=["res://.godot/imported/button_right.png-69c4206d694075552caeca01983907d5.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/laser_green.png"
+dest_files=["res://.godot/imported/laser_green.png-1433fd118e3982fb97a1efe1a8b83e08.ctex"]
 
 [params]
 

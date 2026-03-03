@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7bfxoyokovm"
-path="res://.godot/imported/Button_Sleceted_Left..png-90e000102251c24c8efff993cfcb508a.ctex"
+uid="uid://du5ae3qqv2mn5"
+path="res://.godot/imported/laser_direction_screen.png-79cb865365820347a361897c868e68b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/Button_Sleceted_Left..png"
-dest_files=["res://.godot/imported/Button_Sleceted_Left..png-90e000102251c24c8efff993cfcb508a.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/laser_direction_screen.png"
+dest_files=["res://.godot/imported/laser_direction_screen.png-79cb865365820347a361897c868e68b8.ctex"]
 
 [params]
 

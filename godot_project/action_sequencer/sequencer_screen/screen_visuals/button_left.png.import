@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxb0ygiipoxo"
-path="res://.godot/imported/button_down_selected.png-3282fdd050dac8812905f2a7dc8935d5.ctex"
+uid="uid://dp1ai2n1l82r6"
+path="res://.godot/imported/button_left.png-3bc96a35c67f45202ab2370bfcedefc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/button_down_selected.png"
-dest_files=["res://.godot/imported/button_down_selected.png-3282fdd050dac8812905f2a7dc8935d5.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/button_left.png"
+dest_files=["res://.godot/imported/button_left.png-3bc96a35c67f45202ab2370bfcedefc7.ctex"]
 
 [params]
 

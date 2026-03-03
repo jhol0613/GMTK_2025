@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://d8l1lrlubiip"]
 
 [ext_resource type="Script" uid="uid://dg0nwr6dqt47i" path="res://action_sequencer/sequencer_screen/screen_scenes/change_laser_height_screen.gd" id="1_wpfdh"]
-[ext_resource type="Texture2D" uid="uid://fu352ntwnuli" path="res://action_sequencer/sequencer_screen/screen_scenes/agent_icons/laser_green.png" id="2_vk6oj"]
-[ext_resource type="Texture2D" uid="uid://c27md12wnvve6" path="res://action_sequencer/sequencer_screen/green_slider.png" id="3_wpfdh"]
-[ext_resource type="Texture2D" uid="uid://dlwrv1pjj47oe" path="res://action_sequencer/sequencer_screen/green_slider_hovered.png" id="4_vk6oj"]
+[ext_resource type="Texture2D" uid="uid://fu352ntwnuli" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/laser_green.png" id="2_vk6oj"]
+[ext_resource type="Texture2D" uid="uid://c27md12wnvve6" path="res://action_sequencer/sequencer_screen/screen_visuals/green_slider.png" id="3_wpfdh"]
+[ext_resource type="Texture2D" uid="uid://dlwrv1pjj47oe" path="res://action_sequencer/sequencer_screen/screen_visuals/green_slider_hovered.png" id="4_vk6oj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wpfdh"]
 

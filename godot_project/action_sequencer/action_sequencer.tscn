@@ -19,9 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://cmut2moeovys1" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserOn.png" id="19_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://m410en01fm5j" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserHover.png" id="20_krlbp"]
 [ext_resource type="Texture2D" uid="uid://cb8lc47bmuqpw" path="res://action_sequencer/antenna/sequencer_antenna.png" id="21_krlbp"]
-[ext_resource type="Texture2D" uid="uid://cjiyq2l7ngpuc" path="res://action_sequencer/sequencer_screen/Screen_Turn_On.png" id="22_ja8dg"]
+[ext_resource type="Texture2D" uid="uid://cjiyq2l7ngpuc" path="res://action_sequencer/sequencer_screen/screen_visuals/Screen_Turn_On.png" id="22_ja8dg"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="22_vmoa0"]
-[ext_resource type="Texture2D" uid="uid://ce8bpklr860v" path="res://action_sequencer/sequencer_screen/Screen_Turn_Off.png" id="23_vmoa0"]
+[ext_resource type="Texture2D" uid="uid://ce8bpklr860v" path="res://action_sequencer/sequencer_screen/screen_visuals/Screen_Turn_Off.png" id="23_vmoa0"]
 
 [sub_resource type="Gradient" id="Gradient_e7btv"]
 offsets = PackedFloat32Array(0.0582751, 0.764569)

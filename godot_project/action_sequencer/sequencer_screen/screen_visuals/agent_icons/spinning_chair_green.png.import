@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cegft13gxlhh1"
-path="res://.godot/imported/button_up.png-8eb1f520b415e8cf4f2ad9ba6a81ee56.ctex"
+uid="uid://c0haqmsx6vwmw"
+path="res://.godot/imported/spinning_chair_green.png-6a5a287f48bb45177c016c3f3e33ad01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/button_up.png"
-dest_files=["res://.godot/imported/button_up.png-8eb1f520b415e8cf4f2ad9ba6a81ee56.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/spinning_chair_green.png"
+dest_files=["res://.godot/imported/spinning_chair_green.png-6a5a287f48bb45177c016c3f3e33ad01.ctex"]
 
 [params]
 

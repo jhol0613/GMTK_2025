@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlwrv1pjj47oe"
-path="res://.godot/imported/green_slider_hovered.png-85f080aa2d623970bbe94f09fd65b4ee.ctex"
+uid="uid://drbk47smnoqaw"
+path="res://.godot/imported/button_left_selected.png-26b4daafe401bea980c2af55c1a1cf8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/green_slider_hovered.png"
-dest_files=["res://.godot/imported/green_slider_hovered.png-85f080aa2d623970bbe94f09fd65b4ee.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/button_left_selected.png"
+dest_files=["res://.godot/imported/button_left_selected.png-26b4daafe401bea980c2af55c1a1cf8f.ctex"]
 
 [params]
 

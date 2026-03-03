@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhodhpioiy1ql"
-path="res://.godot/imported/cart_obstacle.png-8201501442a7a05540323c96411245f4.ctex"
+uid="uid://cjiyq2l7ngpuc"
+path="res://.godot/imported/Screen_Turn_On.png-d3d9b1b70acc3741e86180e831e2aff9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/screen_scenes/agent_icons/cart_obstacle.png"
-dest_files=["res://.godot/imported/cart_obstacle.png-8201501442a7a05540323c96411245f4.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/Screen_Turn_On.png"
+dest_files=["res://.godot/imported/Screen_Turn_On.png-d3d9b1b70acc3741e86180e831e2aff9.ctex"]
 
 [params]
 

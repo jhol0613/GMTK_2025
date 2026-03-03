@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce8bpklr860v"
-path="res://.godot/imported/Screen_Turn_Off.png-7cbf7f147dad6d4fe1ec6a178bf30237.ctex"
+uid="uid://c27md12wnvve6"
+path="res://.godot/imported/green_slider.png-ea89dc1a0231f052c5d3f32019be949c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/Screen_Turn_Off.png"
-dest_files=["res://.godot/imported/Screen_Turn_Off.png-7cbf7f147dad6d4fe1ec6a178bf30237.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/green_slider.png"
+dest_files=["res://.godot/imported/green_slider.png-ea89dc1a0231f052c5d3f32019be949c.ctex"]
 
 [params]
 

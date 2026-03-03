@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1dd2tvdko8s0"
-path="res://.godot/imported/button_right_selected.png-30d1b3acf0ee91f441df71994e8a6cbe.ctex"
+uid="uid://dlyl8em160xva"
+path="res://.godot/imported/mockup_laser_dial_2.png-7e60f007817f6b90453886952d783716.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/button_right_selected.png"
-dest_files=["res://.godot/imported/button_right_selected.png-30d1b3acf0ee91f441df71994e8a6cbe.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_visuals/mockup_laser_dial_2.png"
+dest_files=["res://.godot/imported/mockup_laser_dial_2.png-7e60f007817f6b90453886952d783716.ctex"]
 
 [params]
 
