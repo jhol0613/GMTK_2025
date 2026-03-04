@@ -193,6 +193,10 @@ func _reset_level() -> void:
 	_conductor = null
 	_player_hidden = false
 	_player_newly_hidden = false
+	if _level_scene.conductor_enabled:
+		_action_sequencer.conductor_spawned_countdown = _level_scene.conductor_spawn_beat
+	else:
+		_action_sequencer.conductor_spawned_countdown = 0
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
@@ -377,12 +381,16 @@ func _update_player(action: Enums.PlayerAction) -> void:
 		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
-	if _conductor == null \
-		and _current_beat < _level_scene.conductor_spawn_beat \
-		or not _level_scene.conductor_enabled:
+	if not _level_scene.conductor_enabled:
 		return
-	if _conductor == null:
+	elif _conductor == null \
+		and _current_beat < _level_scene.conductor_spawn_beat:
+		_action_sequencer.conductor_spawned_countdown = \
+			_level_scene.conductor_spawn_beat - _current_beat
+		return
+	elif _conductor == null:
 		_spawn_conductor()
+		_action_sequencer.conductor_spawned_countdown = 0
 	_update_conductor_awareness()
 	# Target next train car if player's hidden
 	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position

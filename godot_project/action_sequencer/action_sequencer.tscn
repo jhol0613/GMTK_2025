@@ -397,6 +397,14 @@ texture = ExtResource("23_vmoa0")
 [node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff"]
 texture = ExtResource("22_ja8dg")
 
+[node name="ConductorSpawnCountdown" type="Label" parent="TextureRect/ScreenOff/ScreenOn"]
+offset_left = -38.0
+offset_top = -13.0
+offset_right = 2.0
+offset_bottom = 10.0
+theme_override_font_sizes/font_size = 13
+text = "test"
+
 [node name="Antenna" type="AnimatedSprite2D" parent="TextureRect"]
 position = Vector2(111, -71)
 sprite_frames = SubResource("SpriteFrames_5pvfp")
