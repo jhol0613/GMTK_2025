@@ -7,7 +7,7 @@ class_name Teleporter
 ##In-level grid position of the destination tile
 @export var destination := Vector2i.ZERO:
 	set(new_destination):
-		destination = new_destination.clamp(Vector2i.ZERO, grid_size - Vector2i.ONE)
+		destination = _validate_destination(new_destination)
 		_update_target_position()
 ##The downbeat is beat 0.0
 @export var push_beat := 2.0
@@ -17,6 +17,9 @@ class_name Teleporter
 @onready var sound := $FmodEventEmitter2D
 @onready var collision := $Area2D
 @onready var target_sprite := $TargetSprite
+
+# set in runtime, found dynamically using its name
+var _level_scene: RhythmRailLevel
 
 # Editor-only variables
 
@@ -35,8 +38,18 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not _editor_has_target:
 		_editor_has_target = true
+		# only here we have the guarantee that LevelBase exists
+		_level_scene = find_parent("LevelBase")
 		_update_target_position()
 
+
+func _validate_destination(new_destination: Vector2i) -> Vector2i:
+	new_destination = new_destination.clamp(Vector2i.ZERO, grid_size - Vector2i.ONE)
+	if not _level_scene:
+		return new_destination
+	if _level_scene.has_static_obstacle(new_destination):
+		new_destination = destination
+	return new_destination
 
 func _update_target_position() -> void:
 	if not target_sprite:

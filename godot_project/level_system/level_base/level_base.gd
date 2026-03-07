@@ -199,6 +199,9 @@ func clear_obstacle_overrides() -> void:
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 
+func has_static_obstacle(grid_position: Vector2i) -> bool:
+	return _obstacle_layer.get_used_cells().has(grid_position)
+
 ## Multiply the cost of a tile by the given `weight_scale` argument
 func update_weight_grid(grid_position: Vector2i, weight_scale: float) -> void:
 	path_grid.set_point_weight_scale(grid_position, weight_scale)
@@ -216,10 +219,13 @@ func _initialize_path_finding():
 	path_grid.update()
 
 	for tile in _obstacle_layer.get_used_cells():
-		if not _obstacle_overrides.has(tile):
-			if _obstacle_layer.get_cell_tile_data(tile) != null:
-				if not _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
-					path_grid.set_point_solid(tile)
+		if _obstacle_overrides.has(tile):
+			continue
+		if _obstacle_layer.get_cell_tile_data(tile) == null:
+			continue
+		if _obstacle_layer.get_cell_tile_data(tile).get_custom_data("Traversible"):
+			continue
+		path_grid.set_point_solid(tile)
 	path_grid.update()
 
 func _on_target_area_entered(_area: Area2D) -> void:
