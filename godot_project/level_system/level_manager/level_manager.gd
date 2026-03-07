@@ -249,6 +249,7 @@ func _initialize_movable(movable: Agent, grid_position: Vector2i, should_reset =
 	movable.grid_origin = grid_position
 	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
 	movable.tile_size = _level_scene.get_tile_size()
+	movable.grid_size = _level_scene.get_grid_size()
 	if not movable.is_connected("animation_signal", _on_animation_signal_received):
 		movable.animation_signal.connect(_on_animation_signal_received)
 	if should_reset:

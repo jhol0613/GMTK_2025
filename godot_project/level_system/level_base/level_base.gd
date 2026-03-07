@@ -70,8 +70,6 @@ func _enter_tree() -> void:
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
 func _ready() -> void:
-	if Engine.is_editor_hint():
-		return
 	var children = find_children("*", "", true) # find children recursively
 	for child in children:
 		if child.is_in_group("agents"):
@@ -102,6 +100,7 @@ func _ready() -> void:
 		agent.tile_size = get_tile_size()
 		agent.grid_position = global_to_map(agent.global_position)
 		agent.grid_origin = global_to_map(agent.global_position)
+		agent.grid_size = get_grid_size()
 
 	_initialize_path_finding()
 
@@ -170,6 +169,10 @@ func does_cell_exist(grid_position: Vector2i) -> bool:
 
 func get_tile_size() -> Vector2i:
 	return _floor_layer.tile_set.tile_size
+
+func get_grid_size() -> Vector2i:
+	return (_floor_layer.get_used_rect() \
+		.merge(_obstacle_layer.get_used_rect())).size
 
 ## Take global coordinates and convert to map coordinates
 func global_to_map(coordinates : Vector2):

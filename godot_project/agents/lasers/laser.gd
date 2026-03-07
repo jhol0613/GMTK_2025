@@ -66,7 +66,7 @@ func _construct():
 	_sprite.frame = 0
 
 ##Called to set max fire distance based on static obstacles. Laser blockers can still cause this
-##distance to be shorter. If limit_is_wall is true, down-pointing lasers will apply an exception so 
+##distance to be shorter. If limit_is_wall is true, down-pointing lasers will apply an exception so
 ##that their visual range extends all the way to the train car wall
 func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool):
 	if direction == Enums.Direction.UP:
@@ -116,7 +116,7 @@ func _set_height(new_height: int):
 	height = new_height
 
 	if !is_inside_tree():
-		return 
+		return
 
 	pole1.position.y = max(-height + popup_height, -pole1_height)
 	pole2.position.y = min(max(-height + pole1_height + popup_height, -pole2_height), 0)
@@ -140,7 +140,7 @@ func _set_height(new_height: int):
 		up_laser_clipper.position.y = -up_laser_clipper.size.y - height + direction_data.get(direction).start_position_offset.y
 		beam_root.global_position = global_position
 	elif direction == Enums.Direction.DOWN:
-		#down laser strategy: hit checks will start from laser head, but will ignore the hit if 
+		#down laser strategy: hit checks will start from laser head, but will ignore the hit if
 		#bottom of collider is above it. Also needs to hit from inside.
 		up_laser_clipper.position.y = -height - 10
 		beam_root.global_position = global_position + Vector2(0, -height + direction_data.get(direction).start_position_offset.y) #laser head position
