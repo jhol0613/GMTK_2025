@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=20 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Resource" uid="uid://bm2ri4ouxapyi" path="res://agents/conductor/conductor_move_action_data.tres" id="2_thsup"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_46wui"]
 [ext_resource type="Texture2D" uid="uid://b8wd4ix6y8p2w" path="res://agents/conductor/emotes.png" id="10_thsup"]
+[ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="12_k3trg"]
 
 [sub_resource type="Resource" id="Resource_k3trg"]
 script = ExtResource("3_34788")
@@ -76,6 +77,9 @@ animations = [{
 "name": &"unreachable",
 "speed": 1.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6kqq"]
+size = Vector2(17.5, 65.5)
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
 z_index = 1
@@ -153,3 +157,18 @@ event_name = "event:/Conductor Speak"
 event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
 script = ExtResource("10_46wui")
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="LaserBlocker" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(1, -28)
+collision_layer = 512
+collision_mask = 192
+script = ExtResource("12_k3trg")
+trigger_beam_end_collisions = true
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_h6kqq")
+
+[connection signal="area_entered" from="LaserBlocker" to="." method="_on_laser_hit"]

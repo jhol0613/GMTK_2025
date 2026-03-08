@@ -392,6 +392,10 @@ func _update_conductor() -> void:
 		_spawn_conductor()
 		_action_sequencer.conductor_spawned_countdown = 0
 	_update_conductor_awareness()
+	if _conductor.stunned:
+		_conductor.stunned = false
+		# TODO: add stun animation here
+		return
 	# Target next train car if player's hidden
 	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
