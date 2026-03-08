@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="3_qmdej"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_ykv58"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_ew41l"]
-[ext_resource type="Script" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="4_qmdej"]
+[ext_resource type="Script" uid="uid://y4xyvd52hhc6" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="4_qmdej"]
 
 [node name="LevelBase" instance=ExtResource("1_v5q3b")]
 conductor_spawn_beat = 4
@@ -51,7 +51,7 @@ direction = 3
 grid_origin = Vector2i(6, 1)
 
 [node name="SnackCartObstacle" parent="." index="13" instance=ExtResource("4_ew41l")]
-position = Vector2(145, 29)
+position = Vector2(177, 51)
 movement_path = Array[int]([4])
 grid_origin = Vector2i(1, 1)
 

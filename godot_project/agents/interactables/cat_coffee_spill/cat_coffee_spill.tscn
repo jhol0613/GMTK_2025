@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bxq0hfxmg5ct1"]
+[gd_scene load_steps=28 format=3 uid="uid://bxq0hfxmg5ct1"]
 
 [ext_resource type="Script" uid="uid://wn7v33ph18qx" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.gd" id="1_qfg0r"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="1_uvexm"]
@@ -25,6 +25,14 @@ region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_048me"]
 atlas = ExtResource("3_11q1a")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11q1a"]
+atlas = ExtResource("2_hsr7u")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mloa0"]
+atlas = ExtResource("2_hsr7u")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q4h1b"]
@@ -89,6 +97,12 @@ animations = [{
 }, {
 "frames": [{
 "duration": 0.8,
+"texture": SubResource("AtlasTexture_11q1a")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_mloa0")
+}, {
+"duration": 0.8,
 "texture": SubResource("AtlasTexture_q4h1b")
 }, {
 "duration": 0.8,
@@ -127,7 +141,7 @@ animations = [{
 script = ExtResource("4_37f55")
 signal_id = "spilled_coffee"
 animation = "wake_up"
-frame = 5
+frame = 7
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
 [node name="CatCoffeeSpill" type="Node2D" node_paths=PackedStringArray("default_sound_emitter", "sprite")]
@@ -146,9 +160,8 @@ default_animation = "default"
 z_index = 1
 position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_qfg0r")
+animation = &"wake_up"
 autoplay = "default"
-frame = 1
-frame_progress = 0.936342
 script = ExtResource("1_uvexm")
 signals = Array[ExtResource("4_37f55")]([SubResource("Resource_g10dl")])
 bpm_synch_exceptions = Array[String](["wake_up"])

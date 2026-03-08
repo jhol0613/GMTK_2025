@@ -286,6 +286,8 @@ func _turn_off_sequencer_lights():
 		_initialized_slots[i].sequence_light_on = false
 
 func _on_conductor_countdown_changed(new_value: int):
+	if not _conductor_spawn_text:
+		return
 	if new_value == 0:
 		_conductor_spawn_text.visible = false
 	else:

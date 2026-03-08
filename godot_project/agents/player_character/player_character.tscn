@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=128 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://c0wjn2tl4hnpv" path="res://agents/player_character/sprites/catpet_left.png" id="25_osj7k"]
 [ext_resource type="Texture2D" uid="uid://16kw4knemliq" path="res://agents/player_character/sprites/catpet_back.png" id="27_10run"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="28_qcujq"]
+[ext_resource type="Texture2D" uid="uid://1k1yc2yx3ole" path="res://agents/player_character/sprites/catpet_back2.png" id="29_rrcfc"]
 
 [sub_resource type="Resource" id="Resource_gli1f"]
 script = ExtResource("2_gvvi5")
@@ -278,15 +279,15 @@ region = Rect2(0, 126, 41, 63)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jsyyl"]
 atlas = ExtResource("25_10run")
-region = Rect2(0, 0, 28, 89)
+region = Rect2(0, 0, 28, 67)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g5qeh"]
 atlas = ExtResource("25_10run")
-region = Rect2(28, 0, 28, 89)
+region = Rect2(28, 0, 28, 67)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_npwup"]
 atlas = ExtResource("25_10run")
-region = Rect2(56, 0, 28, 89)
+region = Rect2(56, 0, 28, 67)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_adwru"]
 atlas = ExtResource("25_osj7k")
@@ -317,8 +318,12 @@ atlas = ExtResource("27_10run")
 region = Rect2(0, 0, 27, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sl4x7"]
-atlas = ExtResource("27_10run")
-region = Rect2(27, 0, 27, 64)
+atlas = ExtResource("29_rrcfc")
+region = Rect2(0, 0, 29, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7pex"]
+atlas = ExtResource("29_rrcfc")
+region = Rect2(0, 63, 29, 63)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5yn4y"]
 atlas = ExtResource("6_aodji")
@@ -803,16 +808,16 @@ animations = [{
 "texture": SubResource("AtlasTexture_sl4x7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_el3fw")
+"texture": SubResource("AtlasTexture_t7pex")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sl4x7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_el3fw")
+"texture": SubResource("AtlasTexture_t7pex")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sl4x7")
+"texture": SubResource("AtlasTexture_el3fw")
 }],
 "loop": false,
 "name": &"pet_up",
