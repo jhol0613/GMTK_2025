@@ -50,7 +50,12 @@ func is_in_range(interact_position: Vector2i) -> bool:
 		if (grid_position + relative_position) == interact_position:
 			return true
 	return false
-		
+
+##For interactables that trigger a different animation based on player's relative position, override this function
+##to set the appropriate animation (e.g. set cat petting animation in appropriate direction)
+func update_player_animation_based_on_position(player_grid_position: Vector2i):
+	pass
+
 func reset():
 	super.reset()
 	_interacted = false

@@ -461,10 +461,11 @@ func _update_conductor_awareness():
 func _update_interactables() -> void:
 	for interactable : Interactable in _level_scene.interactables:
 		if interactable.is_in_range(_player_character.grid_position) and interactable.can_interact():
+			interactable.update_player_animation_based_on_position(_player_character.grid_position)
 			_player_character.action_animations.set(Enums.PlayerAction.INTERACT, interactable.player_animation_on_success)
 			_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, interactable.follow_on_animation_on_success)
 			interactable.execute_action(Enums.PlayerAction.INTERACT, _current_beat)
-			return
+			return #Only one interactable should be triggered at a time--keep this in mind for level design
 	_player_character.action_animations.set(Enums.PlayerAction.INTERACT, "")
 	_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, "")
 

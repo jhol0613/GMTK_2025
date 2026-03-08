@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=126 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -26,9 +26,13 @@
 [ext_resource type="Texture2D" uid="uid://cgby283x4o0cu" path="res://agents/player_character/sprites/ActionHide.png" id="18_qasg8"]
 [ext_resource type="Texture2D" uid="uid://dv3q4d6vpvk44" path="res://agents/player_character/sprites/SquishedGameover_placeholder.png" id="19_e7oxi"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
-[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 [ext_resource type="Texture2D" uid="uid://d4h5psowgp800" path="res://agents/player_character/sprites/ActionType.png" id="23_0y67j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
+[ext_resource type="Texture2D" uid="uid://bl7kc3hkmuob" path="res://agents/player_character/sprites/catpet_front.png" id="25_10run"]
+[ext_resource type="Texture2D" uid="uid://dgojkme40ndbv" path="res://agents/player_character/sprites/catpet_right.png" id="25_e7oxi"]
+[ext_resource type="Texture2D" uid="uid://c0wjn2tl4hnpv" path="res://agents/player_character/sprites/catpet_left.png" id="25_osj7k"]
+[ext_resource type="Texture2D" uid="uid://16kw4knemliq" path="res://agents/player_character/sprites/catpet_back.png" id="27_10run"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="28_qcujq"]
 
 [sub_resource type="Resource" id="Resource_gli1f"]
@@ -271,6 +275,50 @@ region = Rect2(0, 0, 41, 63)
 [sub_resource type="AtlasTexture" id="AtlasTexture_p7lr1"]
 atlas = ExtResource("6_xgp35")
 region = Rect2(0, 126, 41, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsyyl"]
+atlas = ExtResource("25_10run")
+region = Rect2(0, 0, 28, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5qeh"]
+atlas = ExtResource("25_10run")
+region = Rect2(28, 0, 28, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npwup"]
+atlas = ExtResource("25_10run")
+region = Rect2(56, 0, 28, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adwru"]
+atlas = ExtResource("25_osj7k")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvjfd"]
+atlas = ExtResource("25_osj7k")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj45u"]
+atlas = ExtResource("25_osj7k")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j47oq"]
+atlas = ExtResource("25_e7oxi")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06khd"]
+atlas = ExtResource("25_e7oxi")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be1f2"]
+atlas = ExtResource("25_e7oxi")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_el3fw"]
+atlas = ExtResource("27_10run")
+region = Rect2(0, 0, 27, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sl4x7"]
+atlas = ExtResource("27_10run")
+region = Rect2(27, 0, 27, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5yn4y"]
 atlas = ExtResource("6_aodji")
@@ -680,6 +728,98 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_jsyyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5qeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npwup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5qeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npwup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsyyl")
+}],
+"loop": false,
+"name": &"pet_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adwru")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvjfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj45u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvjfd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj45u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_adwru")
+}],
+"loop": false,
+"name": &"pet_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j47oq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06khd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be1f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06khd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be1f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j47oq")
+}],
+"loop": false,
+"name": &"pet_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el3fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl4x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el3fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl4x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_el3fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sl4x7")
+}],
+"loop": false,
+"name": &"pet_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5yn4y")
 }, {
 "duration": 1.0,
@@ -932,10 +1072,8 @@ texture = ExtResource("2_5l2xy")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Shadow"]
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"failure_laser"
+animation = &"pet_down"
 autoplay = "idle_down"
-frame = 8
-frame_progress = 1.0
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])
 animation_offsets = Dictionary[String, float]({

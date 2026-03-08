@@ -81,16 +81,7 @@ script = ExtResource("9_5tchc")
 treadmills = [NodePath("../..")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
-[node name="ComputerTerminal2" parent="." index="13" instance=ExtResource("4_5i52b")]
-position = Vector2(49, 65)
-
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
-script = ExtResource("5_h05u1")
-lasers = [NodePath("../../Laser")]
-new_height = 7
-metadata/_custom_type_script = "uid://brjyxyhy640eh"
-
-[node name="Laser" parent="." index="14" instance=ExtResource("3_1o8fn")]
+[node name="Laser" parent="." index="13" instance=ExtResource("3_1o8fn")]
 position = Vector2(48, 3)
 direction = 0
 height = 7
@@ -113,7 +104,7 @@ lasers = [NodePath("../..")]
 new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="LaserBlocker" type="Area2D" parent="." index="15"]
+[node name="LaserBlocker" type="Area2D" parent="." index="14"]
 z_index = 1
 collision_layer = 512
 collision_mask = 0
@@ -125,7 +116,7 @@ metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 position = Vector2(144, 15)
 shape = SubResource("RectangleShape2D_u3brs")
 
-[node name="SpinningChair" parent="." index="16" instance=ExtResource("12_qymky")]
+[node name="SpinningChair" parent="." index="15" instance=ExtResource("12_qymky")]
 z_index = 1
 position = Vector2(239, 88)
 
