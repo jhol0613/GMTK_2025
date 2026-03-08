@@ -46,6 +46,8 @@ var currently_playing_emitter: FmodEventEmitter2DOffset
 var grid_position := Vector2i(0, 0)
 ##grid's tile size for calculating the local position
 var tile_size: Vector2i
+##grid's bound size
+var grid_size := Vector2i.MAX
 ##grid origin in local coordinate space. This should be the coordinate space where position is calculated,
 ##i.e. local with respect to the level itself. It should include the difference between a cell's top left
 ##corner vice its center as well as any offset from parents (i.e. nodes between the agent and and the level

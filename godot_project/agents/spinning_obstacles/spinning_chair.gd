@@ -83,22 +83,22 @@ func _ready() -> void:
 	_construct()
 	super._ready()
 	#add_to_group("movable_obstacles") #This is so reset code gets called when play button pressed
-	
+
 	left_obstacle.set_move_cursor_start_position(_facing_direction)
 	right_obstacle.set_move_cursor_start_position(_facing_direction)
-	
+
 	left_obstacle.standard_move_data.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
 	right_obstacle.standard_move_data.move_duration = AudioManager.beat_time_seconds * beats_per_quarter_turn
-	
+
 	if not terminal_controlled:
 		left_obstacle.action_executed.connect(_on_left_obstacle_move)
 		right_obstacle.action_executed.connect(_on_right_obstacle_move)
-	
+
 	_frame_timer = Timer.new()
 	_frame_timer.one_shot = true
 	_frame_timer.timeout.connect(_advance_sprite_frame)
 	add_child(_frame_timer)
-	
+
 	for child in get_children():
 		if not my_nodes.has(child) and child is  Node2D:
 			#Store positions as the relative position from spin chair's vis center to child's visual center (if it has one)
@@ -114,9 +114,9 @@ func _update_frame(new_sprite_frame: int):
 		#rotate clockwise
 	elif [3, 4, 5, 6].has(new_sprite_frame): #clockwise frames
 		child_rotation = - PI / 4.0
-		
+
 	sprite.frame = new_sprite_frame
-	
+
 	if not anchored_nodes:
 		return
 	for child in anchored_nodes:
@@ -135,7 +135,7 @@ func _on_left_obstacle_move(_action: Enums.PlayerAction):
 	# change sprite frame on obstacle move. The fact that it's left obstacle is arbitrary
 	_advance_sprite_frame()
 	_frame_timer.start(AudioManager.beat_time_seconds * beats_per_quarter_turn)
-	
+
 	left_obstacle.pusher.push_action = _left_push_action_cycle[left_obstacle._move_cursor]
 
 func _on_right_obstacle_move(_action: Enums.PlayerAction):
@@ -192,7 +192,7 @@ func spin(number_of_quarter_turns: int = 1):
 		_facing_direction %= FacingDirection.size()
 		await _frame_timer.timeout
 
-##Because arg is a direction and not a facing direction, will always return the smallest # quarter 
+##Because arg is a direction and not a facing direction, will always return the smallest # quarter
 ##turns (e.g. if facing direction is LEFT and direction is DOWN, assumes the direction "down" translates to FRONT_COUNTERCLOCKWISE)
 func get_quarter_turns_to_direction(direction: Enums.Direction) -> int:
 	match direction:
@@ -202,7 +202,7 @@ func get_quarter_turns_to_direction(direction: Enums.Direction) -> int:
 			return posmod(FacingDirection.RIGHT - _facing_direction, FacingDirection.size())
 		_: #assumes up or down refers to "FRONT"
 			return min(
-				posmod(FacingDirection.FRONT_CLOCKWISE - _facing_direction, FacingDirection.size()), 
+				posmod(FacingDirection.FRONT_CLOCKWISE - _facing_direction, FacingDirection.size()),
 				posmod(FacingDirection.FRONT_COUNTERCLOCKWISE - _facing_direction, FacingDirection.size())
 			)
 

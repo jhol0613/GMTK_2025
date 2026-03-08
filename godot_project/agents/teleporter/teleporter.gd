@@ -7,9 +7,8 @@ class_name Teleporter
 ##In-level grid position of the destination tile
 @export var destination := Vector2i.ZERO:
 	set(new_destination):
-		destination = new_destination
-		if Engine.is_editor_hint():
-			_debug_update_target_position()
+		destination = _validate_destination(new_destination)
+		_update_target_position()
 ##The downbeat is beat 0.0
 @export var push_beat := 2.0
 @export var move_mode := Enums.MoveMode.ON_BEAT
@@ -17,16 +16,15 @@ class_name Teleporter
 
 @onready var sound := $FmodEventEmitter2D
 @onready var collision := $Area2D
+@onready var target_sprite := $TargetSprite
+
+# set in runtime, found dynamically using its name
+var _level_scene: RhythmRailLevel
 
 # Editor-only variables
 
-## Reticle that follows the destination coordinates, visible only in editor
-var _editor_only_target: Sprite2D
-## We can't get LevelBase in _ready, so we need to track if we have set the target's position or not
+## We don't have all initialized variables in _ready(), so wait until _process()
 var _editor_has_target := false
-## Hard-coded target texture
-var _target_scene: CompressedTexture2D = preload("res://agents/teleporter/teleporter_target.png")
-
 
 func _ready() -> void:
 	super._ready()
@@ -38,20 +36,25 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Engine.is_editor_hint() and not _editor_has_target:
+	if not _editor_has_target:
 		_editor_has_target = true
-		_debug_update_target_position()
+		# only here we have the guarantee that LevelBase exists
+		_level_scene = find_parent("LevelBase")
+		_update_target_position()
 
 
-func _debug_update_target_position() -> void:
-	var level_base: RhythmRailLevel = find_parent("LevelBase")
-	if not level_base or not level_base._floor_layer:
+func _validate_destination(new_destination: Vector2i) -> Vector2i:
+	new_destination = new_destination.clamp(Vector2i.ZERO, grid_size - Vector2i.ONE)
+	if not _level_scene:
+		return new_destination
+	if _level_scene.has_static_obstacle(new_destination):
+		new_destination = destination
+	return new_destination
+
+func _update_target_position() -> void:
+	if not target_sprite:
 		return
-	if not _editor_only_target:
-		_editor_only_target = Sprite2D.new()
-		_editor_only_target.texture = _target_scene
-		get_parent().add_child(_editor_only_target)
-	_editor_only_target.global_position = level_base.map_to_local(destination) + Vector2(0.,-4.)
+	target_sprite.position = Vector2((destination - grid_origin) * tile_size)
 
 
 #endregion
