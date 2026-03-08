@@ -12,6 +12,8 @@ var _first_action = true
 var facing_direction = Enums.Direction.RIGHT
 var state = Enums.ConductorState.UNAWARE
 
+var stunned = false
+
 func _ready():
 	super._ready()
 	reset()
@@ -44,3 +46,9 @@ func play_current_emotion():
 	await emotes.animation_finished
 	emotes.animation = "default"
 	emotes.play()
+
+
+func _on_laser_hit(area: Area2D) -> void:
+	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
+		# TODO: conductor: add stun animation
+		stunned = true

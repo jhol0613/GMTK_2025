@@ -249,6 +249,7 @@ func _initialize_movable(movable: Agent, grid_position: Vector2i, should_reset =
 	movable.grid_origin = grid_position
 	movable.local_origin = _level_scene.map_to_local(Vector2i.ZERO)
 	movable.tile_size = _level_scene.get_tile_size()
+	movable.grid_size = _level_scene.get_grid_size()
 	if not movable.is_connected("animation_signal", _on_animation_signal_received):
 		movable.animation_signal.connect(_on_animation_signal_received)
 	if should_reset:
@@ -392,6 +393,10 @@ func _update_conductor() -> void:
 		_spawn_conductor()
 		_action_sequencer.conductor_spawned_countdown = 0
 	_update_conductor_awareness()
+	if _conductor.stunned:
+		_conductor.stunned = false
+		# TODO: add stun animation here
+		return
 	# Target next train car if player's hidden
 	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position
 	var conductor_path = _level_scene.path_grid \
