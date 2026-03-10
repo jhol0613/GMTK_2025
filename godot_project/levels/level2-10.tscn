@@ -18,6 +18,7 @@ tile_map_data = PackedByteArray(0, 0, 9, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
 position = Vector2(49, 9)
 repeatable = true
+grid_origin = Vector2i(1, 0)
 follow_on_animations = Dictionary[int, String]({
 7: "idle"
 })
@@ -30,10 +31,12 @@ metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 [node name="SpinningChair" parent="." index="10" instance=ExtResource("2_8bkav")]
 position = Vector2(112, 48)
 start_direction = 3
+grid_origin = Vector2i(3, 2)
 
 [node name="SpinningChair2" parent="." index="11" instance=ExtResource("2_8bkav")]
 position = Vector2(176, 105)
 start_direction = 3
+grid_origin = Vector2i(5, 5)
 
 [node name="CatCoffeeSpill" parent="SpinningChair2" index="5" instance=ExtResource("5_ytems")]
 position = Vector2(-1, 5)
@@ -41,19 +44,24 @@ position = Vector2(-1, 5)
 [node name="SpinningChair3" parent="." index="12" instance=ExtResource("2_8bkav")]
 position = Vector2(48, 105)
 start_direction = 3
+grid_origin = Vector2i(1, 5)
 
 [node name="SpinningChair4" parent="." index="13" instance=ExtResource("2_8bkav")]
 position = Vector2(240, 49)
 start_direction = 3
+grid_origin = Vector2i(7, 2)
 
 [node name="Treadmill" parent="." index="14" instance=ExtResource("7_linlt")]
 position = Vector2(144, 33)
 direction = 1
+grid_origin = Vector2i(4, 1)
 
 [node name="SpinningChair5" parent="." index="15" instance=ExtResource("2_8bkav")]
 position = Vector2(305, 105)
 start_direction = 3
+grid_origin = Vector2i(9, 5)
 
 [node name="Treadmill2" parent="." index="16" instance=ExtResource("7_linlt")]
 position = Vector2(80, 32)
 direction = 1
+grid_origin = Vector2i(2, 1)

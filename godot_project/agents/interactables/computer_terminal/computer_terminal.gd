@@ -8,6 +8,8 @@ class_name Terminal
 @export var input_delay_beats := 2.0
 var programs : Array[TerminalProgram]
 
+@onready var sound := $FmodEventEmitter2D
+
 signal selected(programs: Array[TerminalProgram])
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +33,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 	return warnings
 	
 func _on_successful_interaction():
+	sound.play()
 	print(AudioManager.beat_time_seconds)
 	await get_tree().create_timer(AudioManager.beat_time_seconds * input_delay_beats).timeout
 	for program in programs:

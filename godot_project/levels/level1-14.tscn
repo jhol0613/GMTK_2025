@@ -14,14 +14,17 @@ tile_map_data = PackedByteArray("AAACAAIAAgACAAAAAAACAAMAAgACAAEAAAAFAAIAAgACAAA
 [node name="Laser" parent="." index="8" instance=ExtResource("2_a6vap")]
 position = Vector2(112, 4)
 height = 7
+grid_origin = Vector2i(3, 0)
 activation_sequence = Array[bool]([true, false])
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_a6vap")]
 position = Vector2(208, 3)
 height = 7
+grid_origin = Vector2i(6, 0)
 activation_sequence = Array[bool]([true, false])
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_a6vap")]
 position = Vector2(304, 3)
 height = 7
+grid_origin = Vector2i(9, 0)
 activation_sequence = Array[bool]([true, false])
