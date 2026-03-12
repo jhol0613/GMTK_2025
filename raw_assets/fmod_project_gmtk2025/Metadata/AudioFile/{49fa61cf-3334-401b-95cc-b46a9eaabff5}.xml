@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{49fa61cf-3334-401b-95cc-b46a9eaabff5}">
+		<property name="assetPath">
+			<value>Rolling_Cart 2.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.80979591836734699</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{ba2b7226-bd64-4263-b35f-637a4c7e6ff7}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -26,5 +26,6 @@ movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])
 [node name="Treadmill" parent="." index="11" instance=ExtResource("4_23alx")]
 position = Vector2(112, 72)
 direction = 1
+grid_origin = Vector2i(3, 3)
 
 [editable path="HideBench"]

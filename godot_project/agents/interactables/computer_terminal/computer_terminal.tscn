@@ -72,3 +72,7 @@ position = Vector2(-0.5, -20)
 shape = SubResource("RectangleShape2D_plk7m")
 
 [node name="GenericInvisibleObstacle" parent="." instance=ExtResource("5_plk7m")]
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Typing_on_Terminal"
+event_guid = "{4e834231-e303-4e07-84aa-5d367ad2ef5b}"
