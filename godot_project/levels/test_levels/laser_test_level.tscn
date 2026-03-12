@@ -20,7 +20,7 @@ tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 [node name="Treadmill" parent="." index="9" instance=ExtResource("7_7nff7")]
 position = Vector2(272, 32)
 direction = 1
-grid_origin = Vector2i(3, 3)
+grid_origin = Vector2i(8, 1)
 
 [node name="Antenna" parent="Treadmill" index="3" instance=ExtResource("9_5i52b")]
 
@@ -40,7 +40,6 @@ metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 position = Vector2(48, 3)
 height = 7
 grid_origin = Vector2i(1, 0)
-default_animation = "fire_up"
 
 [node name="Antenna" parent="Laser" index="5" instance=ExtResource("9_5i52b")]
 
