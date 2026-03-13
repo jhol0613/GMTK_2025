@@ -13,7 +13,9 @@ tile_map_data = PackedByteArray("AAACAAMAAAADAAQAAAACAAQAAAADAAUAAAACAAUAAAADAAY
 [node name="Treadmill" parent="." index="9" instance=ExtResource("2_qg5g5")]
 position = Vector2(337, 33)
 direction = 1
+grid_origin = Vector2i(10, 1)
 
 [node name="Treadmill2" parent="." index="10" instance=ExtResource("2_qg5g5")]
 position = Vector2(337, 13)
 direction = 1
+grid_origin = Vector2i(10, 0)

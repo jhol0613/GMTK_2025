@@ -114,6 +114,3 @@ metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
 shape = SubResource("RectangleShape2D_ix653")
-
-[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
-event_guid = "{00000000-0007-0000-0300-00002b000000}"

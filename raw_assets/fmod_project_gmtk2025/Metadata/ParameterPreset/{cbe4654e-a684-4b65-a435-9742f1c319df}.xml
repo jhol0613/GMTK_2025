@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.03.00">
-	<object class="ParameterPreset" id="{08216655-96ad-433c-818a-77d4392d6a85}">
+	<object class="ParameterPreset" id="{cbe4654e-a684-4b65-a435-9742f1c319df}">
 		<property name="name">
-			<value>Chord_World2</value>
+			<value>Chord_World1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{24d93029-5501-46c5-88c8-a6ddec4015bb}</destination>
 		</relationship>
 		<relationship name="parameter">
-			<destination>{7180848d-edfe-4454-85d1-e57c83c4cf13}</destination>
+			<destination>{4521984e-fb40-48f1-bccf-607c4f96633b}</destination>
 		</relationship>
 	</object>
-	<object class="GameParameter" id="{7180848d-edfe-4454-85d1-e57c83c4cf13}">
-		<property name="parameterType">
-			<value>1</value>
-		</property>
+	<object class="GameParameter" id="{4521984e-fb40-48f1-bccf-607c4f96633b}">
 		<property name="maximum">
-			<value>3</value>
+			<value>6</value>
 		</property>
 		<property name="isGlobal">
 			<value>true</value>
