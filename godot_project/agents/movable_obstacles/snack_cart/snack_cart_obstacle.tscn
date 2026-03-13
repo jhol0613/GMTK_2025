@@ -128,3 +128,7 @@ metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 z_index = 1
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_s1287")
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Rolling_Cart"
+event_guid = "{27011c73-168a-42bb-8eb2-58439cf34ecd}"
