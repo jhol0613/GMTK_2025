@@ -191,6 +191,7 @@ func spin(number_of_quarter_turns: int = 1):
 		_facing_direction += number_of_quarter_turns
 		_facing_direction %= FacingDirection.size()
 		await _frame_timer.timeout
+	$FmodEventEmitter2D.play()
 
 ##Because arg is a direction and not a facing direction, will always return the smallest # quarter
 ##turns (e.g. if facing direction is LEFT and direction is DOWN, assumes the direction "down" translates to FRONT_COUNTERCLOCKWISE)

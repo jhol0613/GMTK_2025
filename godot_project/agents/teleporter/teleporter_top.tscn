@@ -50,7 +50,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"power_up",
-"speed": 10.0
+"speed": 8.0
 }]
 
 [sub_resource type="Resource" id="Resource_q1i2a"]
@@ -61,12 +61,11 @@ frame = 2
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
 [node name="TeleporterTop" type="Node2D" node_paths=PackedStringArray("sprite")]
-y_sort_enabled = true
+z_index = 1
 script = ExtResource("1_mjewp")
 sprite = NodePath("TopSprite")
 
 [node name="TopSprite" type="AnimatedSprite2D" parent="."]
-z_index = 1
 position = Vector2(0, -47)
 sprite_frames = SubResource("SpriteFrames_q1i2a")
 animation = &"power_up"

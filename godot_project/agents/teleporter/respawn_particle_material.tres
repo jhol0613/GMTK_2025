@@ -1,0 +1,18 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://cdj0kefpjqu80"]
+
+[resource]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 64.09
+emission_ring_inner_radius = 27.02
+emission_ring_cone_angle = 90.0
+spread = 180.0
+radial_velocity_min = -80.0
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -800.0
+radial_accel_max = -500.0
+anim_speed_min = 0.71
+anim_speed_max = 2.01

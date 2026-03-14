@@ -12,24 +12,47 @@ class_name Teleporter
 ##The downbeat is beat 0.0
 @export var move_mode := Enums.MoveMode.ON_BEAT
 @export var top : TeleporterTop
-@export var initial_target_sprite_offset := Vector2(0, 0)
+@export_category("Animation")
+@export var respawn_delay := .2
+##The color to modulate entities when they teleport since not every entity has a bespoke teleport animation
+@export var teleported_entity_modulate := Color("#64bc5a")
+##Amount of time to show modulated version of teleported entity before they disappear
+@export var despawn_modulate_time := .6
+##Amount of time to show modulated version of teleported entity when they respawn before going back to normal
+@export var respawn_modulate_time := .6
 
 
 @onready var sound := $FmodEventEmitter2D
 @onready var collision := $Area2D
 @onready var base_sprite := $Node2D/TeleporterBaseFront
 @onready var target_sprite : AnimatedSprite2DSignals = $Target/YSortOffset/TargetSprite
+@onready var despawn_particles : Array[GPUParticles2D] = [
+	$TeleporterBaseBack/DespawnParticles,
+	$TeleporterBaseBack/DespawnParticles2,
+	$TeleporterBaseBack/DespawnParticles3,
+	$TeleporterBaseBack/DespawnParticles4
+]
+@onready var respawn_particles : Array[GPUParticles2D] = [
+	$Target/YSortOffset/TargetSprite/RespawnParticles,
+	$Target/YSortOffset/TargetSprite/RespawnParticles2,
+	$Target/YSortOffset/TargetSprite/RespawnParticles3,
+	$Target/YSortOffset/TargetSprite/RespawnParticles4
+]
+@onready var initial_target_sprite_offset = target_sprite.position
 
 # set in runtime, found dynamically using its name
 var _level_scene: RhythmRailLevel
-
-##time in seconds that warmup animation should start before actual teleportation happens
-var _animation_offset: float
 
 # Editor-only variables
 
 ## We don't have all initialized variables in _ready(), so wait until _process()
 var _editor_has_target := false
+
+##Don't allow teleported entities to immediately teleport again
+var teleport_cooldown_list : Array[Movable]
+
+##Notify level manager that something teleported so it can tell other teleporters not to teleport it
+signal something_teleported(Movable)
 
 func _ready() -> void:
 	super._ready()
@@ -51,6 +74,8 @@ func _process(_delta: float) -> void:
 		# only here we have the guarantee that LevelBase exists
 		_level_scene = find_parent("LevelBase")
 		_update_target_position()
+	if top:
+		top.modulate = modulate
 
 
 func _validate_destination(new_destination: Vector2i) -> Vector2i:
@@ -70,25 +95,43 @@ func _update_target_position() -> void:
 #endregion
 
 func _teleport(entity: Movable) -> void:
+	var original_modulate = entity.modulate
+	something_teleported.emit(entity)
+	entity.interrupt_queued_action(true)
+	entity.queue_teleportation(destination)
 	if entity is PlayerCharacter: #special case for player character since we have art for it
 		entity.visible = false
 		base_sprite.play_with_signals("player_teleport")
-		await base_sprite.animation_finished
-		base_sprite.play_with_signals("default")
-	# TODO: add animation
-	# TODO: add sound
-	#print("Queueing teleport for %s" % entity)
-	entity.queue_teleportation(destination)
-	_play_respawn_animation()
+		await base_sprite.animation_signal # only signal should be when it's time for particles to play
+	else:
+		entity.modulate = teleported_entity_modulate
+	_play_despawn_particles()
+	if entity is not PlayerCharacter:
+		await get_tree().create_timer(despawn_modulate_time).timeout
+	await get_tree().create_timer(respawn_delay).timeout
+	_play_respawn_particles()
+	await get_tree().create_timer(respawn_delay).timeout
+	base_sprite.play_with_signals("default")
+	if entity is PlayerCharacter:
+		target_sprite.play_with_signals("respawn_player")
+	else:
+		target_sprite.play_with_signals("respawn_object")
+	#signal is when object should reappear in respawn animation
+	await target_sprite.animation_signal
 	entity.visible = true
+	if entity is not PlayerCharacter:
+		await get_tree().create_timer(respawn_modulate_time).timeout
+		entity.modulate = original_modulate
 
 ##Play this animation at teleporter origin when something gets teleported
-func _play_despawn_animation():
-	pass
- 
+func _play_despawn_particles():
+	for particle_system in despawn_particles:
+		particle_system.emitting = true
+
 ##Play this animation at teleporter target on getting teleported to destination
-func _play_respawn_animation():
-	target_sprite.play_with_signals("respawn")
+func _play_respawn_particles():
+	for particle_system in respawn_particles:
+		particle_system.emitting = true
 
 func _on_music_bar():
 	if move_mode == Enums.MoveMode.ON_BEAT:
@@ -110,7 +153,8 @@ func _on_push_beat_timeout():
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	if teleport_cooldown_list.has(area.owner):
+		return
 	if area.owner is not Movable or move_mode != Enums.MoveMode.INSTANT:
 		return
-
 	_teleport(area.owner)

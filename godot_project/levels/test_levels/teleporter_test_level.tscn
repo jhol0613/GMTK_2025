@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0lpb8u54s0rd"]
+[gd_scene load_steps=5 format=3 uid="uid://c0lpb8u54s0rd"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_v5q3b"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_ew41l"]
-[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_ykv58"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_ew41l"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_ykv58"]
 
 [node name="LevelBase" instance=ExtResource("1_v5q3b")]
 conductor_spawn_beat = 4
+conductor_enabled = false
 available_actions = Array[int]([4, 3, 1, 2, 7])
 
 [node name="LeftExteriorFloor" parent="." index="4"]
@@ -16,32 +16,30 @@ z_index = 0
 [node name="RightExteriorFloor" parent="." index="5"]
 z_index = -3
 
-[node name="Treadmill" parent="." index="9" instance=ExtResource("3_ykv58")]
-position = Vector2(208, 31)
-direction = 3
-grid_origin = Vector2i(6, 1)
-
-[node name="SnackCartObstacle" parent="." index="10" instance=ExtResource("4_ew41l")]
+[node name="SnackCartObstacle" parent="." index="9" instance=ExtResource("4_ew41l")]
 position = Vector2(306, 12)
-movement_path = Array[int]([4])
 grid_origin = Vector2i(1, 1)
 
-[node name="Teleporter" parent="." index="11" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
-z_index = 1
-position = Vector2(80, 88)
-destination = Vector2i(4, 3)
+[node name="Teleporter" parent="." index="10" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
+position = Vector2(80, 87)
+destination = Vector2i(6, 2)
 top = NodePath("../TeleporterTop")
-initial_target_sprite_offset = Vector2(0, -42)
+respawn_delay = 0.2
+teleported_entity_modulate = Color(0.392157, 0.737255, 0.352941, 1)
+despawn_modulate_time = 0.6
+respawn_modulate_time = 0.6
 grid_origin = Vector2i(2, 4)
-default_action_beat = 2.0
+default_action_beat = 1.0
 
-[node name="TeleporterTop" parent="." index="12" instance=ExtResource("5_ykv58")]
-y_sort_enabled = false
-position = Vector2(80, 89)
+[node name="TeleporterTop" parent="." index="11" instance=ExtResource("5_ykv58")]
+position = Vector2(80, 88)
 
-[node name="Teleporter2" parent="." index="13" instance=ExtResource("2_ew41l")]
-z_index = 1
-position = Vector2(144, 50)
-destination = Vector2i(5, 4)
-initial_target_sprite_offset = Vector2(0, -42)
-grid_origin = Vector2i(4, 2)
+[node name="Teleporter2" parent="." index="12" instance=ExtResource("2_ew41l")]
+visible = false
+position = Vector2(176, 48)
+destination = Vector2i(2, 4)
+respawn_delay = 0.2
+teleported_entity_modulate = Color(0.392157, 0.737255, 0.352941, 1)
+despawn_modulate_time = 0.6
+respawn_modulate_time = 0.6
+grid_origin = Vector2i(5, 2)

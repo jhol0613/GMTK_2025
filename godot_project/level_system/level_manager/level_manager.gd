@@ -332,6 +332,11 @@ func _initialize_teleporters() -> void:
 		# into the teleporter accidentally. The player can force the conductor into going through,
 		# but only if there is no other path
 		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
+		teleporter.something_teleported.connect(_on_something_teleported)
+
+func _on_something_teleported(entity: Movable):
+	for teleporter: Teleporter in _level_scene.teleporters:
+		teleporter.teleport_cooldown_list.append(entity)
 
 #endregion
 
@@ -344,6 +349,7 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
 	_update_agents()
+	#_update_teleporters()
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
@@ -487,6 +493,11 @@ func _update_agents() -> void:
 	for agent in _level_scene.agents:
 		if agent is not Movable and agent is not Interactable: # movables are sorted out into their own update functions
 			agent.execute_action(Enums.PlayerAction.NONE, _current_beat, false)
+
+##Clear teleporter cooldown lists at start of new beat
+func _update_teleporters() -> void:
+	for teleporter: Teleporter in _level_scene.teleporters:
+		teleporter.teleport_cooldown_list.clear()
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)

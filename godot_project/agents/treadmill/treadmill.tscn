@@ -224,7 +224,7 @@ metadata/_custom_type_script = "uid://du4ysr150id7h"
 shape = SubResource("RectangleShape2D_pifmq")
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
-event_name = "event:/Treadmill"
+event_name = "event:/Treadmill-W2"
 event_guid = "{54ca2f07-b4b0-4eb5-84af-c99140d3f2e2}"
 script = ExtResource("7_20g2x")
 offset_seconds = -0.08

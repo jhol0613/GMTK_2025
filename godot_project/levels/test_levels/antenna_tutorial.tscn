@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://jywhb4nrgx2r"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_oltby"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_a5ob7"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="3_a5ob7"]
+[ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_auya8"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="6_vy6my"]
+
+[node name="LevelBase" instance=ExtResource("1_oltby")]
+conductor_enabled = false
+available_actions = Array[int]([4, 7, 3, 2, 1])
+
+[node name="Treadmill" parent="." index="9" instance=ExtResource("2_a5ob7")]
+position = Vector2(113, 88)
+grid_origin = Vector2i(3, 4)
+
+[node name="Treadmill2" parent="." index="10" instance=ExtResource("2_a5ob7")]
+position = Vector2(176, 90)
+grid_origin = Vector2i(5, 4)
+
+[node name="Laser" parent="." index="11" instance=ExtResource("6_vy6my")]
+z_index = 0
+position = Vector2(144, 4)
+height = 7
+grid_origin = Vector2i(4, 0)
+
+[node name="Antenna" parent="Laser" index="5" instance=ExtResource("3_a5ob7")]
+
+[node name="AnimatedSprite2DSignals" parent="Laser/Antenna" index="0"]
+position = Vector2(11, -16)
+
+[node name="Button" parent="Laser/Antenna" index="1"]
+offset_left = -16.0
+offset_top = -9.0
+offset_right = 16.0
+offset_bottom = 10.0
+
+[node name="Button2" type="Button" parent="Laser/Antenna" index="2"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 178.0
+offset_top = -65.0
+offset_right = 210.0
+offset_bottom = -46.0
+mouse_default_cursor_shape = 2
+
+[node name="ChangeLaserHeightProgram" type="Node" parent="Laser/Antenna" index="3" node_paths=PackedStringArray("lasers")]
+script = ExtResource("5_auya8")
+lasers = [NodePath("../.."), NodePath("../../../Laser2")]
+new_height = 64
+metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="Laser2" parent="." index="12" instance=ExtResource("6_vy6my")]
+position = Vector2(81, 4)
+height = 7
+grid_origin = Vector2i(2, 0)
+
+[connection signal="mouse_entered" from="Laser/Antenna/Button2" to="Laser/Antenna" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Laser/Antenna/Button2" to="Laser/Antenna" method="_on_mouse_exited"]
+[connection signal="pressed" from="Laser/Antenna/Button2" to="Laser/Antenna" method="_on_clicked"]
+
+[editable path="Laser/Antenna"]
