@@ -26,3 +26,11 @@ position = Vector2(30, -11)
 sprite_frames = ExtResource("2_ekhmm")
 script = ExtResource("2_6nn3b")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Newspaper Open"
+event_guid = "{4dc3cc1f-9936-4caf-8274-a7db4bc9cd22}"
+
+[node name="FmodEventEmitter2D2" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Newspaper Close"
+event_guid = "{3ee8146c-4fa0-4b21-9771-0d87a089b767}"
