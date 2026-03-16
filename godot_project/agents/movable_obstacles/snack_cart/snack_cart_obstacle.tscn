@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=20 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
 [ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="5_26gw8"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_kgp0j"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_s1287"]
 
 [sub_resource type="Curve" id="Curve_kgp0j"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.238693, 0.118335), 0.49576, 0.126811, 1, 0, Vector2(0.404523, 0.100093), 0.0, 0.0, 0, 0, Vector2(0.59799, 0.118335), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -83,7 +84,7 @@ size = Vector2(14, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1287"]
 size = Vector2(24, 50)
 
-[node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
+[node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "action_sound_emitters", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_kw233")
 pusher = NodePath("Pusher")
@@ -91,6 +92,17 @@ standard_move_data = ExtResource("2_nmw7r")
 bonk_data = ExtResource("3_26gw8")
 slide_data = ExtResource("4_kgp0j")
 slide_bonk_data = SubResource("Resource_s1287")
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
+default_sound_emitter = NodePath("RollSound")
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
 1: "updown",
@@ -129,6 +141,14 @@ z_index = 1
 position = Vector2(0, -24)
 shape = SubResource("RectangleShape2D_s1287")
 
-[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+[node name="RollSound" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/Rolling_Cart"
 event_guid = "{27011c73-168a-42bb-8eb2-58439cf34ecd}"
+script = ExtResource("10_s1287")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="BumpSound" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Rolling Cart Bumping"
+event_guid = "{8cdec751-5e12-422a-abca-0be302f16985}"
+script = ExtResource("10_s1287")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"

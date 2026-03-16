@@ -146,9 +146,10 @@ func interrupt_queued_action(cancel_sound := true):
 			currently_playing_emitter.stop()
 	_animation_timer.stop()
 
-	if not cancel_sound:
-		return
+	if cancel_sound:
+		interrupt_queued_sound()
 
+func interrupt_queued_sound():
 	if _sound_timer.is_connected("timeout", _on_sound_start):
 		_sound_timer.disconnect("timeout", _on_sound_start)
 	if currently_playing_emitter:
@@ -163,7 +164,7 @@ func _on_sound_start(action: Enums.PlayerAction):
 	currently_playing_emitter = action_sound_emitters.get(action, null)
 	if not currently_playing_emitter and default_sound_emitter: #switch to default sound if no specific sound defined for a given action
 		currently_playing_emitter = default_sound_emitter
-	if currently_playing_emitter:
+	if currently_playing_emitter and action != Enums.PlayerAction.NONE:
 		currently_playing_emitter.play()
 
 func _on_animation_start(action: Enums.PlayerAction):

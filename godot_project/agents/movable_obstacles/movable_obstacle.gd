@@ -26,6 +26,11 @@ func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := fal
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
 	if Enums.is_action_fall(action):
 		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), skip_animation)
+		#play bump sound on collision with another movable obstacle
+		interrupt_queued_sound()
+		var emitter = action_sound_emitters.get(Enums.PlayerAction.LEFT_BONK, default_sound_emitter)
+		if emitter:
+			emitter.play()
 	else:
 		super.execute_action(action, beat, skip_animation)
 

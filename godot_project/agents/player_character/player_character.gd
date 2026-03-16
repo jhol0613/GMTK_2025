@@ -5,7 +5,8 @@ class_name PlayerCharacter
 
 @export_subgroup("Sound emitters")
 @export var success_emitter: FmodEventEmitter2D
-@export var failure_emitter: FmodEventEmitter2D
+@export var caught_failure_emitter: FmodEventEmitter2D
+@export var laser_failure_emitter: FmodEventEmitter2D
 
 
 @export_subgroup("Nodes")
@@ -64,13 +65,17 @@ func notify_success():
 	success_emitter.play()
 
 func notify_failure(cause: Enums.FailureCause):
-	failure_emitter.play()
 	interrupt_queued_action()
-	var animation_to_play = "failure"
+	var animation_to_play : String
 	match cause:
+		Enums.FailureCause.CAUGHT:
+			caught_failure_emitter.play()
+			animation_to_play = "failure_caught"
 		Enums.FailureCause.LASER:
+			laser_failure_emitter.play()
 			animation_to_play = "failure_laser"
 		Enums.FailureCause.SQUISHED:
+			#TODO: Sound and animation for getting squished
 			animation_to_play = "failure_squish"
 	print("Failure animation: %s" % animation_to_play)
 	play_animation_with_follow_on(animation_to_play, "cancel_follow_on")
