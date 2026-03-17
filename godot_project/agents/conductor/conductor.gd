@@ -5,6 +5,7 @@ class_name Conductor
 
 
 @onready var entered_emitter = $Sound/EnteredSound
+@onready var grunt_emitter = $Sound/Grunt
 @onready var emotes = $Shadow/AnimatedSprite2D/Emotes
 
 var _first_action = true
@@ -50,5 +51,6 @@ func play_current_emotion():
 
 func _on_laser_hit(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
+		grunt_emitter.play()
 		# TODO: conductor: add stun animation
 		stunned = true

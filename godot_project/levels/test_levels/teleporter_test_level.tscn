@@ -7,8 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_ykv58"]
 
 [node name="LevelBase" instance=ExtResource("1_v5q3b")]
-conductor_spawn_beat = 4
-conductor_enabled = false
+conductor_spawn_beat = 3
 available_actions = Array[int]([4, 3, 1, 2, 7, 6])
 
 [node name="LeftExteriorFloor" parent="." index="4"]
@@ -59,7 +58,6 @@ default_action_beat = 1.0
 position = Vector2(80, 88)
 
 [node name="Teleporter2" parent="." index="13" instance=ExtResource("2_ew41l")]
-visible = false
 position = Vector2(176, 48)
 destination = Vector2i(2, 4)
 teleported_entity_modulate = Color(0.392157, 0.737255, 0.352941, 1)

@@ -983,8 +983,8 @@ caught_failure_emitter = NodePath("Sounds/CaughtFailure")
 laser_failure_emitter = NodePath("Sounds/LaserFailure")
 jump_collision_timer = NodePath("JumpCollisionDisable")
 duck_collision_timer = NodePath("DuckCollisionDisable")
-laser_blocker = NodePath("LaserBlocker")
-laser_blocker_collision_shape = NodePath("LaserBlocker/CollisionShape2D")
+laser_blocker = NodePath("Shadow/Area2D/LaserBlocker")
+laser_blocker_collision_shape = NodePath("Shadow/Area2D/LaserBlocker/CollisionShape2D")
 standard_move_data = ExtResource("2_gli1f")
 bonk_data = SubResource("Resource_gli1f")
 slide_data = ExtResource("6_gli1f")
@@ -1095,6 +1095,19 @@ collision_mask = 126
 position = Vector2(0.5, 9)
 shape = SubResource("RectangleShape2D_lda0w")
 
+[node name="LaserBlocker" type="Area2D" parent="Shadow/Area2D"]
+z_index = 5
+position = Vector2(1, -11.7)
+collision_layer = 512
+collision_mask = 192
+script = ExtResource("28_qcujq")
+trigger_beam_end_collisions = true
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/Area2D/LaserBlocker"]
+position = Vector2(0.25, -5)
+shape = SubResource("RectangleShape2D_2rm4m")
+
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="MoveSideways" type="FmodEventEmitter2D" parent="Sounds"]
@@ -1169,20 +1182,7 @@ one_shot = true
 
 [node name="DuckCollisionDisable" type="Timer" parent="."]
 
-[node name="LaserBlocker" type="Area2D" parent="."]
-z_index = 5
-position = Vector2(1, -28)
-collision_layer = 512
-collision_mask = 192
-script = ExtResource("28_qcujq")
-trigger_beam_end_collisions = true
-metadata/_custom_type_script = "uid://dtg8o21ypt6se"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
-position = Vector2(0.25, -5)
-shape = SubResource("RectangleShape2D_2rm4m")
-
 [connection signal="area_entered" from="Shadow/Area2D" to="." method="_on_collision"]
+[connection signal="area_entered" from="Shadow/Area2D/LaserBlocker" to="." method="_on_laser_hit"]
 [connection signal="timeout" from="JumpCollisionDisable" to="." method="on_jump_collision_disabled_expire"]
 [connection signal="timeout" from="DuckCollisionDisable" to="." method="on_duck_collision_disabled_expire"]
-[connection signal="area_entered" from="LaserBlocker" to="." method="_on_laser_hit"]

@@ -158,6 +158,12 @@ event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
 script = ExtResource("10_46wui")
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
+[node name="Grunt" type="FmodEventEmitter2D" parent="Sound"]
+event_name = "event:/Conductor Grunt"
+event_guid = "{7b5a0860-8b68-494b-aba5-cc88aabf5a0b}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
 [node name="LaserBlocker" type="Area2D" parent="."]
 z_index = 5
 position = Vector2(1, -28)
