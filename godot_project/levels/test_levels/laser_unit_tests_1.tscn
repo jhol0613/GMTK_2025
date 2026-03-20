@@ -12,12 +12,14 @@ tile_map_data = PackedByteArray(0, 0, 8, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 [node name="Laser" parent="." index="9" instance=ExtResource("2_44155")]
 position = Vector2(113, 4)
 height = 48
+grid_origin = Vector2i(3, 0)
 activation_sequence = Array[bool]([true, false, false, false])
 
 [node name="Laser2" parent="." index="10" instance=ExtResource("2_44155")]
 position = Vector2(176, 42)
 direction = 2
-height = 48
+height = 33
+grid_origin = Vector2i(5, 2)
 activation_sequence = Array[bool]([false, true, false, false])
 default_animation = "fire_left"
 
@@ -25,6 +27,7 @@ default_animation = "fire_left"
 position = Vector2(48, 43)
 direction = 3
 height = 48
+grid_origin = Vector2i(1, 2)
 activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
@@ -32,18 +35,21 @@ default_animation = "fire_right"
 position = Vector2(112, 80)
 direction = 0
 height = 48
+grid_origin = Vector2i(3, 4)
 activation_sequence = Array[bool]([false, false, true, false])
 default_animation = "fire_up"
 
 [node name="Laser5" parent="." index="13" instance=ExtResource("2_44155")]
 position = Vector2(274, 4)
 height = 7
+grid_origin = Vector2i(8, 0)
 activation_sequence = Array[bool]([true, false, false, false])
 
 [node name="Laser6" parent="." index="14" instance=ExtResource("2_44155")]
 position = Vector2(336, 41)
 direction = 2
 height = 7
+grid_origin = Vector2i(10, 2)
 activation_sequence = Array[bool]([false, true, false, false])
 default_animation = "fire_left"
 
@@ -51,6 +57,7 @@ default_animation = "fire_left"
 position = Vector2(209, 43)
 direction = 3
 height = 7
+grid_origin = Vector2i(6, 2)
 activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
@@ -58,6 +65,7 @@ default_animation = "fire_right"
 position = Vector2(273, 80)
 direction = 0
 height = 7
+grid_origin = Vector2i(8, 4)
 activation_sequence = Array[bool]([false, false, true, false])
 default_animation = "fire_up"
 
@@ -65,17 +73,20 @@ default_animation = "fire_up"
 position = Vector2(15, 22)
 direction = 0
 height = 48
+grid_origin = Vector2i(0, 1)
 activation_sequence = Array[bool]([false, false, true, false])
 default_animation = "fire_up"
 
 [node name="Laser10" parent="." index="18" instance=ExtResource("2_44155")]
 position = Vector2(16, 79)
 height = 48
+grid_origin = Vector2i(0, 4)
 
 [node name="Laser11" parent="." index="19" instance=ExtResource("2_44155")]
 position = Vector2(80, 99)
 direction = 2
 height = 48
+grid_origin = Vector2i(2, 5)
 activation_sequence = Array[bool]([false, true, false, false])
 default_animation = "fire_left"
 
@@ -83,8 +94,19 @@ default_animation = "fire_left"
 position = Vector2(241, 98)
 direction = 3
 height = 48
+grid_origin = Vector2i(7, 5)
 activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
-[node name="SnackCartObstacle" parent="." index="21" instance=ExtResource("3_7q1qd")]
+[node name="SnackCartObstacle" parent="." index="21" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_7q1qd")]
 position = Vector2(113, 50)
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
