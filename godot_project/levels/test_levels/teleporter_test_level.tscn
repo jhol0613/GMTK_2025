@@ -34,17 +34,20 @@ action_sound_emitters = {
 position = Vector2(80, 87)
 destination = Vector2i(6, 2)
 top = NodePath("../TeleporterTop")
-teleported_entity_modulate = Color(0.392157, 0.737255, 0.352941, 1)
+modulate_multiplier = 7.0
+teleported_entity_modulate = Color(0.157884, 0.32006, 0.139416, 1)
+teleporter_color = 0
 grid_origin = Vector2i(2, 4)
 default_action_beat = 1.0
 
 [node name="TeleporterTop" parent="." index="11" instance=ExtResource("5_ykv58")]
 position = Vector2(80, 88)
 
-[node name="Teleporter2" parent="." index="12" instance=ExtResource("2_ew41l")]
+[node name="Teleporter2" parent="." index="12" node_paths=PackedStringArray("modulate_nodes") instance=ExtResource("2_ew41l")]
 position = Vector2(176, 48)
 destination = Vector2i(2, 4)
 teleported_entity_modulate = Color(0.392157, 0.737255, 0.352941, 1)
+modulate_nodes = [null, null, null]
 grid_origin = Vector2i(5, 2)
 
 [node name="Laser" parent="." index="13" instance=ExtResource("5_qmdej")]

@@ -117,6 +117,12 @@ enum ConductorState {
 	UNREACHABLE # can't reach the player
 }
 
+enum TeleporterColor {
+	PINK,
+	GREEN,
+	BLUE
+}
+
 #region Action and Vector conversions
 var NORTHEAST = Vector2i.UP + Vector2i.RIGHT
 var NORTHWEST = Vector2i.UP + Vector2i.LEFT

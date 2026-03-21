@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://8audifx5gu5m" path="res://action_sequencer/sequencer_screen/screen_scenes/move_teleport_destination_screen.gd" id="1_7a432"]
 [ext_resource type="PackedScene" uid="uid://cokbacpxj3ep0" path="res://action_sequencer/sequencer_screen/digipad/digipad_move.tscn" id="2_8h2tj"]
-[ext_resource type="Texture2D" uid="uid://d0stl0wjqwhuu" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/cart_obstacle_green.png" id="3_6phyf"]
+[ext_resource type="Texture2D" uid="uid://ceajpdfjocj6o" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/teleporter_green.png" id="3_7a432"]
 
 [node name="MoveTeleporterDestinationScreen" type="Control" node_paths=PackedStringArray("digipad")]
 layout_mode = 3
@@ -18,6 +18,5 @@ digipad = NodePath("DigipadMove")
 position = Vector2(15, -2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-25, -1)
-texture = ExtResource("3_6phyf")
+texture = ExtResource("3_7a432")
