@@ -33,12 +33,12 @@ func get_index(level: RhythmRailLevel) -> Dictionary:
 
 ## Returns display name that is defined in each rhythm rail level
 func get_display_name(world: int, level: int):
-	
+
 	if world >= world_definitions.size():
 		return "requested world index out of bounds"
 	if level >= world_definitions[world].level_list.size():
 		return "requested level index out of bounds"
-	
+
 	var level_state = world_definitions[world].level_list[level].get_state()
 	for i in range(level_state.get_node_property_count(0)): #0 is always root node
 		if level_state.get_node_property_name(0, i) == "display_name":
@@ -60,26 +60,28 @@ func get_next_level() -> PackedScene:
 		_current_world += 1
 	return null
 
-## Returns the level select scene associated with a given world	
+## Returns the level select scene associated with a given world
 func get_level_select_scene(world_number: int) -> Enums.Scenes:
 	return world_definitions[world_number].level_select_scene
-	
+
 ## Gets music event associated with current world
 func get_world_music_event_name():
 	return world_definitions[_current_world].music_event_name
-	
+
 func get_world_music_event_bpm():
 	return world_definitions[_current_world].music_event_bpm
 
 ## Returns true iff most recent get level was a world different from the previous
 func is_new_world() -> bool:
 	return !_previous_world == _current_world
-	
+
 func get_world_scene() -> PackedScene:
 	return world_definitions[_current_world].world_scene
 
 ## Returns transition scene for current (most recently loaded level's) world
 func get_transition_scene() -> PackedScene:
 	return world_definitions[_current_world].transition_scene
-	
-	
+
+
+func get_current_index() -> Dictionary:
+	return {"world": _current_world, "level": _current_level}

@@ -27,6 +27,7 @@ var _save_data: Dictionary
 func _ready():
 	_load_save_data()
 
+
 func _load_save_data():
 	if FileAccess.file_exists(save_file_path):
 		var json = JSON.new()
@@ -118,6 +119,26 @@ func _build_fadeout_rect(alpha: float) -> ColorRect:
 	fadeout_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return fadeout_rect
 
+
+func _save_solution(index: int) -> void:
+	if not OS.is_debug_build():
+		return
+	var sequencer = get_node("/root/LevelManager/SequencerLayer/ActionSequencer")
+	if sequencer == null or sequencer is not ActionSequencer:
+		push_error("[GameManager] Couldn't find ActionSequencer!")
+		return
+	SaveManager.save_solution(sequencer.get_current_sequence(), level_catalog.get_current_index(), index)
+
+func _load_solution(index: int) -> void:
+	if not OS.is_debug_build():
+		return
+	var sequencer = get_node("/root/LevelManager/SequencerLayer/ActionSequencer")
+	if sequencer == null or sequencer is not ActionSequencer:
+		push_error("[GameManager] Couldn't find ActionSequencer!")
+		return
+	var solution = SaveManager.load_solution(level_catalog.get_current_index(), index)
+	sequencer.set_current_sequence(solution)
+
 func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("Pause"):
 		if get_tree().paused:
@@ -126,3 +147,55 @@ func _input(_event: InputEvent):
 			pause_game()
 	if Input.is_action_just_pressed("DebugAction"):
 		print("saving")
+
+	if Input.is_action_just_pressed("Save1"):
+		_save_solution(1)
+		return
+	if Input.is_action_just_pressed("Save2"):
+		_save_solution(2)
+		return
+	if Input.is_action_just_pressed("Save3"):
+		_save_solution(3)
+		return
+	if Input.is_action_just_pressed("Save4"):
+		_save_solution(4)
+		return
+	if Input.is_action_just_pressed("Save5"):
+		_save_solution(5)
+		return
+	if Input.is_action_just_pressed("Save6"):
+		_save_solution(6)
+		return
+	if Input.is_action_just_pressed("Save7"):
+		_save_solution(7)
+		return
+	if Input.is_action_just_pressed("Save8"):
+		_save_solution(8)
+		return
+	if Input.is_action_just_pressed("Save9"):
+		_save_solution(9)
+		return
+	if Input.is_action_just_pressed("Save10"):
+		_save_solution(10)
+		return
+
+	if Input.is_action_just_pressed("Load1"):
+		_load_solution(1)
+	if Input.is_action_just_pressed("Load2"):
+		_load_solution(2)
+	if Input.is_action_just_pressed("Load3"):
+		_load_solution(3)
+	if Input.is_action_just_pressed("Load4"):
+		_load_solution(4)
+	if Input.is_action_just_pressed("Load5"):
+		_load_solution(5)
+	if Input.is_action_just_pressed("Load6"):
+		_load_solution(6)
+	if Input.is_action_just_pressed("Load7"):
+		_load_solution(7)
+	if Input.is_action_just_pressed("Load8"):
+		_load_solution(8)
+	if Input.is_action_just_pressed("Load9"):
+		_load_solution(9)
+	if Input.is_action_just_pressed("Load10"):
+		_load_solution(10)

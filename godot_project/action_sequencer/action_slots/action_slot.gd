@@ -65,28 +65,32 @@ func clear_slot():
 	texture_rect.texture = null
 	action = Enums.PlayerAction.NONE
 
-func set_action(new_action: Enums.PlayerAction):
+func set_action(new_action: Enums.PlayerAction, silent = false):
+	# in case the loaded solution contains a weird action, which WILL NOT HAPPEN
+	if new_action not in action_textures.keys() and new_action != Enums.PlayerAction.NONE:
+		return
 	action = new_action
 	texture_rect.texture = action_textures.get(action)
 	hover_light_on = false
-	place_block_emitter.play()
-	
+	if not silent:
+		place_block_emitter.play()
+
 func set_to_thinking_mode_color():
 	_current_sequence_light_color = thinking_light_color
-	
+
 func set_to_playing_mode_color():
 	_current_sequence_light_color = playing_light_color
-	
+
 func _update_flashing_light(new_state):
 	flashing_light_on = new_state
 	_update_light()
-	
+
 func _update_hover_light(new_state):
 	if !hover_light_on and new_state:
 		hover_emitter.play()
 	hover_light_on = new_state
 	_update_light()
-	
+
 func _update_sequence_light(new_state):
 	sequence_light_on = new_state
 	_update_light()
@@ -105,7 +109,7 @@ func _update_light():
 func start_flashing():
 	flashing = true
 	flash_timer.start(flash_time)
-	
+
 func stop_flashing():
 	flashing = false
 	flash_timer.stop()
@@ -115,10 +119,10 @@ func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		#if eraser_mode:
 			#if action != Enums.PlayerAction.NONE:
-				#clear_slot()            
-				#accept_event()    
+				#clear_slot()
+				#accept_event()
 				#return
-				
+
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if is_active and ui_interaction_enabled and action != preview_action:
 				action_slot_clicked.emit(self)
