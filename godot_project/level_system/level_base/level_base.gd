@@ -68,6 +68,7 @@ func _enter_tree() -> void:
 		GameManager.start_world = index.get("world")
 		GameManager.start_level = index.get("level")
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
+		SaveManager.enable_save = false # disable saving for random levels in the editor
 
 func _ready() -> void:
 	var children = find_children("*", "", true) # find children recursively

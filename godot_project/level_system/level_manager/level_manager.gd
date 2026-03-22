@@ -174,6 +174,7 @@ func _on_level_complete() -> void:
 		_execute_world_transition()
 		return
 
+	SaveManager.update_furthest_level(GameManager.level_catalog.get_current_index())
 	advance_level()
 
 func _on_level_fail() -> void:

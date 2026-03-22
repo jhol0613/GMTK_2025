@@ -27,7 +27,7 @@ func _ready() -> void:
 ## Saves a collectible to the save file if it's been queued for collect
 func collect_if_queued():
 	if type == Enums.CollectibleType.SAVED and queued_for_collect:
-		GameManager.save_collectible(id)
+		SaveManager.add_collectible(id)
 
 func reset():
 	visible = true
