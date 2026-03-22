@@ -1,3 +1,5 @@
+@tool
+
 extends Node2D
 
 ##Visuals for top part of a teleporter. Has no functionality except animation

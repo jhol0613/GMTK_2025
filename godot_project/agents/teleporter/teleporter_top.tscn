@@ -1,56 +1,24 @@
-[gd_scene load_steps=12 format=3 uid="uid://dxx1mrwugq8vj"]
+[gd_scene load_steps=15 format=3 uid="uid://dxx1mrwugq8vj"]
 
 [ext_resource type="Texture2D" uid="uid://b21uk1rb7q23y" path="res://agents/teleporter/sprites/teleporter_frames.png" id="1_4wbou"]
 [ext_resource type="Script" uid="uid://cyl62mr0g5ds8" path="res://agents/teleporter/teleporter_top.gd" id="1_mjewp"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="2_mjewp"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="4_ncfnh"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ncfnh"]
-atlas = ExtResource("1_4wbou")
-region = Rect2(64, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mjewp"]
-atlas = ExtResource("1_4wbou")
-region = Rect2(160, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q1i2a"]
-atlas = ExtResource("1_4wbou")
-region = Rect2(256, 0, 32, 96)
+[ext_resource type="Texture2D" uid="uid://bnae1wupxmcvi" path="res://agents/teleporter/sprites/teleporter_light_frames.png" id="5_q1i2a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5r7c"]
 atlas = ExtResource("1_4wbou")
-region = Rect2(352, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ufu4w"]
-atlas = ExtResource("1_4wbou")
 region = Rect2(64, 0, 32, 96)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_q1i2a"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ufu4w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ncfnh")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mjewp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q1i2a")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_a5r7c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ufu4w")
 }],
 "loop": false,
-"name": &"power_up",
-"speed": 8.0
+"name": &"default",
+"speed": 5.0
 }]
 
 [sub_resource type="Resource" id="Resource_q1i2a"]
@@ -60,12 +28,70 @@ animation = "power_up"
 frame = 2
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgsux"]
+atlas = ExtResource("5_q1i2a")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_durda"]
+atlas = ExtResource("5_q1i2a")
+region = Rect2(160, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j433c"]
+atlas = ExtResource("5_q1i2a")
+region = Rect2(256, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvoch"]
+atlas = ExtResource("5_q1i2a")
+region = Rect2(352, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f11p"]
+atlas = ExtResource("5_q1i2a")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q1i2a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgsux")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_durda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j433c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvoch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f11p")
+}],
+"loop": false,
+"name": &"power_up",
+"speed": 8.0
+}]
+
 [node name="TeleporterTop" type="Node2D" node_paths=PackedStringArray("sprite")]
 z_index = 1
 script = ExtResource("1_mjewp")
-sprite = NodePath("TopSprite")
+sprite = NodePath("Lights")
 
-[node name="TopSprite" type="AnimatedSprite2D" parent="."]
+[node name="StaticSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -47)
+sprite_frames = SubResource("SpriteFrames_ufu4w")
+autoplay = "default"
+script = ExtResource("2_mjewp")
+signals = Array[ExtResource("4_ncfnh")]([SubResource("Resource_q1i2a")])
+default_animation_offset = -0.3
+synch_framerates_to_bpm = false
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Lights" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -47)
 sprite_frames = SubResource("SpriteFrames_q1i2a")
 animation = &"power_up"

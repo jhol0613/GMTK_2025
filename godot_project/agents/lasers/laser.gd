@@ -137,6 +137,7 @@ func _set_height(new_height: int):
 		beam_root.setup(direction, height, 0.0, beam_segment_scene, direction_data.get(direction).end_image)
 
 	if direction == Enums.Direction.UP:
+		#up laser strategy: hit checks start from laser base, but ignore hit if bottom of collider is below it
 		up_laser_clipper.position.y = -up_laser_clipper.size.y - height + direction_data.get(direction).start_position_offset.y
 		beam_root.global_position = global_position
 	elif direction == Enums.Direction.DOWN:
@@ -149,7 +150,7 @@ func _set_height(new_height: int):
 		beam_root.fire_again_on_no_hit = true
 		beam_root.line.visible = false
 		up_laser_clipper.position.y = -up_laser_clipper.size.y + 10#10 is arbitrary, just to maker sure everything's in frame
-		beam_root.global_position = global_position + Vector2(0, -height + 2) #laser head position
+		beam_root.global_position = global_position + Vector2(0, -height + direction_data.get(direction).start_position_offset.y) #laser head position
 
 func set_height_animated(new_height: int, duration: float):
 	var old_height = height

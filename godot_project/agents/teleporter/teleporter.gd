@@ -14,29 +14,40 @@ class_name Teleporter
 @export var top : TeleporterTop
 @export_category("Animation")
 @export var respawn_delay := .2
+##Because modulate values need to be grreater than 1 to get to white, multiply the selected teleporter color
+##(as defined in the script by teleporter_color_definitions) by this value
+@export var modulate_multiplier := 3.0
 ##The color to modulate entities when they teleport since not every entity has a bespoke teleport animation
 @export var teleported_entity_modulate := Color("#64bc5a")
 ##Amount of time to show modulated version of teleported entity before they disappear
 @export var despawn_modulate_time := .6
 ##Amount of time to show modulated version of teleported entity when they respawn before going back to normal
 @export var respawn_modulate_time := .6
-
+##Nodes that should be modulated by the teleporter color (this shouldn't have to be changed)
+@export var modulate_nodes : Array[Node2D]
+@export var teleporter_color : Enums.TeleporterColor = Enums.TeleporterColor.GREEN: set = _set_color
+@export var teleporter_color_definitions : Dictionary[Enums.TeleporterColor, Color] = {
+	Enums.TeleporterColor.PINK: Color("ec29cd"),
+	Enums.TeleporterColor.GREEN: Color("285224"),
+	Enums.TeleporterColor.BLUE: Color("2677eb")
+}
 
 @onready var sound := $FmodEventEmitter2D
 @onready var collision := $Area2D
-@onready var base_sprite := $Node2D/TeleporterBaseFront
+@onready var base_sprite_lights := $Node2D/TeleporterBaseFront/Lights
 @onready var target_sprite : AnimatedSprite2DSignals = $Target/YSortOffset/TargetSprite
+@onready var target_sprite_lights : AnimatedSprite2DSignals = $Target/YSortOffset/TargetSprite/Lights
 @onready var despawn_particles : Array[GPUParticles2D] = [
-	$TeleporterBaseBack/DespawnParticles,
-	$TeleporterBaseBack/DespawnParticles2,
-	$TeleporterBaseBack/DespawnParticles3,
-	$TeleporterBaseBack/DespawnParticles4
+	$TeleporterBaseBack/DespawnParticles/DespawnParticles,
+	$TeleporterBaseBack/DespawnParticles/DespawnParticles2,
+	$TeleporterBaseBack/DespawnParticles/DespawnParticles3,
+	$TeleporterBaseBack/DespawnParticles/DespawnParticles4
 ]
 @onready var respawn_particles : Array[GPUParticles2D] = [
-	$Target/YSortOffset/TargetSprite/RespawnParticles,
-	$Target/YSortOffset/TargetSprite/RespawnParticles2,
-	$Target/YSortOffset/TargetSprite/RespawnParticles3,
-	$Target/YSortOffset/TargetSprite/RespawnParticles4
+	$Target/YSortOffset/TargetSprite/Lights/RespawnParticles,
+	$Target/YSortOffset/TargetSprite/Lights/RespawnParticles2,
+	$Target/YSortOffset/TargetSprite/Lights/RespawnParticles3,
+	$Target/YSortOffset/TargetSprite/Lights/RespawnParticles4
 ]
 @onready var initial_target_sprite_offset = target_sprite.position
 
@@ -61,6 +72,7 @@ func _ready() -> void:
 		AudioManager.music_bar.connect(_on_music_bar)
 	if not top:
 		return
+	_set_color(teleporter_color)
 	if AudioManager.beat_time_seconds * default_action_beat < top.sprite.default_animation_offset:
 		push_warning("Teleporter powerup animation can't be triggered because it would bleed into the
 		previous bar. Either reduce teleporter top animation offset or move teleporter action beat later")
@@ -91,6 +103,16 @@ func _update_target_position() -> void:
 		return
 	target_sprite.position = Vector2((destination - grid_origin) * tile_size) + initial_target_sprite_offset
 
+func _set_color(new_color):
+	teleporter_color = new_color
+	for node: Node2D in modulate_nodes:
+		var color = teleporter_color_definitions[teleporter_color]
+		color.v *= modulate_multiplier
+		node.modulate = color
+	if top:
+		var color = teleporter_color_definitions[teleporter_color]
+		color.v *= modulate_multiplier
+		top.sprite.modulate = color
 
 #endregion
 
@@ -101,8 +123,8 @@ func _teleport(entity: Movable) -> void:
 	entity.queue_teleportation(destination)
 	if entity is PlayerCharacter: #special case for player character since we have art for it
 		entity.visible = false
-		base_sprite.play_with_signals("player_teleport")
-		await base_sprite.animation_signal # only signal should be when it's time for particles to play
+		base_sprite_lights.play_with_signals("player_teleport")
+		await base_sprite_lights.animation_signal # only signal should be when it's time for particles to play
 	else:
 		entity.modulate = teleported_entity_modulate
 	_play_despawn_particles()
@@ -111,13 +133,13 @@ func _teleport(entity: Movable) -> void:
 	await get_tree().create_timer(respawn_delay).timeout
 	_play_respawn_particles()
 	await get_tree().create_timer(respawn_delay).timeout
-	base_sprite.play_with_signals("default")
+	base_sprite_lights.play_with_signals("default")
 	if entity is PlayerCharacter:
-		target_sprite.play_with_signals("respawn_player")
+		target_sprite_lights.play_with_signals("respawn_player")
 	else:
-		target_sprite.play_with_signals("respawn_object")
+		target_sprite_lights.play_with_signals("respawn_object")
 	#signal is when object should reappear in respawn animation
-	await target_sprite.animation_signal
+	await target_sprite_lights.animation_signal
 	entity.visible = true
 	if entity is not PlayerCharacter:
 		await get_tree().create_timer(respawn_modulate_time).timeout

@@ -69,7 +69,7 @@ func fire(depth: int):
 		should_spawn_child = true
 	else: #hits beam end
 		line.points[1] = target_position
-		_generate_beam_end(line.points[1], -1, false)
+		_generate_beam_end(line.points[1], 0, false)
 		return
 
 	line.points[1] = collision_point - global_position
@@ -95,6 +95,9 @@ func fire(depth: int):
 		if height <= blocker_height + blocker.altitude and height >= blocker.altitude: #laser blocked
 			# Down laser shouldn't hit things behind it
 			if direction == Enums.Direction.DOWN and blocker_lowpoint <= global_position.y + height:
+				line.points[1] = collision_point - global_position
+				should_spawn_child = true
+			elif direction == Enums.Direction.UP and blocker_lowpoint >= global_position.y:
 				line.points[1] = collision_point - global_position
 				should_spawn_child = true
 			elif (Enums.is_vertical(direction)):

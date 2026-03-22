@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://utunhux5xaso"]
+[gd_scene load_steps=63 format=3 uid="uid://utunhux5xaso"]
 
 [ext_resource type="Script" uid="uid://hledp1xoysq1" path="res://agents/teleporter/teleporter.gd" id="1_wok2c"]
 [ext_resource type="Texture2D" uid="uid://carg475anuqrn" path="res://agents/teleporter/sprites/twinkle1.png" id="3_4tlvn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://baqs7hijaqpyy" path="res://agents/teleporter/sprites/twinkle4.png" id="6_eq6yf"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="7_yrgjr"]
 [ext_resource type="Texture2D" uid="uid://bk6seqpxkj8wm" path="res://agents/teleporter/sprites/destination_frames.png" id="10_4xowe"]
+[ext_resource type="Texture2D" uid="uid://bnae1wupxmcvi" path="res://agents/teleporter/sprites/teleporter_light_frames.png" id="11_q80g7"]
 [ext_resource type="Material" uid="uid://cdj0kefpjqu80" path="res://agents/teleporter/respawn_particle_material.tres" id="12_q80g7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_swgog"]
@@ -24,7 +25,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_swgog")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
@@ -39,52 +40,74 @@ particles_anim_loop = true
 atlas = ExtResource("3_swgog")
 region = Rect2(32, 0, 32, 96)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bi32p"]
-atlas = ExtResource("3_swgog")
-region = Rect2(128, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mvrti"]
-atlas = ExtResource("3_swgog")
-region = Rect2(224, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4tlvn"]
-atlas = ExtResource("3_swgog")
-region = Rect2(320, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hkms6"]
-atlas = ExtResource("3_hkms6")
-region = Rect2(0, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rg0i6"]
-atlas = ExtResource("3_hkms6")
-region = Rect2(32, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w72eu"]
-atlas = ExtResource("3_hkms6")
-region = Rect2(64, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eq6yf"]
-atlas = ExtResource("3_hkms6")
-region = Rect2(96, 0, 32, 96)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idmjr"]
-atlas = ExtResource("3_hkms6")
-region = Rect2(128, 0, 32, 96)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_4xowe"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_por8y")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_por8y"]
+script = ExtResource("5_rg0i6")
+signal_id = "particle_time"
+animation = "player_teleport"
+frame = 4
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhnav"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(32, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q2vx"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(128, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4nrb"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(224, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eh5io"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(320, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fw7so"]
+atlas = ExtResource("3_hkms6")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjooo"]
+atlas = ExtResource("3_hkms6")
+region = Rect2(32, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oofy3"]
+atlas = ExtResource("3_hkms6")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wb2r"]
+atlas = ExtResource("3_hkms6")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck0f4"]
+atlas = ExtResource("3_hkms6")
+region = Rect2(128, 0, 32, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fw7so"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhnav")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bi32p")
+"texture": SubResource("AtlasTexture_2q2vx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mvrti")
+"texture": SubResource("AtlasTexture_a4nrb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4tlvn")
+"texture": SubResource("AtlasTexture_eh5io")
 }],
 "loop": true,
 "name": &"default",
@@ -92,26 +115,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hkms6")
+"texture": SubResource("AtlasTexture_fw7so")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rg0i6")
+"texture": SubResource("AtlasTexture_qjooo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w72eu")
+"texture": SubResource("AtlasTexture_oofy3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_eq6yf")
+"texture": SubResource("AtlasTexture_2wb2r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_idmjr")
+"texture": SubResource("AtlasTexture_ck0f4")
 }],
 "loop": false,
 "name": &"player_teleport",
 "speed": 10.0
 }]
 
-[sub_resource type="Resource" id="Resource_por8y"]
+[sub_resource type="Resource" id="Resource_m0w3q"]
 script = ExtResource("5_rg0i6")
 signal_id = "particle_time"
 animation = "player_teleport"
@@ -237,13 +260,134 @@ animation = "respawn_player"
 frame = 7
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysxxu"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5hw5"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_athml"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(192, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elnem"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(288, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvb3k"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnieg"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oodk7"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(32, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ule3x"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(64, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6spn8"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bwxd"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(128, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_angki"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(160, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi0xe"]
+atlas = ExtResource("10_4xowe")
+region = Rect2(192, 0, 32, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qjooo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysxxu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5hw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_athml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_elnem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qvb3k")
+}],
+"loop": false,
+"name": &"respawn_object",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnieg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oodk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ule3x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6spn8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bwxd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_angki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mi0xe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnieg")
+}],
+"loop": false,
+"name": &"respawn_player",
+"speed": 10.0
+}]
+
+[sub_resource type="Resource" id="Resource_oofy3"]
+script = ExtResource("5_rg0i6")
+signal_id = "make_entity_visble"
+animation = "respawn_object"
+frame = 2
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_2wb2r"]
+script = ExtResource("5_rg0i6")
+signal_id = "make_entity_visible"
+animation = "respawn_player"
+frame = 7
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
 size = Vector2(24, 18)
 
-[node name="Teleporter" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="Teleporter" type="Node2D" node_paths=PackedStringArray("modulate_nodes", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_wok2c")
+teleported_entity_modulate = Color(0.00839919, 0.0326423, 0.0067576, 1)
+modulate_nodes = [NodePath("Node2D/TeleporterBaseFront/Lights"), NodePath("TeleporterBaseBack/DespawnParticles"), NodePath("Target/YSortOffset/TargetSprite/Lights")]
 default_action_beat = 2.5
 sprite = NodePath("Node2D/TeleporterBaseFront")
 default_animation = "none"
@@ -253,7 +397,10 @@ metadata/_custom_type_script = "uid://dxn7tnanjy6px"
 position = Vector2(0, -45)
 sprite_frames = SubResource("SpriteFrames_hkms6")
 
-[node name="DespawnParticles" type="GPUParticles2D" parent="TeleporterBaseBack"]
+[node name="DespawnParticles" type="Node2D" parent="TeleporterBaseBack"]
+
+[node name="DespawnParticles" type="GPUParticles2D" parent="TeleporterBaseBack/DespawnParticles"]
+modulate = Color(2.43, 4.865, 1.155, 1)
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("3_4tlvn")
@@ -263,7 +410,7 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = ExtResource("4_eq6yf")
 
-[node name="DespawnParticles2" type="GPUParticles2D" parent="TeleporterBaseBack"]
+[node name="DespawnParticles2" type="GPUParticles2D" parent="TeleporterBaseBack/DespawnParticles"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("4_4xowe")
@@ -272,7 +419,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = ExtResource("4_eq6yf")
 
-[node name="DespawnParticles3" type="GPUParticles2D" parent="TeleporterBaseBack"]
+[node name="DespawnParticles3" type="GPUParticles2D" parent="TeleporterBaseBack/DespawnParticles"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("5_w72eu")
@@ -282,7 +429,7 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = ExtResource("4_eq6yf")
 
-[node name="DespawnParticles4" type="GPUParticles2D" parent="TeleporterBaseBack"]
+[node name="DespawnParticles4" type="GPUParticles2D" parent="TeleporterBaseBack/DespawnParticles"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("6_eq6yf")
@@ -297,10 +444,19 @@ process_material = ExtResource("4_eq6yf")
 [node name="TeleporterBaseFront" type="AnimatedSprite2D" parent="Node2D"]
 position = Vector2(0, -45)
 sprite_frames = SubResource("SpriteFrames_4xowe")
-animation = &"player_teleport"
 autoplay = "default"
 script = ExtResource("5_rehqy")
 signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_por8y")])
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Lights" type="AnimatedSprite2D" parent="Node2D/TeleporterBaseFront"]
+sprite_frames = SubResource("SpriteFrames_fw7so")
+animation = &"player_teleport"
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+script = ExtResource("5_rehqy")
+signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_m0w3q")])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Target" type="Node2D" parent="."]
@@ -320,7 +476,15 @@ script = ExtResource("5_rehqy")
 signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_4xowe"), SubResource("Resource_w72eu")])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="RespawnParticles" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite"]
+[node name="Lights" type="AnimatedSprite2D" parent="Target/YSortOffset/TargetSprite"]
+sprite_frames = SubResource("SpriteFrames_qjooo")
+animation = &"respawn_object"
+autoplay = "default"
+script = ExtResource("5_rehqy")
+signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_oofy3"), SubResource("Resource_2wb2r")])
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="RespawnParticles" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite/Lights"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("3_4tlvn")
@@ -330,7 +494,7 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = ExtResource("12_q80g7")
 
-[node name="RespawnParticles2" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite"]
+[node name="RespawnParticles2" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite/Lights"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("4_4xowe")
@@ -340,7 +504,7 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = ExtResource("12_q80g7")
 
-[node name="RespawnParticles3" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite"]
+[node name="RespawnParticles3" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite/Lights"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("5_w72eu")
@@ -350,7 +514,7 @@ explosiveness = 1.0
 randomness = 1.0
 process_material = ExtResource("12_q80g7")
 
-[node name="RespawnParticles4" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite"]
+[node name="RespawnParticles4" type="GPUParticles2D" parent="Target/YSortOffset/TargetSprite/Lights"]
 material = SubResource("CanvasItemMaterial_q80g7")
 emitting = false
 texture = ExtResource("6_eq6yf")

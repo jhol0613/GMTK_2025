@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://44m1kxxusxto"]
+[gd_scene format=3 uid="uid://bglfa6yjunqqq"]
 
 [node name="TestBackground" type="Node2D"]
 z_index = -100
@@ -7,18 +7,18 @@ z_index = -100
 offset_right = 600.0
 offset_bottom = 450.0
 mouse_filter = 2
-color = Color(0.538885, 0.129354, 0.79163, 1)
+color = Color(0.451761, 0.395123, 0.118619, 1)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 216.0
 offset_top = 39.0
 offset_right = 405.0
 offset_bottom = 62.0
-text = "TEST WORLD"
+text = "WORLD 3 PLACEHOLDER"
 
 [node name="Label2" type="Label" parent="."]
 offset_left = 219.0
 offset_top = 385.0
 offset_right = 408.0
 offset_bottom = 408.0
-text = "TEST WORLD"
+text = "WORLD 3 PLACEHOLDER	"
