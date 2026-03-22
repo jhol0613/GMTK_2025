@@ -5,9 +5,6 @@ extends Node2D
 ## Scenes must explicitly set pause enabled to true
 @export var pause_enabled := false
 
-@export_subgroup("Save Files")
-@export var save_file_path := "user://save_data.json"
-
 @export_subgroup("Animation")
 @export var default_fade_out_time := 1.0
 @export var default_fade_in_time := 1.0
@@ -21,34 +18,6 @@ extends Node2D
 @onready var _transition_in_time = default_fade_in_time
 
 @onready var _pause_layer: CanvasLayer
-
-var _save_data: Dictionary
-
-func _ready():
-	_load_save_data()
-
-
-func _load_save_data():
-	if FileAccess.file_exists(save_file_path):
-		var json = JSON.new()
-		var json_string = FileAccess.get_file_as_string(save_file_path)
-		var error = json.parse(json_string)
-		if error == OK:
-			if typeof(json.data) == TYPE_DICTIONARY:
-				_save_data = json.data
-	else:
-		# Create new save data if it doesn't exist yet
-		_save_data = {
-			"farthest_level_reached": 0,
-			"collectibles_acquired": []}
-		_save_save_data()
-
-func _save_save_data():
-	var json_string = JSON.stringify(_save_data)
-	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
-	print(FileAccess.get_open_error())
-	file.store_string(json_string)
-	file.close()
 
 func load_scene(scene: Enums.Scenes, transition_style = Enums.TransitionStyle.FADEINOUT, transition_in_time = default_fade_in_time,
 	transition_out_time = default_fade_out_time):
@@ -75,14 +44,6 @@ func pause_game():
 func unpause_game():
 	get_tree().paused = false
 	_pause_layer.queue_free()
-
-#func update_furthest_level_reached(world: int, level: int):
-	#pass
-
-func save_collectible(id: String):
-	if  !_save_data["collectibles_acquired"].has(id):
-		_save_data["collectibles_acquired"].append(id)
-		_save_save_data()
 
 func _load_scene(scene_to_load: Enums.Scenes):
 	get_tree().call_deferred("change_scene_to_packed", scene_dict.get(scene_to_load))
