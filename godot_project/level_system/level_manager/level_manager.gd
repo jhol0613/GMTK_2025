@@ -80,7 +80,9 @@ var _player_hidden = false
 var _player_newly_hidden = false
 
 func _ready() -> void:
-	_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
+	var loaded_level = SaveManager.save_data.furthest_level_reached["level"]
+	var loaded_world = SaveManager.save_data.furthest_level_reached["world"]
+	_level_scene = GameManager.level_catalog.get_level(loaded_world, loaded_level).instantiate()
 
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)

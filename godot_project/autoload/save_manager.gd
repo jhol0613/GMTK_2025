@@ -47,6 +47,8 @@ func load_solution(level_index: Dictionary, index: int) -> Array[Enums.PlayerAct
 func _ready() -> void:
 	if not FileAccess.file_exists(save_data_path):
 		save_data = SaveData.new()
+		save_data.furthest_level_reached["world"] = GameManager.start_world
+		save_data.furthest_level_reached["level"] = GameManager.start_level
 		save_game()
 	else:
 		load_game()
