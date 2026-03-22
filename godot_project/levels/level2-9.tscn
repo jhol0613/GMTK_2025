@@ -19,9 +19,19 @@ tile_map_data = PackedByteArray("AAABAAEABAAAAAAAAAADAAEABAABAAAAAAACAAEABAACAAA
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_apg4g")]
 position = Vector2(80, 26)
 
-[node name="SnackCartObstacle" parent="." index="10" instance=ExtResource("3_apg4g")]
+[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_apg4g")]
 position = Vector2(238, 87)
 movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
 
 [node name="Treadmill" parent="." index="11" instance=ExtResource("4_23alx")]
 position = Vector2(112, 72)

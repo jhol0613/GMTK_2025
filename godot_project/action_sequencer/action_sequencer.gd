@@ -232,6 +232,22 @@ func update_sequencer_data(new_available_slots: int, new_available_actions: Arra
 	_clear_action_slots()
 	_enter_thinking_mode()
 
+func set_current_sequence(sequence: Array[Enums.PlayerAction]) -> void:
+	for slot in _initialized_slots:
+		slot.set_action(Enums.PlayerAction.NONE, true)
+
+	for i in range(min(_available_slots, sequence.size())):
+		var slot = _initialized_slots[i]
+		slot.set_action(sequence[i], true)
+
+func get_current_sequence() -> Array[Enums.PlayerAction]:
+	var sequence: Array[Enums.PlayerAction] = []
+
+	for i in range(_available_slots):
+		sequence.append(_initialized_slots[i].action)
+
+	return sequence
+
 func _enter_thinking_mode():
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
 	current_state = SequencingState.SEQUENCING
