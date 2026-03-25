@@ -10,7 +10,7 @@ var original_heights: Array[int]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sequencer_control_scene = load("uid://d8l1lrlubiip")
+	sequencer_control_scene_UID = "uid://d8l1lrlubiip"
 	super._ready()
 	for laser in lasers:
 		original_heights.append(laser.height)

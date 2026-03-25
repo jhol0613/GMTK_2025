@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6v2ik65uj1ou"]
+
+[ext_resource type="Script" uid="uid://dwovapaxcfys" path="res://action_sequencer/sequencer_screen/screen_ui_components/digipad_cycle.gd" id="1_yuhax"]
+[ext_resource type="Texture2D" uid="uid://bhx0gfkqrnsum" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_unselected.png" id="2_i1rw1"]
+[ext_resource type="Texture2D" uid="uid://dabsvkcrhwqih" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_selected.png" id="3_ii2ja"]
+[ext_resource type="Texture2D" uid="uid://bbajqdinllhdf" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_hovered.png" id="4_whtpy"]
+[ext_resource type="Texture2D" uid="uid://q6nl70tqhple" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_unselected.png" id="5_il2lh"]
+[ext_resource type="Texture2D" uid="uid://qkjn05fh3jaa" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_selected.png" id="6_436kf"]
+[ext_resource type="Texture2D" uid="uid://cy6hqkmyvj7xr" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_hovered.png" id="7_ultlu"]
+
+[node name="DigipadCycle" type="Node2D"]
+script = ExtResource("1_yuhax")
+
+[node name="Left" type="TextureButton" parent="."]
+offset_left = -25.0
+offset_top = -11.0
+offset_right = -14.0
+offset_bottom = 12.0
+texture_normal = ExtResource("2_i1rw1")
+texture_pressed = ExtResource("3_ii2ja")
+texture_hover = ExtResource("4_whtpy")
+
+[node name="Right" type="TextureButton" parent="."]
+offset_left = 13.0
+offset_top = -11.0
+offset_right = 24.0
+offset_bottom = 12.0
+texture_normal = ExtResource("5_il2lh")
+texture_pressed = ExtResource("6_436kf")
+texture_hover = ExtResource("7_ultlu")
+
+[node name="OptionLabel" type="Label" parent="."]
+offset_left = -11.0
+offset_top = -17.0
+offset_right = 10.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.596078, 0.870588, 0.364706, 1)
+theme_override_font_sizes/font_size = 23
+text = "A	"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+offset_left = -11.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 11.0
+border_color = Color(0.596078, 0.870588, 0.364706, 1)
+border_width = 2.0
+editor_only = false

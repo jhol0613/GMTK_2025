@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://utunhux5xaso"]
+[gd_scene load_steps=64 format=3 uid="uid://utunhux5xaso"]
 
 [ext_resource type="Script" uid="uid://hledp1xoysq1" path="res://agents/teleporter/teleporter.gd" id="1_wok2c"]
 [ext_resource type="Texture2D" uid="uid://carg475anuqrn" path="res://agents/teleporter/sprites/twinkle1.png" id="3_4tlvn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://bk6seqpxkj8wm" path="res://agents/teleporter/sprites/destination_frames.png" id="10_4xowe"]
 [ext_resource type="Texture2D" uid="uid://bnae1wupxmcvi" path="res://agents/teleporter/sprites/teleporter_light_frames.png" id="11_q80g7"]
 [ext_resource type="Material" uid="uid://cdj0kefpjqu80" path="res://agents/teleporter/respawn_particle_material.tres" id="12_q80g7"]
+[ext_resource type="Texture2D" uid="uid://dtekfyw2evlma" path="res://decorations/basic_light.tres" id="14_x86ak"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_swgog"]
 atlas = ExtResource("3_swgog")
@@ -382,12 +383,13 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
 size = Vector2(24, 18)
 
-[node name="Teleporter" type="Node2D" node_paths=PackedStringArray("modulate_nodes", "sprite")]
+[node name="Teleporter" type="Node2D" node_paths=PackedStringArray("modulate_nodes", "glow_nodes", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_wok2c")
 teleported_entity_modulate = Color(0.00839919, 0.0326423, 0.0067576, 1)
 modulate_nodes = [NodePath("Node2D/TeleporterBaseFront/Lights"), NodePath("TeleporterBaseBack/DespawnParticles"), NodePath("Target/YSortOffset/TargetSprite/Lights")]
+glow_nodes = [NodePath("Target/YSortOffset/TargetSprite/Glow")]
 default_action_beat = 2.5
 sprite = NodePath("Node2D/TeleporterBaseFront")
 default_animation = "none"
@@ -523,6 +525,10 @@ one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 process_material = ExtResource("12_q80g7")
+
+[node name="Glow" type="PointLight2D" parent="Target/YSortOffset/TargetSprite"]
+position = Vector2(0, 37)
+texture = ExtResource("14_x86ak")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 2

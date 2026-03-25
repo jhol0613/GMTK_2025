@@ -80,5 +80,15 @@ position = Vector2(272, 54)
 direction = 3
 grid_origin = Vector2i(8, 2)
 
-[node name="SnackCartObstacle" parent="." index="22" instance=ExtResource("4_ahmw1")]
+[node name="SnackCartObstacle" parent="." index="22" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_ahmw1")]
 position = Vector2(16, 31)
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}

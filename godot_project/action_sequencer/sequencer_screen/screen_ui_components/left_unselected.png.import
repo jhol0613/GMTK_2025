@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chhml3enxlbh5"
-path="res://.godot/imported/up_unselected.png-403f4937218a2a367dc6cc783c7a46f6.ctex"
+uid="uid://bhx0gfkqrnsum"
+path="res://.godot/imported/left_unselected.png-41db9d85ad05d4f33b5cff270f215da6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/digipad/up_unselected.png"
-dest_files=["res://.godot/imported/up_unselected.png-403f4937218a2a367dc6cc783c7a46f6.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_ui_components/left_unselected.png"
+dest_files=["res://.godot/imported/left_unselected.png-41db9d85ad05d4f33b5cff270f215da6.ctex"]
 
 [params]
 

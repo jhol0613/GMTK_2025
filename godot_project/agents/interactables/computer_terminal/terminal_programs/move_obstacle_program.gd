@@ -8,7 +8,7 @@ class_name MoveObstacleProgram
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sequencer_control_scene = load("uid://cwm6kjroqw6hn")
+	sequencer_control_scene_UID = "uid://cwm6kjroqw6hn"
 	super._ready()
 
 func initialize_screen(screen_scene: MoveCartScreen):

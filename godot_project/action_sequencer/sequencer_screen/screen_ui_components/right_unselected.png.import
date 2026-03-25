@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhfqaklv6pc55"
-path="res://.godot/imported/up_hovered.png-11dc83b095d4545fc8251b7e7926bc5e.ctex"
+uid="uid://q6nl70tqhple"
+path="res://.godot/imported/right_unselected.png-66f7067189ba36d2194632f343900ccd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/digipad/up_hovered.png"
-dest_files=["res://.godot/imported/up_hovered.png-11dc83b095d4545fc8251b7e7926bc5e.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_ui_components/right_unselected.png"
+dest_files=["res://.godot/imported/right_unselected.png-66f7067189ba36d2194632f343900ccd.ctex"]
 
 [params]
 

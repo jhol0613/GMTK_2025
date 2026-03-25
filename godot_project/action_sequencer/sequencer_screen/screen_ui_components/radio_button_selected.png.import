@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h5daitayoe8t"
-path="res://.godot/imported/down_hovered.png-ddac49a2e5ea599d0627247ca43a8401.ctex"
+uid="uid://qyvtiesbns7i"
+path="res://.godot/imported/radio_button_selected.png-3d2cf7e7a014bae15e7bc46a0b301e28.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/digipad/down_hovered.png"
-dest_files=["res://.godot/imported/down_hovered.png-ddac49a2e5ea599d0627247ca43a8401.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_ui_components/radio_button_selected.png"
+dest_files=["res://.godot/imported/radio_button_selected.png-3d2cf7e7a014bae15e7bc46a0b301e28.ctex"]
 
 [params]
 

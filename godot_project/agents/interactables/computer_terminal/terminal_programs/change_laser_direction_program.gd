@@ -7,7 +7,7 @@ class_name TurnLaserProgram
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sequencer_control_scene = load("uid://dw1sgggrlnrke")
+	sequencer_control_scene_UID = "uid://dw1sgggrlnrke"
 	super._ready()
 
 func initialize_screen(screen_scene: ChangeLaserDirectionScreen):

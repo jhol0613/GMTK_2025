@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxx1mrwugq8vj"]
+[gd_scene load_steps=18 format=3 uid="uid://dxx1mrwugq8vj"]
 
 [ext_resource type="Texture2D" uid="uid://b21uk1rb7q23y" path="res://agents/teleporter/sprites/teleporter_frames.png" id="1_4wbou"]
 [ext_resource type="Script" uid="uid://cyl62mr0g5ds8" path="res://agents/teleporter/teleporter_top.gd" id="1_mjewp"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="2_mjewp"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="4_ncfnh"]
+[ext_resource type="Texture2D" uid="uid://dtekfyw2evlma" path="res://decorations/basic_light.tres" id="5_a5r7c"]
 [ext_resource type="Texture2D" uid="uid://bnae1wupxmcvi" path="res://agents/teleporter/sprites/teleporter_light_frames.png" id="5_q1i2a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5r7c"]
@@ -23,9 +24,9 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_q1i2a"]
 script = ExtResource("4_ncfnh")
-signal_id = "powered_up"
+signal_id = "light1"
 animation = "power_up"
-frame = 2
+frame = 0
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qgsux"]
@@ -76,10 +77,25 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="TeleporterTop" type="Node2D" node_paths=PackedStringArray("sprite")]
+[sub_resource type="Resource" id="Resource_a5r7c"]
+script = ExtResource("4_ncfnh")
+signal_id = "light2"
+animation = "power_up"
+frame = 1
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_ufu4w"]
+script = ExtResource("4_ncfnh")
+signal_id = "light3"
+animation = "power_up"
+frame = 2
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[node name="TeleporterTop" type="Node2D" node_paths=PackedStringArray("lights_sprite", "lights")]
 z_index = 1
 script = ExtResource("1_mjewp")
-sprite = NodePath("Lights")
+lights_sprite = NodePath("Lights")
+lights = [NodePath("StaticSprite/Light1"), NodePath("StaticSprite/Light2"), NodePath("StaticSprite/Light3")]
 
 [node name="StaticSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -47)
@@ -91,12 +107,33 @@ default_animation_offset = -0.3
 synch_framerates_to_bpm = false
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
+[node name="Light1" type="PointLight2D" parent="StaticSprite"]
+visible = false
+position = Vector2(-8, -28)
+energy = 0.8
+texture = ExtResource("5_a5r7c")
+texture_scale = 0.33
+
+[node name="Light2" type="PointLight2D" parent="StaticSprite"]
+visible = false
+position = Vector2(0, -28)
+energy = 0.8
+texture = ExtResource("5_a5r7c")
+texture_scale = 0.33
+
+[node name="Light3" type="PointLight2D" parent="StaticSprite"]
+visible = false
+position = Vector2(9, -28)
+energy = 0.8
+texture = ExtResource("5_a5r7c")
+texture_scale = 0.33
+
 [node name="Lights" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -47)
 sprite_frames = SubResource("SpriteFrames_q1i2a")
 animation = &"power_up"
 script = ExtResource("2_mjewp")
-signals = Array[ExtResource("4_ncfnh")]([SubResource("Resource_q1i2a")])
+signals = Array[ExtResource("4_ncfnh")]([SubResource("Resource_q1i2a"), SubResource("Resource_a5r7c"), SubResource("Resource_ufu4w")])
 default_animation_offset = -0.3
 synch_framerates_to_bpm = false
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

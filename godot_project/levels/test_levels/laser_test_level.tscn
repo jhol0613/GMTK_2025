@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3ups0rsbp08v"]
+[gd_scene load_steps=8 format=3 uid="uid://b3ups0rsbp08v"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_21cbe"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_1o8fn"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_h05u1"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_7nff7"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="7_21cbe"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="9_5i52b"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="9_5tchc"]
 
@@ -58,5 +59,24 @@ lasers = [NodePath("../..")]
 new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
+[node name="SpinningChair" parent="." index="11" instance=ExtResource("7_21cbe")]
+position = Vector2(206, 91)
+
+[node name="Antenna" parent="SpinningChair" index="11" instance=ExtResource("9_5i52b")]
+offset_left = -43.0
+offset_top = -8.0
+offset_right = -12.0
+offset_bottom = 11.0
+
+[node name="AnimatedSprite2DSignals" parent="SpinningChair/Antenna" index="0"]
+position = Vector2(91, -26)
+
+[node name="Button" parent="SpinningChair/Antenna" index="1"]
+offset_left = -2.0
+offset_top = -45.0
+offset_right = 84.0
+offset_bottom = -14.0
+
 [editable path="Treadmill/Antenna"]
 [editable path="Laser/Antenna"]
+[editable path="SpinningChair/Antenna"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cwm6kjroqw6hn"]
 
 [ext_resource type="Script" uid="uid://djqwojcsbltjy" path="res://action_sequencer/sequencer_screen/screen_scenes/move_cart_screen.gd" id="1_jgl75"]
-[ext_resource type="PackedScene" uid="uid://cokbacpxj3ep0" path="res://action_sequencer/sequencer_screen/digipad/digipad_move.tscn" id="2_vn6h8"]
+[ext_resource type="PackedScene" uid="uid://cokbacpxj3ep0" path="res://action_sequencer/sequencer_screen/screen_ui_components/digipad_move.tscn" id="2_vn6h8"]
 [ext_resource type="Texture2D" uid="uid://d0stl0wjqwhuu" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/cart_obstacle_green.png" id="3_mmuae"]
 
 [node name="MoveCartScreen" type="Control" node_paths=PackedStringArray("digipad")]

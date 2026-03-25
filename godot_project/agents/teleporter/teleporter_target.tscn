@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5t6k3wr3u4ta"]
+
+[ext_resource type="Script" uid="uid://bujx52eu2ou1i" path="res://agents/teleporter/teleporter_target.gd" id="1_11fxs"]
+[ext_resource type="Texture2D" uid="uid://ber3gdi3vy416" path="res://agents/teleporter/sprites/inactive_destination.png" id="2_11fxs"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_11fxs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mylfu"]
+atlas = ExtResource("2_11fxs")
+region = Rect2(0, 0, 32, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yxgs8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mylfu")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TeleporterTarget" type="Node2D" node_paths=PackedStringArray("sprite")]
+script = ExtResource("1_11fxs")
+sprite = NodePath("Sprite2D")
+metadata/_custom_type_script = "uid://dxn7tnanjy6px"
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -46)
+sprite_frames = SubResource("SpriteFrames_yxgs8")
+autoplay = "default"
+script = ExtResource("3_11fxs")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

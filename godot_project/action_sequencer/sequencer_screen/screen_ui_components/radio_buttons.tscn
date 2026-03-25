@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://demy3ayc46hro"]
+
+[node name="RadioButtons" type="Node2D"]
+
+[node name="CheckButton" type="TextureButton" parent="."]
+offset_right = 44.0
+offset_bottom = 24.0

@@ -4,7 +4,8 @@ extends Agent
 
 class_name Teleporter
 
-##In-level grid position of the destination tile
+@export var teleporter_color : Enums.TeleporterColor = Enums.TeleporterColor.GREEN: set = _set_color
+##In-level grid position of the destination tile. Active destination will always start as the 
 @export var destination := Vector2i.ZERO:
 	set(new_destination):
 		destination = _validate_destination(new_destination)
@@ -25,7 +26,8 @@ class_name Teleporter
 @export var respawn_modulate_time := .6
 ##Nodes that should be modulated by the teleporter color (this shouldn't have to be changed)
 @export var modulate_nodes : Array[Node2D]
-@export var teleporter_color : Enums.TeleporterColor = Enums.TeleporterColor.GREEN: set = _set_color
+##Glowing light nodes
+@export var glow_nodes: Array[Light2D]
 @export var teleporter_color_definitions : Dictionary[Enums.TeleporterColor, Color] = {
 	Enums.TeleporterColor.PINK: Color("ec29cd"),
 	Enums.TeleporterColor.GREEN: Color("285224"),
@@ -62,18 +64,24 @@ var _editor_has_target := false
 ##Don't allow teleported entities to immediately teleport again
 var teleport_cooldown_list : Array[Movable]
 
+##Array of targets for the various potential destinations
+var destination_targets : Array[TeleporterTarget]
+
 ##Notify level manager that something teleported so it can tell other teleporters not to teleport it
 signal something_teleported(Movable)
 
 func _ready() -> void:
 	super._ready()
 	add_to_group("teleporters")
+	for child in get_children():
+		if child is TeleporterTarget:
+			destination_targets.append(child)
 	if not Engine.is_editor_hint():
 		AudioManager.music_bar.connect(_on_music_bar)
 	if not top:
 		return
 	_set_color(teleporter_color)
-	if AudioManager.beat_time_seconds * default_action_beat < top.sprite.default_animation_offset:
+	if AudioManager.beat_time_seconds * default_action_beat < top.lights_sprite.default_animation_offset:
 		push_warning("Teleporter powerup animation can't be triggered because it would bleed into the
 		previous bar. Either reduce teleporter top animation offset or move teleporter action beat later")
 
@@ -105,14 +113,19 @@ func _update_target_position() -> void:
 
 func _set_color(new_color):
 	teleporter_color = new_color
+	#target_sprite_glow.color = teleporter_color_definitions[teleporter_color]
 	for node: Node2D in modulate_nodes:
 		var color = teleporter_color_definitions[teleporter_color]
 		color.v *= modulate_multiplier
 		node.modulate = color
+	for light: Light2D in glow_nodes:
+		light.color = teleporter_color_definitions[teleporter_color]
 	if top:
 		var color = teleporter_color_definitions[teleporter_color]
+		for light in top.lights:
+			light.color = color
 		color.v *= modulate_multiplier
-		top.sprite.modulate = color
+		top.lights_sprite.modulate = color
 
 #endregion
 
@@ -158,9 +171,10 @@ func _play_respawn_particles():
 func _on_music_bar():
 	if move_mode == Enums.MoveMode.ON_BEAT:
 		if top:
-			await get_tree().create_timer(default_action_beat * AudioManager.beat_time_seconds + top.sprite.default_animation_offset).timeout
-			top.sprite.play_with_signals("power_up")
-			await top.sprite.animation_signal #top sprite should only emit one signal, so no need to check signal id
+			await get_tree().create_timer(default_action_beat * AudioManager.beat_time_seconds + \
+				top.lights_sprite.default_animation_offset).timeout
+			top.power_up()
+			await top.powered_up #top sprite should only emit one signal, so no need to check signal id
 			_on_push_beat_timeout()
 		else:
 			get_tree().create_timer(default_action_beat * AudioManager.beat_time_seconds).timeout.connect(_on_push_beat_timeout)
