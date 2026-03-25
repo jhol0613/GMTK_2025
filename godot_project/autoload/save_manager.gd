@@ -10,6 +10,7 @@ var save_data_path = "user://save_data.tres"
 # Don't forget to save_game() after modifying this!
 var save_data: SaveData
 var enable_save := true
+var run_from_F6 := false
 
 #region Solutions
 

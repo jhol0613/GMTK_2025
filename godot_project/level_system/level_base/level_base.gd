@@ -67,8 +67,10 @@ func _enter_tree() -> void:
 		var index = GameManager.level_catalog.get_index(self)
 		GameManager.start_world = index.get("world")
 		GameManager.start_level = index.get("level")
-		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
+		# flag so game manager knows game was run from F6 (i.e. shouldn't load based on a saved game)
+		SaveManager.run_from_F6 = true 
 		SaveManager.enable_save = false # disable saving for random levels in the editor
+		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
 func _ready() -> void:
 	var children = find_children("*", "", true) # find children recursively
