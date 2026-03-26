@@ -53,10 +53,10 @@ metadata/_custom_type_script = "uid://edi48oyem1ac"
 
 [node name="Teleporter" parent="." index="10" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
 position = Vector2(80, 87)
+teleporter_color = 0
 destination = Vector2i(4, 2)
 top = NodePath("../TeleporterTop")
 modulate_multiplier = 7.0
-teleported_entity_modulate = Color(0.157884, 0.32006, 0.139416, 1)
 grid_origin = Vector2i(2, 4)
 default_action_beat = 1.0
 

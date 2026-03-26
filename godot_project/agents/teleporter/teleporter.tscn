@@ -387,7 +387,6 @@ size = Vector2(24, 18)
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_wok2c")
-teleported_entity_modulate = Color(0.00839919, 0.0326423, 0.0067576, 1)
 modulate_nodes = [NodePath("Node2D/TeleporterBaseFront/Lights"), NodePath("TeleporterBaseBack/DespawnParticles"), NodePath("Target/YSortOffset/TargetSprite/Lights")]
 glow_nodes = [NodePath("Target/YSortOffset/TargetSprite/Glow")]
 default_action_beat = 2.5

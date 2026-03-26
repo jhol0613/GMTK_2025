@@ -18,12 +18,8 @@ class_name Teleporter
 ##Because modulate values need to be grreater than 1 to get to white, multiply the selected teleporter color
 ##(as defined in the script by teleporter_color_definitions) by this value
 @export var modulate_multiplier := 3.0
-##The color to modulate entities when they teleport since not every entity has a bespoke teleport animation
-@export var teleported_entity_modulate := Color("#64bc5a")
 ##Amount of time to show modulated version of teleported entity before they disappear
 @export var despawn_modulate_time := .6
-##Amount of time to show modulated version of teleported entity when they respawn before going back to normal
-@export var respawn_modulate_time := .6
 ##Nodes that should be modulated by the teleporter color (this shouldn't have to be changed)
 @export var modulate_nodes : Array[Node2D]
 ##Glowing light nodes
@@ -133,18 +129,37 @@ func _teleport(entity: Movable) -> void:
 	var original_modulate = entity.modulate
 	something_teleported.emit(entity)
 	entity.interrupt_queued_action(true)
-	entity.queue_teleportation(destination)
+	
 	if entity is PlayerCharacter: #special case for player character since we have art for it
+		entity.queue_teleportation(destination)
 		entity.visible = false
 		base_sprite_lights.play_with_signals("player_teleport")
 		await base_sprite_lights.animation_signal # only signal should be when it's time for particles to play
 	else:
-		entity.modulate = teleported_entity_modulate
+		# set to appropriate color and brighten slightly since entity is probably not coming from grayscale image
+		entity.modulate = teleporter_color_definitions[teleporter_color] * Color(1.5, 1.5, 1.5, 0.8) 
+		var tween = get_tree().create_tween()
+		tween.tween_method(
+			_stairstep_tween.bind(entity), 
+			Vector2(1,1), 
+			Vector2(0,0), 
+			# object teleport animation should take the same time as player teleport animation
+			base_sprite_lights.get_animation_duration("player_teleport")
+		)
+		await tween.finished
+		entity.queue_teleportation(destination)
 	_play_despawn_particles()
-	if entity is not PlayerCharacter:
-		await get_tree().create_timer(despawn_modulate_time).timeout
 	await get_tree().create_timer(respawn_delay).timeout
 	_play_respawn_particles()
+	if entity is not PlayerCharacter:
+		var tween = get_tree().create_tween()
+		tween.tween_method(
+			_stairstep_tween.bind(entity), 
+			Vector2(0,0), 
+			Vector2(1,1), 
+			# object teleport animation should take the same time as player teleport animation
+			base_sprite_lights.get_animation_duration("player_teleport")
+		)
 	await get_tree().create_timer(respawn_delay).timeout
 	base_sprite_lights.play_with_signals("default")
 	if entity is PlayerCharacter:
@@ -155,8 +170,11 @@ func _teleport(entity: Movable) -> void:
 	await target_sprite_lights.animation_signal
 	entity.visible = true
 	if entity is not PlayerCharacter:
-		await get_tree().create_timer(respawn_modulate_time).timeout
+		#await get_tree().create_timer(respawn_modulate_time).timeout
 		entity.modulate = original_modulate
+
+func _stairstep_tween(value: Vector2, entity):
+	entity.scale = floor(value * 5.0) / 5.0 #lazy coding. Currently hardcoded to frame rate of 5 for this tween
 
 ##Play this animation at teleporter origin when something gets teleported
 func _play_despawn_particles():

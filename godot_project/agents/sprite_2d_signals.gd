@@ -47,7 +47,13 @@ func get_animation_offset_seconds(animation_name: String) -> float:
 		return animation_offsets.get(animation_name, default_animation_offset) * AudioManager.beat_time_seconds
 	else: #just use seconds if not synching frames to bpm
 		return animation_offsets.get(animation_name, default_animation_offset)
-	
+
+##Returns duration of the animation in seconds
+func get_animation_duration(animation_name: String) -> float:
+	var duration := 0.0
+	for i in range(sprite_frames.get_frame_count(animation_name)):
+		duration += sprite_frames.get_frame_duration(animation_name, i)
+	return duration / sprite_frames.get_animation_speed(animation_name)
 
 func _on_timeout(signal_id: String):
 	animation_signal.emit(signal_id)
