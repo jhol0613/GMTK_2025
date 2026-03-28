@@ -80,9 +80,10 @@ func set_max_fire_distance_by_grid_spaces(grid_spaces: int, limit_is_wall: bool)
 func set_direction(new_direction: Enums.Direction):
 	direction = new_direction
 	_set_height(height) #Sets up the beam root with new direction
-	#_construct()
+	
 	# Level manager needs to set new max beam length based on the obstacle grid
 	direction_changed.emit(self)
+	_construct()
 
 func _fire(anim_signal_id: String):
 	if anim_signal_id != "fire":

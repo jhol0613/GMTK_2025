@@ -112,13 +112,15 @@ func _ready() -> void:
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 
-## Returns number of cells in given direction before hitting an obstacle
-func get_cells_to_obstacle(grid_position: Vector2i, direction: Enums.Direction):
+##Returns number of cells in given direction before hitting an obstacle. Cells with heights less
+##than clearing_height will be ignored
+func get_cells_to_obstacle(grid_position: Vector2i, direction: Enums.Direction, ignore_movables = false, clearing_height = 0):
+	print(clearing_height)
 	var cells = 0
 	var check_position = grid_position
 	for i in range(100):
 		check_position = check_position + Enums.direction_to_vector(direction)
-		if !is_cell_navigable(check_position):
+		if !is_cell_navigable(check_position, ignore_movables, clearing_height):
 			return cells
 		cells += 1
 
@@ -155,14 +157,18 @@ func get_traversible_neighbors(grid_position: Vector2i) -> Array[Vector2i]:
 
 	return neighbors_to_return
 
-func is_cell_navigable(grid_position: Vector2i) -> bool:
+func is_cell_navigable(grid_position: Vector2i, ignore_movables = false, clearing_height = 0) -> bool:
 	var cell_exists = does_cell_exist(grid_position)
 
 	var tile_data = _obstacle_layer.get_cell_tile_data(grid_position)
 	var cell_traversible = true # Traversible if the cell is unoccupied
+	var blocking_height = 0
 	if tile_data:
 		cell_traversible = tile_data.get_custom_data("Traversible")
-	cell_traversible = cell_traversible and not _obstacle_overrides.has(grid_position)
+		blocking_height = tile_data.get_custom_data("LaserBlockingHeight")
+		print(blocking_height)
+	cell_traversible = cell_traversible and (not _obstacle_overrides.has(grid_position) or ignore_movables) 
+	cell_traversible = cell_traversible or clearing_height > blocking_height
 
 	return cell_exists and cell_traversible
 

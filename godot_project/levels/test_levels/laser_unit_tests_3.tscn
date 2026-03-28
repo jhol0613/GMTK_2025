@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://i0ptr4hy1cj6"]
+[gd_scene load_steps=8 format=3 uid="uid://i0ptr4hy1cj6"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_mi1oy"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_45wtd"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_45wtd"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="4_dtmfp"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="5_dtmfp"]
+[ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="6_p4wgu"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="7_rfeq1"]
 
 [node name="LevelBase" instance=ExtResource("1_mi1oy")]
 conductor_enabled = false
@@ -11,6 +14,7 @@ available_actions = Array[int]([1, 2, 3, 4, 5, 6, 7])
 
 [node name="Laser" parent="." index="9" instance=ExtResource("2_45wtd")]
 position = Vector2(48, 42)
+height = 50
 grid_origin = Vector2i(1, 2)
 activation_sequence = Array[bool]([true, false, false, false])
 
@@ -34,3 +38,55 @@ script = ExtResource("4_dtmfp")
 lasers = [NodePath("../../Laser")]
 new_height = 38
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="Laser2" parent="." index="12" instance=ExtResource("2_45wtd")]
+position = Vector2(144, 60)
+direction = 3
+height = 7
+grid_origin = Vector2i(4, 3)
+default_animation = "fire_right"
+
+[node name="Antenna" parent="Laser2" index="5" instance=ExtResource("5_dtmfp")]
+offset_left = -14.0
+offset_top = -8.0
+offset_right = 17.0
+offset_bottom = 11.0
+
+[node name="AnimatedSprite2DSignals" parent="Laser2/Antenna" index="0"]
+position = Vector2(25, -8)
+
+[node name="Button" parent="Laser2/Antenna" index="1"]
+offset_top = -1.0
+offset_bottom = 18.0
+
+[node name="TurnLaserProgram" type="Node" parent="Laser2/Antenna" index="2" node_paths=PackedStringArray("lasers")]
+script = ExtResource("6_p4wgu")
+lasers = [NodePath("../..")]
+metadata/_custom_type_script = "uid://b23y6rruo1ixg"
+
+[node name="Antenna" parent="." index="13" instance=ExtResource("5_dtmfp")]
+offset_left = 225.0
+offset_top = 32.0
+offset_right = 256.0
+offset_bottom = 51.0
+
+[node name="ChangeLaserHeightProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("lasers")]
+script = ExtResource("4_dtmfp")
+lasers = [NodePath("../../Laser2")]
+metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="SnackCartObstacle" parent="." index="14" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("7_rfeq1")]
+position = Vector2(208, 68)
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
+
+[editable path="Laser2/Antenna"]
+[editable path="Antenna"]

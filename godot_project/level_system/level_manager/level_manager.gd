@@ -322,7 +322,7 @@ func _initialize_lasers() -> void:
 
 ##Update max laser firing distance based on level static obstacles
 func _update_laser_firing_distance(laser: Laser) -> void:
-	var cells_to_obstacle = _level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction)
+	var cells_to_obstacle = _level_scene.get_cells_to_obstacle(laser.grid_position, laser.direction, true, laser.height)
 	var cells_to_wall = _level_scene.get_cells_to_level_edge(laser.grid_position, laser.direction)
 	laser.set_max_fire_distance_by_grid_spaces(cells_to_obstacle, cells_to_obstacle == cells_to_wall)
 
