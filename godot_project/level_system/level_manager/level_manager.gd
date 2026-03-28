@@ -382,11 +382,13 @@ func _update_obstacles():
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 ## Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
-func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction):
+func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction, update_origin := false):
 	_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 	obstacle.execute_action(_bonk_check(obstacle, desired_action), -1)
 	obstacle.advance_move_cursor()
 	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+	if update_origin:
+		_initialize_movable(obstacle, obstacle.grid_position, false)
 
 
 func _update_player(action: Enums.PlayerAction) -> void:

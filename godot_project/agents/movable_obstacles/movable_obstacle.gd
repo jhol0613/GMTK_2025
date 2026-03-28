@@ -5,6 +5,8 @@ class_name MovableObstacle
 ##Repeating path for this object to follow
 @export var movement_path: Array[Enums.PlayerAction]
 @export var pusher: Pusher
+##Push action doesn't update until first movement, so set this if initial push action required
+@export var initial_push_action := Enums.PlayerAction.DOWN_FALL
 ##A disabled obstacle will not move or use its pusher, and its grid space will be considered unoccupied
 @export var enabled := true: set = _set_enabled
 
@@ -12,11 +14,12 @@ class_name MovableObstacle
 @onready var _move_cursor := _move_cursor_start_position
 
 # Not used by base class, but can be used by children
-signal request_offbeat_action(obstacle: MovableObstacle, action: Enums.PlayerAction)
+signal request_offbeat_action(obstacle: MovableObstacle, action: Enums.PlayerAction, update_origin: bool)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("movable_obstacles")
+	pusher.push_action = initial_push_action
 	super._ready()
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
