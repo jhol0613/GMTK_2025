@@ -355,13 +355,14 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_player(action)
 	_update_conductor()
 	_update_agents()
-	#_update_teleporters()
+	_update_teleporters()
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
 func _on_thinking_action_performed():
 	_update_obstacles()
 	_update_agents()
+	_update_teleporters()
 	_current_beat += 1
 
 func _update_obstacles():

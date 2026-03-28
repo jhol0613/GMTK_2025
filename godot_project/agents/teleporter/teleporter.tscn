@@ -389,7 +389,12 @@ y_sort_enabled = true
 script = ExtResource("1_wok2c")
 modulate_nodes = [NodePath("Node2D/TeleporterBaseFront/Lights"), NodePath("TeleporterBaseBack/DespawnParticles"), NodePath("Target/YSortOffset/TargetSprite/Lights")]
 glow_nodes = [NodePath("Target/YSortOffset/TargetSprite/Glow")]
-default_action_beat = 2.5
+teleporter_color_definitions = Dictionary[int, Color]({
+0: Color(0.92549, 0.160784, 0.803922, 1),
+1: Color(0.238467, 0.49, 0.2156, 1),
+2: Color(0.14902, 0.466667, 0.921569, 1)
+})
+default_action_beat = 1.0
 sprite = NodePath("Node2D/TeleporterBaseFront")
 default_animation = "none"
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"

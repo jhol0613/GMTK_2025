@@ -54,11 +54,10 @@ metadata/_custom_type_script = "uid://edi48oyem1ac"
 [node name="Teleporter" parent="." index="10" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
 position = Vector2(80, 87)
 teleporter_color = 0
-destination = Vector2i(4, 2)
+destination = Vector2i(3, 1)
 top = NodePath("../TeleporterTop")
 modulate_multiplier = 7.0
 grid_origin = Vector2i(2, 4)
-default_action_beat = 1.0
 
 [node name="Antenna" parent="Teleporter" index="5" instance=ExtResource("4_0sgq7")]
 offset_left = -15.0
@@ -115,6 +114,15 @@ offset_bottom = 18.0
 script = ExtResource("10_j4yor")
 lasers = [NodePath("../..")]
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
+
+[node name="Teleporter2" parent="." index="13" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
+position = Vector2(113, 30)
+destination = Vector2i(2, 4)
+top = NodePath("../TeleporterTop2")
+grid_origin = Vector2i(3, 1)
+
+[node name="TeleporterTop2" parent="." index="14" instance=ExtResource("5_ykv58")]
+position = Vector2(111, 31)
 
 [editable path="SnackCartObstacle/Antenna"]
 [editable path="Teleporter/Antenna"]

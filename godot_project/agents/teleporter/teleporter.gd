@@ -13,7 +13,7 @@ class_name Teleporter
 ##The downbeat is beat 0.0
 @export var move_mode := Enums.MoveMode.ON_BEAT
 @export var top : TeleporterTop
-@export_category("Animation")
+@export_group("Animation")
 @export var respawn_delay := .2
 ##Because modulate values need to be grreater than 1 to get to white, multiply the selected teleporter color
 ##(as defined in the script by teleporter_color_definitions) by this value
@@ -202,7 +202,7 @@ func _on_music_bar():
 
 func _on_push_beat_timeout():
 	for area in collision.get_overlapping_areas():
-		if area.owner is Movable:
+		if area.owner is Movable and not teleport_cooldown_list.has(area.owner):
 			_teleport(area.owner)
 
 
