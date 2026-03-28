@@ -33,10 +33,20 @@ height = 48
 grid_origin = Vector2i(4, 0)
 activation_sequence = Array[bool]([true, true])
 
-[node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("collision_area") instance=ExtResource("3_vq6kx")]
+[node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("collision_area", "action_sound_emitters") instance=ExtResource("3_vq6kx")]
 position = Vector2(80, 69)
 movement_path = Array[int]([3, 1, 4, 4, 4, 2, 3, 3])
 collision_area = NodePath("../Target")
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
 
 [node name="Laser5" parent="." index="14" instance=ExtResource("2_llv2y")]
 position = Vector2(176, 98)
@@ -78,6 +88,16 @@ grid_origin = Vector2i(9, 5)
 activation_sequence = Array[bool]([true, true])
 default_animation = "fire_up"
 
-[node name="SnackCartObstacle2" parent="." index="19" instance=ExtResource("3_vq6kx")]
+[node name="SnackCartObstacle2" parent="." index="19" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_vq6kx")]
 position = Vector2(208, 49)
 movement_path = Array[int]([2, 4, 4, 4, 1, 3, 3, 3])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}

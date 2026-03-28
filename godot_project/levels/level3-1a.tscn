@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=4 uid="uid://bb7h1cttsvw2y"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_5ni7d"]
+[ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="3_j8mqq"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_jtelp"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_jtelp"]
+
+[node name="LevelBase" instance=ExtResource("1_5ni7d")]
+conductor_spawn_beat = 4
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([1, 2, 4, 7])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAAHAAEAAQAAAAMAAAAGAAAAAQAAAAMAAAAHAAAAAQAAAAMAAAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAADAAUAAQAAAAMAAAADAAQAAQAAAAMAAAADAAMAAQAAAAMAAAAEAAAAAQAAAAMAAAADAAAAAQAAAAMAAAACAAAAAQAAAAMAAAAHAAIAAQAAAAMAAAAEAAEAAQAAAAMAAAAGAAIAAQAAAAMAAAAEAAQAAQAAAAMAAAAFAAQAAQAAAAMAAAAGAAEAAQAAAAMAAAA=")
+
+[node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_jtelp")]
+position = Vector2(112, 30)
+
+[node name="MoveObstacleProgram" type="Node" parent="ComputerTerminal" index="7" node_paths=PackedStringArray("obstacles")]
+script = ExtResource("3_j8mqq")
+obstacles = [NodePath("../../SnackCartObstacle")]
+action = 2
+metadata/_custom_type_script = "uid://edi48oyem1ac"
+
+[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_jtelp")]
+position = Vector2(81, 29)
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}

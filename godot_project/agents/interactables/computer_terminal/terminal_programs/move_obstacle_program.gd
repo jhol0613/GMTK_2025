@@ -15,10 +15,10 @@ func initialize_screen(screen_scene: MoveCartScreen):
 	super.initialize_screen(screen_scene)
 	screen_scene.direction_pressed.connect(_on_direction_selected)
 
-func _run() -> void:
+func run() -> void:
 	for obstacle in obstacles:
 		obstacle.request_offbeat_action.emit(obstacle, action)
 
 func _on_direction_selected(direction: Enums.Direction):
 	action = Enums.direction_to_action(direction)
-	_run()
+	run()

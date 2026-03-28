@@ -10,6 +10,16 @@ available_actions = Array[int]([1, 2, 4, 3])
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAEAAAAAgACAAIAAAAEAAEAAgACAAMAAAAFAAAAAgADAAIAAAAFAAEAAgADAAMAAAAHAAQAAgAAAAIAAAAHAAUAAgAAAAMAAAAHAAAAAgADAAEAAAAIAAAAAgAEAAEAAAA=")
 
-[node name="SnackCartObstacle" parent="." index="9" instance=ExtResource("2_hckjy")]
+[node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("2_hckjy")]
 position = Vector2(112, 47)
 movement_path = Array[int]([2, 2, 4, 4, 1, 1, 3, 3])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
