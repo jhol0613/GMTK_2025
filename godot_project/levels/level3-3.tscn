@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=4 uid="uid://cs55rosw0upr2"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_sbc7u"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="2_4na6f"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="2_5fmx6"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_cb7ns"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cb7ns"]
+
+[node name="LevelBase" instance=ExtResource("1_sbc7u")]
+conductor_spawn_beat = 4
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([1, 2, 4, 7])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAIAAEAAQABAAMAAAAJAAEAAQABAAMAAAAJAAMAAQABAAMAAAAJAAUAAQABAAMAAAAIAAUAAQABAAMAAAAHAAMAAQABAAMAAAAHAAUAAQABAAMAAAAJAAQAAQABAAMAAAAHAAEAAQABAAMAAAAKAAEAAQABAAMAAAA=")
+
+[node name="Antenna" parent="." index="9"]
+offset_left = 194.0
+offset_top = 51.0
+offset_right = 225.0
+offset_bottom = 70.0
+
+[node name="AnimatedSprite2DSignals" parent="Antenna" index="0"]
+position = Vector2(-8, 10)
+
+[node name="Button" parent="Antenna" index="1"]
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 18.0
+
+[node name="TurnTreadmillProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("2_4na6f")
+treadmills = [NodePath("../../Treadmill")]
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[node name="Treadmill" parent="." index="10" instance=ExtResource("3_cb7ns")]
+position = Vector2(208, 70)
+grid_origin = Vector2i(6, 3)
+
+[node name="Laser" parent="." index="11" instance=ExtResource("2_5fmx6")]
+position = Vector2(273, 59)
+direction = 2
+height = 34
+grid_origin = Vector2i(8, 3)
+default_animation = "fire_left"
+
+[node name="SnackCartObstacle" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cb7ns")]
+position = Vector2(48, 69)
+movement_path = Array[int]([4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
+
+[editable path="Antenna"]

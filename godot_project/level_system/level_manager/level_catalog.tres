@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=45 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=49 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -33,11 +33,15 @@
 [ext_resource type="PackedScene" uid="uid://bglfa6yjunqqq" path="res://backgrounds/world3/world3_placeholder.tscn" id="29_u7mwr"]
 [ext_resource type="PackedScene" uid="uid://bb7h1cttsvw2y" path="res://levels/level3-1a.tscn" id="29_y2rew"]
 [ext_resource type="PackedScene" uid="uid://bpca4h6xw3efm" path="res://levels/level3-1b.tscn" id="30_y2rew"]
+[ext_resource type="PackedScene" uid="uid://mw374qbgvht0" path="res://levels/level3-1.tscn" id="31_4ssl1"]
 [ext_resource type="PackedScene" uid="uid://cqus7ea6hnmos" path="res://levels/test_levels/moving_obstacle_test_level.tscn" id="31_6wlqo"]
 [ext_resource type="PackedScene" uid="uid://bbh554jiabmo8" path="res://levels/test_levels/laser_unit_tests_1.tscn" id="32_b2pns"]
+[ext_resource type="PackedScene" uid="uid://yqdesiyfbuu3" path="res://levels/level3-2.tscn" id="32_sb2tf"]
 [ext_resource type="PackedScene" uid="uid://m8c53vf6waxo" path="res://levels/test_levels/laser_unit_tests_2.tscn" id="33_5wfa6"]
+[ext_resource type="PackedScene" uid="uid://cs55rosw0upr2" path="res://levels/level3-3.tscn" id="33_s30ns"]
 [ext_resource type="PackedScene" uid="uid://44m1kxxusxto" path="res://backgrounds/world2/world2_placeholder.tscn" id="34_3js1v"]
 [ext_resource type="PackedScene" uid="uid://i0ptr4hy1cj6" path="res://levels/test_levels/laser_unit_tests_3.tscn" id="34_6wlqo"]
+[ext_resource type="PackedScene" uid="uid://cyx2a6u3pgvsa" path="res://levels/level3-4.tscn" id="34_8402a"]
 [ext_resource type="PackedScene" uid="uid://wtckv38k5hfs" path="res://levels/test_levels/conductor_test_level.tscn" id="35_b2pns"]
 [ext_resource type="PackedScene" uid="uid://jywhb4nrgx2r" path="res://levels/test_levels/antenna_tutorial.tscn" id="37_3js1v"]
 
@@ -65,7 +69,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("29_u7mwr")
-level_list = Array[PackedScene]([ExtResource("29_y2rew"), ExtResource("30_y2rew")])
+level_list = Array[PackedScene]([ExtResource("29_y2rew"), ExtResource("30_y2rew"), ExtResource("31_4ssl1"), ExtResource("32_sb2tf"), ExtResource("33_s30ns"), ExtResource("34_8402a")])
 level_select_scene = 0
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0

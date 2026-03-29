@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cy0877omjeja8"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_psfox"]
-[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="2_8bkav"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://levels/test_levels/spinning_chair.tscn" id="2_8bkav"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_np4t2"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="4_ytems"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="5_ytems"]

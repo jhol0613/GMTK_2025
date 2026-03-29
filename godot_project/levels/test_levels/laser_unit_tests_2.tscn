@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://m8c53vf6waxo"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_oxi8i"]
-[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_743l8"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="2_743l8"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_rkh4g"]
 
 [node name="LevelBase" instance=ExtResource("1_oxi8i")]

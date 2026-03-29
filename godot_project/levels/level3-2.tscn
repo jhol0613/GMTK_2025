@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgk6kkh5eo7ad"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_3w3gh"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="2_nuot2"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_3w3gh"]
+
+[node name="LevelBase" instance=ExtResource("1_3w3gh")]
+conductor_spawn_beat = 4
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([1, 2, 4, 7])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 5, 0, 3, 0, 1, 0, 1, 0, 3, 0, 0, 0, 5, 0, 4, 0, 1, 0, 1, 0, 3, 0, 0, 0, 7, 0, 3, 0, 1, 0, 1, 0, 3, 0, 0, 0, 8, 0, 3, 0, 1, 0, 1, 0, 3, 0, 0, 0)
+
+[node name="Antenna" parent="." index="9"]
+offset_left = 194.0
+offset_top = 51.0
+offset_right = 225.0
+offset_bottom = 70.0
+
+[node name="TurnTreadmillProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("2_nuot2")
+treadmills = [NodePath("../../Treadmill")]
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[node name="Treadmill" parent="." index="10" instance=ExtResource("3_3w3gh")]
+position = Vector2(208, 70)
+grid_origin = Vector2i(6, 3)
