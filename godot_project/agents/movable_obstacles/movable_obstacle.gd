@@ -19,7 +19,8 @@ signal request_offbeat_action(obstacle: MovableObstacle, action: Enums.PlayerAct
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	add_to_group("movable_obstacles")
-	pusher.push_action = initial_push_action
+	if pusher:
+		pusher.push_action = initial_push_action
 	super._ready()
 
 # override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
