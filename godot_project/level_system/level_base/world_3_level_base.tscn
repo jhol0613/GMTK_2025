@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://dncr2b8omfbne"]
+[gd_scene load_steps=3 format=4 uid="uid://dncr2b8omfbne"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_fad7w"]
 [ext_resource type="Texture2D" uid="uid://buba0jhrlub6q" path="res://decorations/slidingwindow.png" id="2_8tyq8"]
-[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="3_8tyq8"]
 
 [node name="LevelBase" instance=ExtResource("1_fad7w")]
 
@@ -67,9 +66,3 @@ tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAgAAAAIAAAD//wEAAgABAAI
 
 [node name="RightRoof" parent="RightExteriorFloor" index="2"]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAAAAP3/AAAAAAAAABAAAP7/AAAAAAEAABAAAP//AAAAAAIAABAAAAAAAAAAAAMAABD///3/AQAAAAAAAAD+//3/AQAAAAAAAAD9//3/AQAAAAAAAAD8//3/AQAAAAAAAAD7//3/AQAAAAAAAAD6//3/AQAAAAAAAAA=")
-
-[node name="Antenna" parent="." index="9" instance=ExtResource("3_8tyq8")]
-offset_left = 82.0
-offset_top = 39.0
-offset_right = 113.0
-offset_bottom = 58.0
