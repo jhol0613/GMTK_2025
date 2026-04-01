@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=50 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=51 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -44,6 +44,7 @@
 [ext_resource type="PackedScene" uid="uid://cyx2a6u3pgvsa" path="res://levels/level3-4.tscn" id="34_8402a"]
 [ext_resource type="PackedScene" uid="uid://wtckv38k5hfs" path="res://levels/test_levels/conductor_test_level.tscn" id="35_b2pns"]
 [ext_resource type="PackedScene" uid="uid://bo68brdb7cy47" path="res://levels/level3-5.tscn" id="35_sb2tf"]
+[ext_resource type="PackedScene" uid="uid://deturlt7ef805" path="res://levels/level3-6.tscn" id="36_s30ns"]
 [ext_resource type="PackedScene" uid="uid://jywhb4nrgx2r" path="res://levels/test_levels/antenna_tutorial.tscn" id="37_3js1v"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
@@ -70,7 +71,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("29_u7mwr")
-level_list = Array[PackedScene]([ExtResource("29_y2rew"), ExtResource("30_y2rew"), ExtResource("31_4ssl1"), ExtResource("32_sb2tf"), ExtResource("33_s30ns"), ExtResource("34_8402a"), ExtResource("35_sb2tf")])
+level_list = Array[PackedScene]([ExtResource("29_y2rew"), ExtResource("30_y2rew"), ExtResource("31_4ssl1"), ExtResource("32_sb2tf"), ExtResource("33_s30ns"), ExtResource("34_8402a"), ExtResource("35_sb2tf"), ExtResource("36_s30ns")])
 level_select_scene = 0
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0
