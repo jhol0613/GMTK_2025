@@ -397,6 +397,7 @@ func _update_player(action: Enums.PlayerAction) -> void:
 		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
+	var conductor_just_spawned := false
 	if not _level_scene.conductor_enabled:
 		return
 	elif _conductor == null \
@@ -407,6 +408,7 @@ func _update_conductor() -> void:
 	elif _conductor == null:
 		_spawn_conductor()
 		_action_sequencer.conductor_spawned_countdown = 0
+		conductor_just_spawned = true
 	_update_conductor_awareness()
 	if _conductor.stunned:
 		_conductor.stunned = false
@@ -438,6 +440,12 @@ func _update_conductor() -> void:
 	# skip the next action if the conductor is trying to leave the map
 	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
 		return
+	
+	# Don't give conductor an action immediately after he spawns
+	if conductor_just_spawned:
+		conductor_just_spawned = false
+		return
+	
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
