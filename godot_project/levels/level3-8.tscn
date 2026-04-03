@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=4 uid="uid://cin3jemsgx5vl"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_mcwt6"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="2_g0151"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_fruxy"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_g0151"]
+[ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_fruxy"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_fb3ry"]
+
+[node name="LevelBase" instance=ExtResource("1_mcwt6")]
+available_actions = Array[int]([4, 1, 2])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAGAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAMAAQAAAAMAAAA=")
+
+[node name="Laser" parent="." index="9" instance=ExtResource("2_g0151")]
+position = Vector2(48, 99)
+direction = 0
+height = 28
+grid_origin = Vector2i(1, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
+
+[node name="Laser2" parent="." index="10" instance=ExtResource("2_g0151")]
+position = Vector2(177, 98)
+direction = 0
+height = 28
+grid_origin = Vector2i(5, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
+
+[node name="Laser3" parent="." index="11" instance=ExtResource("2_g0151")]
+position = Vector2(209, 98)
+direction = 0
+height = 28
+grid_origin = Vector2i(6, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
+
+[node name="Laser4" parent="." index="12" instance=ExtResource("2_g0151")]
+position = Vector2(241, 99)
+direction = 0
+height = 28
+grid_origin = Vector2i(7, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
+
+[node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_fruxy")]
+position = Vector2(17, 12)
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
+
+[node name="Antenna" parent="SnackCartObstacle" index="5" instance=ExtResource("4_g0151")]
+offset_left = -16.0
+offset_top = -18.0
+offset_right = 15.0
+offset_bottom = 1.0
+
+[node name="AnimatedSprite2DSignals" parent="SnackCartObstacle/Antenna" index="0"]
+position = Vector2(10, -34)
+
+[node name="Button" parent="SnackCartObstacle/Antenna" index="1"]
+offset_left = 4.0
+offset_top = -35.0
+offset_right = 28.0
+offset_bottom = 19.0
+
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles")]
+script = ExtResource("5_fruxy")
+obstacles = [NodePath("../..")]
+should_reset_position = 1
+metadata/_custom_type_script = "uid://edi48oyem1ac"
+
+[node name="Treadmill" parent="." index="14" instance=ExtResource("6_fb3ry")]
+position = Vector2(272, 33)
+direction = 1
+grid_origin = Vector2i(8, 1)
+
+[editable path="SnackCartObstacle/Antenna"]
