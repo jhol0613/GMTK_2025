@@ -1,19 +1,23 @@
-[gd_scene load_steps=15 format=3 uid="uid://cokbacpxj3ep0"]
+[gd_scene load_steps=19 format=3 uid="uid://cokbacpxj3ep0"]
 
 [ext_resource type="Script" uid="uid://bdavrthjdgpk7" path="res://action_sequencer/sequencer_screen/screen_ui_components/digipad_move.gd" id="1_j6nj7"]
 [ext_resource type="Texture2D" uid="uid://bhx0gfkqrnsum" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_unselected.png" id="3_nv07m"]
 [ext_resource type="Texture2D" uid="uid://dabsvkcrhwqih" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_selected.png" id="4_0iqj5"]
+[ext_resource type="Texture2D" uid="uid://dclxpu42sypub" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_disabled.png" id="5_5t05f"]
 [ext_resource type="Texture2D" uid="uid://bbajqdinllhdf" path="res://action_sequencer/sequencer_screen/screen_ui_components/left_hovered.png" id="5_2324i"]
 [ext_resource type="Script" uid="uid://cgts4xv44awd7" path="res://action_sequencer/sequencer_screen/screen_scenes/direction_button.gd" id="6_rvvfo"]
 [ext_resource type="Texture2D" uid="uid://chhml3enxlbh5" path="res://action_sequencer/sequencer_screen/screen_ui_components/up_unselected.png" id="7_hs4fv"]
 [ext_resource type="Texture2D" uid="uid://tt11xw4bkqmr" path="res://action_sequencer/sequencer_screen/screen_ui_components/up_selected.png" id="8_beya8"]
 [ext_resource type="Texture2D" uid="uid://bhfqaklv6pc55" path="res://action_sequencer/sequencer_screen/screen_ui_components/up_hovered.png" id="9_4ftys"]
+[ext_resource type="Texture2D" uid="uid://c5psyuh7mjisd" path="res://action_sequencer/sequencer_screen/screen_ui_components/up_disabled.png" id="10_3hoqi"]
 [ext_resource type="Texture2D" uid="uid://04bv4v4cjp5" path="res://action_sequencer/sequencer_screen/screen_ui_components/down_unselected.png" id="10_rth3t"]
 [ext_resource type="Texture2D" uid="uid://ug17apm76hdk" path="res://action_sequencer/sequencer_screen/screen_ui_components/down_selected.png" id="11_bteox"]
 [ext_resource type="Texture2D" uid="uid://h5daitayoe8t" path="res://action_sequencer/sequencer_screen/screen_ui_components/down_hovered.png" id="12_084tx"]
 [ext_resource type="Texture2D" uid="uid://q6nl70tqhple" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_unselected.png" id="13_tf2tl"]
+[ext_resource type="Texture2D" uid="uid://hlo8o6m6ruel" path="res://action_sequencer/sequencer_screen/screen_ui_components/down_disabled.png" id="14_fexw7"]
 [ext_resource type="Texture2D" uid="uid://qkjn05fh3jaa" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_selected.png" id="14_osop2"]
 [ext_resource type="Texture2D" uid="uid://cy6hqkmyvj7xr" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_hovered.png" id="15_xci14"]
+[ext_resource type="Texture2D" uid="uid://bi8ry1hwdpts" path="res://action_sequencer/sequencer_screen/screen_ui_components/right_disabled.png" id="18_cyn5g"]
 
 [node name="DigipadMove" type="Node2D" node_paths=PackedStringArray("_buttons")]
 script = ExtResource("1_j6nj7")
@@ -27,6 +31,7 @@ offset_bottom = 12.0
 texture_normal = ExtResource("3_nv07m")
 texture_pressed = ExtResource("4_0iqj5")
 texture_hover = ExtResource("5_2324i")
+texture_disabled = ExtResource("5_5t05f")
 script = ExtResource("6_rvvfo")
 direction = 2
 metadata/_custom_type_script = "uid://cgts4xv44awd7"
@@ -38,6 +43,7 @@ offset_right = 10.0
 texture_normal = ExtResource("7_hs4fv")
 texture_pressed = ExtResource("8_beya8")
 texture_hover = ExtResource("9_4ftys")
+texture_disabled = ExtResource("10_3hoqi")
 script = ExtResource("6_rvvfo")
 metadata/_custom_type_script = "uid://cgts4xv44awd7"
 
@@ -49,6 +55,7 @@ offset_bottom = 15.0
 texture_normal = ExtResource("10_rth3t")
 texture_pressed = ExtResource("11_bteox")
 texture_hover = ExtResource("12_084tx")
+texture_disabled = ExtResource("14_fexw7")
 script = ExtResource("6_rvvfo")
 direction = 1
 metadata/_custom_type_script = "uid://cgts4xv44awd7"
@@ -61,6 +68,7 @@ offset_bottom = 12.0
 texture_normal = ExtResource("13_tf2tl")
 texture_pressed = ExtResource("14_osop2")
 texture_hover = ExtResource("15_xci14")
+texture_disabled = ExtResource("18_cyn5g")
 script = ExtResource("6_rvvfo")
 direction = 3
 metadata/_custom_type_script = "uid://cgts4xv44awd7"

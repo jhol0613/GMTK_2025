@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7bfxoyokovm"
-path="res://.godot/imported/Button_Sleceted_Left..png-6f6cb2a4cbdbc47cda5284c626b77c8f.ctex"
+uid="uid://hlo8o6m6ruel"
+path="res://.godot/imported/down_disabled.png-20f575c649735e85c5c632f3d0194982.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://action_sequencer/sequencer_screen/screen_visuals/Button_Sleceted_Left..png"
-dest_files=["res://.godot/imported/Button_Sleceted_Left..png-6f6cb2a4cbdbc47cda5284c626b77c8f.ctex"]
+source_file="res://action_sequencer/sequencer_screen/screen_ui_components/down_disabled.png"
+dest_files=["res://.godot/imported/down_disabled.png-20f575c649735e85c5c632f3d0194982.ctex"]
 
 [params]
 

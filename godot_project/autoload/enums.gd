@@ -171,6 +171,19 @@ func vector_to_player_action(vector: Vector2i) -> PlayerAction:
 		_:
 			return PlayerAction.NONE
 
+func player_action_to_direction(action: PlayerAction) -> Direction:
+	match action:
+		PlayerAction.UP, PlayerAction.UP_FALL, PlayerAction.UP_SLIDE:
+			return Direction.UP
+		PlayerAction.DOWN, PlayerAction.DOWN_FALL, PlayerAction.DOWN_SLIDE:
+			return Direction.DOWN
+		PlayerAction.LEFT, PlayerAction.LEFT_FALL, PlayerAction.LEFT_SLIDE:
+			return Direction.LEFT
+		PlayerAction.RIGHT, PlayerAction.RIGHT_FALL, PlayerAction.RIGHT_SLIDE:
+			return Direction.RIGHT
+		_:
+			return Direction.UP
+
 func direction_to_vector(direction: Direction) -> Vector2i:
 	match direction:
 		Direction.UP:
@@ -184,6 +197,19 @@ func direction_to_vector(direction: Direction) -> Vector2i:
 		_:
 			return Vector2i.ZERO
 
+func direction_to_vector2(direction: Direction) -> Vector2:
+	match direction:
+		Direction.UP:
+			return Vector2.UP
+		Direction.DOWN:
+			return Vector2.DOWN
+		Direction.LEFT:
+			return Vector2.LEFT
+		Direction.RIGHT:
+			return Vector2.RIGHT
+		_:
+			return Vector2.ZERO
+
 func direction_to_action(direction: Direction) -> PlayerAction:
 	match direction:
 		Direction.UP:
@@ -194,6 +220,19 @@ func direction_to_action(direction: Direction) -> PlayerAction:
 			return PlayerAction.LEFT
 		Direction.RIGHT:
 			return PlayerAction.RIGHT
+		_:
+			return PlayerAction.NONE
+
+func direction_to_fall_action(direction: Direction) -> PlayerAction:
+	match direction:
+		Direction.UP:
+			return PlayerAction.UP_FALL
+		Direction.DOWN:
+			return PlayerAction.DOWN_FALL
+		Direction.LEFT:
+			return PlayerAction.LEFT_FALL
+		Direction.RIGHT:
+			return PlayerAction.RIGHT_FALL
 		_:
 			return PlayerAction.NONE
 

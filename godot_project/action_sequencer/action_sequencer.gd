@@ -274,9 +274,9 @@ func push_replay_button():
 func connect_antenna_to_screen(terminal_program: TerminalProgram):
 	for child in _screen.get_children():
 		child.queue_free()
-	if terminal_program.sequencer_control_scene:
+	if terminal_program.packed_sequencer_control_scene:
 		_screen.visible = true
-		var control_screen = terminal_program.sequencer_control_scene.instantiate()
+		var control_screen = terminal_program.packed_sequencer_control_scene.instantiate()
 		terminal_program.initialize_screen(control_screen)
 		_screen.add_child(control_screen)
 	antenna_tip.emitting = true

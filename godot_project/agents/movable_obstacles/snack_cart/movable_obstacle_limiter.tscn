@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk0jfr40uvcnc"]
+
+[ext_resource type="Script" uid="uid://ckq3f8h33y0cf" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.gd" id="1_ukdjw"]
+
+[node name="MovableObstacleLimiter" type="Line2D"]
+points = PackedVector2Array(0, 0, 32, 0, 32, 19, 0, 19)
+closed = true
+width = 2.0
+default_color = Color(0.311068, 0.75923, 0.972572, 1)
+script = ExtResource("1_ukdjw")

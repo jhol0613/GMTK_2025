@@ -13,3 +13,7 @@ func _ready() -> void:
 
 func _on_button_pressed(direction: Enums.Direction):
 	direction_pressed.emit(direction)
+
+func _set_allowed_directions(directions: Dictionary[Enums.Direction, bool]):
+	for button in _buttons:
+		button.disabled = not directions[button.direction]
