@@ -68,7 +68,8 @@ func _run_with_limiters():
 
 func _on_obstacle_movement_complete(obstacle: MovableObstacle):
 	_number_of_movement_complete += 1
-	obstacle.movement_complete.disconnect(_on_obstacle_movement_complete)
+	if obstacle.movement_complete.is_connected(_on_obstacle_movement_complete):
+		obstacle.movement_complete.disconnect(_on_obstacle_movement_complete)
 	if _number_of_movement_complete >= obstacles.size():
 		_number_of_movement_complete = 0
 		_cooldown_in_progress = false

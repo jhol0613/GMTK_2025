@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cin3jemsgx5vl"]
+[gd_scene load_steps=8 format=4 uid="uid://cin3jemsgx5vl"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_mcwt6"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="2_g0151"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_g0151"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_fruxy"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_fb3ry"]
+[ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="7_m3shw"]
 
 [node name="LevelBase" instance=ExtResource("1_mcwt6")]
 available_actions = Array[int]([4, 1, 2])
@@ -73,9 +74,10 @@ offset_top = -35.0
 offset_right = 28.0
 offset_bottom = 19.0
 
-[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles")]
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("5_fruxy")
 obstacles = [NodePath("../..")]
+obstacle_limiters = [NodePath("../../../MovableObstacleLimiter")]
 should_reset_position = 1
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
@@ -83,5 +85,10 @@ metadata/_custom_type_script = "uid://edi48oyem1ac"
 position = Vector2(272, 33)
 direction = 1
 grid_origin = Vector2i(8, 1)
+
+[node name="MovableObstacleLimiter" parent="." index="15" instance=ExtResource("7_m3shw")]
+z_index = 1
+position = Vector2(2, -4)
+points = PackedVector2Array(0, 0, 28, 0, 28, 36, 0, 36)
 
 [editable path="SnackCartObstacle/Antenna"]

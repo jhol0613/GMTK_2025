@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://bpca4h6xw3efm"]
+[gd_scene load_steps=6 format=4 uid="uid://bpca4h6xw3efm"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_wuicp"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="3_cbh2a"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="3_p8i0c"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_qrq1u"]
+[ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="5_k5hjk"]
 
 [node name="LevelBase" instance=ExtResource("1_wuicp")]
 conductor_spawn_beat = 7
@@ -41,9 +42,14 @@ offset_top = -42.0
 offset_right = 25.0
 offset_bottom = 18.0
 
-[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles")]
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("3_cbh2a")
 obstacles = [NodePath("../..")]
+obstacle_limiters = [NodePath("../../../MovableObstacleLimiter")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
+
+[node name="MovableObstacleLimiter" parent="." index="10" instance=ExtResource("5_k5hjk")]
+position = Vector2(65, 15)
+points = PackedVector2Array(0, 0, 30, 0, 30, 36, 0, 36)
 
 [editable path="SnackCartObstacle/Antenna"]
