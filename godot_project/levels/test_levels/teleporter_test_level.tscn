@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="4_kccvv"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="5_bxp6c"]
 [ext_resource type="Script" uid="uid://y4xyvd52hhc6" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="5_kccvv"]
-[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="5_qmdej"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="5_qmdej"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_ykv58"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="10_j4yor"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
-[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="4_iaxri"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="4_iaxri"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cv2wv"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_iaxri"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="7_y0wce"]
@@ -33,7 +33,7 @@ default_animation = "fire_up"
 position = Vector2(46, 29)
 
 [node name="CatCartObstacle" parent="." index="11" instance=ExtResource("9_bmc3v")]
-position = Vector2(240, 50)
+position = Vector2(241, 50)
 
 [node name="Treadmill" parent="." index="12" instance=ExtResource("6_iaxri")]
 position = Vector2(143, 70)
@@ -42,6 +42,7 @@ grid_origin = Vector2i(4, 3)
 
 [node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
 position = Vector2(272, 68)
+movement_path = Array[int]([3, 3])
 action_sound_emitters = {
 8: NodePath("BumpSound"),
 9: NodePath("BumpSound"),
@@ -64,18 +65,18 @@ position = Vector2(10, -31)
 
 [node name="Button" parent="SnackCartObstacle/Antenna" index="1"]
 offset_left = 5.0
-offset_top = -28.0
+offset_top = -27.0
 offset_right = 27.0
-offset_bottom = 19.0
+offset_bottom = 20.0
 
 [node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("8_bmc3v")
 obstacles = [NodePath("../.."), NodePath("../../../CatCartObstacle")]
-obstacle_limiters = [NodePath("../../../MovableObstacleLimiter"), NodePath("../../../MovableObstacleLimiter")]
+obstacle_limiters = [NodePath("../../../MovableObstacleLimiter2"), NodePath("../../../MovableObstacleLimiter2")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
-[node name="MovableObstacleLimiter" parent="." index="14" instance=ExtResource("9_23qrc")]
-position = Vector2(225, 69)
-points = PackedVector2Array(0, -36, 95, -36, 95, 24, 0, 24)
+[node name="MovableObstacleLimiter2" parent="." index="14" instance=ExtResource("9_23qrc")]
+position = Vector2(192, 70)
+points = PackedVector2Array(32, -36, 128, -38, 127, 19, 62, 18, 63, 36, 31, 36, 31, 18)
 
 [editable path="SnackCartObstacle/Antenna"]

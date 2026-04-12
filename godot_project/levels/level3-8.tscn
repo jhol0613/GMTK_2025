@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=4 uid="uid://cin3jemsgx5vl"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_mcwt6"]
-[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/movable_obstacles/snack_cart/laser.tscn" id="2_g0151"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_g0151"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_fruxy"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_g0151"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_fruxy"]
