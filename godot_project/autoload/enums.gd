@@ -109,12 +109,15 @@ enum MoveMode {
 }
 
 enum ConductorState {
+	INITIAL, # transitional, first state
+	SKIP_ACTION, # transitional, don't do anything for one beat
 	PURSUE,
 	UNAWARE,
 	FOUND, # transitional, goes directly to pursue
 	ANGRY, # goes here from pursue, when conductor sees the player hide
 	UNREACHABLE_START, # transitional, can't reach the player
-	UNREACHABLE # can't reach the player
+	UNREACHABLE, # can't reach the player
+	SNOOZE # waiting for the spawn beat
 }
 
 enum TeleporterColor {

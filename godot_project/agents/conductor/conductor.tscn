@@ -124,7 +124,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(-2.42, 21.47)
-collision_layer = 68
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
 position = Vector2(0, 9)

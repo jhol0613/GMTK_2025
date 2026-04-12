@@ -7,6 +7,7 @@ class_name Conductor
 @onready var entered_emitter = $Sound/EnteredSound
 @onready var grunt_emitter = $Sound/Grunt
 @onready var emotes = $Shadow/AnimatedSprite2D/Emotes
+@onready var collision = $Shadow/AnimatedSprite2D/Area2D
 
 var _first_action = true
 
@@ -41,6 +42,7 @@ func play_current_emotion():
 			emotes.animation = "aware"
 		Enums.ConductorState.UNREACHABLE_START:
 			emotes.animation = "unreachable"
+		# TODO: add emotion "snooze" here
 		_:
 			return
 	emotes.play()
@@ -49,8 +51,13 @@ func play_current_emotion():
 	emotes.play()
 
 
+func set_enemy_collision(value: bool) -> void:
+	collision.set_collision_layer_value(Enums.CollisionLayer.ENEMIES, value)
+
+
 func _on_laser_hit(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
 		grunt_emitter.play()
 		# TODO: conductor: add stun animation
 		stunned = true
+

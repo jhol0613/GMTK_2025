@@ -101,6 +101,9 @@ func _ready() -> void:
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
 
 	GameManager.pause_enabled = true
+
+	if _level_scene.conductor_snooze:
+		_spawn_conductor()
 #endregion
 
 #region Level Switching Management
@@ -271,8 +274,11 @@ func _spawn_conductor() -> void:
 	if _conductor != null:
 		_conductor.queue_free()
 	_conductor = _spawn_movable(conductor_scene, _level_scene.conductor_spawn_position)
-	if not _player_hidden:
-		_conductor.state = Enums.ConductorState.PURSUE
+
+	_conductor.state = Enums.ConductorState.INITIAL
+	if _level_scene.conductor_snooze:
+		_conductor.state = Enums.ConductorState.SNOOZE
+	_conductor.play_current_emotion()
 
 func _initialize_moving_obstacles() -> void:
 	for obstacle in _level_scene.movable_obstacles:
@@ -397,19 +403,25 @@ func _update_player(action: Enums.PlayerAction) -> void:
 		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
-	var conductor_just_spawned := false
 	if not _level_scene.conductor_enabled:
 		return
-	elif _conductor == null \
-		and _current_beat < _level_scene.conductor_spawn_beat:
-		_action_sequencer.conductor_spawned_countdown = \
-			_level_scene.conductor_spawn_beat - _current_beat
-		return
-	elif _conductor == null:
+
+	_action_sequencer.conductor_spawned_countdown = \
+		max(_level_scene.conductor_spawn_beat - _current_beat, 0)
+
+	if _conductor == null:
+		if _current_beat < _level_scene.conductor_spawn_beat and \
+		not _level_scene.conductor_snooze:
+			return
 		_spawn_conductor()
-		_action_sequencer.conductor_spawned_countdown = 0
-		conductor_just_spawned = true
+
 	_update_conductor_awareness()
+	if _conductor.state == Enums.ConductorState.SNOOZE or \
+	_conductor.state == Enums.ConductorState.SKIP_ACTION:
+		return
+	else:
+		_conductor.set_enemy_collision(true)
+
 	if _conductor.stunned:
 		_conductor.stunned = false
 		# TODO: add stun animation here
@@ -440,12 +452,7 @@ func _update_conductor() -> void:
 	# skip the next action if the conductor is trying to leave the map
 	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
 		return
-	
-	# Don't give conductor an action immediately after he spawns
-	if conductor_just_spawned:
-		conductor_just_spawned = false
-		return
-	
+
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
@@ -459,6 +466,14 @@ func _update_conductor_awareness():
 	match _conductor.state:
 		# a little state machine for conductor awareness
 		# the conductor can lose the player when not hiding
+		Enums.ConductorState.INITIAL:
+			# skip one action right after spawn
+			_conductor.state = Enums.ConductorState.SKIP_ACTION
+		Enums.ConductorState.SKIP_ACTION:
+			if _player_hidden:
+				_conductor.state = Enums.ConductorState.UNAWARE
+			else:
+				_conductor.state = Enums.ConductorState.PURSUE
 		Enums.ConductorState.PURSUE:
 			if _player_hidden:
 				_conductor.state = Enums.ConductorState.ANGRY
@@ -484,6 +499,12 @@ func _update_conductor_awareness():
 			_conductor.state = Enums.ConductorState.UNREACHABLE
 		Enums.ConductorState.UNREACHABLE:
 			pass
+		Enums.ConductorState.SNOOZE:
+			_conductor.play_current_emotion()
+			if _level_scene.conductor_spawn_beat > _current_beat:
+				return
+
+			_conductor.state = Enums.ConductorState.SKIP_ACTION
 
 
 func _update_interactables() -> void:
