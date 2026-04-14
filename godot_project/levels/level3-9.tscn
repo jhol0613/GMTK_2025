@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=4 uid="uid://sgl6wm0xs1th"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_hdl3e"]
+[ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_r61v4"]
+[ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="3_on5f3"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="3_wpdya"]
+[ext_resource type="Script" uid="uid://y4xyvd52hhc6" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="4_d3lbo"]
+[ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="4_wpdya"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="5_d3lbo"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="6_q50pw"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="7_pe0n7"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="8_ujhy3"]
+
+[node name="LevelBase" instance=ExtResource("1_hdl3e")]
+player_spawn_position = Vector2i(0, 3)
+conductor_spawn_beat = 5
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([1, 2, 3, 4, 7])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAAIAAQAAQAAAAMAAAAJAAQAAQAAAAMAAAAJAAUAAQAAAAMAAAACAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAEAAQAAAAMAAAA=")
+
+[node name="TeleporterTop" parent="." index="9" instance=ExtResource("3_on5f3")]
+position = Vector2(112, 69)
+
+[node name="Treadmill" parent="." index="10" instance=ExtResource("5_d3lbo")]
+position = Vector2(48, 69)
+direction = 2
+grid_origin = Vector2i(1, 3)
+
+[node name="ComputerTerminal" parent="." index="11" instance=ExtResource("6_q50pw")]
+position = Vector2(48, 28)
+grid_origin = Vector2i(1, 1)
+
+[node name="TurnTreadmillProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("7_pe0n7")
+treadmills = [NodePath("../../Treadmill")]
+new_direction = 3
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[node name="Collectible" parent="." index="12" instance=ExtResource("8_ujhy3")]
+position = Vector2(144, 61)
+
+[node name="Teleporter" parent="." index="13" node_paths=PackedStringArray("top") instance=ExtResource("2_r61v4")]
+position = Vector2(112, 68)
+destination = Vector2i(7, 0)
+top = NodePath("../TeleporterTop")
+grid_origin = Vector2i(3, 3)
+
+[node name="Antenna" parent="Teleporter" index="5" instance=ExtResource("3_wpdya")]
+offset_left = -15.0
+offset_top = -17.0
+offset_right = 16.0
+offset_bottom = 2.0
+
+[node name="AnimatedSprite2DSignals" parent="Teleporter/Antenna" index="0"]
+position = Vector2(22, -77)
+
+[node name="Button" parent="Teleporter/Antenna" index="1"]
+offset_top = -67.0
+offset_bottom = 20.0
+
+[node name="MoveTeleporterDestinationProgram" type="Node" parent="Teleporter/Antenna" index="2" node_paths=PackedStringArray("teleporter")]
+script = ExtResource("4_d3lbo")
+teleporter = NodePath("../..")
+metadata/_custom_type_script = "uid://y4xyvd52hhc6"
+
+[node name="TeleporterTarget2" parent="Teleporter" index="6" instance=ExtResource("4_wpdya")]
+position = Vector2(128, -55)
+
+[node name="TeleporterTarget" parent="Teleporter" index="7" instance=ExtResource("4_wpdya")]
+position = Vector2(32, 21)
+
+[node name="Treadmill2" parent="." index="14" instance=ExtResource("5_d3lbo")]
+position = Vector2(336, 32)
+direction = 1
+
+[editable path="Teleporter/Antenna"]

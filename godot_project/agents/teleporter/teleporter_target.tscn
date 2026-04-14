@@ -20,6 +20,7 @@ animations = [{
 }]
 
 [node name="TeleporterTarget" type="Node2D" node_paths=PackedStringArray("sprite")]
+z_index = -1
 script = ExtResource("1_11fxs")
 sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"

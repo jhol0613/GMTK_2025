@@ -78,15 +78,12 @@ teleporter = NodePath("../..")
 metadata/_custom_type_script = "uid://y4xyvd52hhc6"
 
 [node name="TeleporterTarget2" parent="Teleporter" index="6" instance=ExtResource("5_bxp6c")]
-z_index = -1
 position = Vector2(64, 2)
 
 [node name="TeleporterTarget" parent="Teleporter" index="7" instance=ExtResource("5_bxp6c")]
-z_index = -1
 position = Vector2(128, -55)
 
 [node name="TT3" parent="Teleporter" index="8" instance=ExtResource("5_bxp6c")]
-z_index = -1
 position = Vector2(64, -36)
 
 [node name="TeleporterTop" parent="." index="11" instance=ExtResource("5_ykv58")]

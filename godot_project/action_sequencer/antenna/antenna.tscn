@@ -27,7 +27,7 @@ region = Rect2(44, 0, 11, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_673vx"]
 atlas = ExtResource("3_454wu")
-region = Rect2(0, 0, 11, 20)
+region = Rect2(0, 0, 11, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1pexa"]
 animations = [{
@@ -75,7 +75,7 @@ buttton = NodePath("Button")
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(29, -27)
 sprite_frames = SubResource("SpriteFrames_1pexa")
-animation = &"active"
+animation = &"inactive"
 autoplay = "inactive"
 script = ExtResource("2_83gm2")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
