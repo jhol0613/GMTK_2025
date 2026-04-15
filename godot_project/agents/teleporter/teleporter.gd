@@ -63,6 +63,11 @@ var teleport_cooldown_list : Array[Movable]
 ##Array of targets for the various potential destinations
 var destination_targets : Array[TeleporterTarget]
 
+var teleport_animation_tween: Tween
+
+##Flag to indicate aborted teleport if teleported entity has been freed
+var _teleport_aborted
+
 ##Notify level manager that something teleported so it can tell other teleporters not to teleport it
 signal something_teleported(Movable)
 
@@ -125,7 +130,9 @@ func _set_color(new_color):
 
 #endregion
 
+#Need to check teleport aborted flag after every await call
 func _teleport(entity: Movable) -> void:
+	entity.tree_exited.connect(_abort_teleport)
 	var original_modulate = entity.modulate
 	something_teleported.emit(entity)
 	entity.interrupt_queued_action(true)
@@ -135,25 +142,34 @@ func _teleport(entity: Movable) -> void:
 		entity.visible = false
 		base_sprite_lights.play_with_signals("player_teleport")
 		await base_sprite_lights.animation_signal # only signal should be when it's time for particles to play
+		if _teleport_aborted:
+			_teleport_aborted = false
+			return
 	else:
 		# set to appropriate color and brighten slightly since entity is probably not coming from grayscale image
 		entity.modulate = teleporter_color_definitions[teleporter_color] * Color(1.5, 1.5, 1.5, 0.8) 
-		var tween = get_tree().create_tween()
-		tween.tween_method(
+		teleport_animation_tween = get_tree().create_tween()
+		teleport_animation_tween.tween_method(
 			_stairstep_tween.bind(entity), 
 			Vector2(1,1), 
 			Vector2(0,0), 
 			# object teleport animation should take the same time as player teleport animation
 			base_sprite_lights.get_animation_duration("player_teleport")
 		)
-		await tween.finished
+		await teleport_animation_tween.finished
+		if _teleport_aborted:
+			_teleport_aborted = false
+			return
 		entity.queue_teleportation(destination)
 	_play_despawn_particles()
 	await get_tree().create_timer(respawn_delay).timeout
+	if _teleport_aborted:
+		_teleport_aborted = false
+		return
 	_play_respawn_particles()
 	if entity is not PlayerCharacter:
-		var tween = get_tree().create_tween()
-		tween.tween_method(
+		teleport_animation_tween = get_tree().create_tween()
+		teleport_animation_tween.tween_method(
 			_stairstep_tween.bind(entity), 
 			Vector2(0,0), 
 			Vector2(1,1), 
@@ -161,6 +177,9 @@ func _teleport(entity: Movable) -> void:
 			base_sprite_lights.get_animation_duration("player_teleport")
 		)
 	await get_tree().create_timer(respawn_delay).timeout
+	if _teleport_aborted:
+		_teleport_aborted = false
+		return
 	base_sprite_lights.play_with_signals("default")
 	if entity is PlayerCharacter:
 		target_sprite_lights.play_with_signals("respawn_player")
@@ -168,6 +187,9 @@ func _teleport(entity: Movable) -> void:
 		target_sprite_lights.play_with_signals("respawn_object")
 	#signal is when object should reappear in respawn animation
 	await target_sprite_lights.animation_signal
+	if _teleport_aborted:
+		_teleport_aborted = false
+		return
 	entity.visible = true
 	if entity is not PlayerCharacter:
 		#await get_tree().create_timer(respawn_modulate_time).timeout
@@ -175,6 +197,12 @@ func _teleport(entity: Movable) -> void:
 
 func _stairstep_tween(value: Vector2, entity):
 	entity.scale = floor(value * 5.0) / 5.0 #lazy coding. Currently hardcoded to frame rate of 5 for this tween
+
+##Stop trying to teleport if teleport entity has been freed
+func _abort_teleport():
+	if teleport_animation_tween:
+		teleport_animation_tween.stop()
+	_teleport_aborted = true
 
 ##Play this animation at teleporter origin when something gets teleported
 func _play_despawn_particles():

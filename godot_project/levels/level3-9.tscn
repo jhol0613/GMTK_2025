@@ -18,7 +18,7 @@ conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 3, 4, 7])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAAIAAQAAQAAAAMAAAAJAAQAAQAAAAMAAAAJAAUAAQAAAAMAAAACAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAEAAQAAAAMAAAA=")
+tile_map_data = PackedByteArray("AAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAACAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAEAAQAAAAMAAAA=")
 
 [node name="TeleporterTop" parent="." index="9" instance=ExtResource("3_on5f3")]
 position = Vector2(112, 69)
@@ -74,5 +74,6 @@ position = Vector2(32, 21)
 [node name="Treadmill2" parent="." index="14" instance=ExtResource("5_d3lbo")]
 position = Vector2(336, 32)
 direction = 1
+grid_origin = Vector2i(10, 1)
 
 [editable path="Teleporter/Antenna"]
