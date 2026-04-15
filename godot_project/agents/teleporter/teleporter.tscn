@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://utunhux5xaso"]
+[gd_scene load_steps=67 format=3 uid="uid://utunhux5xaso"]
 
 [ext_resource type="Script" uid="uid://hledp1xoysq1" path="res://agents/teleporter/teleporter.gd" id="1_wok2c"]
 [ext_resource type="Texture2D" uid="uid://carg475anuqrn" path="res://agents/teleporter/sprites/twinkle1.png" id="3_4tlvn"]
@@ -309,6 +309,18 @@ region = Rect2(160, 0, 32, 96)
 atlas = ExtResource("10_4xowe")
 region = Rect2(192, 0, 32, 96)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_80cky"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(96, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idmjr"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(288, 0, 32, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0w3q"]
+atlas = ExtResource("11_q80g7")
+region = Rect2(0, 0, 32, 96)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_qjooo"]
 animations = [{
 "frames": [{
@@ -364,6 +376,20 @@ animations = [{
 "loop": false,
 "name": &"respawn_player",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_80cky")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idmjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0w3q")
+}],
+"loop": false,
+"name": &"update_destination",
+"speed": 12.0
 }]
 
 [sub_resource type="Resource" id="Resource_oofy3"]
@@ -476,7 +502,6 @@ position = Vector2(0, -2)
 y_sort_enabled = true
 position = Vector2(0, -42)
 sprite_frames = SubResource("SpriteFrames_rg0i6")
-animation = &"respawn_object"
 autoplay = "default"
 script = ExtResource("5_rehqy")
 signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_4xowe"), SubResource("Resource_w72eu")])
@@ -484,7 +509,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Lights" type="AnimatedSprite2D" parent="Target/YSortOffset/TargetSprite"]
 sprite_frames = SubResource("SpriteFrames_qjooo")
-animation = &"respawn_object"
+animation = &"update_destination"
 autoplay = "default"
 script = ExtResource("5_rehqy")
 signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_oofy3"), SubResource("Resource_2wb2r")])

@@ -65,11 +65,11 @@ var destination_targets : Array[TeleporterTarget]
 
 var teleport_animation_tween: Tween
 
-##Flag to indicate aborted teleport if teleported entity has been freed
-var _teleport_aborted
-
 ##Notify level manager that something teleported so it can tell other teleporters not to teleport it
-signal something_teleported(Movable)
+signal began_teleport(Movable)
+
+##Notification that teleportation is visually complete
+signal completed_teleport(Movable)
 
 func _ready() -> void:
 	super._ready()
@@ -98,7 +98,6 @@ func _process(_delta: float) -> void:
 	if top:
 		top.modulate = modulate
 
-
 func _validate_destination(new_destination: Vector2i) -> Vector2i:
 	new_destination = new_destination.clamp(Vector2i.ZERO, grid_size - Vector2i.ONE)
 	if not _level_scene:
@@ -110,6 +109,7 @@ func _validate_destination(new_destination: Vector2i) -> Vector2i:
 func _update_target_position() -> void:
 	if not target_sprite:
 		return
+	target_sprite_lights.play_with_signals("update_destination")
 	target_sprite.position = Vector2((destination - grid_origin) * tile_size) + initial_target_sprite_offset
 
 func _set_color(new_color):
@@ -130,11 +130,10 @@ func _set_color(new_color):
 
 #endregion
 
-#Need to check teleport aborted flag after every await call
+#Need to check whether entity has been freed after every await call
 func _teleport(entity: Movable) -> void:
-	entity.tree_exited.connect(_abort_teleport)
+	began_teleport.emit(entity)
 	var original_modulate = entity.modulate
-	something_teleported.emit(entity)
 	entity.interrupt_queued_action(true)
 	
 	if entity is PlayerCharacter: #special case for player character since we have art for it
@@ -142,8 +141,7 @@ func _teleport(entity: Movable) -> void:
 		entity.visible = false
 		base_sprite_lights.play_with_signals("player_teleport")
 		await base_sprite_lights.animation_signal # only signal should be when it's time for particles to play
-		if _teleport_aborted:
-			_teleport_aborted = false
+		if not entity:
 			return
 	else:
 		# set to appropriate color and brighten slightly since entity is probably not coming from grayscale image
@@ -157,14 +155,12 @@ func _teleport(entity: Movable) -> void:
 			base_sprite_lights.get_animation_duration("player_teleport")
 		)
 		await teleport_animation_tween.finished
-		if _teleport_aborted:
-			_teleport_aborted = false
+		if not entity:
 			return
 		entity.queue_teleportation(destination)
 	_play_despawn_particles()
 	await get_tree().create_timer(respawn_delay).timeout
-	if _teleport_aborted:
-		_teleport_aborted = false
+	if not entity:
 		return
 	_play_respawn_particles()
 	if entity is not PlayerCharacter:
@@ -177,8 +173,7 @@ func _teleport(entity: Movable) -> void:
 			base_sprite_lights.get_animation_duration("player_teleport")
 		)
 	await get_tree().create_timer(respawn_delay).timeout
-	if _teleport_aborted:
-		_teleport_aborted = false
+	if not entity:
 		return
 	base_sprite_lights.play_with_signals("default")
 	if entity is PlayerCharacter:
@@ -187,22 +182,17 @@ func _teleport(entity: Movable) -> void:
 		target_sprite_lights.play_with_signals("respawn_object")
 	#signal is when object should reappear in respawn animation
 	await target_sprite_lights.animation_signal
-	if _teleport_aborted:
-		_teleport_aborted = false
+	if not entity:
 		return
 	entity.visible = true
 	if entity is not PlayerCharacter:
 		#await get_tree().create_timer(respawn_modulate_time).timeout
 		entity.modulate = original_modulate
+	completed_teleport.emit()
 
 func _stairstep_tween(value: Vector2, entity):
-	entity.scale = floor(value * 5.0) / 5.0 #lazy coding. Currently hardcoded to frame rate of 5 for this tween
-
-##Stop trying to teleport if teleport entity has been freed
-func _abort_teleport():
-	if teleport_animation_tween:
-		teleport_animation_tween.stop()
-	_teleport_aborted = true
+	if entity:
+		entity.scale = floor(value * 5.0) / 5.0 #lazy coding. Currently hardcoded to frame rate of 5 for this tween
 
 ##Play this animation at teleporter origin when something gets teleported
 func _play_despawn_particles():

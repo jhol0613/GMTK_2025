@@ -338,9 +338,9 @@ func _initialize_teleporters() -> void:
 		# into the teleporter accidentally. The player can force the conductor into going through,
 		# but only if there is no other path
 		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
-		teleporter.something_teleported.connect(_on_something_teleported)
+		teleporter.began_teleport.connect(_on_something_began_teleport)
 
-func _on_something_teleported(entity: Movable):
+func _on_something_began_teleport(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.teleport_cooldown_list.append(entity)
 
