@@ -24,6 +24,7 @@ grid_origin = Vector2i(6, 3)
 position = Vector2(272, 41)
 direction = 2
 height = 40
+grid_origin = Vector2i(8, 2)
 default_animation = "fire_left"
 
 [node name="SnackCartObstacle" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_ddrcm")]
@@ -43,6 +44,7 @@ action_sound_emitters = {
 [node name="SpinningChair" parent="." index="12" instance=ExtResource("5_7ombx")]
 position = Vector2(80, 104)
 start_direction = 1
+grid_origin = Vector2i(2, 5)
 
 [node name="Antenna" parent="." index="13" instance=ExtResource("3_obex8")]
 
