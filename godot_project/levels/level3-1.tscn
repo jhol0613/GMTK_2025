@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://mw374qbgvht0"]
+[gd_scene load_steps=7 format=4 uid="uid://mw374qbgvht0"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_b44x8"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_8aue3"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_ovry0"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="5_ovry0"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="6_81dw1"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="6_sxp6j"]
 
 [node name="LevelBase" instance=ExtResource("1_b44x8")]
@@ -52,4 +53,22 @@ metadata/_custom_type_script = "uid://brjyxyhy640eh"
 position = Vector2(304, 90)
 grid_origin = Vector2i(9, 4)
 
+[node name="Antenna" parent="." index="14" instance=ExtResource("5_ovry0")]
+
+[node name="AnimatedSprite2DSignals" parent="Antenna" index="0"]
+position = Vector2(185, 57)
+
+[node name="Button" parent="Antenna" index="1"]
+offset_left = 181.0
+offset_top = 49.0
+offset_right = 224.0
+offset_bottom = 71.0
+
+[node name="TurnTreadmillProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("6_81dw1")
+treadmills = [NodePath("../../Treadmill")]
+new_direction = 1
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
 [editable path="Antenna2"]
+[editable path="Antenna"]
