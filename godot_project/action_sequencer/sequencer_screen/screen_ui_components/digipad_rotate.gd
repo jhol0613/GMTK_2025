@@ -13,4 +13,3 @@ func _ready() -> void:
 
 func _on_button_pressed():
 	direction_pressed.emit(button_group.get_pressed_button().direction)
-	

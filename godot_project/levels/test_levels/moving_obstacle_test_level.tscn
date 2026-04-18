@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqus7ea6hnmos"]
+[gd_scene load_steps=11 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="4_iaxri"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cv2wv"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_iaxri"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="7_23qrc"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="7_y0wce"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="8_bmc3v"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="8_ekeum"]
@@ -39,6 +40,26 @@ position = Vector2(241, 50)
 position = Vector2(143, 70)
 direction = 1
 grid_origin = Vector2i(4, 3)
+
+[node name="Antenna" parent="Treadmill" index="6" instance=ExtResource("7_y0wce")]
+offset_left = -16.0
+offset_top = -18.0
+offset_right = 15.0
+offset_bottom = 1.0
+
+[node name="AnimatedSprite2DSignals" parent="Treadmill/Antenna" index="0"]
+position = Vector2(30, -13)
+
+[node name="Button" parent="Treadmill/Antenna" index="1"]
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 31.0
+offset_bottom = 17.0
+
+[node name="TurnTreadmillProgram" type="Node" parent="Treadmill/Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("7_23qrc")
+treadmills = [NodePath("../..")]
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
 [node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
 position = Vector2(272, 68)
@@ -79,4 +100,5 @@ metadata/_custom_type_script = "uid://edi48oyem1ac"
 position = Vector2(192, 70)
 points = PackedVector2Array(32, -36, 128, -38, 127, 19, 62, 18, 63, 36, 31, 36, 31, 18)
 
+[editable path="Treadmill/Antenna"]
 [editable path="SnackCartObstacle/Antenna"]
