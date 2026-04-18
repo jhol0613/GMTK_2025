@@ -113,7 +113,8 @@ func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionDa
 
 	_moving_tween = create_tween()
 	_moving_tween.tween_method(_action_movement_callback.bind(position, move_target_local_space, action_data.direct_movement_curve,
-		action_data.y_movement_curve, action_data.y_movement_magnitude), 0.0, 1.0, action_data.move_duration)
+		action_data.y_movement_curve, action_data.y_movement_magnitude), 0.0, 1.0, 
+		AudioManager.get_inverse_time_multiplier() * action_data.move_duration)
 	_moving_tween.tween_callback(func(): movement_complete.emit(self))
 
 func _action_movement_callback(alpha: float, start_position: Vector2, target_position: Vector2, \
@@ -153,11 +154,6 @@ func _get_bonk_target(action: Enums.PlayerAction) -> Vector2i:
 			attempted_position = grid_position + Vector2i.ZERO
 
 	return attempted_position
-
-
-#func _get_animation_name(action: Enums.PlayerAction) -> String:
-	#return animations.get(action, "")
-
 
 func _is_action_bonk(action: Enums.PlayerAction):
 	return (action == Enums.PlayerAction.LEFT_BONK) or \

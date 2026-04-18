@@ -36,7 +36,7 @@ func play_with_signals(animation_name: StringName = &"", custom_speed: float = 1
 	play(animation_name, custom_speed, from_end)
 	var signal_frames = _get_signals(animation_name)
 	for frame_number in signal_frames:
-		var timer = get_tree().create_timer(_get_time_at_frame(animation_name, frame_number))
+		var timer = get_tree().create_timer(_get_time_at_frame(animation_name, frame_number) * 1.0 / custom_speed)
 		timer.timeout.connect(_on_timeout.bind(signal_frames.get(frame_number)))
 
 ##Returns default animation offset (typically 0.0) if animation doesn't exist

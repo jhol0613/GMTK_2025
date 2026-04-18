@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="10_j4yor"]
 
 [node name="LevelBase" instance=ExtResource("1_v5q3b")]
+player_spawn_position = Vector2i(0, 4)
 conductor_spawn_beat = 3
 available_actions = Array[int]([4, 3, 1, 2, 7, 6])
 
@@ -90,9 +91,9 @@ position = Vector2(64, -36)
 position = Vector2(80, 88)
 
 [node name="Laser" parent="." index="12" instance=ExtResource("5_qmdej")]
-position = Vector2(48, 3)
+position = Vector2(272, 4)
 height = 7
-grid_origin = Vector2i(1, 0)
+grid_origin = Vector2i(8, 0)
 
 [node name="Antenna" parent="Laser" index="5" instance=ExtResource("4_0sgq7")]
 offset_left = -16.0

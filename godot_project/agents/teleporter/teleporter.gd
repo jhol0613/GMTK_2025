@@ -139,7 +139,7 @@ func _teleport(entity: Movable) -> void:
 	if entity is PlayerCharacter: #special case for player character since we have art for it
 		entity.queue_teleportation(destination)
 		entity.visible = false
-		base_sprite_lights.play_with_signals("player_teleport")
+		base_sprite_lights.play_with_signals("player_teleport", AudioManager.get_time_multiplier_number())
 		await base_sprite_lights.animation_signal # only signal should be when it's time for particles to play
 		if not entity:
 			return
@@ -152,14 +152,15 @@ func _teleport(entity: Movable) -> void:
 			Vector2(1,1), 
 			Vector2(0,0), 
 			# object teleport animation should take the same time as player teleport animation
-			base_sprite_lights.get_animation_duration("player_teleport")
+			base_sprite_lights.get_animation_duration("player_teleport") * AudioManager.get_inverse_time_multiplier()
 		)
 		await teleport_animation_tween.finished
 		if not entity:
 			return
 		entity.queue_teleportation(destination)
 	_play_despawn_particles()
-	await get_tree().create_timer(respawn_delay).timeout
+	var time_multiplier_adjusted_respawn_delay = respawn_delay * AudioManager.get_inverse_time_multiplier()
+	await get_tree().create_timer(time_multiplier_adjusted_respawn_delay).timeout
 	if not entity:
 		return
 	_play_respawn_particles()
@@ -170,16 +171,17 @@ func _teleport(entity: Movable) -> void:
 			Vector2(0,0), 
 			Vector2(1,1), 
 			# object teleport animation should take the same time as player teleport animation
-			base_sprite_lights.get_animation_duration("player_teleport")
+			base_sprite_lights.get_animation_duration("player_teleport") * AudioManager.get_inverse_time_multiplier()
 		)
-	await get_tree().create_timer(respawn_delay).timeout
+	time_multiplier_adjusted_respawn_delay = respawn_delay * AudioManager.get_inverse_time_multiplier()
+	await get_tree().create_timer(time_multiplier_adjusted_respawn_delay).timeout
 	if not entity:
 		return
 	base_sprite_lights.play_with_signals("default")
 	if entity is PlayerCharacter:
-		target_sprite_lights.play_with_signals("respawn_player")
+		target_sprite_lights.play_with_signals("respawn_player", AudioManager.get_time_multiplier_number())
 	else:
-		target_sprite_lights.play_with_signals("respawn_object")
+		target_sprite_lights.play_with_signals("respawn_object", AudioManager.get_time_multiplier_number())
 	#signal is when object should reappear in respawn animation
 	await target_sprite_lights.animation_signal
 	if not entity:
@@ -192,7 +194,7 @@ func _teleport(entity: Movable) -> void:
 
 func _stairstep_tween(value: Vector2, entity):
 	if entity:
-		entity.scale = floor(value * 5.0) / 5.0 #lazy coding. Currently hardcoded to frame rate of 5 for this tween
+		entity.scale = floor(value * 5.0) / 5.0 #Currently just hardcoded to 5 steps ("frames") in the animation
 
 ##Play this animation at teleporter origin when something gets teleported
 func _play_despawn_particles():

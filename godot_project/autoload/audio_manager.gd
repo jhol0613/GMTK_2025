@@ -62,3 +62,31 @@ func get_fps_from_bpm(query_bpm = bpm):
 ## If query bpm is supplied, does the math with that bpm. Otherwise uses current bpm
 func get_bpm_from_fps(query_bpm = bpm):
 	return query_bpm * 30.0
+
+##Half time is 2, single is 1, double is .5 and quad is .25 
+func get_inverse_time_multiplier() -> float:
+	match time_multiplier:
+		Enums.TimeMultiplier.HALF:
+			return 2.0
+		Enums.TimeMultiplier.SINGLE:
+			return 1.0
+		Enums.TimeMultiplier.DOUBLE:
+			return 0.5
+		Enums.TimeMultiplier.QUADRUPLE:
+			return 0.25
+		_:
+			return 1.0
+
+##Half time is .5, single is 1.0, double is 2.0, quad is 4.0
+func get_time_multiplier_number() -> float:
+	match time_multiplier:
+		Enums.TimeMultiplier.HALF:
+			return 0.5
+		Enums.TimeMultiplier.SINGLE:
+			return 1.0
+		Enums.TimeMultiplier.DOUBLE:
+			return 2.0
+		Enums.TimeMultiplier.QUADRUPLE:
+			return 4.0
+		_:
+			return 1.0
