@@ -26,12 +26,14 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		entered_emitter.play()
 		return
 	match action:
-		Enums.PlayerAction.RIGHT, Enums.PlayerAction.UP, Enums.PlayerAction.DOWN:
-			sprite.flip_h = false
-			facing_direction = Enums.Direction.RIGHT
 		Enums.PlayerAction.LEFT:
 			sprite.flip_h = true
 			facing_direction = Enums.Direction.LEFT
+		Enums.PlayerAction.RIGHT:
+			sprite.flip_h = false
+			facing_direction = Enums.Direction.RIGHT
+		_:
+			pass
 
 func play_current_emotion():
 	match state:

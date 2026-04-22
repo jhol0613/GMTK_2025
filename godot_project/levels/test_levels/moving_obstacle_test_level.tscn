@@ -41,7 +41,7 @@ position = Vector2(143, 70)
 direction = 1
 grid_origin = Vector2i(4, 3)
 
-[node name="Antenna" parent="Treadmill" index="6" instance=ExtResource("7_y0wce")]
+[node name="Antenna" parent="Treadmill" index="3" instance=ExtResource("7_y0wce")]
 offset_left = -16.0
 offset_top = -18.0
 offset_right = 15.0
