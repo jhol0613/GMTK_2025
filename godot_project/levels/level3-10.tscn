@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bh5ec0yys4ety"]
+[gd_scene load_steps=9 format=4 uid="uid://bh5ec0yys4ety"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_bhy8u"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_sucd5"]
@@ -7,13 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="4_rgc4p"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_rgc4p"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_rgc4p"]
+[ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="8_c5scp"]
 
 [node name="LevelBase" instance=ExtResource("1_bhy8u")]
+player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 available_actions = Array[int]([1, 2, 3, 4, 7])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAAJAAIAAQAAAAMAAAAIAAQAAQAAAAMAAAAJAAMAAQAAAAMAAAAGAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAKAAEAAQAAAAMAAAAEAAIAAQAAAAMAAAAEAAMAAQAAAAMAAAAGAAUAAQAAAAMAAAAGAAQAAQAAAAMAAAAHAAIAAQAAAAMAAAAEAAQAAQAAAAMAAAA=")
+tile_map_data = PackedByteArray("AAAJAAIAAQAAAAMAAAAIAAQAAQAAAAMAAAAJAAMAAQAAAAMAAAAGAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAKAAEAAQAAAAMAAAAEAAMAAQAAAAMAAAAGAAUAAQAAAAMAAAAGAAQAAQAAAAMAAAAHAAIAAQAAAAMAAAAEAAQAAQAAAAMAAAADAAAAAQAAAAMAAAABAAIABAAAAAAAAAADAAIABAABAAAAAAACAAIABAACAAAAAAAFAAAABAAAAAAAAAAGAAAABAACAAAAAAAHAAAABAABAAAAAAAJAAAAAQAAAAMAAAAKAAUAAQAAAAMAAAA=")
 
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_sucd5")]
 position = Vector2(81, 47)
@@ -41,9 +43,10 @@ offset_bottom = 1.0
 position = Vector2(5, 2)
 
 [node name="Button" parent="SnackCartObstacle/Antenna" index="1"]
-offset_top = 3.0
-offset_right = 21.0
-offset_bottom = 53.0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 22.0
+offset_bottom = 55.0
 
 [node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles")]
 script = ExtResource("5_rgc4p")
@@ -51,7 +54,7 @@ obstacles = [NodePath("../.."), NodePath("../../../SnackCartObstacle2")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
 [node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_k20h8")]
-position = Vector2(272, 12)
+position = Vector2(274, 10)
 action_sound_emitters = {
 8: NodePath("../SnackCartObstacle/BumpSound"),
 9: NodePath("../SnackCartObstacle/BumpSound"),
@@ -64,17 +67,35 @@ action_sound_emitters = {
 }
 
 [node name="Collectible" parent="." index="12" instance=ExtResource("4_rgc4p")]
-position = Vector2(315, 4)
+position = Vector2(304, 24)
 
 [node name="Treadmill" parent="." index="13" instance=ExtResource("7_rgc4p")]
 position = Vector2(176, 89)
+grid_origin = Vector2i(5, 4)
 
 [node name="Treadmill2" parent="." index="14" instance=ExtResource("7_rgc4p")]
 position = Vector2(240, 89)
 direction = 1
+grid_origin = Vector2i(7, 4)
 
 [node name="Treadmill3" parent="." index="15" instance=ExtResource("7_rgc4p")]
 position = Vector2(240, 71)
 direction = 1
+grid_origin = Vector2i(7, 3)
+
+[node name="MovableObstacleLimiter" parent="." index="16" instance=ExtResource("8_c5scp")]
+z_index = 1
+position = Vector2(130, -2)
+points = PackedVector2Array(0, 0, 28, 0, 29, 34, -1, 34)
+
+[node name="MovableObstacleLimiter2" parent="." index="17" instance=ExtResource("8_c5scp")]
+z_index = 1
+position = Vector2(259, -3)
+points = PackedVector2Array(0, 0, 27, 0, 27, 55, 0, 55)
+
+[node name="Treadmill4" parent="." index="18" instance=ExtResource("7_rgc4p")]
+position = Vector2(112, 89)
+direction = 1
+grid_origin = Vector2i(3, 4)
 
 [editable path="SnackCartObstacle/Antenna"]
