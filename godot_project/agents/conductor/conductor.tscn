@@ -22,9 +22,6 @@ move_duration = 0.5
 timing_offset = 0.0
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
-size = Vector2(20, 10)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_thsup"]
 atlas = ExtResource("10_thsup")
 region = Rect2(0, 40, 23, 20)
@@ -78,6 +75,9 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
+size = Vector2(20, 10)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h6kqq"]
 size = Vector2(17.5, 65.5)
 
@@ -94,7 +94,7 @@ other_action_data = Dictionary[int, ExtResource("3_34788")]({
 14: ExtResource("2_thsup"),
 15: ExtResource("2_thsup")
 })
-collision_area = NodePath("Shadow/AnimatedSprite2D/Area2D")
+collision_area = NodePath("Shadow/Area2D")
 default_sound_emitter = NodePath("Sound/JumpSound")
 sprite = NodePath("Shadow/AnimatedSprite2D")
 action_animations = Dictionary[int, String]({
@@ -122,20 +122,20 @@ autoplay = "idle_right"
 script = ExtResource("6_mq2pu")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
-position = Vector2(-2.42, 21.47)
-collision_layer = 68
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
-position = Vector2(0, 9)
-shape = SubResource("RectangleShape2D_lda0w")
-
 [node name="Emotes" type="AnimatedSprite2D" parent="Shadow/AnimatedSprite2D"]
 position = Vector2(17.425, -24.43)
 sprite_frames = SubResource("SpriteFrames_46wui")
 animation = &"unreachable"
 script = ExtResource("6_mq2pu")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Area2D" type="Area2D" parent="Shadow"]
+position = Vector2(0.155, -10.1)
+collision_layer = 68
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/Area2D"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_lda0w")
 
 [node name="Sound" type="Node" parent="."]
 
