@@ -407,12 +407,13 @@ frame = 7
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
-size = Vector2(24, 18)
+size = Vector2(24, 13)
 
 [node name="Teleporter" type="Node2D" node_paths=PackedStringArray("modulate_nodes", "glow_nodes", "sprite")]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_wok2c")
+disabled = null
 modulate_nodes = [NodePath("Node2D/TeleporterBaseFront/Lights"), NodePath("TeleporterBaseBack/DespawnParticles"), NodePath("Target/YSortOffset/TargetSprite/Lights")]
 glow_nodes = [NodePath("Target/YSortOffset/TargetSprite/Glow")]
 teleporter_color_definitions = Dictionary[int, Color]({
@@ -564,7 +565,7 @@ collision_layer = 2
 collision_mask = 21
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -10)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_pifmq")
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
@@ -575,3 +576,4 @@ offset_seconds = -0.08
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

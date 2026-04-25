@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://b4dj0imvapc5w"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_jq6u0"]
+[ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_c10kv"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://levels/test_levels/spinning_chair.tscn" id="3_a173m"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_c10kv"]
+[ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="5_a173m"]
+
+[node name="LevelBase" instance=ExtResource("1_jq6u0")]
+available_actions = Array[int]([4, 3, 1, 2, 7])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 7, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1, 0, 1, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="Teleporter" parent="." index="9" instance=ExtResource("2_c10kv")]
+position = Vector2(80, 48)
+destination = Vector2i(7, 1)
+disabled = false
+grid_origin = Vector2i(2, 2)
+
+[node name="Teleporter2" parent="." index="10" instance=ExtResource("2_c10kv")]
+position = Vector2(239, 31)
+teleporter_color = 0
+destination = Vector2i(2, 2)
+disabled = false
+grid_origin = Vector2i(7, 1)
+
+[node name="SpinningChair" parent="." index="11" instance=ExtResource("3_a173m")]
+position = Vector2(176, 71)
+start_direction = 1
+grid_origin = Vector2i(5, 3)
+
+[node name="ComputerTerminal" parent="." index="12" instance=ExtResource("4_c10kv")]
+position = Vector2(240, 9)
+grid_origin = Vector2i(7, 0)
+
+[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("chairs")]
+script = ExtResource("5_a173m")
+chairs = [NodePath("../../SpinningChair")]
+number_of_quarter_turns = 1
+metadata/_custom_type_script = "uid://blcr4qlisfk4a"

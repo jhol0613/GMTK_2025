@@ -57,6 +57,7 @@ position = Vector2(80, 87)
 teleporter_color = 0
 destination = Vector2i(3, 1)
 top = NodePath("../TeleporterTop")
+disabled = null
 modulate_multiplier = 7.0
 grid_origin = Vector2i(2, 4)
 
@@ -117,6 +118,7 @@ metadata/_custom_type_script = "uid://brjyxyhy640eh"
 position = Vector2(113, 30)
 destination = Vector2i(2, 4)
 top = NodePath("../TeleporterTop2")
+disabled = null
 grid_origin = Vector2i(3, 1)
 
 [node name="TeleporterTop2" parent="." index="14" instance=ExtResource("5_ykv58")]

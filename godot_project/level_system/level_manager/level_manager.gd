@@ -187,6 +187,8 @@ func _on_level_fail() -> void:
 	_action_sequencer.stop_sequencer()
 	if _conductor != null:
 		_conductor.visible = false
+	for teleporter: Teleporter in _level_scene.teleporters:
+		teleporter.disabled = true
 	await get_tree().create_timer(level_failure_delay).timeout
 	_action_sequencer.buttons_enabled = true
 	_action_sequencer.push_replay_button()
@@ -218,6 +220,8 @@ func _reset_level() -> void:
 		_level_scene.movable_obstacles.erase(obstacle)
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.queue_free()
+	for teleporter: Teleporter in _level_scene.teleporters:
+		teleporter.disabled = false
 	_player_character.reset()
 	_spawned_obstacles.clear()
 
@@ -514,7 +518,8 @@ func _update_agents() -> void:
 ##Clear teleporter cooldown lists at start of new beat
 func _update_teleporters() -> void:
 	for teleporter: Teleporter in _level_scene.teleporters:
-		teleporter.teleport_cooldown_list.clear()
+		pass
+		#teleporter.teleport_cooldown_list.clear()
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	movable.interrupt_queued_action(pusher.should_cancel_sound)

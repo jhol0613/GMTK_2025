@@ -45,6 +45,7 @@ position = Vector2(144, 61)
 position = Vector2(112, 68)
 destination = Vector2i(7, 0)
 top = NodePath("../TeleporterTop")
+disabled = null
 grid_origin = Vector2i(3, 3)
 
 [node name="Antenna" parent="Teleporter" index="5" instance=ExtResource("3_wpdya")]

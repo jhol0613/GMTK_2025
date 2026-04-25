@@ -13,6 +13,8 @@ class_name Teleporter
 ##The downbeat is beat 0.0
 @export var move_mode := Enums.MoveMode.ON_BEAT
 @export var top : TeleporterTop
+#If set to true, teleporter will stop teleportation process and will not start any new teleportations
+@export var disabled := false
 @export_group("Animation")
 @export var respawn_delay := .2
 ##Because modulate values need to be grreater than 1 to get to white, multiply the selected teleporter color
@@ -132,6 +134,8 @@ func _set_color(new_color):
 
 #Need to check whether entity has been freed after every await call
 func _teleport(entity: Movable) -> void:
+	if disabled:
+		return
 	began_teleport.emit(entity)
 	var original_modulate = entity.modulate
 	entity.interrupt_queued_action(true)
@@ -225,10 +229,18 @@ func _on_push_beat_timeout():
 		if area.owner is Movable and not teleport_cooldown_list.has(area.owner):
 			_teleport(area.owner)
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if teleport_cooldown_list.has(area.owner):
 		return
 	if area.owner is not Movable or move_mode != Enums.MoveMode.INSTANT:
 		return
 	_teleport(area.owner)
+
+# Don't remove from cooldown list until moving out of the teleporter
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	if teleport_cooldown_list.has(area.owner):
+		teleport_cooldown_list.erase(area.owner)
+
+func reset():
+	super.reset()
+	teleport_cooldown_list.clear()
