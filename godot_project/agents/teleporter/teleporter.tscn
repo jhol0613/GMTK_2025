@@ -413,7 +413,6 @@ size = Vector2(24, 13)
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_wok2c")
-disabled = null
 modulate_nodes = [NodePath("Node2D/TeleporterBaseFront/Lights"), NodePath("TeleporterBaseBack/DespawnParticles"), NodePath("Target/YSortOffset/TargetSprite/Lights")]
 glow_nodes = [NodePath("Target/YSortOffset/TargetSprite/Glow")]
 teleporter_color_definitions = Dictionary[int, Color]({

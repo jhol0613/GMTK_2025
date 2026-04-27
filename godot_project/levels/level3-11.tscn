@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=4 uid="uid://boiggb2fjxqbr"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_xhynf"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_4cx3b"]
+[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="3_68g8x"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_cqb4s"]
+[ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="5_rvl5c"]
+
+[node name="LevelBase" instance=ExtResource("1_xhynf")]
+available_actions = Array[int]([4, 3, 1, 2])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAGAAAAAQAAAAMAAAAGAAEAAQAAAAMAAAAGAAMAAQAAAAMAAAAGAAQAAQAAAAMAAAAGAAUAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAMAAQAAAAMAAAAEAAUAAQAAAAMAAAA=")
+
+[node name="Treadmill" parent="." index="9" instance=ExtResource("2_4cx3b")]
+position = Vector2(176, 90)
+grid_origin = Vector2i(5, 4)
+
+[node name="CatCartObstacle" parent="." index="10" instance=ExtResource("3_68g8x")]
+position = Vector2(178, 49)
+movement_path = Array[int]([3, 3, 2, 4, 4, 1])
+
+[node name="Treadmill2" parent="." index="11" instance=ExtResource("2_4cx3b")]
+position = Vector2(112, 52)
+direction = 1
+grid_origin = Vector2i(3, 2)
+
+[node name="Antenna" parent="Treadmill2" index="3" instance=ExtResource("4_cqb4s")]
+offset_left = -16.0
+offset_top = -20.0
+offset_right = 15.0
+offset_bottom = -1.0
+
+[node name="AnimatedSprite2DSignals" parent="Treadmill2/Antenna" index="0"]
+position = Vector2(27, -12)
+
+[node name="Button" parent="Treadmill2/Antenna" index="1"]
+offset_top = 1.0
+offset_bottom = 20.0
+
+[node name="TurnTreadmillProgram" type="Node" parent="Treadmill2/Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+script = ExtResource("5_rvl5c")
+treadmills = [NodePath("../..")]
+metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[editable path="Treadmill2/Antenna"]
