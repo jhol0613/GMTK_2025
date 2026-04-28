@@ -37,6 +37,8 @@ func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := fal
 			emitter.play()
 	else:
 		super.execute_action(action, beat, skip_animation)
+		if Enums.is_action_slide(action):
+			pusher.push_action = _direction_to_push_action(action)
 
 func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:
@@ -55,13 +57,13 @@ func advance_move_cursor():
 ##return the same push action that's currently set
 func _direction_to_push_action(move_direction: Enums.PlayerAction) -> Enums.PlayerAction:
 	match move_direction:
-		Enums.PlayerAction.UP:
+		Enums.PlayerAction.UP, Enums.PlayerAction.UP_SLIDE:
 			return Enums.PlayerAction.UP_FALL
-		Enums.PlayerAction.DOWN:
+		Enums.PlayerAction.DOWN, Enums.PlayerAction.DOWN_SLIDE:
 			return Enums.PlayerAction.DOWN_FALL
-		Enums.PlayerAction.LEFT:
+		Enums.PlayerAction.LEFT, Enums.PlayerAction.LEFT_SLIDE:
 			return Enums.PlayerAction.LEFT_FALL
-		Enums.PlayerAction.RIGHT:
+		Enums.PlayerAction.RIGHT, Enums.PlayerAction.RIGHT_SLIDE:
 			return Enums.PlayerAction.RIGHT_FALL
 	return pusher.push_action
 

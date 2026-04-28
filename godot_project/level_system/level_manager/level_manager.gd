@@ -212,10 +212,12 @@ func _reset_level() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.reset()
-	for collectible in _level_scene.collectibles:
-		collectible.reset()
-	for interactable in _level_scene.interactables:
-		interactable.reset()
+	#for collectible in _level_scene.collectibles:
+		#collectible.reset()
+	#for interactable in _level_scene.interactables:
+		#interactable.reset()
+	for agent in _level_scene.agents:
+		agent.reset()
 	for obstacle in _spawned_obstacles: # clear out spawned obstacles
 		_level_scene.movable_obstacles.erase(obstacle)
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)

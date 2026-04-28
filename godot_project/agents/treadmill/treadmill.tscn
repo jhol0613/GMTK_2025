@@ -187,7 +187,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
-size = Vector2(24, 18)
+size = Vector2(21, 13)
 
 [node name="Treadmill" type="Node2D" node_paths=PackedStringArray("_pusher", "default_sound_emitter", "sprite")]
 y_sort_enabled = true
@@ -221,6 +221,7 @@ should_cancel_sound = false
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
+position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_pifmq")
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]

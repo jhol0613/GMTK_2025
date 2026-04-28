@@ -1,29 +1,29 @@
-[gd_scene load_steps=6 format=4 uid="uid://boiggb2fjxqbr"]
+[gd_scene load_steps=8 format=3 uid="uid://boiggb2fjxqbr"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_xhynf"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_4cx3b"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="3_68g8x"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_cqb4s"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="5_rvl5c"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_rvl5c"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="7_du0ay"]
 
 [node name="LevelBase" instance=ExtResource("1_xhynf")]
-available_actions = Array[int]([4, 3, 1, 2])
-
-[node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAAGAAAAAQAAAAMAAAAGAAEAAQAAAAMAAAAGAAMAAQAAAAMAAAAGAAQAAQAAAAMAAAAGAAUAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAMAAQAAAAMAAAAEAAUAAQAAAAMAAAA=")
+conductor_enabled = false
+available_actions = Array[int]([4, 3, 1, 2, 7])
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("2_4cx3b")]
-position = Vector2(176, 90)
-grid_origin = Vector2i(5, 4)
+position = Vector2(145, 52)
+direction = 1
+grid_origin = Vector2i(4, 2)
 
 [node name="CatCartObstacle" parent="." index="10" instance=ExtResource("3_68g8x")]
-position = Vector2(178, 49)
-movement_path = Array[int]([3, 3, 2, 4, 4, 1])
+position = Vector2(337, 106)
+movement_path = Array[int]([3, 3, 4, 4, 4, 3])
 
 [node name="Treadmill2" parent="." index="11" instance=ExtResource("2_4cx3b")]
-position = Vector2(112, 52)
-direction = 1
-grid_origin = Vector2i(3, 2)
+position = Vector2(48, 70)
+grid_origin = Vector2i(1, 3)
 
 [node name="Antenna" parent="Treadmill2" index="3" instance=ExtResource("4_cqb4s")]
 offset_left = -16.0
@@ -42,5 +42,47 @@ offset_bottom = 20.0
 script = ExtResource("5_rvl5c")
 treadmills = [NodePath("../..")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[node name="Treadmill3" parent="." index="12" instance=ExtResource("2_4cx3b")]
+position = Vector2(145, 91)
+grid_origin = Vector2i(4, 4)
+
+[node name="SnackCartObstacle" parent="." index="13" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("6_rvl5c")]
+position = Vector2(79, 69)
+movement_path = Array[int]([3, 4, 4, 4, 3, 3])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}
+
+[node name="Laser" parent="." index="14" instance=ExtResource("7_du0ay")]
+position = Vector2(112, 99)
+direction = 0
+height = 7
+grid_origin = Vector2i(3, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
+
+[node name="Laser3" parent="." index="15" instance=ExtResource("7_du0ay")]
+position = Vector2(144, 99)
+direction = 0
+height = 7
+grid_origin = Vector2i(5, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
+
+[node name="Laser4" parent="." index="16" instance=ExtResource("7_du0ay")]
+position = Vector2(176, 99)
+direction = 0
+height = 7
+grid_origin = Vector2i(5, 5)
+activation_sequence = Array[bool]([true, false])
+default_animation = "fire_up"
 
 [editable path="Treadmill2/Antenna"]

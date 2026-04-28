@@ -14,6 +14,8 @@ class_name Treadmill
 @onready var sound := $FmodEventEmitter2D
 @onready var _animation_loop_counter := 0
 
+@onready var original_direction = direction
+
 func _construct():
 	sprite.animation = _direction_data[direction].animation_name
 	sprite.frame = 0
@@ -41,4 +43,8 @@ func _on_animation_looped():
 
 func set_direction(new_direction: Enums.Direction) -> void:
 	direction = new_direction
+	_construct()
+	
+func reset():
+	direction = original_direction
 	_construct()

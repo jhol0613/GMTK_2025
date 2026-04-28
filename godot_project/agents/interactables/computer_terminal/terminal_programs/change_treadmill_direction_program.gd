@@ -19,13 +19,14 @@ func initialize_screen(screen_scene: ChangeTreadmillDirectionScreen):
 	screen_scene.direction_pressed.connect(_on_direction_selected)
 
 func _on_direction_selected(direction: Enums.Direction):
+	#TODO: Update original direction depending on position reset mode
 	for treadmill in treadmills:
 		treadmill.direction = direction
+		if should_reset_position == PositionResetMode.AUTO or PositionResetMode.FALSE:
+			treadmill.original_direction = direction
 
 func run():
 	for treadmill in treadmills:
 		treadmill.direction = new_direction
-
-func reset():
-	for treadmill in treadmills:
-		treadmill.direction = original_directions[treadmill]
+		if should_reset_position == PositionResetMode.TRUE:
+			treadmill.original_direction = new_direction

@@ -2,12 +2,22 @@ extends Node
 
 class_name TerminalProgram
 
+##Default is auto, where obstacle will reset position if it was moved via terminal or maintain its position
+##if moved via antenna.
+@export var should_reset_position := PositionResetMode.AUTO
+
 var sequencer_control_scene_UID : String
 
 ##If this terminal program can be controlled by the sequencer, this scene will be sent to the sequencer screen
 var packed_sequencer_control_scene: PackedScene
 
 var current_sequencer_control_scene
+
+enum PositionResetMode {
+	AUTO,
+	TRUE,
+	FALSE
+}
 
 func _ready() -> void:
 	if sequencer_control_scene_UID:

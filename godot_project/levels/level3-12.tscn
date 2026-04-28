@@ -15,14 +15,12 @@ tile_map_data = PackedByteArray(0, 0, 7, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0, 3, 0, 
 [node name="Teleporter" parent="." index="9" instance=ExtResource("2_c10kv")]
 position = Vector2(80, 48)
 destination = Vector2i(7, 1)
-disabled = false
 grid_origin = Vector2i(2, 2)
 
 [node name="Teleporter2" parent="." index="10" instance=ExtResource("2_c10kv")]
 position = Vector2(239, 31)
 teleporter_color = 0
 destination = Vector2i(2, 2)
-disabled = false
 grid_origin = Vector2i(7, 1)
 
 [node name="SpinningChair" parent="." index="11" instance=ExtResource("3_a173m")]

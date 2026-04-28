@@ -7,17 +7,8 @@ class_name MoveObstacleProgram
 @export var obstacle_limiters : Array[MovableObstacleLimiter]
 ##Action to take when program is run
 @export var action := Enums.PlayerAction.LEFT
-##Default is auto, where obstacle will reset position if it was moved via terminal or maintain its position
-##if moved via antenna.
-@export var should_reset_position := PositionResetMode.AUTO
 
 @onready var _use_limiters = obstacles.size() == obstacle_limiters.size() and not obstacle_limiters.is_empty()
-
-enum PositionResetMode {
-	AUTO,
-	TRUE,
-	FALSE
-}
 
 ##flag for allowing antenna program position changes to be persistent across resets
 var should_update_origin = false 

@@ -157,3 +157,6 @@ func set_height_animated(new_height: int, duration: float):
 	var old_height = height
 	new_height_tween = create_tween()
 	new_height_tween.tween_property(self, "height", new_height, duration)
+
+func reset():
+	pass
