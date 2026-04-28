@@ -73,7 +73,7 @@ default_animation = "fire_up"
 position = Vector2(144, 99)
 direction = 0
 height = 7
-grid_origin = Vector2i(5, 5)
+grid_origin = Vector2i(4, 5)
 activation_sequence = Array[bool]([true, false])
 default_animation = "fire_up"
 

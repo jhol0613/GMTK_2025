@@ -78,6 +78,7 @@ var _spawned_obstacles : Array[MovableObstacle]
 # Additional state variables
 var _player_hidden = false
 var _player_newly_hidden = false
+var _failure_animation_playing = false
 
 func _ready() -> void:
 	if SaveManager.run_from_F6:
@@ -189,9 +190,11 @@ func _on_level_fail() -> void:
 		_conductor.visible = false
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.disabled = true
+	_failure_animation_playing = true
 	await get_tree().create_timer(level_failure_delay).timeout
 	_action_sequencer.buttons_enabled = true
 	_action_sequencer.push_replay_button()
+	_failure_animation_playing = false
 
 func _reset_level() -> void:
 	print("level reset")
@@ -524,6 +527,8 @@ func _update_teleporters() -> void:
 		#teleporter.teleport_cooldown_list.clear()
 
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
+	if _failure_animation_playing:
+		return
 	movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
 	var action = _bonk_check(movable, pusher.push_action)
