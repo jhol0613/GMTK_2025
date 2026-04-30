@@ -81,9 +81,9 @@ func _ready() -> void:
 			destination_targets.append(child)
 	if not Engine.is_editor_hint():
 		AudioManager.music_bar.connect(_on_music_bar)
+	_set_color(teleporter_color)
 	if not top:
 		return
-	_set_color(teleporter_color)
 	if AudioManager.beat_time_seconds * default_action_beat < top.lights_sprite.default_animation_offset:
 		push_warning("Teleporter powerup animation can't be triggered because it would bleed into the
 		previous bar. Either reduce teleporter top animation offset or move teleporter action beat later")

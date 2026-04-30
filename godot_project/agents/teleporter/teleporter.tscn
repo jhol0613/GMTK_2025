@@ -496,7 +496,7 @@ y_sort_enabled = true
 
 [node name="YSortOffset" type="Node2D" parent="Target"]
 y_sort_enabled = true
-position = Vector2(0, -2)
+position = Vector2(0, -3)
 
 [node name="TargetSprite" type="AnimatedSprite2D" parent="Target/YSortOffset"]
 y_sort_enabled = true

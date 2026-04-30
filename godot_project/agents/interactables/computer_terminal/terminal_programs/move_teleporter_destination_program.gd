@@ -28,8 +28,9 @@ func initialize_screen(screen_scene: MoveTeleporterDestinationScreen):
 	digipad.option_cycled.connect(_on_option_cycled)
 	digipad.number_of_options = teleporter.destination_targets.size()
 
-func _run() -> void:
-	pass
+func run() -> void:
+	if teleporter.destination_targets.size() > 0:
+		teleporter.destination = teleporter.destination_targets[1].grid_position
 
 func _on_option_cycled(index: int):
 	var new_index = index

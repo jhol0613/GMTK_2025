@@ -1,25 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://boiggb2fjxqbr"]
+[gd_scene load_steps=7 format=3 uid="uid://boiggb2fjxqbr"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_xhynf"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_4cx3b"]
-[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="3_68g8x"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_cqb4s"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="5_rvl5c"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_rvl5c"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="7_du0ay"]
 
 [node name="LevelBase" instance=ExtResource("1_xhynf")]
-conductor_enabled = false
-available_actions = Array[int]([4, 3, 1, 2, 7])
+conductor_spawn_beat = 6
+available_actions = Array[int]([4, 3, 1, 2])
+
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("2_4cx3b")]
 position = Vector2(145, 52)
 direction = 1
 grid_origin = Vector2i(4, 2)
 
-[node name="CatCartObstacle" parent="." index="10" instance=ExtResource("3_68g8x")]
-position = Vector2(337, 106)
-movement_path = Array[int]([3, 3, 4, 4, 4, 3])
+[node name="Treadmill4" parent="." index="10" instance=ExtResource("2_4cx3b")]
+position = Vector2(335, 34)
+direction = 1
+grid_origin = Vector2i(10, 1)
 
 [node name="Treadmill2" parent="." index="11" instance=ExtResource("2_4cx3b")]
 position = Vector2(48, 70)
@@ -27,16 +30,16 @@ grid_origin = Vector2i(1, 3)
 
 [node name="Antenna" parent="Treadmill2" index="3" instance=ExtResource("4_cqb4s")]
 offset_left = -16.0
-offset_top = -20.0
+offset_top = -1.0
 offset_right = 15.0
-offset_bottom = -1.0
+offset_bottom = 18.0
 
 [node name="AnimatedSprite2DSignals" parent="Treadmill2/Antenna" index="0"]
-position = Vector2(27, -12)
+position = Vector2(27, -31)
 
 [node name="Button" parent="Treadmill2/Antenna" index="1"]
-offset_top = 1.0
-offset_bottom = 20.0
+offset_top = -18.0
+offset_bottom = 1.0
 
 [node name="TurnTreadmillProgram" type="Node" parent="Treadmill2/Antenna" index="2" node_paths=PackedStringArray("treadmills")]
 script = ExtResource("5_rvl5c")
