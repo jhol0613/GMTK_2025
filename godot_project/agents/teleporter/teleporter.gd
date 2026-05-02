@@ -70,6 +70,9 @@ var teleport_animation_tween: Tween
 ##Notify level manager that something teleported so it can tell other teleporters not to teleport it
 signal began_teleport(Movable)
 
+##Notify level manager that something moved out of teleporter's area so it can be removed from cooldown list
+signal teleporter_cleared(Movable)
+
 ##Notification that teleportation is visually complete
 signal completed_teleport(Movable)
 
@@ -111,7 +114,8 @@ func _validate_destination(new_destination: Vector2i) -> Vector2i:
 func _update_target_position() -> void:
 	if not target_sprite:
 		return
-	target_sprite_lights.play_with_signals("update_destination")
+	if not Engine.is_editor_hint():
+		target_sprite_lights.play_with_signals("update_destination")
 	target_sprite.position = Vector2((destination - grid_origin) * tile_size) + initial_target_sprite_offset
 
 func _set_color(new_color):
@@ -238,8 +242,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 # Don't remove from cooldown list until moving out of the teleporter
 func _on_area_2d_area_exited(area: Area2D) -> void:
-	if teleport_cooldown_list.has(area.owner):
-		teleport_cooldown_list.erase(area.owner)
+	if area.owner is not Movable:
+		return
+	teleporter_cleared.emit(area.owner)
+	#if teleport_cooldown_list.has(area.owner):
+		#teleport_cooldown_list.erase(area.owner)
 
 func reset():
 	super.reset()

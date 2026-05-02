@@ -2,54 +2,64 @@ extends TerminalProgram
 
 class_name MoveTeleporterDestinationProgram
 
-@export var teleporter : Teleporter
+@export var teleporters : Array[Teleporter]
 
-@onready var _teleporting := false
+@onready var _entities_teleporting := 0
 
 var digipad : DigipadCycle
+
+signal _all_entities_done_teleporting
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sequencer_control_scene_UID = "uid://c3oui8nrbnmi4"
 	#for convenience, just set teleporter to whatever owns this antenna program
-	if not teleporter:
+	if teleporters.size() == 0:
 		var gramps = get_parent().get_parent()
 		if gramps is Teleporter:
-			teleporter = gramps
-	if not teleporter:
+			teleporters.append(gramps)
+	if teleporters.size() == 0:
 		push_error("No teleporter sselected for move teleporter destination program")
-	teleporter.began_teleport.connect(_on_teleport_begin)
-	teleporter.completed_teleport.connect(_on_teleport_complete)
+	var num_destinations = teleporters[0].destination_targets.size()
+	for teleporter in teleporters:
+		if teleporter.destination_targets.size() != num_destinations:
+			push_error("If one antenna program controls multiple teleporters, they must have the same number of destinations")
+		teleporter.began_teleport.connect(_on_teleport_begin)
+		teleporter.completed_teleport.connect(_on_teleport_complete)
 	super._ready()
 
 func initialize_screen(screen_scene: MoveTeleporterDestinationScreen):
 	super.initialize_screen(screen_scene)
 	digipad = screen_scene.digipad
 	digipad.option_cycled.connect(_on_option_cycled)
-	digipad.number_of_options = teleporter.destination_targets.size()
+	digipad.number_of_options = teleporters[0].destination_targets.size()
 
 func run() -> void:
-	if teleporter.destination_targets.size() > 0:
-		teleporter.destination = teleporter.destination_targets[1].grid_position
+	for teleporter in teleporters:
+		if teleporter.destination_targets.size() > 0:
+			teleporter.destination = teleporter.destination_targets[1].grid_position
 
 func _on_option_cycled(index: int):
 	var new_index = index
 	#don't update destination target until teleportation complete
-	if _teleporting:
+	if _entities_teleporting > 0:
 		if digipad:
 			digipad.option_cycled.disconnect(_on_option_cycled)
-		await teleporter.completed_teleport
+		await _all_entities_done_teleporting
 		new_index = digipad.index
 		if digipad:
 			digipad.option_cycled.connect(_on_option_cycled)
-	teleporter.destination = teleporter.destination_targets[new_index].grid_position
+	for teleporter in teleporters:
+		teleporter.destination = teleporter.destination_targets[new_index].grid_position
 
 func _on_teleport_begin(_entity):
-	_teleporting = true
+	_entities_teleporting += 1
 
 func _on_teleport_complete():
-	_teleporting = false
+	_entities_teleporting -= 1
+	if _entities_teleporting == 0:
+		_all_entities_done_teleporting.emit()
 
 func reset():
 	super.reset()
-	_teleporting = false
+	_entities_teleporting = 0

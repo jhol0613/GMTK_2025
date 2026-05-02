@@ -348,10 +348,15 @@ func _initialize_teleporters() -> void:
 		# but only if there is no other path
 		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
 		teleporter.began_teleport.connect(_on_something_began_teleport)
+		teleporter.teleporter_cleared.connect(_on_something_cleared_teleporter)
 
 func _on_something_began_teleport(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.teleport_cooldown_list.append(entity)
+
+func _on_something_cleared_teleporter(entity: Movable):
+	for teleporter: Teleporter in _level_scene.teleporters:
+		teleporter.teleport_cooldown_list.erase(entity)
 
 #endregion
 
