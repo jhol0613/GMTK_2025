@@ -398,7 +398,7 @@ func _update_obstacles():
 ## Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
 func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_action: Enums.PlayerAction, update_origin := false):
 	_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-	obstacle.execute_action(_bonk_check(obstacle, desired_action), -1)
+	obstacle.execute_action(_bonk_check(obstacle, desired_action, true), -1)
 	obstacle.advance_move_cursor()
 	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 	if update_origin:
@@ -513,9 +513,11 @@ func _update_interactables() -> void:
 
 
 ## If desired direction clear, return that direction. Otherwise return a bonk in that direction
-func _bonk_check(movable: Movable, action: Enums.PlayerAction) -> Enums.PlayerAction:
+func _bonk_check(movable: Movable, action: Enums.PlayerAction, treat_conductor_as_obstacle = false) -> Enums.PlayerAction:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _level_scene.get_traversible_neighbors(movable.grid_position).has(movable.grid_position + move_direction):
+		if _conductor and movable.grid_position + move_direction == _conductor.grid_position and treat_conductor_as_obstacle:
+			return Enums.action_to_bonk(action)
 		return action
 	else:
 		return Enums.action_to_bonk(action)

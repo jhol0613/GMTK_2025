@@ -60,8 +60,9 @@ position = Vector2(22, -77)
 offset_top = -67.0
 offset_bottom = 20.0
 
-[node name="MoveTeleporterDestinationProgram" type="Node" parent="Teleporter/Antenna" index="2"]
+[node name="MoveTeleporterDestinationProgram" type="Node" parent="Teleporter/Antenna" index="2" node_paths=PackedStringArray("teleporters")]
 script = ExtResource("4_d3lbo")
+teleporters = [NodePath("../..")]
 metadata/_custom_type_script = "uid://y4xyvd52hhc6"
 
 [node name="TeleporterTarget2" parent="Teleporter" index="6" instance=ExtResource("4_wpdya")]

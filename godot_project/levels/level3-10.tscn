@@ -48,9 +48,10 @@ offset_top = 5.0
 offset_right = 22.0
 offset_bottom = 55.0
 
-[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles")]
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("5_rgc4p")
 obstacles = [NodePath("../.."), NodePath("../../../SnackCartObstacle2")]
+obstacle_limiters = [NodePath("../../../MovableObstacleLimiter"), NodePath("../../../MovableObstacleLimiter2")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
 [node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_k20h8")]
