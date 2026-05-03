@@ -384,9 +384,8 @@ func _update_obstacles():
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
 		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
-
 	for obstacle in _level_scene.movable_obstacles:
-		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle]), _current_beat)
+		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle], true), _current_beat)
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
@@ -516,8 +515,11 @@ func _update_interactables() -> void:
 func _bonk_check(movable: Movable, action: Enums.PlayerAction, treat_conductor_as_obstacle = false) -> Enums.PlayerAction:
 	var move_direction : Vector2i = Enums.player_action_to_vector(action)
 	if _level_scene.get_traversible_neighbors(movable.grid_position).has(movable.grid_position + move_direction):
-		if _conductor and movable.grid_position + move_direction == _conductor.grid_position and treat_conductor_as_obstacle:
-			return Enums.action_to_bonk(action)
+		#if conductor pressed up against a wall, bonk off him if treat_conductor_as_obstacle is true (e.g. for movable obstacles)
+		if _conductor and movable.grid_position + move_direction == _conductor.grid_position and \
+			not _level_scene.is_cell_navigable(movable.grid_position + move_direction * 2) and \
+			treat_conductor_as_obstacle:
+				return Enums.action_to_bonk(action)
 		return action
 	else:
 		return Enums.action_to_bonk(action)
@@ -546,6 +548,8 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 			_on_level_fail()
 		else:
 			_player_character.execute_action(action, _current_beat)
+	elif movable is Conductor and Enums.is_action_bonk(action):
+		push_error("Conductor Squished")
 	elif movable is MovableObstacle:
 		_level_scene.update_obstacle_grid(movable.grid_position, true)
 		# skip animation if bonk was caused by a slide
