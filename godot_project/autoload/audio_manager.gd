@@ -21,17 +21,30 @@ signal bpm_changed(new_bpm: float)
 # Ensure time change only happens on a beat that makes sense in the new time
 @onready var _bar := 0
 
+@onready var _queue_time_multiplier_update := false
+@onready var _queued_multiplier : Enums.TimeMultiplier
+
 func _on_music_event_timeline_beat(_params: Dictionary) -> void:
 	if _params.get("bar") == _bar:
 		return
 	_bar = _params.get("bar")
+	
+	if _queue_time_multiplier_update:
+		if _bar % int((time_multiplier_to_number(_queued_multiplier) * 4)) == 1:
+			time_multiplier = _queued_multiplier
+			_queue_time_multiplier_update = false
 
 	if _bar % time_multiplier == 1:
 		music_bar.emit()
 
 func _time_multiplier_changed(new_multiplier: Enums.TimeMultiplier):
+	_queue_time_multiplier_update = true
 	time_multiplier = new_multiplier
 	beat_time_seconds = 60.0 * time_multiplier / (bpm * 4.0)
+
+func update_time_multiplier(new_multiplier: Enums.TimeMultiplier):
+	_queue_time_multiplier_update = true
+	_queued_multiplier = new_multiplier
 
 func set_music_mode(mode: Enums.MusicMode):
 	FmodServer.set_global_parameter_by_name("ThinkingMode", _mode_dictionary.get(mode))
@@ -77,9 +90,8 @@ func get_inverse_time_multiplier() -> float:
 		_:
 			return 1.0
 
-##Half time is .5, single is 1.0, double is 2.0, quad is 4.0
-func get_time_multiplier_number() -> float:
-	match time_multiplier:
+func time_multiplier_to_number(multiplier: Enums.TimeMultiplier) -> float:
+	match multiplier:
 		Enums.TimeMultiplier.HALF:
 			return 0.5
 		Enums.TimeMultiplier.SINGLE:
@@ -90,3 +102,7 @@ func get_time_multiplier_number() -> float:
 			return 4.0
 		_:
 			return 1.0
+
+##Half time is .5, single is 1.0, double is 2.0, quad is 4.0
+func get_time_multiplier_number() -> float:
+	return time_multiplier_to_number(time_multiplier)

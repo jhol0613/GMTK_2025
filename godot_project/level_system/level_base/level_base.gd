@@ -115,7 +115,6 @@ func _ready() -> void:
 ##Returns number of cells in given direction before hitting an obstacle. Cells with heights less
 ##than clearing_height will be ignored
 func get_cells_to_obstacle(grid_position: Vector2i, direction: Enums.Direction, ignore_movables = false, clearing_height = 0):
-	print(clearing_height)
 	var cells = 0
 	var check_position = grid_position
 	for i in range(100):
@@ -166,7 +165,6 @@ func is_cell_navigable(grid_position: Vector2i, ignore_movables = false, clearin
 	if tile_data:
 		cell_traversible = tile_data.get_custom_data("Traversible")
 		blocking_height = tile_data.get_custom_data("LaserBlockingHeight")
-		print(blocking_height)
 	cell_traversible = cell_traversible and (not _obstacle_overrides.has(grid_position) or ignore_movables) 
 	cell_traversible = cell_traversible or clearing_height > blocking_height
 

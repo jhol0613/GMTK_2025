@@ -41,12 +41,12 @@ func play_respawn_particles():
 		particle_system.emitting = true
 
 func play_player_appear_animation(speed = 1.0):
-	_lights.play_with_signals("respawn_player")
+	_lights.play_with_signals("respawn_player", speed)
 	await _lights.animation_signal
 	entity_should_reappear.emit()
 
 func play_entity_appear_animation(speed = 1.0):
-	_lights.play_with_signals("respawn_object")
+	_lights.play_with_signals("respawn_object", speed)
 	await _lights.animation_signal
 	entity_should_reappear.emit()
 

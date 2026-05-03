@@ -398,15 +398,15 @@ func _on_sfx_slider_changed(value):
 func _speed_control_ready() -> void:
 	_speed_btn.toggle_mode = true
 	_speed_btn.button_pressed = false
-	AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
+	AudioManager.update_time_multiplier(Enums.TimeMultiplier.SINGLE)
 	_speed_btn.toggled.connect(_on_speed_toggled)
 
 func _on_speed_toggled(pressed: bool) -> void:
 	speed_btn_emitter.play()
-	if pressed:
-		AudioManager.time_multiplier = Enums.TimeMultiplier.DOUBLE
+	if _speed_btn.button_pressed:
+		AudioManager.update_time_multiplier(Enums.TimeMultiplier.DOUBLE)
 	else:
-		AudioManager.time_multiplier = Enums.TimeMultiplier.SINGLE
+		AudioManager.update_time_multiplier(Enums.TimeMultiplier.SINGLE)
 
 func _on_redo_button_mouse_entered() -> void:
 	if not _redo_btn.disabled:
