@@ -82,6 +82,7 @@ size = Vector2(20, 10)
 size = Vector2(17.5, 65.5)
 
 [node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
+light_mask = 4
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_eb2fl")
@@ -115,6 +116,7 @@ position = Vector2(0, -6)
 texture = ExtResource("4_lda0w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shadow"]
+light_mask = 4
 position = Vector2(2.575, -31.57)
 sprite_frames = ExtResource("4_ps1s8")
 animation = &"jump_right"
@@ -123,6 +125,7 @@ script = ExtResource("6_mq2pu")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Emotes" type="AnimatedSprite2D" parent="Shadow/AnimatedSprite2D"]
+light_mask = 4
 position = Vector2(17.425, -24.43)
 sprite_frames = SubResource("SpriteFrames_46wui")
 animation = &"unreachable"

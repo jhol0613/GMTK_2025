@@ -17,6 +17,18 @@ available_actions = Array[int]([1, 2, 3, 4, 7])
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAAJAAIAAQAAAAMAAAAIAAQAAQAAAAMAAAAJAAMAAQAAAAMAAAAGAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAKAAEAAQAAAAMAAAAEAAMAAQAAAAMAAAAGAAUAAQAAAAMAAAAGAAQAAQAAAAMAAAAHAAIAAQAAAAMAAAAEAAQAAQAAAAMAAAADAAAAAQAAAAMAAAABAAIABAAAAAAAAAADAAIABAABAAAAAAACAAIABAACAAAAAAAFAAAABAAAAAAAAAAGAAAABAACAAAAAAAHAAAABAABAAAAAAAJAAAAAQAAAAMAAAAKAAUAAQAAAAMAAAA=")
 
+[node name="PointLight2D" parent="BackWall" index="0"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D2" parent="BackWall" index="1"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D3" parent="BackWall" index="2"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D4" parent="BackWall" index="3"]
+range_item_cull_mask = 1
+
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_sucd5")]
 position = Vector2(81, 47)
 

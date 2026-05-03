@@ -19,6 +19,16 @@ tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 
 
 [node name="PointLight2D" parent="BackWall" index="0"]
 position = Vector2(112, 47.37)
+range_item_cull_mask = 1
+
+[node name="PointLight2D2" parent="BackWall" index="1"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D3" parent="BackWall" index="2"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D4" parent="BackWall" index="3"]
+range_item_cull_mask = 1
 
 [node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("8_ekeum")]
 position = Vector2(46, 29)

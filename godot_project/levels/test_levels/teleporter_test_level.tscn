@@ -16,6 +16,21 @@ player_spawn_position = Vector2i(0, 4)
 conductor_spawn_beat = 3
 available_actions = Array[int]([4, 3, 1, 2, 7, 6])
 
+[node name="Obstacles" parent="." index="2"]
+tile_map_data = PackedByteArray(0, 0, 6, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 6, 0, 2, 0, 2, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="PointLight2D" parent="BackWall" index="0"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D2" parent="BackWall" index="1"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D3" parent="BackWall" index="2"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D4" parent="BackWall" index="3"]
+range_item_cull_mask = 1
+
 [node name="LeftExteriorFloor" parent="." index="4"]
 z_index = 0
 
@@ -52,10 +67,10 @@ script = ExtResource("4_kccvv")
 obstacles = [NodePath("../..")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
-[node name="Teleporter" parent="." index="10" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
+[node name="Teleporter" parent="." index="10" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_ew41l")]
 position = Vector2(80, 87)
 teleporter_color = 0
-destination = Vector2i(3, 1)
+destination_targets = [NodePath("../TeleporterTarget2")]
 top = NodePath("../TeleporterTop")
 modulate_multiplier = 7.0
 grid_origin = Vector2i(2, 4)
@@ -76,15 +91,6 @@ offset_bottom = 18.0
 [node name="MoveTeleporterDestinationProgram" type="Node" parent="Teleporter/Antenna" index="2"]
 script = ExtResource("5_kccvv")
 metadata/_custom_type_script = "uid://y4xyvd52hhc6"
-
-[node name="TeleporterTarget2" parent="Teleporter" index="6" instance=ExtResource("5_bxp6c")]
-position = Vector2(64, 2)
-
-[node name="TeleporterTarget" parent="Teleporter" index="7" instance=ExtResource("5_bxp6c")]
-position = Vector2(128, -55)
-
-[node name="TT3" parent="Teleporter" index="8" instance=ExtResource("5_bxp6c")]
-position = Vector2(64, -36)
 
 [node name="TeleporterTop" parent="." index="11" instance=ExtResource("5_ykv58")]
 position = Vector2(80, 88)
@@ -112,14 +118,24 @@ script = ExtResource("10_j4yor")
 lasers = [NodePath("../..")]
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="Teleporter2" parent="." index="13" node_paths=PackedStringArray("top") instance=ExtResource("2_ew41l")]
+[node name="Teleporter2" parent="." index="13" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_ew41l")]
 position = Vector2(113, 30)
-destination = Vector2i(2, 4)
+destination_targets = [NodePath("../TeleporterTarget3")]
 top = NodePath("../TeleporterTop2")
 grid_origin = Vector2i(3, 1)
 
 [node name="TeleporterTop2" parent="." index="14" instance=ExtResource("5_ykv58")]
 position = Vector2(111, 31)
+
+[node name="TeleporterTarget2" parent="." index="15" instance=ExtResource("5_bxp6c")]
+position = Vector2(144, 89)
+_active = true
+grid_origin = Vector2i(4, 4)
+
+[node name="TeleporterTarget3" parent="." index="16" instance=ExtResource("5_bxp6c")]
+position = Vector2(144, 89)
+_active = true
+grid_origin = Vector2i(4, 4)
 
 [editable path="SnackCartObstacle/Antenna"]
 [editable path="Teleporter/Antenna"]

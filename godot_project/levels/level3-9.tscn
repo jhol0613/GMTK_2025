@@ -20,6 +20,18 @@ available_actions = Array[int]([1, 2, 3, 4, 7])
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAACAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAEAAQAAAAMAAAA=")
 
+[node name="PointLight2D" parent="BackWall" index="0"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D2" parent="BackWall" index="1"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D3" parent="BackWall" index="2"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D4" parent="BackWall" index="3"]
+range_item_cull_mask = 1
+
 [node name="TeleporterTop" parent="." index="9" instance=ExtResource("3_on5f3")]
 position = Vector2(112, 69)
 
@@ -41,9 +53,9 @@ metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 [node name="Collectible" parent="." index="12" instance=ExtResource("8_ujhy3")]
 position = Vector2(144, 61)
 
-[node name="Teleporter" parent="." index="13" node_paths=PackedStringArray("top") instance=ExtResource("2_r61v4")]
+[node name="Teleporter" parent="." index="13" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_r61v4")]
 position = Vector2(112, 68)
-destination = Vector2i(7, 0)
+destination_targets = [NodePath("../TeleporterTarget2"), NodePath("../TeleporterTarget")]
 top = NodePath("../TeleporterTop")
 grid_origin = Vector2i(3, 3)
 
@@ -65,15 +77,18 @@ script = ExtResource("4_d3lbo")
 teleporters = [NodePath("../..")]
 metadata/_custom_type_script = "uid://y4xyvd52hhc6"
 
-[node name="TeleporterTarget2" parent="Teleporter" index="6" instance=ExtResource("4_wpdya")]
-position = Vector2(128, -55)
-
-[node name="TeleporterTarget" parent="Teleporter" index="7" instance=ExtResource("4_wpdya")]
-position = Vector2(32, 21)
-
 [node name="Treadmill2" parent="." index="14" instance=ExtResource("5_d3lbo")]
 position = Vector2(336, 32)
 direction = 1
 grid_origin = Vector2i(10, 1)
+
+[node name="TeleporterTarget2" parent="." index="15" instance=ExtResource("4_wpdya")]
+position = Vector2(240, 3)
+_active = true
+grid_origin = Vector2i(7, 0)
+
+[node name="TeleporterTarget" parent="." index="16" instance=ExtResource("4_wpdya")]
+position = Vector2(144, 79)
+grid_origin = Vector2i(4, 4)
 
 [editable path="Teleporter/Antenna"]

@@ -55,24 +55,28 @@ tile_set = ExtResource("3_fo6gb")
 
 [node name="PointLight2D" type="PointLight2D" parent="BackWall"]
 position = Vector2(112, -79.63)
+range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="PointLight2D2" type="PointLight2D" parent="BackWall"]
 position = Vector2(240, -79.63)
+range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="PointLight2D3" type="PointLight2D" parent="BackWall"]
 position = Vector2(-2, 42.37)
+range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="PointLight2D4" type="PointLight2D" parent="BackWall"]
 position = Vector2(356, 42.37)
+range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4

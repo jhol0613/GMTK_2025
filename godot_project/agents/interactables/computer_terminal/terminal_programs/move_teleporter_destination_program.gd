@@ -37,7 +37,8 @@ func initialize_screen(screen_scene: MoveTeleporterDestinationScreen):
 func run() -> void:
 	for teleporter in teleporters:
 		if teleporter.destination_targets.size() > 0:
-			teleporter.destination = teleporter.destination_targets[1].grid_position
+			teleporter.current_destination_target = teleporter.destination_targets[1]
+			#teleporter.destination = teleporter.destination_targets[1].grid_position
 
 func _on_option_cycled(index: int):
 	var new_index = index
@@ -50,7 +51,8 @@ func _on_option_cycled(index: int):
 		if digipad:
 			digipad.option_cycled.connect(_on_option_cycled)
 	for teleporter in teleporters:
-		teleporter.destination = teleporter.destination_targets[new_index].grid_position
+		teleporter.current_destination_target = teleporter.destination_targets[new_index]
+		#teleporter.destination = teleporter.destination_targets[new_index].grid_position
 
 func _on_teleport_begin(_entity):
 	_entities_teleporting += 1
