@@ -439,6 +439,7 @@ signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_por8y")])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Lights" type="AnimatedSprite2D" parent="Node2D/TeleporterBaseFront"]
+modulate = Color(0.715401, 1.47, 0.6468, 1)
 sprite_frames = SubResource("SpriteFrames_fw7so")
 animation = &"player_teleport"
 autoplay = "default"
@@ -449,6 +450,7 @@ signals = Array[ExtResource("5_rg0i6")]([SubResource("Resource_m0w3q")])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="DespawnParticles" type="Node2D" parent="Node2D"]
+modulate = Color(0.715401, 1.47, 0.6468, 1)
 position = Vector2(0, -45)
 
 [node name="DespawnParticles" type="GPUParticles2D" parent="Node2D/DespawnParticles"]

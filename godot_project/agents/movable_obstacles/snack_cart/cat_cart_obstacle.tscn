@@ -83,6 +83,12 @@ standard_move_data = ExtResource("2_fbmii")
 bonk_data = ExtResource("3_dy6ey")
 slide_data = ExtResource("4_ix653")
 sprite = NodePath("AnimatedSprite2DSignals")
+action_animations = Dictionary[int, String]({
+1: "updown",
+2: "updown",
+3: "left",
+4: "right"
+})
 metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]

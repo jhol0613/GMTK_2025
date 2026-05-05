@@ -58,3 +58,5 @@ position = Vector2(272, 89)
 
 [node name="TeleporterTarget" parent="." index="14" instance=ExtResource("6_r7ar8")]
 position = Vector2(48, 41)
+_active = true
+grid_origin = Vector2i(1, 2)

@@ -110,7 +110,6 @@ action_animations = Dictionary[int, String]({
 3: "left",
 4: "right"
 })
-default_animation = "updown"
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]

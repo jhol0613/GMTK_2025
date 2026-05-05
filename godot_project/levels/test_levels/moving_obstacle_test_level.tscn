@@ -34,7 +34,8 @@ range_item_cull_mask = 1
 position = Vector2(46, 29)
 
 [node name="CatCartObstacle" parent="." index="10" instance=ExtResource("9_bmc3v")]
-position = Vector2(241, 50)
+position = Vector2(178, 11)
+movement_path = Array[int]([3, 2, 4, 1])
 
 [node name="Treadmill" parent="." index="11" instance=ExtResource("6_iaxri")]
 position = Vector2(143, 70)
@@ -63,7 +64,6 @@ metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
 [node name="SnackCartObstacle" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
 position = Vector2(272, 68)
-movement_path = Array[int]([3, 3])
 action_sound_emitters = {
 8: NodePath("BumpSound"),
 9: NodePath("BumpSound"),
