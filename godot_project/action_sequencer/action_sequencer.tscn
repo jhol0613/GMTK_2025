@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=47 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dgdw1436w52je" path="res://action_sequencer/sequencer_visuals/eraser_button/Eraser.png" id="17_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://cmut2moeovys1" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserOn.png" id="19_cdoyw"]
 [ext_resource type="Texture2D" uid="uid://m410en01fm5j" path="res://action_sequencer/sequencer_visuals/eraser_button/EraserHover.png" id="20_krlbp"]
+[ext_resource type="PackedScene" uid="uid://boffagfakigxj" path="res://action_sequencer/sequencer_screen/screen_scenes/conductor_spawn_screen.tscn" id="21_ja8dg"]
 [ext_resource type="Texture2D" uid="uid://cb8lc47bmuqpw" path="res://action_sequencer/antenna/sequencer_antenna.png" id="21_krlbp"]
 [ext_resource type="Texture2D" uid="uid://cjiyq2l7ngpuc" path="res://action_sequencer/sequencer_screen/screen_visuals/Screen_Turn_On.png" id="22_ja8dg"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="22_vmoa0"]
@@ -397,13 +398,11 @@ texture = ExtResource("23_vmoa0")
 [node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff"]
 texture = ExtResource("22_ja8dg")
 
-[node name="ConductorSpawnCountdown" type="Label" parent="TextureRect/ScreenOff/ScreenOn"]
-offset_left = -38.0
-offset_top = -13.0
-offset_right = 2.0
-offset_bottom = 10.0
-theme_override_font_sizes/font_size = 13
-text = "test"
+[node name="ConductorSpawnScreen" parent="TextureRect/ScreenOff/ScreenOn" instance=ExtResource("21_ja8dg")]
+offset_left = -41.0
+offset_top = -17.0
+offset_right = -41.0
+offset_bottom = -17.0
 
 [node name="Antenna" type="AnimatedSprite2D" parent="TextureRect"]
 position = Vector2(111, -71)

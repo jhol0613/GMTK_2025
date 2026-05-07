@@ -1,0 +1,93 @@
+[gd_scene load_steps=11 format=3 uid="uid://boffagfakigxj"]
+
+[ext_resource type="Script" uid="uid://cjh76njh3rlso" path="res://action_sequencer/sequencer_screen/screen_scenes/conductor_spawn_screen.gd" id="1_5a0j6"]
+[ext_resource type="Texture2D" uid="uid://bbdlel1pol40e" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/conductor_green.png" id="2_p1ueh"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_d2dxv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5a0j6"]
+atlas = ExtResource("2_p1ueh")
+region = Rect2(72, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1ueh"]
+atlas = ExtResource("2_p1ueh")
+region = Rect2(96, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2dxv"]
+atlas = ExtResource("2_p1ueh")
+region = Rect2(0, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ith1"]
+atlas = ExtResource("2_p1ueh")
+region = Rect2(48, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7vuh"]
+atlas = ExtResource("2_p1ueh")
+region = Rect2(24, 0, 24, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atp7r"]
+atlas = ExtResource("2_p1ueh")
+region = Rect2(48, 0, 24, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ith1"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_5a0j6")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_p1ueh")
+}],
+"loop": false,
+"name": &"exit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2dxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ith1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_t7vuh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atp7r")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[node name="ConductorSpawnScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5a0j6")
+animation_time = 0.2
+
+[node name="ConductorSpawnCountdown" type="Label" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_right = 81.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color(0.290196, 0.290196, 0.290196, 1)
+theme_override_font_sizes/font_size = 10
+text = "##"
+horizontal_alignment = 2
+
+[node name="ConductorSpawnAnim" type="AnimatedSprite2D" parent="."]
+position = Vector2(24, 16)
+sprite_frames = SubResource("SpriteFrames_6ith1")
+animation = &"exit"
+autoplay = "idle"
+script = ExtResource("3_d2dxv")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

@@ -205,9 +205,9 @@ func _reset_level() -> void:
 	_player_hidden = false
 	_player_newly_hidden = false
 	if _level_scene.conductor_enabled:
-		_action_sequencer.conductor_spawned_countdown = _level_scene.conductor_spawn_beat
+		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat, true)
 	else:
-		_action_sequencer.conductor_spawned_countdown = 0
+		_action_sequencer.set_conductor_spawn_countdown_display(0)
 
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
@@ -415,12 +415,12 @@ func _update_conductor() -> void:
 		return
 	elif _conductor == null \
 		and _current_beat < _level_scene.conductor_spawn_beat:
-		_action_sequencer.conductor_spawned_countdown = \
-			_level_scene.conductor_spawn_beat - _current_beat
+		_action_sequencer.set_conductor_spawn_countdown_display(
+			_level_scene.conductor_spawn_beat - _current_beat)
 		return
 	elif _conductor == null:
 		_spawn_conductor()
-		_action_sequencer.conductor_spawned_countdown = 0
+		_action_sequencer.set_conductor_spawn_countdown_display(0)
 		conductor_just_spawned = true
 	_update_conductor_awareness()
 	if _conductor.stunned:

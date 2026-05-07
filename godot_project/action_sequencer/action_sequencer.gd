@@ -63,11 +63,10 @@ class_name ActionSequencer
 var _eraser_mode := false
 
 @onready var _screen = $TextureRect/ScreenOff/ScreenOn
-@onready var _conductor_spawn_text = $TextureRect/ScreenOff/ScreenOn/ConductorSpawnCountdown
 @onready var _antenna = $TextureRect/Antenna
 @onready var antenna_tip = $TextureRect/Antenna/AntennaTip
 @onready var _antenna_deployed = false
-var conductor_spawned_countdown : set = _on_conductor_countdown_changed
+@onready var _conductor_spawn_countdown_screen = $TextureRect/ScreenOff/ScreenOn/ConductorSpawnScreen
 
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
@@ -301,14 +300,13 @@ func _turn_off_sequencer_lights():
 	for i in range(_available_slots):
 		_initialized_slots[i].sequence_light_on = false
 
-func _on_conductor_countdown_changed(new_value: int):
-	if not _conductor_spawn_text:
+func set_conductor_spawn_countdown_display(new_value: int, initial = false):
+	if not _conductor_spawn_countdown_screen:
 		return
-	if new_value == 0:
-		_conductor_spawn_text.visible = false
+	if initial:
+		_conductor_spawn_countdown_screen.set_initial_spawn_countdown(new_value)
 	else:
-		_conductor_spawn_text.visible = true
-	_conductor_spawn_text.text = str(new_value)
+		_conductor_spawn_countdown_screen.update_spawn_countdown(new_value)
 
 #region Signal connections
 
