@@ -21,10 +21,13 @@ func set_initial_spawn_countdown(new_value):
 	tween.stop()
 	if new_value == 0:
 		_hide_spawn_countdown(true)
-	else:
-		_hide_spawn_countdown(false)
+		return
+	_hide_spawn_countdown(false)
+	if new_value <= steps:
 		_spawn_animation.position.x = lerp(left_pos, right_pos, 1 - float(new_value) / steps)
-		_spawn_text.text = str(new_value).pad_zeros(2)
+	else:
+		_spawn_animation.position.x = left_pos
+	_spawn_text.text = str(new_value)
 
 func update_spawn_countdown(new_value):
 	if new_value == 0:
@@ -46,3 +49,4 @@ func update_spawn_countdown(new_value):
 func _hide_spawn_countdown(hidden):
 	_spawn_text.visible = not hidden
 	_spawn_animation.visible = not hidden
+	_spawn_animation.play("idle")

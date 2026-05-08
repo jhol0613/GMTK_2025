@@ -85,7 +85,7 @@ text = "##"
 horizontal_alignment = 2
 
 [node name="ConductorSpawnAnim" type="AnimatedSprite2D" parent="."]
-position = Vector2(24, 16)
+position = Vector2(12, 16)
 sprite_frames = SubResource("SpriteFrames_6ith1")
 animation = &"exit"
 autoplay = "idle"
