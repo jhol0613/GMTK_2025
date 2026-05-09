@@ -103,6 +103,7 @@ var _active_action_item : ActionItem
 # Prevents play mode from being triggered if replay is pressed while waiting for the beat
 var _lock_thinking_mode := true
 
+@onready var _should_reset_skip_actions_mode: bool = false
 #endregion
 
 #region Signals
@@ -152,7 +153,6 @@ func play():
 	current_state = SequencingState.RUNNING
 
 
-
 # make one step in the simulation
 func advance():
 
@@ -178,6 +178,10 @@ func advance():
 		perform_thinking_action.emit()
 
 	current_action += 1
+
+	if _should_reset_skip_actions_mode:
+		_reset_skip_actions_mode()
+		_should_reset_skip_actions_mode = false
 
 # should be called when a new level wants to update sequencer parameters
 func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction],
@@ -288,6 +292,26 @@ func deploy_antenna():
 	if not _antenna_deployed:
 		_antenna.play()
 	_antenna_deployed = true
+
+##When true, sequencer actions highlight red (or skip action color)
+##when that action would be triggered (does not alter logic as to whether
+##that action is actually triggered)
+func set_skip_actions_mode(should_skip_actions, immediate = false, one_shot = false):
+	if should_skip_actions:
+		for i in range(_available_slots):
+			_initialized_slots[i].set_to_action_skipped_mode_color()
+	else:
+		for i in range(_available_slots):
+			_initialized_slots[i].set_to_playing_mode_color()
+	if immediate:
+		_initialized_slots[current_action-1].update_light()
+	if one_shot:
+		_should_reset_skip_actions_mode = true
+
+func _reset_skip_actions_mode():
+	for i in range(_available_slots):
+		_initialized_slots[i].set_to_playing_mode_color()
+	_initialized_slots[current_action-1].update_light()
 
 # Clears out all slots and resets action quanitities
 func _clear_action_slots():

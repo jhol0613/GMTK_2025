@@ -128,14 +128,14 @@ grid_origin = Vector2i(3, 1)
 position = Vector2(111, 31)
 
 [node name="TeleporterTarget2" parent="." index="15" instance=ExtResource("5_bxp6c")]
-position = Vector2(144, 89)
+position = Vector2(177, 79)
 _active = true
-grid_origin = Vector2i(4, 4)
+grid_origin = Vector2i(5, 4)
 
 [node name="TeleporterTarget3" parent="." index="16" instance=ExtResource("5_bxp6c")]
-position = Vector2(144, 89)
+position = Vector2(145, 61)
 _active = true
-grid_origin = Vector2i(4, 4)
+grid_origin = Vector2i(4, 3)
 
 [editable path="SnackCartObstacle/Antenna"]
 [editable path="Teleporter/Antenna"]

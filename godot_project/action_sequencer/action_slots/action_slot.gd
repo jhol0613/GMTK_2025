@@ -11,6 +11,7 @@ class_name ActionSlot
 @export var playing_light_color: Color
 @export var thinking_light_color: Color
 @export var space_available_light_color: Color
+@export var action_skipped_light_color: Color
 
 @export_subgroup("Flashing")
 @export var flash_time := .2
@@ -81,6 +82,9 @@ func set_to_thinking_mode_color():
 func set_to_playing_mode_color():
 	_current_sequence_light_color = playing_light_color
 
+func set_to_action_skipped_mode_color():
+	_current_sequence_light_color = action_skipped_light_color
+
 func _update_flashing_light(new_state):
 	flashing_light_on = new_state
 	_update_light()
@@ -93,6 +97,9 @@ func _update_hover_light(new_state):
 
 func _update_sequence_light(new_state):
 	sequence_light_on = new_state
+	_update_light()
+
+func update_light():
 	_update_light()
 
 # Ensures that lights take on color/visibility in the proper priority order

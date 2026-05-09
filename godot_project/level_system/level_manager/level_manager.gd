@@ -315,10 +315,12 @@ func _hide_player(new_hide_status: bool):
 	_player_newly_hidden = new_hide_status
 	if new_hide_status:
 		_player_character.disable_collisions()
+		_action_sequencer.set_skip_actions_mode(true)
 	else:
 		#_player_character.play_animation_with_follow_on("unhide", "idle_down")
 		_player_character.enable_collisions()
 		_update_conductor_awareness()
+		_action_sequencer.set_skip_actions_mode(false)
 
 func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
@@ -353,6 +355,8 @@ func _initialize_teleporters() -> void:
 func _on_something_began_teleport(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.teleport_cooldown_list.append(entity)
+	if entity is PlayerCharacter:
+		_action_sequencer.set_skip_actions_mode(true, true, true)
 
 func _on_something_cleared_teleporter(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
@@ -547,6 +551,7 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
 		else:
+			_action_sequencer.set_skip_actions_mode(true, true, true)
 			_player_character.execute_action(action, _current_beat)
 	elif movable is Conductor and Enums.is_action_bonk(action):
 		push_error("Conductor Squished")

@@ -29,6 +29,7 @@ action_textures = Dictionary[int, CompressedTexture2D]({
 playing_light_color = Color(0, 0.984314, 0, 0.87451)
 thinking_light_color = Color(1, 1, 0.54902, 0.223529)
 space_available_light_color = Color(0, 0.611765, 0.823529, 1)
+action_skipped_light_color = Color(0.801377, 0.0175027, 3.85046e-07, 0.894118)
 metadata/_edit_horizontal_guides_ = [-59.0]
 
 [node name="Sprite2D" type="TextureRect" parent="."]
