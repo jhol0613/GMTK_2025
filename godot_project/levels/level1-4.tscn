@@ -14,7 +14,7 @@ fill_to = Vector2(0, 0)
 
 [node name="LevelBase" instance=ExtResource("1_28bq4")]
 display_name = "1-4"
-conductor_spawn_beat = 14
+conductor_spawn_beat = 6
 available_actions = Array[int]([4, 3, 1, 2])
 
 [node name="Decorative" parent="." index="0"]

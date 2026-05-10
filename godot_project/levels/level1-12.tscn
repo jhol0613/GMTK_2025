@@ -7,7 +7,7 @@
 [node name="LevelBase" instance=ExtResource("1_wf1y7")]
 display_name = "1-12"
 player_spawn_position = Vector2i(0, 3)
-conductor_spawn_beat = 14
+conductor_spawn_beat = 11
 available_actions = Array[int]([4, 3, 1, 2, 5])
 
 [node name="Decorative" parent="." index="0"]

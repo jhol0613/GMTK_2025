@@ -12,18 +12,24 @@ available_actions = Array[int]([4, 3, 1, 2, 5])
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_kn66j")]
 position = Vector2(304, 3)
+grid_origin = Vector2i(9, 0)
 activation_sequence = Array[bool]([false, false, true])
 
 [node name="Laser2" parent="." index="9" instance=ExtResource("2_kn66j")]
 position = Vector2(209, 98)
 direction = 0
+grid_origin = Vector2i(6, 5)
 activation_sequence = Array[bool]([false, false, true])
+default_animation = "fire_up"
 
 [node name="Laser3" parent="." index="10" instance=ExtResource("2_kn66j")]
 position = Vector2(176, 98)
 direction = 0
+grid_origin = Vector2i(5, 5)
 activation_sequence = Array[bool]([false, false, true])
+default_animation = "fire_up"
 
 [node name="Laser4" parent="." index="11" instance=ExtResource("2_kn66j")]
 position = Vector2(48, 4)
+grid_origin = Vector2i(1, 0)
 activation_sequence = Array[bool]([false, false, true])

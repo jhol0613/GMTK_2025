@@ -5,7 +5,7 @@
 
 [node name="LevelBase" instance=ExtResource("1_mw8yd")]
 display_name = "1-14"
-conductor_spawn_beat = 14
+conductor_spawn_beat = 10
 available_actions = Array[int]([4, 3, 1, 2, 5])
 
 [node name="Obstacles" parent="." index="2"]
