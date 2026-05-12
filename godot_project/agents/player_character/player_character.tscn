@@ -972,7 +972,7 @@ metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 size = Vector2(15, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rm4m"]
-size = Vector2(17.5, 65.5)
+size = Vector2(17.5, 55.75)
 
 [node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "caught_failure_emitter", "laser_failure_emitter", "jump_collision_timer", "duck_collision_timer", "laser_blocker", "laser_blocker_collision_shape", "collision_area", "action_sound_emitters", "sprite")]
 light_mask = 4
@@ -1106,7 +1106,7 @@ trigger_beam_end_collisions = true
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/Area2D/LaserBlocker"]
-position = Vector2(0.25, -5)
+position = Vector2(0.25, -0.125)
 shape = SubResource("RectangleShape2D_2rm4m")
 
 [node name="Sounds" type="Node2D" parent="."]

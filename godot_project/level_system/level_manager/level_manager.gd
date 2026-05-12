@@ -551,7 +551,8 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
 		else:
-			_action_sequencer.set_skip_actions_mode(true, true, true)
+			if not was_a_slide:
+				_action_sequencer.set_skip_actions_mode(true, true, true)
 			_player_character.execute_action(action, _current_beat)
 	elif movable is Conductor and Enums.is_action_bonk(action):
 		push_error("Conductor Squished")
