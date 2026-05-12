@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_ahmw1"]
 
 [node name="LevelBase" instance=ExtResource("1_nxyie")]
-conductor_spawn_beat = 6
+conductor_spawn_beat = 4
 available_actions = Array[int]([1, 2, 4, 3, 5, 6])
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_ahmw1")]
