@@ -423,12 +423,11 @@ func _update_conductor() -> void:
 	var conductor_just_spawned := false
 	if not _level_scene.conductor_enabled:
 		return
-(??)	elif _conductor == null \
-(??)		and _current_beat < _level_scene.conductor_spawn_beat:
-(??)		_action_sequencer.conductor_spawned_countdown = \
-(??)			_level_scene.conductor_spawn_beat - _current_beat
-(??)		return
-(??)	elif _conductor == null:
+	elif _conductor == null \
+		and _current_beat < _level_scene.conductor_spawn_beat:
+			_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat - _current_beat)
+			return
+	elif _conductor == null:
 		if _current_beat < _level_scene.conductor_spawn_beat and \
 		not _level_scene.conductor_snooze:
 			return
