@@ -10,7 +10,7 @@
 
 [node name="LevelBase" instance=ExtResource("1_k4jqd")]
 player_spawn_position = Vector2i(0, 3)
-conductor_enabled = false
+conductor_spawn_beat = 18
 available_actions = Array[int]([1, 2, 3, 7])
 
 [node name="Teleporter" parent="." index="9" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_xi7jk")]
