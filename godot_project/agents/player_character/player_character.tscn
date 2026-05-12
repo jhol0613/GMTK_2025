@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://cgby283x4o0cu" path="res://agents/player_character/sprites/ActionHide.png" id="18_qasg8"]
 [ext_resource type="Texture2D" uid="uid://dv3q4d6vpvk44" path="res://agents/player_character/sprites/SquishedGameover_placeholder.png" id="19_e7oxi"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="20_2b0p1"]
-[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
+[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="21_gvvi5"]
 [ext_resource type="Texture2D" uid="uid://d4h5psowgp800" path="res://agents/player_character/sprites/ActionType.png" id="23_0y67j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="24_xrlin"]
 [ext_resource type="Texture2D" uid="uid://bl7kc3hkmuob" path="res://agents/player_character/sprites/catpet_front.png" id="25_10run"]

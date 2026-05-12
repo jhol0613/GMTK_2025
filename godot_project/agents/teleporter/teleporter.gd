@@ -140,7 +140,7 @@ func _teleport(entity: Movable) -> void:
 	began_teleport.emit(entity)
 	var original_modulate = entity.modulate
 	entity.interrupt_queued_action(true)
-	
+
 	if entity is PlayerCharacter: #special case for player character since we have art for it
 		entity.queue_teleportation(current_destination_target.grid_position)
 		entity.visible = false

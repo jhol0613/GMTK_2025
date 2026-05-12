@@ -15,6 +15,8 @@ class_name RhythmRailLevel
 ## Where in the car grid the conductor should appear
 @export var conductor_spawn_position := Vector2i(0, 2)
 @export var conductor_enabled := true
+## The conductor will wait inside the car instead of playing the enter animation
+@export var conductor_snooze := false
 
 @export_subgroup("Sequencer Data")
 ##How many slots should be available in the sequencer
@@ -68,7 +70,7 @@ func _enter_tree() -> void:
 		GameManager.start_world = index.get("world")
 		GameManager.start_level = index.get("level")
 		# flag so game manager knows game was run from F6 (i.e. shouldn't load based on a saved game)
-		SaveManager.run_from_F6 = true 
+		SaveManager.run_from_F6 = true
 		SaveManager.enable_save = false # disable saving for random levels in the editor
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 
@@ -165,7 +167,7 @@ func is_cell_navigable(grid_position: Vector2i, ignore_movables = false, clearin
 	if tile_data:
 		cell_traversible = tile_data.get_custom_data("Traversible")
 		blocking_height = tile_data.get_custom_data("LaserBlockingHeight")
-	cell_traversible = cell_traversible and (not _obstacle_overrides.has(grid_position) or ignore_movables) 
+	cell_traversible = cell_traversible and (not _obstacle_overrides.has(grid_position) or ignore_movables)
 	cell_traversible = cell_traversible or clearing_height > blocking_height
 
 	return cell_exists and cell_traversible
