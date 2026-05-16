@@ -37,15 +37,11 @@ extends Node2D
 @export var lightning_screen_shake_decay := 10.0
 @export var lightning_sreen_shake_strength := 8.0
 
-@export_category("Levels")
-## All train cars in order
-#@export var level_list: Array[PackedScene]
-@export var level_catalog: LevelCatalog
 #endregion
 
 #region Level Manager Initialization
 @onready var _level_scene : RhythmRailLevel
-@onready var _world_scene : Node = GameManager.level_catalog.get_world_scene().instantiate()
+@onready var _world_scene : Node
 @onready var _action_sequencer : ActionSequencer = $SequencerLayer/ActionSequencer
 @onready var _on_the_train : = $TrainCenter/OnTheTrain
 # needs to exist since you can't animate x and y values for on the train separately, don't want train rock
@@ -87,13 +83,16 @@ func _ready() -> void:
 		var loaded_level = SaveManager.save_data.furthest_level_reached["level"]
 		var loaded_world = SaveManager.save_data.furthest_level_reached["world"]
 		_level_scene = GameManager.level_catalog.get_level(loaded_world, loaded_level).instantiate()
-
+	
+	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
+	
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)
 
 	_level_scene.position = initial_train_position
 
-	AudioManager.play_music_event(level_catalog.get_world_music_event_name(), level_catalog.get_world_music_event_bpm())
+	AudioManager.play_music_event(GameManager.level_catalog.get_world_music_event_name(), 
+		GameManager.level_catalog.get_world_music_event_bpm())
 
 	_initialize_level()
 	_on_level_advanced()
@@ -246,11 +245,11 @@ func _on_reset_animation_finished():
 ## Run once final world level complete (i.e. new world level already loaded)
 func _execute_world_transition():
 	AudioManager.play_world_complete_music()
-	var transition_scene = level_catalog.get_transition_scene().instantiate()
+	var transition_scene = GameManager.level_catalog.get_transition_scene().instantiate()
 	assert(transition_scene is WorldTransitionTunnel)
 	await AudioManager.music_complete
 	add_child(transition_scene)
-	AudioManager.play_music_event(level_catalog.get_world_music_event_name(), level_catalog.get_world_music_event_bpm())
+	AudioManager.play_music_event(GameManager.level_catalog.get_world_music_event_name(), GameManager.level_catalog.get_world_music_event_bpm())
 	await get_tree().create_timer(transition_scene.get_time_until_screen_covered()).timeout
 	_world_scene.queue_free()
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()

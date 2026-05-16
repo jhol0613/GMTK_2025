@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene load_steps=16 format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_system/level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
@@ -7,7 +7,6 @@
 [ext_resource type="Shader" uid="uid://ubvksb86n4ul" path="res://action_sequencer/antenna_connect_shader.tres" id="9_csudx"]
 [ext_resource type="PackedScene" uid="uid://dsgqmmf5csx5q" path="res://action_sequencer/action_sequencer.tscn" id="9_hv4d1"]
 [ext_resource type="Texture2D" uid="uid://4dncw8muxbdw" path="res://action_sequencer/antenna/antenna_lightning_back.png" id="10_4isrh"]
-[ext_resource type="Resource" uid="uid://bhskeg8clmay6" path="res://level_system/level_manager/level_catalog.tres" id="10_4koax"]
 [ext_resource type="Texture2D" uid="uid://cjvmxsdt748ep" path="res://action_sequencer/antenna/antenna_lightning.png" id="10_8vhqa"]
 [ext_resource type="Script" uid="uid://rvmpbi1h4oil" path="res://level_system/level_manager/shake_camera.gd" id="19_xwfi3"]
 [ext_resource type="Shader" uid="uid://ddfo0lf2lp4ro" path="res://level_system/level_manager/level_manager.gdshader" id="21_grapr"]
@@ -73,7 +72,6 @@ initial_train_position = Vector2(132, 190)
 brightness = 1.0
 contrast = 1.0
 saturation = 0.5
-level_catalog = ExtResource("10_4koax")
 
 [node name="ShaderLayer" type="CanvasLayer" parent="."]
 

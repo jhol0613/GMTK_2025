@@ -42,7 +42,7 @@ position = Vector2(1, -5)
 tile_map_data = PackedByteArray("AAD//wIAAwABAAEAAAD//wMAAwABAAIAAAD//wEAAwABAAAAAAA=")
 
 [node name="RightWall" parent="RightExteriorFloor" index="1"]
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAA=")
+tile_map_data = PackedByteArray()
 
 [node name="RightRoof" parent="RightExteriorFloor" index="2"]
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAAAAP3/AgAAAAAAABAAAP7/AgAAAAEAAAAAAP//AgAAAAIAAAAAAAAAAgAAAAMAAAD///3/BQAAAAAAAAD+//3/BQAAAAAAAAD9//3/BQAAAAAAAAD8//3/BQAAAAAAAAD7//3/BQAAAAAAAAD6//3/BQAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAP3/AgAAAAAAABAAAP7/AgAAAAEAABAAAP//AgAAAAIAABAAAAAAAgAAAAMAABD///3/BQAAAAAAAAD+//3/BQAAAAAAAAD9//3/BQAAAAAAAAD8//3/BQAAAAAAAAD7//3/BQAAAAAAAAD6//3/BQAAAAAAAAA=")

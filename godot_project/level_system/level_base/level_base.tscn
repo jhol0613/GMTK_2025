@@ -128,7 +128,7 @@ tile_set = ExtResource("6_cjwl0")
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
 position = Vector2(32, -5)
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAA=")
+tile_map_data = PackedByteArray("AAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAA=")
 tile_set = ExtResource("7_x6ye1")
 
 [node name="RightRoof" type="TileMapLayer" parent="RightExteriorFloor"]
@@ -137,7 +137,7 @@ z_index = 2
 position = Vector2(6, -8)
 rotation = 3.14159
 scale = Vector2(1, -1)
-tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAAAAP3/AwAAAAAAABAAAP7/AwAAAAEAABAAAP//AwAAAAIAABAAAAAAAwAAAAMAABD///3/BAAAAAAAABD+//3/BAAAAAAAABD9//3/BAAAAAAAABD8//3/BAAAAAAAABD7//3/BAAAAAAAAAD6//3/BAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAP3/AwAAAAAAABAAAP7/AwAAAAEAABAAAP//AwAAAAIAABAAAAAAAwAAAAMAABD///3/BAAAAAAAABD+//3/BAAAAAAAABD9//3/BAAAAAAAABD8//3/BAAAAAAAABD7//3/BAAAAAAAAAD6//3/BAAAAAAAAAA=")
 tile_set = ExtResource("7_uv04d")
 
 [node name="Target" type="Area2D" parent="."]
