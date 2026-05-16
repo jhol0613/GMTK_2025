@@ -28,7 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://diy0kdtmc3gky" path="res://levels/level2-8.tscn" id="23_dbel0"]
 [ext_resource type="PackedScene" uid="uid://b3ups0rsbp08v" path="res://levels/test_levels/laser_test_level.tscn" id="26_8o3tm"]
 [ext_resource type="PackedScene" uid="uid://dbaky6c84qdhh" path="res://levels/test_levels/interactable_test_level.tscn" id="29_pbglx"]
-[ext_resource type="PackedScene" uid="uid://bglfa6yjunqqq" path="res://backgrounds/world3/world3_placeholder.tscn" id="29_u7mwr"]
 [ext_resource type="PackedScene" uid="uid://bb7h1cttsvw2y" path="res://levels/level3-1a.tscn" id="29_y2rew"]
 [ext_resource type="PackedScene" uid="uid://bpca4h6xw3efm" path="res://levels/level3-1b.tscn" id="30_y2rew"]
 [ext_resource type="PackedScene" uid="uid://mw374qbgvht0" path="res://levels/level3-1.tscn" id="31_4ssl1"]
@@ -47,6 +46,7 @@
 [ext_resource type="PackedScene" uid="uid://i86dgdr2exvq" path="res://levels/level3-7.tscn" id="37_8402a"]
 [ext_resource type="PackedScene" uid="uid://cin3jemsgx5vl" path="res://levels/level3-8.tscn" id="38_ga4mb"]
 [ext_resource type="PackedScene" uid="uid://boiggb2fjxqbr" path="res://levels/level3-11.tscn" id="40_30pcr"]
+[ext_resource type="PackedScene" uid="uid://cj7624t065i2" path="res://backgrounds/world3/world3_background.tscn" id="40_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://b4dj0imvapc5w" path="res://levels/level3-12.tscn" id="40_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://sgl6wm0xs1th" path="res://levels/level3-9.tscn" id="48_1x4po"]
 [ext_resource type="PackedScene" uid="uid://c0lpb8u54s0rd" path="res://levels/test_levels/teleporter_test_level.tscn" id="49_nne5e"]
@@ -75,7 +75,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
-world_scene = ExtResource("29_u7mwr")
+world_scene = ExtResource("40_fk8s6")
 level_list = Array[PackedScene]([ExtResource("29_y2rew"), ExtResource("30_y2rew"), ExtResource("31_4ssl1"), ExtResource("32_sb2tf"), ExtResource("33_s30ns"), ExtResource("34_8402a"), ExtResource("35_sb2tf"), ExtResource("36_s30ns"), ExtResource("37_8402a"), ExtResource("38_ga4mb"), ExtResource("48_1x4po"), ExtResource("40_30pcr"), ExtResource("40_sv7wc")])
 level_select_scene = 0
 music_event_name = "World3_BGM"

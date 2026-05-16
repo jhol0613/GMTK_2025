@@ -362,7 +362,7 @@ shader_parameter/fast_noise = SubResource("NoiseTexture2D_pfdlx")
 shader_parameter/wave_speed = Vector2(0.005, 0.01)
 shader_parameter/wave_strength = Vector2(2, 0.5)
 shader_parameter/scale_y = 208.0
-shader_parameter/y_zoom = 1.815
+shader_parameter/y_zoom = 1.0
 
 [node name="World1Background" type="Node2D"]
 z_index = -100

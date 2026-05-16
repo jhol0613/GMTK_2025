@@ -58,7 +58,6 @@ var terminals := []
 var antennas := []
 
 signal target_reached
-signal conductor_reached_target
 
 var path_grid: AStarGrid2D
 var target_position: Vector2i
@@ -168,7 +167,12 @@ func is_cell_navigable(grid_position: Vector2i, ignore_movables = false, clearin
 	if tile_data:
 		cell_traversible = tile_data.get_custom_data("Traversible")
 		blocking_height = tile_data.get_custom_data("LaserBlockingHeight")
+<<<<<<< HEAD
+	cell_traversible = cell_traversible and (not _obstacle_overrides.has(grid_position) or ignore_movables) 
+=======
+		print(blocking_height)
 	cell_traversible = cell_traversible and (not _obstacle_overrides.has(grid_position) or ignore_movables)
+>>>>>>> conductor_snooze
 	cell_traversible = cell_traversible or clearing_height > blocking_height
 
 	return cell_exists and cell_traversible
@@ -238,11 +242,8 @@ func _initialize_path_finding():
 		path_grid.set_point_solid(tile)
 	path_grid.update()
 
-func _on_target_area_entered(area: Area2D) -> void:
-	if area.owner is PlayerCharacter:
-		target_reached.emit()
-	elif area.owner is Conductor:
-		conductor_reached_target.emit()
+func _on_target_area_entered(_area: Area2D) -> void:
+	target_reached.emit()
 
 func _draw_obstacle_traversibility() -> void:
 	_debug_drawing_layer.clear_data()

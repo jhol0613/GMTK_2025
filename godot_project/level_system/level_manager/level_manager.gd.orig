@@ -155,7 +155,6 @@ func _initialize_level():
 
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
-	_level_scene.connect("conductor_reached_target", _on_conductor_reached_target)
 
 	# Update sequencer with new level data
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions,
@@ -200,10 +199,6 @@ func _on_level_fail() -> void:
 	_action_sequencer.push_replay_button()
 	_failure_animation_playing = false
 
-func _on_conductor_reached_target() -> void:
-	if _conductor.state == Enums.ConductorState.UNAWARE:
-		_conductor.exit_level()
-
 func _reset_level() -> void:
 	print("level reset")
 	_current_beat = 0
@@ -223,10 +218,10 @@ func _reset_level() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.reset()
-	for collectible in _level_scene.collectibles:
-		collectible.reset()
-	for interactable in _level_scene.interactables:
-		interactable.reset()
+	#for collectible in _level_scene.collectibles:
+		#collectible.reset()
+	#for interactable in _level_scene.interactables:
+		#interactable.reset()
 	for agent in _level_scene.agents:
 		agent.reset()
 	for obstacle in _spawned_obstacles: # clear out spawned obstacles
@@ -425,20 +420,30 @@ func _update_player(action: Enums.PlayerAction) -> void:
 		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
 
 func _update_conductor() -> void:
-	var conductor_just_spawned := false
 	if not _level_scene.conductor_enabled:
 		return
+<<<<<<< HEAD
 	elif _conductor == null \
 		and _current_beat < _level_scene.conductor_spawn_beat:
-			_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat - _current_beat)
-			return
+		_action_sequencer.set_conductor_spawn_countdown_display(
+			_level_scene.conductor_spawn_beat - _current_beat)
+		return
 	elif _conductor == null:
+		_spawn_conductor()
+		_action_sequencer.set_conductor_spawn_countdown_display(0)
+		conductor_just_spawned = true
+=======
+
+	_action_sequencer.conductor_spawned_countdown = \
+		max(_level_scene.conductor_spawn_beat - _current_beat, 0)
+
+	if _conductor == null:
 		if _current_beat < _level_scene.conductor_spawn_beat and \
 		not _level_scene.conductor_snooze:
 			return
 		_spawn_conductor()
-		_action_sequencer.set_conductor_spawn_countdown_display(0)
-		conductor_just_spawned = true
+
+>>>>>>> conductor_snooze
 	_update_conductor_awareness()
 	if _conductor.state == Enums.ConductorState.SNOOZE or \
 	_conductor.state == Enums.ConductorState.SKIP_ACTION:
@@ -476,12 +481,7 @@ func _update_conductor() -> void:
 	# skip the next action if the conductor is trying to leave the map
 	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
 		return
-	
-	# Don't give conductor an action immediately after he spawns
-	if conductor_just_spawned:
-		conductor_just_spawned = false
-		return
-	
+
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat

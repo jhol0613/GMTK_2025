@@ -10,6 +10,8 @@
 [node name="LevelBase" instance=ExtResource("1_psfox")]
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 7
+conductor_spawn_position = Vector2i(2, 2)
+conductor_snooze = true
 available_actions = Array[int]([4, 7, 1, 2])
 
 [node name="Obstacles" parent="." index="2"]

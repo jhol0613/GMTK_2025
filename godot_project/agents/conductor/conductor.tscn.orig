@@ -1,0 +1,194 @@
+[gd_scene load_steps=20 format=3 uid="uid://bmm7fgv3iwjwv"]
+
+[ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
+[ext_resource type="Resource" uid="uid://bm2ri4ouxapyi" path="res://agents/conductor/conductor_move_action_data.tres" id="2_thsup"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="3_34788"]
+[ext_resource type="Curve" uid="uid://04rymk8o8meb" path="res://agents/conductor/conductor_y_curve.tres" id="3_lda0w"]
+[ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="4_lda0w"]
+[ext_resource type="SpriteFrames" uid="uid://dhnfjvmbtjy03" path="res://agents/player_character/sprites/player_character_frames.tres" id="4_ps1s8"]
+[ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_34788"]
+[ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="6_46wui"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_46wui"]
+[ext_resource type="Texture2D" uid="uid://b8wd4ix6y8p2w" path="res://agents/conductor/emotes.png" id="10_thsup"]
+[ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="12_k3trg"]
+
+[sub_resource type="Resource" id="Resource_k3trg"]
+script = ExtResource("3_34788")
+direct_movement_curve = ExtResource("5_34788")
+y_movement_curve = ExtResource("3_lda0w")
+y_movement_magnitude = 16.0
+move_duration = 0.5
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thsup"]
+atlas = ExtResource("10_thsup")
+region = Rect2(0, 40, 23, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3trg"]
+atlas = ExtResource("10_thsup")
+region = Rect2(23, 20, 23, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6kqq"]
+atlas = ExtResource("10_thsup")
+region = Rect2(23, 40, 23, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_46wui"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_thsup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3trg")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_thsup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3trg")
+}],
+"loop": false,
+"name": &"aware",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_thsup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6kqq")
+}],
+"loop": true,
+"name": &"unreachable",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lda0w"]
+size = Vector2(20, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6kqq"]
+size = Vector2(17.5, 65.5)
+
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
+light_mask = 4
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_eb2fl")
+standard_move_data = ExtResource("2_thsup")
+bonk_data = SubResource("Resource_k3trg")
+slide_data = ExtResource("6_46wui")
+other_action_data = Dictionary[int, ExtResource("3_34788")]({
+12: ExtResource("2_thsup"),
+13: ExtResource("2_thsup"),
+14: ExtResource("2_thsup"),
+15: ExtResource("2_thsup")
+})
+collision_area = NodePath("Shadow/Area2D")
+default_sound_emitter = NodePath("Sound/JumpSound")
+sprite = NodePath("Shadow/AnimatedSprite2D")
+action_animations = Dictionary[int, String]({
+1: "jump_right",
+2: "jump_right",
+3: "jump_right",
+4: "jump_right"
+})
+follow_on_animations = Dictionary[int, String]({
+1: "idle_right",
+2: "idle_right",
+3: "idle_right",
+4: "idle_right"
+})
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+texture = ExtResource("4_lda0w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Shadow"]
+light_mask = 4
+position = Vector2(2.575, -31.57)
+sprite_frames = ExtResource("4_ps1s8")
+animation = &"jump_right"
+autoplay = "idle_right"
+script = ExtResource("6_mq2pu")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+<<<<<<< HEAD
+=======
+[node name="Area2D" type="Area2D" parent="Shadow/AnimatedSprite2D"]
+position = Vector2(-2.42, 21.47)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/AnimatedSprite2D/Area2D"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_lda0w")
+
+>>>>>>> conductor_snooze
+[node name="Emotes" type="AnimatedSprite2D" parent="Shadow/AnimatedSprite2D"]
+light_mask = 4
+position = Vector2(17.425, -24.43)
+sprite_frames = SubResource("SpriteFrames_46wui")
+animation = &"unreachable"
+script = ExtResource("6_mq2pu")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Area2D" type="Area2D" parent="Shadow"]
+position = Vector2(0.155, -10.1)
+collision_layer = 68
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shadow/Area2D"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_lda0w")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="JumpSound" type="FmodEventEmitter2D" parent="Sound"]
+event_name = "event:/Conductor Footsteps"
+event_guid = "{1db1ae96-b392-45ab-95a1-02448391848b}"
+script = ExtResource("10_46wui")
+offset_seconds = 0.23
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="EnteredSound" type="FmodEventEmitter2D" parent="Sound"]
+event_name = "event:/Door Opens (Conductor Enters)"
+event_guid = "{eba7682c-5954-49ed-a01d-f8fbbd6d8628}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="Voice" type="FmodEventEmitter2D" parent="Sound"]
+event_name = "event:/Conductor Speak"
+event_guid = "{5ce57dca-f8db-45c3-a4d6-cfb2c8c431fc}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="Grunt" type="FmodEventEmitter2D" parent="Sound"]
+event_name = "event:/Conductor Grunt"
+event_guid = "{7b5a0860-8b68-494b-aba5-cc88aabf5a0b}"
+script = ExtResource("10_46wui")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="LaserBlocker" type="Area2D" parent="."]
+z_index = 5
+position = Vector2(1, -28)
+collision_layer = 512
+collision_mask = 192
+script = ExtResource("12_k3trg")
+trigger_beam_end_collisions = true
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_h6kqq")
+
+[connection signal="area_entered" from="LaserBlocker" to="." method="_on_laser_hit"]

@@ -55,6 +55,12 @@ func play_current_emotion():
 func set_enemy_collision(value: bool) -> void:
 	collision.set_collision_layer_value(Enums.CollisionLayer.ENEMIES, value)
 
+func exit_level() -> void:
+	#TODO: Instead of arbitrary wait, play conductor exit animation
+	await get_tree().create_timer(1).timeout
+	visible = false
+	collision.collision_mask = 0
+
 func _on_laser_hit(area: Area2D) -> void:
 	if area.get_collision_layer_value(Enums.CollisionLayer.LASERS):
 		grunt_emitter.play()
