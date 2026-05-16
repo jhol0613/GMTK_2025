@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cb7ns"]
 
 [node name="LevelBase" instance=ExtResource("1_sbc7u")]
+display_name = "3-3"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)

@@ -2,7 +2,7 @@ extends Node2D
 
 @export var world_number := 0
 
-@onready var _level_list_container = $MarginContainer/VBoxContainer/LevelListContainer
+@onready var _level_list_container = $MarginContainer/VBoxContainer2/ScrollContainer/LevelListContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

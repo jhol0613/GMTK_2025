@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="8_ujhy3"]
 
 [node name="LevelBase" instance=ExtResource("1_hdl3e")]
+display_name = "3-9"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 5
 conductor_spawn_position = Vector2i(0, 3)

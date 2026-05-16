@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="7_du0ay"]
 
 [node name="LevelBase" instance=ExtResource("1_xhynf")]
+display_name = "3-11"
 conductor_spawn_beat = 6
 available_actions = Array[int]([4, 3, 1, 2])
 

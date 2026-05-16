@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_linlt"]
 
 [node name="LevelBase" instance=ExtResource("1_psfox")]
+display_name = "2-10"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 7
 conductor_spawn_position = Vector2i(2, 2)

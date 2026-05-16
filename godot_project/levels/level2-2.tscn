@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_hckjy"]
 
 [node name="LevelBase" instance=ExtResource("1_hckjy")]
+display_name = "2-2"
 available_actions = Array[int]([1, 2, 4, 3])
 
 [node name="Obstacles" parent="." index="2"]

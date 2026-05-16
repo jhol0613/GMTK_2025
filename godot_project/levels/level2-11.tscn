@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_lsoic"]
 
 [node name="LevelBase" instance=ExtResource("1_nxyie")]
+display_name = "2-11"
 conductor_spawn_beat = 6
 available_actions = Array[int]([1, 2, 4, 7])
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dual0bcixw854"]
+[gd_scene load_steps=27 format=3 uid="uid://dual0bcixw854"]
 
 [ext_resource type="Script" uid="uid://dtkjbr420kbm1" path="res://menus/title_screen/title_scene.gd" id="1_ofviv"]
 [ext_resource type="Texture2D" uid="uid://cuc5c16cqv58r" path="res://menus/title_screen/Menu_Stars.png" id="2_3h5pg"]
@@ -10,11 +10,14 @@
 [ext_resource type="Texture2D" uid="uid://b11x7oa6qkn5j" path="res://menus/title_screen/playpressed.png" id="5_5mg7y"]
 [ext_resource type="Texture2D" uid="uid://ievbjg1rx2ml" path="res://menus/title_screen/optionsselect.png" id="5_ofviv"]
 [ext_resource type="Texture2D" uid="uid://bojivainvlqrd" path="res://menus/title_screen/optionspressed.png" id="8_bgyt0"]
+[ext_resource type="Texture2D" uid="uid://klgd4p3fvp0t" path="res://menus/title_screen/continue.png" id="8_ygav7"]
+[ext_resource type="Texture2D" uid="uid://ct0l30ktd1ijv" path="res://menus/title_screen/Map.png" id="9_f0xpe"]
 [ext_resource type="Texture2D" uid="uid://cqwvwbxw1kcpk" path="res://menus/title_screen/TitleText1.png" id="11_ehrfh"]
 [ext_resource type="Texture2D" uid="uid://clvfo3gwt5a2o" path="res://menus/title_screen/Quit.png" id="11_l6hpg"]
 [ext_resource type="Texture2D" uid="uid://dtw0tsnohj5k7" path="res://menus/title_screen/Quitselect.png" id="12_7mo1b"]
 [ext_resource type="Texture2D" uid="uid://bgeovtkbbvbbd" path="res://menus/title_screen/TitleText2.png" id="12_kjgsu"]
 [ext_resource type="Texture2D" uid="uid://b508ued4vhh0g" path="res://menus/title_screen/tracks.png" id="13_q7rrh"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="18_f0xpe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_e8u02"]
 animations = [{
@@ -127,9 +130,26 @@ offset_bottom = 292.0
 theme_override_constants/separation = -11
 
 [node name="Play" type="TextureButton" parent="VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 texture_normal = ExtResource("2_ux3pq")
+texture_pressed = ExtResource("5_5mg7y")
+texture_hover = ExtResource("3_yewqo")
+stretch_mode = 4
+
+[node name="Continue" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("8_ygav7")
+texture_pressed = ExtResource("5_5mg7y")
+texture_hover = ExtResource("3_yewqo")
+stretch_mode = 4
+
+[node name="Map" type="TextureButton" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture_normal = ExtResource("9_f0xpe")
 texture_pressed = ExtResource("5_5mg7y")
 texture_hover = ExtResource("3_yewqo")
 stretch_mode = 4
@@ -176,10 +196,18 @@ sprite_frames = SubResource("SpriteFrames_ehrfh")
 autoplay = "default"
 frame = 2
 frame_progress = 1.0
+script = ExtResource("18_f0xpe")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [connection signal="button_down" from="VBoxContainer/Play" to="." method="_on_play_button_down"]
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="button_down" from="VBoxContainer/Continue" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="VBoxContainer/Continue" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="button_down" from="VBoxContainer/Map" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="VBoxContainer/Map" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="VBoxContainer/Map" to="." method="_on_map_pressed"]
 [connection signal="button_down" from="VBoxContainer/Options" to="." method="_on_options_button_down"]
 [connection signal="mouse_entered" from="VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
 [connection signal="button_down" from="VBoxContainer/Quit" to="." method="_on_options_button_down"]

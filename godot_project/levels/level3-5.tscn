@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="5_fo58w"]
 
 [node name="LevelBase" instance=ExtResource("1_50va3")]
+display_name = "3-5"
 conductor_spawn_beat = 4
 available_actions = Array[int]([4, 2])
 

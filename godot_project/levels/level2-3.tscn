@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_hj5e0"]
 
 [node name="LevelBase" instance=ExtResource("1_hj5e0")]
+display_name = "2-3"
 conductor_spawn_beat = 4
 available_actions = Array[int]([1, 2, 4, 3])
 

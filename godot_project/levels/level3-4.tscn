@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_iqnak"]
 
 [node name="LevelBase" instance=ExtResource("1_pd71t")]
+display_name = "3-4"
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 4, 7])

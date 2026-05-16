@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://djc64pphqd2i4"]
+
+[ext_resource type="PackedScene" uid="uid://d0bhe2nc2ba1q" path="res://menus/level_selection_menu/secondary_level_selection_menu/secondary_selection_menu_base.tscn" id="1_lu7li"]
+
+[node name="Menu" instance=ExtResource("1_lu7li")]
+world_number = 1

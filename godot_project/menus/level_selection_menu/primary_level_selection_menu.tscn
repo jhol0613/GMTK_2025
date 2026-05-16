@@ -56,7 +56,7 @@ offset_right = 600.0
 offset_bottom = 451.0
 texture = ExtResource("2_flad7")
 
-[node name="WorldSelectButton" parent="." instance=ExtResource("2_m5yvn")]
+[node name="SnowyPeaksButton" parent="." instance=ExtResource("2_m5yvn")]
 z_index = 1
 offset_left = 72.0
 offset_top = 273.0
@@ -65,13 +65,70 @@ offset_bottom = 323.0
 texture_normal = ExtResource("4_a6itq")
 destination_scene = 4
 
-[node name="Record" type="Sprite2D" parent="WorldSelectButton"]
+[node name="Record" type="Sprite2D" parent="SnowyPeaksButton"]
 z_index = -1
 position = Vector2(28, 24)
 rotation = 2.08427
 texture = ExtResource("5_gkbjk")
 
-[node name="RecordAnimation" type="AnimationPlayer" parent="WorldSelectButton"]
+[node name="RecordAnimation" type="AnimationPlayer" parent="SnowyPeaksButton"]
 libraries = {
 &"": SubResource("AnimationLibrary_a6itq")
 }
+
+[node name="LostIsthmusButton" parent="." instance=ExtResource("2_m5yvn")]
+z_index = 1
+offset_left = 239.0
+offset_top = 313.0
+offset_right = 296.0
+offset_bottom = 363.0
+texture_normal = ExtResource("4_a6itq")
+destination_scene = 6
+
+[node name="Record" type="Sprite2D" parent="LostIsthmusButton"]
+z_index = -1
+position = Vector2(28, 24)
+rotation = 2.08427
+texture = ExtResource("5_gkbjk")
+
+[node name="RecordAnimation" type="AnimationPlayer" parent="LostIsthmusButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_a6itq")
+}
+
+[node name="Label" type="Label" parent="LostIsthmusButton"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 15.0
+offset_right = 79.0
+offset_bottom = 38.0
+text = "Lost Isthmus"
+
+[node name="MonsterCityButton" parent="." instance=ExtResource("2_m5yvn")]
+z_index = 1
+offset_left = 435.0
+offset_top = 231.0
+offset_right = 492.0
+offset_bottom = 281.0
+texture_normal = ExtResource("4_a6itq")
+destination_scene = 7
+
+[node name="Record" type="Sprite2D" parent="MonsterCityButton"]
+z_index = -1
+position = Vector2(28, 24)
+rotation = 2.08427
+texture = ExtResource("5_gkbjk")
+
+[node name="RecordAnimation" type="AnimationPlayer" parent="MonsterCityButton"]
+libraries = {
+&"": SubResource("AnimationLibrary_a6itq")
+}
+
+[node name="Label" type="Label" parent="MonsterCityButton"]
+layout_mode = 0
+offset_left = -21.0
+offset_top = 15.0
+offset_right = 79.0
+offset_bottom = 38.0
+text = "Monster City
+"

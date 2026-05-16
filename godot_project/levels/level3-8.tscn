@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="7_m3shw"]
 
 [node name="LevelBase" instance=ExtResource("1_mcwt6")]
+display_name = "3-8"
 available_actions = Array[int]([4, 1, 2])
 
 [node name="Obstacles" parent="." index="2"]

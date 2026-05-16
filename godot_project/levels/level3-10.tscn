@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="8_c5scp"]
 
 [node name="LevelBase" instance=ExtResource("1_bhy8u")]
+display_name = "3-10"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 available_actions = Array[int]([1, 2, 3, 4, 7])

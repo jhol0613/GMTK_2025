@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="4_23alx"]
 
 [node name="LevelBase" instance=ExtResource("1_xgeqg")]
+display_name = "2-9"
 conductor_spawn_beat = 3
 available_actions = Array[int]([1, 2, 4, 7])
 

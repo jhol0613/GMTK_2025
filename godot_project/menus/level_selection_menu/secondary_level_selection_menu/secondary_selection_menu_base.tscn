@@ -14,16 +14,21 @@ texture = ExtResource("2_qdbtg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 offset_left = 11.0
-offset_top = 55.0
+offset_top = 17.0
 offset_right = 209.0
-offset_bottom = 282.0
+offset_bottom = 244.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer2"]
 layout_mode = 2
 text = "Tracks:"
 
-[node name="LevelListContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 395)
 layout_mode = 2
+
+[node name="LevelListContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer2/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
