@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://dqleuvyixoqjp"]
+[gd_scene load_steps=4 format=3 uid="uid://dqleuvyixoqjp"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_hri01"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_233cq"]
@@ -11,13 +11,13 @@ conductor_spawn_beat = 3
 available_actions = Array[int]([4, 3, 1, 2])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAAKAP//AgAAAAAAAAAKAAAAAgAAAAEAAAA=")
+tile_map_data = PackedByteArray(0, 0, 10, 0, 255, 255, 2, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wEAAAAAAAwAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+tile_map_data = PackedByteArray(0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 12, 0, 0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 20, 0, 0, 0, 255, 255, 3, 0, 0, 0, 0, 0, 21, 0, 0, 0)
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAAAwAABA=")
+tile_map_data = PackedByteArray(0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 20, 0, 0, 0, 255, 255, 3, 0, 0, 0, 0, 0, 21, 0, 0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 12, 0, 0, 16)
 
 [node name="Laser" parent="." index="8" instance=ExtResource("2_233cq")]
 position = Vector2(48, 4)

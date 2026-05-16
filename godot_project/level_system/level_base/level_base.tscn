@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=16 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="7_x6ye1"]
 [ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://backgrounds/world1/car_connector.png" id="8_4d8y1"]
 [ext_resource type="Script" uid="uid://b3m7gnsl48bka" path="res://level_system/level_base/debug_drawing.gd" id="10_ais3r"]
+[ext_resource type="Texture2D" uid="uid://bymyxw6gjuekr" path="res://backgrounds/world1/wheel_well.png" id="10_srili"]
 [ext_resource type="FontFile" uid="uid://bge7vr6k48ykd" path="res://debug/Roboto-VariableFont_wdth,wght.ttf" id="11_ucxu3"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
@@ -95,7 +96,7 @@ tile_set = ExtResource("4_p76ks")
 [node name="LeftExterior" type="TileMapLayer" parent="LeftExteriorFloor"]
 light_mask = 2
 position = Vector2(0, -9)
-tile_map_data = PackedByteArray("AAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+tile_map_data = PackedByteArray("AAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAA=")
 tile_set = ExtResource("6_cjwl0")
 
 [node name="LeftWall" type="TileMapLayer" parent="LeftExteriorFloor"]
@@ -121,7 +122,7 @@ tile_set = ExtResource("4_p76ks")
 [node name="RightExterior" type="TileMapLayer" parent="RightExteriorFloor"]
 light_mask = 2
 position = Vector2(0, -9)
-tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAABMAABA=")
+tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD//wEAAAAAABMAABA=")
 tile_set = ExtResource("6_cjwl0")
 
 [node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
@@ -153,6 +154,16 @@ shape = SubResource("RectangleShape2D_bsh3f")
 z_index = -4
 position = Vector2(421, 58)
 texture = ExtResource("8_4d8y1")
+
+[node name="Wheelwell" type="Sprite2D" parent="AdditionalSprites"]
+z_index = -1
+position = Vector2(71, 127)
+texture = ExtResource("10_srili")
+
+[node name="Wheelwell2" type="Sprite2D" parent="AdditionalSprites"]
+z_index = -1
+position = Vector2(281, 127)
+texture = ExtResource("10_srili")
 
 [node name="DebugDrawing" type="Node2D" parent="."]
 z_index = 4096

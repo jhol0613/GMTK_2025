@@ -33,7 +33,7 @@ texture = SubResource("GradientTexture2D_28bq4")
 texture_scale = 1.4
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wEAAAAAABAAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+tile_map_data = PackedByteArray("AAD//wEAAAAAABAAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAABAAABA=")
+tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD//wEAAAAAABAAABA=")

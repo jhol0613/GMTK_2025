@@ -35,10 +35,10 @@ texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wEAAAAAABEAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+tile_map_data = PackedByteArray("AAD//wEAAAAAABEAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAAAAABEAABA=")
+tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD//wEAAAAAABEAABA=")
 
 [node name="Collectible" parent="." index="8" instance=ExtResource("2_w4kwt")]
 position = Vector2(79, 41)

@@ -50,7 +50,7 @@ position = Vector2(325, -37.63)
 texture = ExtResource("2_k6diu")
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wEAAgAAAB4AAAD//wIAAgAAACAAAAD//wMAAgAAACIAAAAAAAQAAAAAABYAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAABAAQAAAAAABcAAAA=")
+tile_map_data = PackedByteArray("AAD//wEAAgAAAB4AAAD//wIAAgAAACAAAAD//wMAAgAAACIAAAA=")
 
 [node name="LeftWall" parent="LeftExteriorFloor" index="1"]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAgAAAAIAAAD//wEAAgABAAIAAAD//wIAAgABAAIAAAA=")
@@ -59,7 +59,7 @@ tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAgAAAAIAAAD//wEAAgABAAI
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD+////AAAAAAIAAAD+//7/AAAAAAEAAAD+//3/AAAAAAAAAAD+/wAAAAAAAAMAAAD///3/AQABAAAAAAAAAP3/AQABAAAAAAABAP3/AQABAAAAAAACAP3/AQABAAAAAAADAP3/AQABAAAAAAAEAP3/AQABAAAAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
-tile_map_data = PackedByteArray("AAD//wIAAgAAACAAABD//wMAAgAAACIAAAAAAAQAAAAAABYAAAABAAQAAAAAABcAAAACAAQAAAAAABcAAAADAAQAAAAAABcAAAAEAAQAAAAAABgAAAD//wEAAgAAAB4AABA=")
+tile_map_data = PackedByteArray("AAD//wIAAgAAACAAABD//wMAAgAAACIAAAD//wEAAgAAAB4AABA=")
 
 [node name="RightWall" parent="RightExteriorFloor" index="1"]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAgAAAAIAAAD//wEAAgABAAIAAAD//wIAAgABAAIAAAA=")

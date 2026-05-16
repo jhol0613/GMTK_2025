@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://dtbtqvpvt1qm3"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://dtbtqvpvt1qm3"]
 
 [ext_resource type="Texture2D" uid="uid://cuqjtegey05u4" path="res://tilemaps/tilesheets/outsidetiles.png" id="1_h613x"]
 [ext_resource type="Texture2D" uid="uid://d3yicosfk1pl" path="res://tilemaps/tilesheets/Transitionfloor.png" id="2_6a3jm"]
 [ext_resource type="Texture2D" uid="uid://dyg8rapld1r7u" path="res://tilemaps/tilesheets/Secondoutside.png" id="3_nrtq5"]
+[ext_resource type="Texture2D" uid="uid://b882ir11p83qu" path="res://tilemaps/tilesheets/Thirdoutside.png" id="4_533wt"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_h613x"]
 tile_data = PackedInt32Array(0, 0, 8, 65536, 65536, 8, 131072, 65536, 8, 196608, 65536, 8, 262144, 65536, 8, 327680, 65536, 8, 393216, 65536, 8, 458752, 0, 9, 524288, 65536, 10, 589824, 65536, 10, 655360, 65536, 10, 720896, 65536, 10, 786432, 0, 10, 851968, 0, 11)
@@ -132,9 +133,47 @@ texture = ExtResource("3_nrtq5")
 0:38/0 = 0
 1:38/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vawnk"]
+texture = ExtResource("4_533wt")
+texture_region_size = Vector2i(48, 32)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+0:3/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:8/0 = 0
+0:9/0 = 0
+0:10/0 = 0
+0:11/0 = 0
+0:12/0 = 0
+0:13/0 = 0
+0:14/0 = 0
+0:15/0 = 0
+0:16/0 = 0
+0:17/0 = 0
+0:18/0 = 0
+0:19/0 = 0
+0:20/0 = 0
+0:21/0 = 0
+0:22/0 = 0
+0:23/0 = 0
+0:24/0 = 0
+0:25/0 = 0
+0:26/0 = 0
+0:27/0 = 0
+0:28/0 = 0
+0:29/0 = 0
+0:30/0 = 0
+0:31/0 = 0
+0:32/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_6a3jm")
 sources/1 = SubResource("TileSetAtlasSource_svw4q")
 sources/2 = SubResource("TileSetAtlasSource_533wt")
+sources/3 = SubResource("TileSetAtlasSource_vawnk")
 pattern_0 = SubResource("TileMapPattern_h613x")
