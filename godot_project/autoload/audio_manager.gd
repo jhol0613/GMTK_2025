@@ -56,7 +56,10 @@ func play_world_complete_music():
 	#if music_event.event_name != "":
 		#music_event.set_parameter("GameOver", 1.0)
 
-func play_music_event(event_name: String, new_bpm: float):
+##If restart set to false, music won't start over if the requested music event is already playing
+func play_music_event(event_name: String, new_bpm: float, restart = true):
+	if music_event.event_name == "event:/" + event_name and not restart:
+		return
 	FmodServer.set_global_parameter_by_name("GameOver", 0.0)
 	music_event.stop()
 	music_event.event_name = "event:/" + event_name

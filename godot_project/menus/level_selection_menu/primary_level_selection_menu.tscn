@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dql50aatpoank"]
+[gd_scene load_steps=10 format=3 uid="uid://dql50aatpoank"]
 
 [ext_resource type="Texture2D" uid="uid://vy7dmf4n5igk" path="res://menus/level_selection_menu/visual_assests/Map ver1.png" id="1_80rdn"]
 [ext_resource type="Texture2D" uid="uid://bs5fx7unbtaa4" path="res://menus/level_selection_menu/visual_assests/Route.png" id="2_flad7"]
 [ext_resource type="PackedScene" uid="uid://b2svcmsisjih5" path="res://menus/level_selection_menu/world_select_button.tscn" id="2_m5yvn"]
 [ext_resource type="Texture2D" uid="uid://cijetmw8sa7mq" path="res://menus/level_selection_menu/visual_assests/album cover/SnowyPeakCover.png" id="4_a6itq"]
 [ext_resource type="Texture2D" uid="uid://c7b1ywxrbh382" path="res://menus/level_selection_menu/visual_assests/Record.png" id="5_gkbjk"]
+[ext_resource type="Script" uid="uid://c4suba26o50wf" path="res://menus/level_selection_menu/scene_change_button.gd" id="6_ovwpm"]
 
 [sub_resource type="Animation" id="Animation_80rdn"]
 resource_name = "Move"
@@ -132,3 +133,13 @@ offset_right = 79.0
 offset_bottom = 38.0
 text = "Monster City
 "
+
+[node name="Button" type="Button" parent="."]
+offset_left = 488.0
+offset_top = 354.0
+offset_right = 533.0
+offset_bottom = 385.0
+text = "Back"
+script = ExtResource("6_ovwpm")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

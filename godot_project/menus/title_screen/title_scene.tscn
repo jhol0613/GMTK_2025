@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dual0bcixw854"]
+[gd_scene load_steps=31 format=3 uid="uid://dual0bcixw854"]
 
 [ext_resource type="Script" uid="uid://dtkjbr420kbm1" path="res://menus/title_screen/title_scene.gd" id="1_ofviv"]
 [ext_resource type="Texture2D" uid="uid://cuc5c16cqv58r" path="res://menus/title_screen/Menu_Stars.png" id="2_3h5pg"]
@@ -11,11 +11,15 @@
 [ext_resource type="Texture2D" uid="uid://ievbjg1rx2ml" path="res://menus/title_screen/optionsselect.png" id="5_ofviv"]
 [ext_resource type="Texture2D" uid="uid://bojivainvlqrd" path="res://menus/title_screen/optionspressed.png" id="8_bgyt0"]
 [ext_resource type="Texture2D" uid="uid://klgd4p3fvp0t" path="res://menus/title_screen/continue.png" id="8_ygav7"]
+[ext_resource type="Texture2D" uid="uid://bcvmm3vpa87na" path="res://menus/title_screen/continuepressed.png" id="9_c40fc"]
 [ext_resource type="Texture2D" uid="uid://ct0l30ktd1ijv" path="res://menus/title_screen/Map.png" id="9_f0xpe"]
+[ext_resource type="Texture2D" uid="uid://crkdflporybad" path="res://menus/title_screen/continueselect.png" id="10_xrves"]
 [ext_resource type="Texture2D" uid="uid://cqwvwbxw1kcpk" path="res://menus/title_screen/TitleText1.png" id="11_ehrfh"]
 [ext_resource type="Texture2D" uid="uid://clvfo3gwt5a2o" path="res://menus/title_screen/Quit.png" id="11_l6hpg"]
+[ext_resource type="Texture2D" uid="uid://tolp5c4i4rif" path="res://menus/title_screen/mappressed.png" id="11_xrves"]
 [ext_resource type="Texture2D" uid="uid://dtw0tsnohj5k7" path="res://menus/title_screen/Quitselect.png" id="12_7mo1b"]
 [ext_resource type="Texture2D" uid="uid://bgeovtkbbvbbd" path="res://menus/title_screen/TitleText2.png" id="12_kjgsu"]
+[ext_resource type="Texture2D" uid="uid://dnmfqbhlyxckd" path="res://menus/title_screen/mapselect.png" id="12_p7bgt"]
 [ext_resource type="Texture2D" uid="uid://b508ued4vhh0g" path="res://menus/title_screen/tracks.png" id="13_q7rrh"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="18_f0xpe"]
 
@@ -123,15 +127,15 @@ stretch_mode = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 88.0
-offset_top = 191.0
-offset_right = 258.0
-offset_bottom = 292.0
-theme_override_constants/separation = -11
+offset_left = 68.0
+offset_top = 192.0
+offset_right = 238.0
+offset_bottom = 348.0
+theme_override_constants/separation = -24
 
 [node name="Play" type="TextureButton" parent="VBoxContainer"]
 visible = false
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("2_ux3pq")
 texture_pressed = ExtResource("5_5mg7y")
@@ -139,23 +143,23 @@ texture_hover = ExtResource("3_yewqo")
 stretch_mode = 4
 
 [node name="Continue" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("8_ygav7")
-texture_pressed = ExtResource("5_5mg7y")
-texture_hover = ExtResource("3_yewqo")
+texture_pressed = ExtResource("9_c40fc")
+texture_hover = ExtResource("10_xrves")
 stretch_mode = 4
 
 [node name="Map" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("9_f0xpe")
-texture_pressed = ExtResource("5_5mg7y")
-texture_hover = ExtResource("3_yewqo")
+texture_pressed = ExtResource("11_xrves")
+texture_hover = ExtResource("12_p7bgt")
 stretch_mode = 4
 
 [node name="Options" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("4_0ddpl")
 texture_pressed = ExtResource("8_bgyt0")
@@ -163,7 +167,7 @@ texture_hover = ExtResource("5_ofviv")
 stretch_mode = 4
 
 [node name="Quit" type="TextureButton" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("11_l6hpg")
 texture_pressed = ExtResource("12_7mo1b")

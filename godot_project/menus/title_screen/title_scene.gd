@@ -36,7 +36,8 @@ func _ready():
 		_click_start_emitter.visible = true
 		_map_button.visible = true
 	
-	AudioManager.play_music_event(music_event_name, music_event_bpm)
+	
+	AudioManager.play_music_event(music_event_name, music_event_bpm, false)
 
 func _on_play_pressed() -> void:
 	GameManager.load_scene(Enums.Scenes.INTRO_CUTSCENE)
@@ -45,7 +46,7 @@ func _on_continue_pressed() -> void:
 	GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER)
 
 func _on_map_pressed() -> void: 
-	GameManager.load_scene(Enums.Scenes.MAP)
+	GameManager.load_scene(Enums.Scenes.MAP, Enums.TransitionStyle.FADEINOUT, .2, .3)
 
 func _on_music_beat(beat: int):
 	pass
