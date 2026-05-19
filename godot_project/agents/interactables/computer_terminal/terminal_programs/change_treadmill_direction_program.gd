@@ -4,6 +4,11 @@ class_name TurnTreadmillProgram
 
 @export var treadmills : Array[Treadmill]
 @export var new_direction : Enums.Direction
+@export var allowed_directions : Array[Enums.Direction] = [
+	Enums.Direction.UP,
+	Enums.Direction.DOWN,
+	Enums.Direction.LEFT,
+	Enums.Direction.RIGHT]
 
 var original_directions : Dictionary[Treadmill, Enums.Direction]
 
@@ -17,6 +22,7 @@ func _ready() -> void:
 func initialize_screen(screen_scene: ChangeTreadmillDirectionScreen):
 	super.initialize_screen(screen_scene)
 	screen_scene.direction_pressed.connect(_on_direction_selected)
+	screen_scene.set_allowed_directions(allowed_directions)
 
 func _on_direction_selected(direction: Enums.Direction):
 	#TODO: Update original direction depending on position reset mode

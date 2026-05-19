@@ -1,10 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dw1sgggrlnrke"]
+[gd_scene load_steps=4 format=3 uid="uid://dw1sgggrlnrke"]
 
 [ext_resource type="Script" uid="uid://d22cw8lms01jr" path="res://action_sequencer/sequencer_screen/screen_scenes/change_laser_direction_screen.gd" id="1_cv4jw"]
 [ext_resource type="Texture2D" uid="uid://d33t60q4d64hi" path="res://action_sequencer/sequencer_screen/laser_green.png" id="2_com60"]
 [ext_resource type="PackedScene" uid="uid://70ih8s0lu4px" path="res://action_sequencer/sequencer_screen/screen_ui_components/digipad_rotate.tscn" id="3_wl7bb"]
-
-[sub_resource type="ButtonGroup" id="ButtonGroup_com60"]
 
 [node name="ChangeLaserDirectionScreen" type="Control" node_paths=PackedStringArray("digipad")]
 layout_mode = 3
@@ -23,4 +21,5 @@ texture = ExtResource("2_com60")
 
 [node name="Digipad" parent="." instance=ExtResource("3_wl7bb")]
 position = Vector2(15, -2)
-button_group = SubResource("ButtonGroup_com60")
+
+[editable path="Digipad"]
