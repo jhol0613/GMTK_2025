@@ -7,7 +7,7 @@
 [node name="LevelBase2" instance=ExtResource("1_g0u3c")]
 display_name = "2-1"
 conductor_spawn_beat = 6
-available_actions = Array[int]([1, 2, 4, 7])
+available_actions = Array[int]([4, 1, 2, 7])
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAADAAAAAAABAAIAAAADAAEAAAABAAMAAAADAP//AAABAAAAAAACAAQAAgACAAIAAAACAAUAAgACAAMAAAAEAAEAAAABAAMAABAEAAAAAAABAAIAABAEAP//AAABAAAAABADAAIAAwAAAAAAABAHAAMAAQAAAAMAAAAHAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAADAAUAAgADAAMAAAADAAQAAgADAAIAAAA=")

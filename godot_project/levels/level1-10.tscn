@@ -8,7 +8,7 @@
 display_name = "1-10"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
-available_actions = Array[int]([4, 3, 1, 2])
+available_actions = Array[int]([4, 1, 2])
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray(0, 0, 10, 0, 255, 255, 2, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)

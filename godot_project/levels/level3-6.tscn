@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://deturlt7ef805"]
+[gd_scene load_steps=6 format=4 uid="uid://deturlt7ef805"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_43bro"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_lwxgq"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_lwxgq"]
-[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="4_87ofn"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_uwibj"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="6_r7ar8"]
 
@@ -51,13 +50,10 @@ action_sound_emitters = {
 15: NodePath("BumpSound")
 }
 
-[node name="Collectible" parent="." index="12" instance=ExtResource("4_87ofn")]
-position = Vector2(79, 21)
-
-[node name="TeleporterTop" parent="." index="13" instance=ExtResource("5_uwibj")]
+[node name="TeleporterTop" parent="." index="12" instance=ExtResource("5_uwibj")]
 position = Vector2(272, 89)
 
-[node name="TeleporterTarget" parent="." index="14" instance=ExtResource("6_r7ar8")]
+[node name="TeleporterTarget" parent="." index="13" instance=ExtResource("6_r7ar8")]
 position = Vector2(48, 41)
 _active = true
 grid_origin = Vector2i(1, 2)

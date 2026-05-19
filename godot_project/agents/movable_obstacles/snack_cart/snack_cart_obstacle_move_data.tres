@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="MovableActionData" load_steps=3 format=3 uid="uid://ctslejt33rjmg"]
+[gd_resource type="Resource" script_class="MovableActionData" load_steps=4 format=3 uid="uid://ctslejt33rjmg"]
 
 [ext_resource type="Curve" uid="uid://vupyuc37ex5h" path="res://agents/movable_obstacles/snack_cart/snack_cart_curve.tres" id="1_wr5t4"]
-[ext_resource type="Script" path="res://agents/movable_action_data.gd" id="2_r7n2w"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_r7n2w"]
+[ext_resource type="Curve" uid="uid://d2k5xde38rkpw" path="res://agents/null_curve.tres" id="3_r7n2w"]
 
 [resource]
 script = ExtResource("2_r7n2w")
 direct_movement_curve = ExtResource("1_wr5t4")
+y_movement_curve = ExtResource("3_r7n2w")
 y_movement_magnitude = 0.0
 move_duration = 0.3
 timing_offset = 0.0

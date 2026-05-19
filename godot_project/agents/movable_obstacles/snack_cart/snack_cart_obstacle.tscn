@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=21 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
 [ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="5_26gw8"]
+[ext_resource type="Curve" uid="uid://d2k5xde38rkpw" path="res://agents/null_curve.tres" id="6_t8h4k"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_kgp0j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_s1287"]
 
@@ -18,6 +19,7 @@ point_count = 5
 [sub_resource type="Resource" id="Resource_s1287"]
 script = ExtResource("5_26gw8")
 direct_movement_curve = SubResource("Curve_kgp0j")
+y_movement_curve = ExtResource("6_t8h4k")
 y_movement_magnitude = 16.0
 move_duration = 0.6
 timing_offset = 0.0

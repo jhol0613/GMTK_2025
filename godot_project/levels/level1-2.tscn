@@ -6,7 +6,7 @@
 display_name = "1-2"
 conductor_spawn_beat = 12
 available_slots = 4
-available_actions = Array[int]([4, 3, 1, 2])
+available_actions = Array[int]([4, 1, 2])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true

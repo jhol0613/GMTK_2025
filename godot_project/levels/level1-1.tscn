@@ -6,7 +6,7 @@
 display_name = "1-1"
 conductor_spawn_beat = 4
 available_slots = 2
-available_actions = Array[int]([4, 3])
+available_actions = Array[int]([4])
 tutorial_mode = true
 
 [node name="Decorative" parent="." index="0"]
