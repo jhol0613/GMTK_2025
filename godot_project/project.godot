@@ -236,3 +236,4 @@ textures/vram_compression/import_etc2_astc=true
 DeveloperOptions/test_world=1
 DeveloperOptions/test_level=1
 DeveloperOptions/run_test_level_on_startup=true
+DeveloperOptions/show_laser_timing_hints=false

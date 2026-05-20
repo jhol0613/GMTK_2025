@@ -1,10 +1,11 @@
-[gd_scene load_steps=47 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene load_steps=48 format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
 [ext_resource type="PackedScene" uid="uid://c2yuwdalgstuj" path="res://action_sequencer/action_slots/action_slot.tscn" id="3_1tigw"]
 [ext_resource type="Texture2D" uid="uid://2xutjhw601p8" path="res://action_sequencer/sequencer_visuals/sequencer_v9.png" id="4_62g22"]
 [ext_resource type="Texture2D" uid="uid://fwn88sifx0xe" path="res://action_sequencer/sequencer_visuals/play_button/start_unpushed.png" id="5_t1wqv"]
+[ext_resource type="Texture2D" uid="uid://sq3cfccjni3" path="res://action_sequencer/sequencer_visuals/laser_hint.png" id="5_vmoa0"]
 [ext_resource type="Texture2D" uid="uid://b5ek7ah8skgqi" path="res://action_sequencer/sequencer_visuals/play_button/start_pushed.png" id="6_tq4nj"]
 [ext_resource type="Texture2D" uid="uid://spj8uub1psk3" path="res://action_sequencer/sequencer_visuals/play_button/start_mouse_hover.png" id="7_qhuj8"]
 [ext_resource type="Texture2D" uid="uid://hgkcu6my2edw" path="res://action_sequencer/sequencer_visuals/play_button/start_disabled.png" id="8_5cmkx"]
@@ -219,6 +220,55 @@ offset_bottom = -21.0
 grow_vertical = 0
 theme_override_constants/separation = 5
 
+[node name="LaserHints" type="HBoxContainer" parent="TextureRect"]
+custom_minimum_size = Vector2(293, 0)
+layout_mode = 0
+offset_left = 232.0
+offset_top = 52.0
+offset_right = 525.0
+offset_bottom = 60.0
+theme_override_constants/separation = 19
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect5" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect6" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect7" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
+[node name="TextureRect8" type="TextureRect" parent="TextureRect/LaserHints"]
+layout_mode = 2
+texture = ExtResource("5_vmoa0")
+stretch_mode = 2
+
 [node name="PlayButton" type="TextureButton" parent="TextureRect"]
 z_index = 9
 layout_mode = 1
@@ -408,8 +458,6 @@ offset_bottom = -17.0
 position = Vector2(111, -71)
 sprite_frames = SubResource("SpriteFrames_5pvfp")
 animation = &"deploy"
-frame = 15
-frame_progress = 1.0
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

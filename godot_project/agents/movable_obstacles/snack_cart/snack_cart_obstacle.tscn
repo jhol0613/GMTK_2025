@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=22 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
@@ -33,6 +33,10 @@ region = Rect2(0, 0, 48, 64)
 atlas = ExtResource("2_ldseh")
 region = Rect2(48, 0, 48, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_t8h4k"]
+atlas = ExtResource("2_ldseh")
+region = Rect2(192, 0, 48, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_koxf5"]
 atlas = ExtResource("2_ldseh")
 region = Rect2(96, 0, 48, 64)
@@ -58,6 +62,12 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_vnaji")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_t8h4k")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vnaji")
 }],
@@ -117,7 +127,7 @@ metadata/_custom_type_script = "uid://cyio44hidbx4l"
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_koxf5")
-animation = &"updown"
+animation = &"right"
 script = ExtResource("3_koxf5")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="9_5tchc"]
 
 [node name="LevelBase" instance=ExtResource("1_21cbe")]
-conductor_spawn_beat = 5
+conductor_spawn_beat = 3
 available_actions = Array[int]([6, 4, 7, 1, 2, 5, 3])
 
 [node name="Decorative" parent="." index="0"]

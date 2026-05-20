@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://btqpm3f7775os"]
+[gd_scene load_steps=20 format=3 uid="uid://btqpm3f7775os"]
 
 [ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_fbmii"]
@@ -17,6 +17,14 @@ region = Rect2(0, 0, 48, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fbmii"]
 atlas = ExtResource("4_j04bu")
 region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tn4fa"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jqacq"]
+atlas = ExtResource("4_j04bu")
+region = Rect2(192, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dy6ey"]
 atlas = ExtResource("4_j04bu")
@@ -47,6 +55,12 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_tn4fa")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_jqacq")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dy6ey")
 }],
@@ -95,7 +109,7 @@ metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 z_index = 1
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_tn4fa")
-animation = &"left"
+animation = &"right"
 script = ExtResource("5_ix653")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

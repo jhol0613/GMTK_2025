@@ -42,6 +42,18 @@ class_name ActionSequencer
 @onready var play_button_press_emitter = $TextureRect/PlayButton/PlayButtonPress
 @onready var replay_button_press_emitter = $TextureRect/ReplayButton/ReplayButtonPress
 
+@onready var laser_hint_box := $TextureRect/LaserHints
+@onready var laser_hints: Array[TextureRect] = [
+	$TextureRect/LaserHints/TextureRect,
+	$TextureRect/LaserHints/TextureRect2,
+	$TextureRect/LaserHints/TextureRect3,
+	$TextureRect/LaserHints/TextureRect4,
+	$TextureRect/LaserHints/TextureRect5,
+	$TextureRect/LaserHints/TextureRect6,
+	$TextureRect/LaserHints/TextureRect7,
+	$TextureRect/LaserHints/TextureRect8
+]
+
 @onready var _music_slider: VSlider = $TextureRect/MusicSlider
 @onready var music_slider_click_emitter = $TextureRect/MusicSlider/MusicSliderClick
 @onready var music_slider_release_emitter = $TextureRect/MusicSlider/MusicSliderRelease
@@ -126,9 +138,10 @@ func _ready() -> void:
 
 	_music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
 	_sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
+	
+	laser_hint_box.visible = ProjectSettings.get_setting("rhythm_rail/DeveloperOptions/show_laser_timing_hints")
 
 	_speed_control_ready()
-
 	_setup_eraser_button()
 
 
@@ -287,11 +300,20 @@ func connect_antenna_to_screen(terminal_program: TerminalProgram):
 	await get_tree().create_timer(_screen_flash_time).timeout
 	_screen.modulate = Color(1,1,1)
 
-
 func deploy_antenna():
 	if not _antenna_deployed:
 		_antenna.play()
 	_antenna_deployed = true
+
+func set_laser_hint(slot: int, value: bool):
+	if value:
+		laser_hints[slot].modulate.a = 1.0
+	else:
+		laser_hints[slot].modulate.a = 1.0
+
+func clear_laser_hints():
+	for texture in laser_hints:
+		texture.modulate.a = 0.0
 
 ##When true, sequencer actions highlight red (or skip action color)
 ##when that action would be triggered (does not alter logic as to whether

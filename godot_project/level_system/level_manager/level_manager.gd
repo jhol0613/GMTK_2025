@@ -340,6 +340,10 @@ func _initialize_lasers() -> void:
 	for laser: Laser in _level_scene.lasers:
 		laser.direction_changed.connect(_update_laser_firing_distance)
 		_update_laser_firing_distance(laser)
+		_action_sequencer.clear_laser_hints()
+		for i in range(_level_scene.available_slots):
+			if laser.activation_sequence[i % laser.activation_sequence.size()]:
+				_action_sequencer.set_laser_hint(i, true)
 
 ##Update max laser firing distance based on level static obstacles
 func _update_laser_firing_distance(laser: Laser) -> void:
