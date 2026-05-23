@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=23 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://biw3rlelfmcyf" path="res://backgrounds/world1/car_connector.png" id="8_4d8y1"]
 [ext_resource type="Script" uid="uid://b3m7gnsl48bka" path="res://level_system/level_base/debug_drawing.gd" id="10_ais3r"]
 [ext_resource type="Texture2D" uid="uid://bymyxw6gjuekr" path="res://backgrounds/world1/wheel_well.png" id="10_srili"]
+[ext_resource type="Texture2D" uid="uid://dftuaah3jft2e" path="res://agents/keys/lock_placeholder.png" id="11_qsue7"]
 [ext_resource type="FontFile" uid="uid://bge7vr6k48ykd" path="res://debug/Roboto-VariableFont_wdth,wght.ttf" id="11_ucxu3"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="12_natoe"]
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.716783)
@@ -25,6 +27,42 @@ fill_to = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh3f"]
 size = Vector2(20, 27)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsue7"]
+atlas = ExtResource("11_qsue7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_natoe"]
+atlas = ExtResource("11_qsue7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l8x56"]
+atlas = ExtResource("11_qsue7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3gbn"]
+atlas = ExtResource("11_qsue7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1nasv"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_qsue7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_natoe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l8x56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3gbn")
+}],
+"loop": false,
+"name": &"vanish",
+"speed": 3.0
+}]
 
 [node name="LevelBase" type="Node2D"]
 z_index = -1
@@ -164,6 +202,15 @@ texture = ExtResource("10_srili")
 z_index = -1
 position = Vector2(281, 127)
 texture = ExtResource("10_srili")
+
+[node name="Lock" type="AnimatedSprite2D" parent="AdditionalSprites"]
+visible = false
+position = Vector2(347, 45)
+sprite_frames = SubResource("SpriteFrames_1nasv")
+animation = &"vanish"
+script = ExtResource("12_natoe")
+synch_framerates_to_bpm = false
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="DebugDrawing" type="Node2D" parent="."]
 z_index = 4096

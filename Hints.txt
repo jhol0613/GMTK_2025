@@ -1,0 +1,3 @@
+Bonking's not always a bad thing!
+Snack carts always move in cycles of equal to or half of the length of a sequencer loop (make sure this is true)
+Teleporting takes the place of your move.
