@@ -337,10 +337,10 @@ func _initialize_pushers() -> void:
 		pusher.connect("overlapped_movable", _on_pusher_triggered)
 
 func _initialize_lasers() -> void:
+	_action_sequencer.clear_laser_hints()
 	for laser: Laser in _level_scene.lasers:
 		laser.direction_changed.connect(_update_laser_firing_distance)
 		_update_laser_firing_distance(laser)
-		_action_sequencer.clear_laser_hints()
 		for i in range(_level_scene.available_slots):
 			if laser.activation_sequence[i % laser.activation_sequence.size()]:
 				_action_sequencer.set_laser_hint(i, true)

@@ -174,7 +174,7 @@ func advance():
 		print(_initialized_slots.size(), " ", current_action)
 		return
 
-	if _available_slots == current_action:
+	if _available_slots <= current_action:
 		current_action = 0
 
 	# Update lights while sequencing
