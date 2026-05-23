@@ -398,6 +398,7 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 
 func _update_obstacles():
+	_level_scene.clear_obstacle_overrides()
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
@@ -407,7 +408,6 @@ func _update_obstacles():
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
-	_level_scene.clear_obstacle_overrides()
 	for obstacle in _level_scene.movable_obstacles:
 		if obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
@@ -587,8 +587,8 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
 		else:
-			if not was_a_slide:
-				_action_sequencer.set_skip_actions_mode(true, true, true)
+			#if not was_a_slide:
+				#_action_sequencer.set_skip_actions_mode(true, true, true)
 			_player_character.execute_action(action, _current_beat)
 	elif movable is Conductor and Enums.is_action_bonk(action):
 		push_error("Conductor Squished")

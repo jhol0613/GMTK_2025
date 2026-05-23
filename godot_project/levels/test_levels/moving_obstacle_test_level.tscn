@@ -101,8 +101,8 @@ position = Vector2(192, 70)
 points = PackedVector2Array(32, -36, 128, -38, 127, 19, 62, 18, 63, 36, 31, 36, 31, 18)
 
 [node name="SnackCartObstacle2" parent="." index="14" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
-position = Vector2(239, 49)
-movement_path = Array[int]([4, 3])
+position = Vector2(177, 50)
+movement_path = Array[int]([3, 3, 3, 4, 4, 4])
 action_sound_emitters = {
 8: NodePath("BumpSound"),
 9: NodePath("BumpSound"),

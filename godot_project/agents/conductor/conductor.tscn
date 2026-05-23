@@ -96,6 +96,7 @@ other_action_data = Dictionary[int, ExtResource("3_34788")]({
 15: ExtResource("2_thsup")
 })
 collision_area = NodePath("Shadow/Area2D")
+default_action_beat = 1.0
 default_sound_emitter = NodePath("Sound/JumpSound")
 sprite = NodePath("Shadow/AnimatedSprite2D")
 action_animations = Dictionary[int, String]({
@@ -146,7 +147,7 @@ shape = SubResource("RectangleShape2D_lda0w")
 event_name = "event:/Conductor Footsteps"
 event_guid = "{1db1ae96-b392-45ab-95a1-02448391848b}"
 script = ExtResource("10_46wui")
-offset_seconds = 0.23
+offset_seconds = 0.18
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="EnteredSound" type="FmodEventEmitter2D" parent="Sound"]

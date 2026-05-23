@@ -96,6 +96,7 @@ pusher = NodePath("Pusher")
 standard_move_data = ExtResource("2_fbmii")
 bonk_data = ExtResource("3_dy6ey")
 slide_data = ExtResource("4_ix653")
+default_action_beat = 2.0
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
 1: "updown",

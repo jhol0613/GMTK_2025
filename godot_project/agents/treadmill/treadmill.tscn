@@ -200,7 +200,7 @@ _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
 })
 animation_speed = 1.3
 _pusher = NodePath("Pusher")
-default_action_beat = 2.5
+default_action_beat = 2.0
 default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"
