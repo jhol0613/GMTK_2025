@@ -55,7 +55,7 @@
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("3_oivuf")
-level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"), ExtResource("5_peuoq"), ExtResource("6_cto6e"), ExtResource("7_xo8rd"), ExtResource("8_fk8s6"), ExtResource("9_nmtjp"), ExtResource("10_y8p5u"), ExtResource("11_y48yf"), ExtResource("12_bxvsn"), ExtResource("13_e7wa4")])
+level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"), ExtResource("6_cto6e"), ExtResource("7_xo8rd"), ExtResource("8_fk8s6"), ExtResource("9_nmtjp"), ExtResource("10_y8p5u"), ExtResource("5_peuoq"), ExtResource("11_y48yf"), ExtResource("12_bxvsn"), ExtResource("13_e7wa4")])
 level_select_scene = 5
 music_event_name = "World1_BGM"
 music_event_bpm = 170.0
