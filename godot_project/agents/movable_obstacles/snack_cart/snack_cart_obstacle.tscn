@@ -157,7 +157,6 @@ shape = SubResource("RectangleShape2D_s1287")
 event_name = "event:/Rolling_Cart"
 event_guid = "{27011c73-168a-42bb-8eb2-58439cf34ecd}"
 script = ExtResource("10_s1287")
-offset_seconds = -0.1
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="BumpSound" type="FmodEventEmitter2D" parent="."]

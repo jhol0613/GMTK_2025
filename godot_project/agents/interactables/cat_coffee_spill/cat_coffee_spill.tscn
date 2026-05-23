@@ -134,7 +134,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"wake_up",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="Resource" id="Resource_g10dl"]
@@ -165,6 +165,7 @@ autoplay = "default"
 script = ExtResource("1_uvexm")
 signals = Array[ExtResource("4_37f55")]([SubResource("Resource_g10dl")])
 bpm_synch_exceptions = Array[String](["wake_up"])
+time_multiplier_exceptions = Array[String](["wake_up"])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="VisibleObstacleSpawner" type="Node2D" parent="."]
@@ -184,7 +185,7 @@ metadata/_custom_type_script = "uid://cqh2y73sdi1js"
 event_name = "event:/CoffeeSpill"
 event_guid = "{e241a3d9-7242-4e08-956e-df0f2beefdfd}"
 script = ExtResource("8_eux06")
-offset_seconds = 1.1
+offset_seconds = 0.5
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
 [node name="VisualCenter" type="Node2D" parent="."]

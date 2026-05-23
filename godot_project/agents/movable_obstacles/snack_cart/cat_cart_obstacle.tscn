@@ -1,33 +1,34 @@
-[gd_scene load_steps=20 format=3 uid="uid://btqpm3f7775os"]
+[gd_scene load_steps=21 format=3 uid="uid://btqpm3f7775os"]
 
 [ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_fbmii"]
 [ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_dy6ey"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_ix653"]
 [ext_resource type="Texture2D" uid="uid://c1gtr8fe1bwo1" path="res://agents/movable_obstacles/snack_cart/empty_cart.png" id="4_j04bu"]
+[ext_resource type="Texture2D" uid="uid://mw6u2gub4yt6" path="res://agents/movable_obstacles/snack_cart/short_cart.png" id="5_fo802"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_ix653"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="6_fo802"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="7_qdawk"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_dy6ey"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qdawk"]
-atlas = ExtResource("4_j04bu")
-region = Rect2(0, 0, 48, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbmii"]
-atlas = ExtResource("4_j04bu")
-region = Rect2(48, 0, 48, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_tn4fa"]
-atlas = ExtResource("4_j04bu")
+atlas = ExtResource("5_fo802")
 region = Rect2(0, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jqacq"]
-atlas = ExtResource("4_j04bu")
+atlas = ExtResource("5_fo802")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlixh"]
+atlas = ExtResource("5_fo802")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_swuqy"]
+atlas = ExtResource("5_fo802")
 region = Rect2(192, 0, 48, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dy6ey"]
-atlas = ExtResource("4_j04bu")
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jbma"]
+atlas = ExtResource("5_fo802")
 region = Rect2(0, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ix653"]
@@ -42,13 +43,13 @@ region = Rect2(144, 0, 48, 64)
 animations = [{
 "frames": [{
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_qdawk")
+"texture": SubResource("AtlasTexture_tn4fa")
 }, {
 "duration": 0.8,
-"texture": SubResource("AtlasTexture_fbmii")
+"texture": SubResource("AtlasTexture_jqacq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qdawk")
+"texture": SubResource("AtlasTexture_tn4fa")
 }],
 "loop": false,
 "name": &"left",
@@ -56,13 +57,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 0.6,
-"texture": SubResource("AtlasTexture_tn4fa")
+"texture": SubResource("AtlasTexture_jlixh")
 }, {
 "duration": 0.5,
-"texture": SubResource("AtlasTexture_jqacq")
+"texture": SubResource("AtlasTexture_swuqy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dy6ey")
+"texture": SubResource("AtlasTexture_0jbma")
 }],
 "loop": false,
 "name": &"right",
@@ -87,7 +88,7 @@ animations = [{
 size = Vector2(20, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ix653"]
-size = Vector2(30, 46)
+size = Vector2(30, 39)
 
 [node name="CatCartObstacle" type="Node2D" node_paths=PackedStringArray("interactable", "pusher", "sprite")]
 script = ExtResource("1_j04bu")
@@ -96,7 +97,7 @@ pusher = NodePath("Pusher")
 standard_move_data = ExtResource("2_fbmii")
 bonk_data = ExtResource("3_dy6ey")
 slide_data = ExtResource("4_ix653")
-default_action_beat = 2.0
+default_action_beat = 3.0
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
 1: "updown",
@@ -125,7 +126,7 @@ metadata/_custom_type_script = "uid://du4ysr150id7h"
 shape = SubResource("RectangleShape2D_h3hhy")
 
 [node name="CatCoffeeSpill" parent="." instance=ExtResource("7_qdawk")]
-position = Vector2(-3, -21)
+position = Vector2(-2, -9)
 flip_horizontal = true
 
 [node name="LaserBlocker" type="Area2D" parent="."]
@@ -134,4 +135,5 @@ script = ExtResource("9_dy6ey")
 metadata/_custom_type_script = "uid://dtg8o21ypt6se"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LaserBlocker"]
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_ix653")

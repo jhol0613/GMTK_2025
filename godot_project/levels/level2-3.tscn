@@ -5,12 +5,13 @@
 
 [node name="LevelBase" instance=ExtResource("1_hj5e0")]
 display_name = "2-3"
-conductor_spawn_beat = 4
-available_actions = Array[int]([4, 1, 2])
+conductor_spawn_beat = 8
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([4, 1, 2, 7])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAAEAAAABAAAAAAAAAAFAAAABAABAAAAAAAIAAAABAAAAAAAAAAJAAAABAABAAAAAAAAAAAABAAAAAAAAAABAAAABAABAAAAAAACAAAAAwABAAAAAAAGAAAAAwABAAAAAAACAAQAAAABAAIAAAACAAUAAAABAAMAAAADAAQAAAABAAIAABADAAUAAAABAAMAABACAAMAAAABAAAAAAADAAMAAAABAAAAABA=")
+tile_map_data = PackedByteArray("AAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAAIAAQAAAAMAAAABAAMAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAUAAQAAAAMAAAAEAAIAAQAAAAMAAAA=")
 
 [node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_hj5e0")]
-position = Vector2(209, 68)
-movement_path = Array[int]([4, 4, 3, 3])
+position = Vector2(305, 69)
+movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])

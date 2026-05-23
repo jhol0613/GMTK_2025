@@ -38,10 +38,6 @@ func update_player_animation_based_on_position(player_grid_position: Vector2i):
 			push_error("No cat pet animation found for relative grid position ", relative_grid_position)
 
 func _on_successful_interaction():
-	#sprite.play_with_signals("wake_up")
 	await sprite.animation_signal # only signal is the spilled coffee signal, so await without checking signal id is ok
-	#sound.play()
 	obstacle_spawner_visible.spawn_obstacle(grid_position)
 	obstacle_spawner_invisible.spawn_obstacle(grid_position)
-	#await sprite.animation_finished
-	#sprite.play_with_signals("idle")

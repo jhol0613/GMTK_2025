@@ -15,6 +15,7 @@ size = Vector2(12, 8)
 [node name="GenericInvisibleObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_ymfx7")
 pusher = NodePath("Pusher")
+initial_push_action = 14
 standard_move_data = ExtResource("2_f6j1s")
 bonk_data = ExtResource("3_xngg1")
 slide_data = ExtResource("4_lqkdu")

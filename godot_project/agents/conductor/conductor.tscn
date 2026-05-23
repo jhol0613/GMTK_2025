@@ -96,6 +96,12 @@ other_action_data = Dictionary[int, ExtResource("3_34788")]({
 15: ExtResource("2_thsup")
 })
 collision_area = NodePath("Shadow/Area2D")
+action_beats = Dictionary[int, float]({
+12: 0.0,
+13: 0.0,
+14: 0.0,
+15: 0.0
+})
 default_action_beat = 1.0
 default_sound_emitter = NodePath("Sound/JumpSound")
 sprite = NodePath("Shadow/AnimatedSprite2D")

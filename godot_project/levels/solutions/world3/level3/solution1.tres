@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_dfkom")
-sequence = Array[int]([4, 4, 4, 4, 4, 4, 4, 4])
+sequence = Array[int]([4, 4, 4, 4, 0, 0, 0, 0])

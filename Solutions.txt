@@ -14,7 +14,7 @@ Level1-1 uid://dco8dneiqmglo RR
 
 2-1 uid://bsay3jq0vshq2 URRDDRIR / RRDDRIUU
 2-2 uid://c0i1muwqc86y0 RRRRDRRU
-2-3 uid://defrgrdfsdmu3 (trivial)
+2-3 uid://defrgrdfsdmu3 DDRRIUUR
 2-4 uid://buewsb5qu1f0m (trivial)
 2-5 uid://cyo8sopwsu4hj RRRRDLDR
 2-6 uid://cl46e5b8lrrmo RJR(duck)RJR(duck)
