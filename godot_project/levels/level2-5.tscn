@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://cyo8sopwsu4hj"]
+[gd_scene load_steps=4 format=4 uid="uid://cyo8sopwsu4hj"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_5r6hg"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_5r6hg"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="3_brkqa"]
 
 [node name="LevelBase" instance=ExtResource("1_5r6hg")]
 display_name = "2-5"
@@ -46,3 +47,6 @@ grid_origin = Vector2i(10, 4)
 [node name="Treadmill6" parent="." index="15" instance=ExtResource("2_5r6hg")]
 position = Vector2(272, 109)
 grid_origin = Vector2i(8, 5)
+
+[node name="Key" parent="." index="16" instance=ExtResource("3_brkqa")]
+position = Vector2(112, 61)
