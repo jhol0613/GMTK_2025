@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwyquf3j8v11n"]
+
+[ext_resource type="Script" uid="uid://dxn7tnanjy6px" path="res://agents/agent.gd" id="1_clup2"]
+[ext_resource type="Texture2D" uid="uid://q54m1vske3as" path="res://agents/lasers/new_laser_visuals/sparks.png" id="1_n8tqh"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_p355x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oe8a1"]
+atlas = ExtResource("1_n8tqh")
+region = Rect2(102, 0, 51, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72m84"]
+atlas = ExtResource("1_n8tqh")
+region = Rect2(0, 0, 51, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cl1s"]
+atlas = ExtResource("1_n8tqh")
+region = Rect2(51, 0, 51, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvmxe"]
+atlas = ExtResource("1_n8tqh")
+region = Rect2(102, 0, 51, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6l2vp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oe8a1")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72m84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cl1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvmxe")
+}],
+"loop": false,
+"name": &"spark",
+"speed": 5.0
+}]
+
+[node name="LaserSparks" type="Node2D" node_paths=PackedStringArray("sprite")]
+modulate = Color(0.12549, 0.678431, 0.894118, 1)
+script = ExtResource("1_clup2")
+default_action_beat = 2.0
+activation_sequence = Array[bool]([true, false])
+sprite = NodePath("AnimatedSprite2DSignals")
+default_animation = "spark"
+metadata/_custom_type_script = "uid://dxn7tnanjy6px"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_6l2vp")
+animation = &"spark"
+autoplay = "default"
+script = ExtResource("3_p355x")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
