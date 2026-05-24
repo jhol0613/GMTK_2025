@@ -83,15 +83,15 @@ func _ready() -> void:
 		var loaded_level = SaveManager.save_data.furthest_level_reached["level"]
 		var loaded_world = SaveManager.save_data.furthest_level_reached["world"]
 		_level_scene = GameManager.level_catalog.get_level(loaded_world, loaded_level).instantiate()
-	
+
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
-	
+
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)
 
 	_level_scene.position = initial_train_position
 
-	AudioManager.play_music_event(GameManager.level_catalog.get_world_music_event_name(), 
+	AudioManager.play_music_event(GameManager.level_catalog.get_world_music_event_name(),
 		GameManager.level_catalog.get_world_music_event_bpm())
 
 	_initialize_level()
@@ -184,6 +184,7 @@ func _on_level_complete() -> void:
 		return
 
 	SaveManager.update_furthest_level(GameManager.level_catalog.get_current_index())
+	SaveManager.add_completed_level(GameManager.level_catalog.get_current_uid())
 	advance_level()
 
 func _on_level_fail() -> void:
@@ -475,12 +476,12 @@ func _update_conductor() -> void:
 	# skip the next action if the conductor is trying to leave the map
 	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
 		return
-	
+
 	# Don't give conductor an action immediately after he spawns
 	if conductor_just_spawned:
 		conductor_just_spawned = false
 		return
-	
+
 	_conductor.execute_action(
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
