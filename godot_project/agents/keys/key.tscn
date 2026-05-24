@@ -44,6 +44,8 @@ animations = [{
 
 [node name="Key" instance=ExtResource("1_7umh3")]
 script = ExtResource("2_kd02r")
+type = 0
+default_animation = "default"
 
 [node name="AnimatedSprite2DSignals" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6xafp")

@@ -224,6 +224,8 @@ func _reset_level() -> void:
 		obstacle.reset()
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
+	for key in _level_scene.keys:
+		key.reset()
 	for interactable in _level_scene.interactables:
 		interactable.reset()
 	for agent in _level_scene.agents:

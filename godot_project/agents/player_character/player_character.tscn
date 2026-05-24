@@ -1011,7 +1011,6 @@ action_beats = Dictionary[int, float]({
 14: 0.0,
 15: 0.0
 })
-default_action_beat = 0.4
 action_sound_emitters = {
 1: NodePath("Sounds/MoveUp"),
 2: NodePath("Sounds/MoveDown"),
