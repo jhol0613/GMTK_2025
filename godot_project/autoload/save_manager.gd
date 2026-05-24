@@ -2,8 +2,8 @@ extends Node
 
 ## A collection of functions for handling save files
 
-var solutions_path = "res://levels/solutions/world%d/level%d/"
-var solutions_template = "solution%d.tres"
+var solutions_path = "res://levels/solutions/"
+var solutions_template = "%s_solution%d.tres"
 
 var save_data_path = "user://save_data.tres"
 
@@ -14,24 +14,25 @@ var run_from_F6 := false
 
 #region Solutions
 
-func save_solution(solution: Array[Enums.PlayerAction], level_index: Dictionary, index: int) -> bool:
-	print("[SaveManager] Trying to save solution #%d for world(%d) level(%d)" %\
-		[index, level_index["world"], level_index["level"]])
+func save_solution(solution: Array[Enums.PlayerAction], uid: int, index: int) -> bool:
+	var text_uid = ResourceUID.id_to_text(uid)
+	print("[SaveManager] Trying to save solution (new) #%d for %s" %\
+		[index, text_uid])
 	var solution_path = (solutions_path + solutions_template) %\
-		[level_index["world"], level_index["level"], index]
+			[text_uid.trim_prefix("uid://"), index]
 	# ensures that the solutions/world directory exists
-	DirAccess.make_dir_recursive_absolute(solutions_path % [level_index["world"], level_index["level"]])
+	DirAccess.make_dir_recursive_absolute(solutions_path)
 
 	var saved_solution = SavedSolution.new(solution)
 	var result = ResourceSaver.save(saved_solution, solution_path)
 	return result == OK
 
-
-func load_solution(level_index: Dictionary, index: int) -> Array[Enums.PlayerAction]:
-	print("[SaveManager] Trying to load solution #%d for world(%d) level(%d)" %\
-		[index, level_index["world"], level_index["level"]])
+func load_solution(uid: int, index: int) -> Array[Enums.PlayerAction]:
+	var text_uid = ResourceUID.id_to_text(uid)
+	print("[SaveManager] Trying to load solution (new) #%d for %s" %\
+		[index, text_uid])
 	var solution_path = (solutions_path + solutions_template) %\
-		[level_index["world"], level_index["level"], index]
+			[text_uid.trim_prefix("uid://"), index]
 	if not FileAccess.file_exists(solution_path):
 		print("[SaveManager] file doesn't exist")
 		return []
@@ -95,5 +96,10 @@ func update_furthest_level(index: Dictionary) -> void:
 		index["level"] > save_data.furthest_level_reached["level"]:
 		save_data.furthest_level_reached = index
 		save_game()
+
+
+func add_completed_level(uid: int) -> void:
+	save_data.completed_levels[uid] = true
+	save_game()
 
 #endregion
