@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="SavedSolution" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://level_system/level_base/saved_solution.gd" id="1_2jxbu"]
+
+[resource]
+script = ExtResource("1_2jxbu")
+sequence = Array[int]([4, 4, 4, 4, 4, 0, 0, 0])

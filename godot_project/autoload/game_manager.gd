@@ -88,7 +88,7 @@ func _save_solution(index: int) -> void:
 	if sequencer == null or sequencer is not ActionSequencer:
 		push_error("[GameManager] Couldn't find ActionSequencer!")
 		return
-	SaveManager.save_solution(sequencer.get_current_sequence(), level_catalog.get_current_index(), index)
+	SaveManager.save_solution(sequencer.get_current_sequence(), level_catalog.get_current_uid(), index)
 
 func _load_solution(index: int) -> void:
 	if not OS.is_debug_build():
@@ -97,7 +97,7 @@ func _load_solution(index: int) -> void:
 	if sequencer == null or sequencer is not ActionSequencer:
 		push_error("[GameManager] Couldn't find ActionSequencer!")
 		return
-	var solution = SaveManager.load_solution(level_catalog.get_current_index(), index)
+	var solution = SaveManager.load_solution(level_catalog.get_current_uid(), index)
 	sequencer.set_current_sequence(solution)
 
 func _input(_event: InputEvent):

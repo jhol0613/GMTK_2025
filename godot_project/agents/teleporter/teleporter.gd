@@ -5,7 +5,7 @@ extends Agent
 class_name Teleporter
 
 @export var teleporter_color : Enums.TeleporterColor = Enums.TeleporterColor.GREEN: set = _set_color
-##In-level grid position of the destination tile. Active destination will always start as the 
+##In-level grid position of the destination tile. Active destination will always start as the
 #@export var destination := Vector2i.ZERO:
 	#set(new_destination):
 		#destination = _validate_destination(new_destination)
@@ -150,12 +150,12 @@ func _teleport(entity: Movable) -> void:
 			return
 	else:
 		# set to appropriate color and brighten slightly since entity is probably not coming from grayscale image
-		entity.modulate = teleporter_color_definitions[teleporter_color] * Color(1.5, 1.5, 1.5, 0.8) 
+		entity.modulate = teleporter_color_definitions[teleporter_color] * Color(1.5, 1.5, 1.5, 0.8)
 		teleport_animation_tween = get_tree().create_tween()
 		teleport_animation_tween.tween_method(
-			_stairstep_tween.bind(entity), 
-			Vector2(1,1), 
-			Vector2(0,0), 
+			_stairstep_tween.bind(entity),
+			Vector2(1,1),
+			Vector2(0,0),
 			# object teleport animation should take the same time as player teleport animation
 			base_sprite_lights.get_animation_duration("player_teleport") * AudioManager.get_inverse_time_multiplier()
 		)
@@ -173,9 +173,9 @@ func _teleport(entity: Movable) -> void:
 	if entity is not PlayerCharacter:
 		teleport_animation_tween = get_tree().create_tween()
 		teleport_animation_tween.tween_method(
-			_stairstep_tween.bind(entity), 
-			Vector2(0,0), 
-			Vector2(1,1), 
+			_stairstep_tween.bind(entity),
+			Vector2(0,0),
+			Vector2(1,1),
 			# object teleport animation should take the same time as player teleport animation
 			base_sprite_lights.get_animation_duration("player_teleport") * AudioManager.get_inverse_time_multiplier()
 		)
