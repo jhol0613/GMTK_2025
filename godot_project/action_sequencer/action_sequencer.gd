@@ -389,14 +389,14 @@ func _on_action_item_clicked(new_action_item: ActionItem):
 	if tutorial_mode:
 		_tutorial_arrow.visible = true
 
-	if _active_action_item == new_action_item:
-		_enter_erase_mode()
-	else:
-		_exit_erase_mode()
-		_active_action_item = new_action_item
-		for item in _initialized_items:
-			if item != _active_action_item:
-				item.deselect()
+	#if _active_action_item == new_action_item:
+		#_enter_erase_mode()
+	#else:
+	_exit_erase_mode()
+	_active_action_item = new_action_item
+	for item in _initialized_items:
+		if item != _active_action_item:
+			item.deselect()
 
 	_update_slot_action_previews()
 
@@ -509,4 +509,24 @@ func _update_slot_action_previews():
 		if tutorial_mode:
 			_initialized_slots[i].start_flashing()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Up"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.UP:
+				action_item.virtual_click()
+	if event.is_action_pressed("Down"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.DOWN:
+				action_item.virtual_click()
+	if event.is_action_pressed("Left"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.LEFT:
+				action_item.virtual_click()
+	if event.is_action_pressed("Right"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.RIGHT:
+				action_item.virtual_click()
+	if event.is_action_pressed("Erase"):
+		_enter_erase_mode()
+		
 #endregion
