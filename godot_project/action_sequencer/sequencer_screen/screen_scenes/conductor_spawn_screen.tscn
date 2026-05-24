@@ -87,7 +87,7 @@ horizontal_alignment = 2
 [node name="ConductorSpawnAnim" type="AnimatedSprite2D" parent="."]
 position = Vector2(12, 16)
 sprite_frames = SubResource("SpriteFrames_6ith1")
-animation = &"exit"
+animation = &"idle"
 autoplay = "idle"
 script = ExtResource("3_d2dxv")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

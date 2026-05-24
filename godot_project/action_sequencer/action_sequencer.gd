@@ -346,12 +346,14 @@ func _turn_off_sequencer_lights():
 	for i in range(_available_slots):
 		_initialized_slots[i].sequence_light_on = false
 
-func set_conductor_spawn_countdown_display(new_value: int, initial = false):
+##conductor beat should be set to < 0.0 if this is initial display
+func set_conductor_spawn_countdown_display(new_value: int, conductor_beat: float = -1.0):
 	if not _conductor_spawn_countdown_screen:
 		return
-	if initial:
+	if conductor_beat < 0.0:
 		_conductor_spawn_countdown_screen.set_initial_spawn_countdown(new_value)
 	else:
+		await get_tree().create_timer(AudioManager.beat_time_seconds * conductor_beat).timeout
 		_conductor_spawn_countdown_screen.update_spawn_countdown(new_value)
 
 #region Signal connections

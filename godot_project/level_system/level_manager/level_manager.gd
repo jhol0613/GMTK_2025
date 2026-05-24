@@ -54,6 +54,7 @@ extends Node2D
 
 
 var _conductor: Conductor
+var _conductor_beat: float
 var _player_character: PlayerCharacter
 
 var _next_level: RhythmRailLevel
@@ -88,6 +89,13 @@ func _ready() -> void:
 	
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)
+	
+	#Get the beat on which the conductor will move (to pass to the sequencer screen)
+	var conductor_scene_state = conductor_scene.get_state()
+	for i in range(conductor_scene_state.get_node_property_count(0)): #0 is always root node
+		if conductor_scene_state.get_node_property_name(0, i) == "default_action_beat":
+			_conductor_beat = conductor_scene_state.get_node_property_value(0, i)
+			break
 
 	_level_scene.position = initial_train_position
 
@@ -212,7 +220,7 @@ func _reset_level() -> void:
 	_player_hidden = false
 	_player_newly_hidden = false
 	if _level_scene.conductor_enabled:
-		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat, true)
+		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat)
 	else:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
 
@@ -435,14 +443,15 @@ func _update_conductor() -> void:
 		return
 	elif _conductor == null \
 		and _current_beat < _level_scene.conductor_spawn_beat:
-			_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat - _current_beat)
+			_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat - _current_beat, _conductor_beat)
 			return
 	elif _conductor == null:
 		if _current_beat < _level_scene.conductor_spawn_beat and \
 		not _level_scene.conductor_snooze:
 			return
+		await get_tree().create_timer(AudioManager.beat_time_seconds * _conductor_beat)
 		_spawn_conductor()
-		_action_sequencer.set_conductor_spawn_countdown_display(0)
+		_action_sequencer.set_conductor_spawn_countdown_display(0, 0.0)
 		conductor_just_spawned = true
 	_update_conductor_awareness()
 	if _conductor.state == Enums.ConductorState.SNOOZE or \
