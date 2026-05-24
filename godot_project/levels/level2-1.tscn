@@ -12,6 +12,11 @@ available_actions = Array[int]([4, 1, 2, 7])
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAADAAAAAAABAAIAAAADAAEAAAABAAMAAAADAP//AAABAAAAAAACAAQAAgACAAIAAAACAAUAAgACAAMAAAAEAAEAAAABAAMAABAEAAAAAAABAAIAABAEAP//AAABAAAAABADAAIAAwAAAAAAABAHAAMAAQAAAAMAAAAHAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAADAAUAAgADAAMAAAADAAQAAgADAAIAAAA=")
 
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""
+
 [node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("2_y1s2r")]
 position = Vector2(111, 48)
 flip_horizontal = true

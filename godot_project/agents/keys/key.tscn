@@ -2,40 +2,40 @@
 
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="1_7umh3"]
 [ext_resource type="Script" uid="uid://cu7r573cf12xu" path="res://agents/keys/key.gd" id="2_kd02r"]
-[ext_resource type="Texture2D" uid="uid://cjfhjponn36d" path="res://agents/keys/placeholder.png" id="3_5iysg"]
+[ext_resource type="Texture2D" uid="uid://dl6gwkbv2uoql" path="res://agents/keys/train_key.png" id="3_7umh3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_36sgr"]
-atlas = ExtResource("3_5iysg")
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd02r"]
+atlas = ExtResource("3_7umh3")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_euwwp"]
-atlas = ExtResource("3_5iysg")
+[sub_resource type="AtlasTexture" id="AtlasTexture_5iysg"]
+atlas = ExtResource("3_7umh3")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wr7yv"]
-atlas = ExtResource("3_5iysg")
+[sub_resource type="AtlasTexture" id="AtlasTexture_36sgr"]
+atlas = ExtResource("3_7umh3")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6xafp"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_36sgr")
+"texture": SubResource("AtlasTexture_kd02r")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_euwwp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wr7yv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wr7yv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_euwwp")
+"texture": SubResource("AtlasTexture_5iysg")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_36sgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36sgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5iysg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd02r")
 }],
 "loop": true,
 "name": &"default",
@@ -50,3 +50,4 @@ default_animation = "default"
 
 [node name="AnimatedSprite2DSignals" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_6xafp")
+frame_progress = 0.169112

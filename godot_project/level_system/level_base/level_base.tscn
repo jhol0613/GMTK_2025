@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=24 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
@@ -28,6 +28,10 @@ fill_to = Vector2(0, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh3f"]
 size = Vector2(20, 27)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nasv"]
+atlas = ExtResource("11_qsue7")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_qsue7"]
 atlas = ExtResource("11_qsue7")
 region = Rect2(0, 0, 32, 32)
@@ -47,7 +51,15 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="SpriteFrames_1nasv"]
 animations = [{
 "frames": [{
-"duration": 5.0,
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nasv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qsue7")
 }, {
 "duration": 1.0,
@@ -205,9 +217,10 @@ texture = ExtResource("10_srili")
 
 [node name="Lock" type="AnimatedSprite2D" parent="AdditionalSprites"]
 visible = false
+light_mask = 2
 position = Vector2(347, 45)
 sprite_frames = SubResource("SpriteFrames_1nasv")
-animation = &"vanish"
+autoplay = "default"
 script = ExtResource("12_natoe")
 synch_framerates_to_bpm = false
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

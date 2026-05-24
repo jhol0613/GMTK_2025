@@ -227,6 +227,12 @@ func has_static_obstacle(grid_position: Vector2i) -> bool:
 func update_weight_grid(grid_position: Vector2i, weight_scale: float) -> void:
 	path_grid.set_point_weight_scale(grid_position, weight_scale)
 
+func reset_lock():
+	if not keys.is_empty():
+		_lock.visible = true
+		_keys_collected = 0
+		_lock.play("default")
+
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
 	path_grid = AStarGrid2D.new()

@@ -19,6 +19,7 @@ class_name Collectible
 
 @onready var queued_for_collect = false
 
+var collect_tween: Tween
 
 func _ready() -> void:
 	super._ready()
@@ -30,6 +31,8 @@ func collect_if_queued():
 		SaveManager.add_collectible(id)
 
 func reset():
+	if collect_tween and collect_tween.is_running():
+		collect_tween.stop()
 	visible = true
 	collision_area.set_collision_layer_value(3, true)
 	queued_for_collect = false
@@ -40,9 +43,9 @@ func reset():
 func _on_collision_shape_2d_area_entered(_area: Area2D) -> void:
 	collision_area.collision_layer = 0;
 	queued_for_collect = true
-	var tween = create_tween()
-	tween.tween_method(_triggered_callback.bind(), 0.0, 1.0, collected_duration)
-	tween.connect("finished", _on_triggered)
+	collect_tween = create_tween()
+	collect_tween.tween_method(_triggered_callback.bind(), 0.0, 1.0, collected_duration)
+	collect_tween.connect("finished", _on_triggered)
 
 func _triggered_callback(alpha: float):
 	sprite.position.y = -collected_y_curve.sample(alpha) * collected_y_magnitude + _sprite_initial_position.y

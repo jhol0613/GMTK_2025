@@ -223,7 +223,7 @@ func _reset_level() -> void:
 		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat)
 	else:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
-
+	_level_scene.reset_lock()
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
 

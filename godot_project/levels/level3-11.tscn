@@ -15,6 +15,11 @@ available_actions = Array[int]([4, 1, 2, 3])
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray(0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""
+
 [node name="Treadmill4" parent="." index="9" instance=ExtResource("2_4cx3b")]
 position = Vector2(335, 34)
 direction = 1
