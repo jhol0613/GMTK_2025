@@ -102,6 +102,8 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, action_data, should_move_collision))
 
 func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionData, should_move_collision: bool):
+	if Enums.is_action_slide(action):
+		pass
 	# Grid position not updated until movement actually executed on the target beat
 	grid_position += Enums.player_action_to_vector(action)
 	# _get_bonk_target ignores non-bonk actions, but uses the updated grid_position
@@ -111,6 +113,8 @@ func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionDa
 		_frozen_collision_position_during_move = collision_area.global_position +  \
 		float(should_move_collision) * (move_target_local_space - position)
 
+	var test = AudioManager.get_inverse_time_multiplier() * action_data.move_duration
+	
 	_moving_tween = create_tween()
 	_moving_tween.tween_method(_action_movement_callback.bind(position, move_target_local_space, action_data.direct_movement_curve,
 		action_data.y_movement_curve, action_data.y_movement_magnitude), 0.0, 1.0, 

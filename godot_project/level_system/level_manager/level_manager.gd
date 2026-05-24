@@ -589,7 +589,7 @@ func _update_teleporters() -> void:
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	if _failure_animation_playing:
 		return
-	movable.interrupt_queued_action(pusher.should_cancel_sound)
+	#movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
 	var action = _bonk_check(movable, pusher.push_action)
 	if movable is PlayerCharacter:

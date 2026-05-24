@@ -162,7 +162,8 @@ func _on_action_beat(action: Enums.PlayerAction):
 func _on_sound_start(action: Enums.PlayerAction):
 	#Play sound
 	currently_playing_emitter = action_sound_emitters.get(action, null)
-	if not currently_playing_emitter and default_sound_emitter: #switch to default sound if no specific sound defined for a given action
+	#switch to default sound if no specific sound defined for a given action, unless that action is specifically defined as no sound
+	if not currently_playing_emitter and default_sound_emitter and not action_sound_emitters.has(action): 
 		currently_playing_emitter = default_sound_emitter
 	if currently_playing_emitter and action != Enums.PlayerAction.NONE:
 		currently_playing_emitter.play()

@@ -6,17 +6,23 @@
 [node name="LevelBase" instance=ExtResource("1_6v6an")]
 display_name = "2-4"
 conductor_spawn_beat = 3
-available_actions = Array[int]([4, 1, 2])
+available_slots = 4
+available_actions = Array[int]([4, 1])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAACAAMAAAADAAQAAAACAAQAAAADAAUAAAACAAUAAAADAAYAAAACAAIAAAADAAAAAAADAAIAAAADAAAAABADAAMAAAADAAQAABADAAQAAAADAAUAABADAAUAAAADAAYAABAEAAMAAwACAAAAAAAEAAQAAwACAAAAAAAEAAUAAwABAAAAAAAFAAMAAAADAAQAAAAFAAQAAAADAAUAAAAFAAUAAAADAAYAAAAGAAMAAAADAAQAABAGAAQAAAADAAUAABAGAAUAAAADAAYAABAFAAIAAAADAAAAAAAGAAIAAAADAAAAABAIAAMAAAADAAQAAAAIAAQAAAADAAUAAAAIAAUAAAADAAYAAAAJAAMAAAADAAQAABAJAAQAAAADAAUAABAJAAUAAAADAAYAABAIAAIAAAADAAAAAAAJAAIAAAADAAAAABAHAAUAAwABAAAAAAAHAAQAAwACAAAAAAAHAAMAAwACAAAAAAA=")
+tile_map_data = PackedByteArray("AAACAAMAAQAAAAMAAAACAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAMAAQAAAAMAAAAIAAIAAQAAAAMAAAA=")
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("2_qg5g5")]
-position = Vector2(337, 33)
+position = Vector2(113, 33)
 direction = 1
-grid_origin = Vector2i(10, 1)
+grid_origin = Vector2i(3, 1)
 
 [node name="Treadmill2" parent="." index="10" instance=ExtResource("2_qg5g5")]
-position = Vector2(337, 13)
+position = Vector2(208, 32)
 direction = 1
-grid_origin = Vector2i(10, 0)
+grid_origin = Vector2i(6, 1)
+
+[node name="Treadmill3" parent="." index="11" instance=ExtResource("2_qg5g5")]
+position = Vector2(304, 34)
+direction = 1
+grid_origin = Vector2i(9, 1)

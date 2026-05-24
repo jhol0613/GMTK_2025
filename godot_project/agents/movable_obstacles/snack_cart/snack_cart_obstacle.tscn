@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=19 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
@@ -7,23 +7,9 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_koxf5"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
-[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="5_26gw8"]
-[ext_resource type="Curve" uid="uid://d2k5xde38rkpw" path="res://agents/null_curve.tres" id="6_t8h4k"]
+[ext_resource type="Resource" uid="uid://cg2foen8yla6w" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_slide_bonk_data.tres" id="5_s1287"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_kgp0j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_s1287"]
-
-[sub_resource type="Curve" id="Curve_kgp0j"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.238693, 0.118335), 0.49576, 0.126811, 1, 0, Vector2(0.404523, 0.100093), 0.0, 0.0, 0, 0, Vector2(0.59799, 0.118335), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 5
-
-[sub_resource type="Resource" id="Resource_s1287"]
-script = ExtResource("5_26gw8")
-direct_movement_curve = SubResource("Curve_kgp0j")
-y_movement_curve = ExtResource("6_t8h4k")
-y_movement_magnitude = 16.0
-move_duration = 0.6
-timing_offset = 0.0
-metadata/_custom_type_script = "uid://bqsf0t8306cyy"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vnaji"]
 atlas = ExtResource("2_ldseh")
@@ -48,32 +34,32 @@ region = Rect2(144, 0, 48, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_koxf5"]
 animations = [{
 "frames": [{
-"duration": 0.5,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_vnaji")
 }, {
-"duration": 0.8,
+"duration": 1.8,
 "texture": SubResource("AtlasTexture_8yhf8")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_vnaji")
 }],
 "loop": false,
 "name": &"left",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
-"duration": 0.6,
+"duration": 1.7,
 "texture": SubResource("AtlasTexture_vnaji")
 }, {
-"duration": 0.5,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_t8h4k")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_vnaji")
 }],
 "loop": false,
 "name": &"right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -87,7 +73,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"updown",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hhy"]
@@ -103,7 +89,17 @@ pusher = NodePath("Pusher")
 standard_move_data = ExtResource("2_nmw7r")
 bonk_data = ExtResource("3_26gw8")
 slide_data = ExtResource("4_kgp0j")
-slide_bonk_data = SubResource("Resource_s1287")
+slide_bonk_data = ExtResource("5_s1287")
+action_beats = Dictionary[int, float]({
+12: 0.0,
+13: 0.0,
+14: 0.0,
+15: 0.0,
+16: 0.0,
+17: 0.1,
+18: 0.0,
+19: 0.0
+})
 default_action_beat = 3.0
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -113,7 +109,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 default_sound_emitter = NodePath("RollSound")
 sprite = NodePath("AnimatedSprite2DSignals")
@@ -128,7 +132,7 @@ metadata/_custom_type_script = "uid://cyio44hidbx4l"
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_koxf5")
-animation = &"right"
+animation = &"updown"
 script = ExtResource("3_koxf5")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

@@ -81,7 +81,7 @@ size = Vector2(20, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h6kqq"]
 size = Vector2(17.5, 65.5)
 
-[node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "default_sound_emitter", "sprite")]
+[node name="Conductor" type="Node2D" node_paths=PackedStringArray("collision_area", "action_sound_emitters", "default_sound_emitter", "sprite")]
 light_mask = 4
 z_index = 1
 y_sort_enabled = true
@@ -100,9 +100,18 @@ action_beats = Dictionary[int, float]({
 12: 0.0,
 13: 0.0,
 14: 0.0,
-15: 0.0
+15: 0.0,
+16: 0.0,
+17: 0.0,
+18: 0.0
 })
 default_action_beat = 1.0
+action_sound_emitters = {
+16: null,
+17: null,
+18: null,
+19: null
+}
 default_sound_emitter = NodePath("Sound/JumpSound")
 sprite = NodePath("Shadow/AnimatedSprite2D")
 action_animations = Dictionary[int, String]({

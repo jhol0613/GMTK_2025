@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://btqpm3f7775os"]
+[gd_scene load_steps=22 format=3 uid="uid://btqpm3f7775os"]
 
 [ext_resource type="Script" uid="uid://cn4dwhpu81vam" path="res://agents/movable_obstacles/moving_interactable.gd" id="1_j04bu"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_fbmii"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c1gtr8fe1bwo1" path="res://agents/movable_obstacles/snack_cart/empty_cart.png" id="4_j04bu"]
 [ext_resource type="Texture2D" uid="uid://mw6u2gub4yt6" path="res://agents/movable_obstacles/snack_cart/short_cart.png" id="5_fo802"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="5_ix653"]
+[ext_resource type="Resource" uid="uid://cg2foen8yla6w" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_slide_bonk_data.tres" id="5_tn4fa"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="6_fo802"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="7_qdawk"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_dy6ey"]
@@ -42,13 +43,13 @@ region = Rect2(144, 0, 48, 64)
 [sub_resource type="SpriteFrames" id="SpriteFrames_tn4fa"]
 animations = [{
 "frames": [{
-"duration": 0.5,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_tn4fa")
 }, {
-"duration": 0.8,
+"duration": 1.8,
 "texture": SubResource("AtlasTexture_jqacq")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_tn4fa")
 }],
 "loop": false,
@@ -56,18 +57,18 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 0.6,
+"duration": 1.7,
 "texture": SubResource("AtlasTexture_jlixh")
 }, {
-"duration": 0.5,
+"duration": 1.5,
 "texture": SubResource("AtlasTexture_swuqy")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_0jbma")
 }],
 "loop": false,
 "name": &"right",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -97,6 +98,7 @@ pusher = NodePath("Pusher")
 standard_move_data = ExtResource("2_fbmii")
 bonk_data = ExtResource("3_dy6ey")
 slide_data = ExtResource("4_ix653")
+slide_bonk_data = ExtResource("5_tn4fa")
 default_action_beat = 3.0
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
@@ -111,7 +113,7 @@ metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 z_index = 1
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_tn4fa")
-animation = &"right"
+animation = &"updown"
 script = ExtResource("5_ix653")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
