@@ -81,34 +81,35 @@ func _on_texture_rect_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index != MOUSE_BUTTON_LEFT or action == Enums.PlayerAction.NONE:
 			return
-
-		if flashing:
-			stopped_flashing.emit(self)
-			stop_flashing()
-		# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
-		
-		selected = not selected
-		selected_emitter.play()
-		border.modulate.a = float(selected)
-		light.visible = float(selected)
-		if _hovered:
-			texture_rect.position.y += 1
-			_hovered = false
-		action_item_clicked.emit(self)
-		
-		
-		#if not selected:
-			#selected_emitter.play()
-			#border.modulate.a = 1
-			#light.visible = true
+		virtual_click()
+		#if flashing:
+			#stopped_flashing.emit(self)
+			#stop_flashing()
+		## Use modulate alpha instead of visibility so changing visibility doesn't affect layout
+		#
+		#selected = not selected
+		#selected_emitter.play()
+		#border.modulate.a = float(selected)
+		#light.visible = float(selected)
+		#if _hovered:
 			#texture_rect.position.y += 1
-			#selected = true
-			#action_item_clicked.emit(self)
-		#else:
-			#selected_emitter.play()
-			#border.modulate.a = 0
-			#light.visible = false
+			#_hovered = false
+		#action_item_clicked.emit(self)
 
+func virtual_click():
+	if flashing:
+		stopped_flashing.emit(self)
+		stop_flashing()
+	# Use modulate alpha instead of visibility so changing visibility doesn't affect layout
+	
+	selected = true
+	selected_emitter.play()
+	border.modulate.a = float(selected)
+	light.visible = float(selected)
+	if _hovered:
+		texture_rect.position.y += 1
+		_hovered = false
+	action_item_clicked.emit(self)
 
 func deselect():
 	border.modulate.a = 0

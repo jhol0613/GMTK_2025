@@ -1,0 +1,4 @@
+Bonking's not always a bad thing!
+Snack carts will always be on the same tile on a given sequencer beat (confirm this is true)
+Teleporting takes the place of your move.
+Use single time for complicated train cars

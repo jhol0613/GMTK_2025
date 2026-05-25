@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="MovableActionData" load_steps=4 format=3 uid="uid://cg2foen8yla6w"]
+
+[ext_resource type="Curve" uid="uid://cx6eh47xxcsny" path="res://agents/movable_obstacles/snack_cart/snack_cart_slide_bonk.tres" id="1_c4xbd"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="2_h3ikm"]
+[ext_resource type="Curve" uid="uid://d2k5xde38rkpw" path="res://agents/null_curve.tres" id="3_uwxas"]
+
+[resource]
+script = ExtResource("2_h3ikm")
+direct_movement_curve = ExtResource("1_c4xbd")
+y_movement_curve = ExtResource("3_uwxas")
+y_movement_magnitude = 16.0
+move_duration = 0.6
+timing_offset = 0.0
+metadata/_custom_type_script = "uid://bqsf0t8306cyy"

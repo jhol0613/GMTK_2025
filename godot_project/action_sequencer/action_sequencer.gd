@@ -346,12 +346,14 @@ func _turn_off_sequencer_lights():
 	for i in range(_available_slots):
 		_initialized_slots[i].sequence_light_on = false
 
-func set_conductor_spawn_countdown_display(new_value: int, initial = false):
+##conductor beat should be set to < 0.0 if this is initial display
+func set_conductor_spawn_countdown_display(new_value: int, conductor_beat: float = -1.0):
 	if not _conductor_spawn_countdown_screen:
 		return
-	if initial:
+	if conductor_beat < 0.0:
 		_conductor_spawn_countdown_screen.set_initial_spawn_countdown(new_value)
 	else:
+		await get_tree().create_timer(AudioManager.beat_time_seconds * conductor_beat).timeout
 		_conductor_spawn_countdown_screen.update_spawn_countdown(new_value)
 
 #region Signal connections
@@ -387,14 +389,14 @@ func _on_action_item_clicked(new_action_item: ActionItem):
 	if tutorial_mode:
 		_tutorial_arrow.visible = true
 
-	if _active_action_item == new_action_item:
-		_enter_erase_mode()
-	else:
-		_exit_erase_mode()
-		_active_action_item = new_action_item
-		for item in _initialized_items:
-			if item != _active_action_item:
-				item.deselect()
+	#if _active_action_item == new_action_item:
+		#_enter_erase_mode()
+	#else:
+	_exit_erase_mode()
+	_active_action_item = new_action_item
+	for item in _initialized_items:
+		if item != _active_action_item:
+			item.deselect()
 
 	_update_slot_action_previews()
 
@@ -503,8 +505,29 @@ func _update_slot_action_previews():
 			_initialized_slots[i].preview_action = Enums.PlayerAction.NONE
 		else:
 			_initialized_slots[i].preview_action = _active_action_item.action
-
+		if _initialized_slots[i].mouse_hovering:
+			_initialized_slots[i]._on_mouse_entered(true)
 		if tutorial_mode:
 			_initialized_slots[i].start_flashing()
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Up"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.UP:
+				action_item.virtual_click()
+	if event.is_action_pressed("Down"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.DOWN:
+				action_item.virtual_click()
+	if event.is_action_pressed("Left"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.LEFT:
+				action_item.virtual_click()
+	if event.is_action_pressed("Right"):
+		for action_item: ActionItem in _initialized_items:
+			if action_item.action == Enums.PlayerAction.RIGHT:
+				action_item.virtual_click()
+	if event.is_action_pressed("Erase"):
+		_enter_erase_mode()
+		_update_slot_action_previews()
 #endregion

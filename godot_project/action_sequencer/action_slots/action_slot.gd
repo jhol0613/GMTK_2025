@@ -33,6 +33,9 @@ var is_active := true
 # Controls whether a hovering mouse is registered
 var ui_interaction_enabled := false
 
+# True when mouse is hovering over this slot
+var mouse_hovering := false
+
 # What action to preview if hovered
 var preview_action:= Enums.PlayerAction.NONE
 
@@ -134,8 +137,9 @@ func _on_gui_input(event: InputEvent) -> void:
 			if is_active and ui_interaction_enabled and action != preview_action:
 				action_slot_clicked.emit(self)
 
-func _on_mouse_entered() -> void:
-	if ui_interaction_enabled and action != preview_action:
+func _on_mouse_entered(force_hover_texture = false) -> void:
+	mouse_hovering = true
+	if ui_interaction_enabled and (action != preview_action or force_hover_texture):
 		hover_light_on = true
 		texture_rect.texture = action_textures.get(preview_action)
 		if flashing:
@@ -143,6 +147,7 @@ func _on_mouse_entered() -> void:
 			stopped_flashing.emit(self)
 
 func _on_mouse_exited() -> void:
+	mouse_hovering = false
 	hover_light_on = false
 	if action == Enums.PlayerAction.NONE:
 		texture_rect.texture = null

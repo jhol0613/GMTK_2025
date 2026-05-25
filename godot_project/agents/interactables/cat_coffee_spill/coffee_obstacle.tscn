@@ -5,15 +5,15 @@
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_ly127"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_o6cmp"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ot43s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6cmp"]
 atlas = ExtResource("2_o1c63")
-region = Rect2(0, 0, 32, 57)
+region = Rect2(0, 0, 32, 41)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0bwnl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ot43s")
+"texture": SubResource("AtlasTexture_o6cmp")
 }],
 "loop": true,
 "name": &"default",
@@ -21,26 +21,28 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42xvd"]
-size = Vector2(20, 29.25)
+size = Vector2(20, 13.25)
 
 [node name="CoffeeObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_g1vmw")
 pusher = NodePath("Pusher")
+initial_push_action = 14
 sprite = NodePath("Sprite2D")
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_0bwnl")
 script = ExtResource("3_ly127")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Pusher" type="Area2D" parent="."]
+z_as_relative = false
 script = ExtResource("4_o6cmp")
 push_action = 14
 push_mode = 1
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
-position = Vector2(0, 2.375)
+position = Vector2(0, -5.625)
 shape = SubResource("RectangleShape2D_42xvd")

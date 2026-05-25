@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_3cq7s"]
 
 [node name="TilemapLevelBase2" instance=ExtResource("1_3cq7s")]
-display_name = "1-1"
-conductor_spawn_beat = 4
+display_name = "All Aboard"
+conductor_spawn_beat = 5
 available_slots = 2
 available_actions = Array[int]([4])
 tutorial_mode = true

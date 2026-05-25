@@ -1,16 +1,27 @@
-[gd_scene load_steps=3 format=4 uid="uid://defrgrdfsdmu3"]
+[gd_scene load_steps=4 format=4 uid="uid://defrgrdfsdmu3"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_hj5e0"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_hj5e0"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="3_uvemm"]
 
 [node name="LevelBase" instance=ExtResource("1_hj5e0")]
 display_name = "2-3"
-conductor_spawn_beat = 4
-available_actions = Array[int]([4, 1, 2])
+conductor_spawn_beat = 8
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([4, 1, 2, 7])
 
 [node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray("AAAEAAAABAAAAAAAAAAFAAAABAABAAAAAAAIAAAABAAAAAAAAAAJAAAABAABAAAAAAAAAAAABAAAAAAAAAABAAAABAABAAAAAAACAAAAAwABAAAAAAAGAAAAAwABAAAAAAACAAQAAAABAAIAAAACAAUAAAABAAMAAAADAAQAAAABAAIAABADAAUAAAABAAMAABACAAMAAAABAAAAAAADAAMAAAABAAAAABA=")
+tile_map_data = PackedByteArray("AAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAAIAAQAAAAMAAAABAAMAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAUAAQAAAAMAAAAEAAIAAQAAAAMAAAA=")
+
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""
+synch_framerates_to_bpm = true
 
 [node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_hj5e0")]
-position = Vector2(209, 68)
-movement_path = Array[int]([4, 4, 3, 3])
+position = Vector2(305, 69)
+movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])
+
+[node name="Key" parent="." index="10" instance=ExtResource("3_uvemm")]
+position = Vector2(80, 42)

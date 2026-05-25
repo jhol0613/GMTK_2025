@@ -54,6 +54,7 @@ extends Node2D
 
 
 var _conductor: Conductor
+var _conductor_beat: float
 var _player_character: PlayerCharacter
 
 var _next_level: RhythmRailLevel
@@ -88,6 +89,13 @@ func _ready() -> void:
 
 	_on_the_train.add_child(_level_scene)
 	add_child(_world_scene)
+	
+	#Get the beat on which the conductor will move (to pass to the sequencer screen)
+	var conductor_scene_state = conductor_scene.get_state()
+	for i in range(conductor_scene_state.get_node_property_count(0)): #0 is always root node
+		if conductor_scene_state.get_node_property_name(0, i) == "default_action_beat":
+			_conductor_beat = conductor_scene_state.get_node_property_value(0, i)
+			break
 
 	_level_scene.position = initial_train_position
 
@@ -213,10 +221,10 @@ func _reset_level() -> void:
 	_player_hidden = false
 	_player_newly_hidden = false
 	if _level_scene.conductor_enabled:
-		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat, true)
+		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat)
 	else:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
-
+	_level_scene.reset_lock()
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
 
@@ -225,6 +233,8 @@ func _reset_level() -> void:
 		obstacle.reset()
 	for collectible in _level_scene.collectibles:
 		collectible.reset()
+	for key in _level_scene.keys:
+		key.reset()
 	for interactable in _level_scene.interactables:
 		interactable.reset()
 	for agent in _level_scene.agents:
@@ -399,6 +409,7 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 
 func _update_obstacles():
+	_level_scene.clear_obstacle_overrides()
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
@@ -408,7 +419,6 @@ func _update_obstacles():
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
-	_level_scene.clear_obstacle_overrides()
 	for obstacle in _level_scene.movable_obstacles:
 		if obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
@@ -434,14 +444,15 @@ func _update_conductor() -> void:
 		return
 	elif _conductor == null \
 		and _current_beat < _level_scene.conductor_spawn_beat:
-			_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat - _current_beat)
+			_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat - _current_beat, _conductor_beat)
 			return
 	elif _conductor == null:
 		if _current_beat < _level_scene.conductor_spawn_beat and \
 		not _level_scene.conductor_snooze:
 			return
+		await get_tree().create_timer(AudioManager.beat_time_seconds * _conductor_beat)
 		_spawn_conductor()
-		_action_sequencer.set_conductor_spawn_countdown_display(0)
+		_action_sequencer.set_conductor_spawn_countdown_display(0, 0.0)
 		conductor_just_spawned = true
 	_update_conductor_awareness()
 	if _conductor.state == Enums.ConductorState.SNOOZE or \
@@ -579,7 +590,7 @@ func _update_teleporters() -> void:
 func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	if _failure_animation_playing:
 		return
-	movable.interrupt_queued_action(pusher.should_cancel_sound)
+	#movable.interrupt_queued_action(pusher.should_cancel_sound)
 	var was_a_slide = Enums.is_action_slide(pusher.push_action)
 	var action = _bonk_check(movable, pusher.push_action)
 	if movable is PlayerCharacter:
@@ -588,8 +599,8 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
 		else:
-			if not was_a_slide:
-				_action_sequencer.set_skip_actions_mode(true, true, true)
+			#if not was_a_slide:
+				#_action_sequencer.set_skip_actions_mode(true, true, true)
 			_player_character.execute_action(action, _current_beat)
 	elif movable is Conductor and Enums.is_action_bonk(action):
 		push_error("Conductor Squished")

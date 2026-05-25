@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_50va3"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_k0y6x"]
-[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="3_fo58w"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="4_k0y6x"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="5_fo58w"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_mw5e3"]
 
 [node name="LevelBase" instance=ExtResource("1_50va3")]
 display_name = "3-5"
@@ -21,14 +21,24 @@ destination_targets = [NodePath("../TeleporterTarget")]
 top = NodePath("../TeleporterTop")
 grid_origin = Vector2i(2, 4)
 
-[node name="CatCartObstacle" parent="." index="10" instance=ExtResource("3_fo58w")]
-position = Vector2(143, 88)
-movement_path = Array[int]([3, 3, 4, 4])
-
-[node name="TeleporterTop" parent="." index="11" instance=ExtResource("4_k0y6x")]
+[node name="TeleporterTop" parent="." index="10" instance=ExtResource("4_k0y6x")]
 position = Vector2(79, 88)
 
-[node name="TeleporterTarget" parent="." index="12" instance=ExtResource("5_fo58w")]
+[node name="TeleporterTarget" parent="." index="11" instance=ExtResource("5_fo58w")]
 position = Vector2(272, 3)
 _active = true
 grid_origin = Vector2i(8, 0)
+
+[node name="SnackCartObstacle" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_mw5e3")]
+position = Vector2(113, 87)
+movement_path = Array[int]([3, 3, 4, 4])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound")
+}

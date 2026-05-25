@@ -20,6 +20,13 @@ class_name AnimatedSprite2DSignals
 ##Even if synch framerates to bmp is true, these animations won't synch to bpm
 @export var bpm_synch_exceptions: Array[String]
 
+##If true, animations will play in single time regardless of game speed. Otherwise they will double
+##their frame rate for double time, etc.
+@export var play_animations_in_single_time := true
+##Animations in this list will do the opposite of the default. e.g. if play_animations_in_single_time
+##is false, the animations in this list will default to single time anyway
+@export var time_multiplier_exceptions: Array[String]
+
 ##Beats per second
 var old_bps
 
@@ -33,10 +40,16 @@ func _ready():
 func play_with_signals(animation_name: StringName = &"", custom_speed: float = 1.0, from_end: bool = false):
 	if !sprite_frames.has_animation(animation_name):
 		return
-	play(animation_name, custom_speed, from_end)
+	var time_multiplier: float
+	if (play_animations_in_single_time and not time_multiplier_exceptions.has(animation_name)) or \
+		(not play_animations_in_single_time and time_multiplier_exceptions.has(animation_name)):
+			time_multiplier = 1.0
+	else:
+		time_multiplier = AudioManager.get_time_multiplier_number()
+	play(animation_name, custom_speed * time_multiplier, from_end)
 	var signal_frames = _get_signals(animation_name)
 	for frame_number in signal_frames:
-		var timer = get_tree().create_timer(_get_time_at_frame(animation_name, frame_number) * 1.0 / custom_speed)
+		var timer = get_tree().create_timer(_get_time_at_frame(animation_name, frame_number) / (custom_speed * time_multiplier))
 		timer.timeout.connect(_on_timeout.bind(signal_frames.get(frame_number)))
 
 ##Returns default animation offset (typically 0.0) if animation doesn't exist

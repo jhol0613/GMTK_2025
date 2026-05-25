@@ -31,9 +31,12 @@ class_name RhythmRailLevel
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 @onready var _debug_drawing_layer : DebugDrawing = $DebugDrawing
 @onready var _target := $Target
+@onready var _lock := $AdditionalSprites/Lock
 
 ##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
 @onready var _obstacle_overrides: Array[Vector2i]
+
+@onready var _keys_collected := 0
 
 #TODO: These arrays could be refactored to use Godot's Groups system
 ## agents in the level to call update function to
@@ -56,6 +59,9 @@ var teleporters := []
 var terminals := []
 ## antennas in the level (treated like terminals, but aren't an agent so need their own array
 var antennas := []
+##keys in the level. All must be collected for target to activate 
+var keys : Array[LevelKey] = []
+
 
 signal target_reached
 signal conductor_reached_target
@@ -98,6 +104,11 @@ func _ready() -> void:
 			terminals.append(child)
 		if child.is_in_group("antennas"):
 			antennas.append(child)
+		if child.is_in_group("keys"):
+			keys.append(child)
+			if child is LevelKey:
+				_lock.visible = true
+				child.key_collected.connect(_on_key_collected)
 	#agents = get_tree().get_nodes_in_group("agents")
 	for agent: Agent in agents:
 		# The position of the agent in level space
@@ -216,6 +227,12 @@ func has_static_obstacle(grid_position: Vector2i) -> bool:
 func update_weight_grid(grid_position: Vector2i, weight_scale: float) -> void:
 	path_grid.set_point_weight_scale(grid_position, weight_scale)
 
+func reset_lock():
+	if not keys.is_empty():
+		_lock.visible = true
+		_keys_collected = 0
+		_lock.play("default")
+
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
 	path_grid = AStarGrid2D.new()
@@ -239,10 +256,15 @@ func _initialize_path_finding():
 	path_grid.update()
 
 func _on_target_area_entered(area: Area2D) -> void:
-	if area.owner is PlayerCharacter:
+	if area.owner is PlayerCharacter and _keys_collected >= keys.size():
 		target_reached.emit()
 	elif area.owner is Conductor:
 		conductor_reached_target.emit()
+
+func _on_key_collected():
+	_keys_collected += 1
+	if _keys_collected >= keys.size():
+		_lock.play_with_signals("vanish")
 
 func _draw_obstacle_traversibility() -> void:
 	_debug_drawing_layer.clear_data()

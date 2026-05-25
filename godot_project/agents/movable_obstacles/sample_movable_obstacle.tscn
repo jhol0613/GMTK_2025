@@ -40,6 +40,7 @@ script = ExtResource("1_6ffc4")
 movement_path = Array[int]([4, 3])
 pusher = NodePath("Pusher")
 standard_move_data = SubResource("Resource_ufn4q")
+default_action_beat = 1.0
 sprite = NodePath("AnimatedSprite2DSignals")
 default_animation = "default"
 metadata/_custom_type_script = "uid://cyio44hidbx4l"
