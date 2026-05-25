@@ -11,6 +11,7 @@ Level1-1 uid://dco8dneiqmglo RR
 1-10 uid://dqleuvyixoqjp RRRRxRRR / RRRRURUD
 1-12 uid://ej8hk3h8ibcr UxRRRRDx / xDRRUURR
 1-13 uid://cwr6q03gr1165 RJDJRJUJ / RJUJUJRD
+1-13_V2 uid://bjo6fdnk4su8p DRRJRRRU / URRJURRD
 1-14 uid://71ob1186irs4 RURRJDRR
 
 2-1 uid://bsay3jq0vshq2 URRDDRIR / RRDDRIUU
