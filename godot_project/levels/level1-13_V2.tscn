@@ -42,7 +42,7 @@ activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
 [node name="Collectible" parent="." index="10" instance=ExtResource("3_aj7xu")]
-position = Vector2(240, 23)
+position = Vector2(240, 43)
 
 [node name="Key" parent="." index="12" instance=ExtResource("4_kkqpi")]
 position = Vector2(176, 62)
