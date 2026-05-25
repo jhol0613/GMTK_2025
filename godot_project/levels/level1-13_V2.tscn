@@ -8,7 +8,7 @@
 [node name="LevelBase" instance=ExtResource("1_md2cr")]
 display_name = "You Can Step On Them"
 player_spawn_position = Vector2i(0, 3)
-conductor_spawn_beat = 27
+conductor_spawn_beat = 4
 available_actions = Array[int]([4, 1, 2, 5])
 
 [node name="Decorative" parent="." index="0"]

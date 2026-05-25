@@ -8,6 +8,9 @@ extends Node2D
 @export_subgroup("Conductor", "conductor")
 @export var conductor_scene: PackedScene
 
+@export_subgroup("LevelBanner", "level_banner")
+@export var level_banner_scene: PackedScene
+
 @export_category("Animation")
 @export_subgroup("Train Car Positioning")
 ##The initial position of a train car in the level
@@ -131,6 +134,8 @@ func load_next_level():
 ## Pysically advances the level and initializes the new car with proper timing
 func advance_level():
 	_level_number += 1
+	
+	
 
 	# Update reference to new level and initialize
 	_level_scene = _next_level
@@ -146,6 +151,9 @@ func advance_level():
 
 ## Scene initialization steps that are called AFTER the level has been fully advanced
 func _on_level_advanced():
+	var level_banner = level_banner_scene.instantiate()
+	level_banner.label_text_init = _level_scene.display_name
+	add_child(level_banner)
 	_action_sequencer.set_action_icons_hidden(false)
 	_spawn_player()
 	_reset_level()

@@ -127,6 +127,10 @@ enum TeleporterColor {
 	BLUE
 }
 
+enum LevelBannerType {
+	BILLBOARD
+}
+
 #region Action and Vector conversions
 var NORTHEAST = Vector2i.UP + Vector2i.RIGHT
 var NORTHWEST = Vector2i.UP + Vector2i.LEFT

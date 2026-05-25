@@ -23,7 +23,7 @@ lifetime = 4.35
 process_material = ExtResource("2_ia2xi")
 
 [node name="Tracks" type="Parallax2D" parent="."]
-z_index = -3
+z_index = 4
 repeat_size = Vector2(572.17, 0)
 autoscroll = Vector2(-250, 0)
 
