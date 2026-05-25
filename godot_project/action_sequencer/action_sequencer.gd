@@ -505,7 +505,8 @@ func _update_slot_action_previews():
 			_initialized_slots[i].preview_action = Enums.PlayerAction.NONE
 		else:
 			_initialized_slots[i].preview_action = _active_action_item.action
-
+		if _initialized_slots[i].mouse_hovering:
+			_initialized_slots[i]._on_mouse_entered(true)
 		if tutorial_mode:
 			_initialized_slots[i].start_flashing()
 
@@ -528,5 +529,5 @@ func _input(event: InputEvent) -> void:
 				action_item.virtual_click()
 	if event.is_action_pressed("Erase"):
 		_enter_erase_mode()
-		
+		_update_slot_action_previews()
 #endregion
