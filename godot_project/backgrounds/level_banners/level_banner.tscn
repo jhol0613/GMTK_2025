@@ -40,7 +40,7 @@ script = ExtResource("1_ym6d1")
 repeat_size = Vector2(10000, 0)
 
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="Parallax2D"]
-position = Vector2(559, 120)
+position = Vector2(738, 120)
 sprite_frames = SubResource("SpriteFrames_lkef2")
 animation = &"billboard"
 script = ExtResource("3_035hn")

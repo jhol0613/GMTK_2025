@@ -12,7 +12,7 @@ var label_text_init: String
 var scroll_speed_init: float
 var type_init: Enums.LevelBannerType
 
-func _init(type = Enums.LevelBannerType.BILLBOARD, text = "Your ad goes here!", scroll_speed = 120.0):
+func _init(type = Enums.LevelBannerType.BILLBOARD, text = "Your ad goes here!", scroll_speed = 180.0):
 	label_text_init = text
 	scroll_speed_init = scroll_speed
 

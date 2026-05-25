@@ -1,0 +1,110 @@
+[gd_scene load_steps=5 format=3 uid="uid://decxer3b8ursv"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_qjm0g"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_2r4fg"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_r0tgl"]
+
+[sub_resource type="Resource" id="Resource_kd8sp"]
+script = ExtResource("2_2r4fg")
+index = 3
+action = 2
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
+[node name="LevelBase" instance=ExtResource("1_qjm0g")]
+display_name = "No Time For Snacks"
+conductor_spawn_beat = 1
+available_actions = Array[int]([4, 1, 2])
+hints = Array[ExtResource("2_2r4fg")]([SubResource("Resource_kd8sp")])
+
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""
+
+[node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
+position = Vector2(48, 67)
+movement_path = Array[int]([4, 1, 3, 2])
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
+}
+
+[node name="SnackCartObstacle2" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
+position = Vector2(112, 67)
+movement_path = Array[int]([4, 1, 3, 2])
+action_sound_emitters = {
+8: NodePath("../SnackCartObstacle/BumpSound"),
+9: NodePath("../SnackCartObstacle/BumpSound"),
+10: NodePath("../SnackCartObstacle/BumpSound"),
+11: NodePath("../SnackCartObstacle/BumpSound"),
+12: NodePath("../SnackCartObstacle/BumpSound"),
+13: NodePath("../SnackCartObstacle/BumpSound"),
+14: NodePath("../SnackCartObstacle/BumpSound"),
+15: NodePath("../SnackCartObstacle/BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("../SnackCartObstacle/BumpSound"),
+21: NodePath("../SnackCartObstacle/BumpSound"),
+22: NodePath("../SnackCartObstacle/BumpSound"),
+23: NodePath("../SnackCartObstacle/BumpSound")
+}
+
+[node name="SnackCartObstacle3" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
+position = Vector2(177, 68)
+movement_path = Array[int]([4, 1, 3, 2])
+action_sound_emitters = {
+8: NodePath("../SnackCartObstacle/BumpSound"),
+9: NodePath("../SnackCartObstacle/BumpSound"),
+10: NodePath("../SnackCartObstacle/BumpSound"),
+11: NodePath("../SnackCartObstacle/BumpSound"),
+12: NodePath("../SnackCartObstacle/BumpSound"),
+13: NodePath("../SnackCartObstacle/BumpSound"),
+14: NodePath("../SnackCartObstacle/BumpSound"),
+15: NodePath("../SnackCartObstacle/BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("../SnackCartObstacle/BumpSound"),
+21: NodePath("../SnackCartObstacle/BumpSound"),
+22: NodePath("../SnackCartObstacle/BumpSound"),
+23: NodePath("../SnackCartObstacle/BumpSound")
+}
+
+[node name="SnackCartObstacle5" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
+position = Vector2(241, 68)
+movement_path = Array[int]([4, 1, 3, 2])
+action_sound_emitters = {
+8: NodePath("../SnackCartObstacle/BumpSound"),
+9: NodePath("../SnackCartObstacle/BumpSound"),
+10: NodePath("../SnackCartObstacle/BumpSound"),
+11: NodePath("../SnackCartObstacle/BumpSound"),
+12: NodePath("../SnackCartObstacle/BumpSound"),
+13: NodePath("../SnackCartObstacle/BumpSound"),
+14: NodePath("../SnackCartObstacle/BumpSound"),
+15: NodePath("../SnackCartObstacle/BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("../SnackCartObstacle/BumpSound"),
+21: NodePath("../SnackCartObstacle/BumpSound"),
+22: NodePath("../SnackCartObstacle/BumpSound"),
+23: NodePath("../SnackCartObstacle/BumpSound")
+}

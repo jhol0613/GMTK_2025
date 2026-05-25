@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://nongj15fn1k6"]
+[gd_scene load_steps=5 format=3 uid="uid://nongj15fn1k6"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_1kcp2"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_8kmdv"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_c4aqj"]
+
+[sub_resource type="Resource" id="Resource_8kmdv"]
+script = ExtResource("2_c4aqj")
+index = 1
+action = 5
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase2" instance=ExtResource("1_1kcp2")]
 display_name = "Frikin' Laserbeams?!"
 conductor_spawn_beat = 4
 available_slots = 4
 available_actions = Array[int]([4, 5])
+hints = Array[ExtResource("2_c4aqj")]([SubResource("Resource_8kmdv")])
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 13, 0, 0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 20, 0, 0, 0, 255, 255, 3, 0, 0, 0, 0, 0, 21, 0, 0, 0)

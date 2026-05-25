@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=4 uid="uid://ej8hk3h8ibcr"]
+[gd_scene load_steps=7 format=4 uid="uid://ej8hk3h8ibcr"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_wf1y7"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_d0gv4"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_ufyiq"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_d0gv4"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="5_d0gv4"]
+
+[sub_resource type="Resource" id="Resource_ufyiq"]
+script = ExtResource("2_d0gv4")
+index = 7
+action = 0
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_wf1y7")]
 display_name = "Patience is Key"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 11
 available_actions = Array[int]([4, 1, 2, 5])
+hints = Array[ExtResource("2_d0gv4")]([SubResource("Resource_ufyiq")])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true
@@ -81,3 +90,6 @@ grid_origin = Vector2i(9, 0)
 
 [node name="Collectible" parent="." index="17" instance=ExtResource("3_d0gv4")]
 position = Vector2(272, 99)
+
+[node name="Key" parent="." index="19" instance=ExtResource("5_d0gv4")]
+position = Vector2(144, 62)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=4 uid="uid://defrgrdfsdmu3"]
+[gd_scene load_steps=5 format=4 uid="uid://defrgrdfsdmu3"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_hj5e0"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_hj5e0"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_tlkng"]
 [ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="3_uvemm"]
 
 [node name="LevelBase" instance=ExtResource("1_hj5e0")]
@@ -9,6 +10,7 @@ display_name = "2-3"
 conductor_spawn_beat = 8
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 1, 2, 7])
+hints = Array[ExtResource("2_tlkng")]([])
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray("AAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAAIAAQAAAAMAAAABAAMAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAUAAQAAAAMAAAAEAAIAAQAAAAMAAAA=")
