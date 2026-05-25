@@ -106,7 +106,7 @@ var current_state := SequencingState.SEQUENCING
 var current_action := 0
 
 # ActionSlot
-var _initialized_slots := [ActionSlot]
+var _initialized_slots: Array[ActionSlot]
 # ActionItemData
 var _initialized_items := [ActionItem]
 
@@ -248,6 +248,13 @@ func update_sequencer_data(new_available_slots: int, new_available_actions: Arra
 	_clear_action_slots()
 	_enter_thinking_mode()
 
+func set_action_hint(action_hint: ActionHint):
+	if not action_hint:
+		return
+	if action_hint.index <= _available_slots:
+		#_initialized_slots[slot_number].set_action(Enums.PlayerAction.NONE, true)
+		_initialized_slots[action_hint.index].set_hinted_action(action_hint.action)
+
 func set_current_sequence(sequence: Array[Enums.PlayerAction]) -> void:
 	for slot in _initialized_slots:
 		slot.set_action(Enums.PlayerAction.NONE, true)
@@ -340,7 +347,8 @@ func _clear_action_slots():
 	for i in range(_available_actions.size()):
 		_initialized_items[i].quantity = _action_quantities[i]
 	for i in range(_available_slots):
-		_initialized_slots[i].clear_slot()
+		if not _initialized_slots[i].is_hinted:
+			_initialized_slots[i].clear_slot()
 
 func _turn_off_sequencer_lights():
 	for i in range(_available_slots):
@@ -401,10 +409,12 @@ func _on_action_item_clicked(new_action_item: ActionItem):
 	_update_slot_action_previews()
 
 func _on_action_slot_clicked(clicked_slot : ActionSlot):
-	if _active_action_item != null:
+	if _active_action_item != null and not clicked_slot.is_hinted:
 		clicked_slot.set_action(_active_action_item.action)
-	else:
-		print("active action item is null")
+	elif clicked_slot.is_hinted and _eraser_mode:
+		clicked_slot.clear_hint()
+	elif _eraser_mode:
+		#print("active action item is null")
 		clicked_slot.set_action(Enums.PlayerAction.NONE)
 
 func _on_one_slot_stopped_flashing(_stopped_slot: ActionSlot):
@@ -492,10 +502,14 @@ func _enter_erase_mode():
 	_active_action_item = null
 	for item in _initialized_items:
 		item.deselect()
+	for slot in _initialized_slots:
+		slot.set_eraser_mode(true)
 
 func _exit_erase_mode():
 	Input.set_custom_mouse_cursor(null)
 	_setup_eraser_button()
+	for slot in _initialized_slots:
+		slot.set_eraser_mode(false)
 
 ## Iterate through action slots and make sure preview is set to current action (or NONE if in erase mode)
 func _update_slot_action_previews():

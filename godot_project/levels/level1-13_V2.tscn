@@ -1,15 +1,23 @@
-[gd_scene load_steps=5 format=4 uid="uid://bjo6fdnk4su8p"]
+[gd_scene load_steps=7 format=4 uid="uid://bjo6fdnk4su8p"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_md2cr"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_aj7xu"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_kkqpi"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_aj7xu"]
 [ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="4_kkqpi"]
+
+[sub_resource type="Resource" id="Resource_aj7xu"]
+script = ExtResource("2_aj7xu")
+index = 0
+action = 2
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_md2cr")]
 display_name = "You Can Step On Them"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 4
 available_actions = Array[int]([4, 1, 2, 5])
+hints = Array[ExtResource("2_aj7xu")]([SubResource("Resource_aj7xu")])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true

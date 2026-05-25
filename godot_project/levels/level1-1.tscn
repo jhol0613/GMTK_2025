@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=4 uid="uid://dco8dneiqmglo"]
+[gd_scene load_steps=3 format=4 uid="uid://dco8dneiqmglo"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_3cq7s"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_nc1lw"]
 
 [node name="TilemapLevelBase2" instance=ExtResource("1_3cq7s")]
 display_name = "All Aboard"
 conductor_spawn_beat = 5
 available_slots = 2
 available_actions = Array[int]([4])
+hints = Array[ExtResource("2_nc1lw")]([])
 tutorial_mode = true
 
 [node name="Decorative" parent="." index="0"]

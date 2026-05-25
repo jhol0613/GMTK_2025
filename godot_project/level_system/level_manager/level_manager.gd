@@ -79,6 +79,7 @@ var _spawned_obstacles : Array[MovableObstacle]
 var _player_hidden = false
 var _player_newly_hidden = false
 var _failure_animation_playing = false
+var _hint_number := 0
 
 func _ready() -> void:
 	if SaveManager.run_from_F6:
@@ -181,7 +182,8 @@ func _initialize_level():
 	for agent in _level_scene.agents:
 		if not agent.animation_signal.is_connected(_on_animation_signal_received):
 			agent.animation_signal.connect(_on_animation_signal_received)
-
+	
+	_hint_number = 0
 	# load following level
 	load_next_level()
 
@@ -620,6 +622,16 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 	else: # conductor
 		movable.execute_action(action, _current_beat)
 
+func _on_hint_triggered():
+	#In case hints have been erased, fill in all hints up to where you left off
+	for i in range(_hint_number + 1):
+		if i < _level_scene.hints.size():
+			_action_sequencer.set_action_hint(_level_scene.hints[i])
+		else:
+			break
+	if _hint_number < _action_sequencer.total_slots:
+		_hint_number += 1
+
 #endregion
 
 #region Sequencer Callbacks
@@ -701,4 +713,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("SkipLevel"):
 		_advance_car_for_play(0.0)
 		advance_level()
+	if event.is_action_pressed("ShowHint"):
+		_on_hint_triggered()
 #endregion

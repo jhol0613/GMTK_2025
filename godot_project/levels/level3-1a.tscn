@@ -34,5 +34,13 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }

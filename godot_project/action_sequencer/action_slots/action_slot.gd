@@ -5,6 +5,7 @@ class_name ActionSlot
 @export_subgroup("Slot Textures")
 @export var active_texture: CompressedTexture2D
 @export var inactive_texture: CompressedTexture2D
+@export var hinted_texture: CompressedTexture2D
 @export var action_textures: Dictionary[Enums.PlayerAction, CompressedTexture2D]
 
 @export_subgroup("Light Colors")
@@ -29,6 +30,9 @@ var action: Enums.PlayerAction = Enums.PlayerAction.NONE
 
 # If active is false, cannot drag and drop
 var is_active := true
+
+# True if this action slot was filled via a hint
+var is_hinted := false
 
 # Controls whether a hovering mouse is registered
 var ui_interaction_enabled := false
@@ -79,6 +83,21 @@ func set_action(new_action: Enums.PlayerAction, silent = false):
 	if not silent:
 		place_block_emitter.play()
 
+func set_hinted_action(new_action: Enums.PlayerAction):
+	if not is_active:
+		push_error("Attempting to set a hint on an inactive action slot")
+		return
+	is_hinted = true
+	background_sprite.texture = hinted_texture
+	set_action(new_action, true)
+
+func clear_hint():
+	if not is_active:
+		push_error("Attempting to clear hint from an inactive action slot")
+	is_hinted = false
+	background_sprite.texture = active_texture
+	set_action(Enums.PlayerAction.NONE)
+
 func set_to_thinking_mode_color():
 	_current_sequence_light_color = thinking_light_color
 
@@ -127,12 +146,6 @@ func stop_flashing():
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		#if eraser_mode:
-			#if action != Enums.PlayerAction.NONE:
-				#clear_slot()
-				#accept_event()
-				#return
-
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if is_active and ui_interaction_enabled and action != preview_action:
 				action_slot_clicked.emit(self)
@@ -140,8 +153,9 @@ func _on_gui_input(event: InputEvent) -> void:
 func _on_mouse_entered(force_hover_texture = false) -> void:
 	mouse_hovering = true
 	if ui_interaction_enabled and (action != preview_action or force_hover_texture):
-		hover_light_on = true
-		texture_rect.texture = action_textures.get(preview_action)
+		if not is_hinted or eraser_mode:
+			hover_light_on = true
+			texture_rect.texture = action_textures.get(preview_action)
 		if flashing:
 			stop_flashing()
 			stopped_flashing.emit(self)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqob6deb6rmuc"]
+[gd_scene load_steps=6 format=3 uid="uid://cqob6deb6rmuc"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_llv2y"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_gu3qj"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_llv2y"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_vq6kx"]
 [ext_resource type="PackedScene" uid="uid://dwyquf3j8v11n" path="res://agents/lasers/laser_sparks.tscn" id="3_ynwh2"]
@@ -10,6 +11,7 @@ display_name = "2-7"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 6
 available_actions = Array[int]([4, 1, 2, 6])
+hints = Array[ExtResource("2_gu3qj")]([])
 
 [node name="Laser" parent="." index="9" instance=ExtResource("2_llv2y")]
 position = Vector2(48, 3)
