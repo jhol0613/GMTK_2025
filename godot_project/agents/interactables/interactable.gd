@@ -39,7 +39,7 @@ func _on_flip_horizontal(new_flipped_status):
 func can_interact():
 	return not _interacted or repeatable
 
-func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
+func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false, instant = false) -> void:
 	if can_interact():
 		interaction_succeeded.emit()
 		_interacted = true

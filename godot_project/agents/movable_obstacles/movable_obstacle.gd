@@ -23,20 +23,25 @@ func _ready() -> void:
 		pusher.push_action = initial_push_action
 	super._ready()
 
-# override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
-func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false):
+##override _execute_action from movable so behavior can be altered if pusher would have caused a player fall
+##This is modified to not calculate a move delay, since obstacle movements are synched by level manager.
+##Typically, the level manager calls execute action on beat 0, and individual movables handle the timing.
+##Since obstacle movements require synching logic in the level manager, the level manager uses their default
+##action beat and fires execute action on the appropriate beat, so any additional delay is unwarranted. Thus
+##instant defaults to true. It also means you can't currently have sounds that trigger prior to the beat
+func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false, instant = true):
 	if not enabled:
 		return
 	# if action is a fall action, rather than using the pusher action, just go back the way you came
 	if Enums.is_action_fall(action):
-		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), beat, skip_animation)
+		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), beat, skip_animation, instant)
 		#play bump sound on collision with another movable obstacle
 		interrupt_queued_sound()
 		var emitter = action_sound_emitters.get(Enums.PlayerAction.LEFT_BONK, default_sound_emitter)
 		if emitter:
 			emitter.play()
 	else:
-		super.execute_action(action, beat, skip_animation)
+		super.execute_action(action, beat, skip_animation, instant)
 		if Enums.is_action_slide(action):
 			pusher.push_action = _direction_to_push_action(action)
 

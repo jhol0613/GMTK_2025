@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqus7ea6hnmos"]
+[gd_scene load_steps=11 format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_23qrc"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cv2wv"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_iaxri"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="7_23qrc"]
@@ -13,6 +14,7 @@
 [node name="LevelBase" instance=ExtResource("1_svhcm")]
 conductor_spawn_beat = 5
 available_actions = Array[int]([1, 3, 4, 2, 7, 6])
+hints = Array[ExtResource("2_23qrc")]([])
 
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 0, 0)
@@ -72,7 +74,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="Antenna" parent="SnackCartObstacle" index="5" instance=ExtResource("7_y0wce")]
@@ -111,7 +121,37 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
+}
+
+[node name="SnackCartObstacle3" parent="." index="15" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
+position = Vector2(112, 50)
+movement_path = Array[int]([4, 4, 4, 3, 3, 3])
+action_sound_emitters = {
+8: NodePath("../SnackCartObstacle2/BumpSound"),
+9: NodePath("../SnackCartObstacle2/BumpSound"),
+10: NodePath("../SnackCartObstacle2/BumpSound"),
+11: NodePath("../SnackCartObstacle2/BumpSound"),
+12: NodePath("../SnackCartObstacle2/BumpSound"),
+13: NodePath("../SnackCartObstacle2/BumpSound"),
+14: NodePath("../SnackCartObstacle2/BumpSound"),
+15: NodePath("../SnackCartObstacle2/BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("../SnackCartObstacle2/BumpSound"),
+21: NodePath("../SnackCartObstacle2/BumpSound"),
+22: NodePath("../SnackCartObstacle2/BumpSound"),
+23: NodePath("../SnackCartObstacle2/BumpSound")
 }
 
 [editable path="Treadmill/Antenna"]

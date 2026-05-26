@@ -87,24 +87,24 @@ action_sound_emitters = {
 23: NodePath("../SnackCartObstacle/BumpSound")
 }
 
-[node name="SnackCartObstacle5" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
+[node name="SnackCartObstacle4" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
 position = Vector2(241, 68)
 movement_path = Array[int]([4, 1, 3, 2])
 action_sound_emitters = {
-8: NodePath("../SnackCartObstacle/BumpSound"),
-9: NodePath("../SnackCartObstacle/BumpSound"),
-10: NodePath("../SnackCartObstacle/BumpSound"),
-11: NodePath("../SnackCartObstacle/BumpSound"),
-12: NodePath("../SnackCartObstacle/BumpSound"),
-13: NodePath("../SnackCartObstacle/BumpSound"),
-14: NodePath("../SnackCartObstacle/BumpSound"),
-15: NodePath("../SnackCartObstacle/BumpSound"),
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound"),
 16: null,
 17: null,
 18: null,
 19: null,
-20: NodePath("../SnackCartObstacle/BumpSound"),
-21: NodePath("../SnackCartObstacle/BumpSound"),
-22: NodePath("../SnackCartObstacle/BumpSound"),
-23: NodePath("../SnackCartObstacle/BumpSound")
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }

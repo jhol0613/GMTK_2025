@@ -64,8 +64,8 @@ func _ready():
 	if collision_area != null:
 		_collision_area_initial_position = collision_area.position
 
-func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false) -> void:
-	super.execute_action(action, beat, skip_animation)
+func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false, instant := false) -> void:
+	super.execute_action(action, beat, skip_animation, instant)
 	if not check_activation_for_beat(beat):
 		return
 	var action_data: MovableActionData
@@ -98,7 +98,7 @@ func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := fa
 	else:
 		collision_area.position = _collision_area_initial_position
 
-	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds
+	var move_delay = action_data.timing_offset + action_beats.get(action, default_action_beat) * AudioManager.beat_time_seconds * float(not instant)
 	_execute_callable_on_timer(_movement_timer, move_delay, _on_movement_start.bind(action, action_data, should_move_collision))
 
 func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionData, should_move_collision: bool):

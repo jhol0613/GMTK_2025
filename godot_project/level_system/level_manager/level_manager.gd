@@ -75,6 +75,12 @@ var _queue_world_transition = false
 # Keeps track of obstacles spawned in the level so they can be reset
 var _spawned_obstacles : Array[MovableObstacle]
 
+# Key is the beat that an obstacle moves on, array is an array of all the obstacles that move on that
+# beat.
+var _obstacle_move_groups: Dictionary[float, Array] #can't have nested typed array
+
+# obstacles with unique action timings will 
+
 # Additional state variables
 var _player_hidden = false
 var _player_newly_hidden = false
@@ -315,14 +321,19 @@ func _spawn_conductor() -> void:
 	_conductor.play_current_emotion()
 
 func _initialize_moving_obstacles() -> void:
-	for obstacle in _level_scene.movable_obstacles:
+	_obstacle_move_groups.clear()
+	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
 		_initialize_movable(obstacle, _level_scene.global_to_map(obstacle.global_position))
 		obstacle.request_offbeat_action.connect(_on_obstacle_request_offbeat_action)
+		var move_group_array: Array = _obstacle_move_groups.get_or_add(obstacle.default_action_beat, [])
+		move_group_array.append(obstacle)
 	for spawner in _level_scene.obstacle_spawners:
 		spawner.obstacle_spawned.connect(_on_obstacle_spawned)
 
 func _on_obstacle_spawned(obstacle: PackedScene, grid_position: Vector2i):
 	var spawned_obstacle : MovableObstacle = _spawn_movable(obstacle, grid_position)
+	var move_group_array: Array = _obstacle_move_groups.get_or_add(spawned_obstacle.default_action_beat, [])
+	move_group_array.append(spawned_obstacle)
 	if spawned_obstacle.pusher:
 		spawned_obstacle.pusher.connect("overlapped_movable", _on_pusher_triggered)
 	_level_scene.movable_obstacles.append(spawned_obstacle)
@@ -419,17 +430,36 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 
 func _update_obstacles():
+	for key in _obstacle_move_groups.keys():
+		get_tree().create_timer(AudioManager.beat_time_seconds * key).timeout. \
+			connect(_update_obstacle_move_group.bind(_obstacle_move_groups[key]))
+	#_level_scene.clear_obstacle_overrides()
+	## check for actions before grid is updated (so obstacles can move into the same square triggering a push)
+	#var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
+	#for obstacle: MovableObstacle in _level_scene.movable_obstacles:
+		#actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
+	#for obstacle in _level_scene.movable_obstacles:
+		#obstacle.execute_action(_bonk_check(obstacle, actions[obstacle], true), _current_beat)
+		##only update the move cursor if the action was executed (per the activation sequence)
+		#if obstacle.check_activation_for_beat(_current_beat):
+			#obstacle.advance_move_cursor()
+	#for obstacle in _level_scene.movable_obstacles:
+		#if obstacle.enabled:
+			#_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+
+##move_group takes an array of obstacles and moves them all at once using deconfliction and bumping logic
+func _update_obstacle_move_group(move_group):
 	_level_scene.clear_obstacle_overrides()
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
-	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
+	for obstacle: MovableObstacle in move_group:
 		actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
-	for obstacle in _level_scene.movable_obstacles:
+	for obstacle in move_group:
 		obstacle.execute_action(_bonk_check(obstacle, actions[obstacle], true), _current_beat)
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
-	for obstacle in _level_scene.movable_obstacles:
+	for obstacle in move_group:
 		if obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
