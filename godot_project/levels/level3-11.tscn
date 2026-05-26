@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://boiggb2fjxqbr"]
+[gd_scene load_steps=13 format=3 uid="uid://boiggb2fjxqbr"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_xhynf"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_4cx3b"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_du0ay"]
+[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_xx0qd"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_cqb4s"]
+[ext_resource type="TileSet" uid="uid://cd8pqkqbg8nrr" path="res://tilemaps/train_floor.tres" id="4_eeyd6"]
+[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="5_0g3g1"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="5_rvl5c"]
+[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="6_giv63"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_rvl5c"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="7_du0ay"]
+[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="7_x2ws1"]
 
 [node name="LevelBase" instance=ExtResource("1_xhynf")]
 display_name = "3-11"
@@ -14,8 +19,61 @@ conductor_spawn_beat = 6
 available_actions = Array[int]([4, 1, 2, 3])
 hints = Array[ExtResource("2_du0ay")]([])
 
+[node name="Floor" parent="." index="1"]
+z_index = 0
+
 [node name="Obstacles" parent="." index="2"]
 tile_map_data = PackedByteArray(0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="BackWall" parent="." index="3"]
+z_index = -2
+y_sort_enabled = false
+position = Vector2(0, -5.37)
+tile_set = ExtResource("3_xx0qd")
+
+[node name="PointLight2D" parent="BackWall" index="0"]
+z_index = 0
+
+[node name="Windows" parent="BackWall" index="4"]
+position = Vector2(0, 0)
+
+[node name="LeftExteriorFloor" parent="." index="4"]
+tile_set = ExtResource("4_eeyd6")
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+z_index = 0
+tile_set = ExtResource("5_0g3g1")
+
+[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("6_giv63")
+
+[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
+position = Vector2(32, -8)
+tile_set = ExtResource("7_x2ws1")
+
+[node name="RightExteriorFloor" parent="." index="5"]
+position = Vector2(360.655, 0)
+tile_set = ExtResource("4_eeyd6")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+z_index = 0
+scale = Vector2(1, 1)
+tile_set = ExtResource("5_0g3g1")
+
+[node name="RightWall" parent="RightExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("6_giv63")
+
+[node name="RightRoof" parent="RightExteriorFloor" index="2"]
+position = Vector2(6, -8)
+tile_set = ExtResource("7_x2ws1")
+
+[node name="Wheelwell" parent="AdditionalSprites" index="1"]
+z_index = -1
+
+[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
+z_index = -1
 
 [node name="Lock" parent="AdditionalSprites" index="3"]
 light_mask = 1

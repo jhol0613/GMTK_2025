@@ -113,7 +113,8 @@ metadata/_custom_type_script = "uid://cn4dwhpu81vam"
 z_index = 1
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_tn4fa")
-animation = &"updown"
+animation = &"right"
+autoplay = "right"
 script = ExtResource("5_ix653")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

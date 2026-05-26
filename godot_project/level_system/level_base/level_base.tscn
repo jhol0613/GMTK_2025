@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene load_steps=27 format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
 [ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_fo6gb"]
+[ext_resource type="Texture2D" uid="uid://cmhhbr1km07qk" path="res://tilemaps/tilesheets/cart_tracks.png" id="4_natoe"]
 [ext_resource type="TileSet" uid="uid://cd8pqkqbg8nrr" path="res://tilemaps/train_floor.tres" id="4_p76ks"]
 [ext_resource type="TileSet" uid="uid://cyxpoxyaw6ve8" path="res://tilemaps/obstacles.tres" id="5_10qrp"]
 [ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="6_cjwl0"]
@@ -14,6 +15,30 @@
 [ext_resource type="Texture2D" uid="uid://dftuaah3jft2e" path="res://agents/keys/lock_placeholder.png" id="11_qsue7"]
 [ext_resource type="FontFile" uid="uid://bge7vr6k48ykd" path="res://debug/Roboto-VariableFont_wdth,wght.ttf" id="11_ucxu3"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="12_natoe"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l8x56"]
+texture = ExtResource("4_natoe")
+texture_region_size = Vector2i(32, 19)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_u3gbn"]
+tile_size = Vector2i(32, 19)
+sources/0 = SubResource("TileSetAtlasSource_l8x56")
 
 [sub_resource type="Gradient" id="Gradient_yheth"]
 offsets = PackedFloat32Array(0, 0.716783)
@@ -90,8 +115,13 @@ position = Vector2(0, -5.37)
 tile_set = ExtResource("2_tb1rm")
 
 [node name="Floor" type="TileMapLayer" parent="."]
+z_index = -1
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAIAAAABAAAAAAAAAAIAAAACAAAAAAAAAAIAAAADAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAHAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAAAAEAAAAAAAIAAAABAAEAAAAAAAIAAAACAAEAAAAAAAIAAAADAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAFAAEAAAAAAAIAAAAGAAEAAAAAAAIAAAAHAAEAAAAAAAIAAAAIAAEAAAAAAAIAAAAJAAEAAAAAAAIAAAAKAAAAAAAAAAIAAAAKAAEAAAAAAAIAAAAAAAQAAAAAAAIAAAABAAQAAAAAAAIAAAACAAQAAAAAAAIAAAADAAQAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAAAAAIAAAAIAAQAAAAAAAIAAAAJAAQAAAAAAAIAAAAKAAQAAAAAAAIAAAAAAAUAAAAAAAIAAAABAAUAAAAAAAIAAAACAAUAAAAAAAIAAAADAAUAAAAAAAIAAAAEAAUAAAAAAAIAAAAFAAUAAAAAAAIAAAAGAAUAAAAAAAIAAAAHAAUAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAAAAAIAAAAAAAMAAAAAAAMAAAAAAAMAAAAKAAIAAAAAAAMAAAAKAAMAAAAAAAMAAAABAAIAAAAAAAEAAAACAAIAAAAAAAEAAAADAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAEAAAAGAAIAAAAAAAEAAAAHAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAEAAAAJAAMAAAAAAAEAAAAIAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAEAAMAAAAAAAEAAAADAAMAAAAAAAEAAAACAAMAAAAAAAEAAAABAAMAAAAAAAEAAAA=")
 tile_set = ExtResource("4_p76ks")
+
+[node name="CartTracks" type="TileMapLayer" parent="."]
+position = Vector2(0, -6)
+tile_set = SubResource("TileSet_u3gbn")
 
 [node name="Obstacles" type="TileMapLayer" parent="."]
 z_index = 1
@@ -207,12 +237,12 @@ position = Vector2(421, 58)
 texture = ExtResource("8_4d8y1")
 
 [node name="Wheelwell" type="Sprite2D" parent="AdditionalSprites"]
-z_index = -1
+z_index = -2
 position = Vector2(71, 127)
 texture = ExtResource("10_srili")
 
 [node name="Wheelwell2" type="Sprite2D" parent="AdditionalSprites"]
-z_index = -1
+z_index = -2
 position = Vector2(281, 127)
 texture = ExtResource("10_srili")
 
