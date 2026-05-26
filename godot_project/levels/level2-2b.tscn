@@ -10,8 +10,8 @@
 
 [sub_resource type="Resource" id="Resource_kd8sp"]
 script = ExtResource("2_2r4fg")
-index = 3
-action = 2
+index = 4
+action = 4
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_qjm0g")]
@@ -20,13 +20,13 @@ conductor_spawn_beat = 1
 available_actions = Array[int]([4, 1, 2])
 hints = Array[ExtResource("2_2r4fg")]([SubResource("Resource_kd8sp")])
 
-[node name="Floor" parent="." index="1"]
-z_index = 0
+[node name="CartTracks" parent="." index="2"]
+tile_map_data = PackedByteArray("AAABAAMAAAAAAAUAAAADAAMAAAAAAAUAAAAFAAMAAAAAAAUAAAAHAAMAAAAAAAUAAAAEAAMAAAABAAEAAAACAAMAAAABAAEAAAAGAAMAAAABAAEAAAAIAAMAAAABAAEAAAAIAAIAAAABAAAAAAAGAAIAAAABAAAAAAAEAAIAAAABAAAAAAACAAIAAAABAAAAAAABAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAA=")
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray()
 
-[node name="BackWall" parent="." index="3"]
+[node name="BackWall" parent="." index="4"]
 z_index = -2
 y_sort_enabled = false
 position = Vector2(0, -5.37)
@@ -38,7 +38,7 @@ z_index = 0
 [node name="Windows" parent="BackWall" index="4"]
 position = Vector2(0, 0)
 
-[node name="LeftExteriorFloor" parent="." index="4"]
+[node name="LeftExteriorFloor" parent="." index="5"]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
@@ -54,7 +54,7 @@ tile_set = ExtResource("5_j0a3r")
 position = Vector2(32, -8)
 tile_set = ExtResource("6_04nyn")
 
-[node name="RightExteriorFloor" parent="." index="5"]
+[node name="RightExteriorFloor" parent="." index="6"]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]

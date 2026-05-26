@@ -213,13 +213,17 @@ func update_obstacle_grid(grid_position: Vector2i, traversible: bool):
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
 
-func clear_obstacle_overrides() -> void:
+func clear_all_obstacle_overrides() -> void:
 	for override in _obstacle_overrides:
 		path_grid.set_point_solid(override, false)
 	_obstacle_overrides.clear()
 
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
+
+func clear_obstacle_override_at_position(position: Vector2i):
+	path_grid.set_point_solid(position, false)
+	_obstacle_overrides.erase(position)
 
 func has_static_obstacle(grid_position: Vector2i) -> bool:
 	return _obstacle_layer.get_used_cells().has(grid_position)

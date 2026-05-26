@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://defrgrdfsdmu3"]
+[gd_scene load_steps=10 format=4 uid="uid://defrgrdfsdmu3"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_hj5e0"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_hj5e0"]
@@ -9,20 +9,26 @@
 [ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_7yp7o"]
 [ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_pl1ts"]
 
+[sub_resource type="Resource" id="Resource_l8cv6"]
+script = ExtResource("2_tlkng")
+index = 4
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [node name="LevelBase" instance=ExtResource("1_hj5e0")]
 display_name = "2-3"
 conductor_spawn_beat = 8
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 1, 2, 7])
-hints = Array[ExtResource("2_tlkng")]([])
+hints = Array[ExtResource("2_tlkng")]([SubResource("Resource_l8cv6")])
 
 [node name="Floor" parent="." index="1"]
 z_index = 0
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAAIAAQAAAAMAAAABAAMAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAUAAQAAAAMAAAAEAAIAAQAAAAMAAAA=")
 
-[node name="BackWall" parent="." index="3"]
+[node name="BackWall" parent="." index="4"]
 z_index = -2
 y_sort_enabled = false
 position = Vector2(0, -5.37)
@@ -34,7 +40,7 @@ z_index = 0
 [node name="Windows" parent="BackWall" index="4"]
 position = Vector2(0, 0)
 
-[node name="LeftExteriorFloor" parent="." index="4"]
+[node name="LeftExteriorFloor" parent="." index="5"]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
@@ -50,7 +56,7 @@ tile_set = ExtResource("5_7yp7o")
 position = Vector2(32, -8)
 tile_set = ExtResource("6_pl1ts")
 
-[node name="RightExteriorFloor" parent="." index="5"]
+[node name="RightExteriorFloor" parent="." index="6"]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
@@ -80,7 +86,7 @@ autoplay = ""
 synch_framerates_to_bpm = true
 
 [node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_hj5e0")]
-position = Vector2(305, 69)
+position = Vector2(304, 68)
 movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])
 
 [node name="Key" parent="." index="10" instance=ExtResource("3_uvemm")]

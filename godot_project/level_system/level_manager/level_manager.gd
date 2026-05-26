@@ -78,6 +78,8 @@ var _spawned_obstacles : Array[MovableObstacle]
 # Key is the beat that an obstacle moves on, array is an array of all the obstacles that move on that
 # beat.
 var _obstacle_move_groups: Dictionary[float, Array] #can't have nested typed array
+# So you can stop moving obstacles from moving before the beat after a reset
+var _obstacle_move_group_timers: Array[SceneTreeTimer]
 
 # obstacles with unique action timings will 
 
@@ -241,6 +243,8 @@ func _reset_level() -> void:
 	else:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
 	_level_scene.reset_lock()
+	print("hello")
+	_obstacle_move_group_timers.clear()
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
 
@@ -258,6 +262,7 @@ func _reset_level() -> void:
 	for obstacle in _spawned_obstacles: # clear out spawned obstacles
 		_level_scene.movable_obstacles.erase(obstacle)
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
+		_obstacle_move_groups[obstacle.default_action_beat].erase(obstacle)
 		obstacle.queue_free()
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.disabled = false
@@ -430,9 +435,13 @@ func _on_thinking_action_performed():
 	_current_beat += 1
 
 func _update_obstacles():
+	#_obstacle_move_group_timers.clear()
 	for key in _obstacle_move_groups.keys():
-		get_tree().create_timer(AudioManager.beat_time_seconds * key).timeout. \
-			connect(_update_obstacle_move_group.bind(_obstacle_move_groups[key]))
+		var timer = get_tree().create_timer(AudioManager.beat_time_seconds * key)
+		_obstacle_move_group_timers.append(timer)
+		timer.timeout.connect(_update_obstacle_move_group.bind(_obstacle_move_groups[key]))
+		#_obstacle_move_group_timers.append(get_tree().create_timer(AudioManager.beat_time_seconds * key).timeout. \
+			#connect(_update_obstacle_move_group.bind(_obstacle_move_groups[key])))
 	#_level_scene.clear_obstacle_overrides()
 	## check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	#var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
@@ -449,7 +458,8 @@ func _update_obstacles():
 
 ##move_group takes an array of obstacles and moves them all at once using deconfliction and bumping logic
 func _update_obstacle_move_group(move_group):
-	_level_scene.clear_obstacle_overrides()
+	for obstacle in move_group:
+		_level_scene.clear_obstacle_override_at_position(obstacle.grid_position)
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
 	for obstacle: MovableObstacle in move_group:
@@ -459,6 +469,7 @@ func _update_obstacle_move_group(move_group):
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
+	#_level_scene.clear_obstacle_overrides()
 	for obstacle in move_group:
 		if obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
@@ -672,6 +683,8 @@ func _on_action_sequencer_play_started() -> void:
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		obstacle.reset()
+	for timer in _obstacle_move_group_timers:
+		timer.timeout.disconnect(_update_obstacle_move_group)
 
 func _advance_car_for_play(animation_time: float):
 	_advancing_car_for_play = true
@@ -744,5 +757,6 @@ func _input(event: InputEvent) -> void:
 		_advance_car_for_play(0.0)
 		advance_level()
 	if event.is_action_pressed("ShowHint"):
-		_on_hint_triggered()
+		if _action_sequencer.current_state == _action_sequencer.SequencingState.SEQUENCING:
+			_on_hint_triggered()
 #endregion

@@ -1,15 +1,69 @@
-[gd_scene load_steps=5 format=3 uid="uid://diy0kdtmc3gky"]
+[gd_scene load_steps=10 format=4 uid="uid://diy0kdtmc3gky"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_cmohf"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="2_kmakh"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_wo0ho"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_d2wa3"]
+[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_wfkg4"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="4_5iht7"]
+[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_868r3"]
+[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_iifgi"]
+[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_21wgr"]
 
 [node name="LevelBase" instance=ExtResource("1_cmohf")]
-display_name = "2-8"
+display_name = "This level and beyond are broken for now"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 6
 available_actions = Array[int]([4, 1, 2, 6])
+hints = Array[ExtResource("2_wo0ho")]([])
+
+[node name="Obstacles" parent="." index="3"]
+tile_map_data = PackedByteArray()
+
+[node name="BackWall" parent="." index="4"]
+z_index = -2
+y_sort_enabled = false
+position = Vector2(0, -5.37)
+tile_set = ExtResource("3_wfkg4")
+
+[node name="PointLight2D" parent="BackWall" index="0"]
+z_index = 0
+
+[node name="Windows" parent="BackWall" index="4"]
+position = Vector2(0, 0)
+
+[node name="LeftExteriorFloor" parent="." index="5"]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+z_index = 0
+position = Vector2(0, -9)
+tile_set = ExtResource("4_868r3")
+
+[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("5_iifgi")
+
+[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
+position = Vector2(32, -8)
+tile_set = ExtResource("6_21wgr")
+
+[node name="RightExteriorFloor" parent="." index="6"]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+z_index = 0
+position = Vector2(0, -9)
+scale = Vector2(1, 1)
+tile_set = ExtResource("4_868r3")
+
+[node name="RightWall" parent="RightExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("5_iifgi")
+
+[node name="RightRoof" parent="RightExteriorFloor" index="2"]
+position = Vector2(6, -8)
+tile_set = ExtResource("6_21wgr")
 
 [node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("2_kmakh")]
 position = Vector2(84, 46)
@@ -22,7 +76,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="SnackCartObstacle2" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("2_kmakh")]
@@ -36,7 +98,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="Laser" parent="." index="11" instance=ExtResource("4_5iht7")]

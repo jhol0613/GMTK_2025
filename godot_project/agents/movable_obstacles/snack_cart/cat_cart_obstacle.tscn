@@ -99,6 +99,16 @@ standard_move_data = ExtResource("2_fbmii")
 bonk_data = ExtResource("3_dy6ey")
 slide_data = ExtResource("4_ix653")
 slide_bonk_data = ExtResource("5_tn4fa")
+action_beats = Dictionary[int, float]({
+12: 0.0,
+13: 0.0,
+14: 0.0,
+15: 0.0,
+16: 0.0,
+17: 0.0,
+18: 0.0,
+19: 0.0
+})
 default_action_beat = 3.0
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
