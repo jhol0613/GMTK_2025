@@ -23,10 +23,10 @@ hints = Array[ExtResource("2_23qrc")]([])
 [node name="Floor" parent="." index="1"]
 z_index = 0
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAAAAgAAAAAAAAABAAEAAgAAAAEAAAAAAAEAAQAAAAMAAAA=")
 
-[node name="BackWall" parent="." index="3"]
+[node name="BackWall" parent="." index="4"]
 z_index = -2
 y_sort_enabled = false
 position = Vector2(0, -5.37)
@@ -49,7 +49,7 @@ range_item_cull_mask = 1
 [node name="Windows" parent="BackWall" index="4"]
 position = Vector2(0, 0)
 
-[node name="LeftExteriorFloor" parent="." index="4"]
+[node name="LeftExteriorFloor" parent="." index="5"]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
@@ -65,7 +65,7 @@ tile_set = ExtResource("5_di7cc")
 position = Vector2(32, -8)
 tile_set = ExtResource("6_76vi4")
 
-[node name="RightExteriorFloor" parent="." index="5"]
+[node name="RightExteriorFloor" parent="." index="6"]
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]

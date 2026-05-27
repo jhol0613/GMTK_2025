@@ -1,6 +1,6 @@
 @tool
 
-extends MovableObstacle
+extends Agent
 
 class_name SpinningChair
 
@@ -64,7 +64,9 @@ func _construct():
 	if Engine.is_editor_hint():
 		initial_spacing = visualization_tile_size
 	else:
-		initial_spacing = tile_size
+		#should be getting tile_size from level manager, but this gets called before initialization 
+		#and non-movables don't get their tile_size initialized until later, so this is unfortunately way easier
+		initial_spacing = visualization_tile_size 
 
 	#Set starting positions for left and right pushers
 	match _facing_direction:
@@ -80,8 +82,8 @@ func _construct():
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_construct()
 	super._ready()
+	_construct()
 	#add_to_group("movable_obstacles") #This is so reset code gets called when play button pressed
 
 	left_obstacle.set_move_cursor_start_position(_facing_direction)

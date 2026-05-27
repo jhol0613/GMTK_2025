@@ -22,8 +22,8 @@ conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 1, 2, 7])
 hints = Array[ExtResource("2_tlkng")]([SubResource("Resource_l8cv6")])
 
-[node name="Floor" parent="." index="1"]
-z_index = 0
+[node name="CartTracks" parent="." index="2"]
+tile_map_data = PackedByteArray("AAAIAAMAAAABAAIAAAAHAAMAAAABAAIAAAAGAAMAAAABAAIAAAAFAAMAAAABAAMAABAJAAMAAAABAAcAAAA=")
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAAIAAQAAAAMAAAABAAMAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAUAAQAAAAMAAAAEAAIAAQAAAAMAAAA=")

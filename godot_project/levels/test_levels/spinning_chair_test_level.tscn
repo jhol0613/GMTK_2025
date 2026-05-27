@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=4 uid="uid://cpeu3l5fgvpk6"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_tirgd"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_bgswi"]
+[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_d88wl"]
+[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_4t7h3"]
+[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_fltuj"]
+[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_m8cmi"]
+[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="7_iij13"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://levels/test_levels/spinning_chair.tscn" id="8_ndqd4"]
+[ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="9_k712l"]
+[ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="10_skduf"]
+
+[node name="LevelBase" instance=ExtResource("1_tirgd")]
+conductor_spawn_beat = 5
+available_actions = Array[int]([1, 3, 4, 2, 7, 6])
+hints = Array[ExtResource("2_bgswi")]([])
+
+[node name="Floor" parent="." index="1"]
+z_index = 0
+
+[node name="Obstacles" parent="." index="3"]
+tile_map_data = PackedByteArray("AAABAAAAAgAAAAAAAAABAAEAAgAAAAEAAAAFAAEABAAAAAAAAAAGAAEABAABAAAAAAA=")
+
+[node name="BackWall" parent="." index="4"]
+z_index = -2
+y_sort_enabled = false
+position = Vector2(0, -5.37)
+tile_set = ExtResource("3_d88wl")
+
+[node name="PointLight2D" parent="BackWall" index="0"]
+z_index = 0
+position = Vector2(112, 47.37)
+range_item_cull_mask = 1
+
+[node name="PointLight2D2" parent="BackWall" index="1"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D3" parent="BackWall" index="2"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D4" parent="BackWall" index="3"]
+range_item_cull_mask = 1
+
+[node name="Windows" parent="BackWall" index="4"]
+position = Vector2(0, 0)
+
+[node name="LeftExteriorFloor" parent="." index="5"]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+z_index = 0
+position = Vector2(0, -9)
+tile_set = ExtResource("4_4t7h3")
+
+[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("5_fltuj")
+
+[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
+position = Vector2(32, -8)
+tile_set = ExtResource("6_m8cmi")
+
+[node name="RightExteriorFloor" parent="." index="6"]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+z_index = 0
+position = Vector2(0, -9)
+scale = Vector2(1, 1)
+tile_set = ExtResource("4_4t7h3")
+
+[node name="RightWall" parent="RightExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("5_fltuj")
+
+[node name="RightRoof" parent="RightExteriorFloor" index="2"]
+position = Vector2(6, -8)
+tile_set = ExtResource("6_m8cmi")
+
+[node name="Wheelwell" parent="AdditionalSprites" index="1"]
+z_index = -1
+
+[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
+z_index = -1
+
+[node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("7_iij13")]
+position = Vector2(46, 29)
+
+[node name="SpinningChair" parent="." index="11" instance=ExtResource("8_ndqd4")]
+position = Vector2(112, 49)
+start_direction = 1
+grid_origin = Vector2i(3, 2)
+
+[node name="ComputerTerminal" parent="." index="12" instance=ExtResource("9_k712l")]
+position = Vector2(17, 29)
+grid_origin = Vector2i(0, 1)
+
+[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("chairs")]
+script = ExtResource("10_skduf")
+chairs = [NodePath("../../SpinningChair")]
+number_of_quarter_turns = 1
+metadata/_custom_type_script = "uid://blcr4qlisfk4a"

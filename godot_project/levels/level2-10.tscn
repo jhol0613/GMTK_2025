@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy0877omjeja8"]
+[gd_scene load_steps=12 format=4 uid="uid://cy0877omjeja8"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_psfox"]
 [ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://levels/test_levels/spinning_chair.tscn" id="2_8bkav"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_iow7r"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_np4t2"]
+[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_ronyb"]
+[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_638sk"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="4_ytems"]
+[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_wmvbe"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="5_ytems"]
+[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_131uy"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_linlt"]
 
 [node name="LevelBase" instance=ExtResource("1_psfox")]
@@ -14,9 +19,55 @@ conductor_spawn_beat = 7
 conductor_spawn_position = Vector2i(2, 2)
 conductor_snooze = true
 available_actions = Array[int]([4, 1, 2, 7])
+hints = Array[ExtResource("2_iow7r")]([])
 
-[node name="Obstacles" parent="." index="2"]
-tile_map_data = PackedByteArray(0, 0, 9, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+[node name="Obstacles" parent="." index="3"]
+tile_map_data = PackedByteArray("AAAJAAIAAQAAAAMAAAA=")
+
+[node name="BackWall" parent="." index="4"]
+z_index = -2
+y_sort_enabled = false
+position = Vector2(0, -5.37)
+tile_set = ExtResource("3_ronyb")
+
+[node name="PointLight2D" parent="BackWall" index="0"]
+z_index = 0
+
+[node name="Windows" parent="BackWall" index="4"]
+position = Vector2(0, 0)
+
+[node name="LeftExteriorFloor" parent="." index="5"]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
+
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+z_index = 0
+position = Vector2(0, -9)
+tile_set = ExtResource("4_638sk")
+
+[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("5_wmvbe")
+
+[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
+position = Vector2(32, -8)
+tile_set = ExtResource("6_131uy")
+
+[node name="RightExteriorFloor" parent="." index="6"]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
+
+[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+z_index = 0
+position = Vector2(0, -9)
+scale = Vector2(1, 1)
+tile_set = ExtResource("4_638sk")
+
+[node name="RightWall" parent="RightExteriorFloor" index="1"]
+position = Vector2(32, -5)
+tile_set = ExtResource("5_wmvbe")
+
+[node name="RightRoof" parent="RightExteriorFloor" index="2"]
+position = Vector2(6, -8)
+tile_set = ExtResource("6_131uy")
 
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
 position = Vector2(49, 9)

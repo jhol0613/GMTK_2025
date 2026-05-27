@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://boffagfakigxj"]
+[gd_scene load_steps=12 format=3 uid="uid://boffagfakigxj"]
 
 [ext_resource type="Script" uid="uid://cjh76njh3rlso" path="res://action_sequencer/sequencer_screen/screen_scenes/conductor_spawn_screen.gd" id="1_5a0j6"]
+[ext_resource type="FontFile" uid="uid://sus8cyiovrn0" path="res://ui_icons/fonts/VormgeversCAPS.ttf" id="2_d2dxv"]
 [ext_resource type="Texture2D" uid="uid://bbdlel1pol40e" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/conductor_green.png" id="2_p1ueh"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_d2dxv"]
 
@@ -80,7 +81,8 @@ offset_left = 64.0
 offset_right = 81.0
 offset_bottom = 14.0
 theme_override_colors/font_color = Color(0.290196, 0.290196, 0.290196, 1)
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("2_d2dxv")
+theme_override_font_sizes/font_size = 16
 text = "##"
 horizontal_alignment = 2
 
