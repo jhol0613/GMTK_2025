@@ -1,20 +1,14 @@
-[gd_scene load_steps=10 format=4 uid="uid://wc1pswyquc1g"]
+[gd_scene load_steps=5 format=4 uid="uid://wc1pswyquc1g"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_xgeqg"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_apg4g"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_k1a4i"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_apg4g"]
-[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_lbqj5"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="4_23alx"]
-[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_o1cer"]
-[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_8nfe1"]
-[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_io8qy"]
 
 [node name="LevelBase" instance=ExtResource("1_xgeqg")]
 display_name = "2-9"
 conductor_spawn_beat = 3
 available_actions = Array[int]([4, 1, 2, 7])
-hints = Array[ExtResource("2_k1a4i")]([])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true
@@ -22,51 +16,6 @@ tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAAFAAAABwAAAAE
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAEABAAAAAAAAAADAAEABAABAAAAAAACAAEABAACAAAAAAAFAAEABAAAAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAABAAAAAAABAAMAAQAAAAMAAAABAAQAAQAAAAMAAAABAAUAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAIAAQAAAAMAAAAEAAMAAQAAAAMAAAAJAAQAAQAAAAMAAAAJAAUAAQAAAAMAAAACAAMAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAAIAAUAAQAAAAMAAAAIAAQAAQAAAAMAAAA=")
-
-[node name="BackWall" parent="." index="4"]
-z_index = -2
-y_sort_enabled = false
-position = Vector2(0, -5.37)
-tile_set = ExtResource("3_lbqj5")
-
-[node name="PointLight2D" parent="BackWall" index="0"]
-z_index = 0
-
-[node name="Windows" parent="BackWall" index="4"]
-position = Vector2(0, 0)
-
-[node name="LeftExteriorFloor" parent="." index="5"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-tile_set = ExtResource("4_o1cer")
-
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_8nfe1")
-
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
-position = Vector2(32, -8)
-tile_set = ExtResource("6_io8qy")
-
-[node name="RightExteriorFloor" parent="." index="6"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-scale = Vector2(1, 1)
-tile_set = ExtResource("4_o1cer")
-
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_8nfe1")
-
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
-position = Vector2(6, -8)
-tile_set = ExtResource("6_io8qy")
 
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_apg4g")]
 position = Vector2(80, 26)

@@ -14,7 +14,7 @@ conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 4, 7])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAIAAEAAQABAAMAAAAJAAEAAQABAAMAAAAJAAMAAQABAAMAAAAJAAUAAQABAAMAAAAIAAUAAQABAAMAAAAHAAMAAQABAAMAAAAHAAUAAQABAAMAAAAJAAQAAQABAAMAAAAHAAEAAQABAAMAAAAKAAEAAQABAAMAAAA=")
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_cb7ns")]
@@ -40,7 +40,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="Antenna" parent="." index="12" instance=ExtResource("5_5fmx6")]

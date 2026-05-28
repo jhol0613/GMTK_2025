@@ -48,7 +48,10 @@ func set_active_animation(new_active: bool):
 	else:
 		sprite.play_with_signals("inactive")
 
-
+func reset():
+	for child in get_children():
+		if child is TerminalProgram:
+			child.reset()
 
 # Ensure terminal program is configured as a child node
 func _get_configuration_warnings() -> PackedStringArray:

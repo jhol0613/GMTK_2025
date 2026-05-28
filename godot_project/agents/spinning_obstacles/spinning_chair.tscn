@@ -1,53 +1,53 @@
 [gd_scene load_steps=20 format=3 uid="uid://brth7xhog3y76"]
 
-[ext_resource type="Script" uid="uid://dik0gek0s1qv2" path="res://agents/spinning_obstacles/spinning_chair.gd" id="1_2duu5"]
-[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_2duu5"]
-[ext_resource type="Texture2D" uid="uid://bpfn2w0gg3kbm" path="res://agents/spinning_obstacles/spinning_chair_v3.png" id="3_30ema"]
-[ext_resource type="Texture2D" uid="uid://bnl1m4ksmpuur" path="res://agents/spinning_obstacles/spinning_chair_v2.png" id="3_u2psr"]
-[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_u2psr"]
-[ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_neb5q"]
-[ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="6_r40w5"]
-[ext_resource type="Texture2D" uid="uid://d1d8gyhej0it4" path="res://agents/lasers/beam_down_end.png" id="8_ftxi1"]
+[ext_resource type="Script" uid="uid://dik0gek0s1qv2" path="res://agents/spinning_obstacles/spinning_chair.gd" id="1_dl545"]
+[ext_resource type="Texture2D" uid="uid://bnl1m4ksmpuur" path="res://agents/spinning_obstacles/spinning_chair_v2.png" id="2_nipkn"]
+[ext_resource type="Texture2D" uid="uid://bpfn2w0gg3kbm" path="res://agents/spinning_obstacles/spinning_chair_v3.png" id="3_ehh2v"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="4_arcuq"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_soe5w"]
+[ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_slc71"]
+[ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="7_77ec4"]
+[ext_resource type="Texture2D" uid="uid://d1d8gyhej0it4" path="res://agents/lasers/beam_down_end.png" id="8_ctd7t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_neb5q"]
-atlas = ExtResource("3_u2psr")
+atlas = ExtResource("2_nipkn")
 region = Rect2(192, 0, 96, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r40w5"]
-atlas = ExtResource("3_u2psr")
+atlas = ExtResource("2_nipkn")
 region = Rect2(288, 0, 96, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dl545"]
-atlas = ExtResource("3_u2psr")
+atlas = ExtResource("2_nipkn")
 region = Rect2(384, 0, 96, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nipkn"]
-atlas = ExtResource("3_u2psr")
+atlas = ExtResource("2_nipkn")
 region = Rect2(96, 0, 96, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ehh2v"]
-atlas = ExtResource("3_u2psr")
+atlas = ExtResource("2_nipkn")
 region = Rect2(0, 0, 96, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ftxi1"]
-atlas = ExtResource("3_30ema")
-region = Rect2(192, 0, 96, 95)
+atlas = ExtResource("3_ehh2v")
+region = Rect2(196, 0, 98, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_117nd"]
-atlas = ExtResource("3_30ema")
-region = Rect2(288, 0, 96, 95)
+atlas = ExtResource("3_ehh2v")
+region = Rect2(294, 0, 98, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_narcl"]
-atlas = ExtResource("3_30ema")
-region = Rect2(384, 0, 96, 95)
+atlas = ExtResource("3_ehh2v")
+region = Rect2(392, 0, 98, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5tag"]
-atlas = ExtResource("3_30ema")
-region = Rect2(96, 0, 96, 95)
+atlas = ExtResource("3_ehh2v")
+region = Rect2(98, 0, 98, 95)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvjtr"]
-atlas = ExtResource("3_30ema")
-region = Rect2(0, 0, 96, 95)
+atlas = ExtResource("3_ehh2v")
+region = Rect2(0, 0, 98, 95)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u2psr"]
 animations = [{
@@ -111,7 +111,7 @@ animations = [{
 }]
 
 [node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "visual_center", "default_sound_emitter", "sprite")]
-script = ExtResource("1_2duu5")
+script = ExtResource("1_dl545")
 beats_per_quarter_turn = 0.3
 left_obstacle = NodePath("LeftObstacle")
 middle_obstacle = NodePath("MiddleObstacle")
@@ -126,38 +126,38 @@ z_index = 1
 position = Vector2(0, -35)
 sprite_frames = SubResource("SpriteFrames_u2psr")
 animation = &"spin_v3"
-script = ExtResource("3_2duu5")
+script = ExtResource("4_arcuq")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/Spinning Chair"
 event_guid = "{2be3c815-7fee-4641-9ff6-873878e8e7ff}"
-script = ExtResource("5_u2psr")
+script = ExtResource("5_soe5w")
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
-[node name="LeftObstacle" parent="." instance=ExtResource("6_neb5q")]
+[node name="LeftObstacle" parent="." instance=ExtResource("6_slc71")]
 z_index = 1
 position = Vector2(-32, -21)
 movement_path = Array[int]([25, 27, 26, 24])
 activation_sequence = Array[bool]([false])
 
-[node name="RightObstacle" parent="." instance=ExtResource("6_neb5q")]
+[node name="RightObstacle" parent="." instance=ExtResource("6_slc71")]
 z_index = 1
 position = Vector2(32, -21)
 movement_path = Array[int]([27, 25, 24, 26])
 activation_sequence = Array[bool]([false])
 
-[node name="MiddleObstacle" parent="." instance=ExtResource("6_neb5q")]
+[node name="MiddleObstacle" parent="." instance=ExtResource("6_slc71")]
 z_index = 1
 position = Vector2(0, -21)
 activation_sequence = Array[bool]([false])
 
 [node name="VisualCenter" type="Node2D" parent="."]
 position = Vector2(0, -30)
-script = ExtResource("6_r40w5")
+script = ExtResource("7_77ec4")
 metadata/_custom_type_script = "uid://cc284jdpqgups"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 z_index = 5
-texture = ExtResource("8_ftxi1")
+texture = ExtResource("8_ctd7t")

@@ -266,6 +266,8 @@ func _reset_level() -> void:
 		obstacle.queue_free()
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.disabled = false
+	for antenna: Antenna in _level_scene.antennas:
+		antenna.reset()
 	_player_character.reset()
 	_spawned_obstacles.clear()
 

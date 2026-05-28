@@ -17,7 +17,11 @@ func run():
 		chair.spin(number_of_quarter_turns)
 
 func reset():
-	pass
+	for chair in chairs:
+		if _previously_selected_direction:
+			chair.start_direction = _previously_selected_direction
+			chair.reset()
+	super.reset()
 
 func initialize_screen(screen_scene: TurnChairScreen):
 	super.initialize_screen(screen_scene)
@@ -34,9 +38,7 @@ func _on_direction_selected(direction: Enums.Direction):
 			chair.start_direction = chair.FacingDirection.FRONT_CLOCKWISE
 		elif direction == Enums.Direction.RIGHT and chair._facing_direction == chair.FacingDirection.FRONT_CLOCKWISE:
 			chair.start_direction = chair.FacingDirection.FRONT_COUNTERCLOCKWISE
+		#print(chair.get_quarter_turns_to_direction(direction))
+		#print(chair._facing_direction)
 		chair.spin(chair.get_quarter_turns_to_direction(direction))
 	_previously_selected_direction = direction
-
-func _determine_quarter_spins(direction: Enums.Direction):
-	pass
-	#if direction == Enums.Direction.DOWN and _previously_selected_direction != Enums.Direction.DOWN

@@ -190,8 +190,8 @@ func spin(number_of_quarter_turns: int = 1):
 		right_obstacle.request_offbeat_action.emit(right_obstacle, right_obstacle.get_next_move())
 		_on_left_obstacle_move(Enums.PlayerAction.NONE)
 		_on_right_obstacle_move(Enums.PlayerAction.NONE)
-		_facing_direction += number_of_quarter_turns
-		_facing_direction %= FacingDirection.size()
+		_facing_direction += 1
+		_facing_direction = posmod(_facing_direction, FacingDirection.size())
 		await _frame_timer.timeout
 	$FmodEventEmitter2D.play()
 
@@ -208,6 +208,10 @@ func get_quarter_turns_to_direction(direction: Enums.Direction) -> int:
 				posmod(FacingDirection.FRONT_CLOCKWISE - _facing_direction, FacingDirection.size()),
 				posmod(FacingDirection.FRONT_COUNTERCLOCKWISE - _facing_direction, FacingDirection.size())
 			)
+
+func _process(delta: float) -> void:
+	if not Engine.is_editor_hint():
+		print(_facing_direction)
 
 func reset():
 	super.reset()

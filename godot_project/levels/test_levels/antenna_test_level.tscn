@@ -1,15 +1,15 @@
-[gd_scene load_steps=9 format=4 uid="uid://dgk6kkh5eo7ad"]
+[gd_scene load_steps=9 format=4 uid="uid://dp43qoojpooal"]
 
-[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_3w3gh"]
-[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_3w3gh"]
-[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_frsks"]
-[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="3_obex8"]
-[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_ddrcm"]
-[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="5_7ombx"]
-[ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_ddrcm"]
-[ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="7_akpot"]
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_pr51e"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_lwf6y"]
+[ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_8cwf8"]
+[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_abajs"]
+[ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_w2wp6"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_3qe5b"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="7_7cgb1"]
+[ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="8_yruux"]
 
-[node name="LevelBase" instance=ExtResource("1_3w3gh")]
+[node name="LevelBase" instance=ExtResource("1_pr51e")]
 display_name = "3-2"
 player_spawn_position = Vector2i(0, 1)
 conductor_spawn_beat = 4
@@ -19,29 +19,29 @@ available_actions = Array[int]([1, 2, 4, 7])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAFAAMAAQABAAMAAAAFAAQAAQABAAMAAAAHAAMAAQABAAMAAAAIAAMAAQABAAMAAAAHAAIAAQABAAMAAAAHAAEAAQABAAMAAAAHAAAAAQABAAMAAAA=")
 
-[node name="Treadmill" parent="." index="9" instance=ExtResource("3_3w3gh")]
+[node name="Treadmill" parent="." index="9" instance=ExtResource("2_lwf6y")]
 position = Vector2(208, 70)
 grid_origin = Vector2i(6, 3)
 
-[node name="Laser" parent="." index="10" instance=ExtResource("3_frsks")]
+[node name="Laser" parent="." index="10" instance=ExtResource("3_8cwf8")]
 position = Vector2(272, 41)
 direction = 2
 height = 40
 grid_origin = Vector2i(8, 2)
 default_animation = "fire_left"
 
-[node name="Antenna" parent="Laser" index="5" instance=ExtResource("3_obex8")]
+[node name="Antenna" parent="Laser" index="5" instance=ExtResource("4_abajs")]
 offset_left = -16.0
 offset_top = 10.0
 offset_right = 15.0
 offset_bottom = 29.0
 
 [node name="ChangeLaserHeightProgram" type="Node" parent="Laser/Antenna" index="2" node_paths=PackedStringArray("lasers")]
-script = ExtResource("5_ddrcm")
+script = ExtResource("5_w2wp6")
 lasers = [NodePath("../..")]
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="SnackCartObstacle" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_ddrcm")]
+[node name="SnackCartObstacle" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("6_3qe5b")]
 position = Vector2(112, 30)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -62,12 +62,12 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="SpinningChair" parent="." index="12" instance=ExtResource("5_7ombx")]
+[node name="SpinningChair" parent="." index="12" instance=ExtResource("7_7cgb1")]
 position = Vector2(80, 104)
 start_direction = 1
 grid_origin = Vector2i(2, 5)
 
-[node name="Antenna" parent="." index="13" instance=ExtResource("3_obex8")]
+[node name="Antenna" parent="." index="13" instance=ExtResource("4_abajs")]
 
 [node name="AnimatedSprite2DSignals" parent="Antenna" index="0"]
 position = Vector2(51, 90)
@@ -79,7 +79,7 @@ offset_right = 102.0
 offset_bottom = 105.0
 
 [node name="TurnChairProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("chairs")]
-script = ExtResource("7_akpot")
+script = ExtResource("8_yruux")
 chairs = [NodePath("../../SpinningChair")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 

@@ -1,69 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyx2a6u3pgvsa"]
+[gd_scene load_steps=5 format=3 uid="uid://cyx2a6u3pgvsa"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_pd71t"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="2_y41pk"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_yv04m"]
-[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_gyt84"]
-[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://levels/test_levels/spinning_chair.tscn" id="3_iqnak"]
+[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="3_iqnak"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_iqnak"]
-[ext_resource type="TileSet" uid="uid://cd8pqkqbg8nrr" path="res://tilemaps/train_floor.tres" id="4_volys"]
-[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="5_tvv2k"]
-[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="6_fc2rq"]
-[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="7_3058p"]
 
 [node name="LevelBase" instance=ExtResource("1_pd71t")]
 display_name = "3-4"
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 4, 7])
-hints = Array[ExtResource("2_yv04m")]([])
-
-[node name="Obstacles" parent="." index="3"]
-tile_map_data = PackedByteArray()
-
-[node name="BackWall" parent="." index="4"]
-z_index = -2
-y_sort_enabled = false
-position = Vector2(0, -5.37)
-tile_set = ExtResource("3_gyt84")
-
-[node name="PointLight2D" parent="BackWall" index="0"]
-z_index = 0
-
-[node name="Windows" parent="BackWall" index="4"]
-position = Vector2(0, 0)
-
-[node name="LeftExteriorFloor" parent="." index="5"]
-tile_set = ExtResource("4_volys")
-
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-z_index = 0
-tile_set = ExtResource("5_tvv2k")
-
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("6_fc2rq")
-
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
-position = Vector2(32, -8)
-tile_set = ExtResource("7_3058p")
-
-[node name="RightExteriorFloor" parent="." index="6"]
-position = Vector2(360.655, 0)
-tile_set = ExtResource("4_volys")
-
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
-z_index = 0
-scale = Vector2(1, 1)
-tile_set = ExtResource("5_tvv2k")
-
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("6_fc2rq")
-
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
-position = Vector2(6, -8)
-tile_set = ExtResource("7_3058p")
 
 [node name="SpinningChair" parent="." index="9" instance=ExtResource("3_iqnak")]
 position = Vector2(177, 72)

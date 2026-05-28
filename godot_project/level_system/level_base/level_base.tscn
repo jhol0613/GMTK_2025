@@ -107,7 +107,6 @@ y_sort_enabled = true
 script = ExtResource("1_sfitc")
 player_spawn_position = Vector2i(0, 2)
 action_quantities = Array[int]([9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999])
-hints = null
 
 [node name="Decorative" type="TileMapLayer" parent="."]
 z_index = 1

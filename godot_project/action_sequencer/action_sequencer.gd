@@ -115,6 +115,8 @@ var _active_action_item : ActionItem
 # Prevents play mode from being triggered if replay is pressed while waiting for the beat
 var _lock_thinking_mode := true
 
+var _active_control_screen : Control
+
 @onready var _should_reset_skip_actions_mode: bool = false
 #endregion
 
@@ -299,13 +301,16 @@ func connect_antenna_to_screen(terminal_program: TerminalProgram):
 		child.queue_free()
 	if terminal_program.packed_sequencer_control_scene:
 		_screen.visible = true
-		var control_screen = terminal_program.packed_sequencer_control_scene.instantiate()
-		terminal_program.initialize_screen(control_screen)
-		_screen.add_child(control_screen)
+		_active_control_screen = terminal_program.packed_sequencer_control_scene.instantiate()
+		terminal_program.initialize_screen(_active_control_screen)
+		_screen.add_child(_active_control_screen)
 	antenna_tip.emitting = true
 	_screen.modulate = Color(5,5,5)
 	await get_tree().create_timer(_screen_flash_time).timeout
 	_screen.modulate = Color(1,1,1)
+
+func clear_screen():
+	_active_control_screen.queue_free()
 
 func deploy_antenna():
 	if not _antenna_deployed:

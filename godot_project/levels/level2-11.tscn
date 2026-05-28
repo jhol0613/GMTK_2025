@@ -1,66 +1,15 @@
-[gd_scene load_steps=8 format=4 uid="uid://cnjciw5oqjhxj"]
+[gd_scene load_steps=3 format=4 uid="uid://cnjciw5oqjhxj"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_nxyie"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_ik82x"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_lsoic"]
-[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_y0n05"]
-[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_snb0j"]
-[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_52it2"]
-[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_lgsi6"]
 
 [node name="LevelBase" instance=ExtResource("1_nxyie")]
 display_name = "2-11"
 conductor_spawn_beat = 6
 available_actions = Array[int]([1, 2, 4, 7])
-hints = Array[ExtResource("2_ik82x")]([])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAEAAAABAAAAAAAAAAFAAAABAACAAAAAAAGAAAABAABAAAAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAGAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAIAAQAAAAMAAAABAAMAAQAAAAMAAAABAAQAAQAAAAMAAAABAAUAAQAAAAMAAAAJAAMAAQAAAAMAAAAJAAQAAQAAAAMAAAAJAAUAAQAAAAMAAAA=")
-
-[node name="BackWall" parent="." index="4"]
-z_index = -2
-y_sort_enabled = false
-position = Vector2(0, -5.37)
-tile_set = ExtResource("3_y0n05")
-
-[node name="PointLight2D" parent="BackWall" index="0"]
-z_index = 0
-
-[node name="Windows" parent="BackWall" index="4"]
-position = Vector2(0, 0)
-
-[node name="LeftExteriorFloor" parent="." index="5"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-tile_set = ExtResource("4_snb0j")
-
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_52it2")
-
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
-position = Vector2(32, -8)
-tile_set = ExtResource("6_lgsi6")
-
-[node name="RightExteriorFloor" parent="." index="6"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-scale = Vector2(1, 1)
-tile_set = ExtResource("4_snb0j")
-
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_52it2")
-
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
-position = Vector2(6, -8)
-tile_set = ExtResource("6_lgsi6")
 
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_lsoic")]
 position = Vector2(178, 7)
