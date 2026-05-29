@@ -10,5 +10,8 @@ signal value_updated(new_value: int)
 func _ready() -> void:
 	slider.value_changed.connect(_on_value_changed)
 
+func set_slider_value(height: int):
+	slider.value = height
+
 func _on_value_changed(new_value: int):
 	value_updated.emit(new_value)

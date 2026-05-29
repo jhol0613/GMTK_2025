@@ -21,6 +21,8 @@ func reset():
 		if _previously_selected_direction:
 			chair.start_direction = _previously_selected_direction
 			chair.reset()
+	if chairs.size() > 0 and current_sequencer_control_scene is TurnChairScreen:
+		current_sequencer_control_scene.set_direction(chairs[0].get_direction())
 	super.reset()
 
 func initialize_screen(screen_scene: TurnChairScreen):
@@ -29,6 +31,8 @@ func initialize_screen(screen_scene: TurnChairScreen):
 		push_error("Ensure that change_laser_direction_program has change_laser_direction_screen ans its
 		sequencer control scene")
 	screen_scene.direction_pressed.connect(_on_direction_selected)
+	if chairs[0]:
+		screen_scene.set_direction(chairs[0].get_direction())
 
 func _on_direction_selected(direction: Enums.Direction):
 	for chair in chairs:

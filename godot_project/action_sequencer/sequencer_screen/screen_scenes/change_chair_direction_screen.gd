@@ -10,5 +10,8 @@ signal direction_pressed(direction: Enums.Direction)
 func _ready() -> void:
 	digipad.direction_pressed.connect(_on_direction_pressed)
 
+func set_direction(direction: Enums.Direction):
+	digipad.set_direction_pressed(direction)
+
 func _on_direction_pressed(direction: Enums.Direction):
 	direction_pressed.emit(direction)

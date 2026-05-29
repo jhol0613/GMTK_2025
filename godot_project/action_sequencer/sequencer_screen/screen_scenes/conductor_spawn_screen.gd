@@ -1,5 +1,7 @@
 extends Control
 
+class_name ConductorSpawnCountdownScreen
+
 ##There are this many steps between left and right side of the screen. e.g. If steps is 5, conductor will
 ##start moving right when count is less than 5
 @export var steps := 5

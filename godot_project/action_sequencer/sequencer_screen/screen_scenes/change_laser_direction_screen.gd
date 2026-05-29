@@ -15,3 +15,6 @@ func _on_direction_pressed(direction: Enums.Direction):
 
 func set_allowed_directions(allowed_directions: Array[Enums.Direction]):
 	digipad._set_allowed_directions(allowed_directions)
+
+func set_direction(direction: Enums.Direction):
+	digipad.set_direction_pressed(direction)

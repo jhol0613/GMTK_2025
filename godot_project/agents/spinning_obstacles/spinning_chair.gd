@@ -209,9 +209,16 @@ func get_quarter_turns_to_direction(direction: Enums.Direction) -> int:
 				posmod(FacingDirection.FRONT_COUNTERCLOCKWISE - _facing_direction, FacingDirection.size())
 			)
 
-func _process(delta: float) -> void:
-	if not Engine.is_editor_hint():
-		print(_facing_direction)
+func get_direction() -> Enums.Direction:
+	match _facing_direction:
+		FacingDirection.LEFT:
+			return Enums.Direction.LEFT
+		FacingDirection.RIGHT:
+			return Enums.Direction.RIGHT
+		FacingDirection.FRONT_CLOCKWISE, FacingDirection.FRONT_COUNTERCLOCKWISE:
+			return Enums.Direction.DOWN
+		_:
+			return Enums.Direction.DOWN
 
 func reset():
 	super.reset()

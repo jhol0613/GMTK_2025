@@ -23,6 +23,8 @@ func initialize_screen(screen_scene: ChangeTreadmillDirectionScreen):
 	super.initialize_screen(screen_scene)
 	screen_scene.direction_pressed.connect(_on_direction_selected)
 	screen_scene.set_allowed_directions(allowed_directions)
+	if treadmills.size() > 0:
+		current_sequencer_control_scene.set_direction(treadmills[0].direction)
 
 func _on_direction_selected(direction: Enums.Direction):
 	#TODO: Update original direction depending on position reset mode
@@ -36,3 +38,10 @@ func run():
 		treadmill.direction = new_direction
 		if should_reset_position == PositionResetMode.TRUE:
 			treadmill.original_direction = new_direction
+
+func reset():
+	for treadmill in original_directions.keys():
+		treadmill.direction = original_directions[treadmill]
+	if current_sequencer_control_scene is ChangeTreadmillDirectionScreen and treadmills.size() > 0:
+		current_sequencer_control_scene.set_direction(treadmills[0].direction)
+	super.reset()

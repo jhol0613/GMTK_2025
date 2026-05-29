@@ -205,6 +205,9 @@ func _on_level_complete() -> void:
 	_action_sequencer.stop_sequencer()
 	await get_tree().create_timer(level_success_delay).timeout
 
+	_action_sequencer.clear_screen()
+	_action_sequencer.make_spawn_countdown_visible()
+
 	if _queue_world_transition:
 		_execute_world_transition()
 		return
@@ -216,6 +219,8 @@ func _on_level_complete() -> void:
 func _on_level_fail() -> void:
 	_action_sequencer.buttons_enabled = false
 	_action_sequencer.stop_sequencer()
+	for agent: Agent in _level_scene.agents:
+		agent.interrupt_queued_action(true)
 	if _conductor != null:
 		_conductor.visible = false
 	for teleporter: Teleporter in _level_scene.teleporters:

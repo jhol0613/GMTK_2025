@@ -14,6 +14,11 @@ func _ready() -> void:
 func _on_button_pressed():
 	direction_pressed.emit(button_group.get_pressed_button().direction)
 
+func set_direction_pressed(direction: Enums.Direction):
+	for button: DirectionButton in button_group.get_buttons():
+		if button.direction == direction:
+			button.button_pressed = true
+
 func _set_allowed_directions(directions: Array[Enums.Direction]):
 	for button in button_group.get_buttons():
 		button.disabled = not directions.has(button.direction)

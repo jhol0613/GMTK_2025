@@ -78,7 +78,7 @@ var _eraser_mode := false
 @onready var _antenna = $TextureRect/Antenna
 @onready var antenna_tip = $TextureRect/Antenna/AntennaTip
 @onready var _antenna_deployed = false
-@onready var _conductor_spawn_countdown_screen = $TextureRect/ScreenOff/ScreenOn/ConductorSpawnScreen
+@onready var _conductor_spawn_countdown_screen: ConductorSpawnCountdownScreen = $TextureRect/ScreenOff/ScreenOn/ConductorSpawnScreen
 
 const P_MUSIC := "Music_Vol"
 const P_SFX   := "SFX_Vol"
@@ -298,7 +298,10 @@ func push_replay_button():
 
 func connect_antenna_to_screen(terminal_program: TerminalProgram):
 	for child in _screen.get_children():
-		child.queue_free()
+		if child is not ConductorSpawnCountdownScreen:
+			child.queue_free()
+		else:
+			child.visible = false
 	if terminal_program.packed_sequencer_control_scene:
 		_screen.visible = true
 		_active_control_screen = terminal_program.packed_sequencer_control_scene.instantiate()
@@ -310,7 +313,8 @@ func connect_antenna_to_screen(terminal_program: TerminalProgram):
 	_screen.modulate = Color(1,1,1)
 
 func clear_screen():
-	_active_control_screen.queue_free()
+	if _active_control_screen:
+		_active_control_screen.queue_free()
 
 func deploy_antenna():
 	if not _antenna_deployed:
@@ -368,6 +372,9 @@ func set_conductor_spawn_countdown_display(new_value: int, conductor_beat: float
 	else:
 		await get_tree().create_timer(AudioManager.beat_time_seconds * conductor_beat).timeout
 		_conductor_spawn_countdown_screen.update_spawn_countdown(new_value)
+
+func make_spawn_countdown_visible():
+	_conductor_spawn_countdown_screen.visible = true
 
 #region Signal connections
 

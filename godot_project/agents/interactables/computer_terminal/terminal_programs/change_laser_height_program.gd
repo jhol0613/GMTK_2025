@@ -18,6 +18,8 @@ func _ready() -> void:
 func initialize_screen(screen_scene: ChangeLaserHeightScreen):
 	super.initialize_screen(screen_scene)
 	screen_scene.value_updated.connect(_on_height_updated)
+	if lasers.size() > 0:
+		screen_scene.set_slider_value(lasers[0].height)
 
 func _on_height_updated(new_height: int):
 	for laser in lasers:
@@ -30,3 +32,5 @@ func run():
 func reset():
 	for i in range(lasers.size()):
 		lasers[i].height = original_heights[i]
+	if lasers.size() > 0 and current_sequencer_control_scene is ChangeLaserHeightScreen:
+		current_sequencer_control_scene.set_slider_value(lasers[0].height)
