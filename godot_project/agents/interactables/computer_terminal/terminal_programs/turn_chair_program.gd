@@ -2,8 +2,10 @@ extends TerminalProgram
 
 class_name TurnChairProgram
 
-@export var chairs : Array[SpinningChair]
+@export var chairs : Array[SpinningChairV2]
 @export var number_of_quarter_turns := 2
+@export var rotation_left_limit = -99999999
+@export var rotation_right_limit = 99999999
 
 var _previously_selected_direction
 
@@ -21,8 +23,10 @@ func reset():
 		if _previously_selected_direction:
 			chair.start_direction = _previously_selected_direction
 			chair.reset()
-	if chairs.size() > 0 and current_sequencer_control_scene is TurnChairScreen:
-		current_sequencer_control_scene.set_direction(chairs[0].get_direction())
+	if current_sequencer_control_scene is TurnChairScreen:
+		current_sequencer_control_scene.reset()
+	#if chairs.size() > 0 and current_sequencer_control_scene is TurnChairScreen:
+		#current_sequencer_control_scene.set_direction(chairs[0].get_direction())
 	super.reset()
 
 func initialize_screen(screen_scene: TurnChairScreen):
@@ -31,18 +35,17 @@ func initialize_screen(screen_scene: TurnChairScreen):
 		push_error("Ensure that change_laser_direction_program has change_laser_direction_screen ans its
 		sequencer control scene")
 	screen_scene.direction_pressed.connect(_on_direction_selected)
-	if chairs[0]:
-		screen_scene.set_direction(chairs[0].get_direction())
+	screen_scene.set_limits(rotation_left_limit, rotation_right_limit)
+	#if chairs[0]:
+		#screen_scene.set_direction(chairs[0].get_direction())
 
 func _on_direction_selected(direction: Enums.Direction):
+	var should_update_origin = should_reset_position == PositionResetMode.AUTO or should_reset_position == PositionResetMode.TRUE
 	for chair in chairs:
-		if direction == _previously_selected_direction:
-			break
-		elif direction == Enums.Direction.LEFT and chair._facing_direction == chair.FacingDirection.FRONT_COUNTERCLOCKWISE:
-			chair.start_direction = chair.FacingDirection.FRONT_CLOCKWISE
-		elif direction == Enums.Direction.RIGHT and chair._facing_direction == chair.FacingDirection.FRONT_CLOCKWISE:
-			chair.start_direction = chair.FacingDirection.FRONT_COUNTERCLOCKWISE
-		#print(chair.get_quarter_turns_to_direction(direction))
-		#print(chair._facing_direction)
-		chair.spin(chair.get_quarter_turns_to_direction(direction))
-	_previously_selected_direction = direction
+		chair.spin(-1 if direction == Enums.Direction.LEFT else 1, should_update_origin)
+	if should_update_origin:
+		for chair in chairs:
+			await chair._frame_timer.timeout
+			chair.start_direction = chair._facing_direction
+
+	#_previously_selected_direction = direction

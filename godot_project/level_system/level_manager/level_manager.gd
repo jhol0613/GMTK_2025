@@ -689,7 +689,8 @@ func _on_action_sequencer_play_started() -> void:
 	_fade_to_running_shader()
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		obstacle.reset()
+		if obstacle.reset_on_play_pressed:
+			obstacle.reset()
 	for timer in _obstacle_move_group_timers:
 		timer.timeout.disconnect(_update_obstacle_move_group)
 

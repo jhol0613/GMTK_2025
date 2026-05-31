@@ -10,7 +10,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_fjhgq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqkdu"]
-size = Vector2(12, 8)
+size = Vector2(12, 6)
 
 [node name="GenericInvisibleObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "sprite")]
 script = ExtResource("1_ymfx7")
@@ -34,5 +34,5 @@ push_mode = 1
 metadata/_custom_type_script = "uid://du4ysr150id7h"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pusher"]
-position = Vector2(0, 3)
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_lqkdu")

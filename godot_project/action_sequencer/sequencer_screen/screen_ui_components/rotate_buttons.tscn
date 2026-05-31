@@ -1,0 +1,38 @@
+[gd_scene load_steps=10 format=3 uid="uid://cfg7mu8ih630h"]
+
+[ext_resource type="Script" uid="uid://bsemkvdc3ktkp" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_buttons.gd" id="1_vg0s8"]
+[ext_resource type="Texture2D" uid="uid://bc6ax0tk001ut" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_left_unselected.png" id="3_kor1d"]
+[ext_resource type="Texture2D" uid="uid://cddadi6adbj8p" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_left_selected.png" id="4_o6ehg"]
+[ext_resource type="Texture2D" uid="uid://bq70jfa61clq7" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_left_hovered.png" id="5_tsh1r"]
+[ext_resource type="Texture2D" uid="uid://1k2n7md5jlch" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_left_disabled.png" id="6_nap2n"]
+[ext_resource type="Texture2D" uid="uid://db7c2je1iqe5h" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_right_unselected.png" id="7_btqb0"]
+[ext_resource type="Texture2D" uid="uid://d2oplyjsitjfb" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_right_selected.png" id="8_i1fo6"]
+[ext_resource type="Texture2D" uid="uid://evw2jge37745" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_right_hovered.png" id="9_lu0v8"]
+[ext_resource type="Texture2D" uid="uid://cd1tdqyd7uarb" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_right_disabled.png" id="10_wjxl4"]
+
+[node name="Rotatebuttons" type="Node2D" node_paths=PackedStringArray("_left_button", "_right_button")]
+script = ExtResource("1_vg0s8")
+_left_button = NodePath("Left")
+_right_button = NodePath("Right")
+
+[node name="Left" type="TextureButton" parent="."]
+offset_left = -22.0
+offset_top = -11.0
+offset_bottom = 12.0
+texture_normal = ExtResource("3_kor1d")
+texture_pressed = ExtResource("4_o6ehg")
+texture_hover = ExtResource("5_tsh1r")
+texture_disabled = ExtResource("6_nap2n")
+
+[node name="Right" type="TextureButton" parent="."]
+offset_left = 2.0
+offset_top = -11.0
+offset_right = 24.0
+offset_bottom = 12.0
+texture_normal = ExtResource("7_btqb0")
+texture_pressed = ExtResource("8_i1fo6")
+texture_hover = ExtResource("9_lu0v8")
+texture_disabled = ExtResource("10_wjxl4")
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_right_pressed"]

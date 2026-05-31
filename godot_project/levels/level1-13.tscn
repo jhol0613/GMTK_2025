@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://cwr6q03gr1165"]
+[gd_scene load_steps=4 format=4 uid="uid://cwr6q03gr1165"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_2k2ns"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_2uj01"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_kb2bn"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_kb2bn"]
 
 [node name="LevelBase" instance=ExtResource("1_2k2ns")]
@@ -10,7 +9,6 @@ display_name = "1-13"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 27
 available_actions = Array[int]([4, 1, 2, 5])
-hints = Array[ExtResource("2_kb2bn")]([])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true

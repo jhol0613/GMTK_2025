@@ -7,13 +7,13 @@
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="4_nc5m7"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="5_w2wp6"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_3qe5b"]
-[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="7_7cgb1"]
 [ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="7_xc8e3"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="8_yruux"]
+[ext_resource type="PackedScene" uid="uid://rx46ny3cc272" path="res://agents/spinning_obstacles/spinning_chair_V2.tscn" id="9_xc8e3"]
 
 [node name="LevelBase" instance=ExtResource("1_pr51e")]
 display_name = "3-2"
-player_spawn_position = Vector2i(0, 1)
+player_spawn_position = Vector2i(0, 4)
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 4, 7])
@@ -70,8 +70,7 @@ lasers = [NodePath("../..")]
 metadata/_custom_type_script = "uid://b23y6rruo1ixg"
 
 [node name="SnackCartObstacle" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("6_3qe5b")]
-position = Vector2(112, 30)
-movement_path = Array[int]([3, 3, 3, 4, 4])
+position = Vector2(306, 106)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
 9: NodePath("BumpSound"),
@@ -91,27 +90,31 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="SpinningChair" parent="." index="13" instance=ExtResource("7_7cgb1")]
-position = Vector2(80, 104)
-start_direction = 1
+[node name="SpinningChair" parent="." index="14" instance=ExtResource("9_xc8e3")]
+position = Vector2(81, 106)
+start_direction = 2
 grid_origin = Vector2i(2, 5)
 
-[node name="Antenna" parent="." index="14" instance=ExtResource("4_abajs")]
+[node name="Antenna" parent="SpinningChair" index="6" instance=ExtResource("4_abajs")]
+offset_left = -81.0
+offset_top = -106.0
+offset_right = -50.0
+offset_bottom = -87.0
 
-[node name="AnimatedSprite2DSignals" parent="Antenna" index="0"]
+[node name="AnimatedSprite2DSignals" parent="SpinningChair/Antenna" index="0"]
 position = Vector2(51, 90)
 
-[node name="Button" parent="Antenna" index="1"]
+[node name="Button" parent="SpinningChair/Antenna" index="1"]
 offset_left = 67.0
 offset_top = 18.0
 offset_right = 102.0
 offset_bottom = 105.0
 
-[node name="TurnChairProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("chairs")]
+[node name="TurnChairProgram" type="Node" parent="SpinningChair/Antenna" index="2" node_paths=PackedStringArray("chairs")]
 script = ExtResource("8_yruux")
-chairs = [NodePath("../../SpinningChair")]
+chairs = [NodePath("../..")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
 [editable path="Laser/Antenna"]
 [editable path="Laser2/Antenna"]
-[editable path="Antenna"]
+[editable path="SpinningChair/Antenna"]

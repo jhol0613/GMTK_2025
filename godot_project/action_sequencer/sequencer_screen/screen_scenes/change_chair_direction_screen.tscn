@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d18bgy5251pin" path="res://action_sequencer/sequencer_screen/screen_scenes/change_chair_direction_screen.gd" id="1_mrjj6"]
 [ext_resource type="Texture2D" uid="uid://c0haqmsx6vwmw" path="res://action_sequencer/sequencer_screen/screen_visuals/agent_icons/spinning_chair_green.png" id="1_o234r"]
-[ext_resource type="PackedScene" uid="uid://70ih8s0lu4px" path="res://action_sequencer/sequencer_screen/screen_ui_components/digipad_rotate.tscn" id="2_mrjj6"]
+[ext_resource type="PackedScene" uid="uid://cfg7mu8ih630h" path="res://action_sequencer/sequencer_screen/screen_ui_components/rotate_buttons.tscn" id="3_mrjj6"]
 
-[node name="ChangeChairDirectionScreen" type="Control" node_paths=PackedStringArray("digipad")]
+[node name="ChangeChairDirectionScreen" type="Control" node_paths=PackedStringArray("_rotate_buttons")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,16 +12,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mrjj6")
-digipad = NodePath("Digipad")
+_rotate_buttons = NodePath("Rotatebuttons")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-26, -2)
 texture = ExtResource("1_o234r")
 
-[node name="Digipad" parent="." instance=ExtResource("2_mrjj6")]
-position = Vector2(15, -2)
-
-[node name="Up" parent="Digipad" index="1"]
-visible = false
-
-[editable path="Digipad"]
+[node name="Rotatebuttons" parent="." instance=ExtResource("3_mrjj6")]
+position = Vector2(14, -2)

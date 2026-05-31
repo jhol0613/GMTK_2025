@@ -325,6 +325,14 @@ func get_reverse_action(action: PlayerAction) -> PlayerAction:
 			return PlayerAction.DOWN
 		PlayerAction.DOWN:
 			return PlayerAction.UP
+		PlayerAction.UP_LEFT:
+			return PlayerAction.DOWN_RIGHT
+		PlayerAction.UP_RIGHT:
+			return PlayerAction.DOWN_LEFT
+		PlayerAction.DOWN_RIGHT:
+			return PlayerAction.UP_LEFT
+		PlayerAction.DOWN_LEFT:
+			return PlayerAction.UP_RIGHT
 		_:
 			return PlayerAction.NONE
 
@@ -346,4 +354,30 @@ func is_vertical(direction: Direction) -> bool:
 		return false
 	else:
 		return true
+
+func rotate_90_left(direction: Direction) -> Direction:
+	match direction:
+		Enums.Direction.LEFT:
+			return Enums.Direction.DOWN
+		Enums.Direction.DOWN:
+			return Enums.Direction.RIGHT
+		Enums.Direction.RIGHT:
+			return Enums.Direction.UP
+		Enums.Direction.UP:
+			return Enums.Direction.LEFT
+		_:
+			return direction
+
+func rotate_90_right(direction: Direction) -> Direction:
+	match direction:
+		Enums.Direction.LEFT:
+			return Enums.Direction.UP
+		Enums.Direction.DOWN:
+			return Enums.Direction.LEFT
+		Enums.Direction.RIGHT:
+			return Enums.Direction.DOWN
+		Enums.Direction.UP:
+			return Enums.Direction.RIGHT
+		_:
+			return direction
 #endregion

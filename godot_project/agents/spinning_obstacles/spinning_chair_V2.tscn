@@ -1,0 +1,130 @@
+[gd_scene load_steps=17 format=3 uid="uid://rx46ny3cc272"]
+
+[ext_resource type="Script" uid="uid://cfru4jy2a22d0" path="res://agents/spinning_obstacles/spinning_chair_v2.gd" id="1_waa31"]
+[ext_resource type="Texture2D" uid="uid://bpfn2w0gg3kbm" path="res://agents/spinning_obstacles/spinning_chair_v3.png" id="3_cvlbv"]
+[ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="4_jvl4d"]
+[ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_51ho3"]
+[ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_46cqo"]
+[ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="7_c4cux"]
+[ext_resource type="Texture2D" uid="uid://d1d8gyhej0it4" path="res://agents/lasers/beam_down_end.png" id="8_rywup"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qebtr"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(0, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usu0k"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(98, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvlbv"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(196, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvl4d"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(294, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51ho3"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(392, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rywup"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(686, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4cux"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(588, 0, 98, 95)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46cqo"]
+atlas = ExtResource("3_cvlbv")
+region = Rect2(490, 0, 98, 95)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x08ji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qebtr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usu0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvlbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvl4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51ho3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rywup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4cux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46cqo")
+}],
+"loop": false,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "visual_center", "sprite")]
+script = ExtResource("1_waa31")
+left_obstacle = NodePath("LeftObstacle")
+middle_obstacle = NodePath("MiddleObstacle")
+right_obstacle = NodePath("RightObstacle")
+visual_center = NodePath("VisualCenter")
+sprite = NodePath("AnimatedSprite2DSignals")
+metadata/_custom_type_script = "uid://dxn7tnanjy6px"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+z_index = 1
+position = Vector2(0, -35)
+sprite_frames = SubResource("SpriteFrames_x08ji")
+animation = &"spin"
+frame = 2
+script = ExtResource("4_jvl4d")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Spinning Chair"
+event_guid = "{2be3c815-7fee-4641-9ff6-873878e8e7ff}"
+script = ExtResource("5_51ho3")
+metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="LeftObstacle" parent="." instance=ExtResource("6_46cqo")]
+z_index = 1
+position = Vector2(-32, -21)
+movement_path = Array[int]([25, 26, 27, 24])
+reset_on_play_pressed = false
+manually_update_push_action = true
+activation_sequence = Array[bool]([false])
+
+[node name="PositionReference" type="Sprite2D" parent="LeftObstacle"]
+visible = false
+z_index = 5
+texture = ExtResource("8_rywup")
+
+[node name="RightObstacle" parent="." instance=ExtResource("6_46cqo")]
+z_index = 1
+position = Vector2(32, -21)
+movement_path = Array[int]([27, 24, 25, 26])
+reset_on_play_pressed = false
+manually_update_push_action = true
+activation_sequence = Array[bool]([false])
+
+[node name="MiddleObstacle" parent="." instance=ExtResource("6_46cqo")]
+z_index = 1
+position = Vector2(0, -21)
+reset_on_play_pressed = false
+manually_update_push_action = true
+activation_sequence = Array[bool]([false])
+
+[node name="VisualCenter" type="Node2D" parent="."]
+position = Vector2(0, -30)
+script = ExtResource("7_c4cux")
+metadata/_custom_type_script = "uid://cc284jdpqgups"

@@ -4,11 +4,9 @@ class_name TurnLaserProgram
 
 @export var lasers : Array[Laser]
 @export var new_direction : Enums.Direction
-@export var allowed_directions : Array[Enums.Direction] = [
-	Enums.Direction.UP,
-	Enums.Direction.DOWN,
-	Enums.Direction.LEFT,
-	Enums.Direction.RIGHT]
+@export var left_limit: int = -99999
+##Number of times treadmill can be rotated 90 deg clockwise from starting position
+@export var right_limit: int = 99999
 
 var original_directions : Dictionary[Laser, Enums.Direction]
 
@@ -22,13 +20,14 @@ func _ready() -> void:
 func initialize_screen(screen_scene: ChangeLaserDirectionScreen):
 	super.initialize_screen(screen_scene)
 	screen_scene.direction_pressed.connect(_on_direction_selected)
-	screen_scene.set_allowed_directions(allowed_directions)
-	if lasers.size() > 0:
-		screen_scene.set_direction(lasers[0].direction)
+	screen_scene.set_limits(left_limit, right_limit)
 
 func _on_direction_selected(direction: Enums.Direction):
 	for laser in lasers:
-		laser.direction = direction
+		if direction == Enums.Direction.LEFT:
+			laser.direction = Enums.rotate_90_left(laser.direction)
+		elif direction == Enums.Direction.RIGHT:
+			laser.direction = Enums.rotate_90_right(laser.direction)
 
 func run():
 	for laser in lasers:
@@ -37,5 +36,5 @@ func run():
 func reset():
 	for laser in lasers:
 		laser.direction = original_directions[laser]
-	if lasers.size() > 0 and current_sequencer_control_scene is ChangeLaserDirectionScreen:
-		current_sequencer_control_scene.set_direction(lasers[0].direction)
+	#if lasers.size() > 0 and current_sequencer_control_scene is ChangeLaserDirectionScreen:
+		#current_sequencer_control_scene.set_direction(lasers[0].direction)

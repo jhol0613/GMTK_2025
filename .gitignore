@@ -7,6 +7,7 @@ raw_assets/fmod_project_gmtk2025/.user
 raw_assets/fmod_project_gmtk2025/.cache
 raw_assets/fmod_project_gmtk2025/.unsaved
 godot_project/addons/fmod/libs/windows/~libGodotFmod.windows.editor.x86_64.dll
+*.TMP
 
 # Mac
 .DS_Store

@@ -1,17 +1,15 @@
-[gd_scene load_steps=5 format=4 uid="uid://bsay3jq0vshq2"]
+[gd_scene load_steps=4 format=4 uid="uid://bsay3jq0vshq2"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_g0u3c"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="2_y1s2r"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_ylgck"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_y1s2r"]
 
 [node name="LevelBase2" instance=ExtResource("1_g0u3c")]
 display_name = "2-1"
 conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 7])
-hints = Array[ExtResource("2_ylgck")]([])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAADAAAAAAABAAIAAAADAAEAAAABAAMAAAADAP//AAABAAAAAAACAAQAAgACAAIAAAACAAUAAgACAAMAAAAEAAEAAAABAAMAABAEAAAAAAABAAIAABAEAP//AAABAAAAABADAAIAAwAAAAAAABAHAAMAAQAAAAMAAAAHAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAADAAUAAgADAAMAAAADAAQAAgADAAIAAAA=")
 
 [node name="Lock" parent="AdditionalSprites" index="3"]

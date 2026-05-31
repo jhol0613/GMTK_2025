@@ -9,6 +9,9 @@ class_name MovableObstacle
 @export var initial_push_action := Enums.PlayerAction.DOWN_FALL
 ##A disabled obstacle will not move or use its pusher, and its grid space will be considered unoccupied
 @export var enabled := true: set = _set_enabled
+@export var reset_on_play_pressed := true
+##If true, push action will not automatically update when move cursor is advanced
+@export var manually_update_push_action := false
 
 @onready var _move_cursor_start_position := 0
 @onready var _move_cursor := _move_cursor_start_position
@@ -55,7 +58,7 @@ func advance_move_cursor():
 	_move_cursor += 1
 	if _move_cursor >= movement_path.size():
 		_move_cursor = 0
-	if pusher and movement_path.size() > 0:
+	if pusher and movement_path.size() > 0 and not manually_update_push_action:
 		pusher.push_action = _direction_to_push_action(movement_path[(_move_cursor-1) % movement_path.size()])
 
 ##Push action is what happens to a movable that overlaps the obstacle. If not up/left/right/down, just
