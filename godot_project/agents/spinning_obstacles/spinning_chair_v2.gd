@@ -8,7 +8,7 @@ class_name SpinningChairV2
 ##Number of beats it takes for chair to rotate 90 degrees
 @export var beats_per_quarter_turn := 0.3
 @export var start_direction := Enums.Direction.DOWN: set = _set_start_direction
-##If true, chair will only turn if commanded to do so externally (i.e. not "on the beat"
+##If true, chair will only turn if commanded to do so externally (i.e. not "on the beat")
 @export var terminal_controlled := true
 
 @export_group("Spinning Chair Data")
@@ -20,10 +20,14 @@ class_name SpinningChairV2
 @export var middle_obstacle: MovableObstacle
 @export var right_obstacle: MovableObstacle
 @export var visual_center: VisualCenter
-@onready var my_nodes = [sprite, default_sound_emitter, left_obstacle, middle_obstacle, right_obstacle, visual_center]
-##Nodes that should be anchored to couch rotation. Vector2 is the initial position
-var anchored_nodes: Dictionary[Node, Vector2]
-var anchored_node_centers: Dictionary[Node, VisualCenter]
+@export var highlight_button: Button
+@export_group("Antenna Info")
+@export var highlight_button_size_horizontal := Vector2(97, 38)
+@export var highlight_button_position_horizontal := Vector2(-49, -55)
+@export var highlight_button_size_vertical := Vector2(30, 79)
+@export var highlight_button_position_vertical := Vector2(-17, -78)
+
+var _anchors: Array[SpinningChairAnchor]
 
 @onready var _left_push_action_cycle = [
 	Enums.PlayerAction.UP_FALL,
@@ -49,6 +53,7 @@ var _frame_increment = 1 # one for forward, -1 for backward
 func _construct():
 	_facing_direction = start_direction
 	_update_frame(_direction_to_frame(_facing_direction))
+	_update_highlight_button()
 	#_update_frame(2 * start_direction) #see enum description for why this works
 	var initial_spacing
 	if Engine.is_editor_hint():
@@ -95,9 +100,8 @@ func _ready() -> void:
 	add_child(_frame_timer)
 
 	for child in get_children():
-		if not my_nodes.has(child) and child is  Node2D:
-			#Store positions as the relative position from spin chair's vis center to child's visual center (if it has one)
-			anchored_nodes[child] = _get_visual_center_position(child)
+		if child is SpinningChairAnchor:
+			_anchors.append(child)
 
 func direction_to_move_cursor_position(direction: Enums.Direction) -> int:
 	match direction:
@@ -114,22 +118,14 @@ func direction_to_move_cursor_position(direction: Enums.Direction) -> int:
 
 ##Use this instead of updating frame directly so that anchored nodes also get moved
 func _update_frame(new_sprite_frame: int):
-	var child_rotation
-	if new_sprite_frame == sprite.frame:
-		child_rotation = 0.0
-	elif [1, 2, 7, 0].has(new_sprite_frame): #counterclockwise frames
-		child_rotation = PI / 4.0
-		#rotate clockwise
-	elif [3, 4, 5, 6].has(new_sprite_frame): #clockwise frames
-		child_rotation = - PI / 4.0
-
 	sprite.frame = new_sprite_frame
-
-	if not anchored_nodes:
-		return
-	for child in anchored_nodes:
-		pass
-#		_set_position_based_on_visual_center(child, _get_visual_center_position(child).rotated(child_rotation))
+	for anchor in _anchors:
+		if sprite.frame < anchor.data.positions.size():
+			anchor.position = anchor.data.positions[sprite.frame]
+			for child in anchor.get_children(): 
+				if child is Interactable:
+					child.updated_position.emit(child, child.global_position)
+					child.flip_horizontal = anchor.data.flip_horizontal[sprite.frame]
 
 # Bypass agent's animation system with override
 func _on_animation_start(action):
@@ -160,36 +156,6 @@ func _set_start_direction(new_direction: Enums.Direction):
 	_construct()
 	left_obstacle.set_move_cursor_start_position(direction_to_move_cursor_position(start_direction))
 	right_obstacle.set_move_cursor_start_position(direction_to_move_cursor_position(start_direction))
-	
-##Returns position of a Node's visual center relative to this Spinning Chair. Uses the node's base
-##position if there is no visual center defined
-func _get_visual_center_position(node: Node2D) -> Vector2:
-	for child in node.get_children():
-		if child is VisualCenter:
-			return child.global_position - visual_center.global_position
-	return node.global_position - visual_center.global_position
-
-func _get_visual_center(node: Node2D) -> VisualCenter:
-	for child in node.get_children():
-		if child is VisualCenter:
-			return child
-	return null
-
-##Give new_position in terms of what you want the visual center's position to be
-func _set_position_based_on_visual_center(node: Node2D, new_position: Vector2):
-	var old_position = _get_visual_center_position(node)
-	var child_vis_center = _get_visual_center(node)
-	if child_vis_center:
-		node.position = new_position + visual_center.position - child_vis_center.position
-	else:
-		node.position = new_position + visual_center.position
-	#I don't love this, I shouldn't be accounting for different types of another agent in an agent class
-	if node is Interactable:
-		node.updated_position.emit(node, node.global_position)
-		#If new and old signs are different, flip the interactable (can't just multiply to check sign flip
-		#or it will flip twice if the hy value stops on exactly 0 for a frame)
-		if (new_position.y > 0 and old_position.y <= 0) or (new_position.y < 0 and old_position.y >= 0):
-			node.flip_horizontal = not node.flip_horizontal
 
 ##Positive for clockwise, negative for counterclockwise
 func spin(number_of_quarter_turns: int = 1, update_origin = false):
@@ -219,6 +185,7 @@ func spin(number_of_quarter_turns: int = 1, update_origin = false):
 		_facing_direction = Enums.rotate_90_right(_facing_direction) if number_of_quarter_turns >= 0 \
 			else Enums.rotate_90_left(_facing_direction)
 		await _frame_timer.timeout
+	_update_highlight_button()
 	$FmodEventEmitter2D.play()
 
 ##Because arg is a direction and not a facing direction, will always return the smallest # quarter
@@ -250,14 +217,18 @@ func _direction_to_frame(direction: Enums.Direction)->int:
 		_:
 			return 0
 
+func _update_highlight_button():
+	if _facing_direction == Enums.Direction.UP or _facing_direction == Enums.Direction.DOWN:
+		highlight_button.size = highlight_button_size_horizontal
+		highlight_button.position = highlight_button_position_horizontal
+	else:
+		highlight_button.size = highlight_button_size_vertical
+		highlight_button.position = highlight_button_position_vertical
+
 func reset():
 	super.reset()
 	# Don't call super so position of the chair doesn't reset
 	_facing_direction = start_direction
 	if _frame_timer != null:
 		_frame_timer.stop() #prevent frame from getting off by one if reset in the middle of rotate animation
-	# Reset child positions
 	_construct()
-	for child in anchored_nodes.keys():
-		_set_position_based_on_visual_center(child, anchored_nodes[child])
-		#child.position = anchored_nodes[child]

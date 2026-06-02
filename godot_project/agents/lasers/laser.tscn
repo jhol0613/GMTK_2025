@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene load_steps=36 format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cnmot5c0cn1y4" path="res://agents/lasers/new_laser_visuals/low_shadow.png" id="16_lyym0"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="19_jtygs"]
 [ext_resource type="PackedScene" uid="uid://bgspuqigwj2us" path="res://agents/lasers/beam_segment.tscn" id="20_7lqwi"]
+[ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="20_u3qbj"]
 
 [sub_resource type="Resource" id="Resource_gmiso"]
 script = ExtResource("2_g7y3a")
@@ -153,7 +154,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "up_laser_clipper", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "up_laser_clipper", "antenna_button", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
@@ -165,6 +166,7 @@ pole2 = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/R
 shadow = NodePath("Visuals/Pole1Shadow")
 obstacle = NodePath("GenericInvisibleObstacle")
 up_laser_clipper = NodePath("UpLaserClipper")
+antenna_button = NodePath("AntennaComponent/Button")
 height = 64
 jumpable_threshhold = 16.0
 beam_width = 1
@@ -274,3 +276,16 @@ mouse_filter = 2
 visible = false
 position = Vector2(357, 16)
 hit_from_inside = true
+
+[node name="AntennaComponent" parent="." node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("20_u3qbj")]
+visible = false
+position = Vector2(11, -15)
+highlighted_nodes = [NodePath("../Visuals")]
+detection_areas = [NodePath("Button")]
+
+[node name="Button" type="Button" parent="AntennaComponent"]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -26.0
+offset_top = -57.0
+offset_right = 5.0
+offset_bottom = 26.0

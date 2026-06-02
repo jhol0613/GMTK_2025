@@ -15,7 +15,7 @@ player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 available_actions = Array[int]([1, 2, 3, 4, 7])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAJAAIAAQAAAAMAAAAIAAQAAQAAAAMAAAAJAAMAAQAAAAMAAAAGAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAKAAEAAQAAAAMAAAAEAAMAAQAAAAMAAAAGAAUAAQAAAAMAAAAGAAQAAQAAAAMAAAAHAAIAAQAAAAMAAAAEAAQAAQAAAAMAAAADAAAAAQAAAAMAAAABAAIABAAAAAAAAAADAAIABAABAAAAAAACAAIABAACAAAAAAAFAAAABAAAAAAAAAAGAAAABAACAAAAAAAHAAAABAABAAAAAAAJAAAAAQAAAAMAAAAKAAUAAQAAAAMAAAA=")
 
 [node name="PointLight2D" parent="BackWall" index="0"]
@@ -43,7 +43,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="Antenna" parent="SnackCartObstacle" index="5" instance=ExtResource("4_k20h8")]
@@ -77,7 +85,15 @@ action_sound_emitters = {
 12: NodePath("../SnackCartObstacle/BumpSound"),
 13: NodePath("../SnackCartObstacle/BumpSound"),
 14: NodePath("../SnackCartObstacle/BumpSound"),
-15: NodePath("../SnackCartObstacle/BumpSound")
+15: NodePath("../SnackCartObstacle/BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="Collectible" parent="." index="12" instance=ExtResource("4_rgc4p")]

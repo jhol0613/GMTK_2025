@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://cc001tdwor54g"]
+
+[ext_resource type="Texture2D" uid="uid://3bl5y3qwsqxg" path="res://action_sequencer/antenna/antenna_acvtivated.png" id="1_2803p"]
+[ext_resource type="Script" uid="uid://cgs66ei3r4gdp" path="res://action_sequencer/antenna/antenna_component.gd" id="1_fqk3u"]
+[ext_resource type="Texture2D" uid="uid://btknnajntxvwg" path="res://action_sequencer/antenna/antenna.png" id="2_wqyk8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gsyu"]
+atlas = ExtResource("1_2803p")
+region = Rect2(0, 0, 11, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_454wu"]
+atlas = ExtResource("1_2803p")
+region = Rect2(11, 0, 11, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f6wd4"]
+atlas = ExtResource("1_2803p")
+region = Rect2(22, 0, 11, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abdpb"]
+atlas = ExtResource("1_2803p")
+region = Rect2(33, 0, 11, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4t7f0"]
+atlas = ExtResource("1_2803p")
+region = Rect2(44, 0, 11, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_673vx"]
+atlas = ExtResource("2_wqyk8")
+region = Rect2(0, 0, 11, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yr8on"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gsyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_454wu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f6wd4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abdpb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4t7f0")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_673vx")
+}],
+"loop": false,
+"name": &"inactive",
+"speed": 5.0
+}]
+
+[node name="AntennaComponent" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_yr8on")
+animation = &"inactive"
+autoplay = "inactive"
+script = ExtResource("1_fqk3u")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"

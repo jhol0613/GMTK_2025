@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://rx46ny3cc272"]
+[gd_scene load_steps=21 format=3 uid="uid://rx46ny3cc272"]
 
 [ext_resource type="Script" uid="uid://cfru4jy2a22d0" path="res://agents/spinning_obstacles/spinning_chair_v2.gd" id="1_waa31"]
 [ext_resource type="Texture2D" uid="uid://bpfn2w0gg3kbm" path="res://agents/spinning_obstacles/spinning_chair_v3.png" id="3_cvlbv"]
@@ -6,7 +6,10 @@
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_51ho3"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_46cqo"]
 [ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="7_c4cux"]
+[ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="8_qebtr"]
 [ext_resource type="Texture2D" uid="uid://d1d8gyhej0it4" path="res://agents/lasers/beam_down_end.png" id="8_rywup"]
+[ext_resource type="Script" uid="uid://baegdff0apbnp" path="res://agents/spinning_obstacles/spinning_chair_anchor_data.gd" id="9_cvlbv"]
+[ext_resource type="Script" uid="uid://dbkqhnjkmjtc7" path="res://agents/spinning_obstacles/spinning_chair_anchor.gd" id="9_usu0k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qebtr"]
 atlas = ExtResource("3_cvlbv")
@@ -69,15 +72,22 @@ animations = [{
 }],
 "loop": false,
 "name": &"spin",
-"speed": 5.0
+"speed": 1.0
 }]
 
-[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "visual_center", "sprite")]
+[sub_resource type="Resource" id="Resource_jvl4d"]
+script = ExtResource("9_cvlbv")
+positions = Array[Vector2]([Vector2(-14, -34), Vector2(-31, -51), Vector2(-42, -65), Vector2(-18, -76), Vector2(13, -84), Vector2(27, -71), Vector2(40, -59), Vector2(21, -47)])
+flip_horizontal = Array[bool]([false, false, false, false, false, false, false, false])
+metadata/_custom_type_script = "uid://baegdff0apbnp"
+
+[node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "visual_center", "highlight_button", "sprite")]
 script = ExtResource("1_waa31")
 left_obstacle = NodePath("LeftObstacle")
 middle_obstacle = NodePath("MiddleObstacle")
 right_obstacle = NodePath("RightObstacle")
 visual_center = NodePath("VisualCenter")
+highlight_button = NodePath("Button2")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"
 
@@ -125,6 +135,33 @@ manually_update_push_action = true
 activation_sequence = Array[bool]([false])
 
 [node name="VisualCenter" type="Node2D" parent="."]
-position = Vector2(0, -30)
+position = Vector2(0, -32)
 script = ExtResource("7_c4cux")
 metadata/_custom_type_script = "uid://cc284jdpqgups"
+
+[node name="Button2" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -49.0
+offset_top = -55.0
+offset_right = 48.0
+offset_bottom = -17.0
+
+[node name="SpinningChairAnchor" type="Node2D" parent="."]
+position = Vector2(-42, -64)
+script = ExtResource("9_usu0k")
+data = SubResource("Resource_jvl4d")
+metadata/_custom_type_script = "uid://dbkqhnjkmjtc7"
+
+[node name="AntennaComponent" parent="SpinningChairAnchor" node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("8_qebtr")]
+visible = false
+z_index = 1
+animation = &"active"
+highlighted_nodes = [NodePath("../../AnimatedSprite2DSignals")]
+detection_areas = [NodePath("Button"), NodePath("../../Button2")]
+
+[node name="Button" type="Button" parent="SpinningChairAnchor/AntennaComponent"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -3.0
+offset_top = -7.0
+offset_right = 5.0
+offset_bottom = 11.0

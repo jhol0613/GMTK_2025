@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkdspn40q0ph4"]
+
+[ext_resource type="Script" uid="uid://ce0uw3npcr0p" path="res://action_sequencer/antenna/antenna_system.gd" id="1_5aauc"]
+
+[node name="AntennaSystem" type="Node2D"]
+script = ExtResource("1_5aauc")

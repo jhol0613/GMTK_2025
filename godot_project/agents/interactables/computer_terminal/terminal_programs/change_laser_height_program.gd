@@ -10,6 +10,7 @@ var original_heights: Array[int]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	antenna_group = lasers
 	sequencer_control_scene_UID = "uid://d8l1lrlubiip"
 	super._ready()
 	for laser in lasers:

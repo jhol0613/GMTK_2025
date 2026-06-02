@@ -8,8 +8,14 @@ class_name Treadmill
 @export var _direction_data: Dictionary[Enums.Direction, TreadmillDirectionData]
 @export var animation_speed := 1.0
 @export var animation_loops := 2
-
+@export var antenna_position_data : TreadmillAntennaPositionData
+@export_range(0, 3) var antenna_position_index : int = 0 : 
+	set(new_value):
+		antenna_position_index = new_value
+		if antenna_position_index < antenna_position_data.position_data.size():
+			_antenna.position = antenna_position_data.position_data[antenna_position_index]
 @export var _pusher: Pusher
+@export var _antenna: AntennaComponent
 
 @onready var sound := $FmodEventEmitter2D
 @onready var _animation_loop_counter := 0
@@ -19,6 +25,7 @@ class_name Treadmill
 func _construct():
 	sprite.animation = _direction_data[direction].animation_name
 	sprite.frame = 0
+	#if antenna_position_index < antenna_position_data.size():
 	if not Engine.is_editor_hint():
 		#sprite.play_with_signals(_direction_data[direction].animation_name)
 		_pusher.push_action = _direction_data[direction].push_action

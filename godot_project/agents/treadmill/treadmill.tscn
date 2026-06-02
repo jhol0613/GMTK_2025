@@ -1,9 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://mtxspsqlab42"]
+[gd_scene load_steps=36 format=3 uid="uid://mtxspsqlab42"]
 
 [ext_resource type="Script" uid="uid://bjbsyatg6tdh0" path="res://agents/treadmill/treadmill.gd" id="1_vf448"]
 [ext_resource type="Script" uid="uid://dbiams5fxic7a" path="res://agents/treadmill/treadmill_direction_data.gd" id="2_pstgr"]
 [ext_resource type="Texture2D" uid="uid://dlkyjf11353s3" path="res://agents/treadmill/treadmill_placeholder.png" id="2_vf448"]
+[ext_resource type="Texture2D" uid="uid://basesw1871v52" path="res://agents/treadmill/antenna_plate.png" id="3_alc0r"]
+[ext_resource type="Script" uid="uid://jccjhtfxtiqj" path="res://agents/treadmill/treadmill_antenna_position_data.gd" id="3_pifmq"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_pstgr"]
+[ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="3_splbt"]
 [ext_resource type="Texture2D" uid="uid://c7gtony23dw85" path="res://agents/treadmill/treadmill.png" id="4_20g2x"]
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_niail"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="7_20g2x"]
@@ -31,6 +34,15 @@ script = ExtResource("2_pstgr")
 animation_name = "right"
 push_action = 19
 metadata/_custom_type_script = "uid://dbiams5fxic7a"
+
+[sub_resource type="Resource" id="Resource_bdqtd"]
+script = ExtResource("3_pifmq")
+position_data = Array[Vector2]([Vector2(15, -8), Vector2(15, -31), Vector2(-16, -31), Vector2(-16, -8)])
+direction_to_position = Dictionary[int, int]({})
+metadata/_custom_type_script = "uid://jccjhtfxtiqj"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
+size = Vector2(21, 13)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_20g2x"]
 atlas = ExtResource("2_vf448")
@@ -186,10 +198,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pifmq"]
-size = Vector2(21, 13)
-
-[node name="Treadmill" type="Node2D" node_paths=PackedStringArray("_pusher", "default_sound_emitter", "sprite")]
+[node name="Treadmill" type="Node2D" node_paths=PackedStringArray("_pusher", "_antenna", "default_sound_emitter", "sprite")]
 y_sort_enabled = true
 script = ExtResource("1_vf448")
 _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
@@ -199,19 +208,31 @@ _direction_data = Dictionary[int, ExtResource("2_pstgr")]({
 3: SubResource("Resource_alc0r")
 })
 animation_speed = 1.9
+antenna_position_data = SubResource("Resource_bdqtd")
 _pusher = NodePath("Pusher")
+_antenna = NodePath("AntennaComponent")
 default_action_beat = 2.0
 default_sound_emitter = NodePath("FmodEventEmitter2D")
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://dxn7tnanjy6px"
 
-[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -10)
-sprite_frames = SubResource("SpriteFrames_splbt")
-animation = &"up"
-speed_scale = 1.3
-script = ExtResource("3_pstgr")
-metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+[node name="AntennaComponent" parent="." node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("3_splbt")]
+visible = false
+position = Vector2(15, -31)
+highlighted_nodes = [NodePath("AntennaPlate"), NodePath("../AnimatedSprite2DSignals")]
+detection_areas = [NodePath("Button"), NodePath("../Button2")]
+
+[node name="Button" type="Button" parent="AntennaComponent"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -6.0
+offset_top = -8.0
+offset_right = 7.0
+offset_bottom = 15.0
+
+[node name="AntennaPlate" type="Sprite2D" parent="AntennaComponent"]
+z_index = -1
+position = Vector2(0, 10)
+texture = ExtResource("3_alc0r")
 
 [node name="Pusher" type="Area2D" parent="."]
 position = Vector2(0, -10)
@@ -229,3 +250,18 @@ event_guid = "{54ca2f07-b4b0-4eb5-84af-c99140d3f2e2}"
 script = ExtResource("7_20g2x")
 offset_seconds = -0.08
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_splbt")
+animation = &"up"
+speed_scale = 1.9
+script = ExtResource("3_pstgr")
+metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="Button2" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -16.0
+offset_top = -21.0
+offset_right = 16.0
+offset_bottom = 1.0

@@ -28,7 +28,7 @@ follow_on_animations = Dictionary[int, String]({
 
 [node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="2" node_paths=PackedStringArray("chairs")]
 script = ExtResource("4_ytems")
-chairs = [NodePath("../../SpinningChair"), NodePath("../../SpinningChair2"), NodePath("../../SpinningChair3"), NodePath("../../SpinningChair4")]
+chairs = [null, null, null, null]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
 [node name="SpinningChair" parent="." index="10" instance=ExtResource("2_8bkav")]

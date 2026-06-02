@@ -14,6 +14,7 @@ class_name Laser
 @export var obstacle : MovableObstacle
 #Clips base of laser visuals so you don't see them through laser body if laser changes its draw order due to hitting something
 @export var up_laser_clipper : TextureRect
+@export var antenna_button : Button
 
 ##Height corresponding to a laser shooting out of the ground
 const popup_height := 7
@@ -118,7 +119,10 @@ func _set_height(new_height: int):
 
 	if !is_inside_tree():
 		return
-
+	
+	antenna_button.position.y = - height + popup_height
+	antenna_button.size.y = height + 19
+	
 	pole1.position.y = max(-height + popup_height, -pole1_height)
 	pole2.position.y = min(max(-height + pole1_height + popup_height, -pole2_height), 0)
 

@@ -60,6 +60,7 @@ var teleporters := []
 var terminals := []
 ## antennas in the level (treated like terminals, but aren't an agent so need their own array
 var antennas := []
+var antenna_systems := []
 ##keys in the level. All must be collected for target to activate 
 var keys : Array[LevelKey] = []
 
@@ -105,6 +106,8 @@ func _ready() -> void:
 			terminals.append(child)
 		if child.is_in_group("antennas"):
 			antennas.append(child)
+		if child.is_in_group("antenna_systems"):
+			antenna_systems.append(child)
 		if child.is_in_group("keys"):
 			keys.append(child)
 			if child is LevelKey:

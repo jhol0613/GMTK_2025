@@ -5,6 +5,8 @@ class_name TerminalProgram
 ##Default is auto, where obstacle will reset position if it was moved via terminal or maintain its position
 ##if moved via antenna.
 @export var should_reset_position := PositionResetMode.AUTO
+##All the objects that should be controlled by the same antenna systsem if this program is attached to an antenna system
+@export var antenna_group : Array
 
 var sequencer_control_scene_UID : String
 

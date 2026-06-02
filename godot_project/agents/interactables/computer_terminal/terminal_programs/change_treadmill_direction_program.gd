@@ -18,6 +18,7 @@ class_name TurnTreadmillProgram
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	antenna_group = treadmills
 	sequencer_control_scene_UID = "uid://c5ltudkbawmw7" #uid://c0rrg37ad7473"
 	#for treadmill in treadmills:
 		#original_directions[treadmill] = treadmill.direction

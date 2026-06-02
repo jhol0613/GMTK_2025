@@ -400,6 +400,8 @@ func _initialize_antennas() -> void:
 		#terminal.selected.connect(_on_terminal_selected)
 	for antenna: Antenna in _level_scene.antennas:
 		antenna.selected.connect(_on_antenna_selected)
+	for antenna_system: AntennaSystem in _level_scene.antenna_systems:
+		antenna_system.selected.connect(_on_antenna_system_selected)
 
 func _initialize_teleporters() -> void:
 	for teleporter: Teleporter in _level_scene.teleporters:
@@ -734,6 +736,18 @@ func _fade_to_thinking_shader():
 		Vector3(brightness, contrast, saturation), filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/vignette", 1.0, filter_animation_time)
 	tween.tween_property(_shader.material, "shader_parameter/wipe", 1.0, filter_animation_time)
+
+func _on_antenna_system_selected(antenna_system: AntennaSystem, antenna_position: Vector2):
+	for system: AntennaSystem in _level_scene.antenna_systems:
+		system.set_active_animation(false) # clear other antenna systems if they were active
+	antenna_system.set_active_animation(true)
+	_lightning.global_position = antenna_position
+	_lightning.points[1] = _action_sequencer.antenna_tip.global_position - _lightning.global_position
+	_lightning.visible = true
+	_shake_camera.apply_shake(lightning_sreen_shake_strength, lightning_screen_shake_decay)
+	_action_sequencer.connect_antenna_to_screen(antenna_system.programs[0]) #Only makes sense to connect single program to screen
+	await get_tree().create_timer(lightning_duration).timeout
+	_lightning.visible = false
 
 func _on_antenna_selected(new_antenna: Antenna):
 	for antenna: Antenna in _level_scene.antennas:
