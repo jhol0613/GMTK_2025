@@ -1,6 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=24 format=3 uid="uid://cbc0cwtj1xkvi"]
 
-[ext_resource type="Script" uid="uid://cyio44hidbx4l" path="res://agents/movable_obstacles/movable_obstacle.gd" id="1_kw233"]
+[ext_resource type="Script" uid="uid://cga4cfwlqetr7" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.gd" id="1_nmw7r"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_nmw7r"]
 [ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_26gw8"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
 [ext_resource type="Resource" uid="uid://cg2foen8yla6w" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_slide_bonk_data.tres" id="5_s1287"]
+[ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="7_26gw8"]
+[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="8_gx75w"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_kgp0j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_s1287"]
 
@@ -76,15 +78,36 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="Resource" id="Resource_1bgl0"]
+script = ExtResource("8_gx75w")
+signal_id = "horizontal_move"
+animation = "right"
+frame = 0
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_xel6a"]
+script = ExtResource("8_gx75w")
+signal_id = "horizontal_move"
+animation = "left"
+frame = 0
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
+[sub_resource type="Resource" id="Resource_hjxk2"]
+script = ExtResource("8_gx75w")
+signal_id = "vertical_move"
+animation = "updown"
+frame = 0
+metadata/_custom_type_script = "uid://d0wms71yvj7vy"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3hhy"]
 size = Vector2(14, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s1287"]
 size = Vector2(24, 50)
 
-[node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "action_sound_emitters", "default_sound_emitter", "sprite")]
+[node name="SnackCartObstacle" type="Node2D" node_paths=PackedStringArray("pusher", "action_sound_emitters", "sprite")]
 z_index = 1
-script = ExtResource("1_kw233")
+script = ExtResource("1_nmw7r")
 pusher = NodePath("Pusher")
 standard_move_data = ExtResource("2_nmw7r")
 bonk_data = ExtResource("3_26gw8")
@@ -119,7 +142,6 @@ action_sound_emitters = {
 22: NodePath("BumpSound"),
 23: NodePath("BumpSound")
 }
-default_sound_emitter = NodePath("RollSound")
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
 1: "updown",
@@ -132,8 +154,9 @@ metadata/_custom_type_script = "uid://cyio44hidbx4l"
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -31)
 sprite_frames = SubResource("SpriteFrames_koxf5")
-animation = &"updown"
+animation = &"right"
 script = ExtResource("3_koxf5")
+signals = Array[ExtResource("8_gx75w")]([SubResource("Resource_1bgl0"), SubResource("Resource_xel6a"), SubResource("Resource_hjxk2")])
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="Pusher" type="Area2D" parent="."]
@@ -168,3 +191,15 @@ event_name = "event:/Rolling Cart Bumping"
 event_guid = "{8cdec751-5e12-422a-abca-0be302f16985}"
 script = ExtResource("10_s1287")
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="AntennaComponent" parent="." node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("7_26gw8")]
+position = Vector2(-12, -49)
+highlighted_nodes = [NodePath("../AnimatedSprite2DSignals")]
+detection_areas = [NodePath("../Button")]
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
+offset_left = -12.0
+offset_top = -59.0
+offset_right = 12.0
+offset_bottom = 1.0

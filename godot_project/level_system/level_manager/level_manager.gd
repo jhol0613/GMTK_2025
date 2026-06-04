@@ -81,8 +81,6 @@ var _obstacle_move_groups: Dictionary[float, Array] #can't have nested typed arr
 # So you can stop moving obstacles from moving before the beat after a reset
 var _obstacle_move_group_timers: Array[SceneTreeTimer]
 
-# obstacles with unique action timings will 
-
 # Additional state variables
 var _player_hidden = false
 var _player_newly_hidden = false
@@ -369,12 +367,12 @@ func _hide_player(new_hide_status: bool):
 	_player_newly_hidden = new_hide_status
 	if new_hide_status:
 		_player_character.disable_collisions()
-		_action_sequencer.set_skip_actions_mode(true)
+		_action_sequencer.set_skip_actions_mode(true, _action_sequencer.get_actions_until_next_interact()+1)
 	else:
 		#_player_character.play_animation_with_follow_on("unhide", "idle_down")
 		_player_character.enable_collisions()
 		_update_conductor_awareness()
-		_action_sequencer.set_skip_actions_mode(false)
+		#_action_sequencer.set_skip_actions_mode(false)
 
 func _initialize_pushers() -> void:
 	for pusher in _level_scene.pushers:
@@ -416,7 +414,8 @@ func _on_something_began_teleport(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.teleport_cooldown_list.append(entity)
 	if entity is PlayerCharacter:
-		_action_sequencer.set_skip_actions_mode(true, true, true)
+		_player_character.skip_next_move()
+		_action_sequencer.set_skip_actions_mode(true, 1)
 
 func _on_something_cleared_teleporter(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
@@ -619,6 +618,7 @@ func _update_interactables() -> void:
 			_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, interactable.follow_on_animation_on_success)
 			interactable.execute_action(Enums.PlayerAction.INTERACT, _current_beat)
 			return #Only one interactable should be triggered at a time--keep this in mind for level design
+	_action_sequencer.set_skip_actions_mode(true, 1, true)
 	_player_character.action_animations.set(Enums.PlayerAction.INTERACT, "")
 	_player_character.follow_on_animations.set(Enums.PlayerAction.INTERACT, "")
 
@@ -658,9 +658,11 @@ func _on_pusher_triggered(pusher: Pusher, movable: Movable):
 		if Enums.is_action_bonk(action):
 			_player_character.notify_failure(Enums.FailureCause.SQUISHED)
 			_on_level_fail()
+		elif Enums.is_action_fall(action):
+			_action_sequencer.set_skip_actions_mode(true, 1)
+			_player_character.execute_action(action, _current_beat)
+			_player_character.skip_next_move()
 		else:
-			#if not was_a_slide:
-				#_action_sequencer.set_skip_actions_mode(true, true, true)
 			_player_character.execute_action(action, _current_beat)
 	elif movable is Conductor and Enums.is_action_bonk(action):
 		push_error("Conductor Squished")

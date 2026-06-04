@@ -11,7 +11,7 @@ display_name = "3-5"
 conductor_spawn_beat = 4
 available_actions = Array[int]([4, 2])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAHAAUAAQAAAAMAAAAHAAQAAQAAAAMAAAAHAAMAAQAAAAMAAAAHAAIAAQAAAAMAAAAHAAEAAQAAAAMAAAAHAAAAAQAAAAMAAAA=")
 
 [node name="Teleporter" parent="." index="9" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_k0y6x")]
@@ -40,5 +40,13 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }

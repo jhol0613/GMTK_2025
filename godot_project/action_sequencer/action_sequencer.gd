@@ -117,7 +117,7 @@ var _lock_thinking_mode := true
 
 var _active_control_screen : Control
 
-@onready var _should_reset_skip_actions_mode: bool = false
+@onready var _skip_actions_mode_cooldown: int = -1
 #endregion
 
 #region Signals
@@ -194,9 +194,14 @@ func advance():
 
 	current_action += 1
 
-	if _should_reset_skip_actions_mode:
+	#if cooldown is negative, nothing happens
+	if _skip_actions_mode_cooldown == 0:
+		_skip_actions_mode_cooldown -= 1
 		_reset_skip_actions_mode()
-		_should_reset_skip_actions_mode = false
+	elif _skip_actions_mode_cooldown > 0:
+		_skip_actions_mode_cooldown -= 1
+	#else:
+		#_reset_skip_actions_mode()
 
 # should be called when a new level wants to update sequencer parameters
 func update_sequencer_data(new_available_slots: int, new_available_actions: Array[Enums.PlayerAction],
@@ -333,18 +338,27 @@ func clear_laser_hints():
 
 ##When true, sequencer actions highlight red (or skip action color)
 ##when that action would be triggered (does not alter logic as to whether
-##that action is actually triggered)
-func set_skip_actions_mode(should_skip_actions, immediate = false, one_shot = false):
+##that action is actually triggered). If actions is -1, will stay in skip actions
+##mode until commanded otherwise
+func set_skip_actions_mode(should_skip_actions, number_of_actions: int = -1, instant = false):
 	if should_skip_actions:
 		for i in range(_available_slots):
 			_initialized_slots[i].set_to_action_skipped_mode_color()
-	else:
-		for i in range(_available_slots):
-			_initialized_slots[i].set_to_playing_mode_color()
-	if immediate:
-		_initialized_slots[current_action-1].update_light()
-	if one_shot:
-		_should_reset_skip_actions_mode = true
+	_skip_actions_mode_cooldown = number_of_actions
+	if instant and not should_skip_actions:
+		_reset_skip_actions_mode()
+	elif instant:
+		_initialized_slots[current_action].update_light()
+
+func get_actions_until_next_interact():
+	var slot_num = current_action
+	for i in range(_initialized_slots.size()):
+		slot_num += 1
+		if slot_num >= _initialized_slots.size():
+			slot_num = 0
+		if _initialized_slots[slot_num].action == Enums.PlayerAction.INTERACT:
+			return i
+	return 0
 
 func _reset_skip_actions_mode():
 	for i in range(_available_slots):

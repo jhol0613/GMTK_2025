@@ -18,6 +18,7 @@ var _cooldown_in_progress = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	antenna_group = obstacles
 	sequencer_control_scene_UID = "uid://cwm6kjroqw6hn"
 	super._ready()
 	if should_reset_position == PositionResetMode.FALSE:

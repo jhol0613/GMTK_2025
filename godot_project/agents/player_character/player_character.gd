@@ -34,6 +34,7 @@ class_name PlayerCharacter
 @onready var _laser_blocker_collision_rectangle: RectangleShape2D = laser_blocker_collision_shape.shape
 @onready var _original_laser_blocker_height = _laser_blocker_collision_rectangle.size.y
 @onready var _original_laser_blocker_position = laser_blocker.position
+@onready var _should_skip_next_move = false
 
 signal failure
 
@@ -58,6 +59,16 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		_laser_blocker_collision_rectangle.size.y = duck_height
 		duck_collision_timer.start()
 		_ducking = true
+
+func execute_action(action, beat, skip_animation := false, instant := false):
+	if _should_skip_next_move:
+		_should_skip_next_move = false
+		return
+	super.execute_action(action, beat, skip_animation, instant)
+	
+
+func skip_next_move():
+	_should_skip_next_move = true
 
 func notify_success():
 	await get_tree().create_timer(success_animation_delay).timeout
