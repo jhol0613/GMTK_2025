@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="2_4na6f"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_5fmx6"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_cb7ns"]
-[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="5_5fmx6"]
+[ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="5_5fmx6"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cb7ns"]
 
 [node name="LevelBase" instance=ExtResource("1_sbc7u")]
@@ -51,20 +51,10 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Antenna" parent="." index="12" instance=ExtResource("5_5fmx6")]
+[node name="AntennaSystem" parent="." index="13" instance=ExtResource("5_5fmx6")]
+position = Vector2(59, 32)
 
-[node name="AnimatedSprite2DSignals" parent="Antenna" index="0"]
-position = Vector2(184, 63)
-
-[node name="Button" parent="Antenna" index="1"]
-offset_left = 183.0
-offset_top = 46.0
-offset_right = 223.0
-offset_bottom = 73.0
-
-[node name="TurnTreadmillProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+[node name="TurnTreadmillProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("treadmills")]
 script = ExtResource("2_4na6f")
 treadmills = [NodePath("../../Treadmill")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
-
-[editable path="Antenna"]

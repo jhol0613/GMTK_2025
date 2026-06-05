@@ -12,7 +12,7 @@
 display_name = "3-8"
 available_actions = Array[int]([4, 1, 2])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAGAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAMAAQAAAAMAAAA=")
 
 [node name="Laser" parent="." index="9" instance=ExtResource("2_g0151")]
@@ -57,7 +57,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [node name="Antenna" parent="SnackCartObstacle" index="5" instance=ExtResource("4_g0151")]

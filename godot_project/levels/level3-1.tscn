@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_b44x8"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_8aue3"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_ovry0"]
-[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="5_ovry0"]
+[ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="6_1ygfg"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="6_81dw1"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="6_sxp6j"]
 
@@ -30,46 +30,22 @@ grid_origin = Vector2i(6, 3)
 position = Vector2(144, 3)
 grid_origin = Vector2i(4, 0)
 
-[node name="Antenna2" parent="." index="12" instance=ExtResource("5_ovry0")]
-offset_left = 194.0
-offset_top = 51.0
-offset_right = 225.0
-offset_bottom = 70.0
-
-[node name="AnimatedSprite2DSignals" parent="Antenna2" index="0"]
-position = Vector2(-27, -49)
-
-[node name="Button" parent="Antenna2" index="1"]
-offset_left = -67.0
-offset_top = -109.0
-offset_right = -35.0
-offset_bottom = -38.0
-
-[node name="ChangeLaserHeightProgram" type="Node" parent="Antenna2" index="2" node_paths=PackedStringArray("lasers")]
-script = ExtResource("6_sxp6j")
-lasers = [NodePath("../../Laser2")]
-metadata/_custom_type_script = "uid://brjyxyhy640eh"
-
-[node name="Treadmill2" parent="." index="13" instance=ExtResource("3_ovry0")]
+[node name="Treadmill2" parent="." index="12" instance=ExtResource("3_ovry0")]
 position = Vector2(304, 90)
 grid_origin = Vector2i(9, 4)
 
-[node name="Antenna" parent="." index="14" instance=ExtResource("5_ovry0")]
+[node name="AntennaSystem2" parent="." index="14" instance=ExtResource("6_1ygfg")]
+position = Vector2(183, 6)
 
-[node name="AnimatedSprite2DSignals" parent="Antenna" index="0"]
-position = Vector2(185, 57)
-
-[node name="Button" parent="Antenna" index="1"]
-offset_left = 181.0
-offset_top = 49.0
-offset_right = 224.0
-offset_bottom = 71.0
-
-[node name="TurnTreadmillProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+[node name="TurnTreadmillProgram" type="Node" parent="AntennaSystem2" index="0" node_paths=PackedStringArray("treadmills")]
 script = ExtResource("6_81dw1")
 treadmills = [NodePath("../../Treadmill")]
-new_direction = 1
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
-[editable path="Antenna2"]
-[editable path="Antenna"]
+[node name="AntennaSystem" parent="." index="15" instance=ExtResource("6_1ygfg")]
+position = Vector2(183, 6)
+
+[node name="ChangeLaserHeightProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("lasers")]
+script = ExtResource("6_sxp6j")
+lasers = [NodePath("../../Laser2")]
+metadata/_custom_type_script = "uid://brjyxyhy640eh"

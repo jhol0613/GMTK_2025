@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=3 uid="uid://cbc0cwtj1xkvi"]
 
-[ext_resource type="Script" uid="uid://cga4cfwlqetr7" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.gd" id="1_nmw7r"]
+[ext_resource type="Script" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.gd" id="1_nmw7r"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
 [ext_resource type="Resource" uid="uid://ctslejt33rjmg" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_move_data.tres" id="2_nmw7r"]
 [ext_resource type="Resource" uid="uid://cq8p34cup4ogw" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_bonk_data.tres" id="3_26gw8"]
