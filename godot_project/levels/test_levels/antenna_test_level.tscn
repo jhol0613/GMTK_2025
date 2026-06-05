@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_lwf6y"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="3_8cwf8"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_3qe5b"]
-[ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="7_y48vm"]
+[ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="7_y48vm"]
 [ext_resource type="PackedScene" uid="uid://rx46ny3cc272" path="res://agents/spinning_obstacles/spinning_chair_V2.tscn" id="9_xc8e3"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="10_xc8e3"]
 
@@ -73,7 +73,11 @@ grid_origin = Vector2i(1, 0)
 
 [node name="AntennaSystem3" parent="." index="17" instance=ExtResource("10_xc8e3")]
 
-[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem3" index="0" node_paths=PackedStringArray("obstacles")]
+[node name="TurnLaserProgram" type="Node" parent="AntennaSystem3" index="0" node_paths=PackedStringArray("lasers")]
 script = ExtResource("7_y48vm")
-obstacles = [NodePath("../../SnackCartObstacle")]
-metadata/_custom_type_script = "uid://edi48oyem1ac"
+lasers = [NodePath("../../Laser"), NodePath("../../Laser2")]
+metadata/_custom_type_script = "uid://b23y6rruo1ixg"
+
+[node name="SpinningChair2" parent="." index="18" instance=ExtResource("9_xc8e3")]
+position = Vector2(302, 107)
+grid_origin = Vector2i(9, 5)
