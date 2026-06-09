@@ -448,21 +448,6 @@ func _update_obstacles():
 		var timer = get_tree().create_timer(AudioManager.beat_time_seconds * key)
 		_obstacle_move_group_timers.append(timer)
 		timer.timeout.connect(_update_obstacle_move_group.bind(_obstacle_move_groups[key]))
-		#_obstacle_move_group_timers.append(get_tree().create_timer(AudioManager.beat_time_seconds * key).timeout. \
-			#connect(_update_obstacle_move_group.bind(_obstacle_move_groups[key])))
-	#_level_scene.clear_obstacle_overrides()
-	## check for actions before grid is updated (so obstacles can move into the same square triggering a push)
-	#var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
-	#for obstacle: MovableObstacle in _level_scene.movable_obstacles:
-		#actions.get_or_add(obstacle, _bonk_check(obstacle, obstacle.get_next_move()))
-	#for obstacle in _level_scene.movable_obstacles:
-		#obstacle.execute_action(_bonk_check(obstacle, actions[obstacle], true), _current_beat)
-		##only update the move cursor if the action was executed (per the activation sequence)
-		#if obstacle.check_activation_for_beat(_current_beat):
-			#obstacle.advance_move_cursor()
-	#for obstacle in _level_scene.movable_obstacles:
-		#if obstacle.enabled:
-			#_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 ##move_group takes an array of obstacles and moves them all at once using deconfliction and bumping logic
 func _update_obstacle_move_group(move_group):
@@ -691,7 +676,7 @@ func _on_action_sequencer_play_started() -> void:
 	_current_beat = 0
 	_advance_car_for_play(train_move_right_on_play_time)
 	_fade_to_running_shader()
-	for obstacle in _level_scene.movable_obstacles:
+	for obstacle: MovableObstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 		if obstacle.reset_on_play_pressed:
 			obstacle.reset()

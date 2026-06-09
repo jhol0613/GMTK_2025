@@ -85,4 +85,5 @@ func _set_enabled(new_enabled):
 
 func reset():
 	super.reset()
+	request_offbeat_action.emit(self, Enums.PlayerAction.NONE, false)
 	_move_cursor = _move_cursor_start_position
