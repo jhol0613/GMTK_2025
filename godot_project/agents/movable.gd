@@ -31,9 +31,8 @@ var _collision_area_initial_position
 ##Timer for delaying move to desired beat
 @onready var _movement_timer = Timer.new()
 
-
 # Allows collision to move immediately while visuals catch up
-var _frozen_collision_position_during_move: Vector2i
+var _pre_move_collision_position: Vector2
 
 # If reset in middle of a move
 var _moving_tween: Tween
@@ -110,8 +109,10 @@ func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionDa
 	var move_target_local_space = _grid_to_local(_get_bonk_target(action))
 
 	if collision_area != null:
-		_frozen_collision_position_during_move = collision_area.global_position +  \
-		float(should_move_collision) * (move_target_local_space - position)
+		_pre_move_collision_position = collision_area.position + float(should_move_collision) * (move_target_local_space - position)
+		#_frozen_collision_position_during_move = move_target_local_space - position
+		#_frozen_collision_position_during_move = collision_area.global_position +  \
+		#float(should_move_collision) * (move_target_local_space - position)
 
 	var test = AudioManager.get_inverse_time_multiplier() * action_data.move_duration
 	
@@ -124,11 +125,13 @@ func _on_movement_start(action: Enums.PlayerAction, action_data: MovableActionDa
 func _action_movement_callback(alpha: float, start_position: Vector2, target_position: Vector2, \
 	move_curve: Curve = null_curve, y_curve: Curve = null_curve, y_magnitude: float = 16.0):
 
-	if collision_area != null:
-		collision_area.global_position = _frozen_collision_position_during_move
-	var position_difference = target_position - start_position
-	position = move_curve.sample(alpha) * position_difference + start_position
+	var position_difference = (target_position - start_position) * move_curve.sample(alpha)
+	position = position_difference + start_position
 	sprite.position.y = -y_curve.sample(alpha) * y_magnitude + _sprite_default_y
+	
+	if collision_area != null:
+		collision_area.position = _pre_move_collision_position - position_difference
+	#collision_area.position = _frozen_collision_position_during_move - position
 
 func reset():
 	if _moving_tween:
