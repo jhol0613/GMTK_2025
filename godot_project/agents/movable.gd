@@ -31,6 +31,8 @@ var _collision_area_initial_position
 ##Timer for delaying move to desired beat
 @onready var _movement_timer = Timer.new()
 
+@onready var _should_skip_next_move = false
+
 # Allows collision to move immediately while visuals catch up
 var _pre_move_collision_position: Vector2
 
@@ -64,6 +66,9 @@ func _ready():
 		_collision_area_initial_position = collision_area.position
 
 func execute_action(action : Enums.PlayerAction, beat: int, skip_animation := false, instant := false) -> void:
+	if _should_skip_next_move:
+		_should_skip_next_move = false
+		return
 	super.execute_action(action, beat, skip_animation, instant)
 	if not check_activation_for_beat(beat):
 		return
@@ -174,6 +179,8 @@ func set_grid_position(new_grid_position: Vector2i) -> void:
 	grid_position = new_grid_position
 	position = _grid_to_local(new_grid_position)
 
+func skip_next_move():
+	_should_skip_next_move = true
 
 func _teleportation_clear() -> void:
 	_can_teleport = true

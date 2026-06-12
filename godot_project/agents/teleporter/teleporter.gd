@@ -137,9 +137,9 @@ func _set_color(new_color):
 func _teleport(entity: Movable) -> void:
 	if disabled:
 		return
+	entity.interrupt_queued_action(true)
 	began_teleport.emit(entity)
 	var original_modulate = entity.modulate
-	entity.interrupt_queued_action(true)
 
 	if entity is PlayerCharacter: #special case for player character since we have art for it
 		entity.queue_teleportation(current_destination_target.grid_position)
@@ -199,7 +199,7 @@ func _teleport(entity: Movable) -> void:
 	if entity is not PlayerCharacter:
 		#await get_tree().create_timer(respawn_modulate_time).timeout
 		entity.modulate = original_modulate
-	completed_teleport.emit()
+	completed_teleport.emit(entity)
 
 func _stairstep_tween(value: Vector2, entity):
 	if entity:

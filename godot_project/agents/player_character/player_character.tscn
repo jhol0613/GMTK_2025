@@ -979,7 +979,7 @@ size = Vector2(15, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2rm4m"]
 size = Vector2(17.5, 55.75)
 
-[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "caught_failure_emitter", "laser_failure_emitter", "jump_collision_timer", "duck_collision_timer", "laser_blocker", "laser_blocker_collision_shape", "collision_area", "action_sound_emitters", "sprite")]
+[node name="PlayerCharacter" type="Node2D" node_paths=PackedStringArray("success_emitter", "caught_failure_emitter", "laser_failure_emitter", "jump_collision_timer", "duck_collision_timer", "laser_blocker", "laser_blocker_collision_shape", "collision_area", "sprite")]
 light_mask = 4
 z_index = 1
 script = ExtResource("1_1ty04")
@@ -1012,26 +1012,6 @@ action_beats = Dictionary[int, float]({
 14: 0.0,
 15: 0.0
 })
-action_sound_emitters = {
-1: NodePath("Sounds/MoveUp"),
-2: NodePath("Sounds/MoveDown"),
-3: NodePath("Sounds/MoveSideways"),
-4: NodePath("Sounds/MoveSideways"),
-5: NodePath("Sounds/Jump"),
-6: NodePath("Sounds/Duck"),
-8: NodePath("Sounds/Bonk"),
-9: NodePath("Sounds/Bonk"),
-10: NodePath("Sounds/Bonk"),
-11: NodePath("Sounds/Bonk"),
-12: NodePath("Sounds/QuickBonk"),
-13: NodePath("Sounds/QuickBonk"),
-14: NodePath("Sounds/QuickBonk"),
-15: NodePath("Sounds/QuickBonk"),
-20: NodePath("Sounds/Bonk"),
-21: NodePath("Sounds/Bonk"),
-22: NodePath("Sounds/Bonk"),
-23: NodePath("Sounds/Bonk")
-}
 sprite = NodePath("Shadow/PlayerSprite")
 action_animations = Dictionary[int, String]({
 1: "walk_up",

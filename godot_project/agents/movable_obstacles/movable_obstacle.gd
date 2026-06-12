@@ -13,6 +13,9 @@ class_name MovableObstacle
 ##If true, push action will not automatically update when move cursor is advanced
 @export var manually_update_push_action := false
 
+#for the level manager mostly, so it can skip updating obstacles with canceled moves during a move group update
+@onready var queued_action_canceled = false
+
 @onready var _move_cursor_start_position := 0
 @onready var _move_cursor := _move_cursor_start_position
 
@@ -47,6 +50,10 @@ func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := fal
 		super.execute_action(action, beat, skip_animation, instant)
 		if Enums.is_action_slide(action):
 			pusher.push_action = _direction_to_push_action(action)
+
+func interrupt_queued_action(should_cancel_sound := true):
+	queued_action_canceled = true
+	super.interrupt_queued_action(should_cancel_sound)
 
 func get_next_move() -> Enums.PlayerAction:
 	if movement_path.size() == 0:

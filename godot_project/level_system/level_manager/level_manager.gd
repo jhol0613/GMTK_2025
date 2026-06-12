@@ -408,14 +408,25 @@ func _initialize_teleporters() -> void:
 		# but only if there is no other path
 		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
 		teleporter.began_teleport.connect(_on_something_began_teleport)
+		teleporter.completed_teleport.connect(_on_something_completed_teleport)
 		teleporter.teleporter_cleared.connect(_on_something_cleared_teleporter)
 
 func _on_something_began_teleport(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.teleport_cooldown_list.append(entity)
+
+	#entity.interrupt_queued_action()
+	_level_scene.clear_obstacle_override_at_position(entity.grid_position)
+	_level_scene.update_obstacle_grid(entity.grid_position, true)
+	
+	entity.skip_next_move()
 	if entity is PlayerCharacter:
-		_player_character.skip_next_move()
 		_action_sequencer.set_skip_actions_mode(true, 1)
+	#elif entity is 
+
+func _on_something_completed_teleport(entity: Movable):
+	if entity is MovableObstacle:
+		_level_scene.update_obstacle_grid(entity.grid_position, false)
 
 func _on_something_cleared_teleporter(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
@@ -451,7 +462,7 @@ func _update_obstacles():
 
 ##move_group takes an array of obstacles and moves them all at once using deconfliction and bumping logic
 func _update_obstacle_move_group(move_group):
-	for obstacle in move_group:
+	for obstacle: MovableObstacle in move_group:
 		_level_scene.clear_obstacle_override_at_position(obstacle.grid_position)
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)
 	var actions: Dictionary #Dictionary[MovableObstacle, Enums.PlayerAction]
@@ -463,8 +474,10 @@ func _update_obstacle_move_group(move_group):
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
 	#_level_scene.clear_obstacle_overrides()
-	for obstacle in move_group:
-		if obstacle.enabled:
+	for obstacle: MovableObstacle in move_group:
+		if obstacle.queued_action_canceled:
+			obstacle.queued_action_canceled = false
+		elif obstacle.enabled:
 			_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 
 ## Callback for when obstacle wants to move off beat, so level manager can still update grid and resolve disputes
@@ -475,7 +488,6 @@ func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_acti
 	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 	if update_origin:
 		_initialize_movable(obstacle, obstacle.grid_position, false)
-
 
 func _update_player(action: Enums.PlayerAction) -> void:
 	if _player_newly_hidden or not _player_hidden:
