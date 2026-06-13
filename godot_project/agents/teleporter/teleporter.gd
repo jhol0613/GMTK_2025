@@ -188,7 +188,7 @@ func _teleport(entity: Movable) -> void:
 		current_destination_target.play_player_appear_animation(AudioManager.get_time_multiplier_number())
 		#target_sprite_lights.play_with_signals("respawn_player", AudioManager.get_time_multiplier_number())
 	else:
-		current_destination_target.play_player_appear_animation(AudioManager.get_time_multiplier_number())
+		current_destination_target.play_entity_appear_animation(AudioManager.get_time_multiplier_number())
 		#target_sprite_lights.play_with_signals("respawn_object", AudioManager.get_time_multiplier_number())
 	#signal is when object should reappear in respawn animation
 	#await target_sprite_lights.animation_signal

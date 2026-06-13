@@ -451,7 +451,7 @@ metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
 [node name="DespawnParticles" type="Node2D" parent="Node2D"]
 modulate = Color(0.715401, 1.47, 0.6468, 1)
-position = Vector2(0, -45)
+position = Vector2(-1, -26)
 
 [node name="DespawnParticles" type="GPUParticles2D" parent="Node2D/DespawnParticles"]
 modulate = Color(2.43, 4.865, 1.155, 1)
