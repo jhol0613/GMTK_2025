@@ -230,8 +230,9 @@ func _on_level_fail() -> void:
 	_failure_animation_playing = false
 
 func _on_conductor_reached_target() -> void:
-	if _conductor.state == Enums.ConductorState.UNAWARE:
-		_conductor.exit_level()
+	pass
+	#if _conductor.state == Enums.ConductorState.UNAWARE:
+		#_conductor.exit_level()
 
 func _reset_level() -> void:
 	print("level reset")
@@ -582,10 +583,10 @@ func _update_conductor_awareness():
 			if _player_hidden:
 				return
 			var new_awareness := true
-			if _conductor.facing_direction == Enums.Direction.LEFT:
-				new_awareness = _player_character.grid_position.x <= _conductor.grid_position.x
-			else:
-				new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
+			#if _conductor.facing_direction == Enums.Direction.LEFT:
+				#new_awareness = _player_character.grid_position.x <= _conductor.grid_position.x
+			#else:
+				#new_awareness = _player_character.grid_position.x >= _conductor.grid_position.x
 
 			if new_awareness:
 				_conductor.state = Enums.ConductorState.FOUND
