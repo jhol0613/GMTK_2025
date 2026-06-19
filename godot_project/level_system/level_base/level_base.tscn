@@ -228,6 +228,13 @@ collision_mask = 5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
 shape = SubResource("RectangleShape2D_bsh3f")
 
+[node name="LeftTarget" type="Area2D" parent="."]
+position = Vector2(17, 52)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTarget"]
+shape = SubResource("RectangleShape2D_bsh3f")
+
 [node name="AdditionalSprites" type="Node2D" parent="."]
 
 [node name="CarConnector" type="Sprite2D" parent="AdditionalSprites"]
@@ -262,3 +269,4 @@ script = ExtResource("10_ais3r")
 font = ExtResource("11_ucxu3")
 
 [connection signal="area_entered" from="Target" to="." method="_on_target_area_entered"]
+[connection signal="area_entered" from="LeftTarget" to="." method="_on_left_target_area_entered"]

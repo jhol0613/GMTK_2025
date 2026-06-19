@@ -6,7 +6,7 @@
 [node name="LevelBase" instance=ExtResource("1_6p6tl")]
 display_name = "2-9"
 conductor_spawn_beat = 3
-available_actions = Array[int]([4, 1, 2, 7])
+available_actions = Array[int]([4, 3, 7])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true
@@ -17,5 +17,7 @@ tile_map_data = PackedByteArray("AAABAAEABAAAAAAAAAADAAEABAABAAAAAAACAAEABAACAAA
 
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_nx1ru")]
 position = Vector2(80, 26)
+
+[connection signal="area_entered" from="LeftTarget" to="." method="_on_left_target_reached"]
 
 [editable path="HideBench"]

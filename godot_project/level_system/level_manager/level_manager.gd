@@ -178,6 +178,7 @@ func _initialize_level():
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_level_complete)
 	_level_scene.connect("conductor_reached_target", _on_conductor_reached_target)
+	_level_scene.connect("left_target_reached", _on_left_target_reached)
 
 	# Update sequencer with new level data
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions,
@@ -234,6 +235,9 @@ func _on_conductor_reached_target() -> void:
 	#if _conductor.state == Enums.ConductorState.UNAWARE:
 		#_conductor.exit_level()
 
+func _on_left_target_reached() -> void:
+	print("Player went backwards, train car should advance backward")
+
 func _reset_level() -> void:
 	print("level reset")
 	_current_beat = 0
@@ -247,7 +251,7 @@ func _reset_level() -> void:
 	else:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
 	_level_scene.reset_lock()
-	print("hello")
+	_level_scene.reset_left_target_active()
 	_obstacle_move_group_timers.clear()
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true

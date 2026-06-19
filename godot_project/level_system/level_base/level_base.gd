@@ -32,6 +32,7 @@ class_name RhythmRailLevel
 @onready var _obstacle_layer : TileMapLayer = $Obstacles
 @onready var _debug_drawing_layer : DebugDrawing = $DebugDrawing
 @onready var _target := $Target
+@onready var _left_target := $LeftTarget
 @onready var _lock := $AdditionalSprites/Lock
 
 ##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
@@ -67,6 +68,9 @@ var keys : Array[LevelKey] = []
 
 signal target_reached
 signal conductor_reached_target
+signal left_target_reached
+
+var left_target_triggered_count := 0
 
 var path_grid: AStarGrid2D
 var target_position: Vector2i
@@ -268,6 +272,16 @@ func _on_target_area_entered(area: Area2D) -> void:
 		target_reached.emit()
 	elif area.owner is Conductor:
 		conductor_reached_target.emit()
+
+func reset_left_target_active():
+	left_target_triggered_count = 0
+	#_left_target.set_collision_mask_value(1, active)
+
+func _on_left_target_area_entered(area: Area2D) -> void:
+	if left_target_triggered_count >= 1:
+		left_target_reached.emit()
+	else:
+		left_target_triggered_count += 1
 
 func _on_key_collected():
 	_keys_collected += 1
