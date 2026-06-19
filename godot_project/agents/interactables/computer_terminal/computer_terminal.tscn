@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://balkn08c5sj37"]
+[gd_scene load_steps=12 format=3 uid="uid://balkn08c5sj37"]
 
 [ext_resource type="Script" uid="uid://dp30hkkvpxa3q" path="res://agents/interactables/computer_terminal/computer_terminal.gd" id="1_vgobs"]
 [ext_resource type="Texture2D" uid="uid://0idlb3c8520j" path="res://agents/interactables/computer_terminal/terminal_final.png" id="2_vgobs"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="3_plk7m"]
+[ext_resource type="Texture2D" uid="uid://bygxg2ghslmu2" path="res://agents/interactables/computer_terminal/terminal_nearly_transparent.png" id="4_7dd7v"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="4_anuqy"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="5_plk7m"]
 
@@ -43,11 +44,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_plk7m"]
 size = Vector2(15, 38)
 
-[node name="ComputerTerminal" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="ComputerTerminal" type="Node2D" node_paths=PackedStringArray("highlight_sprites", "sprite")]
 z_index = 1
 script = ExtResource("1_vgobs")
 interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])
 player_animation_on_success = "type"
+highlight_sprites = [NodePath("AnimatedSprite2DSignals/HighlightSprite")]
 sprite = NodePath("AnimatedSprite2DSignals")
 action_animations = Dictionary[int, String]({
 7: "activate"
@@ -58,9 +60,12 @@ metadata/_custom_type_script = "uid://xq6vhxpiybio"
 [node name="AnimatedSprite2DSignals" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -25)
 sprite_frames = SubResource("SpriteFrames_bv8hh")
-animation = &"activate"
+animation = &"idle"
 script = ExtResource("3_plk7m")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="HighlightSprite" type="Sprite2D" parent="AnimatedSprite2DSignals"]
+texture = ExtResource("4_7dd7v")
 
 [node name="LaserBlocker" type="Area2D" parent="."]
 collision_layer = 513

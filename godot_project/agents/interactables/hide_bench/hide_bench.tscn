@@ -1,10 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://43urct8w48ps"]
+[gd_scene load_steps=5 format=3 uid="uid://43urct8w48ps"]
 
 [ext_resource type="Script" uid="uid://b6i8hkyn2si42" path="res://agents/interactables/hide_bench/hide_bench.gd" id="1_ekhmm"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="2_6nn3b"]
 [ext_resource type="SpriteFrames" uid="uid://ddc77qj3h71yt" path="res://agents/interactables/hide_bench/reader.tres" id="2_ekhmm"]
+[ext_resource type="Texture2D" uid="uid://cenypvfg6qf40" path="res://agents/interactables/hide_bench/Bench sitters_nearly_transparent.png" id="4_82ul6"]
 
-[node name="HideBench" type="Node2D" node_paths=PackedStringArray("sprite")]
+[node name="HideBench" type="Node2D" node_paths=PackedStringArray("highlight_sprites", "sprite")]
 z_index = 1
 script = ExtResource("1_ekhmm")
 hide_duration = 5
@@ -12,6 +13,7 @@ interactable_positions = Array[Vector2i]([Vector2i(0, 1), Vector2i(0, -1)])
 repeatable = true
 player_animation_on_success = "hide"
 follow_on_animation_on_success = "hiding"
+highlight_sprites = [NodePath("AnimatedSprite2DSignals/HighlightSprite1"), NodePath("AnimatedSprite2DSignals2/HighlightSprite2")]
 sprite = NodePath("AnimatedSprite2DSignals")
 metadata/_custom_type_script = "uid://xq6vhxpiybio"
 
@@ -21,11 +23,17 @@ sprite_frames = ExtResource("2_ekhmm")
 script = ExtResource("2_6nn3b")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
+[node name="HighlightSprite1" type="Sprite2D" parent="AnimatedSprite2DSignals"]
+texture = ExtResource("4_82ul6")
+
 [node name="AnimatedSprite2DSignals2" type="AnimatedSprite2D" parent="."]
 position = Vector2(30, -11)
 sprite_frames = ExtResource("2_ekhmm")
 script = ExtResource("2_6nn3b")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
+
+[node name="HighlightSprite2" type="Sprite2D" parent="AnimatedSprite2DSignals2"]
+texture = ExtResource("4_82ul6")
 
 [node name="FmodEventEmitter2D" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/Newspaper Open"

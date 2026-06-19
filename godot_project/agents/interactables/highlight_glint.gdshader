@@ -1,9 +1,10 @@
 shader_type canvas_item;
+render_mode blend_add;
 
-uniform float speed : hint_range(0.0, 5.0) = 1.0;
-uniform float line_width : hint_range(0.0, 0.2) = 0.15;
+uniform float speed : hint_range(0.0, 5.0) = 2.0;
+uniform float line_width : hint_range(0.0, 0.2) = 0.2;
 uniform vec4 line_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
-uniform float pause_duration : hint_range(0.0, 2.0) = 0.15;
+uniform float pause_duration : hint_range(0.0, 2.0) = 0.0;
 uniform float offset = 2.0;
 uniform int pixelate_line : hint_range(0, 1) = 1;
 
@@ -11,7 +12,7 @@ void fragment() {
     vec4 base_texture = texture(TEXTURE, UV);
     
     // Skip fully transparent pixels
-    if (base_texture.a < 0.01) {
+    if (base_texture.a < 0.001) {
         discard;
     }
     
@@ -46,6 +47,5 @@ void fragment() {
     // Mix base texture with line color (respecting line_color alpha)
     vec3 final_color = mix(base_texture.rgb, line_color.rgb, line_intensity * line_color.a);
     
-    // Preserve original alpha
-    COLOR = vec4(final_color, base_texture.a);
+    COLOR = vec4(final_color, 1.0);
 }
