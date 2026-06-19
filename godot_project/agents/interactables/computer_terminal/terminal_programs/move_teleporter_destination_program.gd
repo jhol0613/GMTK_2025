@@ -12,7 +12,7 @@ signal _all_entities_done_teleporting
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	sequencer_control_scene_UID = "uid://c3oui8nrbnmi4"
+	sequencer_control_scene_UID = Enums.SequencerControlScene.MOVE_TELEPORT_DESTINATION
 	#for convenience, just set teleporter to whatever owns this antenna program
 	if teleporters.size() == 0:
 		var gramps = get_parent().get_parent()

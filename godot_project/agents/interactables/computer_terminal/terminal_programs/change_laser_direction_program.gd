@@ -13,7 +13,7 @@ var original_directions : Dictionary[Laser, Enums.Direction]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	antenna_group = lasers
-	sequencer_control_scene_UID = "uid://dw1sgggrlnrke"
+	sequencer_control_scene_UID = Enums.SequencerControlScene.TURN_LASER
 	for laser in lasers:
 		original_directions[laser] = laser.direction
 	super._ready()

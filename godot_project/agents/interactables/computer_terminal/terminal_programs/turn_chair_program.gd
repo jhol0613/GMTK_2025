@@ -12,7 +12,7 @@ var _previously_selected_direction
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	antenna_group = chairs
-	sequencer_control_scene_UID = "uid://crorf1owblj5p"
+	sequencer_control_scene_UID = Enums.SequencerControlScene.TURN_CHAIR
 	super._ready()
 
 func run():

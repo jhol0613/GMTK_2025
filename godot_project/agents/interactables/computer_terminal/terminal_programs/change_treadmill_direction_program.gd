@@ -8,29 +8,17 @@ class_name TurnTreadmillProgram
 @export var left_limit: int = -99999
 ##Number of times treadmill can be rotated 90 deg clockwise from starting position
 @export var right_limit: int = 99999
-#@export var allowed_directions : Array[Enums.Direction] = [
-	#Enums.Direction.UP,
-	#Enums.Direction.DOWN,
-	#Enums.Direction.LEFT,
-	#Enums.Direction.RIGHT]
-
-#var original_directions : Dictionary[Treadmill, Enums.Direction]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	antenna_group = treadmills
-	sequencer_control_scene_UID = "uid://c5ltudkbawmw7" #uid://c0rrg37ad7473"
-	#for treadmill in treadmills:
-		#original_directions[treadmill] = treadmill.direction
+	sequencer_control_scene_UID = Enums.SequencerControlScene.TURN_TREADMILL
 	super._ready()
 
 func initialize_screen(screen_scene: ChangeTreadmillDirectionScreenV2):
 	super.initialize_screen(screen_scene)
 	screen_scene.direction_pressed.connect(_on_direction_selected)
 	screen_scene.set_limits(left_limit, right_limit)
-	#screen_scene.set_allowed_directions(allowed_directions)
-	#if treadmills.size() > 0:
-		#current_sequencer_control_scene.set_direction(treadmills[0].direction)
 
 func _on_direction_selected(direction: Enums.Direction):
 	for treadmill in treadmills:
