@@ -51,7 +51,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bsh3f"]
-size = Vector2(20, 27)
+size = Vector2(15, 19)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1nasv"]
 atlas = ExtResource("11_qsue7")
@@ -226,6 +226,7 @@ collision_layer = 2
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_bsh3f")
 
 [node name="LeftTarget" type="Area2D" parent="."]

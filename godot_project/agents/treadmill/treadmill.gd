@@ -33,6 +33,7 @@ func _construct():
 
 func _ready() -> void:
 	super._ready()
+	add_to_group("treadmills")
 	set_direction(direction)
 	sprite.speed_scale = animation_speed
 	action_executed.connect(_on_action_executed)

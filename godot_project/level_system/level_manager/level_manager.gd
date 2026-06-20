@@ -176,7 +176,7 @@ func _initialize_level():
 	_initialize_antennas()
 
 	# Connect to level finished signal
-	_level_scene.connect("target_reached", _on_level_complete)
+	_level_scene.connect("target_reached", _on_exit_overlapped)
 	_level_scene.connect("conductor_reached_target", _on_conductor_reached_target)
 	_level_scene.connect("left_target_reached", _on_left_target_reached)
 
@@ -194,7 +194,13 @@ func _initialize_level():
 	# load following level
 	load_next_level()
 
+func _on_exit_overlapped() -> void:
+	#this way failures take precedence, e.g. if you bump into the conductor while he's at the exit
+	call_deferred("_on_level_complete")
+
 func _on_level_complete() -> void:
+	if _failure_animation_playing:
+		return
 	_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
 	_player_character.notify_success()
 	for collectible in _level_scene.collectibles:
@@ -216,6 +222,7 @@ func _on_level_complete() -> void:
 	advance_level()
 
 func _on_level_fail() -> void:
+	print("level fail")
 	_action_sequencer.buttons_enabled = false
 	_action_sequencer.stop_sequencer()
 	for agent: Agent in _level_scene.agents:
@@ -409,10 +416,6 @@ func _initialize_antennas() -> void:
 
 func _initialize_teleporters() -> void:
 	for teleporter: Teleporter in _level_scene.teleporters:
-		# set a high value of traversing through a teleporter to discourage the conductor from going
-		# into the teleporter accidentally. The player can force the conductor into going through,
-		# but only if there is no other path
-		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
 		teleporter.began_teleport.connect(_on_something_began_teleport)
 		teleporter.completed_teleport.connect(_on_something_completed_teleport)
 		teleporter.teleporter_cleared.connect(_on_something_cleared_teleporter)
@@ -527,8 +530,10 @@ func _update_conductor() -> void:
 		_conductor.stunned = false
 		# TODO: add stun animation here
 		return
-	# Target next train car if player's hidden
+	
 	var target = _player_character.grid_position if _conductor.state != Enums.ConductorState.UNAWARE else _level_scene.target_position
+	_update_grid_weights(target)
+	# Target next train car if player's hidden
 	var conductor_path = _level_scene.path_grid \
 		.get_id_path(_conductor.grid_position, target, true)
 
@@ -563,6 +568,39 @@ func _update_conductor() -> void:
 		_bonk_check(_conductor, Enums.vector_to_player_action(conductor_path[1] - _conductor.grid_position)),
 		_current_beat
 	)
+
+func _update_grid_weights(target: Vector2i):
+	#cells in conductor's row are cheaper so conductor prioritizes horizontal movement
+	var player_relative_to_conductor: Vector2i = _player_character.grid_position - _conductor.grid_position
+	for row in range(_level_scene.path_grid.size.y):
+		for column in range(_level_scene.path_grid.size.x):
+			_level_scene.update_weight_grid(Vector2i(column, row), .8 if row == _conductor.grid_position.y else 1.0)
+	#treadmills pointing along desired path make path cheaper, opposite direction makes path expensive
+	#naive path is the path the conductor would take if treadmills all had weight 1.0
+	var naive_path: Array[Vector2i] = _level_scene.path_grid.get_id_path(_conductor.grid_position, target, true)
+	for i in range(naive_path.size()-1):
+		for treadmill: Treadmill in _level_scene.treadmills:
+			if not treadmill.grid_position == naive_path[i]:
+				continue
+			var desired_direction = naive_path[i+1] - naive_path[i]
+			var dot = Enums.doti(Enums.direction_to_vector(treadmill.direction), desired_direction)
+			var weight = 0.1 if dot == 1 else 5.0 if dot == -1 else 4.0
+			if weight == 100.0:
+				pass
+			_level_scene.update_weight_grid(treadmill.grid_position, weight)
+				
+	#for treadmill: Treadmill in _level_scene.treadmills:
+		#
+		#if Enums.doti(Enums.direction_to_vector(treadmill.direction), player_relative_to_conductor) >= 0:
+			#_level_scene.update_weight_grid(treadmill.grid_position, 0.1)
+		#else:
+			#_level_scene.update_weight_grid(treadmill.grid_position, 3.0)
+	
+	# set a high value of traversing through a teleporter to discourage the conductor from going
+	# into the teleporter accidentally. The player can force the conductor into going through,
+	# but only if there is no other path
+	for teleporter in _level_scene.teleporters:
+		_level_scene.update_weight_grid(teleporter.grid_position, 99.0)
 
 ##Use conductor facing direction, player hide status and position to determine if conductor should become aware
 func _update_conductor_awareness():

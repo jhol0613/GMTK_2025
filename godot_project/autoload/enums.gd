@@ -393,4 +393,8 @@ func rotate_90_right(direction: Direction) -> Direction:
 			return Enums.Direction.RIGHT
 		_:
 			return direction
+
+##dot product of 2 Vector2i
+func doti(a: Vector2i, b: Vector2i) -> int:
+	return a.x * b.x + a.y * b.y
 #endregion

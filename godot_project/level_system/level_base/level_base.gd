@@ -7,15 +7,15 @@ class_name RhythmRailLevel
 @export var display_name:= "Unnamed Level"
 
 @export_subgroup("Player", "player")
-## Where on the tilemap the player should spawn
+##Where on the tilemap the player should spawn
 @export var player_spawn_position: Vector2i
 
 @export_subgroup("Conductor", "conductor")
 @export var conductor_spawn_beat := 2
-## Where in the car grid the conductor should appear
+##Where in the car grid the conductor should appear
 @export var conductor_spawn_position := Vector2i(0, 2)
 @export var conductor_enabled := true
-## The conductor will wait inside the car instead of playing the enter animation
+##The conductor will wait inside the car instead of playing the enter animation
 @export var conductor_snooze := false
 
 @export_subgroup("Sequencer Data")
@@ -43,6 +43,8 @@ class_name RhythmRailLevel
 #TODO: These arrays could be refactored to use Godot's Groups system
 ## agents in the level to call update function to
 var agents := []
+## treadmills in the level
+var treadmills := []
 ## movable_obstacles in the level except the player and conductor
 var movable_obstacles := []
 ## collectibles in the level
@@ -92,6 +94,8 @@ func _ready() -> void:
 	for child in children:
 		if child.is_in_group("agents"):
 			agents.append(child)
+		if child.is_in_group("treadmills"):
+			treadmills.append(child)
 		if child.is_in_group("collectibles"):
 			collectibles.append(child)
 		if child.is_in_group("movable_obstacles"):
