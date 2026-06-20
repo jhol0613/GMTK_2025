@@ -15,7 +15,6 @@ func _ready() -> void:
 	
 	
 func _save_target_positions():
-	print("hello")
 	for star in target_positions.keys():
 		target_positions[star] = star.position
 	notify_property_list_changed()

@@ -361,8 +361,12 @@ func get_actions_until_next_interact():
 	return 0
 
 func _reset_skip_actions_mode():
-	for i in range(_available_slots):
-		_initialized_slots[i].set_to_playing_mode_color()
+	if current_state == SequencingState.RUNNING:
+		for i in range(_available_slots):
+			_initialized_slots[i].set_to_playing_mode_color()
+	else:
+		for i in range(_available_slots):
+			_initialized_slots[i].set_to_thinking_mode_color()
 	_initialized_slots[current_action-1].update_light()
 
 # Clears out all slots and resets action quanitities

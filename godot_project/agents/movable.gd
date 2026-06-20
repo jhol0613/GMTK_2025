@@ -144,6 +144,7 @@ func reset():
 	_reset_timer(_movement_timer)
 	if _sprite_default_y:
 		sprite.position.y = _sprite_default_y
+	_should_skip_next_move = false
 	super.reset()
 
 func interrupt_queued_action(should_cancel_sound := true):
@@ -172,7 +173,6 @@ func _is_action_bonk(action: Enums.PlayerAction):
 		(action == Enums.PlayerAction.RIGHT_BONK) or \
 		(action == Enums.PlayerAction.UP_BONK) or \
 		(action == Enums.PlayerAction.DOWN_BONK)
-
 
 func set_grid_position(new_grid_position: Vector2i) -> void:
 	print("Set position: %s" % new_grid_position)

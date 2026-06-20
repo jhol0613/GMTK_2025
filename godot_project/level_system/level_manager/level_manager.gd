@@ -87,6 +87,9 @@ var _player_newly_hidden = false
 var _failure_animation_playing = false
 var _hint_number := 0
 
+var _actively_teleporting_entities := 0
+signal all_entities_complete_teleport
+
 func _ready() -> void:
 	if SaveManager.run_from_F6:
 		_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
@@ -201,6 +204,7 @@ func _on_exit_overlapped() -> void:
 func _on_level_complete() -> void:
 	if _failure_animation_playing:
 		return
+	_conductor.interrupt_queued_action(true)
 	_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
 	_player_character.notify_success()
 	for collectible in _level_scene.collectibles:
@@ -246,6 +250,8 @@ func _on_left_target_reached() -> void:
 	print("Player went backwards, train car should advance backward")
 
 func _reset_level() -> void:
+	if _actively_teleporting_entities > 0:
+		await all_entities_complete_teleport
 	print("level reset")
 	_current_beat = 0
 	if _conductor != null:
@@ -257,6 +263,7 @@ func _reset_level() -> void:
 		_action_sequencer.set_conductor_spawn_countdown_display(_level_scene.conductor_spawn_beat)
 	else:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
+	_action_sequencer._reset_skip_actions_mode()
 	_level_scene.reset_lock()
 	_level_scene.reset_left_target_active()
 	_obstacle_move_group_timers.clear()
@@ -425,17 +432,25 @@ func _on_something_began_teleport(entity: Movable):
 		teleporter.teleport_cooldown_list.append(entity)
 
 	#entity.interrupt_queued_action()
-	_level_scene.clear_obstacle_override_at_position(entity.grid_position)
-	_level_scene.update_obstacle_grid(entity.grid_position, true)
 	
-	entity.skip_next_move()
+	if entity is MovableObstacle:
+		_level_scene.clear_obstacle_override_at_position(entity.grid_position)
+		_level_scene.update_obstacle_grid(entity.grid_position, true)
 	if entity is PlayerCharacter:
 		_action_sequencer.set_skip_actions_mode(true, 1)
-	#elif entity is 
+		entity.disable_collisions()
+	entity.skip_next_move()
+	
+	_actively_teleporting_entities += 1
 
 func _on_something_completed_teleport(entity: Movable):
 	if entity is MovableObstacle:
 		_level_scene.update_obstacle_grid(entity.grid_position, false)
+	elif entity is PlayerCharacter:
+		entity.enable_collisions()
+	_actively_teleporting_entities -= 1
+	if _actively_teleporting_entities <= 0:
+		all_entities_complete_teleport.emit()
 
 func _on_something_cleared_teleporter(entity: Movable):
 	for teleporter: Teleporter in _level_scene.teleporters:
@@ -471,6 +486,7 @@ func _update_obstacles():
 
 ##move_group takes an array of obstacles and moves them all at once using deconfliction and bumping logic
 func _update_obstacle_move_group(move_group):
+	print("updating move group")
 	for obstacle: MovableObstacle in move_group:
 		_level_scene.clear_obstacle_override_at_position(obstacle.grid_position)
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)

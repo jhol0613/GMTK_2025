@@ -1,12 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://buewsb5qu1f0m"]
+[gd_scene load_steps=5 format=4 uid="uid://buewsb5qu1f0m"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_6v6an"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_khuon"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_qg5g5"]
-[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_6kvce"]
-[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_idv3j"]
-[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_05a43"]
-[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_nclxg"]
 
 [sub_resource type="Resource" id="Resource_khuon"]
 script = ExtResource("2_khuon")
@@ -24,56 +20,6 @@ hints = Array[ExtResource("2_khuon")]([SubResource("Resource_khuon")])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAACAAMAAQAAAAMAAAACAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAMAAQAAAAMAAAAIAAIAAQAAAAMAAAA=")
 
-[node name="BackWall" parent="." index="4"]
-z_index = -2
-y_sort_enabled = false
-position = Vector2(0, -5.37)
-tile_set = ExtResource("3_6kvce")
-
-[node name="PointLight2D" parent="BackWall" index="0"]
-z_index = 0
-
-[node name="Windows" parent="BackWall" index="4"]
-position = Vector2(0, 0)
-
-[node name="LeftExteriorFloor" parent="." index="5"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-tile_set = ExtResource("4_idv3j")
-
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_05a43")
-
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
-position = Vector2(32, -8)
-tile_set = ExtResource("6_nclxg")
-
-[node name="RightExteriorFloor" parent="." index="6"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-scale = Vector2(1, 1)
-tile_set = ExtResource("4_idv3j")
-
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_05a43")
-
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
-position = Vector2(6, -8)
-tile_set = ExtResource("6_nclxg")
-
-[node name="Lock" parent="AdditionalSprites" index="3"]
-light_mask = 1
-animation = &"vanish"
-autoplay = ""
-
 [node name="Treadmill" parent="." index="9" instance=ExtResource("2_qg5g5")]
 position = Vector2(113, 33)
 direction = 1
@@ -88,3 +34,8 @@ grid_origin = Vector2i(6, 1)
 position = Vector2(304, 34)
 direction = 1
 grid_origin = Vector2i(9, 1)
+
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""

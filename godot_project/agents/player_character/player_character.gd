@@ -44,7 +44,7 @@ func _ready() -> void:
 	play_animation_with_follow_on("enter", "idle_right")
 
 func _on_action_executed(action: Enums.PlayerAction) -> void:
-	print(Enums.PlayerAction.find_key(action))
+	#print(Enums.PlayerAction.find_key(action))
 	if action == Enums.PlayerAction.JUMP:
 		jump_collision_timer.start()
 		#use y magnitude of jump for
