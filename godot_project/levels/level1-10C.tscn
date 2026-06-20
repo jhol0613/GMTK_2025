@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://be2qsy855xkru"]
+
+[ext_resource type="PackedScene" uid="uid://dqleuvyixoqjp" path="res://levels/level1-10.tscn" id="1_7lrli"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="2_o6cim"]
+
+[node name="LevelBase" instance=ExtResource("1_7lrli")]
+
+[node name="Collectible2" parent="." index="15" instance=ExtResource("2_o6cim")]
+position = Vector2(176, 23)

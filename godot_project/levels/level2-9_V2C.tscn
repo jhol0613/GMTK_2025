@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxamtpnnaaxku"]
+
+[ext_resource type="PackedScene" uid="uid://b6meeftrxeskf" path="res://levels/level2-9_V2.tscn" id="1_vne7l"]
+[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="2_2f1ee"]
+[ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_4017a"]
+
+[node name="LevelBase" instance=ExtResource("1_vne7l")]
+
+[node name="CatCoffeeSpill" parent="." index="12" instance=ExtResource("2_2f1ee")]
+position = Vector2(143, 75)
+flip_horizontal = true
+
+[node name="Collectible" parent="." index="13" instance=ExtResource("3_4017a")]
+position = Vector2(176, 42)
+
+[editable path="HideBench"]

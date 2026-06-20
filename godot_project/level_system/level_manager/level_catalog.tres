@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=59 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=64 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -54,6 +54,10 @@
 [ext_resource type="PackedScene" uid="uid://bh5ec0yys4ety" path="res://levels/level3-10.tscn" id="50_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://cpeu3l5fgvpk6" path="res://levels/test_levels/spinning_chair_test_level.tscn" id="52_30pcr"]
 [ext_resource type="PackedScene" uid="uid://dp43qoojpooal" path="res://levels/test_levels/antenna_test_level.tscn" id="53_7y0qp"]
+[ext_resource type="PackedScene" uid="uid://be2qsy855xkru" path="res://levels/level1-10C.tscn" id="55_kwvbr"]
+[ext_resource type="PackedScene" uid="uid://dw5itru0xomuv" path="res://levels/level1-12C.tscn" id="56_7kw4m"]
+[ext_resource type="PackedScene" uid="uid://c21ovtt8hac3l" path="res://levels/level1-13_V2C.tscn" id="57_pvehw"]
+[ext_resource type="PackedScene" uid="uid://dxamtpnnaaxku" path="res://levels/level2-9_V2C.tscn" id="58_qjc6i"]
 
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
@@ -97,7 +101,17 @@ music_event_bpm = 160.0
 antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
+[sub_resource type="Resource" id="Resource_7kw4m"]
+script = ExtResource("2_lqinw")
+world_scene = ExtResource("34_3js1v")
+level_list = Array[PackedScene]([ExtResource("55_kwvbr"), ExtResource("56_7kw4m"), ExtResource("57_pvehw"), ExtResource("58_qjc6i")])
+level_select_scene = 0
+music_event_name = "World2_BGM"
+music_event_bpm = 160.0
+antenna_deployed = false
+metadata/_custom_type_script = "uid://dk64rba8fhrtt"
+
 [resource]
 script = ExtResource("1_vetjv")
-world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr")])
+world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr"), SubResource("Resource_7kw4m")])
 metadata/_custom_type_script = "uid://4j1dtwn2r7t1"

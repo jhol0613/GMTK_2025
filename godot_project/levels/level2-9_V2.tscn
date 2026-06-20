@@ -5,18 +5,19 @@
 
 [node name="LevelBase" instance=ExtResource("1_6p6tl")]
 display_name = "2-9"
-conductor_spawn_beat = 3
-available_actions = Array[int]([4, 3, 7])
+conductor_spawn_beat = 5
+conductor_spawn_position = Vector2i(0, 3)
+available_actions = Array[int]([4, 3, 1, 2, 7])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAAFAAAABwAAAAEAAAAGAAAABwACAAEAAAAIAAAABwABAAEAAAAJAAAABwABAAMAAAAFAAEABwAAAAIAAAAGAAEABwACAAIAAAAIAAEABwABAAIAAAAJAAEABwABAAQAAAA=")
+tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAAFAAAABwAAAAIAAAAGAAAABwACAAIAAAAIAAAABwABAAIAAAAJAAAABwABAAQAAAAFAP//BwAAAAEAAAAGAP//BwACAAEAAAAIAP//BwABAAEAAAAJAP//BwABAAMAAAA=")
 
 [node name="Obstacles" parent="." index="3"]
-tile_map_data = PackedByteArray("AAABAAEABAAAAAAAAAADAAEABAABAAAAAAACAAEABAACAAAAAAAFAAEABAAAAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAABAAAAAAA=")
+tile_map_data = PackedByteArray("AAAEAAEAAQAAAAMAAAAEAAIAAQAAAAMAAAAEAAAAAQAAAAMAAAABAAAABAAAAAAAAAACAAAABAACAAAAAAADAAAABAABAAAAAAAFAAAABAAAAAAAAAAGAAAABAABAAAAAAAJAAAABAABAAAAAAAIAAAABAAAAAAAAAAEAAMAAQAAAAMAAAAEAAUAAQAAAAMAAAA=")
 
 [node name="HideBench" parent="." index="9" instance=ExtResource("2_nx1ru")]
-position = Vector2(80, 26)
+position = Vector2(80, 10)
 
 [connection signal="area_entered" from="LeftTarget" to="." method="_on_left_target_reached"]
 

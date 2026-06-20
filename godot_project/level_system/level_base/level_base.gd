@@ -113,8 +113,8 @@ func _ready() -> void:
 		if child.is_in_group("antenna_systems"):
 			antenna_systems.append(child)
 		if child.is_in_group("keys"):
-			keys.append(child)
-			if child is LevelKey:
+			if child is LevelKey and child.process_mode != ProcessMode.PROCESS_MODE_DISABLED:	
+				keys.append(child)
 				_lock.visible = true
 				child.key_collected.connect(_on_key_collected)
 	#agents = get_tree().get_nodes_in_group("agents")
