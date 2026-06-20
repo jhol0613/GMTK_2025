@@ -1,5 +1,7 @@
 extends Interactable
 
+class_name CatCoffeeSpill
+
 ## Two obstacle spawners for an obstacle that spans 2 tiles (only one has the visuals)
 @onready var obstacle_spawner_visible := $VisibleObstacleSpawner
 @onready var obstacle_spawner_invisible := $InvisibleObstacleSpawner

@@ -79,6 +79,7 @@ animations = [{
 script = ExtResource("9_cvlbv")
 positions = Array[Vector2]([Vector2(-14, -34), Vector2(-31, -51), Vector2(-42, -65), Vector2(-18, -76), Vector2(13, -84), Vector2(27, -71), Vector2(40, -59), Vector2(21, -47)])
 flip_horizontal = Array[bool]([false, false, false, false, false, false, false, false])
+visible = [true, true, true, true, true, true, true, true]
 metadata/_custom_type_script = "uid://baegdff0apbnp"
 
 [node name="SpinningChair" type="Node2D" node_paths=PackedStringArray("left_obstacle", "middle_obstacle", "right_obstacle", "visual_center", "highlight_button", "sprite")]

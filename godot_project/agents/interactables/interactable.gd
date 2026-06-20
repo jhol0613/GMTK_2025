@@ -40,6 +40,8 @@ func _ready() -> void:
 
 #Override in children if additional flip functionality desired (e.g. cat coffee spill spawn location)
 func _on_flip_horizontal(new_flipped_status):
+	if not sprite:
+		return
 	flip_horizontal = new_flipped_status
 	sprite.flip_h = new_flipped_status
 

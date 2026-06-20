@@ -122,6 +122,7 @@ func _update_frame(new_sprite_frame: int):
 	for anchor in _anchors:
 		if sprite.frame < anchor.data.positions.size():
 			anchor.position = anchor.data.positions[sprite.frame]
+			anchor.visible = anchor.data.visible[sprite.frame]
 			for child in anchor.get_children(): 
 				if child is Interactable:
 					child.updated_position.emit(child, child.global_position)

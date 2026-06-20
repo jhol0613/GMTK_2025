@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bp7lb26ts0xvp"]
+
+[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="1_xs7r5"]
+[ext_resource type="Script" uid="uid://cogehxp18lkuu" path="res://cat_coffee_spill_on_spin_chair.gd" id="2_for74"]
+
+[node name="CatCoffeeSpillOnSpinChair" instance=ExtResource("1_xs7r5")]
+script = ExtResource("2_for74")

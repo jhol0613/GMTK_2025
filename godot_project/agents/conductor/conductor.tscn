@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bmm7fgv3iwjwv"]
+[gd_scene load_steps=21 format=3 uid="uid://bmm7fgv3iwjwv"]
 
 [ext_resource type="Script" uid="uid://d1h0dtrug0xt" path="res://agents/conductor/conductor.gd" id="1_eb2fl"]
 [ext_resource type="Resource" uid="uid://bm2ri4ouxapyi" path="res://agents/conductor/conductor_move_action_data.tres" id="2_thsup"]
@@ -9,6 +9,7 @@
 [ext_resource type="Curve" uid="uid://dhv63y4pidyfd" path="res://agents/player_character/bonk_curve.tres" id="5_34788"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="6_46wui"]
 [ext_resource type="Script" uid="uid://dc8yw4ksjvsgl" path="res://agents/sprite_2d_signals.gd" id="6_mq2pu"]
+[ext_resource type="Resource" uid="uid://riflchehf8lc" path="res://agents/player_character/player_slide_bonk_action_data.tres" id="7_h6kqq"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_46wui"]
 [ext_resource type="Texture2D" uid="uid://b8wd4ix6y8p2w" path="res://agents/conductor/emotes.png" id="10_thsup"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="12_k3trg"]
@@ -89,6 +90,7 @@ script = ExtResource("1_eb2fl")
 standard_move_data = ExtResource("2_thsup")
 bonk_data = SubResource("Resource_k3trg")
 slide_data = ExtResource("6_46wui")
+slide_bonk_data = ExtResource("7_h6kqq")
 other_action_data = Dictionary[int, ExtResource("3_34788")]({
 12: ExtResource("2_thsup"),
 13: ExtResource("2_thsup"),
@@ -110,7 +112,11 @@ action_sound_emitters = {
 16: null,
 17: null,
 18: null,
-19: null
+19: null,
+20: NodePath("Sound/Grunt"),
+21: NodePath("Sound/Grunt"),
+22: NodePath("Sound/Grunt"),
+23: NodePath("Sound/Grunt")
 }
 default_sound_emitter = NodePath("Sound/JumpSound")
 sprite = NodePath("Shadow/AnimatedSprite2D")

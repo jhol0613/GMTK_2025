@@ -1,26 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy0877omjeja8"]
+[gd_scene load_steps=10 format=3 uid="uid://cy0877omjeja8"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_psfox"]
-[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="2_8bkav"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_np4t2"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="4_ytems"]
-[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="5_ytems"]
+[ext_resource type="PackedScene" uid="uid://rx46ny3cc272" path="res://agents/spinning_obstacles/spinning_chair_V2.tscn" id="5_3uvtg"]
+[ext_resource type="Script" uid="uid://dbkqhnjkmjtc7" path="res://agents/spinning_obstacles/spinning_chair_anchor.gd" id="6_af5w0"]
+[ext_resource type="Resource" uid="uid://c0mwvah7rsg3f" path="res://agents/spinning_obstacles/cat_anchor_data.tres" id="7_3uvtg"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_linlt"]
+[ext_resource type="PackedScene" uid="uid://bp7lb26ts0xvp" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill_on_spin_chair.tscn" id="8_3uvtg"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="9_af5w0"]
 
 [node name="LevelBase" instance=ExtResource("1_psfox")]
 display_name = "2-10"
-player_spawn_position = Vector2i(0, 3)
-conductor_spawn_beat = 7
-conductor_spawn_position = Vector2i(2, 2)
-conductor_snooze = true
+conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 7])
 
-[node name="Obstacles" parent="." index="3"]
-tile_map_data = PackedByteArray(0, 0, 9, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
-
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
-position = Vector2(49, 9)
-repeatable = true
+position = Vector2(49, 30)
 grid_origin = Vector2i(1, 0)
 follow_on_animations = Dictionary[int, String]({
 7: "idle"
@@ -28,43 +24,50 @@ follow_on_animations = Dictionary[int, String]({
 
 [node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="2" node_paths=PackedStringArray("chairs")]
 script = ExtResource("4_ytems")
-chairs = [null, null, null, null]
+chairs = [NodePath("../../SpinningChair3"), NodePath("../../SpinningChair"), NodePath("../../SpinningChair2"), NodePath("../../SpinningChair4"), NodePath("../../SpinningChair5")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
-[node name="SpinningChair" parent="." index="10" instance=ExtResource("2_8bkav")]
-position = Vector2(112, 48)
-start_direction = 3
-grid_origin = Vector2i(3, 2)
-
-[node name="SpinningChair2" parent="." index="11" instance=ExtResource("2_8bkav")]
-position = Vector2(176, 105)
+[node name="SpinningChair3" parent="." index="10" instance=ExtResource("5_3uvtg")]
+position = Vector2(178, 108)
 start_direction = 3
 grid_origin = Vector2i(5, 5)
 
-[node name="CatCoffeeSpill" parent="SpinningChair2" index="5" instance=ExtResource("5_ytems")]
-position = Vector2(-1, 5)
+[node name="SpinningChairAnchor2" type="Node2D" parent="SpinningChair3" index="8"]
+script = ExtResource("6_af5w0")
+data = ExtResource("7_3uvtg")
+metadata/_custom_type_script = "uid://dbkqhnjkmjtc7"
 
-[node name="SpinningChair3" parent="." index="12" instance=ExtResource("2_8bkav")]
-position = Vector2(48, 105)
+[node name="CatCoffeeSpillOnSpinChair" parent="SpinningChair3/SpinningChairAnchor2" index="0" instance=ExtResource("8_3uvtg")]
+
+[node name="Treadmill" parent="." index="11" instance=ExtResource("7_linlt")]
+position = Vector2(240, 70)
+direction = 3
+grid_origin = Vector2i(7, 3)
+
+[node name="Treadmill2" parent="." index="12" instance=ExtResource("7_linlt")]
+position = Vector2(112, 71)
+direction = 3
+grid_origin = Vector2i(3, 3)
+
+[node name="SpinningChair" parent="." index="15" instance=ExtResource("5_3uvtg")]
+position = Vector2(50, 107)
 start_direction = 3
 grid_origin = Vector2i(1, 5)
 
-[node name="SpinningChair4" parent="." index="13" instance=ExtResource("2_8bkav")]
-position = Vector2(240, 49)
+[node name="SpinningChair2" parent="." index="16" instance=ExtResource("5_3uvtg")]
+position = Vector2(114, 50)
+start_direction = 3
+grid_origin = Vector2i(3, 2)
+
+[node name="SpinningChair4" parent="." index="17" instance=ExtResource("5_3uvtg")]
+position = Vector2(240, 50)
 start_direction = 3
 grid_origin = Vector2i(7, 2)
 
-[node name="Treadmill" parent="." index="14" instance=ExtResource("7_linlt")]
-position = Vector2(144, 33)
-direction = 1
-grid_origin = Vector2i(4, 1)
-
-[node name="SpinningChair5" parent="." index="15" instance=ExtResource("2_8bkav")]
-position = Vector2(305, 105)
+[node name="SpinningChair5" parent="." index="18" instance=ExtResource("5_3uvtg")]
+position = Vector2(306, 107)
 start_direction = 3
 grid_origin = Vector2i(9, 5)
 
-[node name="Treadmill2" parent="." index="16" instance=ExtResource("7_linlt")]
-position = Vector2(80, 32)
-direction = 1
-grid_origin = Vector2i(2, 1)
+[node name="Key" parent="." index="19" instance=ExtResource("9_af5w0")]
+position = Vector2(240, 81)
