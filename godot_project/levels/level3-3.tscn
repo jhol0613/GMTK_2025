@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://cs55rosw0upr2"]
+[gd_scene load_steps=8 format=4 uid="uid://cs55rosw0upr2"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_sbc7u"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="2_4na6f"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_cb7ns"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="5_5fmx6"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cb7ns"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="7_hqaf8"]
 
 [node name="LevelBase" instance=ExtResource("1_sbc7u")]
 display_name = "3-3"
@@ -19,6 +20,7 @@ tile_map_data = PackedByteArray("AAAIAAEAAQABAAMAAAAJAAEAAQABAAMAAAAJAAMAAQABAAM
 
 [node name="Treadmill" parent="." index="9" instance=ExtResource("3_cb7ns")]
 position = Vector2(208, 70)
+direction = 2
 grid_origin = Vector2i(6, 3)
 
 [node name="Laser" parent="." index="10" instance=ExtResource("2_5fmx6")]
@@ -58,3 +60,6 @@ position = Vector2(59, 32)
 script = ExtResource("2_4na6f")
 treadmills = [NodePath("../../Treadmill")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
+
+[node name="Key" parent="." index="15" instance=ExtResource("7_hqaf8")]
+position = Vector2(176, 62)
