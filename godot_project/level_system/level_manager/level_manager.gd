@@ -270,7 +270,8 @@ func _reset_level() -> void:
 	for obstacle in _spawned_obstacles: # clear out spawned obstacles
 		_level_scene.movable_obstacles.erase(obstacle)
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)
-		_obstacle_move_groups[obstacle.default_action_beat].erase(obstacle)
+		if _obstacle_move_groups.has(obstacle.default_action_beat):
+			_obstacle_move_groups[obstacle.default_action_beat].erase(obstacle)
 		obstacle.queue_free()
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.disabled = false

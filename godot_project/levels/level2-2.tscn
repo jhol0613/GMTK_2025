@@ -11,11 +11,6 @@ available_actions = Array[int]([4, 1, 2])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAEAAAAAgACAAIAAAAEAAEAAgACAAMAAAAFAAAAAgADAAIAAAAFAAEAAgADAAMAAAAHAAQAAgAAAAIAAAAHAAUAAgAAAAMAAAAHAAAAAgADAAEAAAAIAAAAAgAEAAEAAAA=")
 
-[node name="Lock" parent="AdditionalSprites" index="3"]
-light_mask = 1
-animation = &"vanish"
-autoplay = ""
-
 [node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters", "default_sound_emitter") instance=ExtResource("2_hckjy")]
 position = Vector2(112, 47)
 script = ExtResource("3_5ud83")
@@ -39,3 +34,8 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 default_sound_emitter = NodePath("RollSound")
+
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""

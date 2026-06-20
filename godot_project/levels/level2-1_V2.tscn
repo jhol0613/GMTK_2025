@@ -25,6 +25,16 @@ z_index = 0
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAADAAIAAwAAAAAAABADAAEAAAABAAMAAAADAAAAAAABAAIAAAADAP//AAABAAAAAAADAAUAAQAAAAMAAAADAAQAAQAAAAMAAAA=")
 
+[node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("2_a54ga")]
+position = Vector2(111, 48)
+flip_horizontal = true
+
+[node name="AnimatedSprite2DSignals" parent="CatCoffeeSpill" index="0"]
+position = Vector2(-3, -22)
+
+[node name="Key" parent="." index="10" instance=ExtResource("3_yn5ti")]
+position = Vector2(48, 100)
+
 [node name="Wheelwell" parent="AdditionalSprites" index="1"]
 z_index = -1
 
@@ -35,15 +45,5 @@ z_index = -1
 light_mask = 1
 animation = &"vanish"
 autoplay = ""
-
-[node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("2_a54ga")]
-position = Vector2(111, 48)
-flip_horizontal = true
-
-[node name="AnimatedSprite2DSignals" parent="CatCoffeeSpill" index="0"]
-position = Vector2(-3, -22)
-
-[node name="Key" parent="." index="10" instance=ExtResource("3_yn5ti")]
-position = Vector2(48, 100)
 
 [editable path="CatCoffeeSpill"]
