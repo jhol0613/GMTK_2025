@@ -134,7 +134,7 @@ enum LevelBannerType {
 const SequencerControlScene = {
 	TURN_CHAIR = "uid://crorf1owblj5p",
 	TURN_LASER = "uid://dw1sgggrlnrke",
-	TURN_TREADMILL = "uid://c0rrg37ad7473",
+	TURN_TREADMILL = "uid://c5ltudkbawmw7",
 	CHANGE_LASER_HEIGHT = "uid://d8l1lrlubiip",
 	MOVE_CART = "uid://cwm6kjroqw6hn",
 	MOVE_TELEPORT_DESTINATION = "uid://c3oui8nrbnmi4"
