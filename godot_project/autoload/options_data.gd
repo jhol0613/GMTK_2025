@@ -8,4 +8,3 @@ class_name OptionsData
 func _init(_fullscreen: bool = false, _resolution: Enums.Resolution = Enums.Resolution.DEFAULT):
 	fullscreen = _fullscreen
 	resolution = _resolution
-

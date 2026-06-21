@@ -47,10 +47,6 @@ func load_solution(uid: int, index: int) -> Array[Enums.PlayerAction]:
 
 #endregion
 
-#region Options
-
-#endregion
-
 #region Save data
 func _ready() -> void:
 	if not FileAccess.file_exists(save_data_path):

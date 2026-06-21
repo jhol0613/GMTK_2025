@@ -1,6 +1,7 @@
 extends Control
 
 @onready var pause       : Control      = $pause_menu
+@onready var options     : Control      = $OptionsMenu
 @onready var bg          : TextureRect  = $pause_menu/pause_menu_bg
 @onready var confirm     : Control      = $pause_menu/quit_confirm
 @onready var confirm_bg  : TextureRect  = $pause_menu/quit_confirm/confirm_menu_bg
@@ -91,8 +92,8 @@ func _on_resume_btn_pressed() -> void:
 func _on_options_btn_pressed() -> void:
 	pause_btn_click_emitter.play()
 	bg.texture = T_PAUSE
-	get_tree().change_scene_to_file("res://level_system/level_selection_menu/primary_level_selection_menu.tscn")
-	GameManager.unpause_game()
+	pause.hide()
+	options.show()
 
 func _on_quit_btn_pressed() -> void:
 	pause_btn_click_emitter.play()
@@ -109,3 +110,9 @@ func _on_quit_no_pressed() -> void:
 	pause_btn_click_emitter.play()
 	confirm.visible = false
 	bg.texture = T_PAUSE
+
+
+func _on_options_back_button_pressed() -> void:
+	pause_btn_click_emitter.play()
+	pause.show()
+	options.hide()

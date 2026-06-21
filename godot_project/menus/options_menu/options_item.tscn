@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ual0atw2tqjk"]
+
+[node name="OptionsItem" type="Control"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.089
+offset_bottom = -0.0499992
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 102.0
+offset_bottom = 23.0
+text = "Option name"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 258.0
+offset_top = 11.0
+offset_right = 290.0
+offset_bottom = 31.0
