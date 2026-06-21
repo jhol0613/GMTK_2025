@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://rx46ny3cc272"]
+[gd_scene load_steps=23 format=3 uid="uid://rx46ny3cc272"]
 
 [ext_resource type="Script" uid="uid://cfru4jy2a22d0" path="res://agents/spinning_obstacles/spinning_chair_v2.gd" id="1_waa31"]
 [ext_resource type="Texture2D" uid="uid://bpfn2w0gg3kbm" path="res://agents/spinning_obstacles/spinning_chair_v3.png" id="3_cvlbv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="5_51ho3"]
 [ext_resource type="PackedScene" uid="uid://cpv7o05l1e0xk" path="res://agents/movable_obstacles/generic_invisible_obstacle.tscn" id="6_46cqo"]
 [ext_resource type="Script" uid="uid://cc284jdpqgups" path="res://agents/spinning_obstacles/visual_center.gd" id="7_c4cux"]
+[ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="7_jvl4d"]
 [ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="8_qebtr"]
 [ext_resource type="Texture2D" uid="uid://d1d8gyhej0it4" path="res://agents/lasers/beam_down_end.png" id="8_rywup"]
 [ext_resource type="Script" uid="uid://baegdff0apbnp" path="res://agents/spinning_obstacles/spinning_chair_anchor_data.gd" id="9_cvlbv"]
@@ -75,6 +76,9 @@ animations = [{
 "speed": 1.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51ho3"]
+size = Vector2(29, 37)
+
 [sub_resource type="Resource" id="Resource_jvl4d"]
 script = ExtResource("9_cvlbv")
 positions = Array[Vector2]([Vector2(-14, -34), Vector2(-31, -51), Vector2(-42, -65), Vector2(-18, -76), Vector2(13, -84), Vector2(27, -71), Vector2(40, -59), Vector2(21, -47)])
@@ -120,6 +124,14 @@ visible = false
 z_index = 5
 texture = ExtResource("8_rywup")
 
+[node name="LaserBlocker" type="Area2D" parent="LeftObstacle"]
+script = ExtResource("7_jvl4d")
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftObstacle/LaserBlocker"]
+position = Vector2(0.5, -15.5)
+shape = SubResource("RectangleShape2D_51ho3")
+
 [node name="RightObstacle" parent="." instance=ExtResource("6_46cqo")]
 z_index = 1
 position = Vector2(32, -21)
@@ -128,12 +140,28 @@ reset_on_play_pressed = false
 manually_update_push_action = true
 activation_sequence = Array[bool]([false])
 
+[node name="LaserBlocker" type="Area2D" parent="RightObstacle"]
+script = ExtResource("7_jvl4d")
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightObstacle/LaserBlocker"]
+position = Vector2(0.5, -15.5)
+shape = SubResource("RectangleShape2D_51ho3")
+
 [node name="MiddleObstacle" parent="." instance=ExtResource("6_46cqo")]
 z_index = 1
 position = Vector2(0, -21)
 reset_on_play_pressed = false
 manually_update_push_action = true
 activation_sequence = Array[bool]([false])
+
+[node name="LaserBlocker" type="Area2D" parent="MiddleObstacle"]
+script = ExtResource("7_jvl4d")
+metadata/_custom_type_script = "uid://dtg8o21ypt6se"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleObstacle/LaserBlocker"]
+position = Vector2(0.5, -15.5)
+shape = SubResource("RectangleShape2D_51ho3")
 
 [node name="VisualCenter" type="Node2D" parent="."]
 position = Vector2(0, -32)

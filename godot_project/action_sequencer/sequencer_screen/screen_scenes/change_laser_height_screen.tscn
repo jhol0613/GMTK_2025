@@ -40,6 +40,6 @@ theme_override_icons/grabber = ExtResource("3_wpfdh")
 theme_override_icons/grabber_highlight = ExtResource("4_vk6oj")
 theme_override_styles/slider = SubResource("StyleBoxEmpty_wpfdh")
 min_value = 7.0
-max_value = 64.0
+max_value = 55.0
 value = 7.0
 scrollable = false

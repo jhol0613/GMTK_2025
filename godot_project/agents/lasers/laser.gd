@@ -28,7 +28,8 @@ const pole2_height := 24
 #TODO: Manual max beam length setting no longer supported in recursisve lasers. Re-implement this feature
 #if we need it.
 #@export var max_beam_length := 0: set = set_max_beam_length
-@export_range(popup_height, popup_height + pole1_height + pole2_height, 1) var height := 7: set = _set_height
+#@export_range(popup_height, popup_height + pole1_height + pole2_height, 1) var height := 7: set = _set_height
+@export_range(popup_height, 55, 1) var height := 7: set = _set_height
 
 @export_subgroup("Laser Data")
 ##Heighest laser height value that can be jumped
@@ -126,6 +127,7 @@ func _set_height(new_height: int):
 	pole1.position.y = max(-height + popup_height, -pole1_height)
 	pole2.position.y = min(max(-height + pole1_height + popup_height, -pole2_height), 0)
 
+	var previous_obstacle_enabled = obstacle.enabled
 	if height <= popup_height:
 		shadow.play("stowed")
 		obstacle.enabled = false
@@ -135,6 +137,9 @@ func _set_height(new_height: int):
 	else:
 		shadow.play("deployed")
 		obstacle.enabled = true
+	if not Engine.is_editor_hint():
+		if obstacle.enabled != previous_obstacle_enabled:
+			obstacle.request_offbeat_action.emit(obstacle, Enums.PlayerAction.NONE, false)
 
 	#Set up beam
 	if not Engine.is_editor_hint():

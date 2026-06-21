@@ -510,7 +510,8 @@ func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_acti
 	_level_scene.update_obstacle_grid(obstacle.grid_position, true)
 	obstacle.execute_action(_bonk_check(obstacle, desired_action, true), -1)
 	obstacle.advance_move_cursor()
-	_level_scene.update_obstacle_grid(obstacle.grid_position, false)
+	if obstacle.enabled:
+		_level_scene.update_obstacle_grid(obstacle.grid_position, false)
 	if update_origin:
 		_initialize_movable(obstacle, obstacle.grid_position, false)
 

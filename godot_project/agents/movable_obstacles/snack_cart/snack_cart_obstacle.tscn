@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cbc0cwtj1xkvi"]
+[gd_scene load_steps=25 format=3 uid="uid://cbc0cwtj1xkvi"]
 
 [ext_resource type="Script" uid="uid://cga4cfwlqetr7" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.gd" id="1_nmw7r"]
 [ext_resource type="Texture2D" uid="uid://cncr5apvrqh7b" path="res://agents/movable_obstacles/snack_cart/cart_obstacle.png" id="2_ldseh"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://du4ysr150id7h" path="res://agents/pusher.gd" id="4_h3hhy"]
 [ext_resource type="Resource" uid="uid://bnjcv5f0a3n1w" path="res://agents/player_character/player_slide_action_data.tres" id="4_kgp0j"]
 [ext_resource type="Resource" uid="uid://cg2foen8yla6w" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_slide_bonk_data.tres" id="5_s1287"]
+[ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="6_1bgl0"]
 [ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="7_26gw8"]
 [ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="8_gx75w"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_kgp0j"]
@@ -113,6 +114,12 @@ standard_move_data = ExtResource("2_nmw7r")
 bonk_data = ExtResource("3_26gw8")
 slide_data = ExtResource("4_kgp0j")
 slide_bonk_data = ExtResource("5_s1287")
+other_action_data = Dictionary[int, ExtResource("6_1bgl0")]({
+12: ExtResource("2_nmw7r"),
+13: ExtResource("2_nmw7r"),
+14: ExtResource("2_nmw7r"),
+15: ExtResource("2_nmw7r")
+})
 action_beats = Dictionary[int, float]({
 12: 0.0,
 13: 0.0,

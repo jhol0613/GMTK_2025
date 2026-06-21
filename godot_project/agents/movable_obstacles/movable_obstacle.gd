@@ -38,18 +38,18 @@ func _ready() -> void:
 func execute_action(action: Enums.PlayerAction, beat: int, skip_animation := false, instant = true):
 	if not enabled:
 		return
-	# if action is a fall action, rather than using the pusher action, just go back the way you came
-	if Enums.is_action_fall(action):
-		super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), beat, skip_animation, instant)
-		#play bump sound on collision with another movable obstacle
-		interrupt_queued_sound()
-		var emitter = action_sound_emitters.get(Enums.PlayerAction.LEFT_BONK, default_sound_emitter)
-		if emitter:
-			emitter.play()
-	else:
-		super.execute_action(action, beat, skip_animation, instant)
-		if Enums.is_action_slide(action):
-			pusher.push_action = _direction_to_push_action(action)
+	## if action is a fall action, rather than using the pusher action, just go back the way you came
+	#if Enums.is_action_fall(action):
+		#super.execute_action(Enums.get_reverse_action(movement_path[_move_cursor-1]), beat, skip_animation, instant)
+		##play bump sound on collision with another movable obstacle
+		#interrupt_queued_sound()
+		#var emitter = action_sound_emitters.get(Enums.PlayerAction.LEFT_BONK, default_sound_emitter)
+		#if emitter:
+			#emitter.play()
+	#else:
+	super.execute_action(action, beat, skip_animation, instant)
+	if Enums.is_action_slide(action):
+		pusher.push_action = _direction_to_push_action(action)
 
 func interrupt_queued_action(should_cancel_sound := true):
 	queued_action_canceled = true

@@ -19,8 +19,8 @@ tile_map_data = PackedByteArray("AAAHAAMAAQABAAMAAAAIAAMAAQABAAMAAAAHAAIAAQABAAM
 
 [node name="Laser" parent="." index="9" instance=ExtResource("2_8aue3")]
 position = Vector2(144, 3)
-height = 20
-grid_origin = Vector2i(1, 0)
+height = 7
+grid_origin = Vector2i(4, 0)
 
 [node name="Treadmill" parent="." index="10" instance=ExtResource("3_ovry0")]
 position = Vector2(208, 70)
@@ -28,8 +28,8 @@ grid_origin = Vector2i(6, 3)
 
 [node name="Laser2" parent="." index="11" instance=ExtResource("2_8aue3")]
 position = Vector2(112, 3)
-height = 50
-grid_origin = Vector2i(4, 0)
+height = 55
+grid_origin = Vector2i(3, 0)
 
 [node name="Treadmill2" parent="." index="12" instance=ExtResource("3_ovry0")]
 position = Vector2(304, 90)
