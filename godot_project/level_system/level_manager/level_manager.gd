@@ -61,6 +61,7 @@ var _conductor_beat: float
 var _player_character: PlayerCharacter
 
 var _next_level: RhythmRailLevel
+var _previous_level: RhythmRailLevel
 var _level_number := 0
 var _current_beat := 0
 
@@ -144,10 +145,8 @@ func load_next_level():
 ## Pysically advances the level and initializes the new car with proper timing
 func advance_level():
 	_level_number += 1
-	
-	
-
 	# Update reference to new level and initialize
+	_previous_level = _level_scene
 	_level_scene = _next_level
 	_initialize_level()
 
@@ -158,6 +157,17 @@ func advance_level():
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_level_advanced)
 
+func regress_level():
+	_level_number -= 1
+	_level_scene = _previous_level
+	_initialize_level()
+	
+	# Tween to control animation of one train car to the next
+	var tween = create_tween()
+	var target_pos = _train_center.position - Vector2(-next_car_offset - train_move_right_on_play_distance, 0)
+	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
+		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(_on_level_regressed)
 
 ## Scene initialization steps that are called AFTER the level has been fully advanced
 func _on_level_advanced():
@@ -165,9 +175,30 @@ func _on_level_advanced():
 	level_banner.label_text_init = _level_scene.display_name
 	add_child(level_banner)
 	_action_sequencer.set_action_icons_hidden(false)
+	_replace_previous_level_with_collectible_car()
 	_spawn_player()
 	_reset_level()
 
+## Scene initialization steps that are called AFTER the level has been fully advanced
+func _on_level_regressed():
+	#var level_banner = level_banner_scene.instantiate()
+	#level_banner.label_text_init = _level_scene.display_name
+	#add_child(level_banner)
+	_action_sequencer.set_action_icons_hidden(false)
+	_spawn_player()
+	_reset_level()
+
+func _replace_previous_level_with_collectible_car():
+	if not _previous_level:
+		return
+	var collectible_car_packed = GameManager.level_catalog.get_collectible_car()
+	var previous_level_position = _previous_level.position
+	if collectible_car_packed != null:
+		_previous_level = collectible_car_packed.instantiate()
+	else: # for now, break if loading past game end
+		printerr("No collectible car defined, keeping previous level instead")
+	_previous_level.position = previous_level_position
+	
 # Handle connecting to signals, running initialization code for agents in new level
 func _initialize_level():
 	# Initialize new obstacles and pushers
@@ -181,12 +212,13 @@ func _initialize_level():
 	# Connect to level finished signal
 	_level_scene.connect("target_reached", _on_exit_overlapped)
 	_level_scene.connect("conductor_reached_target", _on_conductor_reached_target)
-	_level_scene.connect("left_target_reached", _on_left_target_reached)
+	#_level_scene.connect("left_target_reached", _on_left_target_reached)
 
 	# Update sequencer with new level data
 	_action_sequencer.update_sequencer_data(_level_scene.available_slots, _level_scene.available_actions,
 		_level_scene.action_quantities)
 	_action_sequencer.tutorial_mode = _level_scene.tutorial_mode
+	_action_sequencer.make_spawn_countdown_visible()
 
 	# Connect to animation signals from agents
 	for agent in _level_scene.agents:
@@ -198,29 +230,35 @@ func _initialize_level():
 	load_next_level()
 
 func _on_exit_overlapped() -> void:
+	if _conductor:
+		_conductor.interrupt_queued_action(true)
 	#this way failures take precedence, e.g. if you bump into the conductor while he's at the exit
 	call_deferred("_on_level_complete")
 
+func _on_left_exit() -> void:
+	if _failure_animation_playing:
+		return
+	regress_level()
+
+##called when player "beats" level (i.e. exits to the right)
 func _on_level_complete() -> void:
 	if _failure_animation_playing:
 		return
-	_conductor.interrupt_queued_action(true)
-	_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
 	_player_character.notify_success()
+	
+	#_player_character.disable_collisions() # I don't think this line does anything important anymore, I'm just a bit nervous to take it out
+	_action_sequencer.buttons_enabled = false
+	_action_sequencer.stop_sequencer()
+	_action_sequencer.clear_screen()
+	
 	for collectible in _level_scene.collectibles:
 		collectible.collect_if_queued()
-	_action_sequencer.buttons_enabled = false
 
-	_action_sequencer.stop_sequencer()
 	await get_tree().create_timer(level_success_delay).timeout
-
-	_action_sequencer.clear_screen()
-	_action_sequencer.make_spawn_countdown_visible()
 
 	if _queue_world_transition:
 		_execute_world_transition()
 		return
-
 	SaveManager.update_furthest_level(GameManager.level_catalog.get_current_index())
 	SaveManager.add_completed_level(GameManager.level_catalog.get_current_uid())
 	advance_level()
@@ -246,8 +284,8 @@ func _on_conductor_reached_target() -> void:
 	#if _conductor.state == Enums.ConductorState.UNAWARE:
 		#_conductor.exit_level()
 
-func _on_left_target_reached() -> void:
-	print("Player went backwards, train car should advance backward")
+#func _on_left_target_reached() -> void:
+	#print("Player went backwards, train car should advance backward")
 
 func _reset_level() -> void:
 	if _actively_teleporting_entities > 0:
@@ -265,7 +303,6 @@ func _reset_level() -> void:
 		_action_sequencer.set_conductor_spawn_countdown_display(0)
 	_action_sequencer._reset_skip_actions_mode()
 	_level_scene.reset_lock()
-	_level_scene.reset_left_target_active()
 	_obstacle_move_group_timers.clear()
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
@@ -498,7 +535,6 @@ func _update_obstacle_move_group(move_group):
 		#only update the move cursor if the action was executed (per the activation sequence)
 		if obstacle.check_activation_for_beat(_current_beat):
 			obstacle.advance_move_cursor()
-	#_level_scene.clear_obstacle_overrides()
 	for obstacle: MovableObstacle in move_group:
 		if obstacle.queued_action_canceled:
 			obstacle.queued_action_canceled = false
@@ -516,6 +552,9 @@ func _on_obstacle_request_offbeat_action(obstacle: MovableObstacle, desired_acti
 		_initialize_movable(obstacle, obstacle.grid_position, false)
 
 func _update_player(action: Enums.PlayerAction) -> void:
+	if _level_scene.player_in_left_target and action == Enums.PlayerAction.LEFT:
+		_on_left_exit()
+		return
 	if _player_newly_hidden or not _player_hidden:
 		_player_newly_hidden = false
 		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
@@ -555,26 +594,22 @@ func _update_conductor() -> void:
 		.get_id_path(_conductor.grid_position, target, true)
 
 	# find path state
-	var traversible = true
-	var reached = conductor_path.size() < 2
-	for node in conductor_path:
-		if node[0] < 0 or node[1] < 0:
-			traversible = false
-			break
+	#whether conductor can reach his target
+	var traversible = not conductor_path.is_empty() and conductor_path[conductor_path.size() - 1] == target
+	#whether conductor has reached the end of his pathing
+	var reached_end_of_path = conductor_path.size() < 2# and conductor_path[conductor_path.size() - 1] == target
 
-	if reached:
+	if reached_end_of_path:
 		# catch the seated player
 		if _conductor.state != Enums.ConductorState.UNAWARE and _player_hidden:
 			_hide_player(false) # optionally, another failure animation
+		elif not traversible and _conductor.state != Enums.ConductorState.UNREACHABLE:
+			_conductor.state = Enums.ConductorState.UNREACHABLE_START
 		return
 
 	# launch the animation only once
-	if not traversible and _conductor.state != Enums.ConductorState.UNREACHABLE:
-		_conductor.state = Enums.ConductorState.UNREACHABLE_START
-
-	# skip the next action if the conductor is trying to leave the map
-	if conductor_path[1][0] < 0 or conductor_path[1][1] < 0:
-		return
+	#if not traversible and reached_end_of_path and _conductor.state != Enums.ConductorState.UNREACHABLE:
+		#_conductor.state = Enums.ConductorState.UNREACHABLE_START
 
 	# Don't give conductor an action immediately after he spawns
 	if conductor_just_spawned:
@@ -602,8 +637,6 @@ func _update_grid_weights(target: Vector2i):
 			var desired_direction = naive_path[i+1] - naive_path[i]
 			var dot = Enums.doti(Enums.direction_to_vector(treadmill.direction), desired_direction)
 			var weight = 0.1 if dot == 1 else 5.0 if dot == -1 else 4.0
-			if weight == 100.0:
-				pass
 			_level_scene.update_weight_grid(treadmill.grid_position, weight)
 				
 	#for treadmill: Treadmill in _level_scene.treadmills:

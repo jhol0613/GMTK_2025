@@ -155,8 +155,10 @@ func _advance_sprite_frame():
 func _set_start_direction(new_direction: Enums.Direction):
 	start_direction = new_direction
 	_construct()
-	left_obstacle.set_move_cursor_start_position(direction_to_move_cursor_position(start_direction))
-	right_obstacle.set_move_cursor_start_position(direction_to_move_cursor_position(start_direction))
+	
+	if not Engine.is_editor_hint():
+		left_obstacle.set_move_cursor_start_position(direction_to_move_cursor_position(start_direction))
+		right_obstacle.set_move_cursor_start_position(direction_to_move_cursor_position(start_direction))
 
 ##Positive for clockwise, negative for counterclockwise
 func spin(number_of_quarter_turns: int = 1, update_origin = false):

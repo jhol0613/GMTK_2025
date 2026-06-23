@@ -88,10 +88,16 @@ func is_new_world() -> bool:
 func get_world_scene() -> PackedScene:
 	return world_definitions[_current_world].world_scene
 
-## Returns transition scene for current (most recently loaded level's) world
+##Returns transition scene for current (most recently loaded level's) world
 func get_transition_scene() -> PackedScene:
 	return world_definitions[_current_world].transition_scene
 
+##Returns collectible car scene for previous car's world
+func get_collectible_car() -> PackedScene:
+	if _current_level == 0:
+		return world_definitions[_previous_world].collectible_car
+	else:
+		return world_definitions[_current_world].collectible_car
 
 func get_current_uid() -> int:
 	return ResourceLoader.get_resource_uid(world_definitions[_current_world].level_list[_current_level].resource_path)

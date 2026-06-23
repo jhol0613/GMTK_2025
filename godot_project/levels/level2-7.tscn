@@ -22,12 +22,6 @@ hints = Array[ExtResource("2_gu3qj")]([SubResource("Resource_jq20w")])
 [node name="CartTracks" parent="." index="2"]
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAQAAAACAAEAAAABAAIAAAADAAEAAAABAAIAAAAEAAEAAAABAAAAAAAEAAIAAAABAAEAAAADAAIAAAABAAIAAAACAAIAAAABAAIAAAABAAIAAAAAAAEAAAAHAAQAAAABAAYAAAAIAAQAAAABAAIAAAAJAAQAAAABAAEAAAAJAAMAAAABAAAAAAAIAAMAAAABAAIAAAAHAAMAAAABAAIAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAEAAAA=")
 
-[node name="Wheelwell" parent="AdditionalSprites" index="1"]
-z_index = -1
-
-[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
-z_index = -1
-
 [node name="Laser" parent="." index="9" instance=ExtResource("2_llv2y")]
 position = Vector2(48, 3)
 height = 42
@@ -138,3 +132,9 @@ action_sound_emitters = {
 22: NodePath("BumpSound"),
 23: NodePath("BumpSound")
 }
+
+[node name="Wheelwell" parent="AdditionalSprites" index="1"]
+z_index = -1
+
+[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
+z_index = -1

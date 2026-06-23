@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=64 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=66 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
+[ext_resource type="PackedScene" uid="uid://died68yk0oupu" path="res://level_system/collectible_displays/world1_collectible_car.tscn" id="3_agh00"]
 [ext_resource type="PackedScene" uid="uid://bb0wlqq06138" path="res://backgrounds/world1/world1_background.tscn" id="3_oivuf"]
 [ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://levels/level1-1.tscn" id="3_ydpb6"]
 [ext_resource type="PackedScene" uid="uid://qktyo80o850a" path="res://levels/level1-2.tscn" id="4_rcuhu"]
@@ -15,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/level1-14.tscn" id="13_e7wa4"]
 [ext_resource type="PackedScene" uid="uid://ciue2so776nlq" path="res://levels/level2-2_V2.tscn" id="15_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://dx3c77r31rvvm" path="res://levels/level2-1_V2.tscn" id="15_sv7wc"]
+[ext_resource type="PackedScene" uid="uid://dfiuf20xcifm3" path="res://level_system/collectible_displays/world2_collectible_car.tscn" id="15_xpa8w"]
 [ext_resource type="PackedScene" uid="uid://decxer3b8ursv" path="res://levels/level2-2b.tscn" id="16_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://bacyu05xq1n3r" path="res://levels/level2-3warmup.tscn" id="17_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://defrgrdfsdmu3" path="res://levels/level2-3.tscn" id="18_wvvmg"]
@@ -25,11 +27,11 @@
 [ext_resource type="PackedScene" uid="uid://cl46e5b8lrrmo" path="res://levels/level2-6.tscn" id="21_ja0kk"]
 [ext_resource type="PackedScene" uid="uid://cy0877omjeja8" path="res://levels/level2-10.tscn" id="21_y8p5u"]
 [ext_resource type="PackedScene" uid="uid://cqob6deb6rmuc" path="res://levels/level2-7.tscn" id="22_wvixl"]
-[ext_resource type="PackedScene" uid="uid://diy0kdtmc3gky" path="res://levels/level2-8.tscn" id="23_dbel0"]
 [ext_resource type="PackedScene" uid="uid://b6meeftrxeskf" path="res://levels/level2-9_V2.tscn" id="25_7y0qp"]
 [ext_resource type="PackedScene" uid="uid://b3ups0rsbp08v" path="res://levels/test_levels/laser_test_level.tscn" id="26_8o3tm"]
 [ext_resource type="PackedScene" uid="uid://dbaky6c84qdhh" path="res://levels/test_levels/interactable_test_level.tscn" id="29_pbglx"]
 [ext_resource type="PackedScene" uid="uid://bb7h1cttsvw2y" path="res://levels/level3-1a.tscn" id="29_y2rew"]
+[ext_resource type="PackedScene" uid="uid://dh0dhlb7moy3l" path="res://level_system/collectible_displays/world3_collectible_car.tscn" id="30_fc5oy"]
 [ext_resource type="PackedScene" uid="uid://bpca4h6xw3efm" path="res://levels/level3-1b.tscn" id="30_y2rew"]
 [ext_resource type="PackedScene" uid="uid://mw374qbgvht0" path="res://levels/level3-1.tscn" id="31_4ssl1"]
 [ext_resource type="PackedScene" uid="uid://cqus7ea6hnmos" path="res://levels/test_levels/moving_obstacle_test_level.tscn" id="31_6wlqo"]
@@ -66,17 +68,19 @@ level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"),
 level_select_scene = 5
 music_event_name = "World1_BGM"
 music_event_bpm = 170.0
+collectible_car = ExtResource("3_agh00")
 antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_ydpb6"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("21_5wr1n")
-level_list = Array[PackedScene]([ExtResource("15_sv7wc"), ExtResource("15_fk8s6"), ExtResource("16_sv7wc"), ExtResource("17_sv7wc"), ExtResource("18_wvvmg"), ExtResource("19_8o3tm"), ExtResource("20_dbel0"), ExtResource("21_ja0kk"), ExtResource("22_wvixl"), ExtResource("23_dbel0"), ExtResource("21_y8p5u"), ExtResource("25_7y0qp")])
+level_list = Array[PackedScene]([ExtResource("15_sv7wc"), ExtResource("15_fk8s6"), ExtResource("16_sv7wc"), ExtResource("17_sv7wc"), ExtResource("18_wvvmg"), ExtResource("19_8o3tm"), ExtResource("20_dbel0"), ExtResource("21_ja0kk"), ExtResource("22_wvixl"), ExtResource("21_y8p5u"), ExtResource("25_7y0qp")])
 level_select_scene = 6
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
+collectible_car = ExtResource("15_xpa8w")
 antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
@@ -88,6 +92,7 @@ level_select_scene = 7
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
+collectible_car = ExtResource("30_fc5oy")
 antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 

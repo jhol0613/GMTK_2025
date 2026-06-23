@@ -40,7 +40,6 @@ class_name RhythmRailLevel
 
 @onready var _keys_collected := 0
 
-#TODO: These arrays could be refactored to use Godot's Groups system
 ## agents in the level to call update function to
 var agents := []
 ## treadmills in the level
@@ -70,9 +69,10 @@ var keys : Array[LevelKey] = []
 
 signal target_reached
 signal conductor_reached_target
-signal left_target_reached
+#signal left_target_reached
 
-var left_target_triggered_count := 0
+var player_in_left_target
+#var left_target_triggered_count := 0
 
 var path_grid: AStarGrid2D
 var target_position: Vector2i
@@ -134,6 +134,12 @@ func _ready() -> void:
 	_initialize_path_finding()
 
 	target_position = global_to_map(_target.global_position)
+	
+	player_in_left_target = false
+	for area in _left_target.get_overlapping_areas():
+		if area.owner is PlayerCharacter:
+			player_in_left_target = true
+			break
 
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
@@ -204,8 +210,8 @@ func get_tile_size() -> Vector2i:
 	return _floor_layer.tile_set.tile_size
 
 func get_grid_size() -> Vector2i:
-	return (_floor_layer.get_used_rect() \
-		.merge(_obstacle_layer.get_used_rect())).size
+	return _floor_layer.get_used_rect().size# \
+		#.merge(_obstacle_layer.get_used_rect())).size
 
 ## Take global coordinates and convert to map coordinates
 func global_to_map(coordinates : Vector2):
@@ -219,7 +225,8 @@ func update_obstacle_grid(grid_position: Vector2i, traversible: bool):
 		_obstacle_overrides.erase(grid_position)
 	else:
 		_obstacle_overrides.append(grid_position)
-	path_grid.set_point_solid(grid_position, !traversible) # update A* grid
+	if not has_static_obstacle(grid_position): #don't make a spot with a static obstacle traversible
+		path_grid.set_point_solid(grid_position, !traversible) # update A* grid
 
 	if get_tree().debug_collisions_hint:
 		_draw_obstacle_traversibility()
@@ -233,8 +240,10 @@ func clear_all_obstacle_overrides() -> void:
 		_draw_obstacle_traversibility()
 
 func clear_obstacle_override_at_position(position: Vector2i):
-	path_grid.set_point_solid(position, false)
 	_obstacle_overrides.erase(position)
+	#don't set grie point traversible if it actually has a static obstacle there
+	if not has_static_obstacle(position):
+		path_grid.set_point_solid(position, false)
 
 func has_static_obstacle(grid_position: Vector2i) -> bool:
 	return _obstacle_layer.get_used_cells().has(grid_position)
@@ -252,8 +261,8 @@ func reset_lock():
 # cycles through each tile in the tile layer, adding it to the path finding node
 func _initialize_path_finding():
 	path_grid = AStarGrid2D.new()
-	path_grid.region = _floor_layer.get_used_rect() \
-		.merge(_obstacle_layer.get_used_rect())
+	path_grid.region = _floor_layer.get_used_rect() #\
+		#.merge(_obstacle_layer.get_used_rect())
 	path_grid.cell_size = _floor_layer.tile_set.tile_size
 	path_grid.offset = path_grid.cell_size * 0.5
 	path_grid.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
@@ -277,15 +286,11 @@ func _on_target_area_entered(area: Area2D) -> void:
 	elif area.owner is Conductor:
 		conductor_reached_target.emit()
 
-func reset_left_target_active():
-	left_target_triggered_count = 0
-	#_left_target.set_collision_mask_value(1, active)
-
 func _on_left_target_area_entered(area: Area2D) -> void:
-	if left_target_triggered_count >= 1:
-		left_target_reached.emit()
-	else:
-		left_target_triggered_count += 1
+	player_in_left_target = true
+
+func _on_left_target_area_exited(area: Area2D) -> void:
+	player_in_left_target = false
 
 func _on_key_collected():
 	_keys_collected += 1
