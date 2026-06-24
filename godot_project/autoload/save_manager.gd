@@ -12,8 +12,6 @@ var save_data: SaveData
 var enable_save := true
 var run_from_F6 := false
 
-var options_data: OptionsData
-
 #region Solutions
 
 func save_solution(solution: Array[Enums.PlayerAction], uid: int, index: int) -> bool:

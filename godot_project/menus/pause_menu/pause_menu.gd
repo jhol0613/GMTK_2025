@@ -116,3 +116,5 @@ func _on_options_back_button_pressed() -> void:
 	pause_btn_click_emitter.play()
 	pause.show()
 	options.hide()
+	# saving options here to avoid writing to disk too much
+	OptionsManager.commit()

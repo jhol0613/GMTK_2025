@@ -3,15 +3,14 @@ extends Node
 
 const OPTIONS_DATA_PATH := "user://options_data.tres"
 
-var fullscreen := false
 var options_data: OptionsData
 
 func _ready() -> void:
 	if not FileAccess.file_exists(OPTIONS_DATA_PATH):
-		save_options_data()
+		commit()
 	else:
 		options_data = ResourceLoader.load(OPTIONS_DATA_PATH)
-	
+
 	_sync()
 
 func _sync():
@@ -20,7 +19,7 @@ func _sync():
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-func save_options_data():
+func commit():
 	if not options_data:
 		options_data = OptionsData.new()
 	ResourceSaver.save(options_data, OPTIONS_DATA_PATH)
@@ -28,4 +27,6 @@ func save_options_data():
 func set_fullscreen(toggle_on := true):
 	options_data.fullscreen = toggle_on
 	_sync()
-	save_options_data()
+
+func _exit_tree() -> void:
+	commit()
