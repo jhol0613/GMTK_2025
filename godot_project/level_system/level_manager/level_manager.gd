@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name LevelManager
+
 #region Export Variables
 @export_category("Scenes")
 @export_subgroup("Player", "player")
@@ -94,13 +96,15 @@ var _actively_teleporting_entities := 0
 signal all_entities_complete_teleport
 
 func _ready() -> void:
-	if SaveManager.run_from_F6:
-		_level_scene = GameManager.level_catalog.get_level(GameManager.start_world, GameManager.start_level).instantiate()
-	else:
-		var loaded_level = SaveManager.save_data.furthest_level_reached["level"]
-		var loaded_world = SaveManager.save_data.furthest_level_reached["world"]
-		_level_scene = GameManager.level_catalog.get_level(loaded_world, loaded_level).instantiate()
+	var loaded_level = GameManager.start_level
+	var loaded_world = GameManager.start_world
+	if not SaveManager.run_from_F6:
+		loaded_level = SaveManager.save_data.furthest_level_reached["level"]
+		loaded_world = SaveManager.save_data.furthest_level_reached["world"]
 
+	var packed_level = GameManager.level_catalog.get_level(loaded_world, loaded_level)
+	_level_scene = packed_level.instantiate()
+	_level_scene.uid = ResourceLoader.get_resource_uid(packed_level.resource_path)
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
 
 	_on_the_train.add_child(_level_scene)
@@ -136,11 +140,13 @@ func _ready() -> void:
 func load_next_level():
 	var _next_level_packed = GameManager.level_catalog.get_next_level()
 	_queue_world_transition = GameManager.level_catalog.is_new_world()
-	if _next_level_packed != null:
-		_next_level = _next_level_packed.instantiate()
-	else: # for now, break if loading past game end
+
+	if _next_level_packed == null: # for now, break if loading past game end
 		printerr("Attempting to load level beyond end of catalog. Loading 0,0 instead")
-		_next_level = GameManager.level_catalog.get_level(0,0).instantiate()
+		_next_level_packed = GameManager.level_catalog.get_level(0,0)
+	_next_level = _next_level_packed.instantiate()
+	_next_level.uid = ResourceLoader.get_resource_uid(_next_level_packed.resource_path)
+
 	_on_the_train.call_deferred("add_child", _next_level)
 	_next_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
 
@@ -364,6 +370,9 @@ func _execute_world_transition():
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
 	add_child(_world_scene)
 	advance_level()
+
+func get_current_level_uid() -> int:
+	return _level_scene.uid
 
 #endregion
 

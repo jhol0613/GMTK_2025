@@ -84,20 +84,28 @@ func _build_fadeout_rect(alpha: float) -> ColorRect:
 func _save_solution(index: int) -> void:
 	if not OS.is_debug_build():
 		return
+	var level_manager = get_node("/root/LevelManager")
+	if level_manager == null or level_manager is not LevelManager:
+		push_error("[GameManager] Couldn't find LevelManager!")
+		return
 	var sequencer = get_node("/root/LevelManager/SequencerLayer/ActionSequencer")
 	if sequencer == null or sequencer is not ActionSequencer:
 		push_error("[GameManager] Couldn't find ActionSequencer!")
 		return
-	SaveManager.save_solution(sequencer.get_current_sequence(), level_catalog.get_current_uid(), index)
+	SaveManager.save_solution(sequencer.get_current_sequence(), level_manager.get_current_level_uid(), index)
 
 func _load_solution(index: int) -> void:
 	if not OS.is_debug_build():
 		return
+	var level_manager = get_node("/root/LevelManager")
+	if level_manager == null or level_manager is not LevelManager:
+		push_error("[GameManager] Couldn't find LevelManager!")
+		return
 	var sequencer = get_node("/root/LevelManager/SequencerLayer/ActionSequencer")
 	if sequencer == null or sequencer is not ActionSequencer:
 		push_error("[GameManager] Couldn't find ActionSequencer!")
 		return
-	var solution = SaveManager.load_solution(level_catalog.get_current_uid(), index)
+	var solution = SaveManager.load_solution(level_manager.get_current_level_uid(), index)
 	sequencer.set_current_sequence(solution)
 
 func _input(_event: InputEvent):

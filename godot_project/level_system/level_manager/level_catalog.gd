@@ -99,8 +99,5 @@ func get_collectible_car() -> PackedScene:
 	else:
 		return world_definitions[_current_world].collectible_car
 
-func get_current_uid() -> int:
-	return ResourceLoader.get_resource_uid(world_definitions[_current_world].level_list[_current_level].resource_path)
-
 func get_current_index() -> Dictionary:
 	return {"world": _current_world, "level": _current_level}
