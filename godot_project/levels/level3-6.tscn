@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=4 uid="uid://deturlt7ef805"]
+[gd_scene load_steps=7 format=4 uid="uid://deturlt7ef805"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_43bro"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_lwxgq"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_lwxgq"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_uwibj"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="6_8cmfy"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="6_r7ar8"]
 
 [node name="LevelBase" instance=ExtResource("1_43bro")]
@@ -23,8 +24,8 @@ top = NodePath("../TeleporterTop")
 grid_origin = Vector2i(8, 4)
 
 [node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_lwxgq")]
-position = Vector2(273, 49)
-movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])
+position = Vector2(210, 50)
+movement_path = Array[int]([3, 3, 4, 4, 4, 3])
 action_sound_emitters = {
 8: NodePath("BumpSound"),
 9: NodePath("BumpSound"),
@@ -45,8 +46,8 @@ action_sound_emitters = {
 }
 
 [node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_lwxgq")]
-position = Vector2(240, 72)
-movement_path = Array[int]([4, 3, 3, 3, 3, 4, 4, 4])
+position = Vector2(178, 68)
+movement_path = Array[int]([4, 4, 3, 3, 3, 4])
 action_sound_emitters = {
 8: NodePath("BumpSound"),
 9: NodePath("BumpSound"),
@@ -70,6 +71,12 @@ action_sound_emitters = {
 position = Vector2(272, 89)
 
 [node name="TeleporterTarget" parent="." index="13" instance=ExtResource("6_r7ar8")]
-position = Vector2(48, 41)
+position = Vector2(48, 40)
 _active = true
 grid_origin = Vector2i(1, 2)
+
+[node name="Key" parent="." index="17" instance=ExtResource("6_8cmfy")]
+position = Vector2(176, 24)
+
+[node name="Key2" parent="." index="18" instance=ExtResource("6_8cmfy")]
+position = Vector2(176, 81)
