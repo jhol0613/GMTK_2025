@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/level1-14.tscn" id="13_e7wa4"]
 [ext_resource type="PackedScene" uid="uid://ciue2so776nlq" path="res://levels/level2-2_V2.tscn" id="15_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://dx3c77r31rvvm" path="res://levels/level2-1_V2.tscn" id="15_sv7wc"]
-[ext_resource type="PackedScene" uid="uid://dfiuf20xcifm3" path="res://level_system/collectible_displays/world2_collectible_car.tscn" id="15_xpa8w"]
+[ext_resource type="PackedScene" uid="uid://ypistjoure1e" path="res://level_system/collectible_displays/world2_collectible_car.tscn" id="15_xpa8w"]
 [ext_resource type="PackedScene" uid="uid://decxer3b8ursv" path="res://levels/level2-2b.tscn" id="16_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://bacyu05xq1n3r" path="res://levels/level2-3warmup.tscn" id="17_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://defrgrdfsdmu3" path="res://levels/level2-3.tscn" id="18_wvvmg"]
@@ -75,7 +75,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 [sub_resource type="Resource" id="Resource_ydpb6"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("21_5wr1n")
-level_list = Array[PackedScene]([ExtResource("15_sv7wc"), ExtResource("15_fk8s6"), ExtResource("16_sv7wc"), ExtResource("17_sv7wc"), ExtResource("18_wvvmg"), ExtResource("19_8o3tm"), ExtResource("20_dbel0"), ExtResource("21_ja0kk"), ExtResource("22_wvixl"), ExtResource("21_y8p5u"), ExtResource("25_7y0qp")])
+level_list = Array[PackedScene]([ExtResource("15_sv7wc"), ExtResource("15_fk8s6"), ExtResource("16_sv7wc"), ExtResource("17_sv7wc"), ExtResource("18_wvvmg"), ExtResource("19_8o3tm"), ExtResource("20_dbel0"), ExtResource("21_ja0kk"), ExtResource("22_wvixl"), ExtResource("21_y8p5u"), ExtResource("25_7y0qp"), ExtResource("58_qjc6i")])
 level_select_scene = 6
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0

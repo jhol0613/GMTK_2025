@@ -33,6 +33,7 @@ class_name RhythmRailLevel
 @onready var _debug_drawing_layer : DebugDrawing = $DebugDrawing
 @onready var _target := $Target
 @onready var _left_target := $LeftTarget
+@onready var _modified_target := $ModifiedTarget
 @onready var _lock := $AdditionalSprites/Lock
 
 ##Any grid position in this array will be treated as if it contains an obstacle when checking traversibility
@@ -72,7 +73,7 @@ signal conductor_reached_target
 #signal left_target_reached
 
 var player_in_left_target
-#var left_target_triggered_count := 0
+var player_in_modified_target
 
 var path_grid: AStarGrid2D
 var target_position: Vector2i
@@ -291,6 +292,12 @@ func _on_left_target_area_entered(area: Area2D) -> void:
 
 func _on_left_target_area_exited(area: Area2D) -> void:
 	player_in_left_target = false
+
+func _on_modified_target_area_entered(area: Area2D) -> void:
+	player_in_modified_target = true
+
+func _on_modified_target_area_exited(area: Area2D) -> void:
+	player_in_modified_target = false
 
 func _on_key_collected():
 	_keys_collected += 1

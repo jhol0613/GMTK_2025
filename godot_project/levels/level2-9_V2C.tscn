@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_4017a"]
 
 [node name="LevelBase" instance=ExtResource("1_vne7l")]
+display_name = "2-9 Collectible"
 conductor_spawn_beat = 7
 
 [node name="CatCoffeeSpill" parent="." index="12" instance=ExtResource("2_2f1ee")]

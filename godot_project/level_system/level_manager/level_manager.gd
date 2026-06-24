@@ -17,6 +17,8 @@ extends Node2D
 @export var initial_train_position := Vector2(132, 188)
 ##The distance in pixels to space out train cars
 @export var next_car_offset := 490
+##The extra amount that a train car moves when going backward, so the forward car gets hidden
+@export var car_regressed_offset := 60
 ##The distance that a train car will move (right) when play is pressed
 @export var train_move_right_on_play_distance := -22
 ##The amount of time it takes for train car to offset on pressing play
@@ -161,10 +163,11 @@ func regress_level():
 	_level_number -= 1
 	_level_scene = _previous_level
 	_initialize_level()
-	
+
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
-	var target_pos = _train_center.position - Vector2(-next_car_offset - train_move_right_on_play_distance, 0)
+	var target_pos = _train_center.position - Vector2(-next_car_offset - \
+		+ car_regressed_offset - train_move_right_on_play_distance, 0)
 	tween.tween_property(_train_center, "position", target_pos, train_car_advance_play_time) \
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_level_regressed)
@@ -192,15 +195,28 @@ func _replace_previous_level_with_collectible_car():
 	if not _previous_level:
 		return
 	var collectible_car_packed = GameManager.level_catalog.get_collectible_car()
-	var previous_level_position = _previous_level.position
-	if collectible_car_packed != null:
-		_previous_level = collectible_car_packed.instantiate()
-	else: # for now, break if loading past game end
+	if collectible_car_packed == null:
 		printerr("No collectible car defined, keeping previous level instead")
-	_previous_level.position = previous_level_position
-	
+		return
+	if collectible_car_packed != null:
+		var previous_level_position = _previous_level.position
+		_previous_level.queue_free()
+		_previous_level = collectible_car_packed.instantiate()
+		_previous_level.position = previous_level_position
+		_on_the_train.add_child(_previous_level)
+
+func _replace_next_level_with_follow_on():
+	var _next_level_packed = GameManager.level_catalog.get_next_level()
+	_queue_world_transition = false #GameManager.level_catalog.is_new_world()
+	if _next_level_packed != null:
+		var next_level_position = _next_level.position
+		_next_level.queue_free()
+		_next_level = _next_level_packed.instantiate()
+		_next_level.postion = next_level_position
+		_on_the_train.add_child(_next_level)
+
 # Handle connecting to signals, running initialization code for agents in new level
-func _initialize_level():
+func _initialize_level(should_load_next_level = true):
 	# Initialize new obstacles and pushers
 	_initialize_moving_obstacles()
 	_initialize_pushers()
@@ -224,10 +240,11 @@ func _initialize_level():
 	for agent in _level_scene.agents:
 		if not agent.animation_signal.is_connected(_on_animation_signal_received):
 			agent.animation_signal.connect(_on_animation_signal_received)
-	
+
 	_hint_number = 0
-	# load following level
-	load_next_level()
+
+	if should_load_next_level:
+		load_next_level()
 
 func _on_exit_overlapped() -> void:
 	if _conductor:
@@ -238,6 +255,7 @@ func _on_exit_overlapped() -> void:
 func _on_left_exit() -> void:
 	if _failure_animation_playing:
 		return
+	_player_character.notify_left_exit()
 	regress_level()
 
 ##called when player "beats" level (i.e. exits to the right)
@@ -283,9 +301,6 @@ func _on_conductor_reached_target() -> void:
 	pass
 	#if _conductor.state == Enums.ConductorState.UNAWARE:
 		#_conductor.exit_level()
-
-#func _on_left_target_reached() -> void:
-	#print("Player went backwards, train car should advance backward")
 
 func _reset_level() -> void:
 	if _actively_teleporting_entities > 0:
@@ -555,6 +570,11 @@ func _update_player(action: Enums.PlayerAction) -> void:
 	if _level_scene.player_in_left_target and action == Enums.PlayerAction.LEFT:
 		_on_left_exit()
 		return
+	#if player is on the right space but success doesn't get auto-triggered (e.g. collectibles car),
+	#let them advance the level by moving right
+	if _level_scene.player_in_modified_target and action == Enums.PlayerAction.RIGHT:
+		_on_exit_overlapped()
+		return
 	if _player_newly_hidden or not _player_hidden:
 		_player_newly_hidden = false
 		_player_character.execute_action(_bonk_check(_player_character, action), _current_beat)
@@ -638,14 +658,8 @@ func _update_grid_weights(target: Vector2i):
 			var dot = Enums.doti(Enums.direction_to_vector(treadmill.direction), desired_direction)
 			var weight = 0.1 if dot == 1 else 5.0 if dot == -1 else 4.0
 			_level_scene.update_weight_grid(treadmill.grid_position, weight)
-				
-	#for treadmill: Treadmill in _level_scene.treadmills:
-		#
-		#if Enums.doti(Enums.direction_to_vector(treadmill.direction), player_relative_to_conductor) >= 0:
-			#_level_scene.update_weight_grid(treadmill.grid_position, 0.1)
-		#else:
-			#_level_scene.update_weight_grid(treadmill.grid_position, 3.0)
-	
+
+
 	# set a high value of traversing through a teleporter to discourage the conductor from going
 	# into the teleporter accidentally. The player can force the conductor into going through,
 	# but only if there is no other path

@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=3 uid="uid://bq8pyr55mrptp"]
+[gd_scene load_steps=135 format=3 uid="uid://bq8pyr55mrptp"]
 
 [ext_resource type="Script" uid="uid://d2n0xo5exdiso" path="res://agents/player_character/player_character.gd" id="1_1ty04"]
 [ext_resource type="Texture2D" uid="uid://dd5t58goffwnn" path="res://agents/player_character/sprites/player_shadow.png" id="2_5l2xy"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://16kw4knemliq" path="res://agents/player_character/sprites/catpet_back.png" id="27_10run"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="28_qcujq"]
 [ext_resource type="Texture2D" uid="uid://1k1yc2yx3ole" path="res://agents/player_character/sprites/catpet_back2.png" id="29_rrcfc"]
+[ext_resource type="Texture2D" uid="uid://bi3g3rof3kcg8" path="res://agents/player_character/sprites/successcombined_left.png" id="33_fjd3h"]
 
 [sub_resource type="Resource" id="Resource_gli1f"]
 script = ExtResource("2_gvvi5")
@@ -361,6 +362,30 @@ region = Rect2(0, 256, 62, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k6eow"]
 atlas = ExtResource("17_5yn4y")
+region = Rect2(0, 320, 62, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3632"]
+atlas = ExtResource("33_fjd3h")
+region = Rect2(0, 0, 62, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5ccr"]
+atlas = ExtResource("33_fjd3h")
+region = Rect2(0, 64, 62, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5ypb"]
+atlas = ExtResource("33_fjd3h")
+region = Rect2(0, 128, 62, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yq4ou"]
+atlas = ExtResource("33_fjd3h")
+region = Rect2(0, 192, 62, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2toyn"]
+atlas = ExtResource("33_fjd3h")
+region = Rect2(0, 256, 62, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvnto"]
+atlas = ExtResource("33_fjd3h")
 region = Rect2(0, 320, 62, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rrcfc"]
@@ -871,6 +896,35 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_e3632")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5ccr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5ccr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3632")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5ypb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yq4ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2toyn")
+}, {
+"duration": 100.0,
+"texture": SubResource("AtlasTexture_kvnto")
+}],
+"loop": false,
+"name": &"success_left",
+"speed": 5.67
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_rrcfc")
 }, {
 "duration": 1.0,
@@ -1069,7 +1123,7 @@ texture = ExtResource("2_5l2xy")
 light_mask = 4
 position = Vector2(1, -29.3)
 sprite_frames = SubResource("SpriteFrames_5l2xy")
-animation = &"bonk_down"
+animation = &"success_left"
 autoplay = "idle_down"
 script = ExtResource("20_2b0p1")
 signals = Array[ExtResource("21_gvvi5")]([SubResource("Resource_efbsa"), SubResource("Resource_gvvi5")])

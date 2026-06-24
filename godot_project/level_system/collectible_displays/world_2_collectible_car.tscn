@@ -1,28 +1,15 @@
-[gd_scene load_steps=4 format=4 uid="uid://ypistjoure1e"]
+[gd_scene load_steps=3 format=4 uid="uid://ckrtg0ajfoxqx"]
 
-[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_md1ii"]
-[ext_resource type="Texture2D" uid="uid://djnguvahrguca" path="res://decorations/left_target.png" id="3_mnwcx"]
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_2ee2o"]
+[ext_resource type="Texture2D" uid="uid://djnguvahrguca" path="res://decorations/left_target.png" id="2_02v7a"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5lvy"]
-
-[node name="LevelBase" instance=ExtResource("1_md1ii")]
-player_spawn_position = Vector2i(10, 2)
-available_actions = Array[int]([3, 4])
+[node name="LevelBase" instance=ExtResource("1_2ee2o")]
+available_actions = Array[int]([4, 3])
 
 [node name="Floor" parent="." index="1"]
 tile_map_data = PackedByteArray("AAAAAAEAAgAAAAIAAAABAAEAAgAAAAIAAAACAAEAAgAAAAIAAAADAAEAAgAAAAIAAAAEAAEAAgAAAAIAAAAFAAEAAgAAAAIAAAAGAAEAAgAAAAIAAAAHAAEAAgAAAAIAAAAIAAEAAgAAAAIAAAAJAAEAAgAAAAIAAAAKAAEAAgAAAAIAAAAAAAQAAgAAAAIAAAABAAQAAgAAAAIAAAACAAQAAgAAAAIAAAADAAQAAgAAAAIAAAAEAAQAAgAAAAIAAAAFAAQAAgAAAAIAAAAGAAQAAgAAAAIAAAAHAAQAAgAAAAIAAAAIAAQAAgAAAAIAAAAJAAQAAgAAAAIAAAAKAAQAAgAAAAIAAAAAAAIAAgAAAAAAAAAAAAMAAgAAAAAAAAAKAAIAAgAAAAAAAAAKAAMAAgAAAAAAAAABAAIAAgAAAAAAAAACAAIAAgAAAAAAAAADAAIAAgAAAAAAAAAEAAIAAgAAAAAAAAAFAAIAAgAAAAAAAAAGAAIAAgAAAAAAAAAHAAIAAgAAAAAAAAAIAAIAAgAAAAAAAAAJAAIAAgAAAAAAAAAJAAMAAgAAAAAAAAAIAAMAAgAAAAAAAAAHAAMAAgAAAAAAAAAGAAMAAgAAAAAAAAAFAAMAAgAAAAAAAAAEAAMAAgAAAAAAAAADAAMAAgAAAAAAAAACAAMAAgAAAAAAAAABAAMAAgAAAAAAAAAAAAUAAgAAAAIAAAABAAUAAgAAAAIAAAACAAUAAgAAAAIAAAADAAUAAgAAAAIAAAAEAAUAAgAAAAIAAAAFAAUAAgAAAAIAAAAGAAUAAgAAAAIAAAAHAAUAAgAAAAIAAAAIAAUAAgAAAAIAAAAJAAUAAgAAAAIAAAAKAAUAAgAAAAIAAAAKAAAAAgAAAAIAAAAJAAAAAgAAAAIAAAAIAAAAAgAAAAIAAAAHAAAAAgAAAAIAAAAGAAAAAgAAAAIAAAAFAAAAAgAAAAIAAAAEAAAAAgAAAAIAAAADAAAAAgAAAAIAAAACAAAAAgAAAAIAAAABAAAAAgAAAAIAAAAAAAAAAgAAAAIAAAA=")
 
-[node name="Target" parent="." index="7"]
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="ModifiedTarget" index="0"]
-position = Vector2(338, 52)
-shape = SubResource("RectangleShape2D_s5lvy")
-
-[node name="Sprite2D2" type="Sprite2D" parent="ModifiedTarget" index="1"]
-position = Vector2(347, 51)
+[node name="Sprite2D2" type="Sprite2D" parent="LeftTarget" index="2"]
+position = Vector2(330, -1)
 scale = Vector2(-1, 1)
-texture = ExtResource("3_mnwcx")
-
-[node name="ModifiedTarget2" type="Area2D" parent="." index="11"]
+texture = ExtResource("2_02v7a")

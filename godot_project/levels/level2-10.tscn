@@ -12,7 +12,7 @@
 
 [node name="LevelBase" instance=ExtResource("1_psfox")]
 display_name = "2-10"
-conductor_spawn_beat = 9
+conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 7])
 
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]

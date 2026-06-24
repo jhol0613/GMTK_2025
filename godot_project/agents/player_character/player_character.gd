@@ -64,6 +64,10 @@ func notify_success():
 	play_animation_with_follow_on("success")
 	success_emitter.play()
 
+func notify_left_exit():
+	play_animation_with_follow_on("success_left")
+	success_emitter.play()
+
 func notify_failure(cause: Enums.FailureCause):
 	interrupt_queued_action()
 	var animation_to_play : String

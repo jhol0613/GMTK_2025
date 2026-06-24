@@ -30,7 +30,7 @@ func _on_action_executed(action: Enums.PlayerAction) -> void:
 		Enums.PlayerAction.LEFT:
 			sprite.flip_h = true
 			facing_direction = Enums.Direction.LEFT
-		Enums.PlayerAction.RIGHT:
+		Enums.PlayerAction.RIGHT, Enums.PlayerAction.UP:
 			sprite.flip_h = false
 			facing_direction = Enums.Direction.RIGHT
 		_:
