@@ -80,9 +80,6 @@ var _eraser_mode := false
 @onready var _antenna_deployed = false
 @onready var _conductor_spawn_countdown_screen: ConductorSpawnCountdownScreen = $TextureRect/ScreenOff/ScreenOn/ConductorSpawnScreen
 
-const P_MUSIC := "Music_Vol"
-const P_SFX   := "SFX_Vol"
-
 const ERASER_CURSOR := preload("res://action_sequencer/sequencer_visuals/eraser_button/EraserMouse.png")
 const ERASER_HOTSPOT := Vector2(6, 14)
 
@@ -135,12 +132,12 @@ func _ready() -> void:
 	AudioManager.music_bar.connect(_on_advance)
 	AudioManager.set_music_mode(Enums.MusicMode.THINKING)
 
-	_music_slider.value = FmodServer.get_global_parameter_by_name(P_MUSIC)
-	_sfx_slider.value   = FmodServer.get_global_parameter_by_name(P_SFX)
+	_music_slider.ratio = OptionsManager.options_data.music_value
+	_sfx_slider.ratio   = OptionsManager.options_data.sfx_value
 
 	_music_slider.connect("value_changed", Callable(self, "_on_music_slider_changed"))
 	_sfx_slider.connect("value_changed", Callable(self, "_on_sfx_slider_changed"))
-	
+
 	laser_hint_box.visible = ProjectSettings.get_setting("rhythm_rail/DeveloperOptions/show_laser_timing_hints")
 
 	_speed_control_ready()
@@ -463,8 +460,8 @@ func _on_play_button_mouse_entered() -> void:
 func _on_replay_button_mouse_entered() -> void:
 	play_button_hover_emitter.play()
 
-func _on_music_slider_changed(value):
-	FmodServer.set_global_parameter_by_name(P_MUSIC, value)
+func _on_music_slider_changed(_value):
+	OptionsManager.set_music_value(_music_slider.ratio)
 
 func _on_music_slider_drag_started() -> void:
 	music_slider_click_emitter.play()
@@ -478,8 +475,8 @@ func _on_sfx_slider_drag_started() -> void:
 func _on_sfx_slider_drag_ended(_value_changed: bool) -> void:
 	sfx_slider_release_emitter.play()
 
-func _on_sfx_slider_changed(value):
-	FmodServer.set_global_parameter_by_name(P_SFX, value)
+func _on_sfx_slider_changed(_value):
+	OptionsManager.set_sfx_value(_sfx_slider.ratio)
 
 func _speed_control_ready() -> void:
 	_speed_btn.toggle_mode = true
