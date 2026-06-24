@@ -1,7 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://bm2axmjyuw8gr"]
+[gd_scene load_steps=31 format=3 uid="uid://bm2axmjyuw8gr"]
 
 [ext_resource type="Script" uid="uid://bc3elcigudtk7" path="res://menus/pause_menu/pause_menu.gd" id="1_qd56w"]
+[ext_resource type="Script" uid="uid://dhsaynbb1l2qk" path="res://menus/options_menu/options_menu.gd" id="2_l3nas"]
 [ext_resource type="Texture2D" uid="uid://bu64yaxj7fu0s" path="res://menus/pause_menu/pausemenu_visuals/pause.png" id="3_4s7ec"]
+[ext_resource type="Texture2D" uid="uid://kfsfp0725v6l" path="res://menus/options_menu/options_menu_bg.png" id="3_vpjwo"]
 [ext_resource type="Texture2D" uid="uid://betxuvh17xfgr" path="res://menus/pause_menu/pausemenu_visuals/yesno.png" id="4_4s7ec"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4s7ec"]
@@ -71,6 +73,55 @@ offset_right = 599.0
 offset_bottom = 451.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.152941)
+
+[node name="OptionsMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_l3nas")
+
+[node name="TextureRect" type="TextureRect" parent="OptionsMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_vpjwo")
+
+[node name="Options" type="VBoxContainer" parent="OptionsMenu"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.195
+anchor_top = 0.362
+anchor_right = 0.195
+anchor_bottom = 0.362
+offset_top = 0.0999908
+offset_right = 253.0
+offset_bottom = 87.1
+
+[node name="FullscreenOption" type="HBoxContainer" parent="OptionsMenu"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 169.0
+offset_right = 227.0
+offset_bottom = 188.0
+
+[node name="Label" type="Label" parent="OptionsMenu/FullscreenOption"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="CheckButton" type="CheckButton" parent="OptionsMenu/FullscreenOption"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="OptionsMenu"]
+layout_mode = 0
+offset_left = 329.0
+offset_top = 138.0
+offset_right = 374.0
+offset_bottom = 169.0
+text = "Back"
 
 [node name="pause_menu" type="Control" parent="."]
 anchors_preset = 0
@@ -167,6 +218,8 @@ event_guid = "{ea28acac-8947-4b28-80c1-399dc6f9ac3f}"
 event_name = "event:/PasueClick"
 event_guid = "{1e6fda23-5bac-4100-a590-d50141d2c696}"
 
+[connection signal="toggled" from="OptionsMenu/FullscreenOption/CheckButton" to="OptionsMenu" method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="OptionsMenu/BackButton" to="." method="_on_options_back_button_pressed"]
 [connection signal="mouse_entered" from="pause_menu/resume_btn" to="." method="_on_resume_btn_mouse_entered"]
 [connection signal="pressed" from="pause_menu/resume_btn" to="." method="_on_resume_btn_pressed"]
 [connection signal="mouse_entered" from="pause_menu/options_btn" to="." method="_on_options_btn_mouse_entered"]

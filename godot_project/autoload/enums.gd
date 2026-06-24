@@ -102,6 +102,11 @@ enum SaveDataItem {
 	FARTHEST_LEVEL_REACHED
 }
 
+# TODO: decide on resolutions
+enum Resolution {
+	DEFAULT
+}
+
 enum MoveMode {
 	##If push on beat, pusher will only perform a check for overlaps on specified beat
 	ON_BEAT,

@@ -10,7 +10,7 @@
 [ext_resource type="Resource" uid="uid://cg2foen8yla6w" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle_slide_bonk_data.tres" id="5_s1287"]
 [ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="6_1bgl0"]
 [ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="7_26gw8"]
-[ext_resource type="Script" uid="uid://d0wms71yvj7vy" path="res://agents/sprite_2d_signal_data.gd" id="8_gx75w"]
+[ext_resource type="Script" path="res://agents/sprite_2d_signal_data.gd" id="8_gx75w"]
 [ext_resource type="Script" uid="uid://dtg8o21ypt6se" path="res://agents/lasers/laser_blocker.gd" id="9_kgp0j"]
 [ext_resource type="Script" uid="uid://deg3tw8squr8x" path="res://agents/fmod_event_emitter_2d_offset.gd" id="10_s1287"]
 

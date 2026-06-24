@@ -16,7 +16,7 @@ conductor_spawn_beat = 8
 available_actions = Array[int]([4, 1, 2])
 hints = Array[ExtResource("2_f8odd")]([SubResource("Resource_f8odd")])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAIAAQAAgAAAAIAAAAIAAUAAgAAAAMAAAAEAAUAAgADAAEAAAAFAAUAAgAEAAEAAAAGAAQAAgACAAAAAAAGAAUAAgACAAEAAAAHAAQAAgACAAAAAAAHAAUAAgACAAEAAAABAAQAAgACAAAAAAABAAUAAgACAAEAAAAGAAMAAgADAAEAAAAHAAMAAgAEAAEAAAAIAAMAAgADAAEAAAAJAAMAAgAEAAEAAAACAAMAAgACAAIAAAACAAQAAgACAAMAAAADAAMAAgADAAIAAAADAAQAAgADAAMAAAA=")
 
 [node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
