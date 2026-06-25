@@ -66,6 +66,7 @@ var _player_character: PlayerCharacter
 
 var _next_level: RhythmRailLevel
 var _previous_level: RhythmRailLevel
+var _regressed_level: RhythmRailLevel #temp storage for updating references during level regression
 var _level_number := 0
 var _current_beat := 0
 
@@ -123,6 +124,7 @@ func _ready() -> void:
 		GameManager.level_catalog.get_world_music_event_bpm())
 
 	_initialize_level()
+	load_next_level()
 	_on_level_advanced()
 
 	AudioManager.music_bar.connect(_on_music_bar)
@@ -157,6 +159,7 @@ func advance_level():
 	_previous_level = _level_scene
 	_level_scene = _next_level
 	_initialize_level()
+	load_next_level()
 
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
@@ -167,8 +170,10 @@ func advance_level():
 
 func regress_level():
 	_level_number -= 1
-	_level_scene = _previous_level
+	_regressed_level = _level_scene
+	_level_scene = _previous_level #previous level has been replaced with collectible car by the time this is called
 	_initialize_level()
+	#Next level is already loaded. It gets pulled forward in on__level_regressed
 
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
@@ -178,7 +183,7 @@ func regress_level():
 		.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_callback(_on_level_regressed)
 
-## Scene initialization steps that are called AFTER the level has been fully advanced
+##Scene initialization steps that are called AFTER the level has been fully advanced
 func _on_level_advanced():
 	var level_banner = level_banner_scene.instantiate()
 	level_banner.label_text_init = _level_scene.display_name
@@ -188,11 +193,10 @@ func _on_level_advanced():
 	_spawn_player()
 	_reset_level()
 
-## Scene initialization steps that are called AFTER the level has been fully advanced
+##Scene initialization steps that are called AFTER the level has been fully regressed
 func _on_level_regressed():
-	#var level_banner = level_banner_scene.instantiate()
-	#level_banner.label_text_init = _level_scene.display_name
-	#add_child(level_banner)
+	_next_level.position = _regressed_level.position
+	_regressed_level.queue_free()
 	_action_sequencer.set_action_icons_hidden(false)
 	_spawn_player()
 	_reset_level()
@@ -222,7 +226,7 @@ func _replace_next_level_with_follow_on():
 		_on_the_train.add_child(_next_level)
 
 # Handle connecting to signals, running initialization code for agents in new level
-func _initialize_level(should_load_next_level = true):
+func _initialize_level():
 	# Initialize new obstacles and pushers
 	_initialize_moving_obstacles()
 	_initialize_pushers()
@@ -247,10 +251,7 @@ func _initialize_level(should_load_next_level = true):
 		if not agent.animation_signal.is_connected(_on_animation_signal_received):
 			agent.animation_signal.connect(_on_animation_signal_received)
 
-	_hint_number = 0
-
-	if should_load_next_level:
-		load_next_level()
+	_hint_number = 0	
 
 func _on_exit_overlapped() -> void:
 	if _conductor:
@@ -284,7 +285,7 @@ func _on_level_complete() -> void:
 		_execute_world_transition()
 		return
 	SaveManager.update_furthest_level(GameManager.level_catalog.get_current_index())
-	SaveManager.add_completed_level(GameManager.level_catalog.get_current_uid())
+	#SaveManager.add_completed_level(GameManager.level_catalog.get_current_uid())
 	advance_level()
 
 func _on_level_fail() -> void:
