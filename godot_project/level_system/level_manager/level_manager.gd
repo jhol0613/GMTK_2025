@@ -285,7 +285,7 @@ func _on_level_complete() -> void:
 		_execute_world_transition()
 		return
 	SaveManager.update_furthest_level(GameManager.level_catalog.get_current_index())
-	#SaveManager.add_completed_level(GameManager.level_catalog.get_current_uid())
+	SaveManager.add_completed_level(get_current_level_uid())
 	advance_level()
 
 func _on_level_fail() -> void:
