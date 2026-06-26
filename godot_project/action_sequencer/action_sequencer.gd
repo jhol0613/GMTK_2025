@@ -24,6 +24,7 @@ class_name ActionSequencer
 @export var default_action_quantities: Array[int]
 @export var total_slots := 8
 @export var max_actions := 8
+@export var laser_hint_beat := 2.0
 
 @export_category("Animation")
 ##Amount of time that screen flashes when new antenna is selected
@@ -43,15 +44,15 @@ class_name ActionSequencer
 @onready var replay_button_press_emitter = $TextureRect/ReplayButton/ReplayButtonPress
 
 @onready var laser_hint_box := $TextureRect/LaserHints
-@onready var laser_hints: Array[TextureRect] = [
-	$TextureRect/LaserHints/TextureRect,
-	$TextureRect/LaserHints/TextureRect2,
-	$TextureRect/LaserHints/TextureRect3,
-	$TextureRect/LaserHints/TextureRect4,
-	$TextureRect/LaserHints/TextureRect5,
-	$TextureRect/LaserHints/TextureRect6,
-	$TextureRect/LaserHints/TextureRect7,
-	$TextureRect/LaserHints/TextureRect8
+@onready var laser_hints: Array[AnimatedSprite2DSignals] = [
+	$TextureRect/LaserHints/LaserHint1,
+	$TextureRect/LaserHints/LaserHint2,
+	$TextureRect/LaserHints/LaserHint3,
+	$TextureRect/LaserHints/LaserHint4,
+	$TextureRect/LaserHints/LaserHint5,
+	$TextureRect/LaserHints/LaserHint6,
+	$TextureRect/LaserHints/LaserHint7,
+	$TextureRect/LaserHints/LaserHint8
 ]
 
 @onready var _music_slider: VSlider = $TextureRect/MusicSlider
@@ -332,6 +333,10 @@ func set_laser_hint(slot: int, value: bool):
 func clear_laser_hints():
 	for texture in laser_hints:
 		texture.modulate.a = 0.0
+
+func flash_laser_hint(beat: int):
+	await get_tree().create_timer(laser_hint_beat * AudioManager.beat_time_seconds).timeout
+	laser_hints[beat % _available_slots].play_with_signals("flash")
 
 ##When true, sequencer actions highlight red (or skip action color)
 ##when that action would be triggered (does not alter logic as to whether

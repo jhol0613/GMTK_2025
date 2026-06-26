@@ -530,6 +530,7 @@ func _on_action_performed(action: Enums.PlayerAction) -> void:
 	_update_conductor()
 	_update_agents()
 	_update_teleporters()
+	_action_sequencer.flash_laser_hint(_current_beat)
 	_current_beat += 1
 
 # Called when sequencer emits an action in thinking mode
@@ -537,6 +538,7 @@ func _on_thinking_action_performed():
 	_update_obstacles()
 	_update_agents()
 	_update_teleporters()
+	_action_sequencer.flash_laser_hint(_current_beat)
 	_current_beat += 1
 
 func _update_obstacles():
