@@ -14,11 +14,7 @@ signal _all_entities_done_teleporting
 func _ready() -> void:
 	antenna_group = teleporters
 	sequencer_control_scene_UID = Enums.SequencerControlScene.MOVE_TELEPORT_DESTINATION
-	#for convenience, just set teleporter to whatever owns this antenna program
-	if teleporters.size() == 0:
-		var gramps = get_parent().get_parent()
-		if gramps is Teleporter:
-			teleporters.append(gramps)
+
 	if teleporters.size() == 0:
 		push_error("No teleporter sselected for move teleporter destination program")
 	var num_destinations = teleporters[0].destination_targets.size()
@@ -58,7 +54,7 @@ func _on_option_cycled(index: int):
 func _on_teleport_begin(_entity):
 	_entities_teleporting += 1
 
-func _on_teleport_complete():
+func _on_teleport_complete(_entity):
 	_entities_teleporting -= 1
 	if _entities_teleporting == 0:
 		_all_entities_done_teleporting.emit()
