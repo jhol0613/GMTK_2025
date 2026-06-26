@@ -51,6 +51,7 @@ class_name Teleporter
 	$Target/YSortOffset/TargetSprite/Lights/RespawnParticles4
 ]
 @onready var initial_target_sprite_offset = target_sprite.position
+@onready var _antenna_component := $AntennaComponent
 
 # set in runtime, found dynamically using its name
 var _level_scene: RhythmRailLevel
@@ -85,12 +86,15 @@ func _ready() -> void:
 	add_to_group("teleporters")
 	if destination_targets.is_empty():
 		push_error("Teleporter must have at least one destination target")
+	for destination_target in destination_targets:
+		_antenna_component.add_highlighted_node(destination_target.sprite)
 	if not Engine.is_editor_hint():
 		AudioManager.music_bar.connect(_on_music_bar)
 	_set_color(teleporter_color)
 	current_destination_target = destination_targets[0]
 	if not top:
 		return
+	_antenna_component.add_highlighted_node(top.sprite)
 	if AudioManager.beat_time_seconds * default_action_beat < top.lights_sprite.default_animation_offset:
 		push_warning("Teleporter powerup animation can't be triggered because it would bleed into the
 		previous bar. Either reduce teleporter top animation offset or move teleporter action beat later")

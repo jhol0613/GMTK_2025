@@ -91,10 +91,11 @@ animation = "power_up"
 frame = 2
 metadata/_custom_type_script = "uid://d0wms71yvj7vy"
 
-[node name="TeleporterTop" type="Node2D" node_paths=PackedStringArray("lights_sprite", "lights")]
+[node name="TeleporterTop" type="Node2D" node_paths=PackedStringArray("lights_sprite", "sprite", "lights")]
 z_index = 1
 script = ExtResource("1_mjewp")
 lights_sprite = NodePath("Lights")
+sprite = NodePath("StaticSprite")
 lights = [NodePath("StaticSprite/Light1"), NodePath("StaticSprite/Light2"), NodePath("StaticSprite/Light3")]
 
 [node name="StaticSprite" type="AnimatedSprite2D" parent="."]

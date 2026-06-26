@@ -8,6 +8,7 @@ class_name TeleporterTop
 signal powered_up
 
 @export var lights_sprite : AnimatedSprite2DSignals
+@export var sprite : AnimatedSprite2DSignals
 @export var lights : Array[Light2D]
 
 func _ready():

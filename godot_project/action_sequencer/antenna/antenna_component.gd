@@ -27,6 +27,10 @@ func _ready() -> void:
 	for node in highlighted_nodes:
 		original_modulates.append(node.self_modulate)
 
+func add_highlighted_node(node: Node2D):
+	highlighted_nodes.append(node)
+	original_modulates.append(node.self_modulate)
+
 func _on_mouse_entered():
 	mouse_entered.emit()
 

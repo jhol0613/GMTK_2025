@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://utunhux5xaso"]
+[gd_scene load_steps=68 format=3 uid="uid://utunhux5xaso"]
 
 [ext_resource type="Script" uid="uid://hledp1xoysq1" path="res://agents/teleporter/teleporter.gd" id="1_wok2c"]
 [ext_resource type="Texture2D" uid="uid://carg475anuqrn" path="res://agents/teleporter/sprites/twinkle1.png" id="3_4tlvn"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bnae1wupxmcvi" path="res://agents/teleporter/sprites/teleporter_light_frames.png" id="11_q80g7"]
 [ext_resource type="Material" uid="uid://cdj0kefpjqu80" path="res://agents/teleporter/respawn_particle_material.tres" id="12_q80g7"]
 [ext_resource type="Texture2D" uid="uid://dtekfyw2evlma" path="res://decorations/basic_light.tres" id="14_x86ak"]
+[ext_resource type="PackedScene" uid="uid://cc001tdwor54g" path="res://action_sequencer/antenna/antenna_component.tscn" id="16_ahsak"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_swgog"]
 atlas = ExtResource("3_swgog")
@@ -578,6 +579,25 @@ event_guid = "{54ca2f07-b4b0-4eb5-84af-c99140d3f2e2}"
 script = ExtResource("7_yrgjr")
 offset_seconds = -0.08
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
+
+[node name="AntennaComponent" parent="." node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("16_ahsak")]
+position = Vector2(-1, -93)
+highlighted_nodes = [NodePath("../TeleporterBaseBack"), NodePath("../Node2D/TeleporterBaseFront")]
+detection_areas = [NodePath("Button"), NodePath("Button2")]
+
+[node name="Button" type="Button" parent="AntennaComponent"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -3.0
+offset_top = -8.0
+offset_right = 5.0
+offset_bottom = 12.0
+
+[node name="Button2" type="Button" parent="AntennaComponent"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -15.0
+offset_top = 10.0
+offset_right = 17.0
+offset_bottom = 96.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
