@@ -15,23 +15,21 @@ func get_level(world: int, level: int) -> PackedScene:
 	_previous_world = _current_world
 	_current_world = world
 	_current_level = level
-	return world_definitions[world].levels[level].original
 
-## Get level by it's UID
-func get_uid_level(uid: int) -> PackedScene:
-	for world in world_definitions:
-		for level in world.levels:
-			if uid == ResourceLoader.get_resource_uid(level.original.resource_path):
-				return level.original
+	var packed_level = world_definitions[world].levels[level]
+	if ResourceLoader.get_resource_uid(packed_level.original.resource_path) in SaveManager.save_data.completed_levels:
+		return packed_level.collectible
+	return packed_level.original
 
-	return world_definitions[0].levels[0].original
 
 ## Given a rhythm rail level, returns a dictionary with the world and level number. Updates state to level index
 func get_index(level: RhythmRailLevel) -> Dictionary:
 	var index_dict = {"world": -1, "level": -1}
 	for world_index in range(world_definitions.size()):
 		for level_index in range(world_definitions[world_index].levels.size()):
-			if level.scene_file_path == world_definitions[world_index].levels[level_index].original.resource_path:
+			var packed_level = world_definitions[world_index].levels[level_index]
+			if level.scene_file_path == packed_level.original.resource_path or \
+			packed_level.collectible and level.scene_file_path == packed_level.collectible.resource_path:
 				index_dict.set("world", world_index)
 				index_dict.set("level", level_index)
 				_previous_world = _current_world
