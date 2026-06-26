@@ -11,27 +11,27 @@ var _previous_world := -1
 ## Returns level at a given index. Updates state to returned level index
 func get_level(world: int, level: int) -> PackedScene:
 	assert(world < world_definitions.size(), str("World ", world, " is not defined"))
-	assert(level < world_definitions[world].level_list.size(), str("Level ", level, " in World ", world, " is not defined"))
+	assert(level < world_definitions[world].levels.size(), str("Level ", level, " in World ", world, " is not defined"))
 	_previous_world = _current_world
 	_current_world = world
 	_current_level = level
-	return world_definitions[world].level_list[level]
+	return world_definitions[world].levels[level].original
 
 ## Get level by it's UID
 func get_uid_level(uid: int) -> PackedScene:
 	for world in world_definitions:
-		for level in world.level_list:
-			if uid == ResourceLoader.get_resource_uid(level.resource_path):
+		for level in world.levels:
+			if uid == ResourceLoader.get_resource_uid(level.original.resource_path):
 				return level
 
-	return world_definitions[0].level_list[0]
+	return world_definitions[0].levels[0].original
 
 ## Given a rhythm rail level, returns a dictionary with the world and level number. Updates state to level index
 func get_index(level: RhythmRailLevel) -> Dictionary:
 	var index_dict = {"world": -1, "level": -1}
 	for world_index in range(world_definitions.size()):
-		for level_index in range(world_definitions[world_index].level_list.size()):
-			if level.scene_file_path == world_definitions[world_index].level_list[level_index].resource_path:
+		for level_index in range(world_definitions[world_index].levels.size()):
+			if level.scene_file_path == world_definitions[world_index].levels[level_index].original.resource_path:
 				index_dict.set("world", world_index)
 				index_dict.set("level", level_index)
 				_previous_world = _current_world
@@ -45,10 +45,10 @@ func get_display_name(world: int, level: int):
 
 	if world >= world_definitions.size():
 		return "requested world index out of bounds"
-	if level >= world_definitions[world].level_list.size():
+	if level >= world_definitions[world].levels.size():
 		return "requested level index out of bounds"
 
-	var level_state = world_definitions[world].level_list[level].get_state()
+	var level_state = world_definitions[world].levels[level].original.get_state()
 	for i in range(level_state.get_node_property_count(0)): #0 is always root node
 		if level_state.get_node_property_name(0, i) == "display_name":
 			return level_state.get_node_property_value(0, i)
@@ -58,15 +58,15 @@ func get_display_name(world: int, level: int):
 func get_next_level() -> PackedScene:
 	# check if any more levels in this world
 	_previous_world = _current_world
-	if _current_level + 1 < world_definitions[_current_world].level_list.size():
+	if _current_level + 1 < world_definitions[_current_world].levels.size():
 		_current_level += 1
-		return world_definitions[_current_world].level_list[_current_level]
+		return world_definitions[_current_world].levels[_current_level].original
 	# get next world with a least 1 level, return first level in that world
 	_current_world += 1
 	_current_level = 0
 	while _current_world < world_definitions.size():
-		if world_definitions[_current_world].level_list.size() > 0:
-			return world_definitions[_current_world].level_list[_current_level]
+		if world_definitions[_current_world].levels.size() > 0:
+			return world_definitions[_current_world].levels[_current_level].original
 		_current_world += 1
 	return null
 
