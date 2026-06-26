@@ -118,7 +118,6 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_wmh5c"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("3_oivuf")
-level_list = Array[PackedScene]([])
 levels = Array[ExtResource("14_agh00")]([SubResource("Resource_agh00"), SubResource("Resource_xpa8w"), SubResource("Resource_fc5oy"), SubResource("Resource_s1xyy"), SubResource("Resource_isgho"), SubResource("Resource_4lmby"), SubResource("Resource_k6k1i"), SubResource("Resource_15cvr"), SubResource("Resource_5ulpv"), SubResource("Resource_hug5r")])
 level_select_scene = 5
 music_event_name = "World1_BGM"
@@ -186,7 +185,6 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_ydpb6"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("21_5wr1n")
-level_list = Array[PackedScene]([])
 levels = Array[ExtResource("14_agh00")]([SubResource("Resource_831uk"), SubResource("Resource_5gqab"), SubResource("Resource_l8k77"), SubResource("Resource_1owmq"), SubResource("Resource_eijgq"), SubResource("Resource_54guf"), SubResource("Resource_wxow8"), SubResource("Resource_s5joa"), SubResource("Resource_pmubg"), SubResource("Resource_clo73"), SubResource("Resource_otauw")])
 level_select_scene = 6
 music_event_name = "World2_BGM"
@@ -264,7 +262,6 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("40_fk8s6")
-level_list = Array[PackedScene]([])
 levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_3qwdo"), SubResource("Resource_573c6"), SubResource("Resource_2mi6j"), SubResource("Resource_y5e7o"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_wepqg"), SubResource("Resource_dniod")])
 level_select_scene = 7
 music_event_name = "World3_BGM"
@@ -337,7 +334,6 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_u7mwr"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("34_3js1v")
-level_list = Array[PackedScene]([])
 levels = Array[ExtResource("14_agh00")]([SubResource("Resource_mbm5a"), SubResource("Resource_l1c24"), SubResource("Resource_6cenb"), SubResource("Resource_tiysq"), SubResource("Resource_o67xc"), SubResource("Resource_j5min"), SubResource("Resource_3meng"), SubResource("Resource_47x0y"), SubResource("Resource_hoyem"), SubResource("Resource_77x0c"), SubResource("Resource_lb5ed"), SubResource("Resource_gb6cx")])
 level_select_scene = 0
 music_event_name = "World2_BGM"
