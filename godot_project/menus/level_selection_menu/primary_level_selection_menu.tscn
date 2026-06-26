@@ -141,5 +141,3 @@ offset_right = 533.0
 offset_bottom = 385.0
 text = "Back"
 script = ExtResource("6_ovwpm")
-
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
