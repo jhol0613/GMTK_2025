@@ -39,7 +39,6 @@ extends Node2D
 
 @export_category("Levels")
 ## All train cars in order
-#@export var level_list: Array[PackedScene]
 @export var level_catalog: LevelCatalog
 #endregion
 

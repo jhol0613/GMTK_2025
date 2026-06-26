@@ -28,7 +28,7 @@ func _on_music_event_timeline_beat(_params: Dictionary) -> void:
 	if _params.get("bar") == _bar:
 		return
 	_bar = _params.get("bar")
-	
+
 	if _queue_time_multiplier_update:
 		if _bar % int((time_multiplier_to_number(_queued_multiplier) * 4)) == 1:
 			time_multiplier = _queued_multiplier
