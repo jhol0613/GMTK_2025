@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=113 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=112 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -90,6 +90,7 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_4lmby"]
 script = ExtResource("14_agh00")
 original = ExtResource("10_y8p5u")
+collectible = ExtResource("55_kwvbr")
 metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_k6k1i"]
@@ -344,18 +345,7 @@ music_event_bpm = 160.0
 antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
-[sub_resource type="Resource" id="Resource_7kw4m"]
-script = ExtResource("2_lqinw")
-world_scene = ExtResource("34_3js1v")
-level_list = Array[PackedScene]([ExtResource("55_kwvbr"), ExtResource("56_7kw4m"), ExtResource("57_pvehw"), ExtResource("58_qjc6i")])
-levels = Array[ExtResource("14_agh00")]([])
-level_select_scene = 0
-music_event_name = "World2_BGM"
-music_event_bpm = 160.0
-antenna_deployed = false
-metadata/_custom_type_script = "uid://dk64rba8fhrtt"
-
 [resource]
 script = ExtResource("1_vetjv")
-world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr"), SubResource("Resource_7kw4m")])
+world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr")])
 metadata/_custom_type_script = "uid://4j1dtwn2r7t1"
