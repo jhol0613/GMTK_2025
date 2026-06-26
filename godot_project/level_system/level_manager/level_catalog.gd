@@ -22,7 +22,7 @@ func get_uid_level(uid: int) -> PackedScene:
 	for world in world_definitions:
 		for level in world.levels:
 			if uid == ResourceLoader.get_resource_uid(level.original.resource_path):
-				return level
+				return level.original
 
 	return world_definitions[0].levels[0].original
 

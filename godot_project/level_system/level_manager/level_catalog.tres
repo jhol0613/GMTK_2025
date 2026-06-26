@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=66 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=67 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ej8hk3h8ibcr" path="res://levels/level1-12.tscn" id="11_y48yf"]
 [ext_resource type="PackedScene" uid="uid://bjo6fdnk4su8p" path="res://levels/level1-13_V2.tscn" id="12_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/level1-14.tscn" id="13_e7wa4"]
+[ext_resource type="Script" uid="uid://bogveiln632se" path="res://level_system/level_manager/packed_level.gd" id="14_agh00"]
 [ext_resource type="PackedScene" uid="uid://ciue2so776nlq" path="res://levels/level2-2_V2.tscn" id="15_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://dx3c77r31rvvm" path="res://levels/level2-1_V2.tscn" id="15_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://ypistjoure1e" path="res://level_system/collectible_displays/world2_collectible_car.tscn" id="15_xpa8w"]
@@ -65,6 +66,7 @@
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("3_oivuf")
 level_list = Array[PackedScene]([ExtResource("3_ydpb6"), ExtResource("4_rcuhu"), ExtResource("7_xo8rd"), ExtResource("8_fk8s6"), ExtResource("9_nmtjp"), ExtResource("10_y8p5u"), ExtResource("5_peuoq"), ExtResource("11_y48yf"), ExtResource("12_sv7wc"), ExtResource("13_e7wa4")])
+levels = Array[ExtResource("14_agh00")]([])
 level_select_scene = 5
 music_event_name = "World1_BGM"
 music_event_bpm = 170.0
@@ -76,6 +78,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("21_5wr1n")
 level_list = Array[PackedScene]([ExtResource("15_sv7wc"), ExtResource("15_fk8s6"), ExtResource("16_sv7wc"), ExtResource("17_sv7wc"), ExtResource("18_wvvmg"), ExtResource("19_8o3tm"), ExtResource("20_dbel0"), ExtResource("21_ja0kk"), ExtResource("22_wvixl"), ExtResource("21_y8p5u"), ExtResource("25_7y0qp"), ExtResource("58_qjc6i")])
+levels = Array[ExtResource("14_agh00")]([])
 level_select_scene = 6
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
@@ -88,6 +91,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("40_fk8s6")
 level_list = Array[PackedScene]([ExtResource("29_y2rew"), ExtResource("30_y2rew"), ExtResource("31_4ssl1"), ExtResource("32_sb2tf"), ExtResource("33_s30ns"), ExtResource("34_8402a"), ExtResource("35_sb2tf"), ExtResource("36_s30ns"), ExtResource("37_8402a"), ExtResource("38_ga4mb"), ExtResource("48_1x4po"), ExtResource("40_30pcr"), ExtResource("40_sv7wc")])
+levels = Array[ExtResource("14_agh00")]([])
 level_select_scene = 7
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0
@@ -100,6 +104,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("34_3js1v")
 level_list = Array[PackedScene]([ExtResource("29_pbglx"), ExtResource("26_8o3tm"), ExtResource("31_6wlqo"), ExtResource("32_b2pns"), ExtResource("33_5wfa6"), ExtResource("34_6wlqo"), ExtResource("35_b2pns"), ExtResource("37_3js1v"), ExtResource("49_nne5e"), ExtResource("50_fk8s6"), ExtResource("52_30pcr"), ExtResource("53_7y0qp")])
+levels = Array[ExtResource("14_agh00")]([])
 level_select_scene = 0
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
@@ -110,6 +115,7 @@ metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("34_3js1v")
 level_list = Array[PackedScene]([ExtResource("55_kwvbr"), ExtResource("56_7kw4m"), ExtResource("57_pvehw"), ExtResource("58_qjc6i")])
+levels = Array[ExtResource("14_agh00")]([])
 level_select_scene = 0
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0

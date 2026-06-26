@@ -9,4 +9,3 @@ var original: PackedScene
 ## Version of the level with collectible
 @export
 var collectible: PackedScene
-
