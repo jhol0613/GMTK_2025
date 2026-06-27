@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=113 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=116 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -53,7 +53,9 @@
 [ext_resource type="PackedScene" uid="uid://cj7624t065i2" path="res://backgrounds/world3/world3_background.tscn" id="40_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://b4dj0imvapc5w" path="res://levels/level3-12.tscn" id="40_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://w2fypr8pvqj0" path="res://levels/level3-9C.tscn" id="45_xpa8w"]
+[ext_resource type="PackedScene" uid="uid://c8nmnp0nakg6m" path="res://levels/level3-10_V2C.tscn" id="47_s1xyy"]
 [ext_resource type="PackedScene" uid="uid://sgl6wm0xs1th" path="res://levels/level3-9.tscn" id="48_1x4po"]
+[ext_resource type="PackedScene" uid="uid://dqkvody2ol4r8" path="res://levels/level3-10_V2.tscn" id="49_fc5oy"]
 [ext_resource type="PackedScene" uid="uid://c0lpb8u54s0rd" path="res://levels/test_levels/teleporter_test_level.tscn" id="49_nne5e"]
 [ext_resource type="PackedScene" uid="uid://bh5ec0yys4ety" path="res://levels/level3-10.tscn" id="50_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://cpeu3l5fgvpk6" path="res://levels/test_levels/spinning_chair_test_level.tscn" id="52_30pcr"]
@@ -251,6 +253,12 @@ original = ExtResource("48_1x4po")
 collectible = ExtResource("45_xpa8w")
 metadata/_custom_type_script = "uid://bogveiln632se"
 
+[sub_resource type="Resource" id="Resource_iobns"]
+script = ExtResource("14_agh00")
+original = ExtResource("49_fc5oy")
+collectible = ExtResource("47_s1xyy")
+metadata/_custom_type_script = "uid://bogveiln632se"
+
 [sub_resource type="Resource" id="Resource_wepqg"]
 script = ExtResource("14_agh00")
 original = ExtResource("40_30pcr")
@@ -264,7 +272,7 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("40_fk8s6")
-levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_3qwdo"), SubResource("Resource_573c6"), SubResource("Resource_2mi6j"), SubResource("Resource_y5e7o"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_wepqg"), SubResource("Resource_dniod")])
+levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_3qwdo"), SubResource("Resource_573c6"), SubResource("Resource_2mi6j"), SubResource("Resource_y5e7o"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_iobns"), SubResource("Resource_wepqg"), SubResource("Resource_dniod")])
 level_select_scene = 7
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0

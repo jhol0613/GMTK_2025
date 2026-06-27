@@ -1,0 +1,100 @@
+[gd_scene load_steps=8 format=4 uid="uid://dqkvody2ol4r8"]
+
+[ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_gitvu"]
+[ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_3kmqy"]
+[ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_r3su4"]
+[ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_2i15b"]
+[ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="6_6gqub"]
+[ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_iqdqf"]
+[ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="8_owupb"]
+
+[node name="LevelBase" instance=ExtResource("1_gitvu")]
+display_name = "3-10"
+player_spawn_position = Vector2i(0, 3)
+conductor_spawn_beat = 3
+available_slots = 7
+available_actions = Array[int]([1, 2, 3, 4, 7])
+
+[node name="Obstacles" parent="." index="3"]
+tile_map_data = PackedByteArray("AAADAAAAAQAAAAMAAAAKAAUAAQAAAAMAAAAIAAMAAQAAAAMAAAABAAMABAAAAAAAAAADAAMABAABAAAAAAACAAMABAACAAAAAAAJAAIAAQAAAAMAAAAIAAEAAQAAAAMAAAAFAAMAAQAAAAMAAAAGAAMAAQAAAAMAAAADAAEAAQAAAAMAAAAIAAAAAQAAAAMAAAAGAAUAAQAAAAMAAAAEAAQAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAA=")
+
+[node name="PointLight2D" parent="BackWall" index="0"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D2" parent="BackWall" index="1"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D3" parent="BackWall" index="2"]
+range_item_cull_mask = 1
+
+[node name="PointLight2D4" parent="BackWall" index="3"]
+range_item_cull_mask = 1
+
+[node name="HideBench" parent="." index="9" instance=ExtResource("2_3kmqy")]
+position = Vector2(82, 66)
+
+[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r3su4")]
+position = Vector2(144, 30)
+action_sound_emitters = {
+8: NodePath("BumpSound"),
+9: NodePath("BumpSound"),
+10: NodePath("BumpSound"),
+11: NodePath("BumpSound"),
+12: NodePath("BumpSound"),
+13: NodePath("BumpSound"),
+14: NodePath("BumpSound"),
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
+}
+
+[node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r3su4")]
+position = Vector2(241, 30)
+action_sound_emitters = {
+8: NodePath("../SnackCartObstacle/BumpSound"),
+9: NodePath("../SnackCartObstacle/BumpSound"),
+10: NodePath("../SnackCartObstacle/BumpSound"),
+11: NodePath("../SnackCartObstacle/BumpSound"),
+12: NodePath("../SnackCartObstacle/BumpSound"),
+13: NodePath("../SnackCartObstacle/BumpSound"),
+14: NodePath("../SnackCartObstacle/BumpSound"),
+15: NodePath("../SnackCartObstacle/BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
+}
+
+[node name="MovableObstacleLimiter" parent="." index="12" instance=ExtResource("8_owupb")]
+z_index = 1
+position = Vector2(130, 16.9474)
+scale = Vector2(1, 0.973684)
+points = PackedVector2Array(0, 0, 28, 0, 28, 33.9459, 0, 33.9459)
+
+[node name="MovableObstacleLimiter2" parent="." index="13" instance=ExtResource("8_owupb")]
+z_index = 1
+position = Vector2(226, 16.2203)
+scale = Vector2(1, 0.610169)
+points = PackedVector2Array(0, 0, 27, 0, 27, 55, 13.2444, 55, 0, 55)
+
+[node name="AntennaSystem" parent="." index="17" instance=ExtResource("6_6gqub")]
+
+[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
+script = ExtResource("5_2i15b")
+obstacles = [NodePath("../../SnackCartObstacle"), NodePath("../../SnackCartObstacle2")]
+obstacle_limiters = [NodePath("../../MovableObstacleLimiter"), NodePath("../../MovableObstacleLimiter2")]
+metadata/_custom_type_script = "uid://edi48oyem1ac"
+
+[node name="Treadmill" parent="." index="18" instance=ExtResource("7_iqdqf")]
+position = Vector2(240, 70)
+direction = 1
