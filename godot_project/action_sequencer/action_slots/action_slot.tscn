@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2yuwdalgstuj"]
+[gd_scene load_steps=14 format=3 uid="uid://c2yuwdalgstuj"]
 
 [ext_resource type="Script" uid="uid://cds2tru0s15j4" path="res://action_sequencer/action_slots/action_slot.gd" id="1_5idlh"]
 [ext_resource type="Texture2D" uid="uid://c68c60ps82r03" path="res://action_sequencer/action_slots/action_slot_inactive.png" id="2_5idlh"]
@@ -12,8 +12,11 @@
 [ext_resource type="Texture2D" uid="uid://dg7s4hknhtvo8" path="res://action_sequencer/action_slots/Jump.png" id="8_bi66e"]
 [ext_resource type="Texture2D" uid="uid://7i3ye02vrbp2" path="res://action_sequencer/action_slots/Duck.png" id="9_8fu2t"]
 [ext_resource type="Texture2D" uid="uid://b2pduu0l3dwqt" path="res://action_sequencer/action_slots/Interact.png" id="10_5msto"]
+[ext_resource type="Texture2D" uid="uid://d25ba5ccmqgmc" path="res://action_sequencer/action_slots/delete.png" id="13_xtiu8"]
 
 [node name="ActionSlot" type="CenterContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
 mouse_filter = 0
 script = ExtResource("1_5idlh")
 active_texture = ExtResource("2_5idlh")
@@ -59,6 +62,11 @@ event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 [node name="Hover" type="FmodEventEmitter2D" parent="."]
 event_name = "event:/SlotHover"
 event_guid = "{4617f2bf-e26f-4d78-b661-2634eb2ca28c}"
+
+[node name="DeleteDecal" type="TextureRect" parent="."]
+visible = false
+layout_mode = 2
+texture = ExtResource("13_xtiu8")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
