@@ -19,16 +19,8 @@ hints = Array[ExtResource("2_2r4fg")]([SubResource("Resource_kd8sp")])
 [node name="CartTracks" parent="." index="2"]
 tile_map_data = PackedByteArray("AAABAAMAAAAAAAUAAAADAAMAAAAAAAUAAAAFAAMAAAAAAAUAAAAHAAMAAAAAAAUAAAAEAAMAAAABAAEAAAACAAMAAAABAAEAAAAGAAMAAAABAAEAAAAIAAMAAAABAAEAAAAIAAIAAAABAAAAAAAGAAIAAAABAAAAAAAEAAIAAAABAAAAAAACAAIAAAABAAAAAAABAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAFAAIAAAAAAAAAAAAHAAIAAAAAAAAAAAA=")
 
-[node name="Wheelwell" parent="AdditionalSprites" index="1"]
-z_index = -1
-
-[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
-z_index = -1
-
-[node name="Lock" parent="AdditionalSprites" index="3"]
-light_mask = 1
-animation = &"vanish"
-autoplay = ""
+[node name="Obstacles" parent="." index="3"]
+tile_map_data = PackedByteArray("AAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAGAAEAAQAAAAMAAAAGAAAAAQAAAAMAAAAKAAEAAQAAAAMAAAAKAAAAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAAGAAQAAQAAAAMAAAAGAAUAAQAAAAMAAAAKAAQAAQAAAAMAAAAKAAUAAQAAAAMAAAA=")
 
 [node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_r0tgl")]
 position = Vector2(48, 67)
@@ -117,3 +109,14 @@ action_sound_emitters = {
 22: NodePath("BumpSound"),
 23: NodePath("BumpSound")
 }
+
+[node name="Wheelwell" parent="AdditionalSprites" index="1"]
+z_index = -1
+
+[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
+z_index = -1
+
+[node name="Lock" parent="AdditionalSprites" index="3"]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""

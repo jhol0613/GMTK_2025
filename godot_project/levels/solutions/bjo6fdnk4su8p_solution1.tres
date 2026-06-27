@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_hpkdj")
-sequence = Array[int]([1, 0, 4, 4, 4, 4, 2, 0])
+sequence = Array[int]([2, 4, 4, 5, 4, 4, 4, 1])

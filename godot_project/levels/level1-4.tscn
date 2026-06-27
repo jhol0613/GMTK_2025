@@ -21,7 +21,7 @@ fill_to = Vector2(0, 0)
 
 [node name="LevelBase" instance=ExtResource("1_28bq4")]
 display_name = "Caution: Wet Floor"
-conductor_spawn_beat = 6
+conductor_spawn_beat = 8
 available_actions = Array[int]([4, 1, 2])
 hints = Array[ExtResource("2_7e7v3")]([SubResource("Resource_7e7v3")])
 

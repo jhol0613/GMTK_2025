@@ -25,6 +25,13 @@ tile_map_data = PackedByteArray("AAAGAAIAAAABAAYAAAAHAAIAAAABAAMAAAAFAAIAAAABAAI
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAAAAEAAQAAAAMAAAABAAEAAQAAAAMAAAACAAEAAQAAAAMAAAADAAEAAQAAAAMAAAAEAAEAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAAHAAEAAQAAAAMAAAAIAAEAAQAAAAMAAAAJAAEAAQAAAAMAAAAKAAEAAQAAAAMAAAA=")
 
+[node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_6s3v3")]
+position = Vector2(208, 50)
+movement_path = Array[int]([4, 3, 3, 3, 3, 4, 4, 4])
+
+[node name="Key" parent="." index="10" instance=ExtResource("3_6s3v3")]
+position = Vector2(111, 81)
+
 [node name="Wheelwell" parent="AdditionalSprites" index="1"]
 z_index = -1
 
@@ -35,10 +42,3 @@ z_index = -1
 light_mask = 1
 animation = &"vanish"
 autoplay = ""
-
-[node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_6s3v3")]
-position = Vector2(208, 50)
-movement_path = Array[int]([4, 3, 3, 3, 3, 4, 4, 4])
-
-[node name="Key" parent="." index="10" instance=ExtResource("3_6s3v3")]
-position = Vector2(111, 81)

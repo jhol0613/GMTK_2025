@@ -52,7 +52,7 @@ func get_display_name(world: int, level: int):
 			return level_state.get_node_property_value(0, i)
 	return "unnamed level"
 
-## Returns the next level based on internal state. Updates state to returned level index. Returns null if level doesn't exist
+##Returns the next level based on internal state. Updates state to returned level index. Returns null if level doesn't exist
 func get_next_level() -> PackedScene:
 	# check if any more levels in this world
 	_previous_world = _current_world

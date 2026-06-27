@@ -66,7 +66,7 @@ var _player_character: PlayerCharacter
 
 var _next_level: RhythmRailLevel
 var _previous_level: RhythmRailLevel
-var _regressed_level: RhythmRailLevel #temp storage for updating references during level regression
+#var _regressed_level: RhythmRailLevel #temp storage for updating references during level regression
 var _level_number := 0
 var _current_beat := 0
 
@@ -170,11 +170,14 @@ func advance_level():
 
 func regress_level():
 	_level_number -= 1
-	_regressed_level = _level_scene
+	#_regressed_level = _level_scene
+	_next_level.queue_free()
+	_next_level = _level_scene
 	_level_scene = _previous_level #previous level has been replaced with collectible car by the time this is called
 	_initialize_level()
 	#Next level is already loaded. It gets pulled forward in on__level_regressed
-
+	
+	_queue_world_transition = false
 	# Tween to control animation of one train car to the next
 	var tween = create_tween()
 	var target_pos = _train_center.position - Vector2(-next_car_offset - \
@@ -189,17 +192,32 @@ func _on_level_advanced():
 	level_banner.label_text_init = _level_scene.display_name
 	add_child(level_banner)
 	_action_sequencer.set_action_icons_hidden(false)
-	_replace_previous_level_with_collectible_car()
+	#Only bother replacing previous car if you can actually go left to get there
+	if _action_sequencer._available_actions.has(Enums.PlayerAction.LEFT):
+		_replace_previous_level_with_collectible_car()
 	_spawn_player()
 	_reset_level()
 
 ##Scene initialization steps that are called AFTER the level has been fully regressed
 func _on_level_regressed():
-	_next_level.position = _regressed_level.position
-	_regressed_level.queue_free()
+	#_next_level.position = _regressed_level.position
+	#_regressed_level.queue_free()
 	_action_sequencer.set_action_icons_hidden(false)
+	_reload_next_level()
 	_spawn_player()
 	_reset_level()
+
+##Used to refresh next level (e.g. if a collectible version should be loaded in its place)
+func _reload_next_level():
+	var index = GameManager.level_catalog.get_index(_next_level)
+	var _next_level_packed = GameManager.level_catalog.get_level(index["world"], index["level"])
+	#_queue_world_transition = false #GameManager.level_catalog.is_new_world()
+	if _next_level_packed != null:
+		var next_level_position = _next_level.position
+		_next_level.queue_free()
+		_next_level = _next_level_packed.instantiate()
+		_next_level.position = next_level_position
+		_on_the_train.add_child(_next_level)
 
 func _replace_previous_level_with_collectible_car():
 	if not _previous_level:
@@ -215,15 +233,15 @@ func _replace_previous_level_with_collectible_car():
 		_previous_level.position = previous_level_position
 		_on_the_train.add_child(_previous_level)
 
-func _replace_next_level_with_follow_on():
-	var _next_level_packed = GameManager.level_catalog.get_next_level()
-	_queue_world_transition = false #GameManager.level_catalog.is_new_world()
-	if _next_level_packed != null:
-		var next_level_position = _next_level.position
-		_next_level.queue_free()
-		_next_level = _next_level_packed.instantiate()
-		_next_level.postion = next_level_position
-		_on_the_train.add_child(_next_level)
+#func _replace_next_level_with_follow_on():
+	#var _next_level_packed = GameManager.level_catalog.get_next_level()
+	#_queue_world_transition = false #GameManager.level_catalog.is_new_world()
+	#if _next_level_packed != null:
+		#var next_level_position = _next_level.position
+		#_next_level.queue_free()
+		#_next_level = _next_level_packed.instantiate()
+		#_next_level.postion = next_level_position
+		#_on_the_train.add_child(_next_level)
 
 # Handle connecting to signals, running initialization code for agents in new level
 func _initialize_level():

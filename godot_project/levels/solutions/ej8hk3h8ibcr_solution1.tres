@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_ljfi6")
-sequence = Array[int]([4, 1, 4, 4, 4, 2, 4, 0])
+sequence = Array[int]([1, 0, 4, 4, 4, 4, 2, 0])

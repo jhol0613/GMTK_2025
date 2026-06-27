@@ -13,7 +13,7 @@ metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_5r6hg")]
 display_name = "2-5"
-conductor_spawn_beat = 6
+conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 3])
 hints = Array[ExtResource("2_dckb2")]([SubResource("Resource_dckb2")])
 

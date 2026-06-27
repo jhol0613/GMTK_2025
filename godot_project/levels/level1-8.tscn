@@ -12,7 +12,7 @@ metadata/_custom_type_script = "uid://cefvtumj4eayh"
 [node name="LevelBase" instance=ExtResource("1_3l1p8")]
 display_name = "Bebop and Bonk"
 player_spawn_position = Vector2i(0, 3)
-conductor_spawn_beat = 8
+conductor_spawn_beat = 7
 available_actions = Array[int]([4, 1, 2])
 hints = Array[ExtResource("2_f8odd")]([SubResource("Resource_f8odd")])
 

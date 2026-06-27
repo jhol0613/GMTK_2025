@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_qmpsg")
-sequence = Array[int]([1, 1, 4, 4, 2, 2, 4, 4])
+sequence = Array[int]([4, 5, 4, 4])

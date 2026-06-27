@@ -12,7 +12,6 @@ metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase2" instance=ExtResource("1_1kcp2")]
 display_name = "Frikin' Laserbeams?!"
-conductor_spawn_beat = 4
 available_slots = 4
 available_actions = Array[int]([4, 5])
 hints = Array[ExtResource("2_c4aqj")]([SubResource("Resource_8kmdv")])
