@@ -451,15 +451,16 @@ event_guid = "{4be42de0-2f0a-4ff1-ad9d-e2e8cf053fce}"
 
 [node name="RedoButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 24.0
-offset_right = 240.0
-offset_bottom = 35.0
+offset_left = 203.0
+offset_top = 19.0
+offset_right = 260.0
+offset_bottom = 37.0
 tooltip_text = "Clear all slots
 "
 texture_normal = ExtResource("17_tq4nj")
 texture_pressed = ExtResource("19_cdoyw")
 texture_hover = ExtResource("20_krlbp")
+stretch_mode = 3
 
 [node name="RedoButtonHover" type="FmodEventEmitter2D" parent="TextureRect/RedoButton"]
 event_name = "event:/PickBlock"
@@ -471,15 +472,16 @@ event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
 [node name="EraserButton" type="TextureButton" parent="TextureRect"]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 44.0
-offset_right = 240.0
-offset_bottom = 53.0
+offset_left = 203.0
+offset_top = 39.0
+offset_right = 260.0
+offset_bottom = 57.0
 tooltip_text = "Clear selected slot"
 toggle_mode = true
 texture_normal = ExtResource("17_tq4nj")
 texture_pressed = ExtResource("19_cdoyw")
 texture_hover = ExtResource("20_krlbp")
+stretch_mode = 3
 
 [node name="EraserButtonHover" type="FmodEventEmitter2D" parent="TextureRect/EraserButton"]
 event_name = "event:/PickBlock"
