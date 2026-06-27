@@ -43,6 +43,8 @@ func _on_play_pressed() -> void:
 	GameManager.load_scene(Enums.Scenes.INTRO_CUTSCENE)
 
 func _on_continue_pressed() -> void:
+	GameManager.start_world = SaveManager.save_data.furthest_level_reached["world"]
+	GameManager.start_level = SaveManager.save_data.furthest_level_reached["level"]
 	GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER)
 
 func _on_map_pressed() -> void: 

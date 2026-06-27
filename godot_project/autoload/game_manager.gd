@@ -21,6 +21,8 @@ extends Node2D
 
 ## Tells the game to enable some debugging options
 var run_from_F6 := false
+## UID of the level that gets loaded from F6
+var f6_uid: int = -1
 
 func load_scene(scene: Enums.Scenes, transition_style = Enums.TransitionStyle.FADEINOUT, transition_in_time = default_fade_in_time,
 	transition_out_time = default_fade_out_time):
@@ -35,6 +37,7 @@ func load_scene(scene: Enums.Scenes, transition_style = Enums.TransitionStyle.FA
 			_fadeout(scene)
 		Enums.TransitionStyle.NONE:
 			_load_scene(scene)
+
 
 func pause_game():
 	if pause_enabled:
