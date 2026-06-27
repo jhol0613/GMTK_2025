@@ -574,6 +574,13 @@ func _input(event: InputEvent) -> void:
 			if action_item.action == Enums.PlayerAction.RIGHT:
 				action_item.virtual_click()
 	if event.is_action_pressed("Erase"):
-		_enter_erase_mode()
-		_update_slot_action_previews()
+		_on_eraser_toggled(not _eraser_mode)
+	if event.is_action_pressed("Play"):
+		_on_play_button_pressed()
+	if event.is_action_pressed("Pause"):
+		_exit_erase_mode()
+	if event.is_action_pressed("Replay"):
+		_on_replay_button_pressed()
+	if event.is_action_pressed("Redo"):
+		_on_redo_button_pressed()
 #endregion
