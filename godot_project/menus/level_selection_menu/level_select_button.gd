@@ -29,5 +29,6 @@ func grow_btn(end_size: Vector2, duration: float) -> void:
 	tween.tween_property(self, 'scale', end_size, duration)
 
 func lvl_btn_on_pressed() -> void:
-	var level_scene = GameManager.level_catalog.get_level(destination_world, destination_level)
-	get_tree().call_deferred("change_scene_to_packed", level_scene)
+	GameManager.start_world = destination_world
+	GameManager.start_level = destination_level
+	GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)

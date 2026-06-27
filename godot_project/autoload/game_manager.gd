@@ -19,6 +19,9 @@ extends Node2D
 
 @onready var _pause_layer: CanvasLayer
 
+## Tells the game to enable some debugging options
+var run_from_F6 := false
+
 func load_scene(scene: Enums.Scenes, transition_style = Enums.TransitionStyle.FADEINOUT, transition_in_time = default_fade_in_time,
 	transition_out_time = default_fade_out_time):
 

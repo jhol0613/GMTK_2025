@@ -90,7 +90,7 @@ func _enter_tree() -> void:
 		assert(GameManager.start_world >= 0, "Add this level to level_system/level_manager/level_catalog.tres")
 		assert(GameManager.start_level >= 0, "Add this level to level_system/level_manager/level_catalog.tres")
 		# flag so game manager knows game was run from F6 (i.e. shouldn't load based on a saved game)
-		SaveManager.run_from_F6 = true
+		GameManager.run_from_F6 = true
 		SaveManager.enable_save = false # disable saving for random levels in the editor
 		GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER, Enums.TransitionStyle.NONE)
 

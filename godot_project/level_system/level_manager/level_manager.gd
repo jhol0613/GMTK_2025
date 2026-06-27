@@ -99,7 +99,7 @@ signal all_entities_complete_teleport
 func _ready() -> void:
 	var loaded_level = GameManager.start_level
 	var loaded_world = GameManager.start_world
-	if not SaveManager.run_from_F6:
+	if not GameManager.run_from_F6:
 		loaded_level = SaveManager.save_data.furthest_level_reached["level"]
 		loaded_world = SaveManager.save_data.furthest_level_reached["world"]
 
