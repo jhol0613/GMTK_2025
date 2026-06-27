@@ -115,6 +115,9 @@ var _lock_thinking_mode := true
 
 var _active_control_screen : Control
 
+var _is_dragging := false
+var _painted_this_drag: Array[ActionSlot] = []
+
 @onready var _skip_actions_mode_cooldown: int = -1
 #endregion
 
@@ -583,4 +586,41 @@ func _input(event: InputEvent) -> void:
 		_on_replay_button_pressed()
 	if event.is_action_pressed("Redo"):
 		_on_redo_button_pressed()
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			_begin_drag(event.global_position)
+		else:
+			_end_drag()
+	elif event is InputEventMouseMotion and _is_dragging:
+		_try_paint_at(event.global_position)
+#endregion
+
+#region Draggable actions
+
+
+func _begin_drag(global_pos: Vector2) -> void:
+	if not _active_action_item or _active_action_item.action == Enums.PlayerAction.NONE:
+		return
+	_is_dragging = true
+	_painted_this_drag.clear()
+	_try_paint_at(global_pos)
+
+
+func _end_drag() -> void:
+	_is_dragging = false
+	_painted_this_drag.clear()
+
+
+func _try_paint_at(global_pos: Vector2) -> void:
+	if not _active_action_item or _active_action_item.action == Enums.PlayerAction.NONE:
+		return
+	for i in range(_available_slots):
+		var slot = _initialized_slots[i]
+		if slot.get_global_rect().has_point(global_pos):
+			if slot not in _painted_this_drag:
+				slot.set_action(_active_action_item.action)
+				_painted_this_drag.append(slot)
+			break  # Only one slot can be under the cursor at a time
+
 #endregion
