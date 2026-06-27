@@ -600,7 +600,9 @@ func _input(event: InputEvent) -> void:
 
 
 func _begin_drag(global_pos: Vector2) -> void:
-	if not _active_action_item or _active_action_item.action == Enums.PlayerAction.NONE:
+	if not _eraser_mode and \
+	(not _active_action_item or \
+	_active_action_item.action == Enums.PlayerAction.NONE):
 		return
 	_is_dragging = true
 	_painted_this_drag.clear()
@@ -613,14 +615,19 @@ func _end_drag() -> void:
 
 
 func _try_paint_at(global_pos: Vector2) -> void:
-	if not _active_action_item or _active_action_item.action == Enums.PlayerAction.NONE:
+	if not _eraser_mode and \
+	(not _active_action_item or \
+	_active_action_item.action == Enums.PlayerAction.NONE):
 		return
 	for i in range(_available_slots):
 		var slot = _initialized_slots[i]
 		if slot.get_global_rect().has_point(global_pos):
 			if slot not in _painted_this_drag:
-				slot.set_action(_active_action_item.action)
+				var action = Enums.PlayerAction.NONE
+				if not _eraser_mode:
+					action = _active_action_item.action
+				slot.set_action(action)
 				_painted_this_drag.append(slot)
-			break  # Only one slot can be under the cursor at a time
+			break
 
 #endregion
