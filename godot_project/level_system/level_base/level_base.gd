@@ -67,9 +67,6 @@ var antenna_systems := []
 ##keys in the level. All must be collected for target to activate 
 var keys : Array[LevelKey] = []
 
-## used for saves, instantiated dynamically
-var uid: int = -1
-
 signal target_reached
 signal conductor_reached_target
 #signal left_target_reached

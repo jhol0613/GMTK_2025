@@ -104,7 +104,6 @@ func _ready() -> void:
 		packed_level = GameManager.level_catalog.get_level_by_uid(GameManager.f6_uid)
 
 	_level_scene = packed_level.instantiate()
-	_level_scene.uid = ResourceLoader.get_resource_uid(packed_level.resource_path)
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
 
 	_on_the_train.add_child(_level_scene)
@@ -146,7 +145,6 @@ func load_next_level():
 		printerr("Attempting to load level beyond end of catalog. Loading 0,0 instead")
 		_next_level_packed = GameManager.level_catalog.get_level(0,0)
 	_next_level = _next_level_packed.instantiate()
-	_next_level.uid = ResourceLoader.get_resource_uid(_next_level_packed.resource_path)
 
 	_on_the_train.call_deferred("add_child", _next_level)
 	_next_level.position = initial_train_position + (_level_number+1) * Vector2(next_car_offset, 0.0)
@@ -390,7 +388,7 @@ func _execute_world_transition():
 	advance_level()
 
 func get_current_level_uid() -> int:
-	return _level_scene.uid
+	return ResourceLoader.get_resource_uid(_level_scene.scene_file_path)
 
 #endregion
 
