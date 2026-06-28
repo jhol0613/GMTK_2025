@@ -102,3 +102,4 @@ metadata/_custom_type_script = "uid://edi48oyem1ac"
 [node name="Treadmill" parent="." index="19" instance=ExtResource("8_1jgol")]
 position = Vector2(240, 70)
 direction = 1
+grid_origin = Vector2i(7, 3)

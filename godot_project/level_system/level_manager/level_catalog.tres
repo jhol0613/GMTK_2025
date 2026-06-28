@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=116 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=117 format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -56,6 +56,7 @@
 [ext_resource type="PackedScene" uid="uid://c8nmnp0nakg6m" path="res://levels/level3-10_V2C.tscn" id="47_s1xyy"]
 [ext_resource type="PackedScene" uid="uid://sgl6wm0xs1th" path="res://levels/level3-9.tscn" id="48_1x4po"]
 [ext_resource type="PackedScene" uid="uid://dqkvody2ol4r8" path="res://levels/level3-10_V2.tscn" id="49_fc5oy"]
+[ext_resource type="PackedScene" uid="uid://8qwohyb5h1tm" path="res://levels/level3-11C.tscn" id="49_isgho"]
 [ext_resource type="PackedScene" uid="uid://c0lpb8u54s0rd" path="res://levels/test_levels/teleporter_test_level.tscn" id="49_nne5e"]
 [ext_resource type="PackedScene" uid="uid://bh5ec0yys4ety" path="res://levels/level3-10.tscn" id="50_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://cpeu3l5fgvpk6" path="res://levels/test_levels/spinning_chair_test_level.tscn" id="52_30pcr"]
@@ -262,6 +263,7 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 [sub_resource type="Resource" id="Resource_wepqg"]
 script = ExtResource("14_agh00")
 original = ExtResource("40_30pcr")
+collectible = ExtResource("49_isgho")
 metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_dniod"]

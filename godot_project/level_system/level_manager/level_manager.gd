@@ -363,8 +363,8 @@ func _reset_level() -> void:
 		obstacle.queue_free()
 	for teleporter: Teleporter in _level_scene.teleporters:
 		teleporter.disabled = false
-	for antenna: Antenna in _level_scene.antennas:
-		antenna.reset()
+	for antenna_system: AntennaSystem in _level_scene.antenna_systems:
+		antenna_system.reset()
 	_player_character.reset()
 	_spawned_obstacles.clear()
 
@@ -493,8 +493,8 @@ func _update_laser_firing_distance(laser: Laser) -> void:
 func _initialize_antennas() -> void:
 	#for terminal: Terminal in _level_scene.terminals:
 		#terminal.selected.connect(_on_terminal_selected)
-	for antenna: Antenna in _level_scene.antennas:
-		antenna.selected.connect(_on_antenna_selected)
+	#for antenna: Antenna in _level_scene.antennas:
+		#antenna.selected.connect(_on_antenna_selected)
 	for antenna_system: AntennaSystem in _level_scene.antenna_systems:
 		antenna_system.selected.connect(_on_antenna_system_selected)
 
@@ -883,17 +883,17 @@ func _on_antenna_system_selected(antenna_system: AntennaSystem, antenna_position
 	await get_tree().create_timer(lightning_duration).timeout
 	_lightning.visible = false
 
-func _on_antenna_selected(new_antenna: Antenna):
-	for antenna: Antenna in _level_scene.antennas:
-		antenna.set_active_animation(false)
-	new_antenna.set_active_animation(true)
-	_lightning.global_position = new_antenna.get_sprite_global_position()
-	_lightning.points[1] = _action_sequencer.antenna_tip.global_position - _lightning.global_position
-	_lightning.visible = true
-	_shake_camera.apply_shake(lightning_sreen_shake_strength, lightning_screen_shake_decay)
-	_action_sequencer.connect_antenna_to_screen(new_antenna.programs[0]) #Only makes sense to connect single program to screen
-	await get_tree().create_timer(lightning_duration).timeout
-	_lightning.visible = false
+#func _on_antenna_selected(new_antenna: Antenna):
+	#for antenna: Antenna in _level_scene.antennas:
+		#antenna.set_active_animation(false)
+	#new_antenna.set_active_animation(true)
+	#_lightning.global_position = new_antenna.get_sprite_global_position()
+	#_lightning.points[1] = _action_sequencer.antenna_tip.global_position - _lightning.global_position
+	#_lightning.visible = true
+	#_shake_camera.apply_shake(lightning_sreen_shake_strength, lightning_screen_shake_decay)
+	#_action_sequencer.connect_antenna_to_screen(new_antenna.programs[0]) #Only makes sense to connect single program to screen
+	#await get_tree().create_timer(lightning_duration).timeout
+	#_lightning.visible = false
 	# if you crashed here you probably forgot to add a terminal program to a terminal or an antenna
 #endregion
 

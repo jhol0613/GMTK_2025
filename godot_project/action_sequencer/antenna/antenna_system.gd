@@ -38,6 +38,10 @@ func set_active_animation(new_active):
 	for antenna in antennas:
 		antenna.set_broadcasting(new_active)
 
+func reset():
+	for program in programs:
+		program.reset()
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings = []
 	for child in get_children():
