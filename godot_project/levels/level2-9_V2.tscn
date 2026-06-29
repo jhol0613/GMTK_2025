@@ -1,13 +1,28 @@
-[gd_scene load_steps=3 format=4 uid="uid://b6meeftrxeskf"]
+[gd_scene load_steps=6 format=4 uid="uid://b6meeftrxeskf"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_6p6tl"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_nx1ru"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_xvsk0"]
+
+[sub_resource type="Resource" id="Resource_6p6tl"]
+script = ExtResource("2_xvsk0")
+index = 3
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
+[sub_resource type="Resource" id="Resource_xvsk0"]
+script = ExtResource("2_xvsk0")
+index = 7
+action = 3
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_6p6tl")]
 display_name = "2-9 Normal"
+left_exit_counts_as_beating_level = true
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 3, 1, 2, 7])
+hints = Array[ExtResource("2_xvsk0")]([SubResource("Resource_6p6tl"), SubResource("Resource_xvsk0")])
 
 [node name="Decorative" parent="." index="0"]
 y_sort_enabled = true

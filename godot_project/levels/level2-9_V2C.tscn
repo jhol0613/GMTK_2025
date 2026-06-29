@@ -9,10 +9,14 @@ display_name = "2-9 Collectible"
 conductor_spawn_beat = 7
 
 [node name="CatCoffeeSpill" parent="." index="12" instance=ExtResource("2_2f1ee")]
-position = Vector2(143, 75)
+position = Vector2(143, 86)
 flip_horizontal = true
+
+[node name="AnimatedSprite2DSignals" parent="CatCoffeeSpill" index="0"]
+position = Vector2(-1, -36)
 
 [node name="Collectible" parent="." index="13" instance=ExtResource("3_4017a")]
 position = Vector2(176, 42)
 
 [editable path="HideBench"]
+[editable path="CatCoffeeSpill"]

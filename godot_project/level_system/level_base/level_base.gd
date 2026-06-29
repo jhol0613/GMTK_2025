@@ -5,6 +5,7 @@ class_name RhythmRailLevel
 
 @export_subgroup("LevelInfo")
 @export var display_name:= "Unnamed Level"
+@export var left_exit_counts_as_beating_level := false
 
 @export_subgroup("Player", "player")
 ##Where on the tilemap the player should spawn

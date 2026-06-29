@@ -1,19 +1,24 @@
-[gd_scene load_steps=6 format=4 uid="uid://bpca4h6xw3efm"]
+[gd_scene load_steps=8 format=4 uid="uid://bpca4h6xw3efm"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_wuicp"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_cbh2a"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="3_cbh2a"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="4_k5hjk"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_qrq1u"]
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="5_k5hjk"]
+
+[sub_resource type="Resource" id="Resource_qrq1u"]
+script = ExtResource("2_cbh2a")
+index = 4
+action = 1
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase2" instance=ExtResource("1_wuicp")]
 display_name = "3-1b"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 1, 2])
-
-[node name="Floor" parent="." index="1"]
-tile_map_data = PackedByteArray("AAAAAAEABAAAAAEAAAABAAEABAAAAAEAAAACAAEABAAAAAEAAAADAAEABAAAAAEAAAAEAAEABAAAAAEAAAAFAAEABAAAAAEAAAAGAAEABAAAAAEAAAAHAAEABAAAAAEAAAAIAAEABAAAAAEAAAAJAAEABAAAAAEAAAAKAAEABAAAAAEAAAAAAAQABAAAAAEAAAABAAQABAAAAAEAAAACAAQABAAAAAEAAAADAAQABAAAAAEAAAAEAAQABAAAAAEAAAAFAAQABAAAAAEAAAAGAAQABAAAAAEAAAAHAAQABAAAAAEAAAAIAAQABAAAAAEAAAAJAAQABAAAAAEAAAAKAAQABAAAAAEAAAAAAAIABAAAAAAAAAAAAAMABAAAAAAAAAAKAAIAAgAAAAMAAAAKAAMAAgAAAAMAAAABAAIABAAAAAAAAAACAAIABAAAAAAAAAADAAIABAAAAAAAAAAEAAIABAAAAAAAAAAFAAIABAAAAAAAAAAGAAIABAAAAAAAAAAHAAIABAAAAAAAAAAIAAIABAAAAAAAAAAJAAIABAAAAAAAAAAJAAMABAAAAAAAAAAIAAMABAAAAAAAAAAHAAMABAAAAAAAAAAGAAMABAAAAAAAAAAFAAMABAAAAAAAAAAEAAMABAAAAAAAAAADAAMABAAAAAAAAAACAAMABAAAAAAAAAABAAMABAAAAAAAAAAAAAUABAAAAAEAAAABAAUABAAAAAEAAAACAAUABAAAAAEAAAADAAUABAAAAAEAAAAEAAUABAAAAAEAAAAFAAUABAAAAAEAAAAGAAUABAAAAAEAAAAHAAUABAAAAAEAAAAIAAUABAAAAAEAAAAJAAUABAAAAAEAAAAKAAUABAAAAAEAAAAKAAAABAAAAAEAAAAJAAAABAAAAAEAAAAIAAAABAAAAAEAAAAHAAAABAAAAAEAAAAGAAAABAAAAAEAAAAFAAAABAAAAAEAAAAEAAAABAAAAAEAAAADAAAABAAAAAEAAAACAAAABAAAAAEAAAABAAAABAAAAAEAAAAAAAAABAAAAAEAAAA=")
+hints = Array[ExtResource("2_cbh2a")]([SubResource("Resource_qrq1u")])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAADAAUAAQAAAAMAAAADAAQAAQAAAAMAAAADAAMAAQAAAAMAAAABAAMAAQAAAAMAAAA=")

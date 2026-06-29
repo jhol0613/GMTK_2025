@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://i86dgdr2exvq"]
+[gd_scene load_steps=11 format=3 uid="uid://i86dgdr2exvq"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_k4jqd"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_rh3b6"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_xi7jk"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="3_7f3wr"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_jjql3"]
@@ -8,16 +9,28 @@
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="6_jjql3"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="7_07skx"]
 
+[sub_resource type="Resource" id="Resource_2js6o"]
+script = ExtResource("2_rh3b6")
+index = 1
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
+[sub_resource type="Resource" id="Resource_8n67t"]
+script = ExtResource("2_rh3b6")
+index = 1
+action = 1
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [node name="LevelBase" instance=ExtResource("1_k4jqd")]
 display_name = "3-7"
 conductor_spawn_beat = 18
 available_actions = Array[int]([1, 2, 3, 7])
+hints = Array[ExtResource("2_rh3b6")]([SubResource("Resource_2js6o"), SubResource("Resource_8n67t")])
 
 [node name="Teleporter" parent="." index="9" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_xi7jk")]
 position = Vector2(16, 10)
 destination_targets = [NodePath("../TeleporterTarget")]
 top = NodePath("../TeleporterTop")
-grid_origin = Vector2i(0, 5)
 
 [node name="ComputerTerminal" parent="." index="10" instance=ExtResource("3_jjql3")]
 position = Vector2(209, 48)
@@ -36,12 +49,12 @@ metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
 [node name="LeftTreadmill" parent="." index="11" instance=ExtResource("3_7f3wr")]
 position = Vector2(16, 32)
-grid_origin = Vector2i(0, 4)
+grid_origin = Vector2i(0, 1)
 
 [node name="RightTreadmill" parent="." index="12" instance=ExtResource("3_7f3wr")]
 position = Vector2(336, 90)
 direction = 1
-grid_origin = Vector2i(10, 1)
+grid_origin = Vector2i(10, 4)
 
 [node name="TeleporterTop" parent="." index="13" instance=ExtResource("6_jjql3")]
 position = Vector2(17, 11)
@@ -49,4 +62,4 @@ position = Vector2(17, 11)
 [node name="TeleporterTarget" parent="." index="14" instance=ExtResource("7_07skx")]
 position = Vector2(336, 98)
 _active = true
-grid_origin = Vector2i(10, 0)
+grid_origin = Vector2i(10, 5)

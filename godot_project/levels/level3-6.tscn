@@ -1,11 +1,24 @@
-[gd_scene load_steps=7 format=4 uid="uid://deturlt7ef805"]
+[gd_scene load_steps=10 format=4 uid="uid://deturlt7ef805"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_43bro"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_8cmfy"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_lwxgq"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_lwxgq"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_uwibj"]
 [ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="6_8cmfy"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="6_r7ar8"]
+
+[sub_resource type="Resource" id="Resource_uuex1"]
+script = ExtResource("2_8cmfy")
+index = 2
+action = 2
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
+[sub_resource type="Resource" id="Resource_6v5no"]
+script = ExtResource("2_8cmfy")
+index = 5
+action = 1
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_43bro")]
 display_name = "3-6"
@@ -13,6 +26,7 @@ player_spawn_position = Vector2i(0, 3)
 conductor_enabled = false
 available_slots = 6
 available_actions = Array[int]([4, 3, 1, 2])
+hints = Array[ExtResource("2_8cmfy")]([SubResource("Resource_uuex1"), SubResource("Resource_6v5no")])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAEAAQAAQAAAAMAAAAEAAUAAQAAAAMAAAABAAUAAQAAAAMAAAABAAQAAQAAAAMAAAAHAAUAAQAAAAMAAAAHAAQAAQAAAAMAAAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAHAAEAAQAAAAMAAAAHAAAAAQAAAAMAAAA=")

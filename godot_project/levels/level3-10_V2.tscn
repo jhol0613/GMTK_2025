@@ -1,12 +1,25 @@
-[gd_scene load_steps=8 format=4 uid="uid://dqkvody2ol4r8"]
+[gd_scene load_steps=11 format=4 uid="uid://dqkvody2ol4r8"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_gitvu"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_3kmqy"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_gitvu"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_r3su4"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_2i15b"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="6_6gqub"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_iqdqf"]
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="8_owupb"]
+
+[sub_resource type="Resource" id="Resource_3kmqy"]
+script = ExtResource("2_gitvu")
+index = 4
+action = 1
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
+[sub_resource type="Resource" id="Resource_r3su4"]
+script = ExtResource("2_gitvu")
+index = 3
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_gitvu")]
 display_name = "3-10"
@@ -14,6 +27,7 @@ player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 available_slots = 7
 available_actions = Array[int]([1, 2, 3, 4, 7])
+hints = Array[ExtResource("2_gitvu")]([SubResource("Resource_3kmqy"), SubResource("Resource_r3su4")])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAADAAAAAQAAAAMAAAAKAAUAAQAAAAMAAAAIAAMAAQAAAAMAAAABAAMABAAAAAAAAAADAAMABAABAAAAAAACAAMABAACAAAAAAAJAAIAAQAAAAMAAAAIAAEAAQAAAAMAAAAFAAMAAQAAAAMAAAAGAAMAAQAAAAMAAAADAAEAAQAAAAMAAAAIAAAAAQAAAAMAAAAGAAUAAQAAAAMAAAAEAAQAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAA=")
@@ -98,3 +112,4 @@ metadata/_custom_type_script = "uid://edi48oyem1ac"
 [node name="Treadmill" parent="." index="18" instance=ExtResource("7_iqdqf")]
 position = Vector2(240, 70)
 direction = 1
+grid_origin = Vector2i(7, 3)

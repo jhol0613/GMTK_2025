@@ -230,16 +230,6 @@ func _replace_previous_level_with_collectible_car():
 		_previous_level.position = previous_level_position
 		_on_the_train.add_child(_previous_level)
 
-#func _replace_next_level_with_follow_on():
-	#var _next_level_packed = GameManager.level_catalog.get_next_level()
-	#_queue_world_transition = false #GameManager.level_catalog.is_new_world()
-	#if _next_level_packed != null:
-		#var next_level_position = _next_level.position
-		#_next_level.queue_free()
-		#_next_level = _next_level_packed.instantiate()
-		#_next_level.postion = next_level_position
-		#_on_the_train.add_child(_next_level)
-
 # Handle connecting to signals, running initialization code for agents in new level
 func _initialize_level():
 	# Initialize new obstacles and pushers
@@ -278,6 +268,8 @@ func _on_left_exit() -> void:
 	if _failure_animation_playing:
 		return
 	_player_character.notify_left_exit()
+	if _level_scene.left_exit_counts_as_beating_level:
+		SaveManager.add_completed_level(get_current_level_uid())
 	regress_level()
 
 ##called when player "beats" level (i.e. exits to the right)

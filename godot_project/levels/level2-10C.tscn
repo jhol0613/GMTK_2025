@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="2_kd6po"]
 
 [node name="LevelBase" instance=ExtResource("1_cir2f")]
+conductor_spawn_beat = 10
 
 [node name="Collectible2" parent="." index="21" instance=ExtResource("2_kd6po")]
 position = Vector2(17, 80)

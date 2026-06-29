@@ -1,16 +1,24 @@
-[gd_scene load_steps=7 format=4 uid="uid://boiggb2fjxqbr"]
+[gd_scene load_steps=9 format=4 uid="uid://boiggb2fjxqbr"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_xhynf"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_4cx3b"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_du0ay"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="5_du0ay"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="5_rvl5c"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="6_rvl5c"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="7_du0ay"]
 
+[sub_resource type="Resource" id="Resource_du0ay"]
+script = ExtResource("2_du0ay")
+index = 4
+action = 3
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [node name="LevelBase" instance=ExtResource("1_xhynf")]
 display_name = "3-11"
 conductor_spawn_beat = 3
 available_actions = Array[int]([4, 3])
+hints = Array[ExtResource("2_du0ay")]([SubResource("Resource_du0ay")])
 
 [node name="CartTracks" parent="." index="2"]
 tile_map_data = PackedByteArray("AAACAAQAAAABAAIAAAADAAMAAAABAAYAAAADAAQAAAABAAYAAAACAAMAAAAAAAAAAAAEAAQAAAABAAEAAAAFAAQAAAABAAMAAAA=")

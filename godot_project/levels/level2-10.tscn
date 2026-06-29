@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cy0877omjeja8"]
+[gd_scene load_steps=12 format=3 uid="uid://cy0877omjeja8"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_psfox"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_r04a0"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_np4t2"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="4_ytems"]
 [ext_resource type="PackedScene" uid="uid://rx46ny3cc272" path="res://agents/spinning_obstacles/spinning_chair_V2.tscn" id="5_3uvtg"]
@@ -10,10 +11,17 @@
 [ext_resource type="PackedScene" uid="uid://bp7lb26ts0xvp" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill_on_spin_chair.tscn" id="8_3uvtg"]
 [ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="9_af5w0"]
 
+[sub_resource type="Resource" id="Resource_iow7r"]
+script = ExtResource("2_r04a0")
+index = 1
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [node name="LevelBase" instance=ExtResource("1_psfox")]
 display_name = "2-10"
 conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 7])
+hints = Array[ExtResource("2_r04a0")]([SubResource("Resource_iow7r")])
 
 [node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
 position = Vector2(49, 30)

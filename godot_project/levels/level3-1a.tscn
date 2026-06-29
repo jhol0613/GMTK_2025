@@ -1,18 +1,23 @@
-[gd_scene load_steps=5 format=4 uid="uid://bb7h1cttsvw2y"]
+[gd_scene load_steps=7 format=4 uid="uid://bb7h1cttsvw2y"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_5ni7d"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_jtelp"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="3_j8mqq"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="3_jtelp"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="4_jtelp"]
+
+[sub_resource type="Resource" id="Resource_s8j8e"]
+script = ExtResource("2_jtelp")
+index = 6
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
 [node name="LevelBase" instance=ExtResource("1_5ni7d")]
 display_name = "3-1a"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 1, 2, 7])
-
-[node name="Floor" parent="." index="1"]
-tile_map_data = PackedByteArray("AAAAAAEABAAAAAEAAAABAAEABAAAAAEAAAACAAEABAAAAAEAAAADAAEABAAAAAEAAAAEAAEABAAAAAEAAAAFAAEABAAAAAEAAAAGAAEABAAAAAEAAAAHAAEABAAAAAEAAAAIAAEABAAAAAEAAAAJAAEABAAAAAEAAAAKAAEABAAAAAEAAAAAAAQABAAAAAEAAAABAAQABAAAAAEAAAACAAQABAAAAAEAAAADAAQABAAAAAEAAAAEAAQABAAAAAEAAAAFAAQABAAAAAEAAAAGAAQABAAAAAEAAAAHAAQABAAAAAEAAAAIAAQABAAAAAEAAAAJAAQABAAAAAEAAAAKAAQABAAAAAEAAAAAAAIABAAAAAAAAAAAAAMABAAAAAAAAAAKAAIAAgAAAAMAAAAKAAMAAgAAAAMAAAABAAIABAAAAAAAAAACAAIABAAAAAAAAAADAAIABAAAAAAAAAAEAAIABAAAAAAAAAAFAAIABAAAAAAAAAAGAAIABAAAAAAAAAAHAAIABAAAAAAAAAAIAAIABAAAAAAAAAAJAAIABAAAAAAAAAAJAAMABAAAAAAAAAAIAAMABAAAAAAAAAAHAAMABAAAAAAAAAAGAAMABAAAAAAAAAAFAAMABAAAAAAAAAAEAAMABAAAAAAAAAADAAMABAAAAAAAAAACAAMABAAAAAAAAAABAAMABAAAAAAAAAAAAAUABAAAAAEAAAABAAUABAAAAAEAAAACAAUABAAAAAEAAAADAAUABAAAAAEAAAAEAAUABAAAAAEAAAAFAAUABAAAAAEAAAAGAAUABAAAAAEAAAAHAAUABAAAAAEAAAAIAAUABAAAAAEAAAAJAAUABAAAAAEAAAAKAAUABAAAAAEAAAAKAAAABAAAAAEAAAAJAAAABAAAAAEAAAAIAAAABAAAAAEAAAAHAAAABAAAAAEAAAAGAAAABAAAAAEAAAAFAAAABAAAAAEAAAAEAAAABAAAAAEAAAADAAAABAAAAAEAAAACAAAABAAAAAEAAAABAAAABAAAAAEAAAAAAAAABAAAAAEAAAA=")
+hints = Array[ExtResource("2_jtelp")]([SubResource("Resource_s8j8e")])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAACAAAAAQAAAAMAAAABAAMAAQAAAAMAAAADAAMAAQAAAAMAAAADAAQAAQAAAAMAAAADAAUAAQAAAAMAAAA=")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=4 uid="uid://sgl6wm0xs1th"]
+[gd_scene load_steps=12 format=4 uid="uid://sgl6wm0xs1th"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_hdl3e"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_on5f3"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_r61v4"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="3_on5f3"]
 [ext_resource type="Script" uid="uid://y4xyvd52hhc6" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="4_d3lbo"]
@@ -10,12 +11,19 @@
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="7_pe0n7"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="9_on5f3"]
 
+[sub_resource type="Resource" id="Resource_wpdya"]
+script = ExtResource("2_on5f3")
+index = 5
+action = 2
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [node name="LevelBase" instance=ExtResource("1_hdl3e")]
 display_name = "3-9"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([4, 1, 2, 3, 7])
+hints = Array[ExtResource("2_on5f3")]([SubResource("Resource_wpdya")])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAACAAAAAQAAAAMAAAACAAEAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAACAAIAAQAAAAMAAAAAAAEAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAEAAQAAAAMAAAAFAAMAAQAAAAMAAAAFAAAAAQAAAAMAAAA=")

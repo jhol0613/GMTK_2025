@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://cin3jemsgx5vl"]
+[gd_scene load_steps=10 format=4 uid="uid://cin3jemsgx5vl"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_mcwt6"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_ba3fm"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_g0151"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_fruxy"]
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="5_fruxy"]
@@ -8,10 +9,18 @@
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="6_m3shw"]
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="7_m3shw"]
 
+[sub_resource type="Resource" id="Resource_p4em5"]
+script = ExtResource("2_ba3fm")
+index = 5
+action = 2
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [node name="LevelBase" instance=ExtResource("1_mcwt6")]
 display_name = "3-8"
+conductor_spawn_position = Vector2i(0, 3)
 available_slots = 6
 available_actions = Array[int]([4, 1, 2])
+hints = Array[ExtResource("2_ba3fm")]([SubResource("Resource_p4em5")])
 
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAGAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAMAAQAAAAMAAAA=")
