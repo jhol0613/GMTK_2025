@@ -11,7 +11,7 @@
 [node name="LevelBase" instance=ExtResource("1_kksss")]
 display_name = "3-11"
 conductor_spawn_beat = 3
-available_actions = Array[int]([4, 1, 2, 3])
+available_actions = Array[int]([4, 1, 3])
 
 [node name="CartTracks" parent="." index="2"]
 tile_map_data = PackedByteArray("AAACAAQAAAABAAIAAAADAAMAAAABAAYAAAADAAQAAAABAAYAAAACAAMAAAAAAAAAAAAEAAQAAAABAAEAAAAFAAQAAAABAAMAAAA=")

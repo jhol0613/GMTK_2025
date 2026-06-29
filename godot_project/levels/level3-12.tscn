@@ -2,22 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_jq6u0"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_c10kv"]
-[ext_resource type="PackedScene" uid="uid://brth7xhog3y76" path="res://agents/spinning_obstacles/spinning_chair.tscn" id="3_a173m"]
-[ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="4_4pxc2"]
 [ext_resource type="PackedScene" uid="uid://balkn08c5sj37" path="res://agents/interactables/computer_terminal/computer_terminal.tscn" id="4_c10kv"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="5_a173m"]
 [ext_resource type="PackedScene" uid="uid://c5t6k3wr3u4ta" path="res://agents/teleporter/teleporter_target.tscn" id="6_gr047"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="6_he6yh"]
 [ext_resource type="Script" uid="uid://y4xyvd52hhc6" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="7_he6yh"]
+[ext_resource type="PackedScene" uid="uid://rx46ny3cc272" path="res://agents/spinning_obstacles/spinning_chair_V2.tscn" id="9_d6xvb"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="10_d6xvb"]
+[ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="10_it3ah"]
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="11_d6xvb"]
 
 [node name="LevelBase" instance=ExtResource("1_jq6u0")]
 display_name = "3-12"
-conductor_spawn_beat = 17
+conductor_spawn_beat = 15
 available_actions = Array[int]([4, 2, 3, 7])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAMAAwABAAAAAAAJAAIAAQAAAAMAAAAJAAEAAQAAAAMAAAAJAAAAAQAAAAMAAAACAAIAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAACAAQAAQAAAAMAAAAEAAUAAQAAAAMAAAABAAUAAQAAAAMAAAA=")
 
 [node name="PointLight2D" parent="BackWall" index="0"]
@@ -37,20 +37,6 @@ position = Vector2(80, 106)
 destination_targets = [NodePath("../GreenDest1")]
 top = NodePath("../GreenTeleporterTop")
 grid_origin = Vector2i(2, 5)
-
-[node name="Antenna" parent="GreenTeleporter" index="5" instance=ExtResource("4_4pxc2")]
-offset_left = -14.0
-offset_top = 2.0
-offset_right = 17.0
-offset_bottom = 21.0
-
-[node name="AnimatedSprite2DSignals" parent="GreenTeleporter/Antenna" index="0"]
-position = Vector2(23, -96)
-
-[node name="MoveTeleporterDestinationProgram" type="Node" parent="GreenTeleporter/Antenna" index="2" node_paths=PackedStringArray("teleporters")]
-script = ExtResource("7_he6yh")
-teleporters = [NodePath("../../../PinkTeleporter"), NodePath("../../../BlueTeleporter")]
-metadata/_custom_type_script = "uid://y4xyvd52hhc6"
 
 [node name="PinkTeleporter" parent="." index="10" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_c10kv")]
 position = Vector2(208, 68)
@@ -73,55 +59,61 @@ grid_origin = Vector2i(6, 0)
 [node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("chairs")]
 script = ExtResource("5_a173m")
 chairs = [NodePath("../../SpinningChair")]
-number_of_quarter_turns = 1
+number_of_quarter_turns = -1
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
 [node name="CatCoffeeSpill" parent="." index="13" instance=ExtResource("6_he6yh")]
-position = Vector2(145, 63)
+position = Vector2(145, 74)
 flip_horizontal = true
 
 [node name="AnimatedSprite2DSignals" parent="CatCoffeeSpill" index="0"]
-position = Vector2(-2, -14)
+position = Vector2(-2, -8)
 
-[node name="SpinningChair" parent="." index="14" instance=ExtResource("3_a173m")]
-position = Vector2(303, 108)
-start_direction = 1
-grid_origin = Vector2i(9, 5)
+[node name="Collectible" parent="." index="14" instance=ExtResource("10_d6xvb")]
+position = Vector2(208, 42)
 
-[node name="Collectible" parent="." index="15" instance=ExtResource("10_d6xvb")]
-position = Vector2(208, 40)
-
-[node name="GreenTeleporterTop" parent="." index="16" instance=ExtResource("11_d6xvb")]
+[node name="GreenTeleporterTop" parent="." index="15" instance=ExtResource("11_d6xvb")]
 position = Vector2(80, 107)
 
-[node name="PinkTeleporterTop" parent="." index="17" instance=ExtResource("11_d6xvb")]
+[node name="PinkTeleporterTop" parent="." index="16" instance=ExtResource("11_d6xvb")]
 position = Vector2(208, 68)
 
-[node name="BlueTeleporterTop" parent="." index="18" instance=ExtResource("11_d6xvb")]
+[node name="BlueTeleporterTop" parent="." index="17" instance=ExtResource("11_d6xvb")]
 position = Vector2(144, 89)
 
-[node name="PinkDest1" parent="." index="19" instance=ExtResource("6_gr047")]
+[node name="PinkDest1" parent="." index="18" instance=ExtResource("6_gr047")]
 position = Vector2(112, 22)
 _active = true
 grid_origin = Vector2i(3, 1)
 
-[node name="PinkDest2" parent="." index="20" instance=ExtResource("6_gr047")]
+[node name="PinkDest2" parent="." index="19" instance=ExtResource("6_gr047")]
 position = Vector2(144, 42)
 grid_origin = Vector2i(4, 2)
 
-[node name="BlueDest1" parent="." index="21" instance=ExtResource("6_gr047")]
+[node name="BlueDest1" parent="." index="20" instance=ExtResource("6_gr047")]
 position = Vector2(272, 41)
 _active = true
 grid_origin = Vector2i(8, 2)
 
-[node name="BlueDest2" parent="." index="22" instance=ExtResource("6_gr047")]
+[node name="BlueDest2" parent="." index="21" instance=ExtResource("6_gr047")]
 position = Vector2(208, 41)
 grid_origin = Vector2i(6, 2)
 
-[node name="GreenDest1" parent="." index="23" instance=ExtResource("6_gr047")]
+[node name="GreenDest1" parent="." index="22" instance=ExtResource("6_gr047")]
 position = Vector2(176, 3)
 _active = true
 grid_origin = Vector2i(5, 0)
 
-[editable path="GreenTeleporter/Antenna"]
+[node name="SpinningChair" parent="." index="26" instance=ExtResource("9_d6xvb")]
+position = Vector2(304, 107)
+start_direction = 2
+grid_origin = Vector2i(9, 5)
+
+[node name="AntennaSystem" parent="." index="27" instance=ExtResource("10_it3ah")]
+
+[node name="MoveTeleporterDestinationProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("teleporters")]
+script = ExtResource("7_he6yh")
+teleporters = [NodePath("../../PinkTeleporter"), NodePath("../../BlueTeleporter")]
+metadata/_custom_type_script = "uid://y4xyvd52hhc6"
+
 [editable path="CatCoffeeSpill"]
