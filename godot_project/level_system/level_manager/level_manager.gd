@@ -59,7 +59,6 @@ class_name LevelManager
 @onready var _shake_camera := $ShakeCamera
 @onready var _lightning := $SequencerLayer/Lightning
 
-
 var _conductor: Conductor
 var _conductor_beat: float
 var _player_character: PlayerCharacter
@@ -97,17 +96,37 @@ var _actively_teleporting_entities := 0
 signal all_entities_complete_teleport
 
 func _ready() -> void:
+	print("Level Manager _ready() attemtping to load ")
+	print("World: ")
+	print(GameManager.start_world)
+	print("Level: ")
+	print(GameManager.start_level)
 	var loaded_level = GameManager.start_level
 	var loaded_world = GameManager.start_world
+	print("Loading Packed Level via level_catalog.get_level(world, level)")
 	var packed_level = GameManager.level_catalog.get_level(loaded_world, loaded_level)
 	if GameManager.run_from_F6:
+		print("Game was run from F6, so loading packed level via level_catalog.get_level_by_uid(uid)")
+		print("f6_UID: ")
+		print(GameManager.f6_uid)
 		packed_level = GameManager.level_catalog.get_level_by_uid(GameManager.f6_uid)
-
+	print("Packed level: ")
+	print(packed_level)
+	
+	print("Level Manager _ready() attempting to instantiate _level_scene")
 	_level_scene = packed_level.instantiate()
+	if _level_scene == null:
+		push_error("Level Manager _ready() Attempted to instantiate _level_scene, but Level scene is null")
+	print("_level_scene: ")
+	print(_level_scene)
+	print("Level Manager _ready() level scene instantiated. Attempting to instantiate world scene")
 	_world_scene = GameManager.level_catalog.get_world_scene().instantiate()
-
+	print("World Scene instantiated. Adding _level_scene to _on_the_train")
 	_on_the_train.add_child(_level_scene)
+	print("Added level scene to _on_the_train")
+	print("Adding World Scene")
 	add_child(_world_scene)
+	print("Added world scene to level manager")
 	
 	#Get the beat on which the conductor will move (to pass to the sequencer screen)
 	var conductor_scene_state = conductor_scene.get_state()
@@ -121,9 +140,13 @@ func _ready() -> void:
 	AudioManager.play_music_event(GameManager.level_catalog.get_world_music_event_name(),
 		GameManager.level_catalog.get_world_music_event_bpm())
 
+	print("Level manager _ready() initializing level")
 	_initialize_level()
+	print("Level initialized. Loading next level")
 	load_next_level()
+	print("Next level loaded. Calling _on_level_advanced()")
 	_on_level_advanced()
+	print("_on_level_advanced() complete")
 
 	AudioManager.music_bar.connect(_on_music_bar)
 	_action_sequencer.play_action_delay = train_move_right_on_play_time
@@ -380,7 +403,7 @@ func _execute_world_transition():
 	advance_level()
 
 func get_current_level_uid() -> int:
-	return ResourceLoader.get_resource_uid(_level_scene.scene_file_path)
+	return GameManager.level_catalog.level_uid_list.level_uids[_level_scene.scene_file_path]
 
 #endregion
 

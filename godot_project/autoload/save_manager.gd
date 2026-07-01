@@ -54,7 +54,6 @@ func _ready() -> void:
 	else:
 		load_game()
 
-
 ##Save current game state to the file
 func save_game() -> void:
 	if not enable_save:
@@ -71,6 +70,8 @@ func load_game() -> void:
 		push_error("[SaveManager] Loaded save data is not correct!")
 		return
 	save_data = result
+	print("Save Data: ")
+	print(save_data)
 
 
 ##Adds the collectible into save file, saves automatically.
@@ -96,6 +97,8 @@ func update_furthest_level(index: Dictionary) -> void:
 		save_data.furthest_level_reached = index
 		save_game()
 
+func get_resource_uid(resource_path: String) -> int:
+	return GameManager.level_catalog.level_uid_list.level_uids[resource_path]
 
 func add_completed_level(uid: int) -> void:
 	save_data.completed_levels[uid] = true

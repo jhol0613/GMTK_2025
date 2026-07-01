@@ -1,8 +1,10 @@
+@tool
 extends Resource
 
 class_name LevelCatalog
 
 @export var world_definitions: Array[WorldDefinition]
+@export var level_uid_list: UIDMap
 
 var _current_world := -1
 var _current_level := -1
@@ -10,15 +12,33 @@ var _previous_world := -1
 
 ## Returns level at a given index. Updates state to returned level index
 func get_level(world: int, level: int) -> PackedScene:
+	print("LevelCatalog get_level() world_definitions: ")
+	print(world_definitions)
+	print("running asserts")
 	assert(world < world_definitions.size(), str("World ", world, " is not defined"))
 	assert(level < world_definitions[world].levels.size(), str("Level ", level, " in World ", world, " is not defined"))
+	print("LevelCatalog get_level() passed assert statements")
 	_previous_world = _current_world
 	_current_world = world
 	_current_level = level
 
+	print("getting packed level from world_definitions. Packed Level: ")
 	var packed_level = world_definitions[world].levels[level]
-	if ResourceLoader.get_resource_uid(packed_level.original.resource_path) in SaveManager.save_data.completed_levels:
+	print(packed_level)
+	print("checking save data for packed_level.original uid in save_data.completed_levels")
+	print("Save Data: ")
+	print(SaveManager.save_data)
+	print("Completed Levels: ")
+	print(SaveManager.save_data.completed_levels)
+	print("packed_level.original.resource_path: ")
+	print(packed_level.original.resource_path)
+	print("packed_level resource uid: ")
+	if level_uid_list.level_uids[packed_level.original.resource_path] in SaveManager.save_data.completed_levels:
+		print("Returning collectible version. packed_level.collectible: ")
+		print(packed_level.collectible)
 		return packed_level.collectible
+	print("Returning original verion. packed_level.original: ")
+	print(packed_level.original)
 	return packed_level.original
 
 
@@ -28,7 +48,7 @@ func get_level_by_uid(uid: int) -> PackedScene:
 	for world_index in range(world_definitions.size()):
 		for level_index in range(world_definitions[world_index].levels.size()):
 			var packed_level = world_definitions[world_index].levels[level_index]
-			if uid == ResourceLoader.get_resource_uid(packed_level.original.resource_path):
+			if uid == level_uid_list.level_uids[packed_level.original.resource_path]:
 				index_dict.set("world", world_index)
 				index_dict.set("level", level_index)
 				_previous_world = _current_world
@@ -37,7 +57,7 @@ func get_level_by_uid(uid: int) -> PackedScene:
 				return packed_level.original
 
 			if packed_level.collectible and \
-			uid == ResourceLoader.get_resource_uid(packed_level.collectible.resource_path):
+			uid == level_uid_list.level_uids[packed_level.collectible.resource_path]:
 				index_dict.set("world", world_index)
 				index_dict.set("level", level_index)
 				_previous_world = _current_world
@@ -93,6 +113,17 @@ func get_next_level() -> PackedScene:
 			return world_definitions[_current_world].levels[_current_level].original
 		_current_world += 1
 	return null
+
+##Returns a list of all level resource paths in the catalog
+func get_level_resource_paths() -> Array[String]:
+	var paths : Array[String]
+	for world in world_definitions:
+		for level in world.levels:
+			paths.append(level.original.resource_path)
+			if level.collectible:
+				paths.append(level.collectible.resource_path)
+	return paths
+		
 
 ## Returns the level select scene associated with a given world
 func get_level_select_scene(world_number: int) -> Enums.Scenes:
