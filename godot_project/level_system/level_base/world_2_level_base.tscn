@@ -1,68 +1,68 @@
-[gd_scene load_steps=3 format=4 uid="uid://4rhumva5wup3"]
+[gd_scene format=4 uid="uid://4rhumva5wup3"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_oskbc"]
 [ext_resource type="Texture2D" uid="uid://buba0jhrlub6q" path="res://decorations/slidingwindow.png" id="2_k6diu"]
 
-[node name="LevelBase" instance=ExtResource("1_oskbc")]
+[node name="LevelBase" unique_id=611420051 instance=ExtResource("1_oskbc")]
 
-[node name="Decorative" parent="." index="0"]
+[node name="Decorative" parent="." index="0" unique_id=1207528347]
 tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAA=")
 
-[node name="Floor" parent="." index="1"]
+[node name="Floor" parent="." index="1" unique_id=1364947742]
 tile_map_data = PackedByteArray("AAAAAAEAAgAAAAIAAAABAAEAAgAAAAIAAAACAAEAAgAAAAIAAAADAAEAAgAAAAIAAAAEAAEAAgAAAAIAAAAFAAEAAgAAAAIAAAAGAAEAAgAAAAIAAAAHAAEAAgAAAAIAAAAIAAEAAgAAAAIAAAAJAAEAAgAAAAIAAAAKAAEAAgAAAAIAAAAAAAQAAgAAAAIAAAABAAQAAgAAAAIAAAACAAQAAgAAAAIAAAADAAQAAgAAAAIAAAAEAAQAAgAAAAIAAAAFAAQAAgAAAAIAAAAGAAQAAgAAAAIAAAAHAAQAAgAAAAIAAAAIAAQAAgAAAAIAAAAJAAQAAgAAAAIAAAAKAAQAAgAAAAIAAAAAAAIAAgAAAAAAAAAAAAMAAgAAAAAAAAAKAAIAAgAAAAMAAAAKAAMAAgAAAAMAAAABAAIAAgAAAAAAAAACAAIAAgAAAAAAAAADAAIAAgAAAAAAAAAEAAIAAgAAAAAAAAAFAAIAAgAAAAAAAAAGAAIAAgAAAAAAAAAHAAIAAgAAAAAAAAAIAAIAAgAAAAAAAAAJAAIAAgAAAAAAAAAJAAMAAgAAAAAAAAAIAAMAAgAAAAAAAAAHAAMAAgAAAAAAAAAGAAMAAgAAAAAAAAAFAAMAAgAAAAAAAAAEAAMAAgAAAAAAAAADAAMAAgAAAAAAAAACAAMAAgAAAAAAAAABAAMAAgAAAAAAAAAAAAUAAgAAAAIAAAABAAUAAgAAAAIAAAACAAUAAgAAAAIAAAADAAUAAgAAAAIAAAAEAAUAAgAAAAIAAAAFAAUAAgAAAAIAAAAGAAUAAgAAAAIAAAAHAAUAAgAAAAIAAAAIAAUAAgAAAAIAAAAJAAUAAgAAAAIAAAAKAAUAAgAAAAIAAAAKAAAAAgAAAAIAAAAJAAAAAgAAAAIAAAAIAAAAAgAAAAIAAAAHAAAAAgAAAAIAAAAGAAAAAgAAAAIAAAAFAAAAAgAAAAIAAAAEAAAAAgAAAAIAAAADAAAAAgAAAAIAAAACAAAAAgAAAAIAAAABAAAAAgAAAAIAAAAAAAAAAgAAAAIAAAA=")
 
-[node name="BackWall" parent="." index="4"]
+[node name="BackWall" parent="." index="4" unique_id=445055544]
 tile_map_data = PackedByteArray("AAAHAP7/AgAAAA0AAAAHAP//AgAAAA4AAAAHAP3/AgAAAAwAAAAIAP3/AgAAAA8AAAAIAP7/AgAAABAAAAAIAP//AgAAABEAAAAJAP3/AgAAABIAAAAJAP7/AgAAAAcAAAAJAP//AgAAABQAAAAKAP3/AgAAAAIAAAAKAP7/AgAAAAgAAAAKAP//AgAAAAsAAAAEAP3/AgAAAA8AAAAEAP7/AgAAABAAAAAEAP//AgAAABEAAAAFAP3/AgAAABIAAAAFAP7/AgAAAAcAAAAFAP//AgAAABQAAAAGAP3/AgAAAAIAAAAGAP7/AgAAAAgAAAAGAP//AgAAAAsAAAAAAP3/AgAAAAAAAAAAAP7/AgAAAAYAAAAAAP//AgAAAAkAAAABAP3/AgAAABIAAAABAP7/AgAAAAcAAAABAP//AgAAABQAAAACAP3/AgAAAAIAAAACAP7/AgAAAAgAAAACAP//AgAAAAsAAAADAP3/AgAAAAwAAAADAP7/AgAAAA0AAAADAP//AgAAAA4AAAA=")
 
-[node name="PointLight2D" parent="BackWall" index="0"]
+[node name="PointLight2D" parent="BackWall" index="0" unique_id=1100077405]
 position = Vector2(112, -57.63)
 energy = 0.2
 
-[node name="PointLight2D2" parent="BackWall" index="1"]
+[node name="PointLight2D2" parent="BackWall" index="1" unique_id=725947962]
 position = Vector2(240, -58.63)
 energy = 0.2
 
-[node name="Windows" parent="BackWall" index="4"]
+[node name="Windows" parent="BackWall" index="4" unique_id=975793370]
 tile_map_data = PackedByteArray("AAAAAP3/AgAAAAMAAAACAP3/AgAAAAUAAAAEAP3/AgAAAAMAAAAIAP3/AgAAAAMAAAAGAP3/AgAAAAUAAAAKAP3/AgAAAAUAAAABAP3/AgAAAAQAAAAFAP3/AgAAAAQAAAAJAP3/AgAAAAQAAAA=")
 
-[node name="Sprite2D" type="Sprite2D" parent="BackWall" index="5"]
+[node name="Sprite2D" type="Sprite2D" parent="BackWall" index="5" unique_id=1878042989]
 position = Vector2(26, -45.63)
 texture = ExtResource("2_k6diu")
 
-[node name="Sprite2D2" type="Sprite2D" parent="BackWall" index="6"]
+[node name="Sprite2D2" type="Sprite2D" parent="BackWall" index="6" unique_id=1475688417]
 position = Vector2(69, -51.63)
 texture = ExtResource("2_k6diu")
 
-[node name="Sprite2D3" type="Sprite2D" parent="BackWall" index="7"]
+[node name="Sprite2D3" type="Sprite2D" parent="BackWall" index="7" unique_id=1091944409]
 position = Vector2(154, -52.63)
 texture = ExtResource("2_k6diu")
 
-[node name="Sprite2D4" type="Sprite2D" parent="BackWall" index="8"]
+[node name="Sprite2D4" type="Sprite2D" parent="BackWall" index="8" unique_id=346229112]
 position = Vector2(197, -52.63)
 texture = ExtResource("2_k6diu")
 
-[node name="Sprite2D5" type="Sprite2D" parent="BackWall" index="9"]
+[node name="Sprite2D5" type="Sprite2D" parent="BackWall" index="9" unique_id=1452291840]
 position = Vector2(282, -50.63)
 texture = ExtResource("2_k6diu")
 
-[node name="Sprite2D6" type="Sprite2D" parent="BackWall" index="10"]
+[node name="Sprite2D6" type="Sprite2D" parent="BackWall" index="10" unique_id=1255666593]
 position = Vector2(325, -37.63)
 texture = ExtResource("2_k6diu")
 
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+[node name="LeftExterior" parent="LeftExteriorFloor" parent_id_path=PackedInt32Array(285330550) index="0" unique_id=1430336634]
 tile_map_data = PackedByteArray("AAD//wEAAgAAAB4AAAD//wIAAgAAACAAAAD//wMAAgAAACIAAAA=")
 
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
+[node name="LeftWall" parent="LeftExteriorFloor" parent_id_path=PackedInt32Array(285330550) index="1" unique_id=1195097161]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAgAAAAIAAAD//wEAAgABAAIAAAD//wIAAgABAAIAAAA=")
 
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
+[node name="LeftRoof" parent="LeftExteriorFloor" parent_id_path=PackedInt32Array(285330550) index="2" unique_id=1360180031]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD+////AAAAAAIAAAD+//7/AAAAAAEAAAD+//3/AAAAAAAAAAD+/wAAAAAAAAMAAAD///3/AQABAAAAAAAAAP3/AQABAAAAAAABAP3/AQABAAAAAAACAP3/AQABAAAAAAADAP3/AQABAAAAAAAEAP3/AQABAAAAAAA=")
 
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+[node name="RightExterior" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="0" unique_id=3075045]
 tile_map_data = PackedByteArray("AAD//wIAAgAAACAAABD//wMAAgAAACIAAAD//wEAAgAAAB4AABA=")
 
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
+[node name="RightWall" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="1" unique_id=1320273353]
 tile_map_data = PackedByteArray("AAD//wMAAgAAAAIAAAD//wEAAgABAAIAAAD//wIAAgABAAIAAAA=")
 
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
+[node name="RightRoof" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="2" unique_id=285994768]
 tile_map_data = PackedByteArray("AAAAAP3/AAAAAAAAABAAAP7/AAAAAAEAABAAAP//AAAAAAIAABAAAAAAAAAAAAMAABD///3/AQAAAAAAAAD+//3/AQAAAAAAAAD9//3/AQAAAAAAAAD8//3/AQAAAAAAAAD7//3/AQAAAAAAAAD6//3/AQAAAAAAAAA=")

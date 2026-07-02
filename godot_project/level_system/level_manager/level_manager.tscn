@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3nxiipcuklcd"]
+[gd_scene format=3 uid="uid://b3nxiipcuklcd"]
 
 [ext_resource type="Script" uid="uid://dpf7d5h8mvkeq" path="res://level_system/level_manager/level_manager.gd" id="1_04quo"]
 [ext_resource type="PackedScene" uid="uid://bmm7fgv3iwjwv" path="res://agents/conductor/conductor.tscn" id="2_xxlmw"]
@@ -64,7 +64,7 @@ shader_parameter/AuxBeamSpeed = -4.0
 shader_parameter/background_texture = ExtResource("10_4isrh")
 shader_parameter/Transparency = 0.0
 
-[node name="LevelManager" type="Node2D"]
+[node name="LevelManager" type="Node2D" unique_id=1877466920]
 y_sort_enabled = true
 script = ExtResource("1_04quo")
 player_scene = ExtResource("3_oyr8j")
@@ -75,9 +75,9 @@ brightness = 1.0
 contrast = 1.0
 saturation = 0.5
 
-[node name="ShaderLayer" type="CanvasLayer" parent="."]
+[node name="ShaderLayer" type="CanvasLayer" parent="." unique_id=1705350972]
 
-[node name="Shader" type="ColorRect" parent="ShaderLayer"]
+[node name="Shader" type="ColorRect" parent="ShaderLayer" unique_id=1252575307]
 z_index = 2096
 z_as_relative = false
 material = SubResource("ShaderMaterial_aoawx")
@@ -89,30 +89,28 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_n2acl")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1754858215]
+libraries/ = SubResource("AnimationLibrary_n2acl")
 
-[node name="TrainCenter" type="Node2D" parent="."]
+[node name="TrainCenter" type="Node2D" parent="." unique_id=2004768747]
 
-[node name="OnTheTrain" type="Node2D" parent="TrainCenter"]
+[node name="OnTheTrain" type="Node2D" parent="TrainCenter" unique_id=1768194418]
 
-[node name="ShakeCamera" type="Camera2D" parent="."]
+[node name="ShakeCamera" type="Camera2D" parent="." unique_id=578851744]
 position = Vector2(300, 226)
 process_callback = 0
 script = ExtResource("19_xwfi3")
 
-[node name="SequencerLayer" type="CanvasLayer" parent="."]
+[node name="SequencerLayer" type="CanvasLayer" parent="." unique_id=2020364997]
 
-[node name="ActionSequencer" parent="SequencerLayer" instance=ExtResource("9_hv4d1")]
+[node name="ActionSequencer" parent="SequencerLayer" unique_id=468223153 instance=ExtResource("9_hv4d1")]
 z_index = 520
 offset_left = 4.0
 offset_top = 107.0
 offset_right = 620.0
 offset_bottom = 453.0
 
-[node name="Lightning" type="Line2D" parent="SequencerLayer"]
+[node name="Lightning" type="Line2D" parent="SequencerLayer" unique_id=388218579]
 visible = false
 z_index = 80
 material = SubResource("ShaderMaterial_4isrh")

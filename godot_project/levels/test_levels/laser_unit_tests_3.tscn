@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://i0ptr4hy1cj6"]
+[gd_scene format=3 uid="uid://i0ptr4hy1cj6"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_mi1oy"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_45wtd"]
@@ -8,45 +8,45 @@
 [ext_resource type="Script" uid="uid://b23y6rruo1ixg" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_direction_program.gd" id="6_p4wgu"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="7_rfeq1"]
 
-[node name="LevelBase" instance=ExtResource("1_mi1oy")]
+[node name="LevelBase" unique_id=1065510452 instance=ExtResource("1_mi1oy")]
 conductor_enabled = false
 available_actions = Array[int]([1, 2, 3, 4, 5, 6, 7])
 
-[node name="Laser" parent="." index="9" instance=ExtResource("2_45wtd")]
+[node name="Laser" parent="." index="9" unique_id=1072881720 instance=ExtResource("2_45wtd")]
 position = Vector2(48, 42)
 height = 50
 grid_origin = Vector2i(1, 2)
 activation_sequence = Array[bool]([true, false, false, false])
 
-[node name="ComputerTerminal" parent="." index="10" instance=ExtResource("3_45wtd")]
+[node name="ComputerTerminal" parent="." index="10" unique_id=183313116 instance=ExtResource("3_45wtd")]
 position = Vector2(17, 29)
 grid_origin = Vector2i(0, 1)
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="3" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal" index="3" unique_id=221303142 node_paths=PackedStringArray("lasers")]
 script = ExtResource("4_dtmfp")
 lasers = [NodePath("../../Laser")]
 new_height = 7
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="ComputerTerminal2" parent="." index="11" instance=ExtResource("3_45wtd")]
+[node name="ComputerTerminal2" parent="." index="11" unique_id=146502594 instance=ExtResource("3_45wtd")]
 position = Vector2(16, 85)
 interactable_positions = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1), Vector2i(0, -1)])
 grid_origin = Vector2i(0, 4)
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="ComputerTerminal2" index="3" unique_id=1837557496 node_paths=PackedStringArray("lasers")]
 script = ExtResource("4_dtmfp")
 lasers = [NodePath("../../Laser")]
 new_height = 38
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="Laser2" parent="." index="12" instance=ExtResource("2_45wtd")]
+[node name="Laser2" parent="." index="12" unique_id=1679789640 instance=ExtResource("2_45wtd")]
 position = Vector2(144, 60)
 direction = 3
 height = 7
 grid_origin = Vector2i(4, 3)
 default_animation = "fire_right"
 
-[node name="Antenna" parent="Laser2" index="5" instance=ExtResource("5_dtmfp")]
+[node name="Antenna" parent="Laser2" index="5" unique_id=1862968578 instance=ExtResource("5_dtmfp")]
 offset_left = -14.0
 offset_top = -8.0
 offset_right = 17.0
@@ -59,23 +59,23 @@ position = Vector2(25, -8)
 offset_top = -1.0
 offset_bottom = 18.0
 
-[node name="TurnLaserProgram" type="Node" parent="Laser2/Antenna" index="2" node_paths=PackedStringArray("lasers")]
+[node name="TurnLaserProgram" type="Node" parent="Laser2/Antenna" index="2" unique_id=627453582 node_paths=PackedStringArray("lasers")]
 script = ExtResource("6_p4wgu")
 lasers = [NodePath("../..")]
 metadata/_custom_type_script = "uid://b23y6rruo1ixg"
 
-[node name="Antenna" parent="." index="13" instance=ExtResource("5_dtmfp")]
+[node name="Antenna" parent="." index="13" unique_id=1945411528 instance=ExtResource("5_dtmfp")]
 offset_left = 225.0
 offset_top = 32.0
 offset_right = 256.0
 offset_bottom = 51.0
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="Antenna" index="2" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="Antenna" index="2" unique_id=1597953261 node_paths=PackedStringArray("lasers")]
 script = ExtResource("4_dtmfp")
 lasers = [NodePath("../../Laser2")]
 metadata/_custom_type_script = "uid://brjyxyhy640eh"
 
-[node name="SnackCartObstacle" parent="." index="14" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("7_rfeq1")]
+[node name="SnackCartObstacle" parent="." index="14" unique_id=2090335276 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("7_rfeq1")]
 position = Vector2(208, 68)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -85,7 +85,15 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }
 
 [editable path="Laser2/Antenna"]

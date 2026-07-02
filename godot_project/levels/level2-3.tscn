@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://defrgrdfsdmu3"]
+[gd_scene format=4 uid="uid://defrgrdfsdmu3"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_hj5e0"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_hj5e0"]
@@ -11,7 +11,7 @@ index = 4
 action = 7
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_hj5e0")]
+[node name="LevelBase" unique_id=1618386043 instance=ExtResource("1_hj5e0")]
 display_name = "2-3"
 conductor_spawn_beat = 8
 conductor_spawn_position = Vector2i(0, 3)
@@ -24,11 +24,11 @@ tile_map_data = PackedByteArray("AAAIAAMAAAABAAIAAAAHAAMAAAABAAIAAAAGAAMAAAABAAI
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAABAAIAAQAAAAMAAAABAAMAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAUAAQAAAAMAAAAEAAIAAQAAAAMAAAA=")
 
-[node name="CatCartObstacle" parent="." index="9" instance=ExtResource("2_hj5e0")]
+[node name="CatCartObstacle" parent="." index="9" unique_id=947309308 instance=ExtResource("2_hj5e0")]
 position = Vector2(304, 68)
 movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4])
 
-[node name="Key" parent="." index="10" instance=ExtResource("3_uvemm")]
+[node name="Key" parent="." index="10" unique_id=423301890 instance=ExtResource("3_uvemm")]
 position = Vector2(80, 42)
 
 [node name="Wheelwell" parent="AdditionalSprites" index="1"]

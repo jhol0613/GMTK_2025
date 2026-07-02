@@ -1,23 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbh554jiabmo8"]
+[gd_scene format=3 uid="uid://bbh554jiabmo8"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_3krjw"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_44155"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_7q1qd"]
 
-[node name="LevelBase" instance=ExtResource("1_3krjw")]
+[node name="LevelBase" unique_id=1300143516 instance=ExtResource("1_3krjw")]
 conductor_enabled = false
 available_actions = Array[int]([1, 2, 4, 5, 6])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray(0, 0, 8, 0, 2, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 
-[node name="Laser" parent="." index="9" instance=ExtResource("2_44155")]
+[node name="Laser" parent="." index="9" unique_id=1637950364 instance=ExtResource("2_44155")]
 position = Vector2(113, 4)
 height = 48
 grid_origin = Vector2i(3, 0)
 activation_sequence = Array[bool]([true, false, false, false])
 
-[node name="Laser2" parent="." index="10" instance=ExtResource("2_44155")]
+[node name="Laser2" parent="." index="10" unique_id=1854614655 instance=ExtResource("2_44155")]
 position = Vector2(176, 42)
 direction = 2
 height = 33
@@ -25,7 +25,7 @@ grid_origin = Vector2i(5, 2)
 activation_sequence = Array[bool]([false, true, false, false])
 default_animation = "fire_left"
 
-[node name="Laser3" parent="." index="11" instance=ExtResource("2_44155")]
+[node name="Laser3" parent="." index="11" unique_id=1681294734 instance=ExtResource("2_44155")]
 position = Vector2(48, 43)
 direction = 3
 height = 48
@@ -33,7 +33,7 @@ grid_origin = Vector2i(1, 2)
 activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
-[node name="Laser4" parent="." index="12" instance=ExtResource("2_44155")]
+[node name="Laser4" parent="." index="12" unique_id=1284573075 instance=ExtResource("2_44155")]
 position = Vector2(112, 80)
 direction = 0
 height = 48
@@ -41,13 +41,13 @@ grid_origin = Vector2i(3, 4)
 activation_sequence = Array[bool]([false, false, true, false])
 default_animation = "fire_up"
 
-[node name="Laser5" parent="." index="13" instance=ExtResource("2_44155")]
+[node name="Laser5" parent="." index="13" unique_id=781127209 instance=ExtResource("2_44155")]
 position = Vector2(274, 4)
 height = 7
 grid_origin = Vector2i(8, 0)
 activation_sequence = Array[bool]([true, false, false, false])
 
-[node name="Laser6" parent="." index="14" instance=ExtResource("2_44155")]
+[node name="Laser6" parent="." index="14" unique_id=577691145 instance=ExtResource("2_44155")]
 position = Vector2(336, 41)
 direction = 2
 height = 7
@@ -55,14 +55,14 @@ grid_origin = Vector2i(10, 2)
 activation_sequence = Array[bool]([false, true, false, false])
 default_animation = "fire_left"
 
-[node name="Laser7" parent="." index="15" instance=ExtResource("2_44155")]
+[node name="Laser7" parent="." index="15" unique_id=1123134537 instance=ExtResource("2_44155")]
 position = Vector2(209, 43)
 direction = 3
 grid_origin = Vector2i(6, 2)
 activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
-[node name="Laser8" parent="." index="16" instance=ExtResource("2_44155")]
+[node name="Laser8" parent="." index="16" unique_id=1977109925 instance=ExtResource("2_44155")]
 position = Vector2(273, 80)
 direction = 0
 height = 7
@@ -70,7 +70,7 @@ grid_origin = Vector2i(8, 4)
 activation_sequence = Array[bool]([false, false, true, false])
 default_animation = "fire_up"
 
-[node name="Laser9" parent="." index="17" instance=ExtResource("2_44155")]
+[node name="Laser9" parent="." index="17" unique_id=785013739 instance=ExtResource("2_44155")]
 position = Vector2(15, 22)
 direction = 0
 height = 48
@@ -78,12 +78,12 @@ grid_origin = Vector2i(0, 1)
 activation_sequence = Array[bool]([false, false, true, false])
 default_animation = "fire_up"
 
-[node name="Laser10" parent="." index="18" instance=ExtResource("2_44155")]
+[node name="Laser10" parent="." index="18" unique_id=377911152 instance=ExtResource("2_44155")]
 position = Vector2(16, 79)
 height = 48
 grid_origin = Vector2i(0, 4)
 
-[node name="Laser11" parent="." index="19" instance=ExtResource("2_44155")]
+[node name="Laser11" parent="." index="19" unique_id=194799887 instance=ExtResource("2_44155")]
 position = Vector2(80, 99)
 direction = 2
 height = 48
@@ -91,7 +91,7 @@ grid_origin = Vector2i(2, 5)
 activation_sequence = Array[bool]([false, true, false, false])
 default_animation = "fire_left"
 
-[node name="Laser12" parent="." index="20" instance=ExtResource("2_44155")]
+[node name="Laser12" parent="." index="20" unique_id=573309319 instance=ExtResource("2_44155")]
 position = Vector2(241, 98)
 direction = 3
 height = 48
@@ -99,7 +99,7 @@ grid_origin = Vector2i(7, 5)
 activation_sequence = Array[bool]([false, false, false, true])
 default_animation = "fire_right"
 
-[node name="SnackCartObstacle" parent="." index="21" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_7q1qd")]
+[node name="SnackCartObstacle" parent="." index="21" unique_id=104796251 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_7q1qd")]
 position = Vector2(113, 50)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -109,5 +109,13 @@ action_sound_emitters = {
 12: NodePath("BumpSound"),
 13: NodePath("BumpSound"),
 14: NodePath("BumpSound"),
-15: NodePath("BumpSound")
+15: NodePath("BumpSound"),
+16: null,
+17: null,
+18: null,
+19: null,
+20: NodePath("BumpSound"),
+21: NodePath("BumpSound"),
+22: NodePath("BumpSound"),
+23: NodePath("BumpSound")
 }

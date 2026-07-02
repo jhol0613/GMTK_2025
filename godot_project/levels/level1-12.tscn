@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://ej8hk3h8ibcr"]
+[gd_scene format=4 uid="uid://ej8hk3h8ibcr"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_wf1y7"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_d0gv4"]
@@ -8,10 +8,9 @@
 [sub_resource type="Resource" id="Resource_ufyiq"]
 script = ExtResource("2_d0gv4")
 index = 7
-action = 0
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_wf1y7")]
+[node name="LevelBase" unique_id=1633999331 instance=ExtResource("1_wf1y7")]
 display_name = "Patience is Key"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 10
@@ -34,58 +33,58 @@ tile_map_data = PackedByteArray("AAD//wEAAAAAAAsAAAD//wIAAAAAABQAAAD//wMAAAAAABU
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
 tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD//wEAAAAAAAsAABA=")
 
-[node name="Laser" parent="." index="8" instance=ExtResource("2_ufyiq")]
+[node name="Laser" parent="." index="8" unique_id=503847800 instance=ExtResource("2_ufyiq")]
 position = Vector2(48, 3)
 height = 7
 grid_origin = Vector2i(1, 0)
 
-[node name="Laser2" parent="." index="9" instance=ExtResource("2_ufyiq")]
+[node name="Laser2" parent="." index="9" unique_id=1378010738 instance=ExtResource("2_ufyiq")]
 position = Vector2(48, 98)
 direction = 0
 height = 7
 grid_origin = Vector2i(1, 5)
 default_animation = "fire_up"
 
-[node name="Laser3" parent="." index="10" instance=ExtResource("2_ufyiq")]
+[node name="Laser3" parent="." index="10" unique_id=303584533 instance=ExtResource("2_ufyiq")]
 position = Vector2(112, 3)
 height = 7
 grid_origin = Vector2i(3, 0)
 
-[node name="Laser4" parent="." index="11" instance=ExtResource("2_ufyiq")]
+[node name="Laser4" parent="." index="11" unique_id=441475405 instance=ExtResource("2_ufyiq")]
 position = Vector2(112, 98)
 direction = 0
 height = 7
 grid_origin = Vector2i(3, 5)
 default_animation = "fire_up"
 
-[node name="Laser5" parent="." index="12" instance=ExtResource("2_ufyiq")]
+[node name="Laser5" parent="." index="12" unique_id=2003191030 instance=ExtResource("2_ufyiq")]
 position = Vector2(176, 3)
 height = 7
 grid_origin = Vector2i(5, 0)
 
-[node name="Laser6" parent="." index="13" instance=ExtResource("2_ufyiq")]
+[node name="Laser6" parent="." index="13" unique_id=101409463 instance=ExtResource("2_ufyiq")]
 position = Vector2(176, 98)
 direction = 0
 height = 7
 grid_origin = Vector2i(5, 5)
 default_animation = "fire_up"
 
-[node name="Laser7" parent="." index="14" instance=ExtResource("2_ufyiq")]
+[node name="Laser7" parent="." index="14" unique_id=841372846 instance=ExtResource("2_ufyiq")]
 position = Vector2(240, 3)
 height = 7
 grid_origin = Vector2i(7, 0)
 
-[node name="Laser8" parent="." index="15" instance=ExtResource("2_ufyiq")]
+[node name="Laser8" parent="." index="15" unique_id=1522373240 instance=ExtResource("2_ufyiq")]
 position = Vector2(240, 98)
 direction = 0
 height = 7
 grid_origin = Vector2i(7, 5)
 default_animation = "fire_up"
 
-[node name="Laser9" parent="." index="16" instance=ExtResource("2_ufyiq")]
+[node name="Laser9" parent="." index="16" unique_id=1174909532 instance=ExtResource("2_ufyiq")]
 position = Vector2(304, 3)
 height = 7
 grid_origin = Vector2i(9, 0)
 
-[node name="Key" parent="." index="18" instance=ExtResource("5_d0gv4")]
+[node name="Key" parent="." index="18" unique_id=1620278382 instance=ExtResource("5_d0gv4")]
 position = Vector2(144, 62)

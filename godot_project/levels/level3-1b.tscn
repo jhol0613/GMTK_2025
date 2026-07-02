@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bpca4h6xw3efm"]
+[gd_scene format=4 uid="uid://bpca4h6xw3efm"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_wuicp"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_cbh2a"]
@@ -13,7 +13,7 @@ index = 4
 action = 1
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase2" instance=ExtResource("1_wuicp")]
+[node name="LevelBase2" unique_id=453300847 instance=ExtResource("1_wuicp")]
 display_name = "3-1b"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_position = Vector2i(0, 3)
@@ -23,7 +23,7 @@ hints = Array[ExtResource("2_cbh2a")]([SubResource("Resource_qrq1u")])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAADAAUAAQAAAAMAAAADAAQAAQAAAAMAAAADAAMAAQAAAAMAAAABAAMAAQAAAAMAAAA=")
 
-[node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_qrq1u")]
+[node name="SnackCartObstacle" parent="." index="9" unique_id=1644553337 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_qrq1u")]
 position = Vector2(80, 30)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -44,13 +44,13 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="MovableObstacleLimiter" parent="." index="10" instance=ExtResource("5_k5hjk")]
+[node name="MovableObstacleLimiter" parent="." index="10" unique_id=1263102691 instance=ExtResource("5_k5hjk")]
 position = Vector2(65, 15)
 points = PackedVector2Array(0, 0, 30, 0, 30, 36, 0, 36)
 
-[node name="AntennaSystem" parent="." index="13" instance=ExtResource("4_k5hjk")]
+[node name="AntennaSystem" parent="." index="13" unique_id=2065718010 instance=ExtResource("4_k5hjk")]
 
-[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
+[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" unique_id=1449284630 node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("3_cbh2a")
 obstacles = [NodePath("../../SnackCartObstacle")]
 obstacle_limiters = [NodePath("../../MovableObstacleLimiter")]

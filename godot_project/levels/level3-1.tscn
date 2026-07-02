@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://mw374qbgvht0"]
+[gd_scene format=4 uid="uid://mw374qbgvht0"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_b44x8"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_8aue3"]
@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="6_81dw1"]
 [ext_resource type="Script" uid="uid://brjyxyhy640eh" path="res://agents/interactables/computer_terminal/terminal_programs/change_laser_height_program.gd" id="6_sxp6j"]
 
-[node name="LevelBase" instance=ExtResource("1_b44x8")]
+[node name="LevelBase" unique_id=1215794846 instance=ExtResource("1_b44x8")]
 display_name = "3-1"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 6
@@ -17,36 +17,36 @@ available_actions = Array[int]([1, 2, 4, 7, 5])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAHAAMAAQABAAMAAAAIAAMAAQABAAMAAAAHAAIAAQABAAMAAAAIAAEAAQABAAMAAAAJAAEAAQABAAMAAAAKAAEAAQABAAMAAAAAAAQAAQABAAMAAAA=")
 
-[node name="Laser" parent="." index="9" instance=ExtResource("2_8aue3")]
+[node name="Laser" parent="." index="9" unique_id=2112256705 instance=ExtResource("2_8aue3")]
 position = Vector2(144, 3)
 height = 7
 grid_origin = Vector2i(4, 0)
 
-[node name="Treadmill" parent="." index="10" instance=ExtResource("3_ovry0")]
+[node name="Treadmill" parent="." index="10" unique_id=1310767531 instance=ExtResource("3_ovry0")]
 position = Vector2(208, 70)
 grid_origin = Vector2i(6, 3)
 
-[node name="Laser2" parent="." index="11" instance=ExtResource("2_8aue3")]
+[node name="Laser2" parent="." index="11" unique_id=861321986 instance=ExtResource("2_8aue3")]
 position = Vector2(112, 3)
 height = 55
 grid_origin = Vector2i(3, 0)
 
-[node name="Treadmill2" parent="." index="12" instance=ExtResource("3_ovry0")]
+[node name="Treadmill2" parent="." index="12" unique_id=108596700 instance=ExtResource("3_ovry0")]
 position = Vector2(304, 90)
 grid_origin = Vector2i(9, 4)
 
-[node name="AntennaSystem2" parent="." index="14" instance=ExtResource("6_1ygfg")]
+[node name="AntennaSystem2" parent="." index="14" unique_id=984566717 instance=ExtResource("6_1ygfg")]
 position = Vector2(183, 6)
 
-[node name="TurnTreadmillProgram" type="Node" parent="AntennaSystem2" index="0" node_paths=PackedStringArray("treadmills")]
+[node name="TurnTreadmillProgram" type="Node" parent="AntennaSystem2" index="0" unique_id=472227063 node_paths=PackedStringArray("treadmills")]
 script = ExtResource("6_81dw1")
 treadmills = [NodePath("../../Treadmill")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
-[node name="AntennaSystem" parent="." index="15" instance=ExtResource("6_1ygfg")]
+[node name="AntennaSystem" parent="." index="15" unique_id=411557125 instance=ExtResource("6_1ygfg")]
 position = Vector2(183, 6)
 
-[node name="ChangeLaserHeightProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("lasers")]
+[node name="ChangeLaserHeightProgram" type="Node" parent="AntennaSystem" index="0" unique_id=913502696 node_paths=PackedStringArray("lasers")]
 script = ExtResource("6_sxp6j")
 lasers = [NodePath("../../Laser2")]
 metadata/_custom_type_script = "uid://brjyxyhy640eh"

@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cyx2a6u3pgvsa"]
+[gd_scene format=3 uid="uid://cyx2a6u3pgvsa"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_pd71t"]
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="2_iqnak"]
 [ext_resource type="Script" uid="uid://blcr4qlisfk4a" path="res://agents/interactables/computer_terminal/terminal_programs/turn_chair_program.gd" id="2_y41pk"]
 [ext_resource type="PackedScene" uid="uid://rx46ny3cc272" path="res://agents/spinning_obstacles/spinning_chair_V2.tscn" id="4_pd71t"]
 
-[node name="LevelBase" instance=ExtResource("1_pd71t")]
+[node name="LevelBase" unique_id=2139842255 instance=ExtResource("1_pd71t")]
 display_name = "3-4"
 conductor_spawn_beat = 4
 conductor_spawn_position = Vector2i(0, 3)
@@ -14,23 +14,23 @@ available_actions = Array[int]([1, 2, 4, 7])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray(0, 0, 2, 0, 0, 0, 1, 0, 1, 0, 3, 0, 0, 0, 3, 0, 1, 0, 1, 0, 1, 0, 3, 0, 0, 0, 7, 0, 1, 0, 1, 0, 1, 0, 3, 0, 0, 0, 8, 0, 0, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
-[node name="SpinningChair4" parent="." index="10" instance=ExtResource("4_pd71t")]
+[node name="SpinningChair4" parent="." index="10" unique_id=1464844108 instance=ExtResource("4_pd71t")]
 position = Vector2(176, 68)
 grid_origin = Vector2i(5, 3)
 
-[node name="SpinningChair" parent="." index="11" instance=ExtResource("4_pd71t")]
+[node name="SpinningChair" parent="." index="11" unique_id=568097999 instance=ExtResource("4_pd71t")]
 position = Vector2(238, 107)
 start_direction = 2
 grid_origin = Vector2i(7, 5)
 
-[node name="SpinningChair2" parent="." index="12" instance=ExtResource("4_pd71t")]
+[node name="SpinningChair2" parent="." index="12" unique_id=1811637706 instance=ExtResource("4_pd71t")]
 position = Vector2(114, 110)
 start_direction = 3
 grid_origin = Vector2i(3, 5)
 
-[node name="AntennaSystem" parent="." index="13" instance=ExtResource("2_iqnak")]
+[node name="AntennaSystem" parent="." index="13" unique_id=688203791 instance=ExtResource("2_iqnak")]
 
-[node name="TurnChairProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("chairs")]
+[node name="TurnChairProgram" type="Node" parent="AntennaSystem" index="0" unique_id=1734048653 node_paths=PackedStringArray("chairs")]
 script = ExtResource("2_y41pk")
 chairs = [NodePath("../../SpinningChair4"), NodePath("../../SpinningChair"), NodePath("../../SpinningChair2")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"

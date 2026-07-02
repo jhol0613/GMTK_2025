@@ -1,48 +1,48 @@
-[gd_scene load_steps=2 format=4 uid="uid://dncr2b8omfbne"]
+[gd_scene format=4 uid="uid://dncr2b8omfbne"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_fad7w"]
 
-[node name="LevelBase" instance=ExtResource("1_fad7w")]
+[node name="LevelBase" unique_id=486980101 instance=ExtResource("1_fad7w")]
 
-[node name="Floor" parent="." index="1"]
+[node name="Floor" parent="." index="1" unique_id=1364947742]
 tile_map_data = PackedByteArray("AAAAAAEABAAAAAEAAAABAAEABAAAAAEAAAACAAEABAAAAAEAAAADAAEABAAAAAEAAAAEAAEABAAAAAEAAAAFAAEABAAAAAEAAAAGAAEABAAAAAEAAAAHAAEABAAAAAEAAAAIAAEABAAAAAEAAAAJAAEABAAAAAEAAAAKAAEABAAAAAEAAAAAAAQABAAAAAEAAAABAAQABAAAAAEAAAACAAQABAAAAAEAAAADAAQABAAAAAEAAAAEAAQABAAAAAEAAAAFAAQABAAAAAEAAAAGAAQABAAAAAEAAAAHAAQABAAAAAEAAAAIAAQABAAAAAEAAAAJAAQABAAAAAEAAAAKAAQABAAAAAEAAAAAAAIABAAAAAAAAAAAAAMABAAAAAAAAAAKAAIAAgAAAAMAAAAKAAMAAgAAAAMAAAABAAIABAAAAAAAAAACAAIABAAAAAAAAAADAAIABAAAAAAAAAAEAAIABAAAAAAAAAAFAAIABAAAAAAAAAAGAAIABAAAAAAAAAAHAAIABAAAAAAAAAAIAAIABAAAAAAAAAAJAAIABAAAAAAAAAAJAAMABAAAAAAAAAAIAAMABAAAAAAAAAAHAAMABAAAAAAAAAAGAAMABAAAAAAAAAAFAAMABAAAAAAAAAAEAAMABAAAAAAAAAADAAMABAAAAAAAAAACAAMABAAAAAAAAAABAAMABAAAAAAAAAAAAAUABAAAAAEAAAABAAUABAAAAAEAAAACAAUABAAAAAEAAAADAAUABAAAAAEAAAAEAAUABAAAAAEAAAAFAAUABAAAAAEAAAAGAAUABAAAAAEAAAAHAAUABAAAAAEAAAAIAAUABAAAAAEAAAAJAAUABAAAAAEAAAAKAAUABAAAAAEAAAAKAAAABAAAAAEAAAAJAAAABAAAAAEAAAAIAAAABAAAAAEAAAAHAAAABAAAAAEAAAAGAAAABAAAAAEAAAAFAAAABAAAAAEAAAAEAAAABAAAAAEAAAADAAAABAAAAAEAAAACAAAABAAAAAEAAAABAAAABAAAAAEAAAAAAAAABAAAAAEAAAA=")
 
-[node name="BackWall" parent="." index="4"]
+[node name="BackWall" parent="." index="4" unique_id=445055544]
 tile_map_data = PackedByteArray("AAAHAP//AwAAAB0AAAAHAP3/AwAAAAcAAAAIAP3/AwAAAAgAAAAIAP7/AwAAABMAAAAIAP//AwAAAB4AAAAJAP3/AwAAAAkAAAAJAP//AwAAAB8AAAAKAP3/AwAAAAoAAAAKAP7/AwAAABUAAAAKAP//AwAAACAAAAAEAP3/AwAAAAQAAAAEAP7/AwAAAA8AAAAEAP//AwAAABoAAAAFAP3/AwAAAAUAAAAFAP7/AwAAABAAAAAFAP//AwAAABsAAAAGAP3/AwAAAAYAAAAGAP7/AwAAABEAAAAGAP//AwAAABwAAAAAAP3/AwAAAAAAAAAAAP7/AwAAAAsAAAAAAP//AwAAABYAAAABAP3/AwAAAAEAAAABAP//AwAAABcAAAACAP3/AwAAAAIAAAACAP7/AwAAAA0AAAACAP//AwAAABgAAAADAP3/AwAAAAMAAAADAP//AwAAABkAAAA=")
 
-[node name="PointLight2D" parent="BackWall" index="0"]
+[node name="PointLight2D" parent="BackWall" index="0" unique_id=1100077405]
 position = Vector2(65, -83.63)
 energy = 0.2
 
-[node name="PointLight2D2" parent="BackWall" index="1"]
+[node name="PointLight2D2" parent="BackWall" index="1" unique_id=725947962]
 position = Vector2(287, -84.63)
 energy = 0.2
 
-[node name="Windows" parent="BackWall" index="4"]
+[node name="Windows" parent="BackWall" index="4" unique_id=975793370]
 tile_map_data = PackedByteArray()
 
-[node name="LeftExteriorFloor" parent="." index="5"]
+[node name="LeftExteriorFloor" parent="." index="5" unique_id=285330550]
 tile_map_data = PackedByteArray("AAD//wAABAAAAAEAAAD//wEABAAAAAEAAAD//wIABAAAAAEAAAD//wMABAAAAAEAAAD//wQABAAAAAEAAAD//wUABAAAAAEAAAD/////AAAAAAAAAAA=")
 
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+[node name="LeftExterior" parent="LeftExteriorFloor" index="0" unique_id=1430336634]
 position = Vector2(1, -5)
 tile_map_data = PackedByteArray("AAD//wEAAwAAAA8AAAD//wIAAwAAABAAAAD//wMAAwAAABEAAAA=")
 
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
+[node name="LeftWall" parent="LeftExteriorFloor" index="1" unique_id=1195097161]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAA=")
 
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
+[node name="LeftRoof" parent="LeftExteriorFloor" index="2" unique_id=1360180031]
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD+////AgAAAAIAAAD+//7/AgAAAAEAAAD+//3/AgAAAAAAAAD+/wAAAgAAAAMAAAD///3/BQABAAAAAAAAAP3/BQABAAAAAAABAP3/BQABAAAAAAACAP3/BQABAAAAAAADAP3/BQABAAAAAAAEAP3/BQABAAAAAAA=")
 
-[node name="RightExteriorFloor" parent="." index="6"]
+[node name="RightExteriorFloor" parent="." index="6" unique_id=445923122]
 tile_map_data = PackedByteArray("AAD//wAABAAAAAEAAAD//wEABAAAAAEAAAD//wIABAAAAAEAAAD//wMABAAAAAEAAAD//wQABAAAAAEAAAD//wUABAAAAAEAAAD/////BAAAAAEAAAA=")
 
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+[node name="RightExterior" parent="RightExteriorFloor" index="0" unique_id=3075045]
 position = Vector2(1, -5)
 tile_map_data = PackedByteArray("AAD//wIAAwABAAEAAAD//wMAAwABAAIAAAD//wEAAwABAAAAAAA=")
 
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
+[node name="RightWall" parent="RightExteriorFloor" index="1" unique_id=1320273353]
 tile_map_data = PackedByteArray()
 
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
+[node name="RightRoof" parent="RightExteriorFloor" index="2" unique_id=285994768]
 tile_map_data = PackedByteArray("AAAAAP3/AgAAAAAAABAAAP7/AgAAAAEAABAAAP//AgAAAAIAABAAAAAAAgAAAAMAABD///3/BQAAAAAAAAD+//3/BQAAAAAAAAD9//3/BQAAAAAAAAD8//3/BQAAAAAAAAD7//3/BQAAAAAAAAD6//3/BQAAAAAAAAA=")

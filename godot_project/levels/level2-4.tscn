@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://buewsb5qu1f0m"]
+[gd_scene format=4 uid="uid://buewsb5qu1f0m"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_6v6an"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_khuon"]
@@ -10,7 +10,7 @@ index = 1
 action = 1
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_6v6an")]
+[node name="LevelBase" unique_id=1369994985 instance=ExtResource("1_6v6an")]
 display_name = "Here We Go Again"
 available_slots = 4
 available_actions = Array[int]([4, 1])
@@ -19,17 +19,17 @@ hints = Array[ExtResource("2_khuon")]([SubResource("Resource_khuon")])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAACAAMAAQAAAAMAAAACAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAFAAMAAQAAAAMAAAAIAAMAAQAAAAMAAAAIAAIAAQAAAAMAAAA=")
 
-[node name="Treadmill" parent="." index="9" instance=ExtResource("2_qg5g5")]
+[node name="Treadmill" parent="." index="9" unique_id=283599501 instance=ExtResource("2_qg5g5")]
 position = Vector2(113, 33)
 direction = 1
 grid_origin = Vector2i(3, 1)
 
-[node name="Treadmill2" parent="." index="10" instance=ExtResource("2_qg5g5")]
+[node name="Treadmill2" parent="." index="10" unique_id=1917648509 instance=ExtResource("2_qg5g5")]
 position = Vector2(208, 32)
 direction = 1
 grid_origin = Vector2i(6, 1)
 
-[node name="Treadmill3" parent="." index="11" instance=ExtResource("2_qg5g5")]
+[node name="Treadmill3" parent="." index="11" unique_id=1444850678 instance=ExtResource("2_qg5g5")]
 position = Vector2(304, 34)
 direction = 1
 grid_origin = Vector2i(9, 1)

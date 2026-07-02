@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://cyo8sopwsu4hj"]
+[gd_scene format=4 uid="uid://cyo8sopwsu4hj"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_5r6hg"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="2_5r6hg"]
@@ -11,7 +11,7 @@ index = 5
 action = 3
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_5r6hg")]
+[node name="LevelBase" unique_id=817037408 instance=ExtResource("1_5r6hg")]
 display_name = "2-5"
 conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 3])
@@ -20,38 +20,38 @@ hints = Array[ExtResource("2_dckb2")]([SubResource("Resource_dckb2")])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAQAAQAAAAMAAAAFAAAAAQAAAAMAAAAGAAAAAQAAAAMAAAABAAAAAQAAAAMAAAACAAAAAQAAAAMAAAADAAAAAQAAAAMAAAAEAAAAAQAAAAMAAAABAAMAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAGAAEAAQAAAAMAAAAGAAIAAQAAAAMAAAAGAAMAAQAAAAMAAAAAAAQAAQAAAAMAAAA=")
 
-[node name="Treadmill" parent="." index="9" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill" parent="." index="9" unique_id=572219819 instance=ExtResource("2_5r6hg")]
 position = Vector2(145, 50)
 direction = 1
 grid_origin = Vector2i(4, 2)
 
-[node name="Treadmill2" parent="." index="10" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill2" parent="." index="10" unique_id=1780047000 instance=ExtResource("2_5r6hg")]
 position = Vector2(176, 90)
 grid_origin = Vector2i(5, 4)
 
-[node name="Treadmill3" parent="." index="11" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill3" parent="." index="11" unique_id=1990213004 instance=ExtResource("2_5r6hg")]
 position = Vector2(176, 50)
 direction = 1
 grid_origin = Vector2i(5, 2)
 
-[node name="Treadmill4" parent="." index="12" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill4" parent="." index="12" unique_id=1032336430 instance=ExtResource("2_5r6hg")]
 position = Vector2(48, 54)
 grid_origin = Vector2i(1, 2)
 
-[node name="Treadmill5" parent="." index="13" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill5" parent="." index="13" unique_id=924693938 instance=ExtResource("2_5r6hg")]
 position = Vector2(112, 91)
 direction = 1
 grid_origin = Vector2i(3, 4)
 
-[node name="Treadmill7" parent="." index="14" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill7" parent="." index="14" unique_id=727279252 instance=ExtResource("2_5r6hg")]
 position = Vector2(337, 91)
 grid_origin = Vector2i(10, 4)
 
-[node name="Treadmill6" parent="." index="15" instance=ExtResource("2_5r6hg")]
+[node name="Treadmill6" parent="." index="15" unique_id=173640594 instance=ExtResource("2_5r6hg")]
 position = Vector2(272, 109)
 grid_origin = Vector2i(8, 5)
 
-[node name="Key" parent="." index="16" instance=ExtResource("3_brkqa")]
+[node name="Key" parent="." index="16" unique_id=1030160734 instance=ExtResource("3_brkqa")]
 position = Vector2(112, 61)
 
 [node name="Lock" parent="AdditionalSprites" index="3"]

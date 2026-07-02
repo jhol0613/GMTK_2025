@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bh5ec0yys4ety"]
+[gd_scene format=4 uid="uid://bh5ec0yys4ety"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_bhy8u"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_sucd5"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="7_rgc4p"]
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="8_c5scp"]
 
-[node name="LevelBase" instance=ExtResource("1_bhy8u")]
+[node name="LevelBase" unique_id=231519210 instance=ExtResource("1_bhy8u")]
 display_name = "3-10"
 player_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 3, 4, 7])
@@ -29,10 +29,10 @@ range_item_cull_mask = 1
 [node name="PointLight2D4" parent="BackWall" index="3"]
 range_item_cull_mask = 1
 
-[node name="HideBench" parent="." index="9" instance=ExtResource("2_sucd5")]
+[node name="HideBench" parent="." index="9" unique_id=688133972 instance=ExtResource("2_sucd5")]
 position = Vector2(81, 47)
 
-[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_k20h8")]
+[node name="SnackCartObstacle" parent="." index="10" unique_id=1771721498 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_k20h8")]
 position = Vector2(144, 11)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -53,7 +53,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Antenna" parent="SnackCartObstacle" index="5" instance=ExtResource("4_k20h8")]
+[node name="Antenna" parent="SnackCartObstacle" index="5" unique_id=1632639361 instance=ExtResource("4_k20h8")]
 offset_left = -11.0
 offset_top = -53.0
 offset_right = 11.0
@@ -68,13 +68,13 @@ offset_top = 5.0
 offset_right = 22.0
 offset_bottom = 55.0
 
-[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" unique_id=925062490 node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("5_rgc4p")
 obstacles = [NodePath("../.."), NodePath("../../../SnackCartObstacle2")]
 obstacle_limiters = [NodePath("../../../MovableObstacleLimiter"), NodePath("../../../MovableObstacleLimiter2")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
-[node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_k20h8")]
+[node name="SnackCartObstacle2" parent="." index="11" unique_id=1908038962 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_k20h8")]
 position = Vector2(274, 10)
 action_sound_emitters = {
 8: NodePath("../SnackCartObstacle/BumpSound"),
@@ -95,34 +95,34 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Collectible" parent="." index="12" instance=ExtResource("4_rgc4p")]
+[node name="Collectible" parent="." index="12" unique_id=712674802 instance=ExtResource("4_rgc4p")]
 position = Vector2(304, 24)
 
-[node name="Treadmill" parent="." index="13" instance=ExtResource("7_rgc4p")]
+[node name="Treadmill" parent="." index="13" unique_id=401733476 instance=ExtResource("7_rgc4p")]
 position = Vector2(176, 89)
 grid_origin = Vector2i(5, 4)
 
-[node name="Treadmill2" parent="." index="14" instance=ExtResource("7_rgc4p")]
+[node name="Treadmill2" parent="." index="14" unique_id=1058492810 instance=ExtResource("7_rgc4p")]
 position = Vector2(240, 89)
 direction = 1
 grid_origin = Vector2i(7, 4)
 
-[node name="Treadmill3" parent="." index="15" instance=ExtResource("7_rgc4p")]
+[node name="Treadmill3" parent="." index="15" unique_id=100516495 instance=ExtResource("7_rgc4p")]
 position = Vector2(240, 71)
 direction = 1
 grid_origin = Vector2i(7, 3)
 
-[node name="MovableObstacleLimiter" parent="." index="16" instance=ExtResource("8_c5scp")]
+[node name="MovableObstacleLimiter" parent="." index="16" unique_id=165413905 instance=ExtResource("8_c5scp")]
 z_index = 1
 position = Vector2(130, -2)
 points = PackedVector2Array(0, 0, 28, 0, 29, 34, -1, 34)
 
-[node name="MovableObstacleLimiter2" parent="." index="17" instance=ExtResource("8_c5scp")]
+[node name="MovableObstacleLimiter2" parent="." index="17" unique_id=2060598637 instance=ExtResource("8_c5scp")]
 z_index = 1
 position = Vector2(259, -3)
 points = PackedVector2Array(0, 0, 27, 0, 27, 55, 0, 55)
 
-[node name="Treadmill4" parent="." index="18" instance=ExtResource("7_rgc4p")]
+[node name="Treadmill4" parent="." index="18" unique_id=2131549766 instance=ExtResource("7_rgc4p")]
 position = Vector2(112, 89)
 direction = 1
 grid_origin = Vector2i(3, 4)

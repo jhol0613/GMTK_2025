@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://qktyo80o850a"]
+[gd_scene format=4 uid="uid://qktyo80o850a"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_bcw8d"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_7gadf"]
@@ -9,7 +9,7 @@ index = 3
 action = 2
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_bcw8d")]
+[node name="LevelBase" unique_id=1472672958 instance=ExtResource("1_bcw8d")]
 display_name = "A Basic Loop"
 conductor_spawn_beat = 9
 available_slots = 4

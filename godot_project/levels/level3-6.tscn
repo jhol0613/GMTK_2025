@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://deturlt7ef805"]
+[gd_scene format=4 uid="uid://deturlt7ef805"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_43bro"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_8cmfy"]
@@ -20,7 +20,7 @@ index = 5
 action = 1
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_43bro")]
+[node name="LevelBase" unique_id=1294393251 instance=ExtResource("1_43bro")]
 display_name = "3-6"
 player_spawn_position = Vector2i(0, 3)
 conductor_enabled = false
@@ -31,13 +31,13 @@ hints = Array[ExtResource("2_8cmfy")]([SubResource("Resource_uuex1"), SubResourc
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAEAAQAAQAAAAMAAAAEAAUAAQAAAAMAAAABAAUAAQAAAAMAAAABAAQAAQAAAAMAAAAHAAUAAQAAAAMAAAAHAAQAAQAAAAMAAAABAAEAAQAAAAMAAAABAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAHAAEAAQAAAAMAAAAHAAAAAQAAAAMAAAA=")
 
-[node name="Teleporter" parent="." index="9" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_lwxgq")]
+[node name="Teleporter" parent="." index="9" unique_id=989310352 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_lwxgq")]
 position = Vector2(272, 87)
 destination_targets = [NodePath("../TeleporterTarget")]
 top = NodePath("../TeleporterTop")
 grid_origin = Vector2i(8, 4)
 
-[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_lwxgq")]
+[node name="SnackCartObstacle" parent="." index="10" unique_id=560861524 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_lwxgq")]
 position = Vector2(210, 50)
 movement_path = Array[int]([3, 3, 4, 4, 4, 3])
 action_sound_emitters = {
@@ -59,7 +59,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_lwxgq")]
+[node name="SnackCartObstacle2" parent="." index="11" unique_id=1799738967 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_lwxgq")]
 position = Vector2(178, 68)
 movement_path = Array[int]([4, 4, 3, 3, 3, 4])
 action_sound_emitters = {
@@ -81,16 +81,16 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="TeleporterTop" parent="." index="12" instance=ExtResource("5_uwibj")]
+[node name="TeleporterTop" parent="." index="12" unique_id=854586212 instance=ExtResource("5_uwibj")]
 position = Vector2(272, 89)
 
-[node name="TeleporterTarget" parent="." index="13" instance=ExtResource("6_r7ar8")]
+[node name="TeleporterTarget" parent="." index="13" unique_id=1952195267 instance=ExtResource("6_r7ar8")]
 position = Vector2(48, 40)
 _active = true
 grid_origin = Vector2i(1, 2)
 
-[node name="Key" parent="." index="17" instance=ExtResource("6_8cmfy")]
+[node name="Key" parent="." index="17" unique_id=1992293308 instance=ExtResource("6_8cmfy")]
 position = Vector2(176, 24)
 
-[node name="Key2" parent="." index="18" instance=ExtResource("6_8cmfy")]
+[node name="Key2" parent="." index="18" unique_id=424299719 instance=ExtResource("6_8cmfy")]
 position = Vector2(176, 81)

@@ -1,12 +1,7 @@
-[gd_scene load_steps=15 format=4 uid="uid://cqus7ea6hnmos"]
+[gd_scene format=3 uid="uid://cqus7ea6hnmos"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_svhcm"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_23qrc"]
-[ext_resource type="TileSet" uid="uid://caeopn1ofm4ck" path="res://tilemaps/train_walls.tres" id="3_awkd2"]
-[ext_resource type="TileSet" uid="uid://c3ksn0lys57ue" path="res://tilemaps/train_exterior.tres" id="4_wysdy"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="5_cv2wv"]
-[ext_resource type="TileSet" uid="uid://dtbtqvpvt1qm3" path="res://tilemaps/train_mini_walls.tres" id="5_di7cc"]
-[ext_resource type="TileSet" uid="uid://crc3abcp6nakq" path="res://tilemaps/train_roof.tres" id="6_76vi4"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_iaxri"]
 [ext_resource type="Script" uid="uid://bj0gr5aik5uau" path="res://agents/interactables/computer_terminal/terminal_programs/change_treadmill_direction_program.gd" id="7_23qrc"]
 [ext_resource type="PackedScene" uid="uid://chvkecf5ajox" path="res://action_sequencer/antenna/antenna.tscn" id="7_y0wce"]
@@ -15,25 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://bk0jfr40uvcnc" path="res://agents/movable_obstacles/snack_cart/movable_obstacle_limiter.tscn" id="9_23qrc"]
 [ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="9_bmc3v"]
 
-[node name="LevelBase" instance=ExtResource("1_svhcm")]
+[node name="LevelBase" unique_id=1067097043 instance=ExtResource("1_svhcm")]
 conductor_spawn_beat = 5
 available_actions = Array[int]([1, 3, 4, 2, 7, 6])
-hints = Array[ExtResource("2_23qrc")]([])
 
 [node name="Floor" parent="." index="1"]
 z_index = 0
 
 [node name="Obstacles" parent="." index="3"]
-tile_map_data = PackedByteArray("AAABAAAAAgAAAAAAAAABAAEAAgAAAAEAAAAAAAEAAQAAAAMAAAA=")
-
-[node name="BackWall" parent="." index="4"]
-z_index = -2
-y_sort_enabled = false
-position = Vector2(0, -5.37)
-tile_set = ExtResource("3_awkd2")
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 
 [node name="PointLight2D" parent="BackWall" index="0"]
-z_index = 0
 position = Vector2(112, 47.37)
 range_item_cull_mask = 1
 
@@ -46,61 +33,19 @@ range_item_cull_mask = 1
 [node name="PointLight2D4" parent="BackWall" index="3"]
 range_item_cull_mask = 1
 
-[node name="Windows" parent="BackWall" index="4"]
-position = Vector2(0, 0)
-
-[node name="LeftExteriorFloor" parent="." index="5"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-tile_set = ExtResource("4_wysdy")
-
-[node name="LeftWall" parent="LeftExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_di7cc")
-
-[node name="LeftRoof" parent="LeftExteriorFloor" index="2"]
-position = Vector2(32, -8)
-tile_set = ExtResource("6_76vi4")
-
-[node name="RightExteriorFloor" parent="." index="6"]
-tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
-
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
-z_index = 0
-position = Vector2(0, -9)
-scale = Vector2(1, 1)
-tile_set = ExtResource("4_wysdy")
-
-[node name="RightWall" parent="RightExteriorFloor" index="1"]
-position = Vector2(32, -5)
-tile_set = ExtResource("5_di7cc")
-
-[node name="RightRoof" parent="RightExteriorFloor" index="2"]
-position = Vector2(6, -8)
-tile_set = ExtResource("6_76vi4")
-
-[node name="Wheelwell" parent="AdditionalSprites" index="1"]
-z_index = -1
-
-[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
-z_index = -1
-
-[node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("8_ekeum")]
+[node name="CatCoffeeSpill" parent="." index="9" unique_id=1183629538 instance=ExtResource("8_ekeum")]
 position = Vector2(46, 29)
 
-[node name="CatCartObstacle" parent="." index="10" instance=ExtResource("9_bmc3v")]
+[node name="CatCartObstacle" parent="." index="10" unique_id=666174965 instance=ExtResource("9_bmc3v")]
 position = Vector2(178, 11)
 movement_path = Array[int]([3, 2, 4, 1])
 
-[node name="Treadmill" parent="." index="11" instance=ExtResource("6_iaxri")]
+[node name="Treadmill" parent="." index="11" unique_id=1574080193 instance=ExtResource("6_iaxri")]
 position = Vector2(143, 70)
 direction = 1
 grid_origin = Vector2i(4, 3)
 
-[node name="Antenna" parent="Treadmill" index="3" instance=ExtResource("7_y0wce")]
+[node name="Antenna" parent="Treadmill" index="3" unique_id=74791061 instance=ExtResource("7_y0wce")]
 offset_left = -16.0
 offset_top = -18.0
 offset_right = 15.0
@@ -115,12 +60,12 @@ offset_top = -2.0
 offset_right = 31.0
 offset_bottom = 17.0
 
-[node name="TurnTreadmillProgram" type="Node" parent="Treadmill/Antenna" index="2" node_paths=PackedStringArray("treadmills")]
+[node name="TurnTreadmillProgram" type="Node" parent="Treadmill/Antenna" index="2" unique_id=728454497 node_paths=PackedStringArray("treadmills")]
 script = ExtResource("7_23qrc")
 treadmills = [NodePath("../..")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
-[node name="SnackCartObstacle" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
+[node name="SnackCartObstacle" parent="." index="12" unique_id=1106284711 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
 position = Vector2(272, 68)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -141,7 +86,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Antenna" parent="SnackCartObstacle" index="5" instance=ExtResource("7_y0wce")]
+[node name="Antenna" parent="SnackCartObstacle" index="5" unique_id=1230507261 instance=ExtResource("7_y0wce")]
 offset_left = -16.0
 offset_top = -20.0
 offset_right = 15.0
@@ -156,17 +101,17 @@ offset_top = -27.0
 offset_right = 27.0
 offset_bottom = 20.0
 
-[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
+[node name="MoveObstacleProgram" type="Node" parent="SnackCartObstacle/Antenna" index="2" unique_id=1107470617 node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("8_bmc3v")
 obstacles = [NodePath("../.."), NodePath("../../../CatCartObstacle")]
 obstacle_limiters = [NodePath("../../../MovableObstacleLimiter2"), NodePath("../../../MovableObstacleLimiter2")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
-[node name="MovableObstacleLimiter2" parent="." index="13" instance=ExtResource("9_23qrc")]
+[node name="MovableObstacleLimiter2" parent="." index="13" unique_id=1801961248 instance=ExtResource("9_23qrc")]
 position = Vector2(192, 70)
 points = PackedVector2Array(32, -36, 128, -38, 127, 19, 62, 18, 63, 36, 31, 36, 31, 18)
 
-[node name="SnackCartObstacle2" parent="." index="14" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
+[node name="SnackCartObstacle2" parent="." index="14" unique_id=601494948 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
 position = Vector2(177, 50)
 movement_path = Array[int]([3, 3, 3, 4, 4, 4])
 action_sound_emitters = {
@@ -188,7 +133,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="SnackCartObstacle3" parent="." index="15" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
+[node name="SnackCartObstacle3" parent="." index="15" unique_id=1221692141 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("5_cv2wv")]
 position = Vector2(112, 50)
 movement_path = Array[int]([4, 4, 4, 3, 3, 3])
 action_sound_emitters = {
@@ -209,6 +154,12 @@ action_sound_emitters = {
 22: NodePath("../SnackCartObstacle2/BumpSound"),
 23: NodePath("../SnackCartObstacle2/BumpSound")
 }
+
+[node name="Wheelwell" parent="AdditionalSprites" index="1"]
+z_index = -1
+
+[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
+z_index = -1
 
 [editable path="Treadmill/Antenna"]
 [editable path="SnackCartObstacle/Antenna"]

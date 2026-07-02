@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0lpb8u54s0rd"]
+[gd_scene format=3 uid="uid://c0lpb8u54s0rd"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_v5q3b"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_ew41l"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dxx1mrwugq8vj" path="res://agents/teleporter/teleporter_top.tscn" id="5_ykv58"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="6_qmdej"]
 
-[node name="LevelBase" instance=ExtResource("1_v5q3b")]
+[node name="LevelBase" unique_id=2009707710 instance=ExtResource("1_v5q3b")]
 player_spawn_position = Vector2i(0, 4)
 conductor_spawn_beat = 10
 available_actions = Array[int]([4, 3, 1, 2, 7, 6])
@@ -33,7 +33,7 @@ z_index = 0
 [node name="RightExteriorFloor" parent="." index="6"]
 z_index = -3
 
-[node name="SnackCartObstacle" parent="." index="9" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_ew41l")]
+[node name="SnackCartObstacle" parent="." index="9" unique_id=1255193524 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("4_ew41l")]
 position = Vector2(112, 67)
 grid_origin = Vector2i(1, 1)
 action_sound_emitters = {
@@ -55,7 +55,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Teleporter" parent="." index="10" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_ew41l")]
+[node name="Teleporter" parent="." index="10" unique_id=928388228 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_ew41l")]
 position = Vector2(80, 87)
 teleporter_color = 0
 destination_targets = [NodePath("../TeleporterTarget2")]
@@ -63,27 +63,27 @@ top = NodePath("../TeleporterTop")
 modulate_multiplier = 7.0
 grid_origin = Vector2i(2, 4)
 
-[node name="TeleporterTop" parent="." index="11" instance=ExtResource("5_ykv58")]
+[node name="TeleporterTop" parent="." index="11" unique_id=2079573326 instance=ExtResource("5_ykv58")]
 position = Vector2(80, 88)
 
-[node name="Teleporter2" parent="." index="12" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_ew41l")]
+[node name="Teleporter2" parent="." index="12" unique_id=1057909529 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_ew41l")]
 position = Vector2(113, 30)
 destination_targets = [NodePath("../TeleporterTarget3")]
 top = NodePath("../TeleporterTop2")
 grid_origin = Vector2i(3, 1)
 
-[node name="TeleporterTop2" parent="." index="13" instance=ExtResource("5_ykv58")]
+[node name="TeleporterTop2" parent="." index="13" unique_id=1868545579 instance=ExtResource("5_ykv58")]
 position = Vector2(111, 31)
 
-[node name="TeleporterTarget2" parent="." index="14" instance=ExtResource("5_bxp6c")]
+[node name="TeleporterTarget2" parent="." index="14" unique_id=889327817 instance=ExtResource("5_bxp6c")]
 position = Vector2(177, 79)
 _active = true
 grid_origin = Vector2i(5, 4)
 
-[node name="TeleporterTarget3" parent="." index="15" instance=ExtResource("5_bxp6c")]
+[node name="TeleporterTarget3" parent="." index="15" unique_id=1667931438 instance=ExtResource("5_bxp6c")]
 position = Vector2(145, 61)
 _active = true
 grid_origin = Vector2i(4, 3)
 
-[node name="HideBench" parent="." index="17" instance=ExtResource("6_qmdej")]
+[node name="HideBench" parent="." index="17" unique_id=821839540 instance=ExtResource("6_qmdej")]
 position = Vector2(49, 51)

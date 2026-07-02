@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqleuvyixoqjp"]
+[gd_scene format=3 uid="uid://dqleuvyixoqjp"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_hri01"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_233cq"]
@@ -7,10 +7,9 @@
 [sub_resource type="Resource" id="Resource_233cq"]
 script = ExtResource("2_m351s")
 index = 4
-action = 0
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_hri01")]
+[node name="LevelBase" unique_id=2064844327 instance=ExtResource("1_hri01")]
 display_name = "A Rest or Arrest"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_position = Vector2i(0, 3)
@@ -26,22 +25,22 @@ tile_map_data = PackedByteArray(0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 12, 0, 0, 0, 2
 [node name="RightExterior" parent="RightExteriorFloor" index="0"]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 20, 0, 0, 0, 255, 255, 3, 0, 0, 0, 0, 0, 21, 0, 0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 12, 0, 0, 16)
 
-[node name="Laser" parent="." index="8" instance=ExtResource("2_233cq")]
+[node name="Laser" parent="." index="8" unique_id=876836205 instance=ExtResource("2_233cq")]
 position = Vector2(48, 4)
 height = 7
 grid_origin = Vector2i(1, 0)
 
-[node name="Laser2" parent="." index="9" instance=ExtResource("2_233cq")]
+[node name="Laser2" parent="." index="9" unique_id=1912589042 instance=ExtResource("2_233cq")]
 position = Vector2(112, 4)
 height = 7
 grid_origin = Vector2i(3, 0)
 
-[node name="Laser3" parent="." index="10" instance=ExtResource("2_233cq")]
+[node name="Laser3" parent="." index="10" unique_id=1679343334 instance=ExtResource("2_233cq")]
 position = Vector2(208, 4)
 height = 7
 grid_origin = Vector2i(6, 0)
 
-[node name="Laser4" parent="." index="11" instance=ExtResource("2_233cq")]
+[node name="Laser4" parent="." index="11" unique_id=1709489434 instance=ExtResource("2_233cq")]
 position = Vector2(272, 4)
 height = 7
 grid_origin = Vector2i(8, 0)

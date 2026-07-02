@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://bthrchsoqpjv4"]
+[gd_scene format=4 uid="uid://bthrchsoqpjv4"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_28bq4"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_7e7v3"]
@@ -19,7 +19,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
-[node name="LevelBase" instance=ExtResource("1_28bq4")]
+[node name="LevelBase" unique_id=2013710072 instance=ExtResource("1_28bq4")]
 display_name = "Caution: Wet Floor"
 conductor_spawn_beat = 8
 available_actions = Array[int]([4, 1, 2])
@@ -32,7 +32,7 @@ tile_map_data = PackedByteArray("AAAIAAMABAAAAAIAAAAAAAMABAAAAAMAAAADAP//AwAAAAA
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAAAAQAAAABAAIAABAAAAUAAAABAAMAABACAAMAAAABAAAAAAACAAQAAAABAAIAAAACAAUAAAABAAMAAAAFAAMAAAABAAAAAAAFAAQAAAABAAIAAAAFAAUAAAABAAMAAAADAAMAAAABAAAAABADAAQAAAABAAIAABADAAUAAAABAAMAABAGAAMAAAABAAAAABAGAAQAAAABAAIAABAGAAUAAAABAAMAABAJAAMAAAABAAAAABAJAAQAAAABAAIAABAJAAUAAAABAAMAABAIAAQAAAABAAIAAAAIAAUAAAABAAMAAAABAAEABgAAAAAAAAABAAIABgAAAAEAAAADAP//BQAAAAAAAAADAAAABQAAAAEAAAADAAEABQAAAAIAAAABAAMABgAAAAIAAAABAAUAAwAAAAAAAAAEAAUAAwAAAAAAAAAHAAUAAwAAAAAAAAAKAAUAAwAAAAAAAAAAAAMAAAABAAAAABAIAAMAAAABAAAAAAA=")
 
-[node name="PointLight2D5" type="PointLight2D" parent="BackWall" index="5"]
+[node name="PointLight2D5" type="PointLight2D" parent="BackWall" index="5" unique_id=2052832848]
 position = Vector2(48, 72.37)
 color = Color(1, 1, 0.486275, 1)
 energy = 0.94

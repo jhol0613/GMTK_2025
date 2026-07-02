@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://i86dgdr2exvq"]
+[gd_scene format=3 uid="uid://i86dgdr2exvq"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_k4jqd"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_rh3b6"]
@@ -21,45 +21,45 @@ index = 1
 action = 1
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_k4jqd")]
+[node name="LevelBase" unique_id=1778434928 instance=ExtResource("1_k4jqd")]
 display_name = "3-7"
 conductor_spawn_beat = 18
 available_actions = Array[int]([1, 2, 3, 7])
 hints = Array[ExtResource("2_rh3b6")]([SubResource("Resource_2js6o"), SubResource("Resource_8n67t")])
 
-[node name="Teleporter" parent="." index="9" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_xi7jk")]
+[node name="Teleporter" parent="." index="9" unique_id=487028692 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_xi7jk")]
 position = Vector2(16, 10)
 destination_targets = [NodePath("../TeleporterTarget")]
 top = NodePath("../TeleporterTop")
 
-[node name="ComputerTerminal" parent="." index="10" instance=ExtResource("3_jjql3")]
+[node name="ComputerTerminal" parent="." index="10" unique_id=56016468 instance=ExtResource("3_jjql3")]
 position = Vector2(209, 48)
 grid_origin = Vector2i(4, 1)
 
-[node name="TurnLeftTreadmill" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("treadmills")]
+[node name="TurnLeftTreadmill" type="Node" parent="ComputerTerminal" index="4" unique_id=1653301352 node_paths=PackedStringArray("treadmills")]
 script = ExtResource("4_07skx")
 treadmills = [NodePath("../../LeftTreadmill")]
 new_direction = 1
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
-[node name="TurnRightTreadmill" type="Node" parent="ComputerTerminal" index="5" node_paths=PackedStringArray("treadmills")]
+[node name="TurnRightTreadmill" type="Node" parent="ComputerTerminal" index="5" unique_id=1070138269 node_paths=PackedStringArray("treadmills")]
 script = ExtResource("4_07skx")
 treadmills = [NodePath("../../RightTreadmill")]
 metadata/_custom_type_script = "uid://bj0gr5aik5uau"
 
-[node name="LeftTreadmill" parent="." index="11" instance=ExtResource("3_7f3wr")]
+[node name="LeftTreadmill" parent="." index="11" unique_id=1084269364 instance=ExtResource("3_7f3wr")]
 position = Vector2(16, 32)
 grid_origin = Vector2i(0, 1)
 
-[node name="RightTreadmill" parent="." index="12" instance=ExtResource("3_7f3wr")]
+[node name="RightTreadmill" parent="." index="12" unique_id=1094171735 instance=ExtResource("3_7f3wr")]
 position = Vector2(336, 90)
 direction = 1
 grid_origin = Vector2i(10, 4)
 
-[node name="TeleporterTop" parent="." index="13" instance=ExtResource("6_jjql3")]
+[node name="TeleporterTop" parent="." index="13" unique_id=1086677849 instance=ExtResource("6_jjql3")]
 position = Vector2(17, 11)
 
-[node name="TeleporterTarget" parent="." index="14" instance=ExtResource("7_07skx")]
+[node name="TeleporterTarget" parent="." index="14" unique_id=953030415 instance=ExtResource("7_07skx")]
 position = Vector2(336, 98)
 _active = true
 grid_origin = Vector2i(10, 5)

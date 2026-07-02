@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=4 uid="uid://cnjciw5oqjhxj"]
+[gd_scene format=4 uid="uid://cnjciw5oqjhxj"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_nxyie"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_lsoic"]
 
-[node name="LevelBase" instance=ExtResource("1_nxyie")]
+[node name="LevelBase" unique_id=1438206551 instance=ExtResource("1_nxyie")]
 display_name = "2-11"
 conductor_spawn_beat = 6
 available_actions = Array[int]([1, 2, 4, 7])
@@ -11,5 +11,5 @@ available_actions = Array[int]([1, 2, 4, 7])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAAEAAAABAAAAAAAAAAFAAAABAACAAAAAAAGAAAABAABAAAAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAGAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAIAAQAAAAMAAAABAAMAAQAAAAMAAAABAAQAAQAAAAMAAAABAAUAAQAAAAMAAAAJAAMAAQAAAAMAAAAJAAQAAQAAAAMAAAAJAAUAAQAAAAMAAAA=")
 
-[node name="HideBench" parent="." index="9" instance=ExtResource("2_lsoic")]
+[node name="HideBench" parent="." index="9" unique_id=1434731575 instance=ExtResource("2_lsoic")]
 position = Vector2(178, 7)

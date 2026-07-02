@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://bo06pc8na5fpa"]
+[gd_scene format=4 uid="uid://bo06pc8na5fpa"]
 
 [ext_resource type="Script" uid="uid://cy4v1nu57af1o" path="res://level_system/level_base/level_base.gd" id="1_sfitc"]
 [ext_resource type="TileSet" uid="uid://brb4bwq8xu0j" path="res://tilemaps/decorative.tres" id="2_tb1rm"]
@@ -102,97 +102,97 @@ animations = [{
 "speed": 3.0
 }]
 
-[node name="LevelBase" type="Node2D"]
+[node name="LevelBase" type="Node2D" unique_id=1057134730]
 z_index = -1
 y_sort_enabled = true
 script = ExtResource("1_sfitc")
 player_spawn_position = Vector2i(0, 2)
 action_quantities = Array[int]([9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999])
 
-[node name="Decorative" type="TileMapLayer" parent="."]
+[node name="Decorative" type="TileMapLayer" parent="." unique_id=1207528347]
 z_index = 1
 position = Vector2(0, -5.37)
 tile_set = ExtResource("2_tb1rm")
 
-[node name="Floor" type="TileMapLayer" parent="."]
+[node name="Floor" type="TileMapLayer" parent="." unique_id=1364947742]
 z_index = -1
 tile_map_data = PackedByteArray("AAAAAAEAAAAAAAIAAAABAAEAAAAAAAIAAAACAAEAAAAAAAIAAAADAAEAAAAAAAIAAAAEAAEAAAAAAAIAAAAFAAEAAAAAAAIAAAAGAAEAAAAAAAIAAAAHAAEAAAAAAAIAAAAIAAEAAAAAAAIAAAAJAAEAAAAAAAIAAAAKAAEAAAAAAAIAAAAAAAQAAAAAAAIAAAABAAQAAAAAAAIAAAACAAQAAAAAAAIAAAADAAQAAAAAAAIAAAAEAAQAAAAAAAIAAAAFAAQAAAAAAAIAAAAGAAQAAAAAAAIAAAAHAAQAAAAAAAIAAAAIAAQAAAAAAAIAAAAJAAQAAAAAAAIAAAAKAAQAAAAAAAIAAAAAAAIAAAAAAAEAAAAAAAMAAAAAAAEAAAAKAAIAAgAAAAMAAAAKAAMAAgAAAAMAAAABAAIAAAAAAAEAAAACAAIAAAAAAAEAAAADAAIAAAAAAAEAAAAEAAIAAAAAAAEAAAAFAAIAAAAAAAEAAAAGAAIAAAAAAAEAAAAHAAIAAAAAAAEAAAAIAAIAAAAAAAEAAAAJAAIAAAAAAAEAAAAJAAMAAAAAAAEAAAAIAAMAAAAAAAEAAAAHAAMAAAAAAAEAAAAGAAMAAAAAAAEAAAAFAAMAAAAAAAEAAAAEAAMAAAAAAAEAAAADAAMAAAAAAAEAAAACAAMAAAAAAAEAAAABAAMAAAAAAAEAAAAAAAUAAAAAAAIAAAABAAUAAAAAAAIAAAACAAUAAAAAAAIAAAADAAUAAAAAAAIAAAAEAAUAAAAAAAIAAAAFAAUAAAAAAAIAAAAGAAUAAAAAAAIAAAAHAAUAAAAAAAIAAAAIAAUAAAAAAAIAAAAJAAUAAAAAAAIAAAAKAAUAAAAAAAIAAAAKAAAAAAAAAAIAAAAJAAAAAAAAAAIAAAAIAAAAAAAAAAIAAAAHAAAAAAAAAAIAAAAGAAAAAAAAAAIAAAAFAAAAAAAAAAIAAAAEAAAAAAAAAAIAAAADAAAAAAAAAAIAAAACAAAAAAAAAAIAAAABAAAAAAAAAAIAAAAAAAAAAAAAAAIAAAA=")
 tile_set = ExtResource("4_p76ks")
 
-[node name="CartTracks" type="TileMapLayer" parent="."]
+[node name="CartTracks" type="TileMapLayer" parent="." unique_id=169080404]
 position = Vector2(0, -6)
 tile_set = SubResource("TileSet_u3gbn")
 
-[node name="Obstacles" type="TileMapLayer" parent="."]
+[node name="Obstacles" type="TileMapLayer" parent="." unique_id=1467840447]
 z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -7)
 tile_set = ExtResource("5_10qrp")
 
-[node name="BackWall" type="TileMapLayer" parent="."]
+[node name="BackWall" type="TileMapLayer" parent="." unique_id=445055544]
 z_index = -2
 position = Vector2(0, -5.37)
 tile_map_data = PackedByteArray("AAAHAP7/AQAAAA4AAAAHAP//AQAAAA0AAAAHAP3/AQAAAAwAAAAIAP3/AQAAAAAAAAAIAP7/AQAAABAAAAAIAP//AQAAAAgAAAAJAP3/AQAAAAMAAAAJAP7/AQAAABEAAAAJAP//AQAAAAkAAAAKAP3/AQAAAAQAAAAKAP7/AQAAABIAAAAKAP//AQAAAAoAAAAEAP3/AQAAAAAAAAAEAP7/AQAAAAUAAAAEAP//AQAAAAgAAAAFAP3/AQAAAAMAAAAFAP7/AQAAAAYAAAAFAP//AQAAAAkAAAAGAP3/AQAAAAQAAAAGAP7/AQAAAAcAAAAGAP//AQAAAAoAAAAAAP3/AQAAAAAAAAAAAP7/AQAAAAUAAAAAAP//AQAAAAgAAAABAP3/AQAAAAMAAAABAP7/AQAAAAYAAAABAP//AQAAAAkAAAACAP3/AQAAAAQAAAACAP7/AQAAAAcAAAACAP//AQAAAAoAAAADAP3/AQAAAAwAAAADAP7/AQAAAA4AAAADAP//AQAAAA0AAAA=")
 tile_set = ExtResource("3_fo6gb")
 
-[node name="PointLight2D" type="PointLight2D" parent="BackWall"]
+[node name="PointLight2D" type="PointLight2D" parent="BackWall" unique_id=1100077405]
 position = Vector2(112, -79.63)
 range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
-[node name="PointLight2D2" type="PointLight2D" parent="BackWall"]
+[node name="PointLight2D2" type="PointLight2D" parent="BackWall" unique_id=725947962]
 position = Vector2(240, -79.63)
 range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
-[node name="PointLight2D3" type="PointLight2D" parent="BackWall"]
+[node name="PointLight2D3" type="PointLight2D" parent="BackWall" unique_id=707692299]
 position = Vector2(-2, 42.37)
 range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
-[node name="PointLight2D4" type="PointLight2D" parent="BackWall"]
+[node name="PointLight2D4" type="PointLight2D" parent="BackWall" unique_id=69304020]
 position = Vector2(356, 42.37)
 range_item_cull_mask = 13
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_bsh3f")
 texture_scale = 1.4
 
-[node name="Windows" type="TileMapLayer" parent="BackWall"]
+[node name="Windows" type="TileMapLayer" parent="BackWall" unique_id=975793370]
 tile_map_data = PackedByteArray("AAAAAP3/AQAAAAEAAAACAP3/AQAAAAIAAAAEAP3/AQAAAAEAAAAIAP3/AQAAAAEAAAAGAP3/AQAAAAIAAAAKAP3/AQAAAAIAAAA=")
 tile_set = ExtResource("3_fo6gb")
 
-[node name="LeftExteriorFloor" type="TileMapLayer" parent="."]
+[node name="LeftExteriorFloor" type="TileMapLayer" parent="." unique_id=285330550]
 light_mask = 2
 z_index = 3
 position = Vector2(-9.345, 0)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("4_p76ks")
 
-[node name="LeftExterior" type="TileMapLayer" parent="LeftExteriorFloor"]
+[node name="LeftExterior" type="TileMapLayer" parent="LeftExteriorFloor" unique_id=1430336634]
 light_mask = 2
 position = Vector2(0, -9)
 tile_map_data = PackedByteArray("AAD//wEAAAAAABMAAAD//wIAAAAAABQAAAD//wMAAAAAABUAAAA=")
 tile_set = ExtResource("6_cjwl0")
 
-[node name="LeftWall" type="TileMapLayer" parent="LeftExteriorFloor"]
+[node name="LeftWall" type="TileMapLayer" parent="LeftExteriorFloor" unique_id=1195097161]
 light_mask = 2
 position = Vector2(32, -5)
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAA=")
 tile_set = ExtResource("7_x6ye1")
 
-[node name="LeftRoof" type="TileMapLayer" parent="LeftExteriorFloor"]
+[node name="LeftRoof" type="TileMapLayer" parent="LeftExteriorFloor" unique_id=1360180031]
 light_mask = 2
 position = Vector2(32, -8)
 tile_map_data = PackedByteArray("AAD//wcAAAAAAAsAAAD+////AwAAAAIAAAD+//7/AwAAAAEAAAD+//3/AwAAAAAAAAD+/wAAAwAAAAMAAAD///3/BAABAAAAAAAAAP3/BAABAAAAAAABAP3/BAABAAAAAAACAP3/BAABAAAAAAADAP3/BAABAAAAAAAEAP3/BAABAAAAAAA=")
 tile_set = ExtResource("7_uv04d")
 
-[node name="RightExteriorFloor" type="TileMapLayer" parent="."]
+[node name="RightExteriorFloor" type="TileMapLayer" parent="." unique_id=445923122]
 light_mask = 2
 z_index = 3
 position = Vector2(360.655, 0)
@@ -200,19 +200,19 @@ scale = Vector2(-1, 1)
 tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAAD//wEAAAAAAAAAAAD//wIAAAAAAAAAAAD//wMAAAAAAAAAAAD//wQAAAAAAAAAAAD//wUAAAAAAAAAAAD/////AAAAAAAAAAA=")
 tile_set = ExtResource("4_p76ks")
 
-[node name="RightExterior" type="TileMapLayer" parent="RightExteriorFloor"]
+[node name="RightExterior" type="TileMapLayer" parent="RightExteriorFloor" unique_id=3075045]
 light_mask = 2
 position = Vector2(0, -9)
 tile_map_data = PackedByteArray("AAD//wIAAAAAABQAAAD//wMAAAAAABUAAAD//wEAAAAAABMAABA=")
 tile_set = ExtResource("6_cjwl0")
 
-[node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor"]
+[node name="RightWall" type="TileMapLayer" parent="RightExteriorFloor" unique_id=1320273353]
 light_mask = 2
 position = Vector2(32, -5)
 tile_map_data = PackedByteArray("AAD//wMAAAAAAAoAAAD//wEAAAABAAoAAAD//wIAAAABAAoAAAA=")
 tile_set = ExtResource("7_x6ye1")
 
-[node name="RightRoof" type="TileMapLayer" parent="RightExteriorFloor"]
+[node name="RightRoof" type="TileMapLayer" parent="RightExteriorFloor" unique_id=285994768]
 light_mask = 2
 z_index = 2
 position = Vector2(6, -8)
@@ -221,53 +221,53 @@ scale = Vector2(1, -1)
 tile_map_data = PackedByteArray("AAAAAP3/AwAAAAAAABAAAP7/AwAAAAEAABAAAP//AwAAAAIAABAAAAAAAwAAAAMAABD///3/BAAAAAAAABD+//3/BAAAAAAAABD9//3/BAAAAAAAABD8//3/BAAAAAAAABD7//3/BAAAAAAAAAD6//3/BAAAAAAAAAA=")
 tile_set = ExtResource("7_uv04d")
 
-[node name="Target" type="Area2D" parent="."]
+[node name="Target" type="Area2D" parent="." unique_id=1169298287]
 position = Vector2(336, 52)
 collision_layer = 2
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Target"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target" unique_id=696292446]
 position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_bsh3f")
 
-[node name="ModifiedTarget" type="Area2D" parent="."]
+[node name="ModifiedTarget" type="Area2D" parent="." unique_id=1673883856]
 position = Vector2(336, 52)
 collision_layer = 2
 collision_mask = 5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ModifiedTarget"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ModifiedTarget" unique_id=1558199168]
 position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_bsh3f")
 
-[node name="LeftTarget" type="Area2D" parent="."]
+[node name="LeftTarget" type="Area2D" parent="." unique_id=2105039818]
 position = Vector2(17, 52)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTarget"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTarget" unique_id=973785588]
 shape = SubResource("RectangleShape2D_bsh3f")
 
-[node name="Sprite2D" type="Sprite2D" parent="LeftTarget"]
+[node name="Sprite2D" type="Sprite2D" parent="LeftTarget" unique_id=212094264]
 position = Vector2(-11, -1)
 texture = ExtResource("10_l8x56")
 
-[node name="AdditionalSprites" type="Node2D" parent="."]
+[node name="AdditionalSprites" type="Node2D" parent="." unique_id=1869906223]
 
-[node name="CarConnector" type="Sprite2D" parent="AdditionalSprites"]
+[node name="CarConnector" type="Sprite2D" parent="AdditionalSprites" unique_id=1346376889]
 z_index = -4
 position = Vector2(421, 58)
 texture = ExtResource("8_4d8y1")
 
-[node name="Wheelwell" type="Sprite2D" parent="AdditionalSprites"]
+[node name="Wheelwell" type="Sprite2D" parent="AdditionalSprites" unique_id=1713027029]
 z_index = -2
 position = Vector2(71, 127)
 texture = ExtResource("10_srili")
 
-[node name="Wheelwell2" type="Sprite2D" parent="AdditionalSprites"]
+[node name="Wheelwell2" type="Sprite2D" parent="AdditionalSprites" unique_id=481940145]
 z_index = -2
 position = Vector2(281, 127)
 texture = ExtResource("10_srili")
 
-[node name="Lock" type="AnimatedSprite2D" parent="AdditionalSprites"]
+[node name="Lock" type="AnimatedSprite2D" parent="AdditionalSprites" unique_id=703155625]
 visible = false
 light_mask = 2
 position = Vector2(347, 45)
@@ -277,7 +277,7 @@ script = ExtResource("12_natoe")
 synch_framerates_to_bpm = false
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="DebugDrawing" type="Node2D" parent="."]
+[node name="DebugDrawing" type="Node2D" parent="." unique_id=756180013]
 z_index = 4096
 z_as_relative = false
 script = ExtResource("10_ais3r")

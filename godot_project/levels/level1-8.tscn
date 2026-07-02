@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://krk6lavhbs40"]
+[gd_scene format=4 uid="uid://krk6lavhbs40"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_3l1p8"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_f8odd"]
@@ -9,7 +9,7 @@ index = 5
 action = 2
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_3l1p8")]
+[node name="LevelBase" unique_id=457621747 instance=ExtResource("1_3l1p8")]
 display_name = "Bebop and Bonk"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 7

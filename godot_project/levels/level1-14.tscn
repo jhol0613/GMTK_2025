@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=4 uid="uid://71ob1186irs4"]
+[gd_scene format=4 uid="uid://71ob1186irs4"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_mw8yd"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="2_a6vap"]
 
-[node name="LevelBase" instance=ExtResource("1_mw8yd")]
+[node name="LevelBase" unique_id=62022269 instance=ExtResource("1_mw8yd")]
 display_name = "Bonks Getting Me Down"
 conductor_spawn_beat = 10
 available_actions = Array[int]([4, 1, 2, 5])
@@ -11,19 +11,19 @@ available_actions = Array[int]([4, 1, 2, 5])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAACAAIAAgACAAAAAAACAAMAAgACAAEAAAAFAAIAAgACAAAAAAAFAAMAAgACAAEAAAAIAAIAAgACAAAAAAAIAAMAAgACAAEAAAA=")
 
-[node name="Laser" parent="." index="8" instance=ExtResource("2_a6vap")]
+[node name="Laser" parent="." index="8" unique_id=177933315 instance=ExtResource("2_a6vap")]
 position = Vector2(112, 4)
 height = 7
 grid_origin = Vector2i(3, 0)
 activation_sequence = Array[bool]([true, false])
 
-[node name="Laser2" parent="." index="9" instance=ExtResource("2_a6vap")]
+[node name="Laser2" parent="." index="9" unique_id=2044918816 instance=ExtResource("2_a6vap")]
 position = Vector2(208, 3)
 height = 7
 grid_origin = Vector2i(6, 0)
 activation_sequence = Array[bool]([true, false])
 
-[node name="Laser3" parent="." index="10" instance=ExtResource("2_a6vap")]
+[node name="Laser3" parent="." index="10" unique_id=1701516861 instance=ExtResource("2_a6vap")]
 position = Vector2(304, 3)
 height = 7
 grid_origin = Vector2i(9, 0)

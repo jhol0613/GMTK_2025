@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw5itru0xomuv"]
+[gd_scene format=3 uid="uid://dw5itru0xomuv"]
 
 [ext_resource type="PackedScene" uid="uid://ej8hk3h8ibcr" path="res://levels/level1-12.tscn" id="1_vsgvx"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="2_o1rub"]
 
-[node name="LevelBase" instance=ExtResource("1_vsgvx")]
+[node name="LevelBase" unique_id=1459839452 instance=ExtResource("1_vsgvx")]
 
-[node name="Key" parent="." index="18"]
+[node name="Key" parent="." index="18" unique_id=1620278382]
 process_mode = 4
 visible = false
 
-[node name="Collectible2" parent="." index="21" instance=ExtResource("2_o1rub")]
+[node name="Collectible2" parent="." index="21" unique_id=1019201659 instance=ExtResource("2_o1rub")]
 position = Vector2(272, 99)

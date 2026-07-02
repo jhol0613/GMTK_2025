@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=4 uid="uid://c7sdi0ir14t8d"]
+[gd_scene format=4 uid="uid://c7sdi0ir14t8d"]
 
 [ext_resource type="PackedScene" uid="uid://bo06pc8na5fpa" path="res://level_system/level_base/level_base.tscn" id="1_owxv7"]
 
-[node name="LevelBase" instance=ExtResource("1_owxv7")]
+[node name="LevelBase" unique_id=908028182 instance=ExtResource("1_owxv7")]
 display_name = "1-5"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 6

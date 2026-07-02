@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=4 uid="uid://bsay3jq0vshq2"]
+[gd_scene format=4 uid="uid://bsay3jq0vshq2"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_g0u3c"]
 [ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="2_y1s2r"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="3_y1s2r"]
 
-[node name="LevelBase2" instance=ExtResource("1_g0u3c")]
+[node name="LevelBase2" unique_id=1973844054 instance=ExtResource("1_g0u3c")]
 display_name = "2-1"
 conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 7])
@@ -12,14 +12,14 @@ available_actions = Array[int]([4, 1, 2, 7])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAADAAAAAAABAAIAAAADAAEAAAABAAMAAAADAP//AAABAAAAAAACAAQAAgACAAIAAAACAAUAAgACAAMAAAAEAAEAAAABAAMAABAEAAAAAAABAAIAABAEAP//AAABAAAAABADAAIAAwAAAAAAABAHAAMAAQAAAAMAAAAHAAIAAQAAAAMAAAAJAAIAAQAAAAMAAAADAAUAAgADAAMAAAADAAQAAgADAAIAAAA=")
 
+[node name="CatCoffeeSpill" parent="." index="9" unique_id=1100037520 instance=ExtResource("2_y1s2r")]
+position = Vector2(111, 48)
+flip_horizontal = true
+
+[node name="Collectible" parent="." index="10" unique_id=166817216 instance=ExtResource("3_y1s2r")]
+position = Vector2(335, 99)
+
 [node name="Lock" parent="AdditionalSprites" index="3"]
 light_mask = 1
 animation = &"vanish"
 autoplay = ""
-
-[node name="CatCoffeeSpill" parent="." index="9" instance=ExtResource("2_y1s2r")]
-position = Vector2(111, 48)
-flip_horizontal = true
-
-[node name="Collectible" parent="." index="10" instance=ExtResource("3_y1s2r")]
-position = Vector2(335, 99)

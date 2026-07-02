@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://bixv2o76a07e7"]
+[gd_scene format=4 uid="uid://bixv2o76a07e7"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_sh0at"]
 [ext_resource type="PackedScene" uid="uid://utunhux5xaso" path="res://agents/teleporter/teleporter.tscn" id="2_4mgwl"]
@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dkdspn40q0ph4" path="res://action_sequencer/antenna/antenna_system.tscn" id="10_a5gpt"]
 [ext_resource type="Script" uid="uid://y4xyvd52hhc6" path="res://agents/interactables/computer_terminal/terminal_programs/move_teleporter_destination_program.gd" id="11_uus3e"]
 
-[node name="LevelBase" instance=ExtResource("1_sh0at")]
+[node name="LevelBase" unique_id=1805685725 instance=ExtResource("1_sh0at")]
 display_name = "3-12"
 conductor_spawn_beat = 15
 available_actions = Array[int]([4, 2, 3, 7])
@@ -32,86 +32,86 @@ range_item_cull_mask = 1
 [node name="PointLight2D4" parent="BackWall" index="3"]
 range_item_cull_mask = 1
 
-[node name="GreenTeleporter" parent="." index="9" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
+[node name="GreenTeleporter" parent="." index="9" unique_id=333593764 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
 position = Vector2(80, 106)
 destination_targets = [NodePath("../GreenDest1")]
 top = NodePath("../GreenTeleporterTop")
 grid_origin = Vector2i(2, 5)
 
-[node name="PinkTeleporter" parent="." index="10" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
+[node name="PinkTeleporter" parent="." index="10" unique_id=1093209603 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
 position = Vector2(208, 68)
 teleporter_color = 0
 destination_targets = [NodePath("../PinkDest1"), NodePath("../PinkDest2")]
 top = NodePath("../PinkTeleporterTop")
 grid_origin = Vector2i(6, 3)
 
-[node name="BlueTeleporter" parent="." index="11" node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
+[node name="BlueTeleporter" parent="." index="11" unique_id=2133269139 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
 position = Vector2(144, 87)
 teleporter_color = 2
 destination_targets = [NodePath("../BlueDest1"), NodePath("../BlueDest2")]
 top = NodePath("../BlueTeleporterTop")
 grid_origin = Vector2i(4, 4)
 
-[node name="ComputerTerminal" parent="." index="12" instance=ExtResource("3_kemnb")]
+[node name="ComputerTerminal" parent="." index="12" unique_id=909274577 instance=ExtResource("3_kemnb")]
 position = Vector2(208, 9)
 grid_origin = Vector2i(6, 0)
 
-[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="4" node_paths=PackedStringArray("chairs")]
+[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="4" unique_id=1300460989 node_paths=PackedStringArray("chairs")]
 script = ExtResource("4_6diwn")
 chairs = [NodePath("../../SpinningChair")]
 number_of_quarter_turns = -1
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
-[node name="CatCoffeeSpill" parent="." index="13" instance=ExtResource("5_ali2c")]
+[node name="CatCoffeeSpill" parent="." index="13" unique_id=352258757 instance=ExtResource("5_ali2c")]
 position = Vector2(145, 74)
 flip_horizontal = true
 
 [node name="AnimatedSprite2DSignals" parent="CatCoffeeSpill" index="0"]
 position = Vector2(-2, -8)
 
-[node name="Collectible" parent="." index="14" instance=ExtResource("6_155wd")]
+[node name="Collectible" parent="." index="14" unique_id=1690170488 instance=ExtResource("6_155wd")]
 position = Vector2(208, 42)
 
-[node name="GreenTeleporterTop" parent="." index="15" instance=ExtResource("7_je8eh")]
+[node name="GreenTeleporterTop" parent="." index="15" unique_id=739461446 instance=ExtResource("7_je8eh")]
 position = Vector2(80, 107)
 
-[node name="PinkTeleporterTop" parent="." index="16" instance=ExtResource("7_je8eh")]
+[node name="PinkTeleporterTop" parent="." index="16" unique_id=1923810930 instance=ExtResource("7_je8eh")]
 position = Vector2(208, 68)
 
-[node name="BlueTeleporterTop" parent="." index="17" instance=ExtResource("7_je8eh")]
+[node name="BlueTeleporterTop" parent="." index="17" unique_id=1607085824 instance=ExtResource("7_je8eh")]
 position = Vector2(144, 89)
 
-[node name="PinkDest1" parent="." index="18" instance=ExtResource("8_c1fwq")]
+[node name="PinkDest1" parent="." index="18" unique_id=626493860 instance=ExtResource("8_c1fwq")]
 position = Vector2(112, 22)
 _active = true
 grid_origin = Vector2i(3, 1)
 
-[node name="PinkDest2" parent="." index="19" instance=ExtResource("8_c1fwq")]
+[node name="PinkDest2" parent="." index="19" unique_id=1916502574 instance=ExtResource("8_c1fwq")]
 position = Vector2(144, 42)
 grid_origin = Vector2i(4, 2)
 
-[node name="BlueDest1" parent="." index="20" instance=ExtResource("8_c1fwq")]
+[node name="BlueDest1" parent="." index="20" unique_id=1766540258 instance=ExtResource("8_c1fwq")]
 position = Vector2(272, 41)
 _active = true
 grid_origin = Vector2i(8, 2)
 
-[node name="BlueDest2" parent="." index="21" instance=ExtResource("8_c1fwq")]
+[node name="BlueDest2" parent="." index="21" unique_id=794464904 instance=ExtResource("8_c1fwq")]
 position = Vector2(208, 41)
 grid_origin = Vector2i(6, 2)
 
-[node name="GreenDest1" parent="." index="22" instance=ExtResource("8_c1fwq")]
+[node name="GreenDest1" parent="." index="22" unique_id=2022946117 instance=ExtResource("8_c1fwq")]
 position = Vector2(176, 3)
 _active = true
 grid_origin = Vector2i(5, 0)
 
-[node name="SpinningChair" parent="." index="26" instance=ExtResource("9_2u1r8")]
+[node name="SpinningChair" parent="." index="26" unique_id=2120409852 instance=ExtResource("9_2u1r8")]
 position = Vector2(304, 107)
 start_direction = 2
 grid_origin = Vector2i(9, 5)
 
-[node name="AntennaSystem" parent="." index="27" instance=ExtResource("10_a5gpt")]
+[node name="AntennaSystem" parent="." index="27" unique_id=1683450674 instance=ExtResource("10_a5gpt")]
 
-[node name="MoveTeleporterDestinationProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("teleporters")]
+[node name="MoveTeleporterDestinationProgram" type="Node" parent="AntennaSystem" index="0" unique_id=979601846 node_paths=PackedStringArray("teleporters")]
 script = ExtResource("11_uus3e")
 teleporters = [NodePath("../../PinkTeleporter"), NodePath("../../BlueTeleporter")]
 metadata/_custom_type_script = "uid://y4xyvd52hhc6"

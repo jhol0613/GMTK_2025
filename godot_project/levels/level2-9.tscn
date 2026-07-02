@@ -1,11 +1,11 @@
-[gd_scene load_steps=5 format=4 uid="uid://wc1pswyquc1g"]
+[gd_scene format=4 uid="uid://wc1pswyquc1g"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_xgeqg"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_apg4g"]
 [ext_resource type="PackedScene" uid="uid://cbc0cwtj1xkvi" path="res://agents/movable_obstacles/snack_cart/snack_cart_obstacle.tscn" id="3_apg4g"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="4_23alx"]
 
-[node name="LevelBase" instance=ExtResource("1_xgeqg")]
+[node name="LevelBase" unique_id=505168536 instance=ExtResource("1_xgeqg")]
 display_name = "2-9"
 conductor_spawn_beat = 3
 available_actions = Array[int]([4, 1, 2, 7])
@@ -17,10 +17,10 @@ tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAAFAAAABwAAAAE
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAEABAAAAAAAAAADAAEABAABAAAAAAACAAEABAACAAAAAAAFAAEABAAAAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAABAAAAAAABAAMAAQAAAAMAAAABAAQAAQAAAAMAAAABAAUAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAEAAQAAAAMAAAAEAAIAAQAAAAMAAAAEAAMAAQAAAAMAAAAJAAQAAQAAAAMAAAAJAAUAAQAAAAMAAAACAAMAAQAAAAMAAAACAAQAAQAAAAMAAAACAAUAAQAAAAMAAAAIAAUAAQAAAAMAAAAIAAQAAQAAAAMAAAA=")
 
-[node name="HideBench" parent="." index="9" instance=ExtResource("2_apg4g")]
+[node name="HideBench" parent="." index="9" unique_id=419311542 instance=ExtResource("2_apg4g")]
 position = Vector2(80, 26)
 
-[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_apg4g")]
+[node name="SnackCartObstacle" parent="." index="10" unique_id=952088762 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_apg4g")]
 position = Vector2(240, 86)
 movement_path = Array[int]([3, 3, 3, 3, 4, 4, 4, 4, 4, 3])
 action_sound_emitters = {
@@ -42,7 +42,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Treadmill" parent="." index="11" instance=ExtResource("4_23alx")]
+[node name="Treadmill" parent="." index="11" unique_id=476941614 instance=ExtResource("4_23alx")]
 position = Vector2(112, 72)
 direction = 1
 grid_origin = Vector2i(3, 3)

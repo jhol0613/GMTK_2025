@@ -1,21 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsbss7up1cye3"]
+[gd_scene format=3 uid="uid://bsbss7up1cye3"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_qktiv"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="6_pdot5"]
 [ext_resource type="PackedScene" uid="uid://nc50cx6b33h6" path="res://agents/lasers/laser.tscn" id="10_7xde3"]
 
-[node name="LevelBase" instance=ExtResource("1_qktiv")]
+[node name="LevelBase" unique_id=140707851 instance=ExtResource("1_qktiv")]
 conductor_spawn_beat = 3
 available_actions = Array[int]([6, 4, 7, 1, 2, 5, 3])
 
-[node name="Obstacles" parent="." index="2"]
+[node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray(0, 0, 9, 0, 5, 0, 1, 0, 1, 0, 3, 0, 0, 0)
 
-[node name="Treadmill" parent="." index="9" instance=ExtResource("6_pdot5")]
+[node name="Treadmill" parent="." index="9" unique_id=227288869 instance=ExtResource("6_pdot5")]
 position = Vector2(112, 71)
+grid_origin = Vector2i(3, 3)
 
-[node name="Laser" parent="." index="10" instance=ExtResource("10_7xde3")]
+[node name="Laser" parent="." index="10" unique_id=1343631083 instance=ExtResource("10_7xde3")]
 position = Vector2(48, 99)
 direction = 0
 height = 7
+grid_origin = Vector2i(1, 5)
 default_animation = "fire_up"

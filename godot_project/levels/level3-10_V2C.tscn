@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://c8nmnp0nakg6m"]
+[gd_scene format=4 uid="uid://c8nmnp0nakg6m"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_1f8ho"]
 [ext_resource type="PackedScene" uid="uid://43urct8w48ps" path="res://agents/interactables/hide_bench/hide_bench.tscn" id="2_b7vaw"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://edi48oyem1ac" path="res://agents/interactables/computer_terminal/terminal_programs/move_obstacle_program.gd" id="7_uh2sw"]
 [ext_resource type="PackedScene" uid="uid://mtxspsqlab42" path="res://agents/treadmill/treadmill.tscn" id="8_1jgol"]
 
-[node name="LevelBase" instance=ExtResource("1_1f8ho")]
+[node name="LevelBase" unique_id=1880045806 instance=ExtResource("1_1f8ho")]
 display_name = "3-10"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
@@ -31,10 +31,10 @@ range_item_cull_mask = 1
 [node name="PointLight2D4" parent="BackWall" index="3"]
 range_item_cull_mask = 1
 
-[node name="HideBench" parent="." index="9" instance=ExtResource("2_b7vaw")]
+[node name="HideBench" parent="." index="9" unique_id=589809051 instance=ExtResource("2_b7vaw")]
 position = Vector2(82, 66)
 
-[node name="SnackCartObstacle" parent="." index="10" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_0t7e7")]
+[node name="SnackCartObstacle" parent="." index="10" unique_id=75983712 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_0t7e7")]
 position = Vector2(144, 30)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -55,7 +55,7 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="SnackCartObstacle2" parent="." index="11" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_0t7e7")]
+[node name="SnackCartObstacle2" parent="." index="11" unique_id=291156861 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_0t7e7")]
 position = Vector2(241, 30)
 action_sound_emitters = {
 8: NodePath("../SnackCartObstacle/BumpSound"),
@@ -76,30 +76,30 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Collectible" parent="." index="12" instance=ExtResource("4_ne2lj")]
+[node name="Collectible" parent="." index="12" unique_id=68322545 instance=ExtResource("4_ne2lj")]
 position = Vector2(271, 44)
 
-[node name="MovableObstacleLimiter" parent="." index="13" instance=ExtResource("5_bj871")]
+[node name="MovableObstacleLimiter" parent="." index="13" unique_id=419741619 instance=ExtResource("5_bj871")]
 z_index = 1
 position = Vector2(130, 16.9474)
 scale = Vector2(1, 0.973684)
 points = PackedVector2Array(0, 0, 28, 0, 28, 33.9459, 0, 33.9459)
 
-[node name="MovableObstacleLimiter2" parent="." index="14" instance=ExtResource("5_bj871")]
+[node name="MovableObstacleLimiter2" parent="." index="14" unique_id=1864560253 instance=ExtResource("5_bj871")]
 z_index = 1
 position = Vector2(226, 16.2203)
 scale = Vector2(1, 0.610169)
 points = PackedVector2Array(0, 0, 27, 0, 27, 55, 13.2444, 55, 0, 55)
 
-[node name="AntennaSystem" parent="." index="18" instance=ExtResource("6_0f7ar")]
+[node name="AntennaSystem" parent="." index="18" unique_id=905547548 instance=ExtResource("6_0f7ar")]
 
-[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
+[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" unique_id=1891378804 node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("7_uh2sw")
 obstacles = [NodePath("../../SnackCartObstacle"), NodePath("../../SnackCartObstacle2")]
 obstacle_limiters = [NodePath("../../MovableObstacleLimiter"), NodePath("../../MovableObstacleLimiter2")]
 metadata/_custom_type_script = "uid://edi48oyem1ac"
 
-[node name="Treadmill" parent="." index="19" instance=ExtResource("8_1jgol")]
+[node name="Treadmill" parent="." index="19" unique_id=556243986 instance=ExtResource("8_1jgol")]
 position = Vector2(240, 70)
 direction = 1
 grid_origin = Vector2i(7, 3)

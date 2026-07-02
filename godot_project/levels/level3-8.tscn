@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://cin3jemsgx5vl"]
+[gd_scene format=4 uid="uid://cin3jemsgx5vl"]
 
 [ext_resource type="PackedScene" uid="uid://dncr2b8omfbne" path="res://level_system/level_base/world_3_level_base.tscn" id="1_mcwt6"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_ba3fm"]
@@ -15,7 +15,7 @@ index = 5
 action = 2
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_mcwt6")]
+[node name="LevelBase" unique_id=486059557 instance=ExtResource("1_mcwt6")]
 display_name = "3-8"
 conductor_spawn_position = Vector2i(0, 3)
 available_slots = 6
@@ -25,7 +25,7 @@ hints = Array[ExtResource("2_ba3fm")]([SubResource("Resource_p4em5")])
 [node name="Obstacles" parent="." index="3"]
 tile_map_data = PackedByteArray("AAABAAIAAQAAAAMAAAACAAIAAQAAAAMAAAADAAIAAQAAAAMAAAAEAAIAAQAAAAMAAAAFAAIAAQAAAAMAAAAGAAIAAQAAAAMAAAAHAAIAAQAAAAMAAAAIAAMAAQAAAAMAAAA=")
 
-[node name="Laser2" parent="." index="9" instance=ExtResource("2_g0151")]
+[node name="Laser2" parent="." index="9" unique_id=2128952172 instance=ExtResource("2_g0151")]
 position = Vector2(177, 98)
 direction = 0
 height = 28
@@ -33,7 +33,7 @@ grid_origin = Vector2i(5, 5)
 activation_sequence = Array[bool]([true, false])
 default_animation = "fire_up"
 
-[node name="Laser3" parent="." index="10" instance=ExtResource("2_g0151")]
+[node name="Laser3" parent="." index="10" unique_id=1611743548 instance=ExtResource("2_g0151")]
 position = Vector2(209, 98)
 direction = 0
 height = 28
@@ -41,7 +41,7 @@ grid_origin = Vector2i(6, 5)
 activation_sequence = Array[bool]([true, false])
 default_animation = "fire_up"
 
-[node name="Laser4" parent="." index="11" instance=ExtResource("2_g0151")]
+[node name="Laser4" parent="." index="11" unique_id=538838787 instance=ExtResource("2_g0151")]
 position = Vector2(241, 99)
 direction = 0
 height = 28
@@ -49,7 +49,7 @@ grid_origin = Vector2i(7, 5)
 activation_sequence = Array[bool]([true, false])
 default_animation = "fire_up"
 
-[node name="SnackCartObstacle" parent="." index="12" node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_fruxy")]
+[node name="SnackCartObstacle" parent="." index="12" unique_id=1604367223 node_paths=PackedStringArray("action_sound_emitters") instance=ExtResource("3_fruxy")]
 position = Vector2(17, 12)
 action_sound_emitters = {
 8: NodePath("BumpSound"),
@@ -70,19 +70,19 @@ action_sound_emitters = {
 23: NodePath("BumpSound")
 }
 
-[node name="Treadmill" parent="." index="13" instance=ExtResource("6_fb3ry")]
+[node name="Treadmill" parent="." index="13" unique_id=190858951 instance=ExtResource("6_fb3ry")]
 position = Vector2(272, 33)
 direction = 1
 grid_origin = Vector2i(8, 1)
 
-[node name="MovableObstacleLimiter" parent="." index="14" instance=ExtResource("7_m3shw")]
+[node name="MovableObstacleLimiter" parent="." index="14" unique_id=117247840 instance=ExtResource("7_m3shw")]
 z_index = 1
 position = Vector2(2, -4)
 points = PackedVector2Array(0, 0, 28, 0, 28, 36, 0, 36)
 
-[node name="AntennaSystem" parent="." index="18" instance=ExtResource("6_m3shw")]
+[node name="AntennaSystem" parent="." index="18" unique_id=1147312034 instance=ExtResource("6_m3shw")]
 
-[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
+[node name="MoveObstacleProgram" type="Node" parent="AntennaSystem" index="0" unique_id=1973334533 node_paths=PackedStringArray("obstacles", "obstacle_limiters")]
 script = ExtResource("5_fruxy")
 obstacles = [NodePath("../../SnackCartObstacle")]
 obstacle_limiters = [NodePath("../../MovableObstacleLimiter")]

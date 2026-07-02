@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cy0877omjeja8"]
+[gd_scene format=3 uid="uid://cy0877omjeja8"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_psfox"]
 [ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_r04a0"]
@@ -17,65 +17,65 @@ index = 1
 action = 7
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" instance=ExtResource("1_psfox")]
+[node name="LevelBase" unique_id=168575382 instance=ExtResource("1_psfox")]
 display_name = "2-10"
 conductor_spawn_beat = 5
 available_actions = Array[int]([4, 1, 2, 7])
 hints = Array[ExtResource("2_r04a0")]([SubResource("Resource_iow7r")])
 
-[node name="ComputerTerminal" parent="." index="9" instance=ExtResource("3_np4t2")]
+[node name="ComputerTerminal" parent="." index="9" unique_id=418795679 instance=ExtResource("3_np4t2")]
 position = Vector2(49, 30)
 grid_origin = Vector2i(1, 0)
 follow_on_animations = Dictionary[int, String]({
 7: "idle"
 })
 
-[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="2" node_paths=PackedStringArray("chairs")]
+[node name="TurnChairProgram" type="Node" parent="ComputerTerminal" index="2" unique_id=648339405 node_paths=PackedStringArray("chairs")]
 script = ExtResource("4_ytems")
 chairs = [NodePath("../../SpinningChair3"), NodePath("../../SpinningChair"), NodePath("../../SpinningChair2"), NodePath("../../SpinningChair4"), NodePath("../../SpinningChair5")]
 metadata/_custom_type_script = "uid://blcr4qlisfk4a"
 
-[node name="SpinningChair3" parent="." index="10" instance=ExtResource("5_3uvtg")]
+[node name="SpinningChair3" parent="." index="10" unique_id=1955032733 instance=ExtResource("5_3uvtg")]
 position = Vector2(178, 108)
 start_direction = 3
 grid_origin = Vector2i(5, 5)
 
-[node name="SpinningChairAnchor2" type="Node2D" parent="SpinningChair3" index="8"]
+[node name="SpinningChairAnchor2" type="Node2D" parent="SpinningChair3" index="8" unique_id=1410026747]
 script = ExtResource("6_af5w0")
 data = ExtResource("7_3uvtg")
 metadata/_custom_type_script = "uid://dbkqhnjkmjtc7"
 
-[node name="CatCoffeeSpillOnSpinChair" parent="SpinningChair3/SpinningChairAnchor2" index="0" instance=ExtResource("8_3uvtg")]
+[node name="CatCoffeeSpillOnSpinChair" parent="SpinningChair3/SpinningChairAnchor2" index="0" unique_id=1613649164 instance=ExtResource("8_3uvtg")]
 
-[node name="Treadmill" parent="." index="11" instance=ExtResource("7_linlt")]
+[node name="Treadmill" parent="." index="11" unique_id=786047622 instance=ExtResource("7_linlt")]
 position = Vector2(240, 70)
 direction = 3
 grid_origin = Vector2i(7, 3)
 
-[node name="Treadmill2" parent="." index="12" instance=ExtResource("7_linlt")]
+[node name="Treadmill2" parent="." index="12" unique_id=1133474930 instance=ExtResource("7_linlt")]
 position = Vector2(112, 71)
 direction = 3
 grid_origin = Vector2i(3, 3)
 
-[node name="SpinningChair" parent="." index="15" instance=ExtResource("5_3uvtg")]
+[node name="SpinningChair" parent="." index="15" unique_id=868468499 instance=ExtResource("5_3uvtg")]
 position = Vector2(50, 107)
 start_direction = 3
 grid_origin = Vector2i(1, 5)
 
-[node name="SpinningChair2" parent="." index="16" instance=ExtResource("5_3uvtg")]
+[node name="SpinningChair2" parent="." index="16" unique_id=454785826 instance=ExtResource("5_3uvtg")]
 position = Vector2(114, 50)
 start_direction = 3
 grid_origin = Vector2i(3, 2)
 
-[node name="SpinningChair4" parent="." index="17" instance=ExtResource("5_3uvtg")]
+[node name="SpinningChair4" parent="." index="17" unique_id=1972864665 instance=ExtResource("5_3uvtg")]
 position = Vector2(240, 50)
 start_direction = 3
 grid_origin = Vector2i(7, 2)
 
-[node name="SpinningChair5" parent="." index="18" instance=ExtResource("5_3uvtg")]
+[node name="SpinningChair5" parent="." index="18" unique_id=1572117810 instance=ExtResource("5_3uvtg")]
 position = Vector2(306, 107)
 start_direction = 3
 grid_origin = Vector2i(9, 5)
 
-[node name="Key" parent="." index="19" instance=ExtResource("9_af5w0")]
+[node name="Key" parent="." index="19" unique_id=1184196478 instance=ExtResource("9_af5w0")]
 position = Vector2(240, 81)
