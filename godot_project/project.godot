@@ -26,11 +26,15 @@ DSP/dsp_buffer_count=4
 "3D Settings/distance_factor"=1.0
 "3D Settings/rolloff_scale"=1.0
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="RhythmRail"
 run/main_scene="uid://dual0bcixw854"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/image="uid://c4qcxjn0e5cha"
 config/icon="uid://eenhxk641vat"
@@ -38,7 +42,7 @@ config/icon="uid://eenhxk641vat"
 [autoload]
 
 Enums="*res://autoload/enums.gd"
-FmodManager="*res://addons/fmod/FmodManager.gd"
+FmodManager="*uid://cds10pm7hwn3p"
 AudioManager="*res://autoload/audio_manager.tscn"
 GameManager="*res://autoload/game_manager.tscn"
 SaveManager="*res://autoload/save_manager.gd"

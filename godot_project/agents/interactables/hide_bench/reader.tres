@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://ddc77qj3h71yt"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://ddc77qj3h71yt"]
 
 [ext_resource type="Texture2D" uid="uid://dbnrmmou0ysqk" path="res://agents/interactables/hide_bench/Bench sitters.png" id="1_irebk"]
 

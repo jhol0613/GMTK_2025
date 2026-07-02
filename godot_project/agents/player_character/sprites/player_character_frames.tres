@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dhnfjvmbtjy03"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dhnfjvmbtjy03"]
 
 [ext_resource type="Texture2D" uid="uid://bw34spytajpfk" path="res://agents/conductor/conductorjump.png" id="1_tts5m"]
 

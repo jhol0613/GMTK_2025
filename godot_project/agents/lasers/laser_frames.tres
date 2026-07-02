@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://1v425u1v0bil"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://1v425u1v0bil"]
 
 [ext_resource type="Texture2D" uid="uid://bg3vpektvd7qh" path="res://agents/lasers/new_laser_visuals/telescope_laser_head_down.png" id="1_v3wjs"]
 [ext_resource type="Texture2D" uid="uid://b2ct45sktmosp" path="res://agents/lasers/new_laser_visuals/telescope_laser_head_left.png" id="2_0rncm"]
