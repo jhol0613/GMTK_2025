@@ -44,12 +44,7 @@ func _on_play_pressed() -> void:
 
 func _on_continue_pressed() -> void:
 	GameManager.start_world = SaveManager.save_data.furthest_level_reached["world"]
-	print("On continue pressed, Start World:")
-	print(GameManager.start_world)
 	GameManager.start_level = SaveManager.save_data.furthest_level_reached["level"]
-	print("On continue pressed, Start Level:")
-	print(GameManager.start_level)
-	
 	GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER)
 
 func _on_map_pressed() -> void: 

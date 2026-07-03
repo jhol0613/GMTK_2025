@@ -1,6 +1,5 @@
-[gd_resource type="Resource" script_class="LevelCatalog" format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" load_steps=110 format=3 uid="uid://bhskeg8clmay6"]
 
-[ext_resource type="Resource" uid="uid://blj2bn5j7k4ka" path="res://level_system/level_manager/uid_map.tres" id="1_fc5oy"]
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
 [ext_resource type="PackedScene" uid="uid://died68yk0oupu" path="res://level_system/collectible_displays/world1_collectible_car.tscn" id="3_agh00"]
@@ -125,6 +124,7 @@ level_select_scene = 5
 music_event_name = "World1_BGM"
 music_event_bpm = 170.0
 collectible_car = ExtResource("3_agh00")
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_831uk"]
@@ -193,6 +193,7 @@ music_event_name = "World2_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
 collectible_car = ExtResource("15_xpa8w")
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_kxjwu"]
@@ -257,6 +258,7 @@ music_event_name = "World3_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
 collectible_car = ExtResource("30_fc5oy")
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_mbm5a"]
@@ -323,12 +325,13 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("34_3js1v")
 levels = Array[ExtResource("14_agh00")]([SubResource("Resource_mbm5a"), SubResource("Resource_l1c24"), SubResource("Resource_6cenb"), SubResource("Resource_tiysq"), SubResource("Resource_o67xc"), SubResource("Resource_j5min"), SubResource("Resource_3meng"), SubResource("Resource_47x0y"), SubResource("Resource_hoyem"), SubResource("Resource_77x0c"), SubResource("Resource_lb5ed"), SubResource("Resource_gb6cx")])
+level_select_scene = 0
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
+antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [resource]
 script = ExtResource("1_vetjv")
 world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr")])
-level_uid_list = ExtResource("1_fc5oy")
 metadata/_custom_type_script = "uid://4j1dtwn2r7t1"
