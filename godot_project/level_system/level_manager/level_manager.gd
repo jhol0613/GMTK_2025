@@ -189,9 +189,8 @@ func _on_level_advanced():
 	level_banner.label_text_init = _level_scene.display_name
 	add_child(level_banner)
 	_action_sequencer.set_action_icons_hidden(false)
-	#Only bother replacing previous car if you can actually go left to get there
-	if _action_sequencer._available_actions.has(Enums.PlayerAction.LEFT):
-		_replace_previous_level_with_collectible_car()
+
+	_replace_previous_level_with_collectible_car()
 	_spawn_player()
 	_reset_level()
 
@@ -217,15 +216,17 @@ func _reload_next_level():
 		_on_the_train.add_child(_next_level)
 
 func _replace_previous_level_with_collectible_car():
-	if not _previous_level:
-		return
 	var collectible_car_packed = GameManager.level_catalog.get_collectible_car()
 	if collectible_car_packed == null:
 		printerr("No collectible car defined, keeping previous level instead")
 		return
 	if collectible_car_packed != null:
-		var previous_level_position = _previous_level.position
-		_previous_level.queue_free()
+		var previous_level_position : Vector2
+		if _previous_level:
+			previous_level_position = _previous_level.position
+			_previous_level.queue_free()
+		else:
+			previous_level_position = initial_train_position + (_level_number-1) * Vector2(next_car_offset, 0.0)
 		_previous_level = collectible_car_packed.instantiate()
 		_previous_level.position = previous_level_position
 		_on_the_train.add_child(_previous_level)
