@@ -558,7 +558,6 @@ func _update_obstacles():
 
 ##move_group takes an array of obstacles and moves them all at once using deconfliction and bumping logic
 func _update_obstacle_move_group(move_group):
-	print("updating move group")
 	for obstacle: MovableObstacle in move_group:
 		_level_scene.clear_obstacle_override_at_position(obstacle.grid_position)
 	# check for actions before grid is updated (so obstacles can move into the same square triggering a push)

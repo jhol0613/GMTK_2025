@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ej8hk3h8ibcr" path="res://levels/level1-12.tscn" id="11_y48yf"]
 [ext_resource type="PackedScene" uid="uid://bjo6fdnk4su8p" path="res://levels/level1-13_V2.tscn" id="12_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://71ob1186irs4" path="res://levels/level1-14.tscn" id="13_e7wa4"]
-[ext_resource type="Script" path="res://level_system/level_manager/packed_level.gd" id="14_agh00"]
+[ext_resource type="Script" uid="uid://bogveiln632se" path="res://level_system/level_manager/packed_level.gd" id="14_agh00"]
 [ext_resource type="PackedScene" uid="uid://ciue2so776nlq" path="res://levels/level2-2_V2.tscn" id="15_fk8s6"]
 [ext_resource type="PackedScene" uid="uid://dx3c77r31rvvm" path="res://levels/level2-1_V2.tscn" id="15_sv7wc"]
 [ext_resource type="PackedScene" uid="uid://ypistjoure1e" path="res://level_system/collectible_displays/world2_collectible_car.tscn" id="15_xpa8w"]
@@ -57,7 +57,6 @@
 [ext_resource type="PackedScene" uid="uid://8qwohyb5h1tm" path="res://levels/level3-11C.tscn" id="49_isgho"]
 [ext_resource type="PackedScene" uid="uid://c0lpb8u54s0rd" path="res://levels/test_levels/teleporter_test_level.tscn" id="49_nne5e"]
 [ext_resource type="PackedScene" uid="uid://bh5ec0yys4ety" path="res://levels/level3-10.tscn" id="50_fk8s6"]
-[ext_resource type="PackedScene" uid="uid://dgk6kkh5eo7ad" path="res://levels/level3-2.tscn" id="50_k6k1i"]
 [ext_resource type="PackedScene" uid="uid://cs55rosw0upr2" path="res://levels/level3-3.tscn" id="51_15cvr"]
 [ext_resource type="PackedScene" uid="uid://cyx2a6u3pgvsa" path="res://levels/level3-4.tscn" id="52_5ulpv"]
 [ext_resource type="PackedScene" uid="uid://cpeu3l5fgvpk6" path="res://levels/test_levels/spinning_chair_test_level.tscn" id="52_30pcr"]
@@ -196,6 +195,18 @@ original = ExtResource("29_y2rew")
 script = ExtResource("14_agh00")
 original = ExtResource("30_y2rew")
 
+[sub_resource type="Resource" id="Resource_573c6"]
+script = ExtResource("14_agh00")
+original = ExtResource("49_4lmby")
+
+[sub_resource type="Resource" id="Resource_y5e7o"]
+script = ExtResource("14_agh00")
+original = ExtResource("51_15cvr")
+
+[sub_resource type="Resource" id="Resource_q21cx"]
+script = ExtResource("14_agh00")
+original = ExtResource("52_5ulpv")
+
 [sub_resource type="Resource" id="Resource_b6o46"]
 script = ExtResource("14_agh00")
 original = ExtResource("35_sb2tf")
@@ -231,26 +242,10 @@ collectible = ExtResource("49_isgho")
 script = ExtResource("14_agh00")
 original = ExtResource("40_sv7wc")
 
-[sub_resource type="Resource" id="Resource_573c6"]
-script = ExtResource("14_agh00")
-original = ExtResource("49_4lmby")
-
-[sub_resource type="Resource" id="Resource_2mi6j"]
-script = ExtResource("14_agh00")
-original = ExtResource("50_k6k1i")
-
-[sub_resource type="Resource" id="Resource_y5e7o"]
-script = ExtResource("14_agh00")
-original = ExtResource("51_15cvr")
-
-[sub_resource type="Resource" id="Resource_q21cx"]
-script = ExtResource("14_agh00")
-original = ExtResource("52_5ulpv")
-
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("40_fk8s6")
-levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_iobns"), SubResource("Resource_wepqg"), SubResource("Resource_dniod"), SubResource("Resource_573c6"), SubResource("Resource_2mi6j"), SubResource("Resource_y5e7o"), SubResource("Resource_q21cx")])
+levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_573c6"), SubResource("Resource_y5e7o"), SubResource("Resource_q21cx"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_iobns"), SubResource("Resource_wepqg"), SubResource("Resource_dniod")])
 level_select_scene = 7
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0
