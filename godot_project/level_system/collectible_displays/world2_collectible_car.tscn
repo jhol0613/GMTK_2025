@@ -1,20 +1,24 @@
-[gd_scene load_steps=3 format=4 uid="uid://ypistjoure1e"]
+[gd_scene format=4 uid="uid://ypistjoure1e"]
 
 [ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_md1ii"]
 [ext_resource type="Texture2D" uid="uid://djnguvahrguca" path="res://decorations/left_target.png" id="3_mnwcx"]
+[ext_resource type="PackedScene" uid="uid://km3fwpqprptv" path="res://level_system/collectible_displays/collectible_level_names.tscn" id="3_s5lvy"]
 
-[node name="LevelBase" instance=ExtResource("1_md1ii")]
+[node name="LevelBase" unique_id=1079739642 instance=ExtResource("1_md1ii")]
 player_spawn_position = Vector2i(10, 2)
 available_actions = Array[int]([3, 4])
 
-[node name="Floor" parent="." index="1"]
+[node name="Floor" parent="." index="1" unique_id=1364947742]
 tile_map_data = PackedByteArray("AAAAAAEAAgAAAAIAAAABAAEAAgAAAAIAAAACAAEAAgAAAAIAAAADAAEAAgAAAAIAAAAEAAEAAgAAAAIAAAAFAAEAAgAAAAIAAAAGAAEAAgAAAAIAAAAHAAEAAgAAAAIAAAAIAAEAAgAAAAIAAAAJAAEAAgAAAAIAAAAKAAEAAgAAAAIAAAAAAAQAAgAAAAIAAAABAAQAAgAAAAIAAAACAAQAAgAAAAIAAAADAAQAAgAAAAIAAAAEAAQAAgAAAAIAAAAFAAQAAgAAAAIAAAAGAAQAAgAAAAIAAAAHAAQAAgAAAAIAAAAIAAQAAgAAAAIAAAAJAAQAAgAAAAIAAAAKAAQAAgAAAAIAAAAAAAIAAgAAAAAAAAAAAAMAAgAAAAAAAAAKAAIAAgAAAAAAAAAKAAMAAgAAAAAAAAABAAIAAgAAAAAAAAACAAIAAgAAAAAAAAADAAIAAgAAAAAAAAAEAAIAAgAAAAAAAAAFAAIAAgAAAAAAAAAGAAIAAgAAAAAAAAAHAAIAAgAAAAAAAAAIAAIAAgAAAAAAAAAJAAIAAgAAAAAAAAAJAAMAAgAAAAAAAAAIAAMAAgAAAAAAAAAHAAMAAgAAAAAAAAAGAAMAAgAAAAAAAAAFAAMAAgAAAAAAAAAEAAMAAgAAAAAAAAADAAMAAgAAAAAAAAACAAMAAgAAAAAAAAABAAMAAgAAAAAAAAAAAAUAAgAAAAIAAAABAAUAAgAAAAIAAAACAAUAAgAAAAIAAAADAAUAAgAAAAIAAAAEAAUAAgAAAAIAAAAFAAUAAgAAAAIAAAAGAAUAAgAAAAIAAAAHAAUAAgAAAAIAAAAIAAUAAgAAAAIAAAAJAAUAAgAAAAIAAAAKAAUAAgAAAAIAAAAKAAAAAgAAAAIAAAAJAAAAAgAAAAIAAAAIAAAAAgAAAAIAAAAHAAAAAgAAAAIAAAAGAAAAAgAAAAIAAAAFAAAAAgAAAAIAAAAEAAAAAgAAAAIAAAADAAAAAgAAAAIAAAACAAAAAgAAAAIAAAABAAAAAgAAAAIAAAAAAAAAAgAAAAIAAAA=")
 
-[node name="Target" parent="." index="7"]
+[node name="Target" parent="." index="7" unique_id=1169298287]
 monitoring = false
 monitorable = false
 
-[node name="Sprite2D2" type="Sprite2D" parent="ModifiedTarget" index="0"]
+[node name="Sprite2D2" type="Sprite2D" parent="ModifiedTarget" parent_id_path=PackedInt32Array(1673883856) index="0" unique_id=1847674670]
 position = Vector2(11, -1)
 scale = Vector2(-1, 1)
 texture = ExtResource("3_mnwcx")
+
+[node name="CollectibleLevelNames" parent="." index="12" unique_id=369984411 instance=ExtResource("3_s5lvy")]
+position = Vector2(16, -98)
