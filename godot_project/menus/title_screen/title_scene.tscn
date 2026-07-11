@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dual0bcixw854"]
+[gd_scene format=3 uid="uid://dual0bcixw854"]
 
 [ext_resource type="Script" uid="uid://dtkjbr420kbm1" path="res://menus/title_screen/title_scene.gd" id="1_ofviv"]
 [ext_resource type="Texture2D" uid="uid://cuc5c16cqv58r" path="res://menus/title_screen/Menu_Stars.png" id="2_3h5pg"]
@@ -90,7 +90,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="TitleScene" type="Control"]
+[node name="TitleScene" type="Control" unique_id=1749288008]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,24 +99,24 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ofviv")
 
-[node name="SkyRect" type="TextureRect" parent="."]
+[node name="SkyRect" type="TextureRect" parent="." unique_id=928344084]
 layout_mode = 0
 offset_right = 599.0
 offset_bottom = 453.0
 texture = ExtResource("2_t0baq")
 
-[node name="Stars" type="Parallax2D" parent="."]
+[node name="Stars" type="Parallax2D" parent="." unique_id=1986482774]
 repeat_size = Vector2(600, 0)
 autoscroll = Vector2(-2, 0)
 
-[node name="StarsRect" type="TextureRect" parent="Stars"]
+[node name="StarsRect" type="TextureRect" parent="Stars" unique_id=1882379230]
 offset_right = 600.0
 offset_bottom = 497.0
 texture = ExtResource("2_3h5pg")
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="TitleScreenRect" type="TextureRect" parent="."]
+[node name="TitleScreenRect" type="TextureRect" parent="." unique_id=1216956900]
 layout_mode = 0
 offset_left = -1.0
 offset_top = -37.0
@@ -125,7 +125,7 @@ offset_bottom = 451.0
 texture = ExtResource("3_5mg7y")
 stretch_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=484728998]
 layout_mode = 0
 offset_left = 68.0
 offset_top = 192.0
@@ -133,7 +133,7 @@ offset_right = 238.0
 offset_bottom = 348.0
 theme_override_constants/separation = -24
 
-[node name="Play" type="TextureButton" parent="VBoxContainer"]
+[node name="Play" type="TextureButton" parent="VBoxContainer" unique_id=1011558894]
 visible = false
 custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
@@ -142,7 +142,7 @@ texture_pressed = ExtResource("5_5mg7y")
 texture_hover = ExtResource("3_yewqo")
 stretch_mode = 4
 
-[node name="Continue" type="TextureButton" parent="VBoxContainer"]
+[node name="Continue" type="TextureButton" parent="VBoxContainer" unique_id=1184820659]
 custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("8_ygav7")
@@ -150,7 +150,7 @@ texture_pressed = ExtResource("9_c40fc")
 texture_hover = ExtResource("10_xrves")
 stretch_mode = 4
 
-[node name="Map" type="TextureButton" parent="VBoxContainer"]
+[node name="Map" type="TextureButton" parent="VBoxContainer" unique_id=1742356148]
 custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("9_f0xpe")
@@ -158,7 +158,7 @@ texture_pressed = ExtResource("11_xrves")
 texture_hover = ExtResource("12_p7bgt")
 stretch_mode = 4
 
-[node name="Options" type="TextureButton" parent="VBoxContainer"]
+[node name="Options" type="TextureButton" parent="VBoxContainer" unique_id=701642395]
 custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("4_0ddpl")
@@ -166,7 +166,7 @@ texture_pressed = ExtResource("8_bgyt0")
 texture_hover = ExtResource("5_ofviv")
 stretch_mode = 4
 
-[node name="Quit" type="TextureButton" parent="VBoxContainer"]
+[node name="Quit" type="TextureButton" parent="VBoxContainer" unique_id=158848624]
 custom_minimum_size = Vector2(0, 57)
 layout_mode = 2
 texture_normal = ExtResource("11_l6hpg")
@@ -174,27 +174,27 @@ texture_pressed = ExtResource("12_7mo1b")
 texture_hover = ExtResource("12_7mo1b")
 stretch_mode = 4
 
-[node name="ClickStartEmitter" type="FmodEventEmitter2D" parent="."]
+[node name="ClickStartEmitter" type="FmodEventEmitter2D" parent="." unique_id=714265446]
 event_name = "event:/Play_Click"
 event_guid = "{b12e8659-34c7-4bc6-8d91-2718a3690845}"
 
-[node name="HoverEmitter" type="FmodEventEmitter2D" parent="."]
+[node name="HoverEmitter" type="FmodEventEmitter2D" parent="." unique_id=2101473685]
 event_name = "event:/Play&Restart_Hover"
 event_guid = "{e7589cc2-24cd-4965-9ece-55343f63ebc4}"
 
-[node name="Title" type="AnimatedSprite2D" parent="."]
+[node name="Title" type="AnimatedSprite2D" parent="." unique_id=1171085012]
 position = Vector2(281, 200)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_e8u02")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Title"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Title" unique_id=154940055]
 position = Vector2(-51.5, -21.5)
 scale = Vector2(0.5, 0.5)
 amount = 12
 lifetime = 2.73
 process_material = SubResource("ParticleProcessMaterial_3h5pg")
 
-[node name="TrackSprite" type="AnimatedSprite2D" parent="Title"]
+[node name="TrackSprite" type="AnimatedSprite2D" parent="Title" unique_id=499667625]
 position = Vector2(-41, -7)
 sprite_frames = SubResource("SpriteFrames_ehrfh")
 autoplay = "default"

@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d242hjwmsu4gm" path="res://tilemaps/tilesheets/Coffee Spill.png" id="6_xy6vo"]
 [ext_resource type="Texture2D" uid="uid://8x7t3h88deow" path="res://tilemaps/tilesheets/VerticalTable.png" id="7_xy6vo"]
 [ext_resource type="Texture2D" uid="uid://belj5s1ct3khj" path="res://tilemaps/tilesheets/machinery1.png" id="9_k81md"]
+[ext_resource type="Texture2D" uid="uid://cgsomese5b0fy" path="res://decorations/Fishtank_1tile.png" id="10_bp0b6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7ynh"]
 texture = ExtResource("1_m64dk")
@@ -277,6 +278,19 @@ texture_region_size = Vector2i(32, 32)
 2:0/0 = 0
 2:0/0/texture_origin = Vector2i(0, 20)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6dgmi"]
+texture = ExtResource("10_bp0b6")
+texture_region_size = Vector2i(32, 63)
+0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, 22)
+0:0/0/custom_data_1 = 66.0
+1:0/0 = 0
+1:0/0/texture_origin = Vector2i(0, 22)
+1:0/0/custom_data_1 = 66.0
+2:0/0 = 0
+2:0/0/texture_origin = Vector2i(0, 22)
+2:0/0/custom_data_1 = 66.0
+
 [resource]
 tile_size = Vector2i(32, 19)
 navigation_layer_0/layers = 1
@@ -293,3 +307,4 @@ sources/6 = SubResource("TileSetAtlasSource_1jhey")
 sources/7 = SubResource("TileSetAtlasSource_k81md")
 sources/4 = SubResource("TileSetAtlasSource_bp0b6")
 sources/8 = SubResource("TileSetAtlasSource_7w8rb")
+sources/9 = SubResource("TileSetAtlasSource_6dgmi")

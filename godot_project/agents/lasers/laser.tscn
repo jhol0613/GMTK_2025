@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://nc50cx6b33h6"]
+[gd_scene format=3 uid="uid://nc50cx6b33h6"]
 
 [ext_resource type="Script" uid="uid://bbdap7ft62od6" path="res://agents/lasers/laser.gd" id="1_cep7i"]
 [ext_resource type="Script" uid="uid://duifkavk2c1j8" path="res://agents/lasers/laser_direction_data.gd" id="2_g7y3a"]
@@ -154,7 +154,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Laser" type="Node2D" node_paths=PackedStringArray("_sprite", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "up_laser_clipper", "antenna_button", "default_sound_emitter", "sprite")]
+[node name="Laser" type="Node2D" unique_id=1193732294 node_paths=PackedStringArray("_sprite", "animation_player", "visuals", "beam_root", "pole1", "pole2", "shadow", "obstacle", "up_laser_clipper", "antenna_button", "default_sound_emitter", "sprite")]
 z_index = 1
 script = ExtResource("1_cep7i")
 _sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2/LaserHead")
@@ -183,24 +183,22 @@ sprite = NodePath("Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/
 default_animation = "fire_down"
 metadata/_edit_vertical_guides_ = [-55.0]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_aar76")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1987078880]
+libraries/ = SubResource("AnimationLibrary_aar76")
 
-[node name="SoundEmitter" type="FmodEventEmitter2D" parent="."]
+[node name="SoundEmitter" type="FmodEventEmitter2D" parent="." unique_id=1903099494]
 event_name = "event:/Laser"
 event_guid = "{9a53cd25-e27b-4025-a7f1-ec3a4cb0cf2b}"
 script = ExtResource("12_to654")
 offset_seconds = -0.1
 metadata/_custom_type_script = "uid://deg3tw8squr8x"
 
-[node name="Visuals" type="Node2D" parent="."]
+[node name="Visuals" type="Node2D" parent="." unique_id=1552023431]
 
-[node name="LaserBase" type="Sprite2D" parent="Visuals"]
+[node name="LaserBase" type="Sprite2D" parent="Visuals" unique_id=416793168]
 texture = ExtResource("8_gmiso")
 
-[node name="RenderBox" type="TextureRect" parent="Visuals/LaserBase"]
+[node name="RenderBox" type="TextureRect" parent="Visuals/LaserBase" unique_id=2070739416]
 clip_contents = true
 anchors_preset = 7
 anchor_left = 0.5
@@ -215,14 +213,14 @@ grow_vertical = 0
 mouse_filter = 2
 texture = ExtResource("9_to654")
 
-[node name="RenderBoxOffset" type="Node2D" parent="Visuals/LaserBase/RenderBox"]
+[node name="RenderBoxOffset" type="Node2D" parent="Visuals/LaserBase/RenderBox" unique_id=114045225]
 position = Vector2(16, 112)
 
-[node name="Pole1" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset"]
+[node name="Pole1" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset" unique_id=880273206]
 position = Vector2(0, -33)
 texture = ExtResource("10_2o4ih")
 
-[node name="RenderBox2" type="TextureRect" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1"]
+[node name="RenderBox2" type="TextureRect" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1" unique_id=996886458]
 clip_contents = true
 offset_left = -10.0
 offset_top = -67.0
@@ -230,14 +228,14 @@ offset_right = 10.0
 offset_bottom = -13.0
 mouse_filter = 2
 
-[node name="RenderBox2Offset" type="Node2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2"]
+[node name="RenderBox2Offset" type="Node2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2" unique_id=260104433]
 position = Vector2(10, 66)
 
-[node name="Pole2" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset"]
+[node name="Pole2" type="Sprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset" unique_id=1685035938]
 position = Vector2(0, -24)
 texture = ExtResource("11_tquva")
 
-[node name="LaserHead" type="AnimatedSprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2"]
+[node name="LaserHead" type="AnimatedSprite2D" parent="Visuals/LaserBase/RenderBox/RenderBoxOffset/Pole1/RenderBox2/RenderBox2Offset/Pole2" unique_id=955954440]
 position = Vector2(0, -19)
 sprite_frames = ExtResource("7_use4v")
 animation = &"fire_down"
@@ -246,17 +244,18 @@ signals = Array[ExtResource("14_mgkp8")]([SubResource("Resource_jtygs"), SubReso
 default_animation_offset = -0.5
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="Pole1Shadow" type="AnimatedSprite2D" parent="Visuals"]
+[node name="Pole1Shadow" type="AnimatedSprite2D" parent="Visuals" unique_id=555874017]
 position = Vector2(0, 3)
 sprite_frames = SubResource("SpriteFrames_chnl6")
 animation = &"deployed"
+frame_progress = 1.0
 script = ExtResource("11_gmiso")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="GenericInvisibleObstacle" parent="." instance=ExtResource("19_jtygs")]
+[node name="GenericInvisibleObstacle" parent="." unique_id=945673226 instance=ExtResource("19_jtygs")]
 position = Vector2(0, 3)
 
-[node name="UpLaserClipper" type="TextureRect" parent="."]
+[node name="UpLaserClipper" type="TextureRect" parent="." unique_id=2091554889]
 clip_contents = true
 anchors_preset = 7
 anchor_left = 0.5
@@ -271,18 +270,18 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="BeamRoot" parent="UpLaserClipper" instance=ExtResource("20_7lqwi")]
+[node name="BeamRoot" parent="UpLaserClipper" unique_id=293566531 instance=ExtResource("20_7lqwi")]
 visible = false
 position = Vector2(357, 16)
 hit_from_inside = true
 
-[node name="AntennaComponent" parent="." node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("20_u3qbj")]
+[node name="AntennaComponent" parent="." unique_id=1776013755 node_paths=PackedStringArray("highlighted_nodes", "detection_areas") instance=ExtResource("20_u3qbj")]
 visible = false
 position = Vector2(11, -15)
 highlighted_nodes = [NodePath("../Visuals")]
 detection_areas = [NodePath("Button")]
 
-[node name="Button" type="Button" parent="AntennaComponent"]
+[node name="Button" type="Button" parent="AntennaComponent" unique_id=697604917]
 self_modulate = Color(1, 1, 1, 0)
 offset_left = -26.0
 offset_top = -57.0

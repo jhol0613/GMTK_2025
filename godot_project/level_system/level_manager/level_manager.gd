@@ -119,7 +119,7 @@ func _ready() -> void:
 	_level_scene.position = initial_train_position
 
 	AudioManager.play_music_event(GameManager.level_catalog.get_world_music_event_name(),
-		GameManager.level_catalog.get_world_music_event_bpm())
+		GameManager.level_catalog.get_world_music_event_bpm(), false, SaveManager.first_play)
 
 	_initialize_level()
 	load_next_level()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dsgqmmf5csx5q"]
+[gd_scene format=3 uid="uid://dsgqmmf5csx5q"]
 
 [ext_resource type="Script" uid="uid://ckd0uq03c2vtl" path="res://action_sequencer/action_sequencer.gd" id="1_t1wqv"]
 [ext_resource type="PackedScene" uid="uid://ltdnwoljvgwp" path="res://action_sequencer/action_items/action_item.tscn" id="2_reiol"]
@@ -70,9 +70,9 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tigw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_krlbp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y1gc2"]
 atlas = ExtResource("21_krlbp")
-region = Rect2(0, 0, 164, 157)
+region = Rect2(492, 471, 164, 157)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yk6ra"]
 atlas = ExtResource("21_krlbp")
@@ -142,7 +142,7 @@ region = Rect2(492, 471, 164, 157)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_krlbp")
+"texture": SubResource("AtlasTexture_y1gc2")
 }],
 "loop": true,
 "name": &"default",
@@ -211,7 +211,7 @@ initial_velocity_max = 443.95
 gravity = Vector3(0, 1000, 0)
 color = Color(0.643137, 0.866667, 0.858824, 1)
 
-[node name="ActionSequencerBase" type="Control" node_paths=PackedStringArray("items_container", "slots_container")]
+[node name="ActionSequencerBase" type="Control" unique_id=1613101386 node_paths=PackedStringArray("items_container", "slots_container")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 616.0
@@ -224,12 +224,12 @@ items_container = NodePath("TextureRect/ActionItems")
 slots_container = NodePath("TextureRect/ActionSlots")
 default_action_quantities = Array[int]([99999, 99999, 99999, 99999, 99999, 99999, 99999, 99999])
 
-[node name="SequencingLayout" type="HBoxContainer" parent="."]
+[node name="SequencingLayout" type="HBoxContainer" parent="." unique_id=1848896529]
 layout_mode = 1
 offset_right = 48.0
 offset_bottom = 52.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=504953695]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 230.0
@@ -238,7 +238,7 @@ offset_bottom = 356.0
 texture = ExtResource("4_62g22")
 stretch_mode = 2
 
-[node name="ActionSlots" type="HBoxContainer" parent="TextureRect"]
+[node name="ActionSlots" type="HBoxContainer" parent="TextureRect" unique_id=1403329324]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -250,7 +250,7 @@ offset_bottom = -21.0
 grow_vertical = 0
 theme_override_constants/separation = 5
 
-[node name="LaserHints" type="HBoxContainer" parent="TextureRect"]
+[node name="LaserHints" type="HBoxContainer" parent="TextureRect" unique_id=1936524605]
 custom_minimum_size = Vector2(293, 0)
 layout_mode = 0
 offset_left = 232.0
@@ -259,7 +259,7 @@ offset_right = 525.0
 offset_bottom = 60.0
 theme_override_constants/separation = 19
 
-[node name="LaserHint1" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint1" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=1071432657]
 position = Vector2(27, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 animation = &"flash"
@@ -267,7 +267,7 @@ autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint2" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint2" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=1135863281]
 position = Vector2(66, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 animation = &"flash"
@@ -275,49 +275,49 @@ autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint3" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint3" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=1592291302]
 position = Vector2(105, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint4" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint4" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=1368048327]
 position = Vector2(144, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint5" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint5" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=699734917]
 position = Vector2(183, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint6" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint6" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=389781486]
 position = Vector2(222, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint7" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint7" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=78586241]
 position = Vector2(261, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="LaserHint8" type="AnimatedSprite2D" parent="TextureRect/LaserHints"]
+[node name="LaserHint8" type="AnimatedSprite2D" parent="TextureRect/LaserHints" unique_id=1155968744]
 position = Vector2(299, 4)
 sprite_frames = SubResource("SpriteFrames_y1gc2")
 autoplay = "default"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="PlayButton" type="TextureButton" parent="TextureRect"]
+[node name="PlayButton" type="TextureButton" parent="TextureRect" unique_id=389355267]
 z_index = 9
 layout_mode = 1
 anchors_preset = 3
@@ -337,27 +337,27 @@ texture_pressed = ExtResource("6_tq4nj")
 texture_hover = ExtResource("7_qhuj8")
 texture_disabled = ExtResource("8_5cmkx")
 
-[node name="PlayLight1" type="PointLight2D" parent="TextureRect/PlayButton"]
+[node name="PlayLight1" type="PointLight2D" parent="TextureRect/PlayButton" unique_id=2113329440]
 visible = false
 position = Vector2(30, 18)
 color = Color(0.481911, 0.932407, 0.536252, 1)
 texture = SubResource("GradientTexture2D_8w216")
 
-[node name="PlayLight2" type="PointLight2D" parent="TextureRect/PlayButton"]
+[node name="PlayLight2" type="PointLight2D" parent="TextureRect/PlayButton" unique_id=1790284537]
 visible = false
 position = Vector2(10, 6)
 color = Color(0.482353, 0.933333, 0.537255, 1)
 texture = SubResource("GradientTexture2D_8w216")
 
-[node name="PlayButtonHover" type="FmodEventEmitter2D" parent="TextureRect/PlayButton"]
+[node name="PlayButtonHover" type="FmodEventEmitter2D" parent="TextureRect/PlayButton" unique_id=1964177582]
 event_name = "event:/Play&Restart_Hover"
 event_guid = "{e7589cc2-24cd-4965-9ece-55343f63ebc4}"
 
-[node name="PlayButtonPress" type="FmodEventEmitter2D" parent="TextureRect/PlayButton"]
+[node name="PlayButtonPress" type="FmodEventEmitter2D" parent="TextureRect/PlayButton" unique_id=1709390791]
 event_name = "event:/Play_Click"
 event_guid = "{b12e8659-34c7-4bc6-8d91-2718a3690845}"
 
-[node name="ReplayButton" type="TextureButton" parent="TextureRect"]
+[node name="ReplayButton" type="TextureButton" parent="TextureRect" unique_id=1975413309]
 layout_mode = 0
 offset_left = 342.0
 offset_top = 16.0
@@ -368,11 +368,11 @@ texture_normal = ExtResource("9_62g22")
 texture_pressed = ExtResource("10_cdoyw")
 texture_hover = ExtResource("11_krlbp")
 
-[node name="ReplayButtonPress" type="FmodEventEmitter2D" parent="TextureRect/ReplayButton"]
+[node name="ReplayButtonPress" type="FmodEventEmitter2D" parent="TextureRect/ReplayButton" unique_id=1661735471]
 event_name = "event:/Restart_Click"
 event_guid = "{df1895b1-8e9a-4528-a47a-b66cad41c2d8}"
 
-[node name="ActionItems" type="GridContainer" parent="TextureRect"]
+[node name="ActionItems" type="GridContainer" parent="TextureRect" unique_id=1523046894]
 z_index = 11
 layout_mode = 1
 offset_left = 44.0
@@ -383,14 +383,14 @@ theme_override_constants/h_separation = 2
 theme_override_constants/v_separation = 0
 columns = 4
 
-[node name="TutorialArrow" type="Sprite2D" parent="TextureRect"]
+[node name="TutorialArrow" type="Sprite2D" parent="TextureRect" unique_id=1278324438]
 visible = false
 z_index = 4
 position = Vector2(131, 48)
 scale = Vector2(1.57, 1.57)
 texture = ExtResource("12_ja8dg")
 
-[node name="MusicSlider" type="VSlider" parent="TextureRect"]
+[node name="MusicSlider" type="VSlider" parent="TextureRect" unique_id=1823391671]
 layout_mode = 0
 offset_left = 537.0
 offset_top = 22.0
@@ -404,15 +404,15 @@ max_value = 1.0
 step = 0.01
 value = 0.7
 
-[node name="MusicSliderClick" type="FmodEventEmitter2D" parent="TextureRect/MusicSlider"]
+[node name="MusicSliderClick" type="FmodEventEmitter2D" parent="TextureRect/MusicSlider" unique_id=204689088]
 event_name = "event:/PickBlock"
 event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
-[node name="MusicSliderRelease" type="FmodEventEmitter2D" parent="TextureRect/MusicSlider"]
+[node name="MusicSliderRelease" type="FmodEventEmitter2D" parent="TextureRect/MusicSlider" unique_id=2010908200]
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
-[node name="SfxSlider" type="VSlider" parent="TextureRect"]
+[node name="SfxSlider" type="VSlider" parent="TextureRect" unique_id=1676640943]
 layout_mode = 0
 offset_left = 557.0
 offset_top = 22.0
@@ -426,15 +426,15 @@ max_value = 1.0
 step = 0.01
 value = 0.7
 
-[node name="SfxSliderClick" type="FmodEventEmitter2D" parent="TextureRect/SfxSlider"]
+[node name="SfxSliderClick" type="FmodEventEmitter2D" parent="TextureRect/SfxSlider" unique_id=1860793005]
 event_name = "event:/PickBlock"
 event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
-[node name="SfxSliderRelease" type="FmodEventEmitter2D" parent="TextureRect/SfxSlider"]
+[node name="SfxSliderRelease" type="FmodEventEmitter2D" parent="TextureRect/SfxSlider" unique_id=36568437]
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
-[node name="SpeedControl" type="TextureButton" parent="TextureRect"]
+[node name="SpeedControl" type="TextureButton" parent="TextureRect" unique_id=1737978279]
 layout_mode = 0
 offset_left = 515.0
 offset_top = 18.0
@@ -445,11 +445,11 @@ toggle_mode = true
 texture_normal = ExtResource("14_gqgsu")
 texture_pressed = ExtResource("15_4oryb")
 
-[node name="Switch" type="FmodEventEmitter2D" parent="TextureRect/SpeedControl"]
+[node name="Switch" type="FmodEventEmitter2D" parent="TextureRect/SpeedControl" unique_id=790683330]
 event_name = "event:/Switch"
 event_guid = "{4be42de0-2f0a-4ff1-ad9d-e2e8cf053fce}"
 
-[node name="RedoButton" type="TextureButton" parent="TextureRect"]
+[node name="RedoButton" type="TextureButton" parent="TextureRect" unique_id=1187551927]
 layout_mode = 0
 offset_left = 203.0
 offset_top = 19.0
@@ -462,15 +462,15 @@ texture_pressed = ExtResource("19_cdoyw")
 texture_hover = ExtResource("20_krlbp")
 stretch_mode = 3
 
-[node name="RedoButtonHover" type="FmodEventEmitter2D" parent="TextureRect/RedoButton"]
+[node name="RedoButtonHover" type="FmodEventEmitter2D" parent="TextureRect/RedoButton" unique_id=1342583237]
 event_name = "event:/PickBlock"
 event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
-[node name="RedoButtonPress" type="FmodEventEmitter2D" parent="TextureRect/RedoButton"]
+[node name="RedoButtonPress" type="FmodEventEmitter2D" parent="TextureRect/RedoButton" unique_id=1666403607]
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
-[node name="EraserButton" type="TextureButton" parent="TextureRect"]
+[node name="EraserButton" type="TextureButton" parent="TextureRect" unique_id=34065029]
 layout_mode = 0
 offset_left = 203.0
 offset_top = 39.0
@@ -483,35 +483,34 @@ texture_pressed = ExtResource("19_cdoyw")
 texture_hover = ExtResource("20_krlbp")
 stretch_mode = 3
 
-[node name="EraserButtonHover" type="FmodEventEmitter2D" parent="TextureRect/EraserButton"]
+[node name="EraserButtonHover" type="FmodEventEmitter2D" parent="TextureRect/EraserButton" unique_id=167585607]
 event_name = "event:/PickBlock"
 event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
-[node name="EraserButtonPress" type="FmodEventEmitter2D" parent="TextureRect/EraserButton"]
+[node name="EraserButtonPress" type="FmodEventEmitter2D" parent="TextureRect/EraserButton" unique_id=1811337323]
 event_name = "event:/PlaceBlock"
 event_guid = "{d443aee5-06e9-4550-8d0b-b2ab27437d7c}"
 
-[node name="ScreenOff" type="Sprite2D" parent="TextureRect"]
+[node name="ScreenOff" type="Sprite2D" parent="TextureRect" unique_id=1297188547]
 position = Vector2(458, 35)
 texture = ExtResource("23_vmoa0")
 
-[node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff"]
+[node name="ScreenOn" type="Sprite2D" parent="TextureRect/ScreenOff" unique_id=903511305]
 texture = ExtResource("22_ja8dg")
 
-[node name="ConductorSpawnScreen" parent="TextureRect/ScreenOff/ScreenOn" instance=ExtResource("21_ja8dg")]
+[node name="ConductorSpawnScreen" parent="TextureRect/ScreenOff/ScreenOn" unique_id=1033554051 instance=ExtResource("21_ja8dg")]
 offset_left = -41.0
 offset_top = -17.0
 offset_right = -41.0
 offset_bottom = -17.0
 
-[node name="Antenna" type="AnimatedSprite2D" parent="TextureRect"]
+[node name="Antenna" type="AnimatedSprite2D" parent="TextureRect" unique_id=101676416]
 position = Vector2(111, -71)
 sprite_frames = SubResource("SpriteFrames_5pvfp")
-animation = &"deploy"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 
-[node name="AntennaTip" type="GPUParticles2D" parent="TextureRect/Antenna"]
+[node name="AntennaTip" type="GPUParticles2D" parent="TextureRect/Antenna" unique_id=1701943775]
 position = Vector2(-75, -68)
 emitting = false
 amount = 60

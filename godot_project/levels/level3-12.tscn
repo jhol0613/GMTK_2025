@@ -22,20 +22,23 @@ conductor_spawn_beat = 15
 available_actions = Array[int]([4, 2, 3, 7])
 hints = Array[ExtResource("2_rblrv")]([SubResource("Resource_4pxc2")])
 
-[node name="Obstacles" parent="." index="3"]
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
 tile_map_data = PackedByteArray("AAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAMAAwABAAAAAAAJAAIAAQAAAAMAAAAJAAEAAQAAAAMAAAAJAAAAAQAAAAMAAAACAAIAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAACAAQAAQAAAAMAAAAEAAUAAQAAAAMAAAABAAUAAQAAAAMAAAA=")
 
-[node name="PointLight2D" parent="BackWall" index="0"]
+[node name="PointLight2D" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="0" unique_id=1100077405]
 range_item_cull_mask = 1
 
-[node name="PointLight2D2" parent="BackWall" index="1"]
+[node name="PointLight2D2" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="1" unique_id=725947962]
 range_item_cull_mask = 1
 
-[node name="PointLight2D3" parent="BackWall" index="2"]
+[node name="PointLight2D3" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="2" unique_id=707692299]
 range_item_cull_mask = 1
 
-[node name="PointLight2D4" parent="BackWall" index="3"]
+[node name="PointLight2D4" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="3" unique_id=69304020]
 range_item_cull_mask = 1
+
+[node name="RightRoof" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="2" unique_id=285994768]
+position = Vector2(6, -8)
 
 [node name="GreenTeleporter" parent="." index="9" unique_id=1808947940 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_c10kv")]
 position = Vector2(80, 106)

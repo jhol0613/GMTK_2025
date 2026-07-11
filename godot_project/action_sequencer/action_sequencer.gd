@@ -154,7 +154,7 @@ func play():
 		return
 
 	AudioManager.set_music_mode(Enums.MusicMode.RUNNING)
-	_action_items.visible = false
+	#_action_items.visible = false
 
 	# Wait for specified delay (for external animations) to start sequencing actions
 	#await get_tree().create_timer(play_action_delay).timeout

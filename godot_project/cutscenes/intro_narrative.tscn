@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dbp5a6kd8shvl"]
+[gd_scene format=3 uid="uid://dbp5a6kd8shvl"]
 
 [ext_resource type="Script" uid="uid://cs0nlhxwdxuvn" path="res://cutscenes/intro_narrative.gd" id="1_eeae7"]
 [ext_resource type="Texture2D" uid="uid://b1mpsqclad6c1" path="res://cutscenes/conductorstory.png" id="1_h0spu"]
@@ -219,12 +219,12 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="Narrative" type="Control"]
+[node name="Narrative" type="Control" unique_id=1956733982]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_eeae7")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=471399433]
 z_index = -1000
 custom_minimum_size = Vector2(38.945, 0)
 layout_mode = 0
@@ -232,36 +232,36 @@ offset_right = 601.0
 offset_bottom = 452.0
 color = Color(0.0987284, 0.0987284, 0.0987284, 1)
 
-[node name="conductor" type="AnimatedSprite2D" parent="."]
+[node name="conductor" type="AnimatedSprite2D" parent="." unique_id=152916468]
 position = Vector2(272.5, 244)
 sprite_frames = SubResource("SpriteFrames_sj5x1")
 
-[node name="passenger_and_player" type="AnimatedSprite2D" parent="."]
+[node name="passenger_and_player" type="AnimatedSprite2D" parent="." unique_id=1898606576]
 z_index = 1
 position = Vector2(313.5, 200)
 sprite_frames = SubResource("SpriteFrames_hq7jj")
 
-[node name="bench" type="AnimatedSprite2D" parent="."]
+[node name="bench" type="AnimatedSprite2D" parent="." unique_id=1589418277]
 z_index = -2
 position = Vector2(318.5, 218)
 sprite_frames = SubResource("SpriteFrames_eab8e")
 
-[node name="bench_back" type="AnimatedSprite2D" parent="bench"]
+[node name="bench_back" type="AnimatedSprite2D" parent="bench" unique_id=444551779]
 z_index = -2
 position = Vector2(31, 0)
 sprite_frames = SubResource("SpriteFrames_eab8e")
 flip_h = true
 
-[node name="BenchTimer" type="Timer" parent="."]
+[node name="BenchTimer" type="Timer" parent="." unique_id=369116582]
 wait_time = 10.0
 one_shot = true
 autostart = true
 
-[node name="SkipHintTimer" type="Timer" parent="."]
+[node name="SkipHintTimer" type="Timer" parent="." unique_id=765397543]
 wait_time = 3.0
 autostart = true
 
-[node name="SkipHint" type="Label" parent="."]
+[node name="SkipHint" type="Label" parent="." unique_id=1773941732]
 visible = false
 layout_mode = 0
 offset_left = 466.0
@@ -270,7 +270,7 @@ offset_right = 591.0
 offset_bottom = 442.0
 text = "Press K to skip..."
 
-[node name="StartTimer" type="Timer" parent="."]
+[node name="StartTimer" type="Timer" parent="." unique_id=604145023]
 wait_time = 1.5
 one_shot = true
 autostart = true

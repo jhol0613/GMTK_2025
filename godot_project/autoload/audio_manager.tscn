@@ -1,17 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bdjcj7pwehwv4"]
+[gd_scene format=3 uid="uid://bdjcj7pwehwv4"]
 
 [ext_resource type="Script" uid="uid://c8m33vvls5etu" path="res://autoload/audio_manager.gd" id="1_u6vuv"]
 
-[node name="AudioManager" type="FmodBankLoader"]
+[node name="AudioManager" type="FmodBankLoader" unique_id=1829761843]
 bank_paths = ["res://fmod_banks/Desktop/Master.strings.bank", "res://fmod_banks/Desktop/Master.bank", "res://fmod_banks/Desktop/Main.bank"]
 script = ExtResource("1_u6vuv")
 bpm = 170.0
 
-[node name="MusicEvent" type="FmodEventEmitter2D" parent="."]
+[node name="MusicEvent" type="FmodEventEmitter2D" parent="." unique_id=490720241]
 event_name = "event:/PickBlock"
 event_guid = "{f10cb96c-7053-4aef-b2e2-d24c6ddee678}"
 
-[node name="Listener" type="FmodListener2D" parent="."]
+[node name="Listener" type="FmodListener2D" parent="." unique_id=329392529]
 
 [connection signal="stopped" from="MusicEvent" to="." method="on_music_stopped"]
 [connection signal="timeline_beat" from="MusicEvent" to="." method="_on_music_event_timeline_beat"]
