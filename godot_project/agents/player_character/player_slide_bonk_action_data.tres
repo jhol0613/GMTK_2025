@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="MovableActionData" format=3 uid="uid://riflchehf8lc"]
 
 [ext_resource type="Script" uid="uid://bqsf0t8306cyy" path="res://agents/movable_action_data.gd" id="1_06g4g"]
+[ext_resource type="Curve" uid="uid://d2k5xde38rkpw" path="res://agents/null_curve.tres" id="2_riko4"]
 
 [sub_resource type="Curve" id="Curve_gli1f"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.507484), 1.828, -2.842, 0, 0, Vector2(0.711055, 0.00888669), -0.319065, -0.319065, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -9,5 +10,6 @@ point_count = 4
 [resource]
 script = ExtResource("1_06g4g")
 direct_movement_curve = SubResource("Curve_gli1f")
+y_movement_curve = ExtResource("2_riko4")
 move_duration = 0.6
 metadata/_custom_type_script = "uid://bqsf0t8306cyy"

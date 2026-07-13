@@ -123,5 +123,13 @@ func get_collectible_car() -> PackedScene:
 	else:
 		return world_definitions[_current_world].collectible_car
 
+func get_collectible_level_names() -> Array[String]:
+	var names : Array[String]
+	for i in range(world_definitions.size()):
+		for j in range(world_definitions[i].levels.size()):
+			if world_definitions[i].levels[j].collectible:
+				names.append(get_display_name(i, j))
+	return names
+
 func get_current_index() -> Dictionary:
 	return {"world": _current_world, "level": _current_level}

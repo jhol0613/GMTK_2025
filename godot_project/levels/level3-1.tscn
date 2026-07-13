@@ -14,7 +14,7 @@ conductor_spawn_beat = 6
 conductor_spawn_position = Vector2i(0, 3)
 available_actions = Array[int]([1, 2, 4, 7, 5])
 
-[node name="Obstacles" parent="." index="3"]
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
 tile_map_data = PackedByteArray("AAAHAAMAAQABAAMAAAAIAAMAAQABAAMAAAAHAAIAAQABAAMAAAAIAAEAAQABAAMAAAAJAAEAAQABAAMAAAAKAAEAAQABAAMAAAAAAAQAAQABAAMAAAA=")
 
 [node name="Laser" parent="." index="9" unique_id=2112256705 instance=ExtResource("2_8aue3")]

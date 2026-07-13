@@ -11,6 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://bp7lb26ts0xvp" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill_on_spin_chair.tscn" id="8_3uvtg"]
 [ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="9_af5w0"]
 
+[sub_resource type="Resource" id="Resource_r04a0"]
+script = ExtResource("2_r04a0")
+index = 4
+action = 2
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
 [sub_resource type="Resource" id="Resource_iow7r"]
 script = ExtResource("2_r04a0")
 index = 1
@@ -20,8 +26,8 @@ metadata/_custom_type_script = "uid://cefvtumj4eayh"
 [node name="LevelBase" unique_id=168575382 instance=ExtResource("1_psfox")]
 display_name = "2-10"
 conductor_spawn_beat = 5
-available_actions = Array[int]([4, 1, 2, 7])
-hints = Array[ExtResource("2_r04a0")]([SubResource("Resource_iow7r")])
+available_actions = Array[int]([4, 1, 2])
+hints = Array[ExtResource("2_r04a0")]([SubResource("Resource_r04a0"), SubResource("Resource_iow7r")])
 
 [node name="ComputerTerminal" parent="." index="9" unique_id=418795679 instance=ExtResource("3_np4t2")]
 position = Vector2(49, 30)

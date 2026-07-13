@@ -16,14 +16,21 @@ display_name = "She Can Sleep Like That?"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 conductor_spawn_position = Vector2i(0, 3)
-available_actions = Array[int]([4, 1, 2, 3, 7])
+available_actions = Array[int]([4, 1, 2, 7])
 hints = Array[ExtResource("2_o5ngy")]([SubResource("Resource_jsn7p")])
 
-[node name="CartTracks" parent="." index="2"]
+[node name="Decorative" parent="." index="0" unique_id=1207528347]
+y_sort_enabled = true
+tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAACAAAABwABAAEAAAACAAEABwABAAIAAAAJAAAABwAAAAEAAAAJAAEABwAAAAIAAAA=")
+
+[node name="CartTracks" parent="." index="2" unique_id=169080404]
 tile_map_data = PackedByteArray("AAAGAAIAAAABAAYAAAAHAAIAAAABAAMAAAAFAAIAAAABAAIAAAAEAAIAAAABAAIAAAADAAIAAAABAAMAABA=")
 
-[node name="Obstacles" parent="." index="3"]
-tile_map_data = PackedByteArray("AAAAAAEAAQAAAAMAAAABAAEAAQAAAAMAAAACAAEAAQAAAAMAAAADAAEAAQAAAAMAAAAEAAEAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAAHAAEAAQAAAAMAAAAIAAEAAQAAAAMAAAAJAAEAAQAAAAMAAAAKAAEAAQAAAAMAAAA=")
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
+tile_map_data = PackedByteArray("AAAAAAEABAAAAAAAAAABAAEABAACAAAAAAACAAEABAABAAAAAAAEAAEABAAAAAAAAAAFAAEABAACAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAACAAAAAAAKAAEABAABAAAAAAADAAAACQAAAAAAAAAHAAAACQACAAAAAAA=")
+
+[node name="RightRoof" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="2" unique_id=285994768]
+position = Vector2(6, -8)
 
 [node name="CatCartObstacle" parent="." index="9" unique_id=118345962 instance=ExtResource("2_6s3v3")]
 position = Vector2(208, 50)
@@ -32,13 +39,13 @@ movement_path = Array[int]([4, 3, 3, 3, 3, 4, 4, 4])
 [node name="Key" parent="." index="10" unique_id=595792200 instance=ExtResource("3_6s3v3")]
 position = Vector2(111, 81)
 
-[node name="Wheelwell" parent="AdditionalSprites" index="1"]
+[node name="Wheelwell" parent="AdditionalSprites" parent_id_path=PackedInt32Array(1869906223) index="1" unique_id=1713027029]
 z_index = -1
 
-[node name="Wheelwell2" parent="AdditionalSprites" index="2"]
+[node name="Wheelwell2" parent="AdditionalSprites" parent_id_path=PackedInt32Array(1869906223) index="2" unique_id=481940145]
 z_index = -1
 
-[node name="Lock" parent="AdditionalSprites" index="3"]
+[node name="Lock" parent="AdditionalSprites" parent_id_path=PackedInt32Array(1869906223) index="3" unique_id=703155625]
 light_mask = 1
 animation = &"vanish"
 autoplay = ""

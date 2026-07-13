@@ -24,15 +24,15 @@ var _beat := 0
 
 
 func _ready():
-	var first_play = SaveManager.save_data.furthest_level_reached["level"] == 0 and \
-		SaveManager.save_data.furthest_level_reached["world"] == 0
 	
-	if first_play:
+	if SaveManager.first_play:
 		_play_button.visible = true
+		_continue_button.visible = false
 		_click_start_emitter.visible = false
 		_map_button.visible = false
 	else:
 		_play_button.visible = false
+		_continue_button.visible = true
 		_click_start_emitter.visible = true
 		_map_button.visible = true
 	
@@ -40,7 +40,7 @@ func _ready():
 	AudioManager.play_music_event(music_event_name, music_event_bpm, false)
 
 func _on_play_pressed() -> void:
-	GameManager.load_scene(Enums.Scenes.INTRO_CUTSCENE)
+	GameManager.load_scene(Enums.Scenes.LEVEL_MANAGER)
 
 func _on_continue_pressed() -> void:
 	GameManager.start_world = SaveManager.save_data.furthest_level_reached["world"]

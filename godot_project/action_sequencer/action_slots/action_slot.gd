@@ -50,6 +50,7 @@ var eraser_mode: bool = false
 @onready var sequence_light_on := false: set = _update_sequence_light
 @onready var flashing = false
 @onready var _current_sequence_light_color := thinking_light_color
+@onready var delete_decal := $DeleteDecal
 
 signal action_slot_clicked(ActionSlot)
 signal stopped_flashing(ActionSlot)
@@ -80,6 +81,7 @@ func set_action(new_action: Enums.PlayerAction, silent = false):
 	action = new_action
 	texture_rect.texture = action_textures.get(action)
 	hover_light_on = false
+	delete_decal.hide()
 	if not silent:
 		place_block_emitter.play()
 
@@ -152,17 +154,23 @@ func _on_gui_input(event: InputEvent) -> void:
 
 func _on_mouse_entered(force_hover_texture = false) -> void:
 	mouse_hovering = true
-	if ui_interaction_enabled and (action != preview_action or force_hover_texture):
-		if not is_hinted or eraser_mode:
-			hover_light_on = true
-			texture_rect.texture = action_textures.get(preview_action)
-		if flashing:
-			stop_flashing()
-			stopped_flashing.emit(self)
+	if not ui_interaction_enabled or \
+	action == preview_action and not force_hover_texture:
+		return
+
+	if not is_hinted:
+		hover_light_on = true
+		texture_rect.texture = action_textures.get(preview_action)
+	if eraser_mode:
+		delete_decal.show()
+	if flashing:
+		stop_flashing()
+		stopped_flashing.emit(self)
 
 func _on_mouse_exited() -> void:
 	mouse_hovering = false
 	hover_light_on = false
+	delete_decal.hide()
 	if action == Enums.PlayerAction.NONE:
 		texture_rect.texture = null
 	else:

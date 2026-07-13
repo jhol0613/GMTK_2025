@@ -215,7 +215,7 @@ tile_set = ExtResource("7_x6ye1")
 [node name="RightRoof" type="TileMapLayer" parent="RightExteriorFloor" unique_id=285994768]
 light_mask = 2
 z_index = 2
-position = Vector2(6, -8)
+position = Vector2(0, -7.999974)
 rotation = 3.14159
 scale = Vector2(1, -1)
 tile_map_data = PackedByteArray("AAAAAP3/AwAAAAAAABAAAP7/AwAAAAEAABAAAP//AwAAAAIAABAAAAAAAwAAAAMAABD///3/BAAAAAAAABD+//3/BAAAAAAAABD9//3/BAAAAAAAABD8//3/BAAAAAAAABD7//3/BAAAAAAAAAD6//3/BAAAAAAAAAA=")

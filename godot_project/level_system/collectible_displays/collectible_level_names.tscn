@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://km3fwpqprptv"]
+
+[ext_resource type="Script" uid="uid://ctg30qjwqbvo7" path="res://level_system/collectible_displays/collectible_level_names.gd" id="1_i3k35"]
+[ext_resource type="FontFile" uid="uid://sus8cyiovrn0" path="res://ui_icons/fonts/VormgeversCAPS.ttf" id="2_2brqc"]
+
+[node name="CollectibleLevelNames" type="Node2D" unique_id=369984411]
+script = ExtResource("1_i3k35")
+
+[node name="LevelLabels" type="GridContainer" parent="." unique_id=1056625131]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 3
+
+[node name="Label" type="Label" parent="LevelLabels" unique_id=1525045171]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2brqc")
+theme_override_font_sizes/font_size = 18
+text = "Example Label"

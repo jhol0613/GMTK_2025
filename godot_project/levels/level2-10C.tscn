@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cpb2raijtqkoe"]
 
 [ext_resource type="PackedScene" uid="uid://cy0877omjeja8" path="res://levels/level2-10.tscn" id="1_cir2f"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_3uqt3"]
 [ext_resource type="PackedScene" uid="uid://dtwktrcf8naij" path="res://agents/collectibles/collectible.tscn" id="2_kd6po"]
 
 [node name="LevelBase" unique_id=1835452848 instance=ExtResource("1_cir2f")]
 conductor_spawn_beat = 10
+hints = Array[ExtResource("2_3uqt3")]([])
 
 [node name="Collectible2" parent="." index="21" unique_id=1006060538 instance=ExtResource("2_kd6po")]
 position = Vector2(17, 80)

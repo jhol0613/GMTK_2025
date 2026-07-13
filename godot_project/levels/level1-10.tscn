@@ -13,16 +13,16 @@ metadata/_custom_type_script = "uid://cefvtumj4eayh"
 display_name = "A Rest or Arrest"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_position = Vector2i(0, 3)
-available_actions = Array[int]([4, 1, 2])
+available_actions = Array[int]([4])
 hints = Array[ExtResource("2_m351s")]([SubResource("Resource_233cq")])
 
-[node name="Obstacles" parent="." index="3"]
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
 tile_map_data = PackedByteArray(0, 0, 10, 0, 255, 255, 2, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="LeftExterior" parent="LeftExteriorFloor" index="0"]
+[node name="LeftExterior" parent="LeftExteriorFloor" parent_id_path=PackedInt32Array(285330550) index="0" unique_id=1430336634]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 12, 0, 0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 20, 0, 0, 0, 255, 255, 3, 0, 0, 0, 0, 0, 21, 0, 0, 0)
 
-[node name="RightExterior" parent="RightExteriorFloor" index="0"]
+[node name="RightExterior" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="0" unique_id=3075045]
 tile_map_data = PackedByteArray(0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 20, 0, 0, 0, 255, 255, 3, 0, 0, 0, 0, 0, 21, 0, 0, 0, 255, 255, 1, 0, 0, 0, 0, 0, 12, 0, 0, 16)
 
 [node name="Laser" parent="." index="8" unique_id=876836205 instance=ExtResource("2_233cq")]

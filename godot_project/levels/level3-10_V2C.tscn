@@ -16,19 +16,19 @@ conductor_spawn_beat = 3
 available_slots = 7
 available_actions = Array[int]([1, 2, 3, 4, 7])
 
-[node name="Obstacles" parent="." index="3"]
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
 tile_map_data = PackedByteArray("AAADAAAAAQAAAAMAAAAKAAUAAQAAAAMAAAAIAAMAAQAAAAMAAAABAAMABAAAAAAAAAADAAMABAABAAAAAAACAAMABAACAAAAAAAJAAIAAQAAAAMAAAAIAAEAAQAAAAMAAAAFAAMAAQAAAAMAAAAGAAMAAQAAAAMAAAADAAEAAQAAAAMAAAAIAAAAAQAAAAMAAAAGAAUAAQAAAAMAAAAEAAQAAQAAAAMAAAAFAAEAAQAAAAMAAAAGAAEAAQAAAAMAAAA=")
 
-[node name="PointLight2D" parent="BackWall" index="0"]
+[node name="PointLight2D" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="0" unique_id=1100077405]
 range_item_cull_mask = 1
 
-[node name="PointLight2D2" parent="BackWall" index="1"]
+[node name="PointLight2D2" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="1" unique_id=725947962]
 range_item_cull_mask = 1
 
-[node name="PointLight2D3" parent="BackWall" index="2"]
+[node name="PointLight2D3" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="2" unique_id=707692299]
 range_item_cull_mask = 1
 
-[node name="PointLight2D4" parent="BackWall" index="3"]
+[node name="PointLight2D4" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="3" unique_id=69304020]
 range_item_cull_mask = 1
 
 [node name="HideBench" parent="." index="9" unique_id=589809051 instance=ExtResource("2_b7vaw")]

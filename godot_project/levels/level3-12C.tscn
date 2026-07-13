@@ -14,24 +14,26 @@
 
 [node name="LevelBase" unique_id=1805685725 instance=ExtResource("1_sh0at")]
 display_name = "3-12"
-left_exit_counts_as_beating_level = null
 conductor_spawn_beat = 15
 available_actions = Array[int]([4, 2, 3, 7])
 
-[node name="Obstacles" parent="." index="3"]
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
 tile_map_data = PackedByteArray("AAAEAAEAAQAAAAMAAAAEAAAAAQAAAAMAAAAEAAMAAwABAAAAAAAJAAIAAQAAAAMAAAAJAAEAAQAAAAMAAAAJAAAAAQAAAAMAAAACAAIAAQAAAAMAAAACAAEAAQAAAAMAAAACAAAAAQAAAAMAAAACAAQAAQAAAAMAAAAEAAUAAQAAAAMAAAABAAUAAQAAAAMAAAA=")
 
-[node name="PointLight2D" parent="BackWall" index="0"]
+[node name="PointLight2D" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="0" unique_id=1100077405]
 range_item_cull_mask = 1
 
-[node name="PointLight2D2" parent="BackWall" index="1"]
+[node name="PointLight2D2" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="1" unique_id=725947962]
 range_item_cull_mask = 1
 
-[node name="PointLight2D3" parent="BackWall" index="2"]
+[node name="PointLight2D3" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="2" unique_id=707692299]
 range_item_cull_mask = 1
 
-[node name="PointLight2D4" parent="BackWall" index="3"]
+[node name="PointLight2D4" parent="BackWall" parent_id_path=PackedInt32Array(445055544) index="3" unique_id=69304020]
 range_item_cull_mask = 1
+
+[node name="RightRoof" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="2" unique_id=285994768]
+position = Vector2(6, -8)
 
 [node name="GreenTeleporter" parent="." index="9" unique_id=333593764 node_paths=PackedStringArray("destination_targets", "top") instance=ExtResource("2_4mgwl")]
 position = Vector2(80, 106)
@@ -71,6 +73,7 @@ flip_horizontal = true
 position = Vector2(-2, -8)
 
 [node name="Collectible" parent="." index="14" unique_id=1690170488 instance=ExtResource("6_155wd")]
+visible = false
 position = Vector2(208, 42)
 
 [node name="GreenTeleporterTop" parent="." index="15" unique_id=739461446 instance=ExtResource("7_je8eh")]

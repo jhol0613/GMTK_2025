@@ -5,7 +5,7 @@ extends FmodBankLoader
 @export var time_multiplier := Enums.TimeMultiplier.SINGLE: set = _time_multiplier_changed
 ## The amount of time for a single beat in seconds
 @onready var beat_time_seconds := 60.0 * time_multiplier / (bpm * 4)
-@onready var music_event := $MusicEvent
+@onready var music_event : FmodEventEmitter2D = $MusicEvent
 
 signal music_bar
 signal music_complete
@@ -57,7 +57,7 @@ func play_world_complete_music():
 		#music_event.set_parameter("GameOver", 1.0)
 
 ##If restart set to false, music won't start over if the requested music event is already playing
-func play_music_event(event_name: String, new_bpm: float, restart = true):
+func play_music_event(event_name: String, new_bpm: float, restart = true, alternate_intro = false):
 	if music_event.event_name == "event:/" + event_name and not restart:
 		return
 	FmodServer.set_global_parameter_by_name("GameOver", 0.0)
@@ -65,6 +65,7 @@ func play_music_event(event_name: String, new_bpm: float, restart = true):
 	music_event.event_name = "event:/" + event_name
 	bpm = new_bpm
 	bpm_changed.emit(bpm)
+	FmodServer.set_global_parameter_by_name("AlternateIntro", int(alternate_intro))
 	music_event.play()
 
 func on_music_stopped():

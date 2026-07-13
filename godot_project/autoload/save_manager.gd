@@ -11,6 +11,9 @@ var save_data_path = "user://save_data.tres"
 var save_data: SaveData
 var enable_save := true
 
+##Whether this is the first time the game's been played
+var first_play
+
 #region Solutions
 
 func save_solution(solution: Array[Enums.PlayerAction], uid: int, index: int) -> bool:
@@ -53,6 +56,9 @@ func _ready() -> void:
 		save_game()
 	else:
 		load_game()
+	
+	first_play = save_data.furthest_level_reached["level"] <= 1 and \
+		save_data.furthest_level_reached["world"] <= 1
 
 
 ##Save current game state to the file

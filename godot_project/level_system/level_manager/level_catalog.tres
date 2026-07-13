@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="LevelCatalog" load_steps=110 format=3 uid="uid://bhskeg8clmay6"]
+[gd_resource type="Resource" script_class="LevelCatalog" format=3 uid="uid://bhskeg8clmay6"]
 
 [ext_resource type="Script" uid="uid://4j1dtwn2r7t1" path="res://level_system/level_manager/level_catalog.gd" id="1_vetjv"]
 [ext_resource type="Script" uid="uid://dk64rba8fhrtt" path="res://level_system/level_manager/world_definition.gd" id="2_lqinw"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bb0wlqq06138" path="res://backgrounds/world1/world1_background.tscn" id="3_oivuf"]
 [ext_resource type="PackedScene" uid="uid://dco8dneiqmglo" path="res://levels/level1-1.tscn" id="3_ydpb6"]
 [ext_resource type="PackedScene" uid="uid://qktyo80o850a" path="res://levels/level1-2.tscn" id="4_rcuhu"]
+[ext_resource type="PackedScene" uid="uid://bwbw2s6jk27a0" path="res://levels/intro_level.tscn" id="5_k6k1i"]
 [ext_resource type="PackedScene" uid="uid://krk6lavhbs40" path="res://levels/level1-8.tscn" id="5_peuoq"]
 [ext_resource type="PackedScene" uid="uid://bthrchsoqpjv4" path="res://levels/level1-4.tscn" id="7_xo8rd"]
 [ext_resource type="PackedScene" uid="uid://dncuem05x6ioe" path="res://levels/level1-5_V2.tscn" id="8_fk8s6"]
@@ -52,10 +53,14 @@
 [ext_resource type="PackedScene" uid="uid://w2fypr8pvqj0" path="res://levels/level3-9C.tscn" id="45_xpa8w"]
 [ext_resource type="PackedScene" uid="uid://c8nmnp0nakg6m" path="res://levels/level3-10_V2C.tscn" id="47_s1xyy"]
 [ext_resource type="PackedScene" uid="uid://sgl6wm0xs1th" path="res://levels/level3-9.tscn" id="48_1x4po"]
+[ext_resource type="PackedScene" uid="uid://mw374qbgvht0" path="res://levels/level3-1.tscn" id="49_4lmby"]
 [ext_resource type="PackedScene" uid="uid://dqkvody2ol4r8" path="res://levels/level3-10_V2.tscn" id="49_fc5oy"]
 [ext_resource type="PackedScene" uid="uid://8qwohyb5h1tm" path="res://levels/level3-11C.tscn" id="49_isgho"]
 [ext_resource type="PackedScene" uid="uid://c0lpb8u54s0rd" path="res://levels/test_levels/teleporter_test_level.tscn" id="49_nne5e"]
 [ext_resource type="PackedScene" uid="uid://bh5ec0yys4ety" path="res://levels/level3-10.tscn" id="50_fk8s6"]
+[ext_resource type="PackedScene" uid="uid://bixv2o76a07e7" path="res://levels/level3-12C.tscn" id="51_4lmby"]
+[ext_resource type="PackedScene" uid="uid://cs55rosw0upr2" path="res://levels/level3-3.tscn" id="51_15cvr"]
+[ext_resource type="PackedScene" uid="uid://cyx2a6u3pgvsa" path="res://levels/level3-4.tscn" id="52_5ulpv"]
 [ext_resource type="PackedScene" uid="uid://cpeu3l5fgvpk6" path="res://levels/test_levels/spinning_chair_test_level.tscn" id="52_30pcr"]
 [ext_resource type="PackedScene" uid="uid://dp43qoojpooal" path="res://levels/test_levels/antenna_test_level.tscn" id="53_7y0qp"]
 [ext_resource type="PackedScene" uid="uid://be2qsy855xkru" path="res://levels/level1-10C.tscn" id="55_kwvbr"]
@@ -63,68 +68,62 @@
 [ext_resource type="PackedScene" uid="uid://c21ovtt8hac3l" path="res://levels/level1-13_V2C.tscn" id="57_pvehw"]
 [ext_resource type="PackedScene" uid="uid://dxamtpnnaaxku" path="res://levels/level2-9_V2C.tscn" id="58_qjc6i"]
 
+[sub_resource type="Resource" id="Resource_2mi6j"]
+script = ExtResource("14_agh00")
+original = ExtResource("5_k6k1i")
+metadata/_custom_type_script = "uid://bogveiln632se"
+
 [sub_resource type="Resource" id="Resource_agh00"]
 script = ExtResource("14_agh00")
 original = ExtResource("3_ydpb6")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_xpa8w"]
 script = ExtResource("14_agh00")
 original = ExtResource("4_rcuhu")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_fc5oy"]
 script = ExtResource("14_agh00")
 original = ExtResource("7_xo8rd")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_s1xyy"]
 script = ExtResource("14_agh00")
 original = ExtResource("8_fk8s6")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_isgho"]
 script = ExtResource("14_agh00")
 original = ExtResource("9_nmtjp")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_4lmby"]
 script = ExtResource("14_agh00")
 original = ExtResource("10_y8p5u")
 collectible = ExtResource("55_kwvbr")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_k6k1i"]
 script = ExtResource("14_agh00")
 original = ExtResource("5_peuoq")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_15cvr"]
 script = ExtResource("14_agh00")
 original = ExtResource("11_y48yf")
 collectible = ExtResource("56_7kw4m")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_5ulpv"]
 script = ExtResource("14_agh00")
 original = ExtResource("12_sv7wc")
 collectible = ExtResource("57_pvehw")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_hug5r"]
 script = ExtResource("14_agh00")
 original = ExtResource("13_e7wa4")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
-[sub_resource type="Resource" id="Resource_wmh5c"]
+[sub_resource type="Resource" id="Resource_3qwdo"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("3_oivuf")
-levels = Array[ExtResource("14_agh00")]([SubResource("Resource_agh00"), SubResource("Resource_xpa8w"), SubResource("Resource_fc5oy"), SubResource("Resource_s1xyy"), SubResource("Resource_isgho"), SubResource("Resource_4lmby"), SubResource("Resource_k6k1i"), SubResource("Resource_15cvr"), SubResource("Resource_5ulpv"), SubResource("Resource_hug5r")])
+levels = Array[ExtResource("14_agh00")]([SubResource("Resource_2mi6j"), SubResource("Resource_agh00"), SubResource("Resource_xpa8w"), SubResource("Resource_fc5oy"), SubResource("Resource_s1xyy"), SubResource("Resource_isgho"), SubResource("Resource_4lmby"), SubResource("Resource_k6k1i"), SubResource("Resource_15cvr"), SubResource("Resource_5ulpv"), SubResource("Resource_hug5r")])
 level_select_scene = 5
 music_event_name = "World1_BGM"
 music_event_bpm = 170.0
 collectible_car = ExtResource("3_agh00")
-antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_831uk"]
@@ -193,72 +192,73 @@ music_event_name = "World2_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
 collectible_car = ExtResource("15_xpa8w")
-antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_kxjwu"]
 script = ExtResource("14_agh00")
 original = ExtResource("29_y2rew")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_bp8tn"]
 script = ExtResource("14_agh00")
 original = ExtResource("30_y2rew")
-metadata/_custom_type_script = "uid://bogveiln632se"
+
+[sub_resource type="Resource" id="Resource_573c6"]
+script = ExtResource("14_agh00")
+original = ExtResource("49_4lmby")
+
+[sub_resource type="Resource" id="Resource_y5e7o"]
+script = ExtResource("14_agh00")
+original = ExtResource("51_15cvr")
+
+[sub_resource type="Resource" id="Resource_q21cx"]
+script = ExtResource("14_agh00")
+original = ExtResource("52_5ulpv")
 
 [sub_resource type="Resource" id="Resource_b6o46"]
 script = ExtResource("14_agh00")
 original = ExtResource("35_sb2tf")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_i4hiu"]
 script = ExtResource("14_agh00")
 original = ExtResource("36_s30ns")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_c0107"]
 script = ExtResource("14_agh00")
 original = ExtResource("37_8402a")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_amh11"]
 script = ExtResource("14_agh00")
 original = ExtResource("38_ga4mb")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_3r0lm"]
 script = ExtResource("14_agh00")
 original = ExtResource("48_1x4po")
 collectible = ExtResource("45_xpa8w")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_iobns"]
 script = ExtResource("14_agh00")
 original = ExtResource("49_fc5oy")
 collectible = ExtResource("47_s1xyy")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_wepqg"]
 script = ExtResource("14_agh00")
 original = ExtResource("40_30pcr")
 collectible = ExtResource("49_isgho")
-metadata/_custom_type_script = "uid://bogveiln632se"
 
 [sub_resource type="Resource" id="Resource_dniod"]
 script = ExtResource("14_agh00")
 original = ExtResource("40_sv7wc")
-metadata/_custom_type_script = "uid://bogveiln632se"
+collectible = ExtResource("51_4lmby")
 
 [sub_resource type="Resource" id="Resource_3js1v"]
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("40_fk8s6")
-levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_iobns"), SubResource("Resource_wepqg"), SubResource("Resource_dniod")])
+levels = Array[ExtResource("14_agh00")]([SubResource("Resource_kxjwu"), SubResource("Resource_bp8tn"), SubResource("Resource_573c6"), SubResource("Resource_y5e7o"), SubResource("Resource_q21cx"), SubResource("Resource_b6o46"), SubResource("Resource_i4hiu"), SubResource("Resource_c0107"), SubResource("Resource_amh11"), SubResource("Resource_3r0lm"), SubResource("Resource_iobns"), SubResource("Resource_wepqg"), SubResource("Resource_dniod")])
 level_select_scene = 7
 music_event_name = "World3_BGM"
 music_event_bpm = 160.0
 transition_scene = ExtResource("20_5wr1n")
 collectible_car = ExtResource("30_fc5oy")
-antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [sub_resource type="Resource" id="Resource_mbm5a"]
@@ -325,13 +325,11 @@ metadata/_custom_type_script = "uid://bogveiln632se"
 script = ExtResource("2_lqinw")
 world_scene = ExtResource("34_3js1v")
 levels = Array[ExtResource("14_agh00")]([SubResource("Resource_mbm5a"), SubResource("Resource_l1c24"), SubResource("Resource_6cenb"), SubResource("Resource_tiysq"), SubResource("Resource_o67xc"), SubResource("Resource_j5min"), SubResource("Resource_3meng"), SubResource("Resource_47x0y"), SubResource("Resource_hoyem"), SubResource("Resource_77x0c"), SubResource("Resource_lb5ed"), SubResource("Resource_gb6cx")])
-level_select_scene = 0
 music_event_name = "World2_BGM"
 music_event_bpm = 160.0
-antenna_deployed = false
 metadata/_custom_type_script = "uid://dk64rba8fhrtt"
 
 [resource]
 script = ExtResource("1_vetjv")
-world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_wmh5c"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr")])
+world_definitions = Array[ExtResource("2_lqinw")]([SubResource("Resource_3qwdo"), SubResource("Resource_ydpb6"), SubResource("Resource_3js1v"), SubResource("Resource_u7mwr")])
 metadata/_custom_type_script = "uid://4j1dtwn2r7t1"
