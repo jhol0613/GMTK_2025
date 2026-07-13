@@ -285,7 +285,7 @@ func _initialize_path_finding():
 	path_grid.update()
 
 func _on_target_area_entered(area: Area2D) -> void:
-	if area.owner is PlayerCharacter and _keys_collected >= keys.size():
+	if area.get_collision_layer_value(Enums.CollisionLayer.PLAYER) and _keys_collected >= keys.size():
 		target_reached.emit()
 	elif area.owner is Conductor:
 		conductor_reached_target.emit()
