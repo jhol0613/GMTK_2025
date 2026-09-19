@@ -70,10 +70,6 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tigw"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1gc2"]
-atlas = ExtResource("21_krlbp")
-region = Rect2(492, 471, 164, 157)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_yk6ra"]
 atlas = ExtResource("21_krlbp")
 region = Rect2(0, 0, 164, 157)
@@ -140,14 +136,6 @@ region = Rect2(492, 471, 164, 157)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5pvfp"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y1gc2")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yk6ra")
@@ -507,6 +495,7 @@ offset_bottom = -17.0
 [node name="Antenna" type="AnimatedSprite2D" parent="TextureRect" unique_id=101676416]
 position = Vector2(111, -71)
 sprite_frames = SubResource("SpriteFrames_5pvfp")
+animation = &"deploy"
 script = ExtResource("22_vmoa0")
 metadata/_custom_type_script = "uid://dc8yw4ksjvsgl"
 

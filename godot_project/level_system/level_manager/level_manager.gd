@@ -193,6 +193,7 @@ func _on_level_advanced():
 	_replace_previous_level_with_collectible_car()
 	_spawn_player()
 	_reset_level()
+	
 
 ##Scene initialization steps that are called AFTER the level has been fully regressed
 func _on_level_regressed():
@@ -336,6 +337,10 @@ func _reset_level() -> void:
 	_obstacle_move_group_timers.clear()
 	_fade_to_thinking_shader()
 	_action_sequencer.buttons_enabled = true
+	if _level_scene.antenna_systems.is_empty():
+		_action_sequencer.retract_antenna()
+	else:
+		_action_sequencer.deploy_antenna()
 
 	for obstacle in _level_scene.movable_obstacles:
 		_level_scene.update_obstacle_grid(obstacle.grid_position, true)

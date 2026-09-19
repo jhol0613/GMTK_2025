@@ -324,8 +324,13 @@ func clear_screen():
 
 func deploy_antenna():
 	if not _antenna_deployed:
-		_antenna.play()
+		_antenna.play("deploy")
 	_antenna_deployed = true
+
+func retract_antenna():
+	if _antenna_deployed:
+		_antenna.play_backwards("deploy")
+	_antenna_deployed = false
 
 func set_laser_hint(slot: int, value: bool):
 	if value:
