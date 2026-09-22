@@ -1,30 +1,28 @@
-[gd_scene format=4 uid="uid://bacyu05xq1n3r"]
+[gd_scene format=4 uid="uid://c5s1ou4k80olt"]
 
-[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_qx8rc"]
-[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="2_6s3v3"]
-[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_o5ngy"]
-[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="3_6s3v3"]
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_u37sj"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_vkpkr"]
+[ext_resource type="PackedScene" uid="uid://btqpm3f7775os" path="res://agents/movable_obstacles/snack_cart/cat_cart_obstacle.tscn" id="3_mfen7"]
+[ext_resource type="PackedScene" uid="uid://da22s7eq72fw2" path="res://agents/keys/key.tscn" id="4_slukf"]
 
 [sub_resource type="Resource" id="Resource_jsn7p"]
-script = ExtResource("2_o5ngy")
+script = ExtResource("2_vkpkr")
 index = 5
 action = 7
 metadata/_custom_type_script = "uid://cefvtumj4eayh"
 
-[node name="LevelBase" unique_id=371442524 instance=ExtResource("1_qx8rc")]
-display_name = "She Can Sleep Like That?"
+[node name="LevelBase" unique_id=371442524 instance=ExtResource("1_u37sj")]
+display_name = "Pet cats!"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 conductor_spawn_position = Vector2i(0, 3)
+conductor_enabled = false
 available_actions = Array[int]([4, 1, 2, 7])
-hints = Array[ExtResource("2_o5ngy")]([SubResource("Resource_jsn7p")])
+hints = Array[ExtResource("2_vkpkr")]([SubResource("Resource_jsn7p")])
 
 [node name="Decorative" parent="." index="0" unique_id=1207528347]
 y_sort_enabled = true
 tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAACAAAABwABAAEAAAACAAEABwABAAIAAAAJAAAABwAAAAEAAAAJAAEABwAAAAIAAAA=")
-
-[node name="CartTracks" parent="." index="2" unique_id=169080404]
-tile_map_data = PackedByteArray("AAAGAAIAAAABAAYAAAAHAAIAAAABAAMAAAAFAAIAAAABAAIAAAAEAAIAAAABAAIAAAADAAIAAAABAAMAABA=")
 
 [node name="Obstacles" parent="." index="3" unique_id=1467840447]
 tile_map_data = PackedByteArray("AAAAAAEABAAAAAAAAAABAAEABAACAAAAAAACAAEABAABAAAAAAAEAAEABAAAAAAAAAAFAAEABAACAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAACAAAAAAAKAAEABAABAAAAAAADAAAACgAAAAAAAAAHAAAACgAAAAAAAAA=")
@@ -32,12 +30,11 @@ tile_map_data = PackedByteArray("AAAAAAEABAAAAAAAAAABAAEABAACAAAAAAACAAEABAABAAA
 [node name="RightRoof" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="2" unique_id=285994768]
 position = Vector2(6, -8)
 
-[node name="CatCartObstacle" parent="." index="9" unique_id=118345962 instance=ExtResource("2_6s3v3")]
-position = Vector2(208, 50)
-movement_path = Array[int]([4, 3, 3, 3, 3, 4, 4, 4])
+[node name="CatCartObstacle" parent="." index="9" unique_id=118345962 instance=ExtResource("3_mfen7")]
+position = Vector2(80, 88)
 
-[node name="Key" parent="." index="10" unique_id=595792200 instance=ExtResource("3_6s3v3")]
-position = Vector2(111, 81)
+[node name="Key" parent="." index="10" unique_id=595792200 instance=ExtResource("4_slukf")]
+position = Vector2(144, 101)
 
 [node name="Wheelwell" parent="AdditionalSprites" parent_id_path=PackedInt32Array(1869906223) index="1" unique_id=1713027029]
 z_index = -1
