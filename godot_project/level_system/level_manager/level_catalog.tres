@@ -48,7 +48,7 @@
 [ext_resource type="PackedScene" uid="uid://mk0ykxtpoilc" path="res://levels/promotion/promotion_newspaper.tscn" id="36_831uk"]
 [ext_resource type="PackedScene" uid="uid://deturlt7ef805" path="res://levels/level3-6.tscn" id="36_s30ns"]
 [ext_resource type="PackedScene" uid="uid://jywhb4nrgx2r" path="res://levels/test_levels/antenna_tutorial.tscn" id="37_3js1v"]
-[ext_resource type="PackedScene" uid="uid://dj5bd1xdsgq5g" path="res://levels/promotion/promotion_level_2_extra_actions.tscn" id="37_5gqab"]
+[ext_resource type="PackedScene" uid="uid://d31x3x5xey21x" path="res://levels/promotion/promotion_cat_pet_green_screen.tscn" id="37_5gqab"]
 [ext_resource type="PackedScene" uid="uid://i86dgdr2exvq" path="res://levels/level3-7.tscn" id="37_8402a"]
 [ext_resource type="PackedScene" uid="uid://cin3jemsgx5vl" path="res://levels/level3-8.tscn" id="38_ga4mb"]
 [ext_resource type="PackedScene" uid="uid://boiggb2fjxqbr" path="res://levels/level3-11.tscn" id="40_30pcr"]

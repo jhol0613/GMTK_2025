@@ -16,22 +16,21 @@ display_name = "Pet cats!"
 player_spawn_position = Vector2i(0, 3)
 conductor_spawn_beat = 3
 conductor_spawn_position = Vector2i(0, 3)
-conductor_enabled = false
 available_actions = Array[int]([4, 1, 2, 7])
 hints = Array[ExtResource("2_vkpkr")]([SubResource("Resource_jsn7p")])
 
 [node name="Decorative" parent="." index="0" unique_id=1207528347]
 y_sort_enabled = true
-tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAACAAAABwABAAEAAAACAAEABwABAAIAAAAJAAAABwAAAAEAAAAJAAEABwAAAAIAAAA=")
+tile_map_data = PackedByteArray("AAADAP3/AQAAAAAAAAAHAP3/AQAAAAEAAAACAAAABwABAAEAAAAJAAAABwAAAAEAAAACAAEABwABAAIAAAAJAAEABwAAAAIAAAA=")
 
 [node name="Obstacles" parent="." index="3" unique_id=1467840447]
-tile_map_data = PackedByteArray("AAAAAAEABAAAAAAAAAABAAEABAACAAAAAAACAAEABAABAAAAAAAEAAEABAAAAAAAAAAFAAEABAACAAAAAAAGAAEABAABAAAAAAAIAAEABAAAAAAAAAAJAAEABAACAAAAAAAKAAEABAABAAAAAAADAAAACgAAAAAAAAAHAAAACgAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAEABAAAAAAAAAABAAEABAACAAAAAAAEAAEABAAAAAAAAAAFAAEABAACAAAAAAAGAAEABAABAAAAAAAJAAEABAACAAAAAAAKAAEABAABAAAAAAACAAEABAABAAAAAAAIAAEABAAAAAAAAAAHAAAACgAAAAAAAAADAAAACgAAAAAAAAA=")
 
 [node name="RightRoof" parent="RightExteriorFloor" parent_id_path=PackedInt32Array(445923122) index="2" unique_id=285994768]
 position = Vector2(6, -8)
 
 [node name="CatCartObstacle" parent="." index="9" unique_id=118345962 instance=ExtResource("3_mfen7")]
-position = Vector2(80, 88)
+position = Vector2(112, 67)
 
 [node name="Key" parent="." index="10" unique_id=595792200 instance=ExtResource("4_slukf")]
 position = Vector2(144, 101)

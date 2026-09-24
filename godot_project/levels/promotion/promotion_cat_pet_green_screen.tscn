@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://d31x3x5xey21x"]
+
+[ext_resource type="PackedScene" uid="uid://4rhumva5wup3" path="res://level_system/level_base/world_2_level_base.tscn" id="1_ta58v"]
+[ext_resource type="Script" uid="uid://cefvtumj4eayh" path="res://level_system/level_base/action_hint.gd" id="2_qkpmv"]
+[ext_resource type="PackedScene" uid="uid://bxq0hfxmg5ct1" path="res://agents/interactables/cat_coffee_spill/cat_coffee_spill.tscn" id="3_8g8av"]
+
+[sub_resource type="Resource" id="Resource_jsn7p"]
+script = ExtResource("2_qkpmv")
+index = 5
+action = 7
+metadata/_custom_type_script = "uid://cefvtumj4eayh"
+
+[node name="LevelBase" unique_id=371442524 instance=ExtResource("1_ta58v")]
+display_name = "Pet cats!"
+conductor_spawn_beat = 5
+available_actions = Array[int]([4, 1, 2, 7])
+hints = Array[ExtResource("2_qkpmv")]([SubResource("Resource_jsn7p")])
+
+[node name="Decorative" parent="." index="0" unique_id=1207528347]
+visible = false
+y_sort_enabled = true
+
+[node name="Floor" parent="." index="1" unique_id=1364947742]
+visible = false
+
+[node name="Obstacles" parent="." index="3" unique_id=1467840447]
+tile_map_data = PackedByteArray(0, 0, 5, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="BackWall" parent="." index="4" unique_id=445055544]
+visible = false
+
+[node name="LeftExteriorFloor" parent="." index="5" unique_id=285330550]
+visible = false
+
+[node name="RightExteriorFloor" parent="." index="6" unique_id=445923122]
+visible = false
+
+[node name="RightRoof" parent="RightExteriorFloor" index="2" unique_id=285994768]
+position = Vector2(6, -8)
+
+[node name="Sprite2D" parent="LeftTarget" parent_id_path=PackedInt32Array(2105039818) index="1" unique_id=212094264]
+visible = false
+
+[node name="AdditionalSprites" parent="." index="10" unique_id=1869906223]
+visible = false
+
+[node name="Wheelwell" parent="AdditionalSprites" index="1" unique_id=1713027029]
+z_index = -1
+
+[node name="Wheelwell2" parent="AdditionalSprites" index="2" unique_id=481940145]
+z_index = -1
+
+[node name="Lock" parent="AdditionalSprites" index="3" unique_id=703155625]
+light_mask = 1
+animation = &"vanish"
+autoplay = ""
+
+[node name="CatCoffeeSpill" parent="." index="12" unique_id=211895066 instance=ExtResource("3_8g8av")]
+position = Vector2(174, 65)
+flip_horizontal = true
+
+[node name="ColorRect" type="ColorRect" parent="." index="13" unique_id=1870530717]
+offset_left = -174.0
+offset_top = -230.0
+offset_right = 689.0
+offset_bottom = 326.0
+color = Color(0, 0.69411767, 0.2509804, 1)
